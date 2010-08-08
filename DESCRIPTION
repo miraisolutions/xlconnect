@@ -1,0 +1,12 @@
+Package: XLConnect
+Type: Package
+Title: R-Connector for Microsoft Excel files
+Version: 0.01
+Date: 2010-07-30
+Author: Martin Studer, Mirai Solutions GmbH
+Maintainer: Mirai Solutions GmbH <info@mirai-solutions.com>
+URL: http://www.mirai-solutions.com
+Depends: rJava
+Description: R-Connector for Microsoft Excel files
+License: -
+LazyLoad: yes
