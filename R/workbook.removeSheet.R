@@ -9,6 +9,6 @@ if(!isGeneric("removeSheet")) {
 	setGeneric("removeSheet", fun)
 }
 
-setMethod("removeSheet", "workbook", function(.Object) {
+setMethod("removeSheet", signature(.Object = "workbook"), function(.Object) {
 	.Object@jobj$removeSheet()
 })

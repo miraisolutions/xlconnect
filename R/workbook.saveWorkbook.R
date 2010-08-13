@@ -10,6 +10,6 @@ if(!isGeneric("saveWorkbook")) {
 	setGeneric("saveWorkbook", fun)
 }
 
-setMethod("saveWorkbook", "workbook", function(.Object) {
+setMethod("saveWorkbook", signature(.Object = "workbook"), function(.Object) {
 	.Object@jobj$save()
 })

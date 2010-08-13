@@ -9,6 +9,6 @@ if(!isGeneric("createSheet")) {
 	setGeneric("createSheet", fun)
 }
 
-setMethod("createSheet", "workbook", function(.Object, name) {
+setMethod("createSheet", signature(.Object = "workbook", name = "character"), function(.Object, name) {
 	.Object@jobj$createSheet(name)
 })

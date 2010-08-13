@@ -9,6 +9,6 @@ if(!isGeneric("getSheets")) {
 	setGeneric("getSheets", fun)
 }
 
-setMethod("getSheets", "workbook", function(.Object) {
+setMethod("getSheets", signature(.Object = "workbook"), function(.Object) {
 	.Object@jobj$getSheets()
 })

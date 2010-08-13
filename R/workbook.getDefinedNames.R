@@ -9,6 +9,6 @@ if(!isGeneric("getDefinedNames")) {
 	setGeneric("getDefinedNames", fun)
 }
 
-setMethod("getDefinedNames", "workbook", function(.Object) {
+setMethod("getDefinedNames", signature(.Object = "workbook"), function(.Object) {
 	.Object@jobj$getDefinedNames()
 })

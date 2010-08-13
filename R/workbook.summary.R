@@ -3,7 +3,7 @@
 # Author: Martin Studer, Mirai Solutions GmbH
 ###############################################################################
 
-setMethod("summary", "workbook", function(object) {
+setMethod("summary", signature(object = "workbook"), function(object) {
 	cat("Filename: ", object@filename, "\n")
 	
 	cat("Defined Sheets:\n")
