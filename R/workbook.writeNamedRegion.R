@@ -13,9 +13,7 @@ setMethod("writeNamedRegion",
 	signature(.Object = "workbook", data = "ANY", name = "character", location = "character", overwrite = "logical"), 
 	function(.Object, data, name, location, overwrite) {
 	
-	if(!is.data.frame(data)) data <- as.data.frame(data)
-	.Object@jobj$writeNamedRegion(dataframe2dframe(data), name, location, overwrite)
-	
+	.Object@jobj$writeNamedRegion(dataframeToJava(data), name, location, overwrite)
 	invisible()
 })
 
@@ -23,8 +21,6 @@ setMethod("writeNamedRegion",
 	signature(.Object = "workbook", data = "ANY", name = "character", location = "missing", overwrite = "missing"), 
 	function(.Object, data, name, location, overwrite) {
 	
-	if(!is.data.frame(data)) data <- as.data.frame(data)
-	.Object@jobj$writeNamedRegion(dataframe2dframe(data), name)
-	
+	.Object@jobj$writeNamedRegion(dataframeToJava(data), name)
 	invisible()
 })

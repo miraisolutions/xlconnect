@@ -4,9 +4,9 @@
 ###############################################################################
 
 
-dataframe2dframe <- function(df) {
-	# TODO: better error message required ...
-	if(!is.data.frame(df)) stop("Only data.frame's are allowed!")
+dataframeToJava <- function(df) {
+	# Force data.frame
+	if(!is.data.frame(df)) df <- as.data.frame(df)
 	
 	dFrame <- new(J("com.miraisolutions.xlconnect.integration.r.RDataFrameWrapper"))
 	cnames <- colnames(df)

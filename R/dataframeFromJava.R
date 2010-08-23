@@ -3,7 +3,7 @@
 # Author: Martin Studer, Mirai Solutions GmbH
 ###############################################################################
 
-dframe2dataframe <- function(df) {
+dataframeFromJava <- function(df) {
 	columnTypes <- df$getColumnTypes()
 	columnNames <- df$getColumnNames()
 	
