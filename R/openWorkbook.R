@@ -5,6 +5,6 @@
 # Author: Martin Studer, Mirai Solutions GmbH
 ###############################################################################
 
-openWorkbook <- function(filename) {
-	new("workbook", filename = filename)
+openWorkbook <- function(filename, create = FALSE) {
+	new("workbook", filename = filename, create = create)
 }

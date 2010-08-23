@@ -4,12 +4,12 @@
 ###############################################################################
 
 
-remove(objects())
+remove(list = objects())
 excelFile <- "C:/temp/test.xls"
 file.remove(excelFile)
 
 library(XLConnect)
-wb <- openWorkbook(excelFile)
+wb <- openWorkbook(excelFile, create = TRUE)
 df.in <- data.frame(
 		A = c("A", "B", NA, "D"), 
 		B = c(1, NA, 3, 4),

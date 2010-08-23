@@ -6,34 +6,40 @@
 
 dataframeToJava <- function(df) {
 	# Force data.frame
-	if(!is.data.frame(df)) df <- as.data.frame(df)
+	if(!is.data.frame(df)) {
+		warning("Object is not a data.frame! Trying to continue by converting object.")
+		df <- as.data.frame(df)
+	}
 	
 	dFrame <- new(J("com.miraisolutions.xlconnect.integration.r.RDataFrameWrapper"))
 	cnames <- colnames(df)
 	for(i in seq(along = df)) {
-		res <- prepareForXLConnect(df[, i])
+		v <- df[, i]
 		
-		data <- res$data
-		switch(res$dataType,
-				
-				"Numeric" = {
-					dFrame$addNumericColumn(cnames[i], .jarray(data), .jarray(is.na(data)))
-				},
-				
-				"Boolean" = {
-					dFrame$addBooleanColumn(cnames[i], .jarray(data), .jarray(is.na(data)))
-				},
-				
-				"String" = {
-					dFrame$addStringColumn(cnames[i], .jarray(data), .jarray(is.na(data)))
-				},
-				
-				"DateTime" = {
-					dFrame$addDateTimeColumn(cnames[i], .jarray(data), .jarray(is.na(data)))
-				},
-				
-				stop("Unsupported data type!")
-		)			
+		if(is(v, "numeric")) {
+			dFrame$addNumericColumn(cnames[i], .jarray(v), .jarray(is.na(v)))
+		}
+		else if(is(v, "logical")) {
+			dFrame$addBooleanColumn(cnames[i], .jarray(v), .jarray(is.na(v)))
+		}
+		else if(is(v, "character")) {
+			dFrame$addStringColumn(cnames[i], .jarray(v), .jarray(is.na(v)))
+		}
+		else if(is(v, "factor")) {
+			v <- as.character(v)
+			dFrame$addStringColumn(cnames[i], .jarray(v), .jarray(is.na(v)))
+		}
+		else if(is(v, "POSIXt")) {
+			v <- format(v, format = options("XLConnect.dateTimeFormat")[[1]])
+			dFrame$addDateTimeColumn(cnames[i], .jarray(v), .jarray(is.na(v)))
+		}
+		else if(is(v, "Date")) {
+			# Convert Date to POSIXlt before formatting as character
+			v <- format(as.POSIXlt(v), format = options("XLConnect.dateTimeFormat")[[1]])
+			dFrame$addDateTimeColumn(cnames[i], .jarray(v), .jarray(is.na(v)))
+		}
+		else
+			stop("Unsupported data type (class) detected!")			
 	}
 	
 	dFrame
