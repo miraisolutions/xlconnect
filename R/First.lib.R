@@ -13,4 +13,7 @@
 
 	# Load Java dependencies (all jars inside the java subfolder)
 	.jpackage(name = pkgname, jars = "*")
+	
+	# Perform general XLConnect settings
+	XLConnectSettings()
 }

@@ -14,7 +14,7 @@ setMethod("writeNamedRegion",
 	function(.Object, data, name, location, overwrite) {
 	
 	if(!is.data.frame(data)) data <- as.data.frame(data)
-	.Object@jobj$writeNamedRegion(createDFrame(data)@jobj, name, location, overwrite)
+	.Object@jobj$writeNamedRegion(dataframe2dframe(data), name, location, overwrite)
 	
 	invisible()
 })
@@ -24,7 +24,7 @@ setMethod("writeNamedRegion",
 	function(.Object, data, name, location, overwrite) {
 	
 	if(!is.data.frame(data)) data <- as.data.frame(data)
-	.Object@jobj$writeNamedRegion(createDFrame(data)@jobj, name)
+	.Object@jobj$writeNamedRegion(dataframe2dframe(data), name)
 	
 	invisible()
 })

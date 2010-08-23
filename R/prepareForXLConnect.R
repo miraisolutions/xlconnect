@@ -18,8 +18,14 @@ prepareForXLConnect <- function(v) {
 		dataType <- "String"
 		v <- as.character(v)
 	}
-	else if(is(v, "")) {
-		# TODO: add support for date classes Date, POSIXlt, POSIXct
+	else if(is(v, "POSIXt")) {
+		dataType <- "DateTime"
+		v <- format(v, format = options("XLConnect.dateTimeFormat")[[1]])
+	}
+	else if(is(v, "Date")) {
+		dataType <- "DateTime"
+		# Convert Date to POSIXlt before formatting as character
+		v <- format(as.POSIXlt(v), format = options("XLConnect.dateTimeFormat")[[1]])
 	}
 	else
 		stop("Unsupported data type (class) detected!")
