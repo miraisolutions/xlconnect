@@ -44,6 +44,6 @@ dataframeFromJava <- function(df) {
 	# Apply names
 	names(res) <- columnNames
 	
-	data.frame(res, stringsAsFactors = F)
+	data.frame(res, stringsAsFactors = FALSE)
 }
 

@@ -1,10 +1,13 @@
 # General XLConnect Settings
-# Called by .First.lib
+# Called by .First.lib which is also passing the package description (pdesc)
 # 
 # Author: Martin Studer, Mirai Solutions GmbH
 ###############################################################################
 
-XLConnectSettings <- function() {
+XLConnectSettings <- function(pdesc) {
+	
+	# URL to Mirai Solutions GmbH Website
+	options(MiraiSolutions.URL = pdesc$URL)
 	
 	# Date/time format used for conversion to string;
 	# This is used by 'prepareForXLConnect' for communicating a string-based

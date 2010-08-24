@@ -7,7 +7,6 @@ XLConnect - Reading and writing Microsoft Excel files from R
 }
 \description{
 More about what it does (maybe more than one line)
-~~ A concise (1-5 lines) description of the package ~~
 }
 \details{
 \tabular{ll}{
@@ -18,25 +17,20 @@ Date: \tab 2010-07-30\cr
 License: \tab What license is it under?\cr
 LazyLoad: \tab yes\cr
 }
-~~ An overview of how to use the package, including the most important ~~
-~~ functions ~~
+An overview of how to use the package, including the most important functions
 }
 \author{
 Martin Studer, Mirai Solutions GmbH
 
 Maintainer: Mirai Solutions GmbH <info@mirai-solutions.com>
-~~ The author and/or maintainer of the package ~~
 }
 \references{
-~~ Literature or other references for background information ~~
+Literature or other references for background information
 }
-~~ Optionally other standard keywords, one per line, from file KEYWORDS in ~~
-~~ the R documentation directory ~~
-\keyword{ package }
-\seealso{
-~~ Optional links to other man pages, e.g. ~~
-~~ \code{\link[<pkg>:<pkg>-package]{<pkg>}} ~~
+\keyword{ 
+package
+file
 }
 \examples{
-~~ simple examples of the most important functions ~~
+search()
 }

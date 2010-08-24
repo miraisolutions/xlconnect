@@ -6,7 +6,7 @@ Date: 2010-07-30
 Author: Martin Studer, Mirai Solutions GmbH
 Maintainer: Mirai Solutions GmbH <info@mirai-solutions.com>
 URL: http://www.mirai-solutions.com
-Depends: rJava
+Depends: rJava, utils, methods
 Description: R-Connector for Microsoft Excel files
 License: -
 LazyLoad: yes

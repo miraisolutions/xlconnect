@@ -3,8 +3,8 @@
 # Author: Martin Studer, Mirai Solutions GmbH
 ###############################################################################
 
-mirai <- "http://www.mirai-solutions.com"
+mirai <- NA
 class(mirai) <- "mirai"
 print.mirai <- function(x, ...) {
-	browseURL(url = mirai)
+	browseURL(url = options("MiraiSolutions.URL")[[1]])
 }
