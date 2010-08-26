@@ -1,1 +1,4 @@
 TODOS
+
+- support for row.names ??? --> probably on top of existing R functionality
+- provide unit test with data.frame's that include dates & booleans

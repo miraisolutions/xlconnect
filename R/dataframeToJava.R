@@ -17,7 +17,7 @@ dataframeToJava <- function(df) {
 		v <- df[, i]
 		
 		if(is(v, "numeric")) {
-			dFrame$addNumericColumn(cnames[i], .jarray(v), .jarray(is.na(v)))
+			dFrame$addNumericColumn(cnames[i], .jarray(as.double(v)), .jarray(is.na(v)))
 		}
 		else if(is(v, "logical")) {
 			dFrame$addBooleanColumn(cnames[i], .jarray(v), .jarray(is.na(v)))
