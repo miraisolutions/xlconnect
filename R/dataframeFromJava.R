@@ -28,8 +28,9 @@ dataframeFromJava <- function(df) {
 				},
 				
 				"DateTime" = {
-					# Convert date/time strings back to POSIXlt
-					res[[i]] <- as.POSIXlt(as.vector(df$getDateTimeColumn(jIndex)), format = options("XLConnect.dateTimeFormat")[[1]])
+					# Convert date/time strings back to POSIXct with timezone UTC
+					res[[i]] <- as.POSIXct(as.vector(df$getDateTimeColumn(jIndex)), 
+							format = options("XLConnect.dateTimeFormat")[[1]], tz = "UTC")
 				},
 				
 				stop("Unsupported column type detected!")

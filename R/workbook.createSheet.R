@@ -4,7 +4,7 @@
 ###############################################################################
 
 if(!isGeneric("createSheet")) {
-	if(is.function("createSheet")) fun <- getSheets
+	if(is.function("createSheet")) fun <- createSheet
 	else fun <- function(.Object, name) standardGeneric("createSheet")
 	setGeneric("createSheet", fun)
 }

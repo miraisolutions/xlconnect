@@ -4,7 +4,7 @@
 ###############################################################################
 
 if(!isGeneric("readNamedRegion")) {
-	if(is.function("readNamedRegion")) fun <- getSheets
+	if(is.function("readNamedRegion")) fun <- readNamedRegion
 	else fun <- function(.Object, name, header) standardGeneric("readNamedRegion")
 	setGeneric("readNamedRegion", fun)
 }

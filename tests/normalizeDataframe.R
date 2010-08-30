@@ -10,6 +10,9 @@ normalizeDataframe <- function(df) {
 			function(col) {
 				if(is(col, "factor")) {
 					as.character(col)
+				} else if(is(col, "Date") || is(col, "POSIXt")) {
+					# Get rid of "original" timezone and assume UTC
+					as.POSIXct(strftime(col), tz = "UTC")
 				} else
 					col
 			})

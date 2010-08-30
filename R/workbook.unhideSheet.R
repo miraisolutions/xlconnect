@@ -3,22 +3,22 @@
 # Author: Martin Studer, Mirai Solutions GmbH
 ###############################################################################
 
-if(!isGeneric("removeSheet")) {
-	if(is.function("removeSheet")) fun <- removeSheet
-	else fun <- function(.Object, sheet) standardGeneric("removeSheet")
-	setGeneric("removeSheet", fun)
+if(!isGeneric("unhideSheet")) {
+	if(is.function("unhideSheet")) fun <- unhideSheet
+	else fun <- function(.Object, sheet) standardGeneric("unhideSheet")
+	setGeneric("unhideSheet", fun)
 }
 
-setMethod("removeSheet", 
+setMethod("unhideSheet", 
 		signature(.Object = "workbook", sheet = "numeric"), 
 		function(.Object, sheet) {
-			.Object@jobj$removeSheet(as.integer(sheet - 1))
+			.Object@jobj$unhideSheet(as.integer(sheet - 1))
 		}
 )
 
-setMethod("removeSheet", 
+setMethod("unhideSheet", 
 		signature(.Object = "workbook", sheet = "character"), 
 		function(.Object, sheet) {
-			.Object@jobj$removeSheet(sheet)
+			.Object@jobj$unhideSheet(sheet)
 		}
 )

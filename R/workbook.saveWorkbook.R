@@ -5,7 +5,7 @@
 
 
 if(!isGeneric("saveWorkbook")) {
-	if(is.function("saveWorkbook")) fun <- save
+	if(is.function("saveWorkbook")) fun <- saveWorkbook
 	else fun <- function(.Object) standardGeneric("saveWorkbook")
 	setGeneric("saveWorkbook", fun)
 }

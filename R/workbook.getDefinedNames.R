@@ -4,7 +4,7 @@
 ###############################################################################
 
 if(!isGeneric("getDefinedNames")) {
-	if(is.function("getDefinedNames")) fun <- getSheets
+	if(is.function("getDefinedNames")) fun <- getDefinedNames
 	else fun <- function(.Object) standardGeneric("getDefinedNames")
 	setGeneric("getDefinedNames", fun)
 }

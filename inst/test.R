@@ -19,3 +19,13 @@ saveWorkbook(wb)
 
 df.out <- readNamedRegion(wb, "Test", TRUE)
 
+
+readWorksheet(wb, worksheet = 1, header = TRUE)
+
+existsName(wb, "Test")
+existsName(wb, "asdf")
+
+existsSheet(wb, "Test")
+existsSheet(wb, "xxx")
+
+writeWorksheet(wb, data = mtcars, worksheet = "mtcars", create = TRUE)

@@ -34,8 +34,8 @@ dataframeToJava <- function(df) {
 			dFrame$addDateTimeColumn(cnames[i], .jarray(v), .jarray(is.na(v)))
 		}
 		else if(is(v, "Date")) {
-			# Convert Date to POSIXlt before formatting as character
-			v <- format(as.POSIXlt(v), format = options("XLConnect.dateTimeFormat")[[1]])
+			# Convert Date to character and then parse as POSIXct date at midnight UTC
+			v <- format(as.POSIXct(strftime(v), tz = "UTC"), format = options("XLConnect.dateTimeFormat")[[1]])
 			dFrame$addDateTimeColumn(cnames[i], .jarray(v), .jarray(is.na(v)))
 		}
 		else

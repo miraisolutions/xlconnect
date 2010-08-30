@@ -4,7 +4,7 @@
 ###############################################################################
 
 if(!isGeneric("writeNamedRegion")) {
-	if(is.function("writeNamedRegion")) fun <- getSheets
+	if(is.function("writeNamedRegion")) fun <- writeNamedRegion
 	else fun <- function(.Object, data, name, location, overwrite) standardGeneric("writeNamedRegion")
 	setGeneric("writeNamedRegion", fun)
 }
