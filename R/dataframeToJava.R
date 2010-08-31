@@ -29,13 +29,8 @@ dataframeToJava <- function(df) {
 			v <- as.character(v)
 			dFrame$addStringColumn(cnames[i], .jarray(v), .jarray(is.na(v)))
 		}
-		else if(is(v, "POSIXt")) {
+		else if(is(v, "Date") || is(v, "POSIXt")) {
 			v <- format(v, format = options("XLConnect.dateTimeFormat")[[1]])
-			dFrame$addDateTimeColumn(cnames[i], .jarray(v), .jarray(is.na(v)))
-		}
-		else if(is(v, "Date")) {
-			# Convert Date to character and then parse as POSIXct date at midnight UTC
-			v <- format(as.POSIXct(strftime(v), tz = "UTC"), format = options("XLConnect.dateTimeFormat")[[1]])
 			dFrame$addDateTimeColumn(cnames[i], .jarray(v), .jarray(is.na(v)))
 		}
 		else

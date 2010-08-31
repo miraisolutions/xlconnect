@@ -12,7 +12,9 @@ normalizeDataframe <- function(df) {
 					as.character(col)
 				} else if(is(col, "Date") || is(col, "POSIXt")) {
 					# Get rid of "original" timezone and assume UTC
-					as.POSIXct(strftime(col), tz = "UTC")
+					as.POSIXct(
+						format(col, format = options("XLConnect.dateTimeFormat")[[1]]), 
+						tz = "UTC")
 				} else
 					col
 			})

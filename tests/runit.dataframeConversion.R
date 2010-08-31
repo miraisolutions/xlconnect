@@ -1,4 +1,6 @@
-# TODO: Add comment
+# Tests whether data.frame's pushed and pulled to/from Java
+# are consistent (with respect to some defined differences;
+# see 'normalizeDataframe')
 # 
 # Author: Martin Studer, Mirai Solutions GmbH
 ###############################################################################

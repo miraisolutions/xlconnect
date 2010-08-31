@@ -1,5 +1,9 @@
 TODOS
 
 - support for row.names ??? --> probably on top of existing R functionality
-- issue with time zone (see unit tests)
 - support for different date/time classes (see as.POSIXlt)
+- implement proper Java exception handling ...
+- need for print.workbook ??
+
+- check print, summary methods
+- str

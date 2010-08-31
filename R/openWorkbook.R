@@ -6,5 +6,5 @@
 ###############################################################################
 
 openWorkbook <- function(filename, create = FALSE) {
-	new("workbook", filename = filename, create = create)
+	jTryCatch(new("workbook", filename = filename, create = create))
 }
