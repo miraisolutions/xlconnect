@@ -4,10 +4,13 @@
 ###############################################################################
 
 jTryCatch <- function(...) {
-	tryCatch(..., Exception = 
+	tryCatch(..., Throwable = 
 		function(e) {
-			stop(paste(class(e)[1], e$jobj$getMessage(), sep = ": "),
-				call. = FALSE)
+			if(!is.jnull(e$jobj)) {
+				stop(paste(class(e)[1], e$jobj$getMessage(), sep = " (Java): "),
+					call. = FALSE)
+			} else 
+				stop("Undefined error occurred!")
 		}
 	)
 }

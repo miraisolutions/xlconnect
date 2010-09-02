@@ -7,3 +7,8 @@ TODOS
 
 - check print, summary methods
 - str
+
+
+- NAMESPACE file ??? with S3method(print, workbook) ???
+ ---> requires print.workbook
+ 

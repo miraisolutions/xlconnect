@@ -1,0 +1,36 @@
+# XLConnect requires rJava
+import(rJava)
+
+# XLConnect exports the following S4 classes & methods
+exportClasses(workbook)
+exportMethods(
+	createSheet,
+	existsName,
+	existsSheet,
+	getActiveSheetIndex,
+	getActiveSheetName,
+	getDefinedNames,
+	getSheets,
+	hideSheet,
+	print,
+	readNamedRegion,
+	readWorksheet,
+	removeName,
+	removeSheet,
+	saveWorkbook,
+	setActiveSheet,
+	summary,
+	unhideSheet,
+	writeNamedRegion,
+	writeWorksheet
+)
+
+# XLConnect exports the following functions & variables
+export(
+	mirai,
+	openWorkbook
+)
+
+# XLConnect exports the following S3 methods
+S3method(print, mirai)
+# S3method(print, workbook)
