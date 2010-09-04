@@ -2,13 +2,6 @@ TODOS
 
 - support for row.names ??? --> probably on top of existing R functionality
 - support for different date/time classes (see as.POSIXlt)
-- implement proper Java exception handling ...
-- need for print.workbook ??
+- str, summary methods
 
-- check print, summary methods
-- str
-
-
-- NAMESPACE file ??? with S3method(print, workbook) ???
- ---> requires print.workbook
- 
+- probably need workaround for hideSheet in case of XSSF 2 -> hide, 3 -> very hide

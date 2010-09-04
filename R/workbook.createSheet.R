@@ -10,5 +10,5 @@ if(!isGeneric("createSheet")) {
 }
 
 setMethod("createSheet", signature(.Object = "workbook", name = "character"), function(.Object, name) {
-	.Object@jobj$createSheet(name)
+	jTryCatch(.Object@jobj$createSheet(name))
 })

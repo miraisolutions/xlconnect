@@ -1,8 +1,8 @@
-# TODO: Add comment
+# Display workbook
 # 
 # Author: Martin Studer, Mirai Solutions GmbH
 ###############################################################################
 
-setMethod("print", signature(x = "workbook"), function(x, ...) {
-	print(x@filename)
+setMethod("show", signature(object = "workbook"), function(object) {
+	print(object)
 })

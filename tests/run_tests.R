@@ -1,5 +1,6 @@
 # XLConnect Unit Testing Framework
-# 
+# See also http://rwiki.sciviews.org/doku.php?id=developers:runit
+#
 # Author: Martin Studer, Mirai Solutions GmbH
 ###############################################################################
 

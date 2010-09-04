@@ -4,8 +4,8 @@
 ###############################################################################
 
 dataframeFromJava <- function(df) {
-	columnTypes <- df$getColumnTypes()
-	columnNames <- df$getColumnNames()
+	columnTypes <- jTryCatch(df$getColumnTypes())
+	columnNames <- jTryCatch(df$getColumnNames())
 	
 	# Init result list to contain column vectors
 	res <- list()
@@ -16,20 +16,20 @@ dataframeFromJava <- function(df) {
 		switch(columnTypes[i],
 				
 				"Numeric" = {
-					res[[i]] <- as.vector(df$getNumericColumn(jIndex))
+					res[[i]] <- as.vector(jTryCatch(df$getNumericColumn(jIndex)))
 				},
 				
 				"String" = {
-					res[[i]] <- as.vector(df$getStringColumn(jIndex))
+					res[[i]] <- as.vector(jTryCatch(df$getStringColumn(jIndex)))
 				},
 				
 				"Boolean" = {
-					res[[i]] <- as.vector(df$getBooleanColumn(jIndex))
+					res[[i]] <- as.vector(jTryCatch(df$getBooleanColumn(jIndex)))
 				},
 				
 				"DateTime" = {
 					# Convert date/time strings back to POSIXct with timezone UTC
-					res[[i]] <- as.POSIXct(as.vector(df$getDateTimeColumn(jIndex)), 
+					res[[i]] <- as.POSIXct(as.vector(jTryCatch(df$getDateTimeColumn(jIndex))), 
 							format = options("XLConnect.dateTimeFormat")[[1]], tz = "UTC")
 				},
 				
@@ -39,7 +39,7 @@ dataframeFromJava <- function(df) {
 		# Put missings back in place;
 		# note that Java primitives are communicated back which 
 		# don't support any missings - therefore this step
-		res[[i]][df$isMissing(jIndex)] <- NA
+		res[[i]][jTryCatch(df$isMissing(jIndex))] <- NA
 	}
 	
 	# Apply names
@@ -47,4 +47,3 @@ dataframeFromJava <- function(df) {
 	
 	data.frame(res, stringsAsFactors = FALSE)
 }
-

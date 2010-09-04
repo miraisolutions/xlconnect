@@ -12,6 +12,6 @@ if(!isGeneric("existsSheet")) {
 setMethod("existsSheet", 
 		signature(.Object = "workbook", name = "character"), 
 		function(.Object, name) {
-			.Object@jobj$existsSheet(name)
+			jTryCatch(.Object@jobj$existsSheet(name))
 		}
 )

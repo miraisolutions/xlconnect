@@ -5,11 +5,13 @@
 
 
 remove(list = objects())
-excelFile <- "C:/temp/test.xls"
+excelFile <- "C:/temp/test.xlsx"
+# excelFile <- "C:/Users/mstuder/Documents/testWorkbookHiddenSheets.xlsx"
 file.remove(excelFile)
 
 library(XLConnect)
 wb <- openWorkbook(excelFile, create = TRUE)
+# wb <- openWorkbook(excelFile, create = FALSE)
 df.in <- data.frame(
 		A = c("A", "B", NA, "D"), 
 		B = c(1, NA, 3, 4),

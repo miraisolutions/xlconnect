@@ -10,5 +10,5 @@ if(!isGeneric("getDefinedNames")) {
 }
 
 setMethod("getDefinedNames", signature(.Object = "workbook"), function(.Object) {
-	.Object@jobj$getDefinedNames()
+	jTryCatch(.Object@jobj$getDefinedNames())
 })

@@ -1,5 +1,5 @@
 # General XLConnect Settings
-# Called by .First.lib which is also passing the package description (pdesc)
+# Called by .onLoad which is also passing the package description (pdesc)
 # 
 # Author: Martin Studer, Mirai Solutions GmbH
 ###############################################################################
@@ -10,8 +10,8 @@ XLConnectSettings <- function(pdesc) {
 	options(MiraiSolutions.URL = pdesc$URL)
 	
 	# Date/time format used for conversion to string;
-	# This is used by 'prepareForXLConnect' for communicating a string-based
-	# date/time representation to Java which will then convert it to java.util.Date
+	# This is used for communicating a string-based date/time
+	# representation to Java which will then convert it to java.util.Date
 	options(XLConnect.dateTimeFormat = "%Y-%m-%d %H:%M:%S")
 	
 	invisible()

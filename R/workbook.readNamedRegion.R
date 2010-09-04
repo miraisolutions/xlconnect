@@ -15,4 +15,14 @@ setMethod("readNamedRegion",
 		# Read named region (returns RDataFrameWrapper Java object reference)
 		dataFrame <- .Object@jobj$readNamedRegion(name, header)
 		dataframeFromJava(dataFrame)
-	})
+	}
+)
+
+setMethod("readNamedRegion", 
+		signature(.Object = "workbook", name = "character", header = "missing"), 
+		function(.Object, name, header) {	
+			# Read named region (returns RDataFrameWrapper Java object reference)
+			dataFrame <- .Object@jobj$readNamedRegion(name, TRUE)
+			dataframeFromJava(dataFrame)
+		}
+)

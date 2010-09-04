@@ -12,6 +12,7 @@ if(!isGeneric("getActiveSheetIndex")) {
 setMethod("getActiveSheetIndex", 
 		signature(.Object = "workbook"), 
 		function(.Object) {
-			.Object@jobj$getActiveSheetIndex()
+			# Note: Java has 0-based indices
+			jTryCatch(as.integer(.Object@jobj$getActiveSheetIndex() + 1))
 		}
 )

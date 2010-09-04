@@ -12,6 +12,8 @@ exportMethods(
 	getDefinedNames,
 	getSheets,
 	hideSheet,
+	isSheetHidden,
+	isSheetVeryHidden,
 	print,
 	readNamedRegion,
 	readWorksheet,
@@ -19,6 +21,7 @@ exportMethods(
 	removeSheet,
 	saveWorkbook,
 	setActiveSheet,
+	show,
 	summary,
 	unhideSheet,
 	writeNamedRegion,
@@ -33,4 +36,3 @@ export(
 
 # XLConnect exports the following S3 methods
 S3method(print, mirai)
-# S3method(print, workbook)

@@ -12,6 +12,6 @@ if(!isGeneric("getActiveSheetName")) {
 setMethod("getActiveSheetName", 
 		signature(.Object = "workbook"), 
 		function(.Object) {
-			.Object@jobj$getActiveSheetName()
+			jTryCatch(.Object@jobj$getActiveSheetName())
 		}
 )

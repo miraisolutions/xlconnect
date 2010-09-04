@@ -10,5 +10,5 @@ if(!isGeneric("getSheets")) {
 }
 
 setMethod("getSheets", signature(.Object = "workbook"), function(.Object) {
-	.Object@jobj$getSheets()
+	jTryCatch(.Object@jobj$getSheets())
 })
