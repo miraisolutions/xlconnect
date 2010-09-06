@@ -27,6 +27,16 @@ test.workbook.createSheet <- function() {
 	# TODO: Check again, this currently does not produce an error - POI bug?
 	# checkException(createSheet(wb.xlsx, "Invalid Sheet Name'"))
 	
+	# Check that an exception is thrown when trying to create
+	# a worksheet with a very long name (> 30 characters) (*.xls)
+	# TODO: Check again, this currently does not produce an exception - rather truncates: probably POI inconsistency
+	# checkException(createSheet(wb.xls, "A very very very very very very very very long name"))
+	
+	# Check that an exception is thrown when trying to create
+	# a worksheet with a very long name (> 30 characters) (*.xlsx)
+	checkException(createSheet(wb.xlsx, "A very very very very very very very very long name"))
+	
+	
 	sheetName <- "My Sheet"
 
 	# Check if creating a legal worksheet is working properly (*.xls)

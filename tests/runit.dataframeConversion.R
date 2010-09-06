@@ -7,41 +7,37 @@
 
 test.dataframeConversion <- function() {
 	
+	testDataFrame <- function(df) {
+		res <- dataframeFromJava(dataframeToJava(df))
+		checkEquals(normalizeDataframe(df), res)
+	}
+	
 	# built-in dataset mtcars
-	res <- dataframeFromJava(dataframeToJava(mtcars))
-	checkEquals(normalizeDataframe(mtcars), res)
+	testDataFrame(mtcars)
 	
 	# built-in dataset airquality
-	res <- dataframeFromJava(dataframeToJava(airquality))
-	checkEquals(normalizeDataframe(airquality), res)
+	testDataFrame(airquality)
 	
 	# built-in dataset attenu
-	res <- dataframeFromJava(dataframeToJava(attenu))
-	checkEquals(normalizeDataframe(attenu), res)
+	testDataFrame(attenu)
 	
 	# built-in dataset ChickWeight
-	res <- dataframeFromJava(dataframeToJava(ChickWeight))
-	checkEquals(normalizeDataframe(ChickWeight), res)
+	testDataFrame(ChickWeight)
 	
 	# built-in dataset CO2
-	res <- dataframeFromJava(dataframeToJava(CO2))
-	checkEquals(normalizeDataframe(CO2), res)
+	testDataFrame(CO2)
 	
 	# built-in dataset iris
-	res <- dataframeFromJava(dataframeToJava(iris))
-	checkEquals(normalizeDataframe(iris), res)
+	testDataFrame(iris)
 	
 	# built-in dataset longley
-	res <- dataframeFromJava(dataframeToJava(longley))
-	checkEquals(normalizeDataframe(longley), res)
+	testDataFrame(longley)
 	
 	# built-in dataset morley
-	res <- dataframeFromJava(dataframeToJava(morley))
-	checkEquals(normalizeDataframe(morley), res)
+	testDataFrame(morley)
 	
 	# built-in dataset swiss
-	res <- dataframeFromJava(dataframeToJava(swiss))
-	checkEquals(normalizeDataframe(swiss), res)
+	testDataFrame(swiss)
 	
 	# custom test dataset
 	cdf <- data.frame(
@@ -62,7 +58,17 @@ test.dataframeConversion <- function() {
 	cdf[["Column.F"]] <- factor(cdf[["Column.F"]])
 	cdf[["Column.F"]] <- ordered(cdf[["Column.F"]], levels = c("Low", "Medium", "High"))
 	
-	res <- dataframeFromJava(dataframeToJava(cdf))
-	checkEquals(normalizeDataframe(cdf), res)
+	testDataFrame(cdf)
+	
+	# Check that when being supplied with an object that is not coercable
+	# into a data.frame, an appropriate exception is thrown
+	checkException(dataframeToJava(search))
+	
+	# Check that exceptions are thrown when calling dataframeFromJava
+	# with inappropriate objects
+	checkException(dataframeFromJava(NULL))
+	checkException(dataframeFromJava(NA))
+	checkException(dataframeFromJava(9))
+	checkException(dataframeFromJava(search))
 }
 

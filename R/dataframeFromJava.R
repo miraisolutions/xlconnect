@@ -4,6 +4,10 @@
 ###############################################################################
 
 dataframeFromJava <- function(df) {
+	
+	if(!is(df, "jobjRef"))
+		stop("Invalid object - object of class 'jobjRef' required!")
+	
 	columnTypes <- jTryCatch(df$getColumnTypes())
 	columnNames <- jTryCatch(df$getColumnNames())
 	

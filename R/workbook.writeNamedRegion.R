@@ -18,6 +18,14 @@ setMethod("writeNamedRegion",
 )
 
 setMethod("writeNamedRegion", 
+		signature(.Object = "workbook", data = "ANY", name = "character", location = "character", overwrite = "missing"), 
+		function(.Object, data, name, location, overwrite) {
+			.Object@jobj$writeNamedRegion(dataframeToJava(data), name, location, FALSE)
+			invisible()
+		}
+)
+
+setMethod("writeNamedRegion", 
 	signature(.Object = "workbook", data = "ANY", name = "character", location = "missing", overwrite = "missing"), 
 	function(.Object, data, name, location, overwrite) {
 		.Object@jobj$writeNamedRegion(dataframeToJava(data), name)
