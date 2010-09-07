@@ -6,7 +6,7 @@
 
 remove(list = objects())
 excelFile <- "C:/temp/test.xls"
-# excelFile <- "C:/Users/mstuder/Documents/testWorkbookHiddenSheets.xlsx"
+# excelFile <- "C:/Users/mstuder/Documents/testWorkbookReadNamedRegion.xlsx"
 file.remove(excelFile)
 
 library(XLConnect)
@@ -31,3 +31,9 @@ existsSheet(wb, "Test")
 existsSheet(wb, "xxx")
 
 writeWorksheet(wb, data = mtcars, worksheet = "mtcars", create = TRUE)
+
+
+png("test.png", 200, 200)
+plot(1:10, 1:10)
+dev.off()
+addImage(wb, "test.png", name = "image", originalSize = TRUE, location = "image!$A$1", overwrite = TRUE)

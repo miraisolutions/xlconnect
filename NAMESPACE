@@ -4,6 +4,7 @@ import(rJava)
 # XLConnect exports the following S4 classes & methods
 exportClasses(workbook)
 exportMethods(
+	addImage,
 	createSheet,
 	existsName,
 	existsSheet,

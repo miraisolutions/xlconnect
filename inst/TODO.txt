@@ -7,5 +7,3 @@ TODOS
 - probably need workaround for hideSheet in case of XSSF 2 -> hide, 3 -> very hide
 
 - introduce 'header' argument to be able to choose if column headers should be written
-
-- addImage
