@@ -11,5 +11,5 @@ if(!isGeneric("saveWorkbook")) {
 }
 
 setMethod("saveWorkbook", signature(.Object = "workbook"), function(.Object) {
-	.Object@jobj$save()
+	jTryCatch(.Object@jobj$save())
 })

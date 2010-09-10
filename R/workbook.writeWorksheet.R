@@ -51,19 +51,19 @@ setMethod("writeWorksheet",
 )
 
 setMethod("writeWorksheet", 
-		signature(.Object = "workbook", data = "ANY", worksheet = "numeric", startRow = "missing", 
-				startCol = "missing", header = "missing"), 
+		signature(.Object = "workbook", data = "ANY", worksheet = "character", startRow = "missing", 
+				startCol = "missing", header = "logical"), 
 		function(.Object, data, worksheet, startRow, startCol, header) {
-			.Object@jobj$writeWorksheet(dataframeToJava(data), as.integer(worksheet - 1), TRUE)
+			.Object@jobj$writeWorksheet(dataframeToJava(data), worksheet, header)
 			invisible()
 		}
 )
 
 setMethod("writeWorksheet", 
-		signature(.Object = "workbook", data = "ANY", worksheet = "character", startRow = "missing", 
-				startCol = "missing", header = "logical"), 
+		signature(.Object = "workbook", data = "ANY", worksheet = "numeric", startRow = "missing", 
+				startCol = "missing", header = "missing"), 
 		function(.Object, data, worksheet, startRow, startCol, header) {
-			.Object@jobj$writeWorksheet(dataframeToJava(data), worksheet, header)
+			.Object@jobj$writeWorksheet(dataframeToJava(data), as.integer(worksheet - 1), TRUE)
 			invisible()
 		}
 )

@@ -12,6 +12,6 @@ if(!isGeneric("removeName")) {
 setMethod("removeName", 
 		signature(.Object = "workbook", name = "character"), 
 		function(.Object, name) {
-			.Object@jobj$removeName(name)
+			jTryCatch(.Object@jobj$removeName(name))
 		}
 )

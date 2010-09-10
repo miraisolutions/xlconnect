@@ -5,8 +5,8 @@
 
 
 remove(list = objects())
-excelFile <- "C:/temp/test.xls"
-# excelFile <- "C:/Users/mstuder/Documents/testWorkbookReadNamedRegion.xlsx"
+excelFile <- "C:/temp/test.xlsx"
+# excelFile <- "C:/Users/mstuder/Documents/testWorkbookRemoveSheet.xls"
 file.remove(excelFile)
 
 library(XLConnect)

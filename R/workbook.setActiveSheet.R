@@ -12,13 +12,13 @@ if(!isGeneric("setActiveSheet")) {
 setMethod("setActiveSheet", 
 		signature(.Object = "workbook", sheet = "numeric"), 
 		function(.Object, sheet) {
-			.Object@jobj$setActiveSheet(as.integer(sheet - 1))
+			jTryCatch(.Object@jobj$setActiveSheet(as.integer(sheet - 1)))
 		}
 )
 
 setMethod("setActiveSheet", 
 		signature(.Object = "workbook", sheet = "character"), 
 		function(.Object, sheet) {
-			.Object@jobj$setActiveSheet(sheet)
+			jTryCatch(.Object@jobj$setActiveSheet(sheet))
 		}
 )

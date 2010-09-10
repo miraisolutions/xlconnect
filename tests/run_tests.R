@@ -19,6 +19,7 @@ if(require("RUnit", quietly = TRUE)) {
 	}
 	
 	# Source additional files needed by testing framework
+	source("checkNoException.R")
 	source("normalizeDataframe.R")
 	
 	# Set up and run test suite

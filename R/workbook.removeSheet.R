@@ -12,13 +12,13 @@ if(!isGeneric("removeSheet")) {
 setMethod("removeSheet", 
 		signature(.Object = "workbook", sheet = "numeric"), 
 		function(.Object, sheet) {
-			.Object@jobj$removeSheet(as.integer(sheet - 1))
+			jTryCatch(.Object@jobj$removeSheet(as.integer(sheet - 1)))
 		}
 )
 
 setMethod("removeSheet", 
 		signature(.Object = "workbook", sheet = "character"), 
 		function(.Object, sheet) {
-			.Object@jobj$removeSheet(sheet)
+			jTryCatch(.Object@jobj$removeSheet(sheet))
 		}
 )

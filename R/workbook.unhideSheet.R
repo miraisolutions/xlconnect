@@ -12,13 +12,13 @@ if(!isGeneric("unhideSheet")) {
 setMethod("unhideSheet", 
 		signature(.Object = "workbook", sheet = "numeric"), 
 		function(.Object, sheet) {
-			.Object@jobj$unhideSheet(as.integer(sheet - 1))
+			jTryCatch(.Object@jobj$unhideSheet(as.integer(sheet - 1)))
 		}
 )
 
 setMethod("unhideSheet", 
 		signature(.Object = "workbook", sheet = "character"), 
 		function(.Object, sheet) {
-			.Object@jobj$unhideSheet(sheet)
+			jTryCatch(.Object@jobj$unhideSheet(sheet))
 		}
 )
