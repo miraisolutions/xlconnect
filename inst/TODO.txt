@@ -6,4 +6,7 @@ TODOS
 
 - probably need workaround for hideSheet in case of XSSF 2 -> hide, 3 -> very hide
 
-- introduce 'header' argument to be able to choose if column headers should be written
+- unit test for addImage ?
+- unit test for with.workbook
+
+- add method for querying name reference formula (+ adapt createName unit test)

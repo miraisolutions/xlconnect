@@ -5,30 +5,22 @@
 
 if(!isGeneric("writeNamedRegion")) {
 	if(is.function("writeNamedRegion")) fun <- writeNamedRegion
-	else fun <- function(.Object, data, name, location, overwrite) standardGeneric("writeNamedRegion")
+	else fun <- function(.Object, data, name, header) standardGeneric("writeNamedRegion")
 	setGeneric("writeNamedRegion", fun)
 }
 
 setMethod("writeNamedRegion", 
-	signature(.Object = "workbook", data = "ANY", name = "character", location = "character", overwrite = "logical"), 
-	function(.Object, data, name, location, overwrite) {
-		.Object@jobj$writeNamedRegion(dataframeToJava(data), name, location, overwrite)
+	signature(.Object = "workbook", data = "ANY", name = "character", header = "logical"), 
+	function(.Object, data, name, header) {
+		.Object@jobj$writeNamedRegion(dataframeToJava(data), name, header)
 		invisible()
 	}
 )
 
 setMethod("writeNamedRegion", 
-		signature(.Object = "workbook", data = "ANY", name = "character", location = "character", overwrite = "missing"), 
-		function(.Object, data, name, location, overwrite) {
-			.Object@jobj$writeNamedRegion(dataframeToJava(data), name, location, FALSE)
+		signature(.Object = "workbook", data = "ANY", name = "character", header = "missing"), 
+		function(.Object, data, name, header) {
+			.Object@jobj$writeNamedRegion(dataframeToJava(data), name, TRUE)
 			invisible()
 		}
-)
-
-setMethod("writeNamedRegion", 
-	signature(.Object = "workbook", data = "ANY", name = "character", location = "missing", overwrite = "missing"), 
-	function(.Object, data, name, location, overwrite) {
-		.Object@jobj$writeNamedRegion(dataframeToJava(data), name)
-		invisible()
-	}
 )

@@ -16,24 +16,6 @@ df.in <- data.frame(
 		A = c("A", "B", NA, "D"), 
 		B = c(1, NA, 3, 4),
 		C = c(NA, TRUE, FALSE, TRUE))
-writeNamedRegion(wb, df.in, "Test", "Test!$A$1", TRUE)
+createName(wb, name = "Test", formula = "Test!$A$1", overwrite = TRUE)
+writeNamedRegion(wb, df.in, name = "Test", header = TRUE)
 saveWorkbook(wb)
-
-df.out <- readNamedRegion(wb, "Test", TRUE)
-
-
-readWorksheet(wb, worksheet = 1, header = TRUE)
-
-existsName(wb, "Test")
-existsName(wb, "asdf")
-
-existsSheet(wb, "Test")
-existsSheet(wb, "xxx")
-
-writeWorksheet(wb, data = mtcars, worksheet = "mtcars", create = TRUE)
-
-
-png("test.png", 200, 200)
-plot(1:10, 1:10)
-dev.off()
-addImage(wb, "test.png", name = "image", originalSize = TRUE, location = "image!$A$1", overwrite = TRUE)

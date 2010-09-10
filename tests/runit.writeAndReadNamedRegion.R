@@ -11,7 +11,8 @@ test.writeAndReadNamedRegion <- function() {
 	
 	testDataFrame <- function(wb, df, lref) {
 		namedRegion <- deparse(substitute(df))
-		writeNamedRegion(wb, df, namedRegion, paste(namedRegion, lref, sep = "!"), TRUE)
+		createName(wb, name = namedRegion, formula = paste(namedRegion, lref, sep = "!"))
+		writeNamedRegion(wb, df, name = namedRegion, header = TRUE)
 		res <- readNamedRegion(wb, namedRegion)
 		checkEquals(normalizeDataframe(df), res)
 	}
