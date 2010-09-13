@@ -5,7 +5,7 @@
 
 require(XLConnect)
 
-# mtcars xlsx file from demo subfolder of package XLConnect
+# mtcars xlsx file from demoFiles subfolder of package XLConnect
 demoExcelFile <- system.file("demoFiles/mtcars.xlsx", package = "XLConnect")
 
 # Load workbook

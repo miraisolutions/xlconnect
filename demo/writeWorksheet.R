@@ -1,4 +1,4 @@
-# Writing a named region to an Excel file
+# Writing a worksheet to an Excel file
 # 
 # Author: Martin Studer, Mirai Solutions GmbH
 ###############################################################################
@@ -6,7 +6,7 @@
 require(XLConnect)
 
 # Excel workbook to write
-demoExcelFile <- "mtcars.xlsx"
+demoExcelFile <- "CO2.xlsx"
 
 # Remove file if it already exists
 if(file.exists(demoExcelFile)) file.remove(demoExcelFile)
@@ -14,15 +14,14 @@ if(file.exists(demoExcelFile)) file.remove(demoExcelFile)
 # Load workbook (create if not existing)
 wb <- loadWorkbook(demoExcelFile, create = TRUE)
 
-# Create a named region called 'mtcars' on a sheet called 'mtcars'
-# (the call to 'createName' automatically creates the sheet
-# referenced in the formula if it does not exist)
-createName(wb, name = "mtcars", formula = "mtcars!$A$1")
-# Alternatively: wb$createName(name = "mtcars", formula = "mtcars!$A$1")
+# Create a worksheet called 'CO2'
+createSheet(wb, name = "CO2")
+# Alternatively: wb$createSheet(name = "CO2")
 
-# Write built-in data set 'mtcars' to the above defined named region
-writeNamedRegion(wb, mtcars, name = "mtcars")
-# Alternatively: wb$writeNamedRegion(mtcars, name = "mtcars")
+# Write built-in data set 'CO2' to the worksheet created above;
+# offset from the top left corner and with default header = TRUE
+writeWorksheet(wb, CO2, sheet = "CO2", startRow = 4, startCol = 2)
+# Alternatively: wb$writeNamedRegion(CO2, sheet = "CO2", startRow = 4, startCol = 2)
 
 # Save workbook (this actually writes the file to disk)
 saveWorkbook(wb)

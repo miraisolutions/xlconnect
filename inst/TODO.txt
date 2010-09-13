@@ -14,10 +14,6 @@ TODOS
   
 - add demo (demo(...)) and examples in package description
 
-- update package description/documentation
-
-- index, keywords
-
 - license specification
 
 - unit test for "larger" datasets

@@ -3,21 +3,25 @@
 \alias{XLConnect}
 \docType{package}
 \title{
-XLConnect - Reading and writing Microsoft Excel files from R
+Excel Connector for R
 }
 \description{
-More about what it does (maybe more than one line)
+Manipulate Excel files from R
 }
 \details{
 \tabular{ll}{
 Package: \tab XLConnect\cr
 Type: \tab Package\cr
-Version: \tab 0.01\cr
-Date: \tab 2010-07-30\cr
-License: \tab What license is it under?\cr
+Version: \tab 0.1-0\cr
+Date: \tab 2010-09-17\cr
+URL: \tab \url{http://www.mirai-solutions.com}\cr
+SystemRequirements: \tab java\cr
+Depends: \tab R (>= 2.5.0), rJava, utils, methods\cr
+License: \tab -\cr
 LazyLoad: \tab yes\cr
 }
-An overview of how to use the package, including the most important functions
+For an overview over the package please refer to the available demos:\cr
+\code{demo(package = "XLConnect")}
 }
 \author{
 Martin Studer, Mirai Solutions GmbH
@@ -25,12 +29,16 @@ Martin Studer, Mirai Solutions GmbH
 Maintainer: Mirai Solutions GmbH <info@mirai-solutions.com>
 }
 \references{
-Literature or other references for background information
+Mirai Solutions GmbH: \url{http://www.mirai-solutions.com}, Apache POI: \url{http://poi.apache.org}
 }
-\keyword{ 
-package
-file
-}
+\keyword{ package }
 \examples{
-search()
+# Load workbook; create if not existing
+wb <- loadWorkbook("XLConnect.xlsx", create = TRUE)
+# Create a name reference
+createName(wb, name = "mtcars", formula = "mtcars!$C$5")
+# Write built-in data.frame 'mtcars' to the specified named region
+writeNamedRegion(wb, mtcars, name = "mtcars")
+# Save workbook
+saveWorkbook(wb)
 }
