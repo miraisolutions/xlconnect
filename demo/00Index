@@ -3,4 +3,6 @@ writeNamedRegion	Writing a named region to an Excel file
 readWorksheet		Reading a worksheet from an Excel file
 writeWorksheet		Writing a worksheet to an Excel file
 addImage			Adding an image to an Excel file
+hideSheets			Hiding worksheets of an Excel file
 summary				Creating a summary of an Excel workbook
+writeLargeData		Writing large datasets to Excel

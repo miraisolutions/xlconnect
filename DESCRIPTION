@@ -9,5 +9,5 @@ URL: http://www.mirai-solutions.com
 SystemRequirements: java
 Depends: R (>= 2.5.0), rJava, utils, methods
 Description: Manipulate Excel files from R
-License: -
+License: file LICENSE
 LazyLoad: yes
