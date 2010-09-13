@@ -12,7 +12,7 @@ if(!isGeneric("writeNamedRegion")) {
 setMethod("writeNamedRegion", 
 	signature(.Object = "workbook", data = "ANY", name = "character", header = "logical"), 
 	function(.Object, data, name, header) {
-		.Object@jobj$writeNamedRegion(dataframeToJava(data), name, header)
+		jTryCatch(.Object@jobj$writeNamedRegion(dataframeToJava(data), name, header))
 		invisible()
 	}
 )
@@ -20,7 +20,7 @@ setMethod("writeNamedRegion",
 setMethod("writeNamedRegion", 
 		signature(.Object = "workbook", data = "ANY", name = "character", header = "missing"), 
 		function(.Object, data, name, header) {
-			.Object@jobj$writeNamedRegion(dataframeToJava(data), name, TRUE)
+			jTryCatch(.Object@jobj$writeNamedRegion(dataframeToJava(data), name, TRUE))
 			invisible()
 		}
 )

@@ -5,7 +5,7 @@
 
 
 remove(list = objects())
-excelFile <- "C:/temp/test.xlsx"
+excelFile <- "C:/temp/mtcars.xlsx"
 # excelFile <- "C:/Users/mstuder/Documents/testWorkbookRemoveSheet.xls"
 file.remove(excelFile)
 

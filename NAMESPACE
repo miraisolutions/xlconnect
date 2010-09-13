@@ -27,7 +27,8 @@ exportMethods(
 	summary,
 	unhideSheet,
 	writeNamedRegion,
-	writeWorksheet
+	writeWorksheet,
+	"$"
 )
 
 # XLConnect exports the following functions & variables

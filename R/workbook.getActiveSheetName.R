@@ -12,6 +12,7 @@ if(!isGeneric("getActiveSheetName")) {
 setMethod("getActiveSheetName", 
 		signature(.Object = "workbook"), 
 		function(.Object) {
-			jTryCatch(.Object@jobj$getActiveSheetName())
+			sheet <- jTryCatch(.Object@jobj$getActiveSheetName())
+			ifelse(is.null(sheet), NA, sheet)
 		}
 )

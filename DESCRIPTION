@@ -1,6 +1,6 @@
 Package: XLConnect
 Type: Package
-Title: R-Connector for Microsoft Excel files
+Title: Excel Connector for R
 Version: 0.1-0
 Date: 2010-07-30
 Author: Martin Studer, Mirai Solutions GmbH
@@ -8,6 +8,6 @@ Maintainer: Mirai Solutions GmbH <info@mirai-solutions.com>
 URL: http://www.mirai-solutions.com
 SystemRequirements: java
 Depends: R (>= 2.5.0), rJava, utils, methods
-Description: R-Connector for Microsoft Excel files
+Description: Manipulate Excel files from R
 License: -
 LazyLoad: yes

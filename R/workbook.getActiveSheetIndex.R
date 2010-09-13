@@ -13,6 +13,7 @@ setMethod("getActiveSheetIndex",
 		signature(.Object = "workbook"), 
 		function(.Object) {
 			# Note: Java has 0-based indices
-			jTryCatch(as.integer(.Object@jobj$getActiveSheetIndex() + 1))
+			idx <- as.integer(jTryCatch(.Object@jobj$getActiveSheetIndex()) + 1)
+			ifelse(idx > 0, idx, NA)
 		}
 )

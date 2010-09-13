@@ -5,10 +5,29 @@ TODOS
 
 - probably need workaround for hideSheet in case of XSSF 2 -> hide, 3 -> very hide
 
-- unit test for addImage ?
 - unit test for with.workbook
-- unit test for writeNamedRegion
-- unit test for writeWorksheet
+
+- execute unit tests independently from R CMD check
 
 - add method for querying name reference formula (+ adapt createName unit test)
    probably also: getDefinedNames -> getNames which return list structure ...?
+  
+- add demo (demo(...)) and examples in package description
+
+- update package description/documentation
+
+- index, keywords
+
+- license specification
+
+- unit test for "larger" datasets
+
+- rename openWorkbook to loadWorkbook
+
+- rename all .Object to object
+
+
+############### FUTURE RELEASE ###################
+
+- get images ?? + add unit test for adding images
+- read / (write?) document properties via HPSF

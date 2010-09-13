@@ -8,7 +8,7 @@ setMethod("summary", signature(object = "workbook"), function(object) {
 	cat("> Filename: '", object@filename, "'\n", sep = "")
 	
 	nice <- function(x) {
-		if(length(x) > 0) x
+		if(length(x) > 0 && !is.na(x)) x
 		else "<NONE>"
 	}
 	
@@ -18,11 +18,11 @@ setMethod("summary", signature(object = "workbook"), function(object) {
 	cat(nice(sheets), sep = ", ", fill = TRUE)
 	
 	cat("> Hidden Sheets:\n")
-	idx <- sapply(sheets, function(s) isSheetHidden(object, s))
+	idx <- as.logical(sapply(sheets, function(s) isSheetHidden(object, s)))
 	cat(nice(sheets[idx]), sep = ", ", fill = TRUE)
 	
 	cat("> Very Hidden Sheets:\n")
-	idx <- sapply(sheets, function(s) isSheetVeryHidden(object, s))
+	idx <- as.logical(sapply(sheets, function(s) isSheetVeryHidden(object, s)))
 	cat(nice(sheets[idx]), sep = ", ", fill = TRUE)
 	
 	cat("> Names:\n")

@@ -1,0 +1,90 @@
+# TODO: Add comment
+# 
+# Author: Martin Studer, Mirai Solutions GmbH
+###############################################################################
+
+test.workbook.writeAndReadWorksheet <- function() {
+	
+	# Create workbooks
+	wb.xls <- openWorkbook("resources/testWriteAndReadWorksheet.xls", create = TRUE)
+	wb.xlsx <- openWorkbook("resources/testWriteAndReadWorksheet.xlsx", create = TRUE)
+	
+	testDataFrame <- function(wb, df, startRow, startCol) {
+		worksheet <- deparse(substitute(df))
+		createSheet(wb, worksheet)
+		writeWorksheet(wb, df, worksheet, startRow = startRow, startCol = startCol)
+		res <- readWorksheet(wb, worksheet, startRow = startRow, startCol = startCol,
+				endRow = -1, endCol = -1)	
+		checkEquals(normalizeDataframe(df), res)
+	}
+	
+	# built-in dataset mtcars (*.xls)
+	testDataFrame(wb.xls, mtcars, 8, 13)
+	# built-in dataset mtcars (*.xlsx)
+	testDataFrame(wb.xlsx, mtcars, 8, 13)
+	
+	# built-in dataset airquality (*.xls)
+	testDataFrame(wb.xls, airquality, 2, 9)
+	# built-in dataset airquality (*.xlsx)
+	testDataFrame(wb.xlsx, airquality, 2, 9)
+	
+	# built-in dataset attenu (*.xls)
+	testDataFrame(wb.xls, attenu, 7, 1)
+	# built-in dataset attenu (*.xlsx)
+	testDataFrame(wb.xlsx, attenu, 7, 1)
+	
+	# built-in dataset ChickWeight (*.xls)
+	testDataFrame(wb.xls, ChickWeight, 8, 8)
+	# built-in dataset ChickWeight (*.xlsx)
+	testDataFrame(wb.xlsx, ChickWeight, 8, 8)
+	
+	# built-in dataset CO2 (*.xls)
+	testDataFrame(wb.xls, CO2, 100, 12)
+	# built-in dataset CO2 (*.xlsx)
+	testDataFrame(wb.xlsx, CO2, 100, 12)
+	
+	# built-in dataset iris (*.xls)
+	testDataFrame(wb.xls, iris, 1, 1)
+	# built-in dataset iris (*.xlsx)
+	testDataFrame(wb.xlsx, iris, 1, 1)
+	
+	# built-in dataset longley (*.xls)
+	testDataFrame(wb.xls, longley, 5, 214)
+	# built-in dataset longley (*.xlsx)
+	testDataFrame(wb.xlsx, longley, 5, 214)
+	
+	# built-in dataset morley (*.xls)
+	testDataFrame(wb.xls, morley, 1000, 6)
+	# built-in dataset morley (*.xlsx)
+	testDataFrame(wb.xlsx, morley, 1000, 6)
+	
+	# built-in dataset swiss (*.xls)
+	testDataFrame(wb.xls, swiss, 4, 4)
+	# built-in dataset swiss (*.xlsx)
+	testDataFrame(wb.xlsx, swiss, 4, 4)
+	
+	# custom test dataset
+	cdf <- data.frame(
+			"Column.A" = c(1, 2, 3, NA, 5, 6, 7, 8, NA, 10),
+			"Column.B" = c(-4, -3, NA, -1, 0, NA, NA, 3, 4, 5),
+			"Column.C" = c("Anna", "äöü", 
+					NA, "", NA, "$!?&%", "(£2@§~°'^*#|)", "{}[]:,;-_<>", "\\sadf\n\nv", "a b c"),
+			"Column.D" = c(pi, -pi, NA, sqrt(2), sqrt(0.3), -sqrt(pi), exp(1), log(2), sin(2), -tan(2)),
+			"Column.E" = c(TRUE, TRUE, NA, NA, FALSE, FALSE, TRUE, NA, FALSE, TRUE),
+			"Column.F" = c("High", "Medium", "Low", "Low", "Low", NA, NA, "Medium", "High", "High"),
+			"Column.G" = c("High", "Medium", NA, "Low", "Low", "Medium", NA, "Medium", "High", "High"),
+			"Column.H" = rep(c(Sys.Date(), Sys.Date() + 236, NA), length = 10),
+			# NOTE: Column.I is automatically converted to POSIXct!!!
+			"Column.I" = rep(c(as.POSIXlt(Sys.time()), as.POSIXlt(Sys.time()) + 3523523, NA, as.POSIXlt(Sys.time()) + 838239), length = 10),
+			"Column.J" = rep(c(as.POSIXct(Sys.time()), as.POSIXct(Sys.time()) + 436322, NA, as.POSIXct(Sys.time()) - 1295022), length = 10),
+			stringsAsFactors = F
+	)
+	cdf[["Column.F"]] <- factor(cdf[["Column.F"]])
+	cdf[["Column.F"]] <- ordered(cdf[["Column.F"]], levels = c("Low", "Medium", "High"))
+	
+	# (*.xls)
+	testDataFrame(wb.xls, cdf, 1, 1)
+	# (*.xlsx)
+	testDataFrame(wb.xlsx, cdf, 1, 1)
+	
+}
