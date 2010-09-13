@@ -6,8 +6,8 @@
 test.workbook.getActiveSheetIndex <- function() {
 	
 	# Create workbooks
-	wb.xls <- loadWorkbook("resources/testWorkbookActiveSheetIndexAndName.xls", create = FALSE)
-	wb.xlsx <- loadWorkbook("resources/testWorkbookActiveSheetIndexAndName.xlsx", create = FALSE)
+	wb.xls <- loadWorkbook(rsrc("resources/testWorkbookActiveSheetIndexAndName.xls"), create = FALSE)
+	wb.xlsx <- loadWorkbook(rsrc("resources/testWorkbookActiveSheetIndexAndName.xlsx"), create = FALSE)
 	
 	# Check that the active sheet index is 5 (*.xls)
 	checkTrue(getActiveSheetIndex(wb.xls) == 5)

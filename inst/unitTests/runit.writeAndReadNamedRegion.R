@@ -3,65 +3,64 @@
 # Author: Martin Studer, Mirai Solutions GmbH
 ###############################################################################
 
-test.workbook.writeAndReadWorksheet <- function() {
+test.writeAndReadNamedRegion <- function() {
 	
 	# Create workbooks
-	wb.xls <- loadWorkbook("resources/testWriteAndReadWorksheet.xls", create = TRUE)
-	wb.xlsx <- loadWorkbook("resources/testWriteAndReadWorksheet.xlsx", create = TRUE)
+	wb.xls <- loadWorkbook(rsrc("resources/testWriteAndReadNamedRegion.xls"), create = TRUE)
+	wb.xlsx <- loadWorkbook(rsrc("resources/testWriteAndReadNamedRegion.xlsx"), create = TRUE)
 	
-	testDataFrame <- function(wb, df, startRow, startCol) {
-		worksheet <- deparse(substitute(df))
-		createSheet(wb, worksheet)
-		writeWorksheet(wb, df, worksheet, startRow = startRow, startCol = startCol)
-		res <- readWorksheet(wb, worksheet, startRow = startRow, startCol = startCol,
-				endRow = -1, endCol = -1)	
+	testDataFrame <- function(wb, df, lref) {
+		namedRegion <- deparse(substitute(df))
+		createName(wb, name = namedRegion, formula = paste(namedRegion, lref, sep = "!"))
+		writeNamedRegion(wb, df, name = namedRegion, header = TRUE)
+		res <- readNamedRegion(wb, namedRegion)
 		checkEquals(normalizeDataframe(df), res)
 	}
 	
 	# built-in dataset mtcars (*.xls)
-	testDataFrame(wb.xls, mtcars, 8, 13)
+	testDataFrame(wb.xls, mtcars, "$C$8")
 	# built-in dataset mtcars (*.xlsx)
-	testDataFrame(wb.xlsx, mtcars, 8, 13)
+	testDataFrame(wb.xlsx, mtcars, "$C$8")
 	
 	# built-in dataset airquality (*.xls)
-	testDataFrame(wb.xls, airquality, 2, 9)
+	testDataFrame(wb.xls, airquality, "$F$13")
 	# built-in dataset airquality (*.xlsx)
-	testDataFrame(wb.xlsx, airquality, 2, 9)
+	testDataFrame(wb.xlsx, airquality, "$F$13")
 	
 	# built-in dataset attenu (*.xls)
-	testDataFrame(wb.xls, attenu, 7, 1)
+	testDataFrame(wb.xls, attenu, "$A$8")
 	# built-in dataset attenu (*.xlsx)
-	testDataFrame(wb.xlsx, attenu, 7, 1)
+	testDataFrame(wb.xlsx, attenu, "$A$8")
 	
 	# built-in dataset ChickWeight (*.xls)
-	testDataFrame(wb.xls, ChickWeight, 8, 8)
+	testDataFrame(wb.xls, ChickWeight, "$BQ$7")
 	# built-in dataset ChickWeight (*.xlsx)
-	testDataFrame(wb.xlsx, ChickWeight, 8, 8)
+	testDataFrame(wb.xlsx, ChickWeight, "$BQ$7")
 	
 	# built-in dataset CO2 (*.xls)
-	testDataFrame(wb.xls, CO2, 100, 12)
+	testDataFrame(wb.xls, CO2, "$L$1")
 	# built-in dataset CO2 (*.xlsx)
-	testDataFrame(wb.xlsx, CO2, 100, 12)
+	testDataFrame(wb.xlsx, CO2, "$L$1")
 	
 	# built-in dataset iris (*.xls)
-	testDataFrame(wb.xls, iris, 1, 1)
+	testDataFrame(wb.xls, iris, "$BB$5")
 	# built-in dataset iris (*.xlsx)
-	testDataFrame(wb.xlsx, iris, 1, 1)
+	testDataFrame(wb.xlsx, iris, "$BB$5")
 	
 	# built-in dataset longley (*.xls)
-	testDataFrame(wb.xls, longley, 5, 214)
+	testDataFrame(wb.xls, longley, "$AD$8")
 	# built-in dataset longley (*.xlsx)
-	testDataFrame(wb.xlsx, longley, 5, 214)
+	testDataFrame(wb.xlsx, longley, "$AD$8")
 	
 	# built-in dataset morley (*.xls)
-	testDataFrame(wb.xls, morley, 1000, 6)
+	testDataFrame(wb.xls, morley, "$K$4")
 	# built-in dataset morley (*.xlsx)
-	testDataFrame(wb.xlsx, morley, 1000, 6)
+	testDataFrame(wb.xlsx, morley, "$K$4")
 	
 	# built-in dataset swiss (*.xls)
-	testDataFrame(wb.xls, swiss, 4, 4)
+	testDataFrame(wb.xls, swiss, "$M$2")
 	# built-in dataset swiss (*.xlsx)
-	testDataFrame(wb.xlsx, swiss, 4, 4)
+	testDataFrame(wb.xlsx, swiss, "$M$2")
 	
 	# custom test dataset
 	cdf <- data.frame(
@@ -83,8 +82,8 @@ test.workbook.writeAndReadWorksheet <- function() {
 	cdf[["Column.F"]] <- ordered(cdf[["Column.F"]], levels = c("Low", "Medium", "High"))
 	
 	# (*.xls)
-	testDataFrame(wb.xls, cdf, 1, 1)
+	testDataFrame(wb.xls, cdf, "$X$100")
 	# (*.xlsx)
-	testDataFrame(wb.xlsx, cdf, 1, 1)
+	testDataFrame(wb.xlsx, cdf, "$X$100")
 	
 }

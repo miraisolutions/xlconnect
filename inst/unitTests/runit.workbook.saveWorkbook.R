@@ -6,8 +6,10 @@
 test.workbook.saveWorkbook <- function() {
 	
 	# Create workbooks
-	file.xls <- "resources/testWorkbookSaveWorkbook.xls"
-	file.xlsx <- "resources/testWorkbookSaveWorkbook.xlsx"
+	file.xls <- rsrc("resources/testWorkbookSaveWorkbook.xls")
+	file.xlsx <- rsrc("resources/testWorkbookSaveWorkbook.xlsx")
+	file.remove(file.xls)
+	file.remove(file.xlsx)
 	wb.xls <- loadWorkbook(file.xls, create = TRUE)
 	wb.xlsx <- loadWorkbook(file.xlsx, create = TRUE)
 	

@@ -6,8 +6,8 @@
 test.workbook.setActiveSheet <- function() {
 	
 	# Create workbooks
-	wb.xls <- loadWorkbook("resources/testWorkbookSetActiveSheet.xls", create = FALSE)
-	wb.xlsx <- loadWorkbook("resources/testWorkbookSetActiveSheet.xlsx", create = FALSE)
+	wb.xls <- loadWorkbook(rsrc("resources/testWorkbookSetActiveSheet.xls"), create = FALSE)
+	wb.xlsx <- loadWorkbook(rsrc("resources/testWorkbookSetActiveSheet.xlsx"), create = FALSE)
 	
 	# Check that setting the active sheet works ok (*.xls)
 	# (assumes that 'getActiveSheetIndex' works fine)

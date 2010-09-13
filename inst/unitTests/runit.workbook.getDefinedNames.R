@@ -6,8 +6,8 @@
 test.workbook.getDefinedNames <- function() {
 	
 	# Create workbooks
-	wb.xls <- loadWorkbook("resources/testWorkbookDefinedNames.xls", create = FALSE)
-	wb.xlsx <- loadWorkbook("resources/testWorkbookDefinedNames.xlsx", create = FALSE)
+	wb.xls <- loadWorkbook(rsrc("resources/testWorkbookDefinedNames.xls"), create = FALSE)
+	wb.xlsx <- loadWorkbook(rsrc("resources/testWorkbookDefinedNames.xlsx"), create = FALSE)
 	
 	# Names defined in workbooks
 	expectedNames <- c("FirstName", "SecondName", "ThirdName", "FourthName", "FifthName")

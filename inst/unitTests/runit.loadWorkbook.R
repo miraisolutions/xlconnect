@@ -7,30 +7,30 @@ test.loadWorkbook <- function() {
 	
 	# Check that an exception is thrown when trying to open
 	# a non-existent file (*.xls)
-	checkException(loadWorkbook("resources/fileWhichDoesNotExist.xls"))
+	checkException(loadWorkbook(rsrc("resources/fileWhichDoesNotExist.xls")))
 	
 	# Check that an exception is thrown when trying to open
 	# a non-existent file (*.xls)
-	checkException(loadWorkbook("resources/fileWhichDoesNotExist.xlsx"))
+	checkException(loadWorkbook(rsrc("resources/fileWhichDoesNotExist.xlsx")))
 	
 	# Check that an instance of the workbook class is returned
 	# for an already existing file (*.xls)
-	wb <- loadWorkbook("resources/testLoadWorkbook.xls")
+	wb <- loadWorkbook(rsrc("resources/testLoadWorkbook.xls"))
 	checkTrue(is(wb, "workbook"))
 	
 	# Check that an instance of the workbook class is returned
 	# for an already existing file (*.xlsx)
-	wb <- loadWorkbook("resources/testLoadWorkbook.xlsx")
+	wb <- loadWorkbook(rsrc("resources/testLoadWorkbook.xlsx"))
 	checkTrue(is(wb, "workbook"))
 	
 	# Check that an instance of the workbook class is returned
 	# for a file created on-the-fly (*.xls)
-	wb <- loadWorkbook("resources/fileCreatedOnTheFly.xls", create = TRUE)
+	wb <- loadWorkbook(rsrc("resources/fileCreatedOnTheFly.xls"), create = TRUE)
 	checkTrue(is(wb, "workbook"))
 	
 	# Check that an instance of the workbook class is returned
 	# for a file created on-the-fly (*.xlsx)
-	wb <- loadWorkbook("resources/fileCreatedOnTheFly.xlsx", create = TRUE)
+	wb <- loadWorkbook(rsrc("resources/fileCreatedOnTheFly.xlsx"), create = TRUE)
 	checkTrue(is(wb, "workbook"))
 }
 

@@ -6,8 +6,8 @@
 test.workbook.createSheet <- function() {
 	
 	# Create workbooks
-	wb.xls <- loadWorkbook("resources/createSheet.xls", create = TRUE)
-	wb.xlsx <- loadWorkbook("resources/createSheet.xlsx", create = TRUE)
+	wb.xls <- loadWorkbook(rsrc("resources/createSheet.xls"), create = TRUE)
+	wb.xlsx <- loadWorkbook(rsrc("resources/createSheet.xlsx"), create = TRUE)
 	
 	# Check that an exception is thrown when trying to create
 	# a worksheet with a single quote at the beginning (*.xls)

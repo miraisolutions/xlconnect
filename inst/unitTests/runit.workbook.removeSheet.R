@@ -6,8 +6,8 @@
 test.workbook.removeSheet <- function() {
 	
 	# Create workbooks
-	wb.xls <- loadWorkbook("resources/testWorkbookRemoveSheet.xls", create = FALSE)
-	wb.xlsx <- loadWorkbook("resources/testWorkbookRemoveSheet.xlsx", create = FALSE)
+	wb.xls <- loadWorkbook(rsrc("resources/testWorkbookRemoveSheet.xls"), create = FALSE)
+	wb.xlsx <- loadWorkbook(rsrc("resources/testWorkbookRemoveSheet.xlsx"), create = FALSE)
 	
 	# Check that removing a sheet works fine (*.xls)
 	# (assumes 'existsSheet' to be working properly)

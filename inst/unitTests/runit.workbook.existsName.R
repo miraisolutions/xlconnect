@@ -6,8 +6,8 @@
 test.workbook.existsName <- function() {
 	
 	# Create workbooks
-	wb.xls <- loadWorkbook("resources/testWorkbookExistsNameAndSheet.xls", create = FALSE)
-	wb.xlsx <- loadWorkbook("resources/testWorkbookExistsNameAndSheet.xlsx", create = FALSE)
+	wb.xls <- loadWorkbook(rsrc("resources/testWorkbookExistsNameAndSheet.xls"), create = FALSE)
+	wb.xlsx <- loadWorkbook(rsrc("resources/testWorkbookExistsNameAndSheet.xlsx"), create = FALSE)
 	
 	# Check that the following names exists (*.xls)
 	checkTrue(existsName(wb.xls, "AA"))

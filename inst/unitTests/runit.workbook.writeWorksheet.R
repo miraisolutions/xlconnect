@@ -7,8 +7,8 @@
 test.workbook.writeWorksheet <- function() {
 	
 	# Create workbooks
-	wb.xls <- loadWorkbook("resources/testWorkbookWriteWorksheet.xls", create = TRUE)
-	wb.xlsx <- loadWorkbook("resources/testWorkbookWriteWorksheet.xlsx", create = TRUE)
+	wb.xls <- loadWorkbook(rsrc("resources/testWorkbookWriteWorksheet.xls"), create = TRUE)
+	wb.xlsx <- loadWorkbook(rsrc("resources/testWorkbookWriteWorksheet.xlsx"), create = TRUE)
 	
 	# Check that trying to write an object which cannot be converted to a data.frame
 	# causes an exception (*.xls)
