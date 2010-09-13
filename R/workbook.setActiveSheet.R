@@ -2,23 +2,20 @@
 # 
 # Author: Martin Studer, Mirai Solutions GmbH
 ###############################################################################
-
-if(!isGeneric("setActiveSheet")) {
-	if(is.function("setActiveSheet")) fun <- setActiveSheet
-	else fun <- function(.Object, sheet) standardGeneric("setActiveSheet")
-	setGeneric("setActiveSheet", fun)
-}
+ 
+setGeneric("setActiveSheet",
+	function(object, sheet) standardGeneric("setActiveSheet"))
 
 setMethod("setActiveSheet", 
-		signature(.Object = "workbook", sheet = "numeric"), 
-		function(.Object, sheet) {
-			jTryCatch(.Object@jobj$setActiveSheet(as.integer(sheet - 1)))
+		signature(object = "workbook", sheet = "numeric"), 
+		function(object, sheet) {
+			jTryCatch(object@jobj$setActiveSheet(as.integer(sheet - 1)))
 		}
 )
 
 setMethod("setActiveSheet", 
-		signature(.Object = "workbook", sheet = "character"), 
-		function(.Object, sheet) {
-			jTryCatch(.Object@jobj$setActiveSheet(sheet))
+		signature(object = "workbook", sheet = "character"), 
+		function(object, sheet) {
+			jTryCatch(object@jobj$setActiveSheet(sheet))
 		}
 )

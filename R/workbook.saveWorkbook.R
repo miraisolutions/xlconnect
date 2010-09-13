@@ -3,13 +3,9 @@
 # Author: Martin Studer, Mirai Solutions GmbH
 ###############################################################################
 
+setGeneric("saveWorkbook",
+	function(object) standardGeneric("saveWorkbook"))
 
-if(!isGeneric("saveWorkbook")) {
-	if(is.function("saveWorkbook")) fun <- saveWorkbook
-	else fun <- function(.Object) standardGeneric("saveWorkbook")
-	setGeneric("saveWorkbook", fun)
-}
-
-setMethod("saveWorkbook", signature(.Object = "workbook"), function(.Object) {
-	jTryCatch(.Object@jobj$save())
+setMethod("saveWorkbook", signature(object = "workbook"), function(object) {
+	jTryCatch(object@jobj$save())
 })

@@ -3,22 +3,19 @@
 # Author: Martin Studer, Mirai Solutions GmbH
 ###############################################################################
 
-if(!isGeneric("unhideSheet")) {
-	if(is.function("unhideSheet")) fun <- unhideSheet
-	else fun <- function(.Object, sheet) standardGeneric("unhideSheet")
-	setGeneric("unhideSheet", fun)
-}
+setGeneric("unhideSheet",
+	function(object, sheet) standardGeneric("unhideSheet"))
 
 setMethod("unhideSheet", 
-		signature(.Object = "workbook", sheet = "numeric"), 
-		function(.Object, sheet) {
-			jTryCatch(.Object@jobj$unhideSheet(as.integer(sheet - 1)))
+		signature(object = "workbook", sheet = "numeric"), 
+		function(object, sheet) {
+			jTryCatch(object@jobj$unhideSheet(as.integer(sheet - 1)))
 		}
 )
 
 setMethod("unhideSheet", 
-		signature(.Object = "workbook", sheet = "character"), 
-		function(.Object, sheet) {
-			jTryCatch(.Object@jobj$unhideSheet(sheet))
+		signature(object = "workbook", sheet = "character"), 
+		function(object, sheet) {
+			jTryCatch(object@jobj$unhideSheet(sheet))
 		}
 )

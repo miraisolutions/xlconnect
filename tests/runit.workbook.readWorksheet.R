@@ -6,8 +6,8 @@
 test.workbook.readWorksheet <- function() {
 	
 	# Create workbooks
-	wb.xls <- openWorkbook("resources/testWorkbookReadWorksheet.xls", create = FALSE)
-	wb.xlsx <- openWorkbook("resources/testWorkbookReadWorksheet.xlsx", create = FALSE)
+	wb.xls <- loadWorkbook("resources/testWorkbookReadWorksheet.xls", create = FALSE)
+	wb.xlsx <- loadWorkbook("resources/testWorkbookReadWorksheet.xlsx", create = FALSE)
 	
 	checkDf <- data.frame(
 			"NumericColumn" = c(-23.63, NA, NA, 5.8, 3),

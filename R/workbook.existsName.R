@@ -3,15 +3,12 @@
 # Author: Martin Studer, Mirai Solutions GmbH
 ###############################################################################
 
-if(!isGeneric("existsName")) {
-	if(is.function("existsName")) fun <- getSheets
-	else fun <- function(.Object, name) standardGeneric("existsName")
-	setGeneric("existsName", fun)
-}
+setGeneric("existsName",
+	function(object, name) standardGeneric("existsName"))
 
 setMethod("existsName", 
-		signature(.Object = "workbook", name = "character"), 
-		function(.Object, name) {
-			jTryCatch(.Object@jobj$existsName(name))
+		signature(object = "workbook", name = "character"), 
+		function(object, name) {
+			jTryCatch(object@jobj$existsName(name))
 		}
 )

@@ -8,8 +8,8 @@ require(XLConnect)
 # mtcars xlsx file from demo subfolder of package XLConnect
 demoExcelFile <- system.file("demoFiles/mtcars.xlsx", package = "XLConnect")
 
-# Open workbook
-wb <- openWorkbook(demoExcelFile)
+# Load workbook
+wb <- loadWorkbook(demoExcelFile)
 
 ## CASE 1: 
 ## Data starting in top left corner; no other data

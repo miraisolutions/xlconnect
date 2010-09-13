@@ -2,37 +2,34 @@
 # 
 # Author: Martin Studer, Mirai Solutions GmbH
 ###############################################################################
-
-if(!isGeneric("hideSheet")) {
-	if(is.function("hideSheet")) fun <- hideSheet
-	else fun <- function(.Object, sheet, veryHidden) standardGeneric("hideSheet")
-	setGeneric("hideSheet", fun)
-}
+ 
+setGeneric("hideSheet",
+	function(object, sheet, veryHidden) standardGeneric("hideSheet"))
 
 setMethod("hideSheet", 
-		signature(.Object = "workbook", sheet = "numeric", veryHidden = "logical"), 
-		function(.Object, sheet, veryHidden) {
-			.Object@jobj$hideSheet(as.integer(sheet - 1), veryHidden)
+		signature(object = "workbook", sheet = "numeric", veryHidden = "logical"), 
+		function(object, sheet, veryHidden) {
+			object@jobj$hideSheet(as.integer(sheet - 1), veryHidden)
 		}
 )
 
 setMethod("hideSheet", 
-		signature(.Object = "workbook", sheet = "numeric", veryHidden = "missing"), 
-		function(.Object, sheet, veryHidden) {
-			.Object@jobj$hideSheet(as.integer(sheet - 1), FALSE)
+		signature(object = "workbook", sheet = "numeric", veryHidden = "missing"), 
+		function(object, sheet, veryHidden) {
+			object@jobj$hideSheet(as.integer(sheet - 1), FALSE)
 		}
 )
 
 setMethod("hideSheet", 
-		signature(.Object = "workbook", sheet = "character", veryHidden = "logical"), 
-		function(.Object, sheet, veryHidden) {
-			.Object@jobj$hideSheet(sheet, veryHidden)
+		signature(object = "workbook", sheet = "character", veryHidden = "logical"), 
+		function(object, sheet, veryHidden) {
+			object@jobj$hideSheet(sheet, veryHidden)
 		}
 )
 
 setMethod("hideSheet", 
-		signature(.Object = "workbook", sheet = "character", veryHidden = "missing"), 
-		function(.Object, sheet, veryHidden) {
-			.Object@jobj$hideSheet(sheet, FALSE)
+		signature(object = "workbook", sheet = "character", veryHidden = "missing"), 
+		function(object, sheet, veryHidden) {
+			object@jobj$hideSheet(sheet, FALSE)
 		}
 )

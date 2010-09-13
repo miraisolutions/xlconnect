@@ -10,8 +10,8 @@ excelFile <- "C:/temp/mtcars.xlsx"
 file.remove(excelFile)
 
 library(XLConnect)
-wb <- openWorkbook(excelFile, create = TRUE)
-# wb <- openWorkbook(excelFile, create = FALSE)
+wb <- loadWorkbook(excelFile, create = TRUE)
+# wb <- loadWorkbook(excelFile, create = FALSE)
 df.in <- data.frame(
 		A = c("A", "B", NA, "D"), 
 		B = c(1, NA, 3, 4),

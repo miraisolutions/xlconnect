@@ -7,8 +7,8 @@
 test.workbook.writeNamedRegion <- function() {
 	
 	# Create workbooks
-	wb.xls <- openWorkbook("resources/testWorkbookWriteNamedRegion.xls", create = TRUE)
-	wb.xlsx <- openWorkbook("resources/testWorkbookWriteNamedRegion.xlsx", create = TRUE)
+	wb.xls <- loadWorkbook("resources/testWorkbookWriteNamedRegion.xls", create = TRUE)
+	wb.xlsx <- loadWorkbook("resources/testWorkbookWriteNamedRegion.xlsx", create = TRUE)
 	
 	# Check that trying to write an object which cannot be converted to a data.frame
 	# causes an exception (*.xls)

@@ -6,8 +6,8 @@
 test.workbook.getActiveSheetName <- function() {
 
 	# Create workbooks
-	wb.xls <- openWorkbook("resources/testWorkbookActiveSheetIndexAndName.xls", create = FALSE)
-	wb.xlsx <- openWorkbook("resources/testWorkbookActiveSheetIndexAndName.xlsx", create = FALSE)
+	wb.xls <- loadWorkbook("resources/testWorkbookActiveSheetIndexAndName.xls", create = FALSE)
+	wb.xlsx <- loadWorkbook("resources/testWorkbookActiveSheetIndexAndName.xlsx", create = FALSE)
 	
 	# Check that the active sheet name is 'Fifth Sheet' (*.xls)
 	checkTrue(getActiveSheetName(wb.xls) == "Fifth Sheet")

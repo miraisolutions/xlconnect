@@ -6,8 +6,8 @@
 test.workbook.unhideSheet <- function() {
 	
 	# Create workbooks
-	wb.xls <- openWorkbook("resources/testWorkbookHiddenSheets.xls", create = FALSE)
-	wb.xlsx <- openWorkbook("resources/testWorkbookHiddenSheets.xlsx", create = FALSE)
+	wb.xls <- loadWorkbook("resources/testWorkbookHiddenSheets.xls", create = FALSE)
+	wb.xlsx <- loadWorkbook("resources/testWorkbookHiddenSheets.xlsx", create = FALSE)
 	
 	# Check that unhiding sheets works correctly (*.xls)
 	# (assumes 'isSheetHidden' and 'isSheetVeryHidden' work correctly)

@@ -6,8 +6,8 @@
 test.workbook.readNamedRegion <- function() {
 	
 	# Create workbooks
-	wb.xls <- openWorkbook("resources/testWorkbookReadNamedRegion.xls", create = FALSE)
-	wb.xlsx <- openWorkbook("resources/testWorkbookReadNamedRegion.xlsx", create = FALSE)
+	wb.xls <- loadWorkbook("resources/testWorkbookReadNamedRegion.xls", create = FALSE)
+	wb.xlsx <- loadWorkbook("resources/testWorkbookReadNamedRegion.xlsx", create = FALSE)
 	
 	checkDf <- data.frame(
 			"NumericColumn" = c(-23.63, NA, NA, 5.8, 3),

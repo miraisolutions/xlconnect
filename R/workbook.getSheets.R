@@ -3,12 +3,9 @@
 # Author: Martin Studer, Mirai Solutions GmbH
 ###############################################################################
 
-if(!isGeneric("getSheets")) {
-	if(is.function("getSheets")) fun <- getSheets
-	else fun <- function(.Object) standardGeneric("getSheets")
-	setGeneric("getSheets", fun)
-}
+setGeneric("getSheets",
+	function(object) standardGeneric("getSheets"))
 
-setMethod("getSheets", signature(.Object = "workbook"), function(.Object) {
-	jTryCatch(.Object@jobj$getSheets())
+setMethod("getSheets", signature(object = "workbook"), function(object) {
+	jTryCatch(object@jobj$getSheets())
 })

@@ -2,23 +2,20 @@
 # 
 # Author: Martin Studer, Mirai Solutions GmbH
 ###############################################################################
-
-if(!isGeneric("removeSheet")) {
-	if(is.function("removeSheet")) fun <- removeSheet
-	else fun <- function(.Object, sheet) standardGeneric("removeSheet")
-	setGeneric("removeSheet", fun)
-}
+ 
+setGeneric("removeSheet",
+	function(object, sheet) standardGeneric("removeSheet"))
 
 setMethod("removeSheet", 
-		signature(.Object = "workbook", sheet = "numeric"), 
-		function(.Object, sheet) {
-			jTryCatch(.Object@jobj$removeSheet(as.integer(sheet - 1)))
+		signature(object = "workbook", sheet = "numeric"), 
+		function(object, sheet) {
+			jTryCatch(object@jobj$removeSheet(as.integer(sheet - 1)))
 		}
 )
 
 setMethod("removeSheet", 
-		signature(.Object = "workbook", sheet = "character"), 
-		function(.Object, sheet) {
-			jTryCatch(.Object@jobj$removeSheet(sheet))
+		signature(object = "workbook", sheet = "character"), 
+		function(object, sheet) {
+			jTryCatch(object@jobj$removeSheet(sheet))
 		}
 )

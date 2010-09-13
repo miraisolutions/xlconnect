@@ -3,12 +3,9 @@
 # Author: Martin Studer, Mirai Solutions GmbH
 ###############################################################################
 
-if(!isGeneric("createSheet")) {
-	if(is.function("createSheet")) fun <- createSheet
-	else fun <- function(.Object, name) standardGeneric("createSheet")
-	setGeneric("createSheet", fun)
-}
+setGeneric("createSheet",
+	function(object, name) standardGeneric("createSheet"))
 
-setMethod("createSheet", signature(.Object = "workbook", name = "character"), function(.Object, name) {
-	jTryCatch(.Object@jobj$createSheet(name))
+setMethod("createSheet", signature(object = "workbook", name = "character"), function(object, name) {
+	jTryCatch(object@jobj$createSheet(name))
 })

@@ -3,26 +3,23 @@
 # Author: Martin Studer, Mirai Solutions GmbH
 ###############################################################################
 
-if(!isGeneric("readNamedRegion")) {
-	if(is.function("readNamedRegion")) fun <- readNamedRegion
-	else fun <- function(.Object, name, header) standardGeneric("readNamedRegion")
-	setGeneric("readNamedRegion", fun)
-}
+setGeneric("readNamedRegion",
+	function(object, name, header) standardGeneric("readNamedRegion"))
 
 setMethod("readNamedRegion", 
-	signature(.Object = "workbook", name = "character", header = "logical"), 
-	function(.Object, name, header) {	
+	signature(object = "workbook", name = "character", header = "logical"), 
+	function(object, name, header) {	
 		# Read named region (returns RDataFrameWrapper Java object reference)
-		dataFrame <- jTryCatch(.Object@jobj$readNamedRegion(name, header))
+		dataFrame <- jTryCatch(object@jobj$readNamedRegion(name, header))
 		dataframeFromJava(dataFrame)
 	}
 )
 
 setMethod("readNamedRegion", 
-		signature(.Object = "workbook", name = "character", header = "missing"), 
-		function(.Object, name, header) {	
+		signature(object = "workbook", name = "character", header = "missing"), 
+		function(object, name, header) {	
 			# Read named region (returns RDataFrameWrapper Java object reference)
-			dataFrame <- jTryCatch(.Object@jobj$readNamedRegion(name, TRUE))
+			dataFrame <- jTryCatch(object@jobj$readNamedRegion(name, TRUE))
 			dataframeFromJava(dataFrame)
 		}
 )

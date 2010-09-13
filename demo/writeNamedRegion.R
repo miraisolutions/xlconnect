@@ -8,8 +8,8 @@ require(XLConnect)
 # Excel workbook to write
 demoExcelFile <- "mtcars.xlsx"
 
-# Open workbook (create if not existing)
-wb <- openWorkbook(demoExcelFile, create = TRUE)
+# Load workbook (create if not existing)
+wb <- loadWorkbook(demoExcelFile, create = TRUE)
 
 # Create a named region called 'mtcars' on a sheet called 'mtcars'
 createName(wb, name = "mtcars", formula = "mtcars!$A$1")

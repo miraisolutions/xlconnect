@@ -3,24 +3,21 @@
 # Author: Martin Studer, Mirai Solutions GmbH
 ###############################################################################
 
-if(!isGeneric("addImage")) {
-	if(is.function("addImage")) fun <- addImage
-	else fun <- function(.Object, filename, name, originalSize) standardGeneric("addImage")
-	setGeneric("addImage", fun)
-}
+setGeneric("addImage", 
+	function(object, filename, name, originalSize) standardGeneric("addImage"))
 
 setMethod("addImage", 
-		signature(.Object = "workbook", filename = "character", name = "character", 
+		signature(object = "workbook", filename = "character", name = "character", 
 				originalSize = "logical"), 
-		function(.Object, filename, name, originalSize) {
-			jTryCatch(.Object@jobj$addImage(filename, name, originalSize))
+		function(object, filename, name, originalSize) {
+			jTryCatch(object@jobj$addImage(filename, name, originalSize))
 		}
 )
 
 setMethod("addImage", 
-		signature(.Object = "workbook", filename = "character", name = "character", 
+		signature(object = "workbook", filename = "character", name = "character", 
 				originalSize = "missing"), 
-		function(.Object, filename, name, originalSize) {
-			jTryCatch(.Object@jobj$addImage(filename, name, FALSE))
+		function(object, filename, name, originalSize) {
+			jTryCatch(object@jobj$addImage(filename, name, FALSE))
 		}
 )

@@ -6,8 +6,8 @@
 test.workbook.existsSheet <- function() {
 	
 	# Create workbooks
-	wb.xls <- openWorkbook("resources/testWorkbookExistsNameAndSheet.xls", create = FALSE)
-	wb.xlsx <- openWorkbook("resources/testWorkbookExistsNameAndSheet.xlsx", create = FALSE)
+	wb.xls <- loadWorkbook("resources/testWorkbookExistsNameAndSheet.xls", create = FALSE)
+	wb.xlsx <- loadWorkbook("resources/testWorkbookExistsNameAndSheet.xlsx", create = FALSE)
 	
 	# Check that the following sheets exists (*.xls)
 	checkTrue(existsSheet(wb.xls, "AAA"))

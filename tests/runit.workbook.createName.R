@@ -6,8 +6,8 @@
 test.workbook.createName <- function() {
 	
 	# Create workbooks
-	wb.xls <- openWorkbook("resources/createName.xls", create = TRUE)
-	wb.xlsx <- openWorkbook("resources/createName.xlsx", create = TRUE)
+	wb.xls <- loadWorkbook("resources/createName.xls", create = TRUE)
+	wb.xlsx <- loadWorkbook("resources/createName.xlsx", create = TRUE)
 	
 	# Check that creating a legal name works ok (*.xls)
 	# (this test assumes 'existsName' is working fine)

@@ -6,8 +6,8 @@
 test.workbook.isSheetHidden <- function() {
 	
 	# Create workbooks
-	wb.xls <- openWorkbook("resources/testWorkbookHiddenSheets.xls", create = FALSE)
-	wb.xlsx <- openWorkbook("resources/testWorkbookHiddenSheets.xlsx", create = FALSE)
+	wb.xls <- loadWorkbook("resources/testWorkbookHiddenSheets.xls", create = FALSE)
+	wb.xlsx <- loadWorkbook("resources/testWorkbookHiddenSheets.xlsx", create = FALSE)
 	
 	# Check if sheets are hidden (*.xls)
 	checkTrue(isSheetHidden(wb.xls, 2))

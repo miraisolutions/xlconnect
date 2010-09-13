@@ -6,8 +6,8 @@
 test.workbook.removeName <- function() {
 	
 	# Create workbooks
-	wb.xls <- openWorkbook("resources/testWorkbookRemoveName.xls", create = FALSE)
-	wb.xlsx <- openWorkbook("resources/testWorkbookRemoveName.xlsx", create = FALSE)
+	wb.xls <- loadWorkbook("resources/testWorkbookRemoveName.xls", create = FALSE)
+	wb.xlsx <- loadWorkbook("resources/testWorkbookRemoveName.xlsx", create = FALSE)
 	
 	# Check that when removing a name from a worksheet it does not exist anymore (*.xls)
 	# (assumes 'existsName' is working correctly)

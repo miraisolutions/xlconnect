@@ -6,8 +6,8 @@
 test.workbook.writeAndReadWorksheet <- function() {
 	
 	# Create workbooks
-	wb.xls <- openWorkbook("resources/testWriteAndReadWorksheet.xls", create = TRUE)
-	wb.xlsx <- openWorkbook("resources/testWriteAndReadWorksheet.xlsx", create = TRUE)
+	wb.xls <- loadWorkbook("resources/testWriteAndReadWorksheet.xls", create = TRUE)
+	wb.xlsx <- loadWorkbook("resources/testWriteAndReadWorksheet.xlsx", create = TRUE)
 	
 	testDataFrame <- function(wb, df, startRow, startCol) {
 		worksheet <- deparse(substitute(df))

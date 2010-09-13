@@ -22,10 +22,6 @@ TODOS
 
 - unit test for "larger" datasets
 
-- rename openWorkbook to loadWorkbook
-
-- rename all .Object to object
-
 
 ############### FUTURE RELEASE ###################
 

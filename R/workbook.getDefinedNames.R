@@ -3,12 +3,9 @@
 # Author: Martin Studer, Mirai Solutions GmbH
 ###############################################################################
 
-if(!isGeneric("getDefinedNames")) {
-	if(is.function("getDefinedNames")) fun <- getDefinedNames
-	else fun <- function(.Object) standardGeneric("getDefinedNames")
-	setGeneric("getDefinedNames", fun)
-}
+setGeneric("getDefinedNames",
+	function(object) standardGeneric("getDefinedNames"))
 
-setMethod("getDefinedNames", signature(.Object = "workbook"), function(.Object) {
-	jTryCatch(.Object@jobj$getDefinedNames())
+setMethod("getDefinedNames", signature(object = "workbook"), function(object) {
+	jTryCatch(object@jobj$getDefinedNames())
 })

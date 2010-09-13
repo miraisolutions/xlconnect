@@ -34,7 +34,7 @@ exportMethods(
 # XLConnect exports the following functions & variables
 export(
 	mirai,
-	openWorkbook
+	loadWorkbook
 )
 
 # XLConnect exports the following S3 methods

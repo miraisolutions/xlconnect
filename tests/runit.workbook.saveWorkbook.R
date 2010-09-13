@@ -8,8 +8,8 @@ test.workbook.saveWorkbook <- function() {
 	# Create workbooks
 	file.xls <- "resources/testWorkbookSaveWorkbook.xls"
 	file.xlsx <- "resources/testWorkbookSaveWorkbook.xlsx"
-	wb.xls <- openWorkbook(file.xls, create = TRUE)
-	wb.xlsx <- openWorkbook(file.xlsx, create = TRUE)
+	wb.xls <- loadWorkbook(file.xls, create = TRUE)
+	wb.xlsx <- loadWorkbook(file.xlsx, create = TRUE)
 	
 	# Files don't exist yet
 	checkTrue(!file.exists(file.xls))

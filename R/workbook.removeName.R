@@ -3,15 +3,12 @@
 # Author: Martin Studer, Mirai Solutions GmbH
 ###############################################################################
 
-if(!isGeneric("removeName")) {
-	if(is.function("removeName")) fun <- removeName
-	else fun <- function(.Object, name) standardGeneric("removeName")
-	setGeneric("removeName", fun)
-}
+setGeneric("removeName",
+	function(object, name) standardGeneric("removeName"))
 
 setMethod("removeName", 
-		signature(.Object = "workbook", name = "character"), 
-		function(.Object, name) {
-			jTryCatch(.Object@jobj$removeName(name))
+		signature(object = "workbook", name = "character"), 
+		function(object, name) {
+			jTryCatch(object@jobj$removeName(name))
 		}
 )

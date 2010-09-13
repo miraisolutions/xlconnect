@@ -3,23 +3,20 @@
 # Author: Martin Studer, Mirai Solutions GmbH
 ###############################################################################
 
-if(!isGeneric("isSheetVeryHidden")) {
-	if(is.function("isSheetVeryHidden")) fun <- isSheetVeryHidden
-	else fun <- function(.Object, sheet) standardGeneric("isSheetVeryHidden")
-	setGeneric("isSheetVeryHidden", fun)
-}
+setGeneric("isSheetVeryHidden",
+	function(object, sheet) standardGeneric("isSheetVeryHidden"))
 
 setMethod("isSheetVeryHidden", 
-		signature(.Object = "workbook", sheet = "numeric"), 
-		function(.Object, sheet) {
+		signature(object = "workbook", sheet = "numeric"), 
+		function(object, sheet) {
 			# Note: Java indices are 0-based
-			jTryCatch(.Object@jobj$isSheetVeryHidden(as.integer(sheet - 1)))
+			jTryCatch(object@jobj$isSheetVeryHidden(as.integer(sheet - 1)))
 		}
 )
 
 setMethod("isSheetVeryHidden", 
-		signature(.Object = "workbook", sheet = "character"), 
-		function(.Object, sheet) {
-			jTryCatch(.Object@jobj$isSheetVeryHidden(sheet))
+		signature(object = "workbook", sheet = "character"), 
+		function(object, sheet) {
+			jTryCatch(object@jobj$isSheetVeryHidden(sheet))
 		}
 )
