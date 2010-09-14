@@ -8,6 +8,7 @@ Maintainer: Mirai Solutions GmbH <info@mirai-solutions.com>
 URL: http://www.mirai-solutions.com
 SystemRequirements: java
 Depends: R (>= 2.5.0), rJava, utils, methods
+Suggests: RUnit
 Description: Manipulate Excel files from R
 License: file LICENSE
 LazyLoad: yes

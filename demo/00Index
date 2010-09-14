@@ -5,4 +5,5 @@ writeWorksheet		Writing a worksheet to an Excel file
 addImage			Adding an image to an Excel file
 hideSheets			Hiding worksheets of an Excel file
 summary				Creating a summary of an Excel workbook
+withWorkbook		Directly referencing named regions in an Excel workbook
 writeLargeData		Writing large datasets to Excel

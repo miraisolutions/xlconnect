@@ -17,6 +17,7 @@ Date: \tab 2010-09-17\cr
 URL: \tab \url{http://www.mirai-solutions.com}\cr
 SystemRequirements: \tab java\cr
 Depends: \tab R (>= 2.5.0), rJava, utils, methods\cr
+Suggests: \tab RUnit\cr
 License: \tab -\cr
 LazyLoad: \tab yes\cr
 }
