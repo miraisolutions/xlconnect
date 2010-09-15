@@ -51,7 +51,7 @@ writeWorksheet(wb, dfLarge, sheet = "Dummy")
 # Save workbook (this actually writes the file to disk)
 saveWorkbook(wb)
 
-if(interactive()) {
+if(interactive() && exists("shell.exec")) {
 	answer <- readline("Open the created Excel file (y/n)? ")
 	if(answer == "y") shell.exec(file.path(getwd(), demoExcelFile))
 }

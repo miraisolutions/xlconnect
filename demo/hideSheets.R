@@ -35,7 +35,7 @@ hideSheet(wb, sheet = "swiss", veryHidden = TRUE)
 saveWorkbook(wb)
 # Alternatively: wb$saveWorkbook()
 
-if(interactive()) {
+if(interactive() && exists("shell.exec")) {
 	answer <- readline("Open the created Excel file (y/n)? ")
 	if(answer == "y") shell.exec(file.path(getwd(), demoExcelFile))
 }

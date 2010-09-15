@@ -40,8 +40,10 @@ runUnitTests <- function() {
 		source(file.path(path, "normalizeDataframe.R"))
 		
 		# Set up and run test suite
+		orig.opts <- options(encoding = "latin1")
 		TestSuite <- defineTestSuite(paste(pkg, "Test Suite"), dirs = path)
 		TestResult <- runTestSuite(TestSuite)
+		options(orig.opts)
 		
 		# Test protocol files
 		protocol <- file.path(getwd(), paste(pkg, "Unit_Tests", sep = "_"))

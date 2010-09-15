@@ -27,7 +27,7 @@ writeWorksheet(wb, CO2, sheet = "CO2", startRow = 4, startCol = 2)
 saveWorkbook(wb)
 # Alternatively: wb$saveWorkbook()
 
-if(interactive()) {
+if(interactive() && exists("shell.exec")) {
 	answer <- readline("Open the created Excel file (y/n)? ")
 	if(answer == "y") shell.exec(file.path(getwd(), demoExcelFile))
 }

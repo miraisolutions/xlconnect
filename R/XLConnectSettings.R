@@ -14,5 +14,8 @@ XLConnectSettings <- function(pdesc) {
 	# representation to Java which will then convert it to java.util.Date
 	options(XLConnect.dateTimeFormat = "%Y-%m-%d %H:%M:%S")
 	
+	# Turn off Java logging by default
+	setJavaLogLevel("OFF")
+	
 	invisible()
 }
