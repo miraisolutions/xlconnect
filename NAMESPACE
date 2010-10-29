@@ -2,9 +2,10 @@
 import(rJava)
 
 # XLConnect exports the following S4 classes & methods
-exportClasses(workbook)
+exportClasses(workbook, cellstyle)
 exportMethods(
 	addImage,
+	createCellStyle,
 	createName,
 	createSheet,
 	existsName,
@@ -12,10 +13,12 @@ exportMethods(
 	getActiveSheetIndex,
 	getActiveSheetName,
 	getDefinedNames,
+	getReferenceFormula,
 	getSheets,
 	hideSheet,
 	isSheetHidden,
 	isSheetVeryHidden,
+	isSheetVisible,
 	print,
 	readNamedRegion,
 	readWorksheet,
@@ -23,6 +26,9 @@ exportMethods(
 	removeSheet,
 	saveWorkbook,
 	setActiveSheet,
+	setBorderBottom,
+	setStyleAction,
+	setStyleNamePrefix,
 	show,
 	summary,
 	unhideSheet,
@@ -35,7 +41,8 @@ exportMethods(
 export(
 	mirai,
 	loadWorkbook,
-	runUnitTests
+	runUnitTests,
+	XLC
 )
 
 # XLConnect exports the following S3 methods

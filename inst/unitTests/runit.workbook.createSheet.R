@@ -15,8 +15,7 @@ test.workbook.createSheet <- function() {
 	
 	# Check that an exception is thrown when trying to create
 	# a worksheet with a single quote at the beginning (*.xlsx)
-	# TODO: Check again, this currently does not produce an error - POI bug?
-	# checkException(createSheet(wb.xlsx, "'Invalid Sheet Name"))
+	checkException(createSheet(wb.xlsx, "'Invalid Sheet Name"))
 	
 	# Check that an exception is thrown when trying to create
 	# a worksheet with a single quote at the end (*.xls)
@@ -24,15 +23,14 @@ test.workbook.createSheet <- function() {
 	
 	# Check that an exception is thrown when trying to create
 	# a worksheet with a single quote at the end (*.xlsx)
-	# TODO: Check again, this currently does not produce an error - POI bug?
-	# checkException(createSheet(wb.xlsx, "Invalid Sheet Name'"))
+	checkException(createSheet(wb.xlsx, "Invalid Sheet Name'"))
 	
 	# Check that an exception is thrown when trying to create
-	# a worksheet with a very long name (> 30 characters) (*.xls)
+	# a worksheet with a very long name (> 31 characters) (*.xls)
 	checkException(createSheet(wb.xls, "A very very very very very very very very long name"))
 	
 	# Check that an exception is thrown when trying to create
-	# a worksheet with a very long name (> 30 characters) (*.xlsx)
+	# a worksheet with a very long name (> 31 characters) (*.xlsx)
 	checkException(createSheet(wb.xlsx, "A very very very very very very very very long name"))
 	
 	

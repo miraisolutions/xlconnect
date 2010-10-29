@@ -10,14 +10,19 @@ test.workbook.getDefinedNames <- function() {
 	wb.xlsx <- loadWorkbook(rsrc("resources/testWorkbookDefinedNames.xlsx"), create = FALSE)
 	
 	# Names defined in workbooks
-	expectedNames <- c("FirstName", "SecondName", "ThirdName", "FourthName", "FifthName")
+	expectedNamesValidOnly <- c("FirstName", "SecondName", "FourthName", "FifthName")
+	expectedNamesAll <- c("FirstName", "SecondName", "ThirdName", "FourthName", "FifthName")
 	
 	# Check that all and only the expected names exist (*.xls)
-	definedNames <- getDefinedNames(wb.xls)
-	checkTrue(length(setdiff(expectedNames, definedNames)) == 0 && length(setdiff(definedNames, expectedNames)) == 0)
+	definedNames <- getDefinedNames(wb.xls, validOnly = TRUE)
+	checkTrue(length(setdiff(expectedNamesValidOnly, definedNames)) == 0 && length(setdiff(definedNames, expectedNamesValidOnly)) == 0)
+	definedNames <- getDefinedNames(wb.xls, validOnly = FALSE)
+	checkTrue(length(setdiff(expectedNamesAll, definedNames)) == 0 && length(setdiff(definedNames, expectedNamesAll)) == 0)
 	
 	# Check that all and only the expected names exist (*.xlsx)
-	definedNames <- getDefinedNames(wb.xlsx)
-	checkTrue(length(setdiff(expectedNames, definedNames)) == 0 && length(setdiff(definedNames, expectedNames)) == 0)
+	definedNames <- getDefinedNames(wb.xlsx, validOnly = TRUE)
+	checkTrue(length(setdiff(expectedNamesValidOnly, definedNames)) == 0 && length(setdiff(definedNames, expectedNamesValidOnly)) == 0)
+	definedNames <- getDefinedNames(wb.xlsx, validOnly = FALSE)
+	checkTrue(length(setdiff(expectedNamesAll, definedNames)) == 0 && length(setdiff(definedNames, expectedNamesAll)) == 0)
 	
 }
