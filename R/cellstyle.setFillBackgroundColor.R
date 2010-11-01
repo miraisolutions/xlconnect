@@ -3,12 +3,12 @@
 # Author: Martin Studer, Mirai Solutions GmbH
 ###############################################################################
 
-setGeneric("setFillForegroundColor",
-		function(object, color) standardGeneric("setFillForegroundColor"))
+setGeneric("setFillBackgroundColor",
+		function(object, color) standardGeneric("setFillBackgroundColor"))
 
-setMethod("setFillForegroundColor", 
+setMethod("setFillBackgroundColor", 
 		signature(object = "cellstyle", color = "numeric"), 
 		function(object, color) {
-			jTryCatch(object@jobj$setFillForegroundColor(as.integer(color)))
+			jTryCatch(object@jobj$setFillBackgroundColor(as.integer(color)))
 		}
 )
