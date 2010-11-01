@@ -17,7 +17,6 @@ setMethod("writeNamedRegion",
 setMethod("writeNamedRegion", 
 		signature(object = "workbook", data = "ANY", name = "character", header = "missing"), 
 		function(object, data, name, header) {
-			jTryCatch(object@jobj$writeNamedRegion(dataframeToJava(data), name, TRUE))
-			invisible()
+			callGeneric(object, data, name, TRUE)
 		}
 )

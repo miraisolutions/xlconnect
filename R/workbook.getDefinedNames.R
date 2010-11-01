@@ -11,5 +11,5 @@ setMethod("getDefinedNames", signature(object = "workbook", validOnly = "logical
 })
 
 setMethod("getDefinedNames", signature(object = "workbook", validOnly = "missing"), function(object, validOnly) {
-	jTryCatch(object@jobj$getDefinedNames(TRUE))
+	callGeneric(object, TRUE)
 })

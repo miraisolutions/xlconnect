@@ -16,7 +16,7 @@ setMethod("hideSheet",
 setMethod("hideSheet", 
 		signature(object = "workbook", sheet = "numeric", veryHidden = "missing"), 
 		function(object, sheet, veryHidden) {
-			object@jobj$hideSheet(as.integer(sheet - 1), FALSE)
+			callGeneric(object, sheet, FALSE)
 		}
 )
 
@@ -30,6 +30,6 @@ setMethod("hideSheet",
 setMethod("hideSheet", 
 		signature(object = "workbook", sheet = "character", veryHidden = "missing"), 
 		function(object, sheet, veryHidden) {
-			object@jobj$hideSheet(sheet, FALSE)
+			callGeneric(object, sheet, FALSE)
 		}
 )

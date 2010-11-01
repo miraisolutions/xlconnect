@@ -18,6 +18,6 @@ setMethod("addImage",
 		signature(object = "workbook", filename = "character", name = "character", 
 				originalSize = "missing"), 
 		function(object, filename, name, originalSize) {
-			jTryCatch(object@jobj$addImage(filename, name, FALSE))
+			callGeneric(object, filename, name, FALSE)
 		}
 )

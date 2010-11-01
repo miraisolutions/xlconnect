@@ -18,6 +18,6 @@ setMethod("createName",
 		signature(object = "workbook", name = "character", formula = "character", 
 				overwrite = "missing"), 
 		function(object, name, formula, overwrite) {
-			jTryCatch(object@jobj$createName(name, formula, FALSE))
+			callGeneric(object, name, formula, FALSE)
 		}
 )

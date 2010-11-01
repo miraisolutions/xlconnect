@@ -31,9 +31,7 @@ setMethod("writeWorksheet",
 		signature(object = "workbook", data = "ANY", sheet = "character", startRow = "numeric", 
 				startCol = "numeric", header = "missing"), 
 		function(object, data, sheet, startRow, startCol, header) {
-			jTryCatch(object@jobj$writeWorksheet(dataframeToJava(data), sheet, as.integer(startRow - 1), 
-					as.integer(startCol - 1), TRUE))
-			invisible()
+			callGeneric(object, data, sheet, startRow, startCol, TRUE)
 		}
 )
 
@@ -59,8 +57,7 @@ setMethod("writeWorksheet",
 		signature(object = "workbook", data = "ANY", sheet = "numeric", startRow = "missing", 
 				startCol = "missing", header = "missing"), 
 		function(object, data, sheet, startRow, startCol, header) {
-			jTryCatch(object@jobj$writeWorksheet(dataframeToJava(data), as.integer(sheet - 1), TRUE))
-			invisible()
+			callGeneric(object, data, sheet, header = TRUE)
 		}
 )
 
@@ -68,7 +65,6 @@ setMethod("writeWorksheet",
 		signature(object = "workbook", data = "ANY", sheet = "character", startRow = "missing", 
 				startCol = "missing", header = "missing"), 
 		function(object, data, sheet, startRow, startCol, header) {
-			jTryCatch(object@jobj$writeWorksheet(dataframeToJava(data), sheet, TRUE))
-			invisible()
+			callGeneric(object, data, sheet, header = TRUE)
 		}
 )

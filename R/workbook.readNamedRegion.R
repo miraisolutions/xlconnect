@@ -18,8 +18,6 @@ setMethod("readNamedRegion",
 setMethod("readNamedRegion", 
 		signature(object = "workbook", name = "character", header = "missing"), 
 		function(object, name, header) {	
-			# Read named region (returns RDataFrameWrapper Java object reference)
-			dataFrame <- jTryCatch(object@jobj$readNamedRegion(name, TRUE))
-			dataframeFromJava(dataFrame)
+			callGeneric(object, name, TRUE)
 		}
 )
