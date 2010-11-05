@@ -10,5 +10,5 @@ SystemRequirements: java
 Depends: R (>= 2.5.0), rJava, utils, methods
 Suggests: RUnit
 Description: Manipulate Excel files from R
-License: file LICENSE
+License: GPL-3
 LazyLoad: yes
