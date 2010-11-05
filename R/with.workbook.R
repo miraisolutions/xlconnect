@@ -5,8 +5,8 @@
 
 with.workbook <- function(data, expr, ...) {
 	env <- new.env(parent = parent.frame())
-	for(name in getDefinedNames(data)) {
-		tryCatch(assign(name, readNamedRegion(data, name = name, ...), env = env),
+	for(name in getDefinedNames(data, validOnly = TRUE)) {
+		tryCatch(assign(make.names(name), readNamedRegion(data, name = name, ...), env = env),
 			error = function(e) {
 				warning(e)
 			}
