@@ -20,32 +20,28 @@
 
 #############################################################################
 #
-# Directly referencing named regions in an Excel workbook
+# TODO: Add Comment
 # 
 # Author: Martin Studer, Mirai Solutions GmbH
 #
 #############################################################################
 
-require(XLConnect)
+setGeneric("setRowHeight",
+		function(object, sheet, row, height) standardGeneric("setRowHeight"))
 
-# mydata xlsx file from demoFiles subfolder of package XLConnect
-demoExcelFile <- system.file("demoFiles/mydata.xlsx", package = "XLConnect")
+setMethod("setRowHeight", 
+		signature(object = "workbook", sheet = "numeric", row = "numeric", height = "numeric"), 
+		function(object, sheet, row, height) {
+			jTryCatch(object@jobj$setRowHeight(as.integer(sheet - 1), as.integer(row - 1), height))
+			invisible()
+		}
+)
 
-# Load workbook
-wb <- loadWorkbook(demoExcelFile)
+setMethod("setRowHeight", 
+		signature(object = "workbook", sheet = "character", row = "numeric", height = "numeric"), 
+		function(object, sheet, row, height) {
+			jTryCatch(object@jobj$setRowHeight(sheet, as.integer(row - 1), height))
+			invisible()
+		}
+)
 
-# Use 'with' in conjunction with a 'workbook' and directly
-# reference the containing named regions ('mydata' in this case)
-# Note: there's no need to explicitly read the named region
-
-with(wb, {
-	coplot(mpg ~ disp | as.factor(cyl), data = mydata,
-		panel = panel.smooth, rows = 1)
-})
-
-
-# CAUTION: 'with' should only be used with simple workbooks that
-# contain a small number of named regions; if you have workbooks
-# with many named regions and you are only interested in a particluar
-# subset, consider reading in those named region "manually" as this
-# may increase performance

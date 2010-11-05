@@ -20,32 +20,29 @@
 
 #############################################################################
 #
-# Directly referencing named regions in an Excel workbook
+# TODO: Add Comment
 # 
 # Author: Martin Studer, Mirai Solutions GmbH
 #
 #############################################################################
 
-require(XLConnect)
+setGeneric("setColumnWidth",
+		function(object, sheet, column, width) standardGeneric("setColumnWidth"))
 
-# mydata xlsx file from demoFiles subfolder of package XLConnect
-demoExcelFile <- system.file("demoFiles/mydata.xlsx", package = "XLConnect")
+setMethod("setColumnWidth", 
+		signature(object = "workbook", sheet = "numeric", column = "numeric", width = "numeric"), 
+		function(object, sheet, column, width) {
+			jTryCatch(object@jobj$setColumnWidth(as.integer(sheet - 1), as.integer(column - 1), 
+				as.integer(width)))
+			invisible()
+		}
+)
 
-# Load workbook
-wb <- loadWorkbook(demoExcelFile)
-
-# Use 'with' in conjunction with a 'workbook' and directly
-# reference the containing named regions ('mydata' in this case)
-# Note: there's no need to explicitly read the named region
-
-with(wb, {
-	coplot(mpg ~ disp | as.factor(cyl), data = mydata,
-		panel = panel.smooth, rows = 1)
-})
-
-
-# CAUTION: 'with' should only be used with simple workbooks that
-# contain a small number of named regions; if you have workbooks
-# with many named regions and you are only interested in a particluar
-# subset, consider reading in those named region "manually" as this
-# may increase performance
+setMethod("setColumnWidth", 
+		signature(object = "workbook", sheet = "character", column = "numeric", width = "numeric"), 
+		function(object, sheet, column, width) {
+			jTryCatch(object@jobj$setColumnWidth(sheet, as.integer(column - 1), 
+				as.integer(width)))
+			invisible()
+		}
+)
