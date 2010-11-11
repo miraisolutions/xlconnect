@@ -13,12 +13,12 @@ Manipulate Excel files from R
 Package: \tab XLConnect\cr
 Type: \tab Package\cr
 Version: \tab 0.1-1\cr
-Date: \tab 2010-09-17\cr
+Date: \tab 2010-11-12\cr
 URL: \tab \url{http://www.mirai-solutions.com}\cr
 SystemRequirements: \tab java\cr
 Depends: \tab R (>= 2.5.0), rJava, utils, methods\cr
 Suggests: \tab RUnit\cr
-License: \tab -\cr
+License: \tab GPL-3\cr
 LazyLoad: \tab yes\cr
 }
 For an overview over the package please refer to the available demos:\cr
@@ -27,7 +27,7 @@ For an overview over the package please refer to the available demos:\cr
 \author{
 Martin Studer, Mirai Solutions GmbH
 
-Maintainer: Mirai Solutions GmbH <info@mirai-solutions.com>
+Maintainer: Mirai Solutions GmbH <xlconnect@mirai-solutions.com>
 }
 \references{
 Mirai Solutions GmbH: \url{http://www.mirai-solutions.com}, Apache POI: \url{http://poi.apache.org}

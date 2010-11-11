@@ -27,6 +27,7 @@ exportMethods(
 	saveWorkbook,
 	setActiveSheet,
 	setBorder,
+	setCellStyle,
 	setColumnWidth,
 	setDataFormat,
 	setFillBackgroundColor,
