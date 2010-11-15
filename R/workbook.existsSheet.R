@@ -32,6 +32,6 @@ setGeneric("existsSheet",
 setMethod("existsSheet", 
 		signature(object = "workbook", name = "character"), 
 		function(object, name) {
-			jTryCatch(object@jobj$existsSheet(name))
+			xlcCall(object@jobj$existsSheet, name)
 		}
 )

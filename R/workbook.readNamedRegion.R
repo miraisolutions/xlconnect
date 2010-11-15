@@ -32,9 +32,14 @@ setGeneric("readNamedRegion",
 setMethod("readNamedRegion", 
 	signature(object = "workbook", name = "character", header = "logical"), 
 	function(object, name, header) {	
-		# Read named region (returns RDataFrameWrapper Java object reference)
-		dataFrame <- jTryCatch(object@jobj$readNamedRegion(name, header))
-		dataframeFromJava(dataFrame)
+		# returns a list of RDataFrameWrapper Java object references)
+		dataFrame <- xlcCall(object@jobj$readNamedRegion, name, header, SIMPLIFY = FALSE)
+		# construct data.frame
+		dataFrame <- lapply(dataFrame, dataframeFromJava)
+		
+		# Return data.frame directly in case only one data.frame is read
+		if(length(dataFrame) == 1) dataFrame[[1]]
+		else dataFrame
 	}
 )
 

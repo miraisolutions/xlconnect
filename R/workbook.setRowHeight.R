@@ -32,7 +32,7 @@ setGeneric("setRowHeight",
 setMethod("setRowHeight", 
 		signature(object = "workbook", sheet = "numeric", row = "numeric", height = "numeric"), 
 		function(object, sheet, row, height) {
-			jTryCatch(object@jobj$setRowHeight(as.integer(sheet - 1), as.integer(row - 1), height))
+			xlcCall(object@jobj$setRowHeight, as.integer(sheet - 1), as.integer(row - 1), height)
 			invisible()
 		}
 )
@@ -40,8 +40,7 @@ setMethod("setRowHeight",
 setMethod("setRowHeight", 
 		signature(object = "workbook", sheet = "character", row = "numeric", height = "numeric"), 
 		function(object, sheet, row, height) {
-			jTryCatch(object@jobj$setRowHeight(sheet, as.integer(row - 1), height))
+			xlcCall(object@jobj$setRowHeight, sheet, as.integer(row - 1), height)
 			invisible()
 		}
 )
-

@@ -32,14 +32,13 @@ setGeneric("isSheetVeryHidden",
 setMethod("isSheetVeryHidden", 
 		signature(object = "workbook", sheet = "numeric"), 
 		function(object, sheet) {
-			# Note: Java indices are 0-based
-			jTryCatch(object@jobj$isSheetVeryHidden(as.integer(sheet - 1)))
+			xlcCall(object@jobj$isSheetVeryHidden, as.integer(sheet - 1))
 		}
 )
 
 setMethod("isSheetVeryHidden", 
 		signature(object = "workbook", sheet = "character"), 
 		function(object, sheet) {
-			jTryCatch(object@jobj$isSheetVeryHidden(sheet))
+			xlcCall(object@jobj$isSheetVeryHidden, sheet)
 		}
 )

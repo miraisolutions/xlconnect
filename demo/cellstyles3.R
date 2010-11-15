@@ -20,7 +20,7 @@
 
 #############################################################################
 #
-# Adding an image to an Excel file
+# Using cellstyles for specific selected cells
 # 
 # Author: Martin Studer, Mirai Solutions GmbH
 #
@@ -29,47 +29,55 @@
 require(XLConnect)
 
 # Excel workbook to write
-demoExcelFile <- "image.xlsx"
+demoExcelFile <- "cellstyles3.xlsx"
 
 # Remove file if it already exists
 if(file.exists(demoExcelFile)) file.remove(demoExcelFile)
 
-# Image file to write
-demoImageFile <- system.file("demoFiles/SwitzerlandFlag.jpg", package = "XLConnect")
-
 # Load workbook (create if not existing)
 wb <- loadWorkbook(demoExcelFile, create = TRUE)
 
-## CASE 1:
-## Write image in original size matching top left corner of a cell and the image
+# We don't set a specific style action in this demo, so the default 'XLConnect'
+# will be used (XLC$"STYLE_ACTION.XLCONNECT")
 
-# Create a named region called 'switzerland1' on a sheet called 'switzerland1'
+# Create a named region called 'mtcars' on a sheet called 'mtcars'
 # (the call to 'createName' automatically creates the sheet
 # referenced in the formula if it does not exist)
-createName(wb, name = "switzerland1", formula = "switzerland1!$C$4")
-# Alternatively: wb$createName(name = "switzerland1", formula = "switzerland1!$C$4")
+createName(wb, name = "mtcars", formula = "mtcars!$C$4")
 
-# Write image to the named region created above using the image's original size;
-# i.e. the image's top left corner will match the specified cell's top left corner
-addImage(wb, filename = demoImageFile, name = "switzerland1", originalSize = TRUE)
-# Alternatively: wb$addImage(filename = demoImageFile, name = "switzerland1", originalSize = TRUE)
+# Write built-in data set 'mtcars' to the above defined named region.
+# This will use the default style action 'XLConnect'.
+writeNamedRegion(wb, mtcars, name = "mtcars")
 
-## CASE 2:
-## Write image to a specified named region area
+# Now let's color all weight cells of cars with a weight > 3.5 in red
+# (mtcars$wt > 3.5)
 
-# Create a named region called 'switzerland2' on a sheet called 'switzerland2'
-# (the call to 'createName' automatically creates the sheet
-# referenced in the formula if it does not exist)
-createName(wb, name = "switzerland2", formula = "switzerland2!$C$4:$F$9")
-# Alternatively: wb$createName(name = "switzerland2", formula = "switzerland2!$C$4:$F$9")
+# First, create a corresponding (named) cellstyle
+heavyCar <- createCellStyle(wb, name = "HeavyCar")
+# Specify the cellstyle to use a solid foreground color
+setFillPattern(heavyCar, fill = XLC$"FILL.SOLID_FOREGROUND")
+# Specify the foreground color to be used
+setFillForegroundColor(heavyCar, color = XLC$"COLOR.RED")
 
-# Write image to the named region area created above - image will be fitted accordingly
-addImage(wb, filename = demoImageFile, name = "switzerland2", originalSize = FALSE)
-# Alternatively: wb$addImage(filename = demoImageFile, name = "switzerland2", originalSize = FALSE)
+# Which cars have a weight > 3.5 ?
+rowIndex <- which(mtcars$wt > 3.5)
+
+# NOTE: The mtcars data.frame has been written offset with top left cell
+# C4 - and we have also written a header row!
+# So, let's take that into account appropriately. Obviously, the two steps
+# could be combined directly into one ...
+rowIndex <- rowIndex + 4
+
+# The same holds for the column index
+colIndex <- which(names(mtcars) == "wt") + 2
+
+# Set the 'HeavyCar' cellstyle for the corresponding cells.
+# Note: the row and col arguments are vectorized!
+setCellStyle(wb, sheet = "mtcars", row = rowIndex, col = colIndex, 
+	cellstyle = heavyCar)
 
 # Save workbook (this actually writes the file to disk)
 saveWorkbook(wb)
-# Alternatively: wb$saveWorkbook()
 
 if(interactive()) {
 	answer <- readline("Open the created Excel file (y/n)? ")

@@ -20,18 +20,20 @@
 
 #############################################################################
 #
-# TODO: Add Comment
+# Wraps an argument in a list if this is not already the case.
+# Further extracts the 'jobj' slot from S4 classes (such as 'workbook'
+# and 'cellstyle').
 # 
 # Author: Martin Studer, Mirai Solutions GmbH
 #
 #############################################################################
 
-setGeneric("getReferenceFormula",
-		function(object, name) standardGeneric("getReferenceFormula"))
-
-setMethod("getReferenceFormula", 
-		signature(object = "workbook", name = "character"), 
-		function(object, name) {
-			xlcCall(object@jobj$getReferenceFormula, name)
-		}
-)
+wrapList <- function(x) {
+	if(!is(x, "list")) x <- list(x)
+	# Extract 'jobj' slot for S4 classes (such as 'workbook' & 'cellstyle')
+	x <- lapply(x, function(y) {
+		if("jobj" %in% slotNames(y)) y@jobj
+		else y
+	})
+	x
+}

@@ -29,10 +29,16 @@
 setGeneric("getDefinedNames",
 	function(object, validOnly) standardGeneric("getDefinedNames"))
 
-setMethod("getDefinedNames", signature(object = "workbook", validOnly = "logical"), function(object, validOnly) {
-	jTryCatch(object@jobj$getDefinedNames(validOnly))
-})
+setMethod("getDefinedNames", 
+	signature(object = "workbook", validOnly = "logical"), 
+	function(object, validOnly) {
+		jTryCatch(object@jobj$getDefinedNames(validOnly))
+	}
+)
 
-setMethod("getDefinedNames", signature(object = "workbook", validOnly = "missing"), function(object, validOnly) {
-	callGeneric(object, TRUE)
-})
+setMethod("getDefinedNames", 
+	signature(object = "workbook", validOnly = "missing"), 
+	function(object, validOnly) {
+		callGeneric(object, TRUE)
+	}
+)

@@ -32,13 +32,15 @@ setGeneric("unhideSheet",
 setMethod("unhideSheet", 
 		signature(object = "workbook", sheet = "numeric"), 
 		function(object, sheet) {
-			jTryCatch(object@jobj$unhideSheet(as.integer(sheet - 1)))
+			xlcCall(object@jobj$unhideSheet, as.integer(sheet - 1))
+			invisible()
 		}
 )
 
 setMethod("unhideSheet", 
 		signature(object = "workbook", sheet = "character"), 
 		function(object, sheet) {
-			jTryCatch(object@jobj$unhideSheet(sheet))
+			xlcCall(object@jobj$unhideSheet, sheet)
+			invisible()
 		}
 )

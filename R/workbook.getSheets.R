@@ -29,6 +29,9 @@
 setGeneric("getSheets",
 	function(object) standardGeneric("getSheets"))
 
-setMethod("getSheets", signature(object = "workbook"), function(object) {
-	jTryCatch(object@jobj$getSheets())
-})
+setMethod("getSheets", 
+	signature(object = "workbook"), 
+	function(object) {
+		jTryCatch(object@jobj$getSheets())
+	}
+)

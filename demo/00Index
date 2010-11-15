@@ -1,9 +1,13 @@
-readNamedRegion		Reading a named region from an Excel file
-writeNamedRegion	Writing a named region to an Excel file
-readWorksheet		Reading a worksheet from an Excel file
-writeWorksheet		Writing a worksheet to an Excel file
-addImage			Adding an image to an Excel file
-hideSheets			Hiding worksheets of an Excel file
-summary				Creating a summary of an Excel workbook
-withWorkbook		Directly referencing named regions in an Excel workbook
-writeLargeData		Writing large datasets to Excel
+readNamedRegion			Reading a named region from an Excel file
+writeNamedRegion		Writing a named region to an Excel file
+readWorksheet			Reading a worksheet from an Excel file
+writeWorksheet			Writing a worksheet to an Excel file
+addImage				Adding an image to an Excel file
+hideSheets				Hiding worksheets of an Excel file
+summary					Creating a summary of an Excel workbook
+withWorkbook			Directly referencing named regions in an Excel workbook
+writeLargeData			Writing large datasets to Excel
+cellstyles1				Using cellstyles in combination with the 'name prefix' style action
+cellstyles2				Using cellstyles in combination with the 'predefined' style action
+cellstyles3				Using cellstyles for specific selected cells
+cellsize				Setting row height and column width in a worksheet

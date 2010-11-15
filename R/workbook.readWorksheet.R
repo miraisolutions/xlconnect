@@ -34,11 +34,15 @@ setMethod("readWorksheet",
 		signature(object = "workbook", sheet = "numeric", startRow = "numeric", startCol = "numeric", 
 				endRow = "numeric", endCol = "numeric", header = "logical"), 
 		function(object, sheet, startRow, startCol, endRow, endCol, header) {	
-			# Read worksheet (returns RDataFrameWrapper Java object reference)
-			# note that Java indices are 0-based
-			dataFrame <- jTryCatch(object@jobj$readWorksheet(as.integer(sheet - 1), as.integer(startRow - 1), 
-							as.integer(startCol - 1), as.integer(endRow - 1), as.integer(endCol - 1), header))
-			dataframeFromJava(dataFrame)
+			# returns a list of RDataFrameWrapper Java object references)
+			dataFrame <- xlcCall(object@jobj$readWorksheet, as.integer(sheet - 1), as.integer(startRow - 1), 
+				as.integer(startCol - 1), as.integer(endRow - 1), as.integer(endCol - 1), header, SIMPLIFY = FALSE)
+			# construct data.frame
+			dataFrame <- lapply(dataFrame, dataframeFromJava)
+			
+			# Return data.frame directly in case only one data.frame is read
+			if(length(dataFrame) == 1) dataFrame[[1]]
+			else dataFrame
 		}
 )
 
@@ -54,10 +58,15 @@ setMethod("readWorksheet",
 		signature(object = "workbook", sheet = "character", startRow = "numeric", startCol = "numeric", 
 				endRow = "numeric", endCol = "numeric", header = "logical"), 
 		function(object, sheet, startRow, startCol, endRow, endCol, header) {	
-			# Read worksheet (returns RDataFrameWrapper Java object reference)
-			dataFrame <- jTryCatch(object@jobj$readWorksheet(sheet, as.integer(startRow - 1), as.integer(startCol - 1), 
-							as.integer(endRow - 1), as.integer(endCol - 1), header))
-			dataframeFromJava(dataFrame)
+			# returns a list of RDataFrameWrapper Java object references)
+			dataFrame <- xlcCall(object@jobj$readWorksheet, sheet, as.integer(startRow - 1), as.integer(startCol - 1), 
+				as.integer(endRow - 1), as.integer(endCol - 1), header, SIMPLIFY = FALSE)
+			# construct data.frame
+			dataFrame <- lapply(dataFrame, dataframeFromJava)
+			
+			# Return data.frame directly in case only one data.frame is read
+			if(length(dataFrame) == 1) dataFrame[[1]]
+			else dataFrame
 		}
 )
 
@@ -73,10 +82,14 @@ setMethod("readWorksheet",
 		signature(object = "workbook", sheet = "numeric", startRow = "missing", startCol = "missing", 
 				endRow = "missing", endCol = "missing", header = "logical"), 
 		function(object, sheet, startRow, startCol, endRow, endCol, header) {	
-			# Read worksheet (returns RDataFrameWrapper Java object reference)
-			# note that Java indices are 0-based
-			dataFrame <- jTryCatch(object@jobj$readWorksheet(as.integer(sheet - 1), header))
-			dataframeFromJava(dataFrame)
+			# returns a list of RDataFrameWrapper Java object references)
+			dataFrame <- xlcCall(object@jobj$readWorksheet, as.integer(sheet - 1), header, SIMPLIFY = FALSE)
+			# construct data.frame
+			dataFrame <- lapply(dataFrame, dataframeFromJava)
+			
+			# Return data.frame directly in case only one data.frame is read
+			if(length(dataFrame) == 1) dataFrame[[1]]
+			else dataFrame
 		}
 )
 
@@ -92,9 +105,14 @@ setMethod("readWorksheet",
 		signature(object = "workbook", sheet = "character", startRow = "missing", startCol = "missing", 
 				endRow = "missing", endCol = "missing", header = "logical"), 
 		function(object, sheet, startRow, startCol, endRow, endCol, header) {	
-			# Read worksheet (returns RDataFrameWrapper Java object reference)
-			dataFrame <- jTryCatch(object@jobj$readWorksheet(sheet, header))
-			dataframeFromJava(dataFrame)
+			# returns a list of RDataFrameWrapper Java object references)
+			dataFrame <- xlcCall(object@jobj$readWorksheet, sheet, header, SIMPLIFY = FALSE)
+			# construct data.frame
+			dataFrame <- lapply(dataFrame, dataframeFromJava)
+			
+			# Return data.frame directly in case only one data.frame is read
+			if(length(dataFrame) == 1) dataFrame[[1]]
+			else dataFrame
 		}
 )
 

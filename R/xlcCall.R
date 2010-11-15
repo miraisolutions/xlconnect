@@ -26,12 +26,11 @@
 #
 #############################################################################
 
-setGeneric("getReferenceFormula",
-		function(object, name) standardGeneric("getReferenceFormula"))
-
-setMethod("getReferenceFormula", 
-		signature(object = "workbook", name = "character"), 
-		function(object, name) {
-			xlcCall(object@jobj$getReferenceFormula, name)
-		}
-)
+xlcCall <- function(fun, ..., SIMPLIFY = TRUE) {
+	args <- list(...)
+	args <- lapply(args, function(x) {
+		if(is.atomic(x)) x
+		else wrapList(x)
+	})
+	jTryCatch(do.call("mapply", args = c(FUN = fun, args, SIMPLIFY = SIMPLIFY)))
+}

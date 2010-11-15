@@ -29,6 +29,9 @@
 
 XLConnectSettings <- function(pdesc) {
 	
+	# Set Java AWT headless system property.
+	J("java.lang.System")$setProperty("java.awt.headless", "true")
+	
 	# URL to Mirai Solutions GmbH Website
 	options(MiraiSolutions.URL = pdesc$URL)
 	

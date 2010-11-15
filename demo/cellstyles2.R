@@ -20,56 +20,44 @@
 
 #############################################################################
 #
-# Writing large datasets to Excel
+# Using cellstyles in combination with the 'predefined' style action.
+# This is useful when writing data to an Excel template.
 # 
 # Author: Martin Studer, Mirai Solutions GmbH
 #
 #############################################################################
 
-# Increase Java's maximum heap space;
-# this option must be set before the underlying JVM is initialized
-# and therefore MUST happen before XLConnect is loaded
-options(java.parameters = "-Xmx1024m")
-
-if(any(is.element(c("package:XLConnect", "package:rJava"), search()))) {
-	msg <- paste(
-		"XLConnect and/or rJava are already attached.",
-		"You may reload these packages in order for the Java parameter setting",
-		"to take effect.",
-		sep = "\n"
-	)
-	warning(msg)
-}
-
 require(XLConnect)
 
 # Excel workbook to write
-demoExcelFile <- "large.xlsx"
+demoExcelFile <- "cellstyles2.xlsx"
 
 # Remove file if it already exists
 if(file.exists(demoExcelFile)) file.remove(demoExcelFile)
+# Copy the existing Excel template.
+# This template contains a sheet 'mtcars' and defines a named region 'mtcars'
+# that is already pre-styled with some custom cellstyles for headers and columns.
+# You may have a look at this file to compare it with the final result.
+file.copy(system.file("demoFiles/template.xlsx", package = "XLConnect"), demoExcelFile)
 
-# Create a large dummy data.frame
-set.seed(292)
-n <- 50000
-dfLarge <- data.frame(
-	A = rnorm(n),
-	B = sample(letters, size = n, replace = TRUE),
-	C = rnorm(n) > 0,
-	D = rep(as.Date("2010-09-17"), n),
-	E = rnorm(n),
-	F = sample(LETTERS, size = n, replace = TRUE),
-	G = 1:n
-)
+# Load workbook
+wb <- loadWorkbook(demoExcelFile)
 
-# Load workbook (create if not existing)
-wb <- loadWorkbook(demoExcelFile, create = TRUE)
+# Set style action to 'predefined' 
+# (default is 'XLConnect' (XLC$"STYLE_ACTION.XLCONNECT"))
+#
+# This will instruct XLConnect to use existing (predefined) cellstyles
+# when writing headers and columns.
+setStyleAction(wb, XLC$"STYLE_ACTION.PREDEFINED")
 
-# Create a worksheet called 'Dummy'
-createSheet(wb, name = "Dummy")
+# INFO: See the documentation for more information on style actions
+# and cellstyles!
 
-# Write large data.frame to worksheet 'Dummy' created above
-writeWorksheet(wb, dfLarge, sheet = "Dummy")
+# Write built-in data set 'mtcars' to the named region 'mtcars' as defined
+# by the Excel template.
+# Predefined cellstyles will be used as defined by the Excel template
+# when writing the data.
+writeNamedRegion(wb, mtcars, name = "mtcars")
 
 # Save workbook (this actually writes the file to disk)
 saveWorkbook(wb)

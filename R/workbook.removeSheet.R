@@ -32,13 +32,15 @@ setGeneric("removeSheet",
 setMethod("removeSheet", 
 		signature(object = "workbook", sheet = "numeric"), 
 		function(object, sheet) {
-			jTryCatch(object@jobj$removeSheet(as.integer(sheet - 1)))
+			xlcCall(object@jobj$removeSheet, as.integer(sheet - 1))
+			invisible()
 		}
 )
 
 setMethod("removeSheet", 
 		signature(object = "workbook", sheet = "character"), 
 		function(object, sheet) {
-			jTryCatch(object@jobj$removeSheet(sheet))
+			xlcCall(object@jobj$removeSheet, sheet)
+			invisible()
 		}
 )

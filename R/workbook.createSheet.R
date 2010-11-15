@@ -29,6 +29,10 @@
 setGeneric("createSheet",
 	function(object, name) standardGeneric("createSheet"))
 
-setMethod("createSheet", signature(object = "workbook", name = "character"), function(object, name) {
-	jTryCatch(object@jobj$createSheet(name))
-})
+setMethod("createSheet", 
+	signature(object = "workbook", name = "character"), 
+	function(object, name) {
+		xlcCall(object@jobj$createSheet, name)
+		invisible()
+	}
+)
