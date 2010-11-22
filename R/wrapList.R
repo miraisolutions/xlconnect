@@ -32,7 +32,7 @@ wrapList <- function(x) {
 	if(!is(x, "list")) x <- list(x)
 	# Extract 'jobj' slot for S4 classes (such as 'workbook' & 'cellstyle')
 	x <- lapply(x, function(y) {
-		if("jobj" %in% slotNames(y)) y@jobj
+		if(!is(y, "jobjRef") && "jobj" %in% slotNames(y)) y@jobj
 		else y
 	})
 	x

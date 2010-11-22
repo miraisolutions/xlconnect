@@ -34,8 +34,9 @@ options(java.parameters = "-Xmx1024m")
 if(any(is.element(c("package:XLConnect", "package:rJava"), search()))) {
 	msg <- paste(
 		"XLConnect and/or rJava are already attached.",
-		"You may reload these packages in order for the Java parameter setting",
-		"to take effect.",
+		"As such, a JVM instance may already be running.",
+		"Please restart R and set the Java parameters before XLConnect",
+		"or any packages that start a JVM instance are loaded.",
 		sep = "\n"
 	)
 	warning(msg)

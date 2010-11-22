@@ -32,7 +32,9 @@ setGeneric("writeNamedRegion",
 setMethod("writeNamedRegion", 
 	signature(object = "workbook", data = "ANY", name = "character", header = "logical"), 
 	function(object, data, name, header) {
-		jTryCatch(object@jobj$writeNamedRegion(dataframeToJava(data), name, header))
+		# pass data.frame's to Java - construct RDataFrameWrapper Java object references
+		data <- lapply(wrapList(data), dataframeToJava)
+		xlcCall(object@jobj$writeNamedRegion, data, name, header, SIMPLIFY = FALSE)
 		invisible()
 	}
 )

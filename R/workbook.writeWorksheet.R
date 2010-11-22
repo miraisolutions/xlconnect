@@ -33,9 +33,10 @@ setMethod("writeWorksheet",
 		signature(object = "workbook", data = "ANY", sheet = "numeric", startRow = "numeric", 
 				startCol = "numeric", header = "logical"), 
 		function(object, data, sheet, startRow, startCol, header) {
-			# note that Java indices are 0-based
-			jTryCatch(object@jobj$writeWorksheet(dataframeToJava(data), as.integer(sheet - 1), as.integer(startRow - 1), 
-					as.integer(startCol - 1), header))
+			# pass data.frame's to Java - construct RDataFrameWrapper Java object references
+			data <- lapply(wrapList(data), dataframeToJava)
+			xlcCall(object@jobj$writeWorksheet, data, as.integer(sheet - 1), as.integer(startRow - 1),
+				as.integer(startCol - 1), header)
 			invisible()
 		}
 )
@@ -44,8 +45,10 @@ setMethod("writeWorksheet",
 		signature(object = "workbook", data = "ANY", sheet = "character", startRow = "numeric", 
 				startCol = "numeric", header = "logical"), 
 		function(object, data, sheet, startRow, startCol, header) {
-			jTryCatch(object@jobj$writeWorksheet(dataframeToJava(data), sheet, as.integer(startRow - 1), 
-					as.integer(startCol - 1), header))
+			# pass data.frame's to Java - construct RDataFrameWrapper Java object references
+			data <- lapply(wrapList(data), dataframeToJava)
+			xlcCall(object@jobj$writeWorksheet, data, sheet, as.integer(startRow - 1), 
+				as.integer(startCol - 1), header)
 			invisible()
 		}
 )
@@ -62,7 +65,9 @@ setMethod("writeWorksheet",
 		signature(object = "workbook", data = "ANY", sheet = "numeric", startRow = "missing", 
 				startCol = "missing", header = "logical"), 
 		function(object, data, sheet, startRow, startCol, header) {
-			jTryCatch(object@jobj$writeWorksheet(dataframeToJava(data), as.integer(sheet - 1), header))
+			# pass data.frame's to Java - construct RDataFrameWrapper Java object references
+			data <- lapply(wrapList(data), dataframeToJava)
+			xlcCall(object@jobj$writeWorksheet, data, as.integer(sheet - 1), header)
 			invisible()
 		}
 )
@@ -71,7 +76,9 @@ setMethod("writeWorksheet",
 		signature(object = "workbook", data = "ANY", sheet = "character", startRow = "missing", 
 				startCol = "missing", header = "logical"), 
 		function(object, data, sheet, startRow, startCol, header) {
-			jTryCatch(object@jobj$writeWorksheet(dataframeToJava(data), sheet, header))
+			# pass data.frame's to Java - construct RDataFrameWrapper Java object references
+			data <- lapply(wrapList(data), dataframeToJava)
+			xlcCall(object@jobj$writeWorksheet, data, sheet, header)
 			invisible()
 		}
 )
