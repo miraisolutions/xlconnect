@@ -20,7 +20,9 @@
 
 #############################################################################
 #
-# TODO: Add Comment
+# Creates a data.frame from a RDataFrameWrapper jobjRef (rJava) instance.
+#
+# This is used when reading data from Excel workbooks.
 # 
 # Author: Martin Studer, Mirai Solutions GmbH
 #

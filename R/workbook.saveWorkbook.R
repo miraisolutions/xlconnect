@@ -20,7 +20,16 @@
 
 #############################################################################
 #
-# TODO: Add Comment
+# Saving Microsoft Excel workbooks
+#
+# A workbook's underlying Excel file is not saved (or being created in case the 
+# file did not exist and create = TRUE has been specified) unless the saveWorkbook
+# method has been called on the object. This provides more flexibility to the user 
+# to decide when changes are saved and also provides better performance in that 
+# several changes can be written in one go (normally at the end, rather than after 
+# every operation causing the file to be rewritten again completely each time). This 
+# is due to the fact that workbooks are manipulated in-memory and are only written 
+# to disk with specifically calling saveWorkbook.
 # 
 # Author: Martin Studer, Mirai Solutions GmbH
 #

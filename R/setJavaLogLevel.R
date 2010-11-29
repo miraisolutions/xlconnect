@@ -20,7 +20,10 @@
 
 #############################################################################
 #
-# Set XLConnect Java Log Level
+# Set XLConnect Java log level.
+#
+# This controls the logging behaviour of XLConnect's underlying Java code. If 
+# turned on, Java prints logging statements to the standard error.
 # 
 # Author: Martin Studer, Mirai Solutions GmbH
 #

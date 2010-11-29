@@ -20,7 +20,7 @@
 
 #############################################################################
 #
-# Display/show workbook
+# Display/show workbook objects
 # 
 # Author: Martin Studer, Mirai Solutions GmbH
 #

@@ -20,7 +20,11 @@
 
 #############################################################################
 #
-# TODO: Add Comment
+# Creates a Java RDataFrameWrapper instance from a data.frame (non-data.frame 
+# objects are coerced to data.frame's). The resulting jobjRef instance (rJava)
+# can be used when calling Java methods.
+#
+# This is used when writing data.frame's to Excel workbooks.
 # 
 # Author: Martin Studer, Mirai Solutions GmbH
 #

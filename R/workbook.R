@@ -21,6 +21,7 @@
 #############################################################################
 #
 # Workbook class definition with initialization method
+# This is XLConnect's main entity
 # 
 # Author: Martin Studer, Mirai Solutions GmbH
 #

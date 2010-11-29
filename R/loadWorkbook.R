@@ -22,7 +22,7 @@
 #
 # Helper function for opening workbooks
 # This is to be able to write loadWorkbook(...) rather than 
-# new("workbook", filename = ...)
+# new("workbook", filename = ..., create = ...)
 #
 # Author: Martin Studer, Mirai Solutions GmbH
 #

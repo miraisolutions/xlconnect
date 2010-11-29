@@ -1,0 +1,32 @@
+\name{print-methods}
+\docType{methods}
+\alias{print-methods}
+\alias{print,workbook-method}
+\title{ Print a workbook's filename }
+\description{
+Prints the \code{\linkS4class{workbook}}'s underlying filename.
+}
+\section{Methods}{
+\describe{
+
+\item{\code{signature(x = "workbook")}}{
+Prints the specified \code{\linkS4class{workbook}}'s filename (see also the S4 \code{filename}
+slot of the \code{\linkS4class{workbook}} class).
+}
+}}
+\author{
+Martin Studer\cr
+Mirai Solutions GmbH \url{http://www.mirai-solutions.com}
+}
+\seealso{
+\code{\linkS4class{workbook}}
+}
+\examples{
+# Load existing demo Excel file 'mtcars.xlsx' from the XLConnect package
+wb.mtcars <- loadWorkbook(system.file("demoFiles/mtcars.xlsx", 
+	package = "XLConnect"))
+# Print the workbook's underlying filename
+print(wb.mtcars)
+}
+\keyword{methods}
+\keyword{print}

@@ -20,7 +20,7 @@
 
 #############################################################################
 #
-# Reading a named region from an Excel file
+# Reading named regions from an Excel file
 # 
 # Author: Martin Studer, Mirai Solutions GmbH
 #

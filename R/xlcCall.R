@@ -20,7 +20,11 @@
 
 #############################################################################
 #
-# TODO: Add Comment
+# Utility function for vectorizing argument lists and default Java exception
+# handling (jTryCatch)
+#
+# Atomic objects are replicated as is, others are wrapped in a list as defined
+# by wrapList and then replicated
 # 
 # Author: Martin Studer, Mirai Solutions GmbH
 #

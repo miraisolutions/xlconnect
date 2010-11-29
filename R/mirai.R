@@ -20,7 +20,7 @@
 
 #############################################################################
 #
-# Mirai Utility
+# Mirai utility to easily get to the Mirai Solutions GmbH web page
 # 
 # Author: Martin Studer, Mirai Solutions GmbH
 #

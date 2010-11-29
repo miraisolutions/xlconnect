@@ -12,11 +12,11 @@ Manipulate Excel files from R
 \tabular{ll}{
 Package: \tab XLConnect\cr
 Type: \tab Package\cr
-Version: \tab 0.1-1\cr
+Version: \tab 0.1-2\cr
 Date: \tab 2010-11-12\cr
 URL: \tab \url{http://www.mirai-solutions.com}\cr
 SystemRequirements: \tab java\cr
-Depends: \tab R (>= 2.5.0), rJava, utils, methods\cr
+Depends: \tab R (>= 2.9.0), rJava, utils, methods\cr
 Suggests: \tab RUnit\cr
 License: \tab GPL-3\cr
 LazyLoad: \tab yes\cr
@@ -25,12 +25,11 @@ For an overview over the package please refer to the available demos:\cr
 \code{demo(package = "XLConnect")}
 }
 \author{
-Martin Studer, Mirai Solutions GmbH
-
-Maintainer: Mirai Solutions GmbH <xlconnect@mirai-solutions.com>
+Mirai Solutions GmbH, \email{xlconnect@mirai-solutions.com}
 }
 \references{
-Mirai Solutions GmbH: \url{http://www.mirai-solutions.com}, Apache POI: \url{http://poi.apache.org}
+Mirai Solutions GmbH: \url{http://www.mirai-solutions.com}\cr
+Apache POI: \url{http://poi.apache.org}
 }
 \keyword{ package }
 \examples{

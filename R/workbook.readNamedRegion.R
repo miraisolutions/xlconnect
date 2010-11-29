@@ -20,7 +20,7 @@
 
 #############################################################################
 #
-# TODO: Add Comment
+# Reading named regions from an Excel file
 # 
 # Author: Martin Studer, Mirai Solutions GmbH
 #
@@ -36,6 +36,7 @@ setMethod("readNamedRegion",
 		dataFrame <- xlcCall(object@jobj$readNamedRegion, name, header, SIMPLIFY = FALSE)
 		# construct data.frame
 		dataFrame <- lapply(dataFrame, dataframeFromJava)
+		names(dataFrame) <- name
 		
 		# Return data.frame directly in case only one data.frame is read
 		if(length(dataFrame) == 1) dataFrame[[1]]

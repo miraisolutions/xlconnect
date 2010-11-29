@@ -20,7 +20,15 @@
 
 #############################################################################
 #
-# TODO: Add Comment
+# Outputs a summary of workbook object
+#
+# The summary includes:
+#	- the underlying filename
+#	- contained worksheets
+#	- hidden sheets
+#	- very hidden sheets
+#	- defined names
+#	- active sheet name
 # 
 # Author: Martin Studer, Mirai Solutions GmbH
 #

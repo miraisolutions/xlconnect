@@ -20,7 +20,8 @@
 
 #############################################################################
 #
-# TODO: Add Comment
+# Print a workbook
+# Actually prints the workbook's filename
 # 
 # Author: Martin Studer, Mirai Solutions GmbH
 #
