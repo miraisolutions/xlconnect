@@ -50,6 +50,8 @@ export(
 	mirai,
 	loadWorkbook,
 	runUnitTests,
+	xlcFreeMemory,
+	xlcMemoryReport,
 	XLC
 )
 

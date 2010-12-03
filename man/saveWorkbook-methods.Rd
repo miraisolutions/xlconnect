@@ -1,7 +1,6 @@
 \name{saveWorkbook-methods}
 \docType{methods}
 \alias{saveWorkbook-methods}
-\alias{saveWorkbook,workbook-method}
 \title{Saving Microsoft Excel workbooks}
 \description{
  Saves a \code{\linkS4class{workbook}} object to the corresponding Excel file. This method actually writes the workbook object to disk.

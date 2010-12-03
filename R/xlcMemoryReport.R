@@ -20,28 +20,14 @@
 
 #############################################################################
 #
-# Writing named regions to an Excel file
+# Report the amount of free memory in the Java Virtual Machine (JVM)
 # 
 # Author: Martin Studer, Mirai Solutions GmbH
 #
 #############################################################################
 
-setGeneric("writeNamedRegion",
-	function(object, data, name, header) standardGeneric("writeNamedRegion"))
-
-setMethod("writeNamedRegion", 
-	signature(object = "workbook", data = "ANY", name = "character", header = "logical"), 
-	function(object, data, name, header) {
-		# pass data.frame's to Java - construct RDataFrameWrapper Java object references
-		data <- lapply(wrapList(data), dataframeToJava)
-		xlcCall(object@jobj$writeNamedRegion, data, name, header, SIMPLIFY = FALSE)
-		invisible()
-	}
-)
-
-setMethod("writeNamedRegion", 
-		signature(object = "workbook", data = "ANY", name = "character", header = "missing"), 
-		function(object, data, name, header) {
-			callGeneric(object, data, name, TRUE)
-		}
-)
+xlcMemoryReport <- function() {
+	cat("Amount of free memory in the Java Virtual Machine (JVM): ", 
+		J("java.lang.Runtime")$getRuntime()$freeMemory() / 1024^2, "MB\n")
+	invisible()
+}

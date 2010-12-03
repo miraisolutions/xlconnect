@@ -20,28 +20,17 @@
 
 #############################################################################
 #
-# Writing named regions to an Excel file
+# Free Java memory by first running R's garbage collector (gc) and then
+# Java's garbage collector. 
+# This sequence is important as R's gc may release objects which in turn 
+# allows Java's gc to release some objects. 
 # 
 # Author: Martin Studer, Mirai Solutions GmbH
 #
 #############################################################################
 
-setGeneric("writeNamedRegion",
-	function(object, data, name, header) standardGeneric("writeNamedRegion"))
-
-setMethod("writeNamedRegion", 
-	signature(object = "workbook", data = "ANY", name = "character", header = "logical"), 
-	function(object, data, name, header) {
-		# pass data.frame's to Java - construct RDataFrameWrapper Java object references
-		data <- lapply(wrapList(data), dataframeToJava)
-		xlcCall(object@jobj$writeNamedRegion, data, name, header, SIMPLIFY = FALSE)
-		invisible()
-	}
-)
-
-setMethod("writeNamedRegion", 
-		signature(object = "workbook", data = "ANY", name = "character", header = "missing"), 
-		function(object, data, name, header) {
-			callGeneric(object, data, name, TRUE)
-		}
-)
+xlcFreeMemory <- function(...) {
+	gc(...)
+	J("java.lang.Runtime")$getRuntime()$gc()
+	invisible()
+}

@@ -20,7 +20,7 @@
 
 #############################################################################
 #
-# TODO: Add Comment
+# Writing data to worksheets of an Excel file
 # 
 # Author: Martin Studer, Mirai Solutions GmbH
 #

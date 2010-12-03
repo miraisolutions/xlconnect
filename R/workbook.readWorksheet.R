@@ -20,7 +20,7 @@
 
 #############################################################################
 #
-# TODO: Add Comment
+# Reading data from Excel worksheets
 # 
 # Author: Martin Studer, Mirai Solutions GmbH
 #

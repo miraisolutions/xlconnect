@@ -20,7 +20,7 @@
 
 #############################################################################
 #
-# Adding an image to an Excel file
+# Adding an image/graph to an Excel file
 # 
 # Author: Martin Studer, Mirai Solutions GmbH
 #
@@ -41,7 +41,7 @@ demoImageFile <- system.file("demoFiles/SwitzerlandFlag.jpg", package = "XLConne
 wb <- loadWorkbook(demoExcelFile, create = TRUE)
 
 ## CASE 1:
-## Write image in original size matching top left corner of a cell and the image
+## Write an image in original size matching top left corner of a cell
 
 # Create a named region called 'switzerland1' on a sheet called 'switzerland1'
 # (the call to 'createName' automatically creates the sheet
@@ -55,7 +55,7 @@ addImage(wb, filename = demoImageFile, name = "switzerland1", originalSize = TRU
 # Alternatively: wb$addImage(filename = demoImageFile, name = "switzerland1", originalSize = TRUE)
 
 ## CASE 2:
-## Write image to a specified named region area
+## Write an image to a specified named region
 
 # Create a named region called 'switzerland2' on a sheet called 'switzerland2'
 # (the call to 'createName' automatically creates the sheet
@@ -66,6 +66,36 @@ createName(wb, name = "switzerland2", formula = "switzerland2!$C$4:$F$9")
 # Write image to the named region area created above - image will be fitted accordingly
 addImage(wb, filename = demoImageFile, name = "switzerland2", originalSize = FALSE)
 # Alternatively: wb$addImage(filename = demoImageFile, name = "switzerland2", originalSize = FALSE)
+
+## CASE 3:
+## Write an R plot to a specified named region
+## This example makes use of the 'Tonga Trench Earthquakes' example
+
+# Create a named region called 'earthquake' on a sheet called 'earthquake'
+# (the call to 'createName' automatically creates the sheet
+# referenced in the formula if it does not exist)
+createName(wb, name = "earthquake", formula = "earthquake!$B$2")
+# Alternatively: wb$createName(name = "earthquake", formula = "earthquake!$B$2")
+
+# Create R plot to a png device
+require(lattice)
+png(filename = "earthquake.png", width = 800, height = 600)
+devAskNewPage(ask = FALSE)
+
+Depth <- equal.count(quakes$depth, number=8, overlap=.1)
+xyplot(lat ~ long | Depth, data = quakes)
+update(trellis.last.object(),
+		strip = strip.custom(strip.names = TRUE, strip.levels = TRUE),
+		par.strip.text = list(cex = 0.75),
+		aspect = "iso")
+
+dev.off()
+
+# Write image to the named region created above using the image's original size;
+# i.e. the image's top left corner will match the specified cell's top left corner
+addImage(wb, filename = "earthquake.png", name = "earthquake", originalSize = TRUE)
+# Alternatively: wb$addImage(filename = demoImageFile, name = "switzerland1", originalSize = TRUE)
+
 
 # Save workbook (this actually writes the file to disk)
 saveWorkbook(wb)

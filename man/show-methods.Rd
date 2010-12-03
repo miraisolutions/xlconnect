@@ -1,7 +1,6 @@
 \name{show-methods}
 \docType{methods}
 \alias{show-methods}
-\alias{show,workbook-method}
 \title{Display a workbook object}
 \description{
  Displays a \code{\linkS4class{workbook}} object by printing it. This actually calls the \code{\linkS4class{workbook}}'s

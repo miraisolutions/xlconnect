@@ -1,8 +1,6 @@
 \name{readNamedRegion-methods}
 \docType{methods}
 \alias{readNamedRegion-methods}
-\alias{readNamedRegion,workbook,character,logical-method}
-\alias{readNamedRegion,workbook,character,missing-method}
 \title{Reading named regions from a workbook}
 \description{
 Reads named regions from a \code{\linkS4class{workbook}} object.
@@ -30,8 +28,14 @@ Mirai Solutions GmbH \url{http://www.mirai-solutions.com}
 \note{
 The arguments \code{name} and \code{header} are vectorized. As such, multiple named regions
 can be read with one method call. If only one single named region is read, the return value is a \code{data.frame}.
-If multiple named regions are specified, the return value is a (named) \code{list} of {data.frame}'s returned in the
-order they have been specified with the argument \code{name}.
+If multiple named regions are specified, the return value is a (named) \code{list} of \code{data.frame}'s returned in the
+order they have been specified with the argument \code{name}.\cr\cr
+\code{readNamedRegion} tries to determine the resulting column types based on the read cell types. If different cell
+types are found in a specific column, the most general of those is used and mapped to the corresponding R data type.
+The order of data types from least to most general is Boolean (\code{logical}) < DateTime (\code{POSIXct}) < 
+Numeric (\code{numeric}) < String (\code{character}). E.g. if a column is read that contains cells of type Boolean,
+Numeric and String then the resulting column in R would be \code{character} since \code{character} is the most general
+type.
 }
 \seealso{
 \code{\linkS4class{workbook}}, \code{\link[=readWorksheet-methods]{readWorksheet}}, 

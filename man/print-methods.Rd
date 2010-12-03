@@ -1,7 +1,6 @@
 \name{print-methods}
 \docType{methods}
 \alias{print-methods}
-\alias{print,workbook-method}
 \title{ Print a workbook's filename }
 \description{
 Prints the \code{\linkS4class{workbook}}'s underlying filename.
