@@ -20,7 +20,7 @@
 
 #############################################################################
 #
-# TODO: Add Comment
+# Checking existence of names in a workbook
 # 
 # Author: Martin Studer, Mirai Solutions GmbH
 #

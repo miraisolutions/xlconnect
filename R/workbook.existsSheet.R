@@ -20,7 +20,7 @@
 
 #############################################################################
 #
-# TODO: Add Comment
+# Checking for existence of worksheets in a workbook
 # 
 # Author: Martin Studer, Mirai Solutions GmbH
 #

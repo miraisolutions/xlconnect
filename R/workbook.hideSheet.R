@@ -20,7 +20,11 @@
 
 #############################################################################
 #
-# TODO: Add Comment
+# Hiding worksheets in a workbook
+#
+# There are two variants of hiding a worksheet
+# - "normal" hiding: users can unhide the worksheets in Excel
+# - very hiding: worksheets can be unhidden programmatically only
 # 
 # Author: Martin Studer, Mirai Solutions GmbH
 #

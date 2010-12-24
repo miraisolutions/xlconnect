@@ -46,9 +46,10 @@ When writing data to Excel, \code{writeNamedRegion} further applies cell styles 
 # Load workbook (create if not existing)
 wb <- loadWorkbook("writeNamedRegion.xlsx", create = TRUE)
 
-# Create a named region called 'mtcars' on a sheet called 'mtcars'
-# (the call to 'createName' automatically creates the sheet
-# referenced in the formula if it does not exist)
+# Create a worksheet named 'mtcars'
+createSheet(wb, name = "mtcars")
+
+# Create a named region called 'mtcars' on the sheet called 'mtcars'
 createName(wb, name = "mtcars", formula = "mtcars!$A$1")
 
 # Write built-in data set 'mtcars' to the above defined named region

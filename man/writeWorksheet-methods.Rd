@@ -29,7 +29,7 @@ Same as above with \code{startRow = 1} and \code{startCol = 1} meaning that the 
 of the worksheet is used as a starting point for writing the data region. \code{sheet} is specified by name.
 }
 
-\item{\code{signature(object = "workbook", data = "ANY", 
+\item{[]\code{signature(object = "workbook", data = "ANY", 
 sheet = "numeric", startRow = "missing", startCol = "missing", header = "logical")}}{
 Same as above with \code{startRow = 1} and \code{startCol = 1}. \code{sheet} specified by index.
 }
@@ -45,7 +45,7 @@ Same as above with \code{startRow = 1}, \code{startCol = 1} and \code{header = T
 specified by name.
 }
 
-\item{\code{signature(object = "workbook", data = "ANY", 
+\item{[]\code{signature(object = "workbook", data = "ANY", 
 sheet = "numeric", startRow = "missing", startCol = "missing", header = "missing")}}{
 Same as above with \code{startRow = 1}, \code{startCol = 1} and \code{header = TRUE}. \code{sheet}
 specified by index.

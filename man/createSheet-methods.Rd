@@ -1,0 +1,35 @@
+\name{createSheet-methods}
+\docType{methods}
+\alias{createSheet-methods}
+\title{Creating worksheets in a workbook}
+\description{
+Creates worksheets with specified names in a \code{\linkS4class{workbook}} object.
+}
+\section{Methods}{
+\describe{
+
+\item{\code{signature(object = "workbook", name = "character")}}{
+Creates a worksheet with the specified \code{name} if it does not already exist. Note that the naming of worksheets needs
+to be inline with Excel's convention, otherwise an exception will be thrown. For example, worksheet names cannot be longer
+than 31 characters. Also note that the \code{name} argument is vectorized, so multiple worksheets can be created in one method
+call.
+}
+}}
+\author{
+Martin Studer\cr
+Mirai Solutions GmbH \url{http://www.mirai-solutions.com}
+}
+\seealso{
+\code{\linkS4class{workbook}}, \code{\link[=removeSheet-methods]{removeSheet}}, 
+\code{\link[=existsSheet-methods]{existsSheet}}, \code{\link[=getSheet-methods]{getSheet}}
+}
+\examples{
+# Load workbook (create if not existing)
+wb <- loadWorkbook("createSheet.xlsx", create = TRUE)
+# Create a worksheet called 'CO2'
+createSheet(wb, name = "CO2")
+# Save workbook (this actually writes the file to disk)
+saveWorkbook(wb)
+}
+\keyword{methods}
+\keyword{utilities}

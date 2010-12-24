@@ -20,7 +20,7 @@
 
 #############################################################################
 #
-# TODO: Add Comment
+# Retrieving defined names in a workbook
 # 
 # Author: Martin Studer, Mirai Solutions GmbH
 #

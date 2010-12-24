@@ -20,7 +20,7 @@
 
 #############################################################################
 #
-# TODO: Add Comment
+# Checking if worksheets are visible in a workbook
 # 
 # Author: Martin Studer, Mirai Solutions GmbH
 #

@@ -37,9 +37,11 @@ if(file.exists(demoExcelFile)) file.remove(demoExcelFile)
 # Load workbook (create if not existing)
 wb <- loadWorkbook(demoExcelFile, create = TRUE)
 
-# Create a named region called 'mtcars' on a sheet called 'mtcars'
-# (the call to 'createName' automatically creates the sheet
-# referenced in the formula if it does not exist)
+# Create a worksheet named 'mtcars'
+createSheet(wb, name = "mtcars")
+# Alternatively: wb$createSheet(name = "mtcars")
+
+# Create a named region called 'mtcars' on the sheet called 'mtcars'
 createName(wb, name = "mtcars", formula = "mtcars!$A$1")
 # Alternatively: wb$createName(name = "mtcars", formula = "mtcars!$A$1")
 

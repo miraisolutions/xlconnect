@@ -20,7 +20,7 @@
 
 #############################################################################
 #
-# TODO: Add Comment
+# Querying the active worksheet name
 # 
 # Author: Martin Studer, Mirai Solutions GmbH
 #
