@@ -20,7 +20,7 @@
 
 #############################################################################
 #
-# TODO: Add Comment
+# Setting the height of a row in a worksheet
 # 
 # Author: Martin Studer, Mirai Solutions GmbH
 #

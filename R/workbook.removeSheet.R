@@ -20,7 +20,7 @@
 
 #############################################################################
 #
-# TODO: Add Comment
+# Removing worksheets from a workbook
 # 
 # Author: Martin Studer, Mirai Solutions GmbH
 #

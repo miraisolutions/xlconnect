@@ -20,7 +20,7 @@
 
 #############################################################################
 #
-# Wraps an argument in a list if this is not already the case.
+# Wraps an argument in a list if it not already is a list.
 # Further extracts the 'jobj' slot from S4 classes (such as 'workbook'
 # and 'cellstyle').
 # 

@@ -3,7 +3,7 @@
 \alias{hideSheet-methods}
 \title{Hiding worksheets in a workbook}
 \description{
- (Very) hides specified worksheets in a \code{\linkS4class{workbook}} object.
+ (Very) hides the specified worksheets in a \code{\linkS4class{workbook}} object.
 }
 \section{Methods}{
 \describe{

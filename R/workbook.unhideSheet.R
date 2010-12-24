@@ -20,7 +20,7 @@
 
 #############################################################################
 #
-# TODO: Add Comment
+# Unhiding worksheets in a workbook
 # 
 # Author: Martin Studer, Mirai Solutions GmbH
 #

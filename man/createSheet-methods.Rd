@@ -21,7 +21,7 @@ Mirai Solutions GmbH \url{http://www.mirai-solutions.com}
 }
 \seealso{
 \code{\linkS4class{workbook}}, \code{\link[=removeSheet-methods]{removeSheet}}, 
-\code{\link[=existsSheet-methods]{existsSheet}}, \code{\link[=getSheet-methods]{getSheet}}
+\code{\link[=existsSheet-methods]{existsSheet}}, \code{\link[=getSheets-methods]{getSheets}}
 }
 \examples{
 # Load workbook (create if not existing)

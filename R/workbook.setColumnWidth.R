@@ -20,7 +20,7 @@
 
 #############################################################################
 #
-# TODO: Add Comment
+# Setting the width of a column in a worksheet
 # 
 # Author: Martin Studer, Mirai Solutions GmbH
 #

@@ -20,7 +20,7 @@
 
 #############################################################################
 #
-# TODO: Add Comment
+# Setting the active worksheet in a workbook
 # 
 # Author: Martin Studer, Mirai Solutions GmbH
 #
