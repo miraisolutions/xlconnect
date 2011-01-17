@@ -1,6 +1,9 @@
 \name{createName-methods}
 \docType{methods}
+\alias{createName}
 \alias{createName-methods}
+\alias{createName,workbook,character,character,logical-method}
+\alias{createName,workbook,character,character,missing-method}
 \title{Creating names in a workbook}
 \description{
 Creates a name for a specified formula in a \code{\linkS4class{workbook}} object.

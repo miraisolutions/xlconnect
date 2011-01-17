@@ -1,6 +1,9 @@
 \name{removeSheet-methods}
 \docType{methods}
+\alias{removeSheet}
 \alias{removeSheet-methods}
+\alias{removeSheet,workbook,character-method}
+\alias{removeSheet,workbook,numeric-method}
 \title{Removing worksheets from workbooks}
 \description{
 Removes a worksheet from a \code{\linkS4class{workbook}} object.

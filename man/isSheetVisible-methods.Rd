@@ -1,6 +1,9 @@
 \name{isSheetVisible-methods}
 \docType{methods}
+\alias{isSheetVisible}
 \alias{isSheetVisible-methods}
+\alias{isSheetVisible,workbook,character-method}
+\alias{isSheetVisible,workbook,numeric-method}
 \title{Checking if worksheets are visible in a workbook}
 \description{
 Checks if the specified worksheets are visible in a \code{\linkS4class{workbook}} object.

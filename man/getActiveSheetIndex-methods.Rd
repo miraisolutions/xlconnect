@@ -1,6 +1,8 @@
 \name{getActiveSheetIndex-methods}
 \docType{methods}
+\alias{getActiveSheetIndex}
 \alias{getActiveSheetIndex-methods}
+\alias{getActiveSheetIndex,workbook-method}
 \title{Querying the active worksheet index}
 \description{
 Queries the index of the active worksheet in a \code{\linkS4class{workbook}} object.

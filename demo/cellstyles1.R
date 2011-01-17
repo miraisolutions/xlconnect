@@ -85,9 +85,10 @@ setFillForegroundColor(wtColumnCellStyle, color = XLC$"COLOR.LIME")
 # INFO: See the documentation for more information on style actions
 # and cellstyles!
 
-# Create a named region called 'mtcars' on a sheet called 'mtcars'
-# (the call to 'createName' automatically creates the sheet
-# referenced in the formula if it does not exist)
+# Create a sheet named 'mtcars'
+createSheet(wb, name = "mtcars")
+
+# Create a named region called 'mtcars' referring to the sheet called 'mtcars'
 createName(wb, name = "mtcars", formula = "mtcars!$A$1")
 
 # Write built-in data set 'mtcars' to the above defined named region.

@@ -1,6 +1,15 @@
 \name{readWorksheet-methods}
 \docType{methods}
+\alias{readWorksheet}
 \alias{readWorksheet-methods}
+\alias{readWorksheet,workbook,character,missing,missing,missing,missing,logical-method}
+\alias{readWorksheet,workbook,character,missing,missing,missing,missing,missing-method}
+\alias{readWorksheet,workbook,character,numeric,numeric,numeric,numeric,logical-method}
+\alias{readWorksheet,workbook,character,numeric,numeric,numeric,numeric,missing-method}
+\alias{readWorksheet,workbook,numeric,missing,missing,missing,missing,logical-method}
+\alias{readWorksheet,workbook,numeric,missing,missing,missing,missing,missing-method}
+\alias{readWorksheet,workbook,numeric,numeric,numeric,numeric,numeric,logical-method}
+\alias{readWorksheet,workbook,numeric,numeric,numeric,numeric,numeric,missing-method}
 \title{Reading data from worksheets}
 \description{
 Reads data from worksheets of a \code{\linkS4class{workbook}} object.

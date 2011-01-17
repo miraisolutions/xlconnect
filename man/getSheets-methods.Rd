@@ -1,6 +1,8 @@
 \name{getSheets-methods}
 \docType{methods}
+\alias{getSheets}
 \alias{getSheets-methods}
+\alias{getSheets,workbook-method}
 \title{Querying available worksheets in a workbook}
 \description{
 Queries the available worksheets (names) in a \code{\linkS4class{workbook}} object.

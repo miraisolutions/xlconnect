@@ -1,6 +1,9 @@
 \name{setColumnWidth-methods}
 \docType{methods}
+\alias{setColumnWidth}
 \alias{setColumnWidth-methods}
+\alias{setColumnWidth,workbook,character,numeric,numeric-method}
+\alias{setColumnWidth,workbook,numeric,numeric,numeric-method}
 \title{Setting the width of a column in a worksheet}
 \description{
 Sets the width of a column in a worksheet.

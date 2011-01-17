@@ -1,6 +1,11 @@
 \name{hideSheet-methods}
 \docType{methods}
+\alias{hideSheet}
 \alias{hideSheet-methods}
+\alias{hideSheet,workbook,character,logical-method}
+\alias{hideSheet,workbook,character,missing-method}
+\alias{hideSheet,workbook,numeric,logical-method}
+\alias{hideSheet,workbook,numeric,missing-method}
 \title{Hiding worksheets in a workbook}
 \description{
  (Very) hides the specified worksheets in a \code{\linkS4class{workbook}} object.

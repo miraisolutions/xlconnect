@@ -43,9 +43,11 @@ wb <- loadWorkbook(demoExcelFile, create = TRUE)
 ## CASE 1:
 ## Write an image in original size matching top left corner of a cell
 
-# Create a named region called 'switzerland1' on a sheet called 'switzerland1'
-# (the call to 'createName' automatically creates the sheet
-# referenced in the formula if it does not exist)
+# Create a sheet named 'switzerland1'
+createSheet(wb, name = "switzerland1")
+# Alternatively: wb$createSheet(name = "switzerland1")
+
+# Create a named region called 'switzerland1' referring to the sheet called 'switzerland1'
 createName(wb, name = "switzerland1", formula = "switzerland1!$C$4")
 # Alternatively: wb$createName(name = "switzerland1", formula = "switzerland1!$C$4")
 
@@ -57,9 +59,11 @@ addImage(wb, filename = demoImageFile, name = "switzerland1", originalSize = TRU
 ## CASE 2:
 ## Write an image to a specified named region
 
-# Create a named region called 'switzerland2' on a sheet called 'switzerland2'
-# (the call to 'createName' automatically creates the sheet
-# referenced in the formula if it does not exist)
+# Create a sheet named 'switzerland2'
+createSheet(wb, name = "switzerland2")
+# Alternatively: wb$createSheet(name = "switzerland2")
+
+# Create a named region called 'switzerland2' referring to the sheet called 'switzerland2'
 createName(wb, name = "switzerland2", formula = "switzerland2!$C$4:$F$9")
 # Alternatively: wb$createName(name = "switzerland2", formula = "switzerland2!$C$4:$F$9")
 
@@ -71,9 +75,11 @@ addImage(wb, filename = demoImageFile, name = "switzerland2", originalSize = FAL
 ## Write an R plot to a specified named region
 ## This example makes use of the 'Tonga Trench Earthquakes' example
 
-# Create a named region called 'earthquake' on a sheet called 'earthquake'
-# (the call to 'createName' automatically creates the sheet
-# referenced in the formula if it does not exist)
+# Create a sheet named 'earthquake'
+createSheet(wb, name = "earthquake")
+# Alternatively: wb$createSheet(name = "earthquake")
+
+# Create a named region called 'earthquake' referring to the sheet called 'earthquake'
 createName(wb, name = "earthquake", formula = "earthquake!$B$2")
 # Alternatively: wb$createName(name = "earthquake", formula = "earthquake!$B$2")
 

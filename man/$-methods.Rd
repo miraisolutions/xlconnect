@@ -1,6 +1,9 @@
 \name{$-methods}
 \docType{methods}
+\alias{$}
 \alias{$-methods}
+\alias{$,workbook-method}
+\alias{$,cellstyle-method}
 \title{Executing workbook methods in object$method(...) form}
 \description{
 Allows to execute \code{\linkS4class{workbook}} methods in \code{workbook-object$method(...)} form.

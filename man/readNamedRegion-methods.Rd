@@ -1,6 +1,9 @@
 \name{readNamedRegion-methods}
 \docType{methods}
+\alias{readNamedRegion}
 \alias{readNamedRegion-methods}
+\alias{readNamedRegion,workbook,character,logical-method}
+\alias{readNamedRegion,workbook,character,missing-method}
 \title{Reading named regions from a workbook}
 \description{
 Reads named regions from a \code{\linkS4class{workbook}} object.

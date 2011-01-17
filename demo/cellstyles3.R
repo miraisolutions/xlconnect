@@ -40,9 +40,10 @@ wb <- loadWorkbook(demoExcelFile, create = TRUE)
 # We don't set a specific style action in this demo, so the default 'XLConnect'
 # will be used (XLC$"STYLE_ACTION.XLCONNECT")
 
-# Create a named region called 'mtcars' on a sheet called 'mtcars'
-# (the call to 'createName' automatically creates the sheet
-# referenced in the formula if it does not exist)
+# Create a sheet named 'mtcars'
+createSheet(wb, name = "mtcars")
+
+# Create a named region called 'mtcars' referring to the sheet called 'mtcars'
 createName(wb, name = "mtcars", formula = "mtcars!$C$4")
 
 # Write built-in data set 'mtcars' to the above defined named region.

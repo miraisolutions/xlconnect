@@ -1,6 +1,9 @@
 \name{setActiveSheet-methods}
 \docType{methods}
+\alias{setActiveSheet}
 \alias{setActiveSheet-methods}
+\alias{setActiveSheet,workbook,character-method}
+\alias{setActiveSheet,workbook,numeric-method}
 \title{Setting the active worksheet in a workbook}
 \description{
 Sets the active worksheet of a \code{\linkS4class{workbook}}.

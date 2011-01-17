@@ -20,7 +20,7 @@
 
 #############################################################################
 #
-# TODO: Add Comment
+# Adding images to a worksheet
 # 
 # Author: Martin Studer, Mirai Solutions GmbH
 #

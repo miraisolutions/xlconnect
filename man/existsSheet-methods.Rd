@@ -1,6 +1,8 @@
 \name{existsSheet-methods}
 \docType{methods}
+\alias{existsSheet}
 \alias{existsSheet-methods}
+\alias{existsSheet,workbook,character-method}
 \title{Checking for existence of worksheets in a workbook}
 \description{
 Checks if worksheets with specified names exist in a \code{\linkS4class{workbook}} object.

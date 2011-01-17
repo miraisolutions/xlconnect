@@ -1,6 +1,9 @@
 \name{writeNamedRegion-methods}
 \docType{methods}
+\alias{writeNamedRegion}
 \alias{writeNamedRegion-methods}
+\alias{writeNamedRegion,workbook,ANY,character,logical-method}
+\alias{writeNamedRegion,workbook,ANY,character,missing-method}
 \title{Writing named regions to a workbook}
 \description{
 Writes named regions to a \code{\linkS4class{workbook}} object.

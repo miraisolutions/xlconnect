@@ -1,6 +1,14 @@
 \name{writeWorksheet-methods}
 \docType{methods}
+\alias{writeWorksheet}
 \alias{writeWorksheet-methods}
+\alias{writeWorksheet,workbook,ANY,character,missing,missing,logical-method}
+\alias{writeWorksheet,workbook,ANY,character,missing,missing,missing-method}
+\alias{writeWorksheet,workbook,ANY,character,numeric,numeric,logical-method}
+\alias{writeWorksheet,workbook,ANY,character,numeric,numeric,missing-method}
+\alias{writeWorksheet,workbook,ANY,numeric,missing,missing,logical-method}
+\alias{writeWorksheet,workbook,ANY,numeric,missing,missing,missing-method}
+\alias{writeWorksheet,workbook,ANY,numeric,numeric,numeric,logical-method}
 \title{Writing data to worksheets}
 \description{
 Writes data to worksheets of a \code{\linkS4class{workbook}} object.

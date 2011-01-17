@@ -1,6 +1,8 @@
 \name{createSheet-methods}
 \docType{methods}
+\alias{createSheet}
 \alias{createSheet-methods}
+\alias{createSheet,workbook,character-method}
 \title{Creating worksheets in a workbook}
 \description{
 Creates worksheets with specified names in a \code{\linkS4class{workbook}} object.

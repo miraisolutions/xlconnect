@@ -1,6 +1,9 @@
 \name{setRowHeight-methods}
 \docType{methods}
+\alias{setRowHeight}
 \alias{setRowHeight-methods}
+\alias{setRowHeight,workbook,character,numeric,numeric-method}
+\alias{setRowHeight,workbook,numeric,numeric,numeric-method}
 \title{Setting the height of a row in a worksheet}
 \description{
 Sets the height of a row in a worksheet.

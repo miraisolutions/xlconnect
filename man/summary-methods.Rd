@@ -1,6 +1,8 @@
 \name{summary-methods}
 \docType{methods}
+\alias{summary}
 \alias{summary-methods}
+\alias{summary,workbook-method}
 \title{ Summarizing workbook objects }
 \description{
  Outputs a \code{\linkS4class{workbook}} summary including the underlying Excel filename, contained worksheets,

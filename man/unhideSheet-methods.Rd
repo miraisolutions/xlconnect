@@ -1,6 +1,9 @@
 \name{unhideSheet-methods}
 \docType{methods}
+\alias{unhideSheet}
 \alias{unhideSheet-methods}
+\alias{unhideSheet,workbook,character-method}
+\alias{unhideSheet,workbook,numeric-method}
 \title{Unhiding worksheets in a workbook}
 \description{
 Unhides the specified worksheets in a \code{\linkS4class{workbook}} object.

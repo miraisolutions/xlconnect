@@ -1,6 +1,8 @@
 \name{removeName-methods}
 \docType{methods}
+\alias{removeName}
 \alias{removeName-methods}
+\alias{removeName,workbook,character-method}
 \title{Removing names from workbooks}
 \description{
 Removes a name from a \code{\linkS4class{workbook}} object.
