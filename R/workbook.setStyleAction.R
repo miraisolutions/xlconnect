@@ -20,7 +20,7 @@
 
 #############################################################################
 #
-# TODO: Add Comment
+# Controlling application of cell styles when writing data to Excel
 # 
 # Author: Martin Studer, Mirai Solutions GmbH
 #

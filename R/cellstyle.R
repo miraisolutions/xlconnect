@@ -20,7 +20,7 @@
 
 #############################################################################
 #
-# TODO: Add Comment
+# Cell style class definition
 # 
 # Author: Martin Studer, Mirai Solutions GmbH
 #

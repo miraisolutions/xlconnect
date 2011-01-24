@@ -20,7 +20,7 @@
 
 #############################################################################
 #
-# TODO: Add Comment
+# Creating named and anonymous cell styles
 # 
 # Author: Martin Studer, Mirai Solutions GmbH
 #

@@ -20,7 +20,8 @@
 
 #############################################################################
 #
-# TODO: Add Comment
+# Setting the style name prefix for the "Name Prefix" style action
+# (see method setStyleAction)
 # 
 # Author: Martin Studer, Mirai Solutions GmbH
 #

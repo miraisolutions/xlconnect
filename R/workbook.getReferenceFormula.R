@@ -20,7 +20,7 @@
 
 #############################################################################
 #
-# TODO: Add Comment
+# Querying reference formulas of Excel names
 # 
 # Author: Martin Studer, Mirai Solutions GmbH
 #
