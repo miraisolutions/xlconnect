@@ -20,7 +20,7 @@
 
 #############################################################################
 #
-# TODO: Add Comment
+# Setting cell styles
 # 
 # Author: Martin Studer, Mirai Solutions GmbH
 #

@@ -20,7 +20,7 @@
 
 #############################################################################
 #
-# TODO: Add Comment
+# Specifying fill background color for cell styles
 # 
 # Author: Martin Studer, Mirai Solutions GmbH
 #

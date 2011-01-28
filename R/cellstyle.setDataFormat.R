@@ -20,7 +20,7 @@
 
 #############################################################################
 #
-# TODO: Add Comment
+# Specifying custom data formats for cell styles
 # 
 # Author: Martin Studer, Mirai Solutions GmbH
 #

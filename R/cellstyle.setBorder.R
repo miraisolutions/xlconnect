@@ -20,7 +20,7 @@
 
 #############################################################################
 #
-# TODO: Add Comment
+# Specifying borders for cell styles
 # 
 # Author: Martin Studer, Mirai Solutions GmbH
 #

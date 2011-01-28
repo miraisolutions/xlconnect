@@ -20,7 +20,7 @@
 
 #############################################################################
 #
-# TODO: Add Comment
+# Removing names from workbooks
 # 
 # Author: Martin Studer, Mirai Solutions GmbH
 #

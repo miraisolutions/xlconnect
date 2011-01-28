@@ -20,7 +20,7 @@
 
 #############################################################################
 #
-# TODO: Add Comment
+# Executing workbook methods in object$method(...) form
 # 
 # Author: Martin Studer, Mirai Solutions GmbH
 #

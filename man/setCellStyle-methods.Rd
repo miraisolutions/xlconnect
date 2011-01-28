@@ -1,44 +1,38 @@
-\name{cellstyle-class}
-\Rdversion{1.1}
-\docType{class}
-\alias{cellstyle-class}
-\alias{$,cellstyle-method}
-\title{Class "cellstyle"}
+\name{setCellStyle-methods}
+\docType{methods}
+\alias{setCellStyle}
+\alias{setCellStyle-methods}
+\alias{setCellStyle,workbook,character,numeric,numeric,cellstyle-method}
+\alias{setCellStyle,workbook,numeric,numeric,numeric,cellstyle-method}
+\title{Setting cell styles}
 \description{
-This class represents a cell style in a Microsoft Excel workbook. S4 objects of this class
-and corresponding methods are used to manipulate cell styles. This includes setting data formats,
-borders, background- and foreground-colors, etc.
+Sets cell styles for specific cells in a \code{\linkS4class{workbook}}.
 }
-\section{Objects from the Class}{
-Cell styles are created by calling the \code{\link[=createCellStyle-methods]{createCellStyle}} method on a
-\code{\linkS4class{workbook}} object.
+\section{Methods}{
+\describe{
+
+\item{\code{signature(object = "workbook", sheet = "character", row = "numeric", col = "numeric", cellstyle = "cellstyle")}}{
+Sets the specified \code{\linkS4class{cellstyle}} for the specified cell (\code{row}, \code{col}) on the specified (named) \code{sheet}. Note
+that the arguments are vectorized such that multiple cells can be styled with one method call.
 }
-\section{Slots}{
-  \describe{
-    \item{\code{jobj}:}{Object of class \code{jobjRef} (see package \pkg{rJava}) which represents a Java object reference that is used
-    in the back-end to manipulate the underlying Excel cellstyle instance.}
-  }
+
+\item{\code{signature(object = "workbook", sheet = "numeric", row = "numeric", col = "numeric", cellstyle = "cellstyle")}}{
+As above but with the \code{sheet} specified by index.
 }
-\references{
-Cell styles in Excel 2003: \url{http://office.microsoft.com/en-us/excel-help/using-styles-in-excel-HA001110199.aspx}\cr
-Cell styles in Excel 2007: \url{http://office.microsoft.com/en-us/excel-help/apply-create-or-remove-a-cell-style-HP001216732.aspx}
-}
+}}
 \author{
 Martin Studer\cr
 Mirai Solutions GmbH \url{http://www.mirai-solutions.com}
 }
-\note{
-\pkg{XLConnect} generally makes use of custom (named) cell styles. This allows Excel users to more easily manage cell styles
-in a workbook. For example, assuming you were using a specific custom cell style for your data table headers, you can change the header
-styling with a few clicks across all tables.
-}
 \seealso{
-\code{\linkS4class{workbook}}, \code{\link[=createCellStyle-methods]{createCellStyle}}, \code{\link[=setStyleAction-methods]{setStyleAction}},
-\code{\link[=setCellStyle-methods]{setCellStyle}}
+\code{\linkS4class{workbook}}, \code{\linkS4class{cellstyle}}, \code{\link[=createCellStyle-methods]{createCellStyle}},
+\code{\link[=setDataFormat-methods]{setDataFormat}}, \code{\link[=setBorder-methods]{setBorder}},
+\code{\link[=setFillBackgroundColor-methods]{setFillBackgroundColor}}, \code{\link[=setFillForegroundColor-methods]{setFillForegroundColor}},
+\code{\link[=setFillPattern-methods]{setFillPattern}}, \code{\link[=setWrapText-methods]{setWrapText}}
 }
 \examples{
 # Load workbook (create if not existing)
-wb <- loadWorkbook("cellstyles.xlsx", create = TRUE)
+wb <- loadWorkbook("setCellStyle.xlsx", create = TRUE)
 
 # We don't set a specific style action in this demo, so the default 'XLConnect'
 # will be used (XLC$"STYLE_ACTION.XLCONNECT")
@@ -83,5 +77,5 @@ setCellStyle(wb, sheet = "mtcars", row = rowIndex, col = colIndex,
 # Save workbook (this actually writes the file to disk)
 saveWorkbook(wb)
 }
-\keyword{classes}
+\keyword{methods}
 \keyword{utilities}

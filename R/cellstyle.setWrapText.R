@@ -20,7 +20,7 @@
 
 #############################################################################
 #
-# TODO: Add Comment
+# Specifying text wrapping behaviour
 # 
 # Author: Martin Studer, Mirai Solutions GmbH
 #

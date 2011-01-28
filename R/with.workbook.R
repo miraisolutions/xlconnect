@@ -20,7 +20,7 @@
 
 #############################################################################
 #
-# TODO: Add Comment
+# Evaluate an expression in the context of Excel named regions
 # 
 # Author: Martin Studer, Mirai Solutions GmbH
 #

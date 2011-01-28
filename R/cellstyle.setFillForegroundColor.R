@@ -20,7 +20,7 @@
 
 #############################################################################
 #
-# TODO: Add Comment
+# Specifying the fill foreground color for cell styles
 # 
 # Author: Martin Studer, Mirai Solutions GmbH
 #
