@@ -58,3 +58,6 @@ export(
 # XLConnect exports the following S3 methods
 S3method(print, mirai)
 S3method(with, workbook)
+
+# keeps rcmd check from complaining 
+importFrom("utils", "packageDescription")
