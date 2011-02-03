@@ -12,6 +12,7 @@ exportMethods(
 	existsSheet,
 	getActiveSheetIndex,
 	getActiveSheetName,
+        getCellStyle,
 	getDefinedNames,
 	getReferenceFormula,
 	getSheets,
