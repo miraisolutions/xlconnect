@@ -47,4 +47,14 @@ test.workbook.writeNamedRegion <- function() {
 	
 	# Check that attempting to write to a non-existing name causes an exception (*.xlsx)
 	checkException(writeNamedRegion(wb.xlsx, mtcars, "nameDoesNotExist"))
+	
+	# Check that attempting to write to a name which referes to a non-existing sheet
+	# causes an exception (*.xls)
+	createName(wb.xls, "nope", "NonExistingSheet!A1")
+	checkException(writeNamedRegion(wb.xls, mtcars, "nope"))
+	
+	# Check that attempting to write to a name which referes to a non-existing sheet
+	# causes an exception (*.xlsx)
+	createName(wb.xlsx, "nope", "NonExistingSheet!A1")
+	checkException(writeNamedRegion(wb.xlsx, mtcars, "nope"))
 }
