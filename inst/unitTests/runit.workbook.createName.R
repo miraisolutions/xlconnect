@@ -79,5 +79,17 @@ test.workbook.createName <- function() {
 	createName(wb.xlsx, "CurrentlyHere", "NowThere!$C$3", overwrite = TRUE)
 	# TODO: Should actually rather check that new formula is correct
 	checkTrue(existsName(wb.xlsx, "CurrentlyHere"))
+	
+	# Check that after trying to write a name with an illegal formula
+	# (which throws an exception), the name remains available (*.xls)
+	checkException(createName(wb.xls, "aName", "Test!A1A4"))
+	checkNoException(createName(wb.xls, "aName", "Test!A1"))
+	checkTrue(existsName(wb.xls, "aName"))
+	
+	# Check that after trying to write a name with an illegal formula
+	# (which throws an exception), the name remains available (*.xlsx)
+	checkException(createName(wb.xlsx, "aName", "Test!A1A4"))
+	checkNoException(createName(wb.xlsx, "aName", "Test!A1"))
+	checkTrue(existsName(wb.xlsx, "aName"))
 }
 
