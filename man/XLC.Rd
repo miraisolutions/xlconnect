@@ -10,6 +10,7 @@ List structure defining several constants used across \pkg{XLConnect}.
   The format is:
 List of 82
  $ STYLE_ACTION.XLCONNECT     : chr "XLCONNECT"
+ $ STYLE_ACTION.NONE          : chr "NONE"
  $ STYLE_ACTION.PREDEFINED    : chr "PREDEFINED"
  $ STYLE_ACTION.NAME_PREFIX   : chr "STYLE_NAME_PREFIX"
  $ BORDER.DASHED              : num 3

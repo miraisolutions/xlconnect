@@ -19,6 +19,8 @@ supported:\cr
 in solid light grey (25 percent). character, numeric and logical vectors are written using Excel's "General" data format. Time/date vectors
 (e.g. \code{Date} or \code{POSIXt}) are written with the "mm/dd/yyyy hh:mm:ss" data format. All cells are specified to wrap the text if necessary.
 The corresponding custom cell styles are called \emph{XLConnect.Header}, \emph{XLConnect.General} and \emph{XLConnect.Date}.
+\item \code{XLC$"STYLE_ACTION.NONE"}: This style action instructs \pkg{XLConnect} to apply no cell styles when writing data. Cell styles
+are kept as they are. This is useful in a scenario where all styling is predefined in an Excel template which is then only filled with data.
 \item \code{XLC$"STYLE_ACTION.PREDEFINED"}: This style action instructs \pkg{XLConnect} to use existing (predefined) cell styles when
 writing headers and columns. This is useful in a template-based approach where an Excel template with predefined cell styles for headers and
 columns is available. Normally, this would be used when the column dimensions (and potentially also the row dimensions) of the data tables 
