@@ -50,7 +50,11 @@ exportMethods(
 export(
 	mirai,
 	loadWorkbook,
+        readNamedRegionFromFile,
+        readWorksheetFromFile,
 	runUnitTests,
+        writeNamedRegionToFile,
+        writeWorksheetToFile,
 	xlcFreeMemory,
 	xlcMemoryReport,
 	XLC
