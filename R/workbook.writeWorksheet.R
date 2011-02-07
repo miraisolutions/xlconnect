@@ -29,6 +29,7 @@
 setGeneric("writeWorksheet",
 	function(object, data, sheet, startRow, startCol, header) standardGeneric("writeWorksheet"))
 
+# all args, sheet = num
 setMethod("writeWorksheet", 
 		signature(object = "workbook", data = "ANY", sheet = "numeric", startRow = "numeric", 
 				startCol = "numeric", header = "logical"), 
@@ -41,6 +42,7 @@ setMethod("writeWorksheet",
 		}
 )
 
+# all args, sheet = char
 setMethod("writeWorksheet", 
 		signature(object = "workbook", data = "ANY", sheet = "character", startRow = "numeric", 
 				startCol = "numeric", header = "logical"), 
@@ -52,7 +54,7 @@ setMethod("writeWorksheet",
 			invisible()
 		}
 )
-
+# no header, sheet = char
 setMethod("writeWorksheet", 
 		signature(object = "workbook", data = "ANY", sheet = "character", startRow = "numeric", 
 				startCol = "numeric", header = "missing"), 
@@ -60,7 +62,7 @@ setMethod("writeWorksheet",
 			callGeneric(object, data, sheet, startRow, startCol, TRUE)
 		}
 )
-
+# no header, sheet = num
 setMethod("writeWorksheet", 
 		signature(object = "workbook", data = "ANY", sheet = "numeric", startRow = "missing", 
 				startCol = "missing", header = "logical"), 
@@ -72,6 +74,7 @@ setMethod("writeWorksheet",
 		}
 )
 
+# no coords, sheet= char, w/ header
 setMethod("writeWorksheet", 
 		signature(object = "workbook", data = "ANY", sheet = "character", startRow = "missing", 
 				startCol = "missing", header = "logical"), 
@@ -83,6 +86,19 @@ setMethod("writeWorksheet",
 		}
 )
 
+# no coords, sheet=num, w/ header
+setMethod("writeWorksheet", 
+		signature(object = "workbook", data = "ANY", sheet = "numeric", startRow = "missing", 
+				startCol = "missing", header = "logical"), 
+		function(object, data, sheet, startRow, startCol, header) {
+			# pass data.frame's to Java - construct RDataFrameWrapper Java object references
+			data <- lapply(wrapList(data), dataframeToJava)
+			xlcCall(object@jobj$writeWorksheet, data, asInteger(sheet - 1), header)
+			invisible()
+		}
+)
+          
+# no coords, sheet=num, w/o header 
 setMethod("writeWorksheet", 
 		signature(object = "workbook", data = "ANY", sheet = "numeric", startRow = "missing", 
 				startCol = "missing", header = "missing"), 
@@ -91,6 +107,7 @@ setMethod("writeWorksheet",
 		}
 )
 
+# no coords, sheet=char, w/o header 
 setMethod("writeWorksheet", 
 		signature(object = "workbook", data = "ANY", sheet = "character", startRow = "missing", 
 				startCol = "missing", header = "missing"), 
