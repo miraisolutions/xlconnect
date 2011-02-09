@@ -27,12 +27,11 @@
 #############################################################################
 
 
-writeNamedRegionToFile <- function(file, data, name, formula=NA, header = TRUE, styleAction = "PREDEFINED") {
+writeNamedRegionToFile <- function(file, data, name, formula=NA, header = TRUE, styleAction = XLC$STYLE_ACTION.XLCONNECT) {
   # if formula is not specified, we expect a workbook with predefined regions
   create.names <- !is.na(formula)
   wb <- loadWorkbook(file,create=create.names)  
   setStyleAction(wb, styleAction)
-
   
   if(create.names) { 
     # extract "SheetX" from "SheetX!$A$1:$B$2"
