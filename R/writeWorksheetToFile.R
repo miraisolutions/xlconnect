@@ -28,7 +28,7 @@
 #############################################################################
 
 
-writeWorksheetToFile <- function(file, styleAction = "PREDEFINED", ...) {
+writeWorksheetToFile <- function(file, styleAction = XLC$STYLE_ACTION.XLCONNECT, ...) {
   args <- list(...)
 
   # only create sheets when we have names specified
