@@ -8,22 +8,27 @@
 \description{
 Sets the height of a row in a worksheet.
 }
-\section{Methods}{
-\describe{
-
-\item{\code{signature(object = "workbook", sheet = "character", row = "numeric", height = "numeric")}}{
-Sets the \code{height} (in points) of the specified \code{row} on (named) \code{sheet}. Note that the arguments
-\code{sheet}, \code{row} and \code{height} are vectorized. As such the row height of multiple rows (potentially on
-different worksheets) can be set with one method call.
+\usage{
+\S4method{setRowHeight}{workbook,character,numeric,numeric}(object,sheet,row,height)
+\S4method{setRowHeight}{workbook,numeric,numeric,numeric}(object,sheet,row,height)
 }
 
-\item{\code{signature(object = "workbook", sheet = "numeric", row = "numeric", height = "numeric")}}{
-As above but with the \code{sheet} specified by index.
+\arguments{
+  \item{object}{The workbook to use}
+  \item{sheet}{The name or index of the sheet to edit}
+  \item{row}{The index of the row to resize}
+  \item{height}{The height in points of the specified row}
 }
-}}
+
+\description{
+Note that the arguments \code{sheet}, \code{row} and \code{height} are
+vectorized. As such the row height of multiple rows (potentially on
+different worksheets) can be set with one method call. 
+}
+
 \author{
 Martin Studer\cr
-Mirai Solutions GmbH \url{http://www.mirai-solutions.com}
+\href{http://www.mirai-solutions.com}{Mirai Solutions GmbH}
 }
 \seealso{
 \code{\linkS4class{workbook}}, \code{\link[=setColumnWidth-methods]{setColumnWidth}}

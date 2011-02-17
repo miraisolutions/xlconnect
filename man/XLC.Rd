@@ -8,6 +8,7 @@ List structure defining several constants used across \pkg{XLConnect}.
 }
 \format{
   The format is:
+  \preformatted{
 List of 82
  $ STYLE_ACTION.XLCONNECT     : chr "XLCONNECT"
  $ STYLE_ACTION.NONE          : chr "NONE"
@@ -92,6 +93,7 @@ List of 82
  $ FILL.THIN_FORWARD_DIAG     : num 14
  $ FILL.SQUARES               : num 15
  $ FILL.DIAMONDS              : num 16
+ }
 }
 \author{
 Martin Studer\cr

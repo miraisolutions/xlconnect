@@ -8,15 +8,19 @@
  Displays a \code{\linkS4class{workbook}} object by printing it. This actually calls the \code{\linkS4class{workbook}}'s
  \code{\link[=print-methods]{print}} method.
 }
-\section{Methods}{
-\describe{
-\item{\code{signature(object = "workbook")}}{
-Displays the specified \code{\linkS4class{workbook}} object.
+\usage{
+\S4method{show}{workbook}(object)
 }
-}}
+
+\arguments{
+  \item{object}{The workbook to use}
+}
+
+\description{Displays the specified \code{\linkS4class{workbook}} object.
+}
 \author{
 Martin Studer\cr
-Mirai Solutions GmbH \url{http://www.mirai-solutions.com}
+\href{http://www.mirai-solutions.com}{Mirai Solutions GmbH}
 }
 \seealso{
 \code{\linkS4class{workbook}}, \code{\link[=print-methods]{print}}

@@ -7,17 +7,25 @@
 \description{
 Checks the existence of a name in a \code{\linkS4class{workbook}} object.
 }
-\section{Methods}{
-\describe{
 
-\item{\code{signature(object = "workbook", name = "character")}}{
-Returns \code{TRUE} if the name with the specified \code{name} exists and \code{FALSE} otherwise. Note that the \code{name}
-argument is vectorized and therefore multiple names can be checked for existence in one method call.
+\usage{
+\S4method{existsName}{workbook,character}(object, name)
 }
-}}
+
+\arguments{
+  \item{object}{The workbook to use}
+  \item{name}{The name to check for}
+}
+
+\details{
+Returns \code{TRUE} if the specified \code{name} exists and \code{FALSE}
+otherwise. Note that the \code{name} argument is vectorized and
+therefore multiple names can be checked for existence in one method call.
+}
+
 \author{
 Martin Studer\cr
-Mirai Solutions GmbH \url{http://www.mirai-solutions.com}
+\href{http://www.mirai-solutions.com}{Mirai Solutions GmbH}
 }
 \seealso{
 \code{\linkS4class{workbook}}, \code{\link[=createName-methods]{createName}}, \code{\link[=removeName-methods]{removeName}},

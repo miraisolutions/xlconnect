@@ -20,12 +20,15 @@ Cell styles are created by calling the \code{\link[=createCellStyle-methods]{cre
   }
 }
 \references{
-Cell styles in Excel 2003: \url{http://office.microsoft.com/en-us/excel-help/using-styles-in-excel-HA001110199.aspx}\cr
-Cell styles in Excel 2007: \url{http://office.microsoft.com/en-us/excel-help/apply-create-or-remove-a-cell-style-HP001216732.aspx}
+\href{http://office.microsoft.com/en-us/excel-help/using-styles-in-excel-HA001110199.aspx}{Cell
+  styles in Excel 2003} 
+
+\href{http://office.microsoft.com/en-us/excel-help/apply-create-or-remove-a-cell-style-HP001216732.aspx}{Cell
+  styles in Excel 2007} 
 }
 \author{
 Martin Studer\cr
-Mirai Solutions GmbH \url{http://www.mirai-solutions.com}
+\href{http://www.mirai-solutions.com}{Mirai Solutions GmbH}
 }
 \note{
 \pkg{XLConnect} generally makes use of custom (named) cell styles. This allows Excel users to more easily manage cell styles
@@ -77,8 +80,8 @@ colIndex <- which(names(mtcars) == "wt") + 2
 
 # Set the 'HeavyCar' cellstyle for the corresponding cells.
 # Note: the row and col arguments are vectorized!
-setCellStyle(wb, sheet = "mtcars", row = rowIndex, col = colIndex, 
-	cellstyle = heavyCar)
+setCellStyle(wb, sheet = "mtcars", row = rowIndex, col = colIndex,
+             cellstyle = heavyCar)
 
 # Save workbook (this actually writes the file to disk)
 saveWorkbook(wb)

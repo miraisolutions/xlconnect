@@ -7,42 +7,78 @@
 \description{
 Controls the application of cell styles when writing data to Excel.
 }
-\section{Methods}{
-\describe{
+\usage{
+\S4method{setStyleAction}{workbook,character}(object,type)
+}
 
-\item{\code{signature(object = "workbook", type = "character")}}{
-The argument \code{type} defines the style action to be used when writing data (\code{\link[=writeNamedRegion-methods]{writeNamedRegion}}, 
-\code{\link[=writeWorksheet-methods]{writeWorksheet}}) to the specified workbook \code{object}. The following action types are
-supported:\cr
-\itemize{
-\item \code{XLC$"STYLE_ACTION.XLCONNECT"}: This is the default. \code{data.frame} headers (if specified to be written) are colored in
-in solid light grey (25 percent). character, numeric and logical vectors are written using Excel's "General" data format. Time/date vectors
-(e.g. \code{Date} or \code{POSIXt}) are written with the "mm/dd/yyyy hh:mm:ss" data format. All cells are specified to wrap the text if necessary.
-The corresponding custom cell styles are called \emph{XLConnect.Header}, \emph{XLConnect.General} and \emph{XLConnect.Date}.
-\item \code{XLC$"STYLE_ACTION.NONE"}: This style action instructs \pkg{XLConnect} to apply no cell styles when writing data. Cell styles
-are kept as they are. This is useful in a scenario where all styling is predefined in an Excel template which is then only filled with data.
-\item \code{XLC$"STYLE_ACTION.PREDEFINED"}: This style action instructs \pkg{XLConnect} to use existing (predefined) cell styles when
-writing headers and columns. This is useful in a template-based approach where an Excel template with predefined cell styles for headers and
-columns is available. Normally, this would be used when the column dimensions (and potentially also the row dimensions) of the data tables 
-are known up-front and as such a layout and corresponding cell styles can be pre-specified.\cr If a \code{data.frame} is written including 
-its header, it is assumed that the Excel file being written to has predefined cell styles in the header row. Furthermore, the first row of data
-is assumed to contain the cell styles to be replicated for any additional rows. As such, this style action may only be useful if the same column
-cell style should be applied across all rows. Please refer to the available demos for some examples.
-\item \code{XLC$"STYLE_ACTION.NAME_PREFIX"}: This style action instructs \pkg{XLConnect} to look for custom (named) cell styles with a specified prefix
-when writing columns and headers. This style name prefix can be set via the method \code{\link[=setStyleNamePrefix-methods]{setStyleNamePrefix}}.\cr
-For column headers, it first checks if there is a cell style named '\var{<STYLE_NAME_PREFIX>}.Header.\var{<COLUMN_NAME>}'. If there is no such cell style, 
-it checks for a cell style named '\var{<STYLE_NAME_PREFIX>}.Header.\var{<COLUMN_INDEX>}'. Again, if there is no such cell style, it checks for 
-'\var{<STYLE_NAME_PREFIX>}.Header' (no specific column discrimination). As a final resort, it just takes the workbook default cell style.\cr
-For columns, \pkg{XLConnect} first checks the availability of a cell style named '\var{<STYLE_NAME_PREFIX>}.Column.\var{<COLUMN_NAME>}'. If there is no
-such cell style, it checks for '\var{<STYLE_NAME_PREFIX>}.Column.\var{<COLUMN_INDEX>}'. If again there is no such cell style, it checks for
-'\var{<STYLE_NAME_PREFIX>}.Column.\var{<COLUMN_DATA_TYPE>}' with \var{<COLUMN_DATA_TYPE>} being the corresponding data type from the set: 
-\var{\{Numeric, String, Boolean, DateTime\}}. As a last resort, it would make use of the workbook's default cell style.
+\arguments{
+  \item{object}{The workbook to use}
+  \item{type}{Defines the style action to be used when writing data
+  (\code{\link[=writeNamedRegion-methods]{writeNamedRegion}},
+  \code{\link[=writeWorksheet-methods]{writeWorksheet}}) to the
+  specified workbook \code{object}}
 }
-}
+
+\details{
+ The following style actions are supported:\cr
+ \itemize{
+ \item \code{XLC$"STYLE_ACTION.XLCONNECT"}: This is the
+ default. \code{data.frame} headers (if specified to be written) are
+ colored in n solid light grey (25 percent). character, numeric and
+ logical vectors are written using Excel's "General" data
+ format. Time/date vectors e.g. \code{Date} or \code{POSIXt}) are
+ written with the "mm/dd/yyyy hh:mm:ss" data format. All cells are
+ specified to wrap the text if necessary. he corresponding custom cell
+ styles are called \emph{XLConnect.Header}, \emph{XLConnect.General} and
+ \emph{XLConnect.Date}. 
+
+ \item \code{XLC$"STYLE_ACTION.NONE"}: This style action instructs
+ \pkg{XLConnect} to apply no cell styles when writing data. Cell styles
+ are kept as they are. This is useful in a scenario where all styling is
+ predefined in an Excel template which is then only filled with
+ data. item \code{XLC$"STYLE_ACTION.PREDEFINED"}: This style action
+ instructs \pkg{XLConnect} to use existing (predefined) cell styles when
+ riting headers and columns. This is useful in a template-based approach
+ where an Excel template with predefined cell styles for headers and
+ olumns is available. Normally, this would be used when the column
+ dimensions (and potentially also the row dimensions) of the data tables
+ re known up-front and as such a layout and corresponding cell styles
+ can be pre-specified.\cr If a \code{data.frame} is written including
+ its header, it is assumed that the Excel file being written to has
+ predefined cell styles in the header row. Furthermore, the first row of
+ data is assumed to contain the cell styles to be replicated for any
+ additional rows. As such, this style action may only be useful if the
+ same column cell style should be applied across all rows. Please refer
+ to the available demos for some examples.
+ 
+ \item \code{XLC$"STYLE_ACTION.NAME_PREFIX"}: This style action instructs
+ \pkg{XLConnect} to look for custom (named) cell styles with a specified
+ prefix when writing columns and headers. This style name prefix can be
+ set via the method \code{\link[=setStyleNamePrefix-methods]{setStyleNamePrefix}}.\cr
+
+ For column headers, it first checks if there is a cell style named
+ '\var{<STYLE_NAME_PREFIX>}.Header.\var{<COLUMN_NAME>}'. If there is no
+ such cell style,  it checks for a cell style named
+ '\var{<STYLE_NAME_PREFIX>}.Header.\var{<COLUMN_INDEX>}'. Again, if
+ there is no such cell style, it checks for
+ '\var{<STYLE_NAME_PREFIX>}.Header' (no specific column
+ discrimination). As a final resort, it just takes the workbook default
+ cell style.\cr 
+
+ For columns, \pkg{XLConnect} first checks the availability of a cell
+ style named '\var{<STYLE_NAME_PREFIX>}.Column.\var{<COLUMN_NAME>}'. If
+ there is no such cell style, it checks for
+ '\var{<STYLE_NAME_PREFIX>}.Column.\var{<COLUMN_INDEX>}'. If again there
+ is no such cell style, it checks for
+ '\var{<STYLE_NAME_PREFIX>}.Column.\var{<COLUMN_DATA_TYPE>}' with
+ \var{<COLUMN_DATA_TYPE>} being the corresponding data type from the
+ set:  \var{\{Numeric, String, Boolean, DateTime\}}. As a last resort,
+ it would make use of the workbook's default cell style. 
 }}
+
 \author{
 Martin Studer\cr
-Mirai Solutions GmbH \url{http://www.mirai-solutions.com}
+\href{http://www.mirai-solutions.com}{Mirai Solutions GmbH}
 }
 \seealso{
 \code{\linkS4class{workbook}}, \code{\linkS4class{cellstyle}}, \code{\link[=createCellStyle-methods]{createCellStyle}},

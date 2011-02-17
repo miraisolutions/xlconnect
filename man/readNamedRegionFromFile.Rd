@@ -8,11 +8,15 @@
 \usage{
 readNamedRegionFromFile(file, name, header = "TRUE")
 }
-\arguments{}
-\references{
-What are named regions/ranges? \url{http://www.officearticles.com/excel/named_ranges_in_microsoft_excel.htm}\cr
-How to create named regions/ranges? \url{http://www.youtube.com/watch?v=iAE9a0uRtpM}
+\arguments{
+  \item{file}{The file name of the workbook to read}
+  \item{name}{The name of the region to read from}
+  \item{header}{see \link[=readWorksheet-methods]{readWorksheet}}
 }
+
+\details{This is a convenience wrapper to read named regions from a file
+  without creating an intermediate workbook object.}
+
 \author{
 Thomas Themel\cr
 Mirai Solutions GmbH \url{http://www.mirai-solutions.com}

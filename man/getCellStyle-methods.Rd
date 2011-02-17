@@ -12,6 +12,11 @@ Retrieves a named cell style from a workbook.
 \S4method{getCellStyle}{workbook,character}(object,name)
 }
 
+\arguments{
+  \item{object}{The workbook to use}
+  \item{name}{The name of the cell style to retrieve}
+}
+
 \details{
 Retrieves cell style with the specified \code{name}. 
 }
@@ -20,6 +25,7 @@ Retrieves cell style with the specified \code{name}.
 Martin Studer\cr
 \href{Mirai Solutions GmbH}{http://www.mirai-solutions.com}
 }
+
 \seealso{
 \code{\linkS4class{workbook}}, \code{\linkS4class{cellstyle}}, \code{\link[=setStyleAction-methods]{setStyleAction}}, 
 \code{\link[=setStyleNamePrefix-methods]{setStyleNamePrefix}}, \code{\link[=setCellStyle-methods]{setCellStyle}},

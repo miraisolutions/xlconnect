@@ -8,22 +8,28 @@
 \description{
 Sets the width of a column in a worksheet.
 }
-\section{Methods}{
-\describe{
-
-\item{\code{signature(object = "workbook", sheet = "character", column = "numeric", width = "numeric")}}{
-Sets the \code{width} of the specified \code{column} on (named) \code{sheet} in units of 1/256th of a character width.
-Note that the arguments \code{sheet}, \code{column} and \code{width} are vectorized. As such the column width of
-multiple columns (potentially on different sheets) can be set with one method call.
+\usage{
+\S4method{setColumnWidth}{workbook,character,numeric,numeric}(object,sheet,column,width)
+\S4method{setColumnWidth}{workbook,numeric,numeric,numeric}(object,sheet,column,width)
 }
 
-\item{\code{signature(object = "workbook", sheet = "numeric", column = "numeric", width = "numeric")}}{
-As above but with the \code{sheet} specified by index.
+
+\arguments{
+  \item{object}{The workbook to use}
+  \item{sheet}{The name or index of the sheet affected}
+  \item{column}{The index of the column to resize}
+  \item{width}{The width of the specified column in  units of 1/256th of a character width}
 }
-}}
+
+\description{
+Note that the arguments \code{sheet}, \code{column} and \code{width} are
+vectorized. As such the column width of multiple columns (potentially on
+different sheets) can be set with one method call. 
+}
+
 \author{
 Martin Studer\cr
-Mirai Solutions GmbH \url{http://www.mirai-solutions.com}
+\href{http://www.mirai-solutions.com}{Mirai Solutions GmbH}
 }
 \seealso{
 \code{\linkS4class{workbook}}, \code{\link[=setRowHeight-methods]{setRowHeight}}

@@ -7,20 +7,28 @@
 \description{
 Specifies a custom data format for a \code{\linkS4class{cellstyle}}.
 }
-\section{Methods}{
-\describe{
-
-\item{\code{signature(object = "cellstyle", format = "character")}}{
-Specifies the data \code{format} to be used by the corresponding \code{\linkS4class{cellstyle}}. Data formats are specified
-the standard Excel way. Refer to the Excel help or to the link below for more information.
+\usage{
+\S4method{setDataFormat}{cellstyle,character}(object,format)
 }
-}}
+
+\arguments{
+  \item{object}{The workbook to use}
+  \item{format}{A data format string}
+}
+
+
+\description{
+Specifies the data \code{format} to be used by the corresponding
+\code{\linkS4class{cellstyle}}. Data formats are specified he standard
+Excel way. Refer to the Excel help or to the link below for more
+information. 
+}
 \references{
 Excel custom data formats: \url{http://www.ozgrid.com/Excel/CustomFormats.htm}
 }
 \author{
 Martin Studer\cr
-Mirai Solutions GmbH \url{http://www.mirai-solutions.com}
+\href{http://www.mirai-solutions.com}{Mirai Solutions GmbH}
 }
 \seealso{
 \code{\linkS4class{workbook}}, \code{\linkS4class{cellstyle}}, \code{\link[=setCellStyle-methods]{setCellStyle}}, 

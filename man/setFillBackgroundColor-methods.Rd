@@ -7,17 +7,23 @@
 \description{
 Specifies the fill background color for a \code{\linkS4class{cellstyle}}.
 }
-\section{Methods}{
-\describe{
-
-\item{\code{signature(object = "cellstyle", color = "numeric")}}{
-The argument \code{color} specifies the fill background color to use for the \code{\linkS4class{cellstyle}}.
-The \code{color} is normally specified via a corresponding color constant from the \code{\link{XLC}} object.
+\usage{
+\S4method{setFillBackgroundColor}{cellstyle,numeric}(object,color)
 }
-}}
+
+\arguments{
+  \item{object}{The cell style to manipulate}
+  \item{color}{The fill background color to use for the
+    \code{\linkS4class{cellstyle}}}
+}
+
+\description{
+The \code{color} is normally specified via a corresponding color
+constant from the \code{\link{XLC}} object. 
+}
 \author{
 Martin Studer\cr
-Mirai Solutions GmbH \url{http://www.mirai-solutions.com}
+\href{http://www.mirai-solutions.com}{Mirai Solutions GmbH}
 }
 \seealso{
 \code{\linkS4class{workbook}}, \code{\linkS4class{cellstyle}}, \code{\link[=setCellStyle-methods]{setCellStyle}}, 

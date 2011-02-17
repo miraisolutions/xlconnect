@@ -8,30 +8,43 @@
 \description{
 Creates a name for a specified formula in a \code{\linkS4class{workbook}} object.
 }
-\section{Methods}{
-\describe{
-
-\item{\code{signature(object = "workbook", name = "character", formula = "character", overwrite = "logical")}}{
-Creates a name named \code{name} for the specified \code{formula}. If a name with the same \code{name} already exists
-and \code{overwrite = TRUE}, then this name is removed first before the new one is created. If a name already exists and
-\code{overwrite = FALSE}, then an exception is thrown.\cr
-The \code{formula} should be specified as you would type it in Excel. Make sure that the referenced worksheets, functions, ... 
-exist that you are referring to in the \code{formula}.\cr
-The \code{name}, \code{formula} and \code{overwrite} arguments are vectorized such that multiple names can be created in one
-method call.
+\usage{
+\S4method{createName}{workbook,character,character,logical}(object,name,formula,overwrite)
 }
 
-\item{\code{signature(object = "workbook", name = "character", formula = "character", overwrite = "missing")}}{
-As above with \code{overwrite = FALSE}.
+\arguments{
+  \item{object}{The workbook to use}
+  \item{name}{The new name to create}
+  \item{formula}{Excel formula specifying the name}
+  \item{overwrite}{If a name with the same \code{name} already exists
+    and \code{overwrite = TRUE}, then this name is removed first before
+    the new one is created. If a name already exists and
+    \code{overwrite = FALSE}, then an exception is thrown.}
 }
-}}
+
+\details{
+Creates a name named \code{name} for the specified \code{formula}. 
+
+The \code{formula} should be specified as you would type it
+in Excel. Make sure that the referenced worksheets, functions, ...
+exist that you are referring to in the \code{formula}.
+
+The \code{name}, \code{formula} and \code{overwrite} arguments are
+vectorized such that multiple names can be created in one method call.
+
+If \code{overwrite} is missing, it is treated as \code{overwrite = FALSE}.
+}
+
+
 \references{
-What are named regions/ranges? \url{http://www.officearticles.com/excel/named_ranges_in_microsoft_excel.htm}\cr
-How to create named regions/ranges? \url{http://www.youtube.com/watch?v=iAE9a0uRtpM}
+\href{http://www.officearticles.com/excel/named_ranges_in_microsoft_excel.htm}{What
+  are named regions/ranges?} 
+
+\href{http://www.youtube.com/watch?v=iAE9a0uRtpM}{How to create named regions/ranges?}
 }
 \author{
 Martin Studer\cr
-Mirai Solutions GmbH \url{http://www.mirai-solutions.com}
+\href{Mirai Solutions GmbH}{http://www.mirai-solutions.com}
 }
 \seealso{
 \code{\linkS4class{workbook}}, \code{\link[=removeName-methods]{removeName}}, \code{\link[=existsName-methods]{existsName}},

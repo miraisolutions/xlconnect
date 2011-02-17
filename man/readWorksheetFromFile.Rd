@@ -10,7 +10,7 @@ readWorksheetFromFile(file, ...)
 }
 \arguments{
 \item{file}{The path name of the file to read from.}
-\item{..}{arguments passed to \link[=readWorksheet-methods]{readWorksheet})}
+\item{...}{arguments passed to \link[=readWorksheet-methods]{readWorksheet})}
 }
 \author{
 Thomas Themel\cr

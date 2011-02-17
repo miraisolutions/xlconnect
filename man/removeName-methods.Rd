@@ -7,17 +7,22 @@
 \description{
 Removes a name from a \code{\linkS4class{workbook}} object.
 }
-\section{Methods}{
-\describe{
-
-\item{\code{signature(object = "workbook", name = "character")}}{
-Removes the name named \code{name} from the specified workbook \code{object} if it does exist. Multiple names
-can be specified to be removed.
+\usage{
+\S4method{removeName}{workbook,character}(object,name)
 }
-}}
+
+\arguments{
+  \item{object}{The workbook to use}
+  \item{name}{The name to delete}
+}
+
+\description{
+Removes the name named \code{name} from the specified workbook
+\code{object} if it does exist. Multiple names can be specified to be removed.
+}
 \author{
 Martin Studer\cr
-Mirai Solutions GmbH \url{http://www.mirai-solutions.com}
+\href{http://www.mirai-solutions.com}{Mirai Solutions GmbH}
 }
 \seealso{
 \code{\linkS4class{workbook}}, \code{\link[=createName-methods]{createName}}, \code{\link[=existsName-methods]{existsName}},

@@ -7,17 +7,25 @@
 \description{
 Specifies the fill pattern for a \code{\linkS4class{cellstyle}}.
 }
-\section{Methods}{
-\describe{
-
-\item{\code{signature(object = "cellstyle", fill = "numeric")}}{
-The argument \code{fill} specifies the fill pattern to use for the \code{\linkS4class{cellstyle}}.
-\code{fill} is normally specified via a corresponding fill constant from the \code{\link{XLC}} object.
+\usage{
+\S4method{setFillPattern}{cellstyle,numeric}(object,fill)
 }
-}}
+
+\arguments{
+  \item{object}{The cell style to manipulate}
+  \item{fill}{The fill pattern to use for the
+    \code{\linkS4class{cellstyle}}.}
+}
+
+
+\description{
+The argument \code{fill} specifies the fill pattern to use for the \code{\linkS4class{cellstyle}}.
+\code{fill} is normally specified via a corresponding fill constant from
+the \code{\link{XLC}} object. 
+}
 \author{
 Martin Studer\cr
-Mirai Solutions GmbH \url{http://www.mirai-solutions.com}
+\href{http://www.mirai-solutions.com}{Mirai Solutions GmbH}
 }
 \seealso{
 \code{\linkS4class{workbook}}, \code{\linkS4class{cellstyle}}, \code{\link[=setCellStyle-methods]{setCellStyle}}, 

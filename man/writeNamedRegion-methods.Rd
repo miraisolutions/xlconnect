@@ -8,38 +8,45 @@
 \description{
 Writes named regions to a \code{\linkS4class{workbook}} object.
 }
-\section{Methods}{
-\describe{
-
-\item{\code{signature(object = "workbook", data = "ANY", name = "character", 
-header = "logical")}}{
-Writes \code{data} to the named region specified by \code{name}. Note that \code{data} is assumed to be
-a \code{data.frame} and is coerced to one if this is not already the case. The argument \code{header} specifies
-if the column names should be written. Note also that the arguments are vectorized and as such multiple named
-regions can be written with one call. In this case \code{data} is assumed to be a list of data objects
-(\code{data.frame}'s).
+\usage{
+\S4method{writeNamedRegion}{workbook,ANY,character,logical}(object,data,name,header)
 }
 
-\item{\code{signature(object = "workbook", data = "ANY", name = "character", 
-header = "missing")}}{
-The same as above with \code{header = TRUE}.
+\arguments{
+  \item{object}{The workbook to use}
+  \item{data}{Data to write}
+  \item{name}{Name of the region to write to}
+  \item{header}{see \link[=writeNamedRegion-methods]{writeNamedRegion}}
 }
-}}
+
+\details{
+Writes \code{data} to the named region specified by \code{name}. Note
+that \code{data} is assumed to be a \code{data.frame} and is coerced to
+one if this is not already the case. The argument \code{header}
+specifies if the column names should be written. Note also that the
+arguments are vectorized and as such multiple named regions can be
+written with one call. In this case \code{data} is assumed to be a list
+of data objects (\code{data.frame}'s).
+}
 \references{
 What are named regions/ranges? \url{http://www.officearticles.com/excel/named_ranges_in_microsoft_excel.htm}\cr
 How to create named regions/ranges? \url{http://www.youtube.com/watch?v=iAE9a0uRtpM}
 }
 \author{
 Martin Studer\cr
-Mirai Solutions GmbH \url{http://www.mirai-solutions.com}
+\href{http://www.mirai-solutions.com}{Mirai Solutions GmbH}
 }
 \note{
-Named regions are automatically redefined to the area occupied by the written cells. This guarantees that the
-complete set of data can be re-read using \code{\link[=readNamedRegion-methods]{readNamedRegion}}. Also, this allows
-the named region just to be defined as the top left cell to be written to. There is no need to know the exact size
-of the data in advance.\cr\cr
-When writing data to Excel, \code{writeNamedRegion} further applies cell styles to the cells as defined by the
-\code{\linkS4class{workbook}}'s "style action" (see \code{\link[=setStyleAction-methods]{setStyleAction}}).
+Named regions are automatically redefined to the area occupied by the
+written cells. This guarantees that the complete set of data can be
+re-read using
+\code{\link[=readNamedRegion-methods]{readNamedRegion}}. Also, this
+allows the named region just to be defined as the top left cell to be
+written to. There is no need to know the exact size of the data in advance.\cr\cr
+When writing data to Excel, \code{writeNamedRegion} further applies cell
+styles to the cells as defined by the \code{\linkS4class{workbook}}'s
+"style action" (see
+\code{\link[=setStyleAction-methods]{setStyleAction}}). 
 }
 \seealso{
 \code{\linkS4class{workbook}}, \code{\link[=writeWorksheet-methods]{writeWorksheet}},

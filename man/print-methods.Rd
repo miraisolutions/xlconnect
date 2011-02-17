@@ -7,17 +7,22 @@
 \description{
 Prints the \code{\linkS4class{workbook}}'s underlying filename.
 }
-\section{Methods}{
-\describe{
+\usage{
+\S4method{print}{workbook}(x,...)
+}
 
-\item{\code{signature(x = "workbook")}}{
+\arguments{
+  \item{x}{The workbook to print}
+  \item{...}{Arguments passed on to standard \code{print}}
+}
+
+\description{
 Prints the specified \code{\linkS4class{workbook}}'s filename (see also the S4 \code{filename}
 slot of the \code{\linkS4class{workbook}} class).
 }
-}}
 \author{
 Martin Studer\cr
-Mirai Solutions GmbH \url{http://www.mirai-solutions.com}
+\href{http://www.mirai-solutions.com}{Mirai Solutions GmbH}
 }
 \seealso{
 \code{\linkS4class{workbook}}

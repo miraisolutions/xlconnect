@@ -8,22 +8,26 @@
 \description{
 Checks if the specified worksheets are hidden (but not very hidden) in a \code{\linkS4class{workbook}} object.
 }
-\section{Methods}{
-\describe{
-
-\item{\code{signature(object = "workbook", sheet = "character")}}{
-Returns \code{TRUE} if the specified named \code{sheet} is hidden (not visible but also not very hidden),
-otherwise \code{FALSE}. \code{sheet} is vectorized such that multiple worksheets can be queried with one
-method call. An exception is thrown if the specified \code{sheet} does not exist.
+\usage{
+\S4method{isSheetHidden}{workbook,character}(object,sheet)
+\S4method{isSheetHidden}{workbook,numeric}(object,sheet)
 }
 
-\item{\code{signature(object = "workbook", sheet = "numeric")}}{
-As above but with \code{sheet} specified by index rather than by name.
+\arguments{
+  \item{object}{The workbook to use}
+  \item{sheet}{The name or index of the sheet to check}
 }
-}}
+
+
+\description{
+Returns \code{TRUE} if the specified \code{sheet} is hidden (not visible
+but also not very hidden), otherwise \code{FALSE}. \code{sheet} is
+vectorized such that multiple worksheets can be queried with one method
+call. An exception is thrown if the specified \code{sheet} does not exist. 
+}
 \author{
 Martin Studer\cr
-Mirai Solutions GmbH \url{http://www.mirai-solutions.com}
+\href{http://www.mirai-solutions.com}{Mirai Solutions GmbH}
 }
 \seealso{
 \code{\linkS4class{workbook}}, \code{\link[=hideSheet-methods]{hideSheet}}, \code{\link[=unhideSheet-methods]{unhideSheet}},

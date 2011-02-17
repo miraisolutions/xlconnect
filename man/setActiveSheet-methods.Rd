@@ -8,20 +8,22 @@
 \description{
 Sets the active worksheet of a \code{\linkS4class{workbook}}.
 }
-\section{Methods}{
-\describe{
-
-\item{\code{signature(object = "workbook", sheet = "character")}}{
-Sets the (named) \code{sheet} as the active worksheet.
+\usage{
+\S4method{setActiveSheet}{workbook,character}(object,sheet)
+\S4method{setActiveSheet}{workbook,numeric}(object,sheet)
 }
 
-\item{\code{signature(object = "workbook", sheet = "numeric")}}{
-Sets the (indexed) \code{sheet} as the active worksheet.
+\arguments{
+  \item{object}{The workbook to use}
+  \item{sheet}{The name or index of the sheet to activate}
 }
-}}
+
+\description{
+Sets the \code{sheet} as the active worksheet.
+}
 \author{
 Martin Studer\cr
-Mirai Solutions GmbH \url{http://www.mirai-solutions.com}
+\href{http://www.mirai-solutions.com}{Mirai Solutions GmbH}
 }
 \note{
 The active worksheet of a \code{\linkS4class{workbook}} is the worksheet that is displayed

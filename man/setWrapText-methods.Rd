@@ -7,16 +7,18 @@
 \description{
 Specifies if text should be wrapped in a cell.
 }
-\section{Methods}{
-\describe{
-
-\item{\code{signature(object = "cellstyle", wrap = "logical")}}{
-If \code{wrap = TRUE}, the text is wrapped if it exceeds the width of the cell - otherwise not.
+\usage{
+\S4method{setWrapText}{cellstyle,logical}(object,wrap)
 }
-}}
+
+\arguments{
+  \item{object}{The cell style to manipulate}
+  \item{wrap}{If \code{wrap = TRUE}, the text is wrapped if it exceeds the width of the cell - otherwise not}
+}
+
 \author{
 Martin Studer\cr
-Mirai Solutions GmbH \url{http://www.mirai-solutions.com}
+\href{http://www.mirai-solutions.com}{Mirai Solutions GmbH}
 }
 \seealso{
 \code{\linkS4class{workbook}}, \code{\linkS4class{cellstyle}}, \code{\link[=setCellStyle-methods]{setCellStyle}}, 

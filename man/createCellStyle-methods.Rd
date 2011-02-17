@@ -8,23 +8,31 @@
 \description{
 Creates a custom named or anonymous cell style.
 }
-\section{Methods}{
-\describe{
-
-\item{\code{signature(object = "workbook", name = "character")}}{
-Creates a named cell style with the specified \code{name}. Named cell styles may be used in conjunction with the
-\emph{name prefix} style action (see \code{\link[=setStyleAction-methods]{setStyleAction}}) or may also be used directly with
-the method \code{\link[=setCellStyle-methods]{setCellStyle}}. Named cell styles can easily be changed from within Excel using the
-cell styles menu. 
+\usage{
+\S4method{createCellStyle}{workbook,character}(object,name)
 }
 
-\item{\code{signature(object = "workbook", name = "missing")}}{
-Creates an anonymous cell style. Anonymous cell styles can be used in conjunction with the \code{\link[=setCellStyle-methods]{setCellStyle}} method.
+\arguments{
+  \item{object}{The workbook to use}
+  \item{name}{The name of the newly created cell style}
 }
-}}
+
+\details{
+Creates a named cell style with the specified \code{name}. Named cell
+styles may be used in conjunction with the \emph{name prefix} style
+action (see \code{\link[=setStyleAction-methods]{setStyleAction}}) or
+may also be used directly with the method
+\code{\link[=setCellStyle-methods]{setCellStyle}}. Named cell styles can
+easily be changed from within Excel using the cell styles menu.
+
+If \code{name} is missing, creates an anonymous cell style.
+Anonymous cell styles can be used in conjunction with the
+\code{\link[=setCellStyle-methods]{setCellStyle}} method.
+}
+
 \author{
 Martin Studer\cr
-Mirai Solutions GmbH \url{http://www.mirai-solutions.com}
+\href{Mirai Solutions GmbH}{http://www.mirai-solutions.com}
 }
 \seealso{
 \code{\linkS4class{workbook}}, \code{\linkS4class{cellstyle}}, \code{\link[=setStyleAction-methods]{setStyleAction}}, 

@@ -8,15 +8,19 @@
  Outputs a \code{\linkS4class{workbook}} summary including the underlying Excel filename, contained worksheets,
  hidden sheets, very hidden sheets, defined names and the active sheet name.
 }
-\section{Methods}{
-\describe{
-\item{\code{signature(object = "workbook")}}{
-Outputs a summary of the specified \code{\linkS4class{workbook}} object.
+\usage{
+\S4method{summary}{workbook}(object)
 }
-}}
+
+\arguments{
+  \item{object}{The workbook to use}
+}
+
+\description{Outputs a summary of the specified \code{\linkS4class{workbook}} object.
+}
 \author{
 Martin Studer\cr
-Mirai Solutions GmbH \url{http://www.mirai-solutions.com}
+\href{http://www.mirai-solutions.com}{Mirai Solutions GmbH}
 }
 \seealso{
 \code{\linkS4class{workbook}}, \code{\link[=getSheets-methods]{getSheets}}, 

@@ -8,21 +8,26 @@
 \description{
 Retrieves the defined names in a \code{\linkS4class{workbook}} object.
 }
-\section{Methods}{
-\describe{
-
-\item{\code{signature(object = "workbook", validOnly = "logical")}}{
-Queries the defined names in a \code{\linkS4class{workbook}} object.  If \code{validOnly = TRUE} only names with valid references
-are returned. Valid references are ones not starting with #REF! or #NULL! - which could result e.g. due to a missing sheet reference.
+\usage{
+\S4method{getDefinedNames}{workbook,logical}(object,validOnly)
 }
 
-\item{\code{signature(object = "workbook", validOnly = "missing")}}{
-As above with \code{validOnly = TRUE}.
+\arguments{
+  \item{object}{The workbook to use}
+  \item{validOnly}{If \code{validOnly = TRUE} only names with valid references
+are returned. Valid references are ones not starting with #REF! or
+  #NULL! - which could result e.g. due to a missing sheet reference. If
+  \code{validOnly} is missing, it is treated as \code{validOnly = TRUE}.}
 }
-}}
+
+
+\description{
+Queries the defined names in a \code{\linkS4class{workbook}} object.  
+
+}
 \author{
 Martin Studer\cr
-Mirai Solutions GmbH \url{http://www.mirai-solutions.com}
+\href{http://www.mirai-solutions.com}{Mirai Solutions GmbH}
 }
 \seealso{
 \code{\linkS4class{workbook}}, \code{\link[=createName-methods]{createName}}, \code{\link[=removeName-methods]{removeName}}, 

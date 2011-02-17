@@ -7,16 +7,18 @@
 \description{
 Queries the available worksheets (names) in a \code{\linkS4class{workbook}} object.
 }
-\section{Methods}{
-\describe{
-
-\item{\code{signature(object = "workbook")}}{
+\usage{
+\S4method{getSheets}{workbook}(object)
+}
+\arguments{
+  \item{object}{The workbook to use}
+}
+\description{
 Returns all the worksheet names of the specified \code{\linkS4class{workbook}} object.
 }
-}}
 \author{
 Martin Studer\cr
-Mirai Solutions GmbH \url{http://www.mirai-solutions.com}
+\href{http://www.mirai-solutions.com}{Mirai Solutions GmbH}
 }
 \seealso{
 \code{\linkS4class{workbook}}, \code{\link[=createSheet-methods]{createSheet}},

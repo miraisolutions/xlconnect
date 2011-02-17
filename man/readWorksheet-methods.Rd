@@ -8,59 +8,57 @@
 \alias{readWorksheet,workbook,character,numeric,numeric,numeric,numeric,missing-method}
 \alias{readWorksheet,workbook,numeric,missing,missing,missing,missing,logical-method}
 \alias{readWorksheet,workbook,numeric,missing,missing,missing,missing,missing-method}
+\alias{readWorksheet,workbook,character,numeric,missing,missing,missing,missing-method}
 \alias{readWorksheet,workbook,numeric,numeric,numeric,numeric,numeric,logical-method}
 \alias{readWorksheet,workbook,numeric,numeric,numeric,numeric,numeric,missing-method}
 \title{Reading data from worksheets}
 \description{
 Reads data from worksheets of a \code{\linkS4class{workbook}} object.
 }
-\section{Methods}{
-\describe{
+\usage{
+\S4method{readWorksheet}{workbook,numeric,numeric,numeric,numeric,numeric,logical}(object,sheet,startRow,startCol,endRow,endCol,header)
+\S4method{readWorksheet}{workbook,character,missing,missing,missing,missing,logical}(object,sheet,startRow,startCol,endRow,endCol,header)
+\S4method{readWorksheet}{workbook,numeric,missing,missing,missing,missing,logical}(object,sheet,startRow,startCol,endRow,endCol,header)
+\S4method{readWorksheet}{workbook,character,missing,missing,missing,missing,missing}(object,sheet,startRow,startCol,endRow,endCol,header)
+\S4method{readWorksheet}{workbook,numeric,missing,missing,missing,missing,missing}(object,sheet,startRow,startCol,endRow,endCol,header)
+\S4method{readWorksheet}{workbook,character,numeric,numeric,numeric,numeric,missing}(object,sheet,startRow,startCol,endRow,endCol,header)
+\S4method{readWorksheet}{workbook,numeric,numeric,numeric,numeric,numeric,missing}(object,sheet,startRow,startCol,endRow,endCol,header)
+}
 
-\item{[]\code{signature(object = "workbook", sheet = "character", startRow = "numeric", 
-startCol = "numeric", endRow = "numeric", endCol = "numeric", header = "logical")}}{
-Reads data from the worksheet specified by \code{sheet}. Data is read starting at the top left corner specified 
-by \code{startRow} and \code{startCol} down to the bottom right corner specified by \code{endRow} and \code{endCol}.
-If \code{header = TRUE}, the first row is interpreted as column names of the resulting \code{data.frame}.\cr
-If \code{startRow} <= 0 then the first available (logical) row is assumed. If \code{startCol} <= 0 then the column 
-of the first (logical) cell of the start row (\code{startRow}) is assumed. If \code{endRow} <= 0 then the last available 
-(logical) row is assumed. If \code{endCol} <= 0 then the column of the last (logical) cell of the end column (\code{endCol})
-is assumed. In other words, if no boundaries are specified \code{readWorksheet} assumes the "bounding box" of the data as
+\arguments{
+  \item{object}{The workbook to use}
+  \item{sheet}{The name or index of the worksheet to read from}
+  \item{startRow}{The index of the first row to read from}
+  \item{startCol}{The index of the first column to read from}
+  \item{endRow}{The index of the last row to read from}
+  \item{endCol}{The index of the last column to read from}
+  \item{header}{Interpret the first row of the specified area as column
+    headers. If missing, behaves like \code{header=TRUE}}
+}
+
+\description{
+Reads data from the worksheet specified by \code{sheet}. Data is read
+starting at the top left corner specified by \code{startRow} and
+\code{startCol} down to the bottom right corner specified by
+\code{endRow} and \code{endCol}. If \code{header = TRUE}, the first row
+is interpreted as column names of the resulting \code{data.frame}.\cr If
+\code{startRow} <= 0 then the first available (logical) row is
+assumed. If \code{startCol} <= 0 then the column  of the first (logical)
+cell of the start row (\code{startRow}) is assumed. If \code{endRow} <=
+0 then the last available  (logical) row is assumed. If \code{endCol} <=
+0 then the column of the last (logical) cell of the end column
+(\code{endCol}) is assumed. In other words, if no boundaries are
+specified \code{readWorksheet} assumes the "bounding box" of the data as
 the corresponding boundaries.
-}
 
-\item{[]\code{signature(object = "workbook", sheet = "numeric", startRow = "numeric", startCol = "numeric", endRow = "numeric", endCol = "numeric", header = "logical")}}{
-Same as above except that the worksheet (argument \code{sheet}) is specified by index rather than by name.
+If all four coordinate arguments are missing, behaves as above with
+\code{startRow = 0}, \code{startCol = 0}, \code{endRow = 0} and
+\code{endCol = 0}. In this case  \code{readWorksheet} assumes the
+"bounding box" of the data as the corresponding boundaries.
 }
-
-\item{[]\code{signature(object = "workbook", sheet = "character", startRow = "missing", startCol = "missing", endRow = "missing", endCol = "missing", header = "logical")}}{
-Same as above with \code{startRow = 0}, \code{startCol = 0}, \code{endRow = 0} and \code{endCol = 0}. In this case 
-\code{readWorksheet} assumes the "bounding box" of the data as the corresponding boundaries.
-}
-
-\item{[]\code{signature(object = "workbook", sheet = "numeric", startRow = "missing", startCol = "missing", endRow = "missing", endCol = "missing", header = "logical")}}{
-Same as above but with the worksheet (argument \code{sheet}) specified by index.
-}
-
-\item{[]\code{signature(object = "workbook", sheet = "character", startRow = "missing", startCol = "missing", endRow = "missing", endCol = "missing", header = "missing")}}{
-Same as above with \code{header = TRUE}. The worksheet is specified by name.
-}
-
-\item{[]\code{signature(object = "workbook", sheet = "numeric", startRow = "missing", startCol = "missing", endRow = "missing", endCol = "missing", header = "missing")}}{
-Same as above but with the worksheet specified by index.
-}
-
-\item{[]\code{signature(object = "workbook", sheet = "character", startRow = "numeric", startCol = "numeric", endRow = "numeric", endCol = "numeric", header = "missing")}}{
-Same as top method with \code{header = TRUE}.
-}
-
-\item{[]\code{signature(object = "workbook", sheet = "numeric", startRow = "numeric", startCol = "numeric", endRow = "numeric", endCol = "numeric", header = "missing")}}{
-Same as top method with \code{header = TRUE} and the worksheet specified by index.
-}
-}}
 \author{
 Martin Studer\cr
-Mirai Solutions GmbH \url{http://www.mirai-solutions.com}
+\href{http://www.mirai-solutions.com}{Mirai Solutions GmbH}
 }
 \note{
 All arguments (except \code{object}) are vectorized. As such, multiple worksheets (and also multiple data regions

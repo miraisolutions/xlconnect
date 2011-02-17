@@ -7,25 +7,34 @@
 \description{
  Saves a \code{\linkS4class{workbook}} object to the corresponding Excel file. This method actually writes the workbook object to disk.
 }
-\section{Methods}{
-\describe{
+\usage{
+\S4method{saveWorkbook}{workbook}(object)
+}
 
-\item{\code{signature(object = "workbook")}}{
+\arguments{
+  \item{object}{The workbook object to save}
+ }
+
+\description{
 Saves the specified \code{\linkS4class{workbook}} object to disk. The \code{\linkS4class{workbook}}'s underlying filename specifies the
 path (see the \code{\linkS4class{workbook}} class for more information).
 }
-}}
 \author{
 Martin Studer\cr
-Mirai Solutions GmbH \url{http://www.mirai-solutions.com}
+\href{http://www.mirai-solutions.com}{Mirai Solutions GmbH}
 }
 \note{
-As already mentioned in the documentation of the \code{\linkS4class{workbook}} class, 
-a \code{\linkS4class{workbook}}'s underlying Excel file is not saved (or being created in case the file did not exist and \code{create = TRUE} has been
-specified) unless the \code{saveWorkbook} method has been called on the object. This provides more flexibility to the user to decide
-when changes are saved and also provides better performance in that several changes can be written in one go (normally at the end, rather than 
-after every operation causing the file to be rewritten again completely each time). This is due to the fact that workbooks are manipulated in-memory and
-are only written to disk with specifically calling \code{saveWorkbook}.
+As already mentioned in the documentation of the
+\code{\linkS4class{workbook}} class,  a \code{\linkS4class{workbook}}'s
+underlying Excel file is not saved (or being created in case the file
+did not exist and \code{create = TRUE} has been specified) unless the
+\code{saveWorkbook} method has been called on the object. This provides
+more flexibility to the user to decide when changes are saved and also
+provides better performance in that several changes can be written in
+one go (normally at the end, rather than  after every operation causing
+the file to be rewritten again completely each time). This is due to the
+fact that workbooks are manipulated in-memory and are only written to
+disk with specifically calling \code{saveWorkbook}. 
 }
 \seealso{
 \code{\linkS4class{workbook}}, \code{\link{loadWorkbook}}

@@ -6,7 +6,7 @@
   specified by path.
 }
 \usage{
-writeWorksheetToFile(file, styleAction = "PREDEFINED", ...)
+writeWorksheetToFile(file, styleAction = XLC$STYLE_ACTION.XLCONNECT, ...)
 }
 \arguments{
 \item{file}{The path name of the file to write to.}

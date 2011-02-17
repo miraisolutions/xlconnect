@@ -8,20 +8,21 @@
 \description{
 Unhides the specified worksheets in a \code{\linkS4class{workbook}} object.
 }
-\section{Methods}{
-\describe{
-
-\item{\code{signature(object = "workbook", sheet = "character")}}{
-Unhides the specified (named) \code{sheet}(s).
+\usage{
+\S4method{unhideSheet}{workbook,character}(object,sheet)
+\S4method{unhideSheet}{workbook,numeric}(object,sheet)
+}
+\arguments{
+  \item{object}{The workbook to use}
+  \item{sheet}{The name or index of the sheet to unhide}
 }
 
-\item{\code{signature(object = "workbook", sheet = "numeric")}}{
-Unhides the specified (indexed) \code{sheet}(s).
+\description{
+Unhides the specified \code{sheet}(s).
 }
-}}
 \author{
 Martin Studer\cr
-Mirai Solutions GmbH \url{http://www.mirai-solutions.com}
+\href{http://www.mirai-solutions.com}{Mirai Solutions GmbH}
 }
 \seealso{
 \code{\linkS4class{workbook}}, \code{\link[=hideSheet-methods]{hideSheet}},

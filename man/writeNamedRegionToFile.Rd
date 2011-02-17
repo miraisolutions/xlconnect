@@ -6,7 +6,7 @@
   specified by path.
 }
 \usage{
-writeNamedRegionToFile(file, data, name, formula=NA, header = TRUE, styleAction = "PREDEFINED")
+writeNamedRegionToFile(file, data, name, formula=NA, header = TRUE, styleAction = XLC$STYLE_ACTION.XLCONNECT)
 }
 \arguments{
 \item{file}{The path name of the file to write to.}

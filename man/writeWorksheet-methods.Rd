@@ -13,60 +13,42 @@
 \description{
 Writes data to worksheets of a \code{\linkS4class{workbook}} object.
 }
-\section{Methods}{
-\describe{
-
-\item{[]\code{signature(object = "workbook", data = "ANY", sheet = "character", 
-startRow = "numeric", startCol = "numeric", header = "logical")}}{
-Writes \code{data} to the (named) worksheet specified by \code{sheet}. \code{data} is assumed to be a 
-\code{data.frame} and is coerced to one if this is not already the case.\code{startRow} and \code{startCol} 
-define the top left corner of the data region to be written. The argument \code{header} specifies if 
-the column names should be written. Note that the arguments are vectorized and as such multiple data objects
-(\code{data.frame}'s) can be written to different worksheets in one call. In this case \code{data} is 
-assumed to be a list of data objects (\code{data.frame}'s).
+\usage{
+\S4method{writeWorksheet}{workbook,ANY,character,numeric,numeric,logical}(object,data,sheet,startRow,startCol,header)
+\S4method{writeWorksheet}{workbook,ANY,numeric,numeric,numeric,logical}(object,data,sheet,startRow,startCol,header)
 }
 
-\item{[]\code{signature(object = "workbook", data = "ANY", sheet = "numeric", 
-startRow = "numeric", startCol = "numeric", header = "logical")}}{
-Same as above except that the worksheet is specified by an index rather than by name.
+\arguments{
+  \item{object}{The workbook to write to}
+  \item{data}{Data to write}
+  \item{sheet}{The name or index of the sheet to write to}
+  \item{startRow}{Index of the first row to write to. Behaves like
+  \code{startRow = 1} if missing}
+  \item{startCol}{Index of the first column to write to. Behaves like
+  \code{startCol = 1} if missing}
+  \item{header}{Specifies if the column names should be written}
 }
 
-\item{[]\code{signature(object = "workbook", data = "ANY", 
-sheet = "character", startRow = "missing", startCol = "missing", header = "logical")}}{
-Same as above with \code{startRow = 1} and \code{startCol = 1} meaning that the top left corner (cell 'A1')
-of the worksheet is used as a starting point for writing the data region. \code{sheet} is specified by name.
+\description{
+Writes \code{data} to the (named) worksheet specified by
+\code{sheet}. \code{data} is assumed to be a  \code{data.frame} and is
+coerced to one if this is not already the case. \code{startRow} and
+\code{startCol} define the top left corner of the data region to be
+written.  Note that the arguments are vectorized and as such multiple
+data objects (\code{data.frame}'s) can be written to different
+worksheets in one call. In this case \code{data} is assumed to be a list
+of data objects (\code{data.frame}s). 
 }
 
-\item{[]\code{signature(object = "workbook", data = "ANY", 
-sheet = "numeric", startRow = "missing", startCol = "missing", header = "logical")}}{
-Same as above with \code{startRow = 1} and \code{startCol = 1}. \code{sheet} specified by index.
-}
-
-\item{[]\code{signature(object = "workbook", data = "ANY", 
-sheet = "character", startRow = "numeric", startCol = "numeric", header = "missing")}}{
-Same as above with \code{header = TRUE}. \code{sheet} specified by name.
-}
-
-\item{[]\code{signature(object = "workbook", data = "ANY", 
-sheet = "character", startRow = "missing", startCol = "missing", header = "missing")}}{
-Same as above with \code{startRow = 1}, \code{startCol = 1} and \code{header = TRUE}. \code{sheet}
-specified by name.
-}
-
-\item{[]\code{signature(object = "workbook", data = "ANY", 
-sheet = "numeric", startRow = "missing", startCol = "missing", header = "missing")}}{
-Same as above with \code{startRow = 1}, \code{startCol = 1} and \code{header = TRUE}. \code{sheet}
-specified by index.
-}
-
-}}
 \author{
 Martin Studer\cr
-Mirai Solutions GmbH \url{http://www.mirai-solutions.com}
+\href{http://www.mirai-solutions.com}{Mirai Solutions GmbH}
 }
 \note{
-When writing data to Excel, \code{writeWorksheet} further applies cell styles to the cells as defined by the
-\code{\linkS4class{workbook}}'s "style action" (see \code{\link[=setStyleAction-methods]{setStyleAction}}).
+When writing data to Excel, \code{writeWorksheet} further applies cell
+styles to the cells as defined by the \code{\linkS4class{workbook}}'s
+"style action" (see
+\code{\link[=setStyleAction-methods]{setStyleAction}}). 
 }
 \seealso{
 \code{\linkS4class{workbook}}, \code{\link[=writeNamedRegion-methods]{writeNamedRegion}},

@@ -8,16 +8,20 @@
 \description{
 Allows to execute \code{\linkS4class{workbook}} methods in \code{workbook-object$method(...)} form.
 }
-\section{Methods}{
-\describe{
+\usage{
+\S4method{$}{workbook}(x)
+}
 
-\item{\code{signature(x = "workbook")}}{
+\arguments{
+  \item{x}{The workbook to use}
+}
+
+\description{
 \code{x$method(...)} (where \code{x} is a \code{\linkS4class{workbook}}-object) is equivalent to \code{method(x, ...)}
 }
-}}
 \author{
 Martin Studer\cr
-Mirai Solutions GmbH \url{http://www.mirai-solutions.com}
+\href{http://www.mirai-solutions.com}{Mirai Solutions GmbH}
 }
 \note{
 The \code{\linkS4class{workbook}} \code{$}-operator allows to call \code{\linkS4class{workbook}}-methods in \code{workbook-object$method(...)} form. 

@@ -8,20 +8,23 @@
 \description{
 Removes a worksheet from a \code{\linkS4class{workbook}} object.
 }
-\section{Methods}{
-\describe{
-
-\item{\code{signature(object = "workbook", sheet = "character")}}{
-Removes the specified (named) \code{sheet}(s) from the workbook.
+\usage{
+\S4method{removeSheet}{workbook,character}(object,sheet)
+\S4method{removeSheet}{workbook,numeric}(object,sheet)
 }
 
-\item{\code{signature(object = "workbook", sheet = "numeric")}}{
-Removes the specified (indexed) \code{sheet}(s) from the workbook.
+\arguments{
+  \item{object}{The workbook to use}
+  \item{sheet}{The name or index of the sheet to remove}
 }
-}}
+
+\description{
+Removes the specified \code{sheet}(s) from the workbook.
+
+}
 \author{
 Martin Studer\cr
-Mirai Solutions GmbH \url{http://www.mirai-solutions.com}
+\href{http://www.mirai-solutions.com}{Mirai Solutions GmbH}
 }
 \note{
 When removing a worksheet that is the currently active sheet then \pkg{XLConnect} resets

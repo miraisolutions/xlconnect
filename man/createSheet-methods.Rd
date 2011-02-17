@@ -7,19 +7,27 @@
 \description{
 Creates worksheets with specified names in a \code{\linkS4class{workbook}} object.
 }
-\section{Methods}{
-\describe{
-
-\item{\code{signature(object = "workbook", name = "character")}}{
-Creates a worksheet with the specified \code{name} if it does not already exist. Note that the naming of worksheets needs
-to be inline with Excel's convention, otherwise an exception will be thrown. For example, worksheet names cannot be longer
-than 31 characters. Also note that the \code{name} argument is vectorized, so multiple worksheets can be created in one method
-call.
+\usage{
+  \S4method{createSheet}{workbook,character}(object, name)
 }
-}}
+
+\arguments{
+  \item{object}{The workbook to use}
+  \item{name}{The name of the sheet to create}
+}
+
+\details{
+Creates a worksheet with the specified \code{name} if it does not
+already exist. Note that the naming of worksheets needs to be in line
+with Excel's convention, otherwise an exception will be thrown. For
+example, worksheet names cannot be longer than 31 characters. Also note
+that the \code{name} argument is vectorized, so multiple worksheets can
+be created in one method call.
+}
+
 \author{
 Martin Studer\cr
-Mirai Solutions GmbH \url{http://www.mirai-solutions.com}
+\href{http://www.mirai-solutions.com}{Mirai Solutions GmbH}
 }
 \seealso{
 \code{\linkS4class{workbook}}, \code{\link[=removeSheet-methods]{removeSheet}}, 

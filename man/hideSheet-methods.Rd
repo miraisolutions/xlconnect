@@ -10,38 +10,44 @@
 \description{
  (Very) hides the specified worksheets in a \code{\linkS4class{workbook}} object.
 }
-\section{Methods}{
-\describe{
-
-\item{\code{signature(object = "workbook", sheet = "character", veryHidden = "logical")}}{
-Hides the specified named \code{sheet}. If \code{veryHidden = TRUE}, the specified \code{sheet} is "very" hidden (see note), otherwise
-it is just hidden. The arguments \code{sheet} and \code{veryHidden} are vectorized such that multiple worksheets can be (very)
-hidden with one method call. An exception is thrown if the specified \code{sheet} does not exist.
+\usage{
+\S4method{hideSheet}{workbook,character,logical}(object,sheet,veryHidden)
+\S4method{hideSheet}{workbook,numeric,logical}(object,sheet,veryHidden)
 }
 
-\item{\code{signature(object = "workbook", sheet = "character", veryHidden = "missing")}}{
-As above with \code{veryHidden = FALSE}.
+\arguments{
+  \item{object}{The workbook to use}
+  \item{sheet}{The name or index of the sheet to hide}
+  \item{veryHidden}{Hides the specified named \code{sheet}. If
+  \code{veryHidden = TRUE}, the specified \code{sheet} is "very" hidden
+  (see note), otherwise it is just hidden. If missing, behaves like
+  \code{veryHidden = FALSE}.}
+
 }
 
-\item{\code{signature(object = "workbook", sheet = "numeric", veryHidden = "logical")}}{
-As above but with the \code{sheet} being specified by index rather than by name.
+
+\description{
+  The arguments \code{sheet} and \code{veryHidden} are vectorized such
+  that multiple worksheets can be (very) hidden with one method call. An
+  exception is thrown if the specified \code{sheet} does not exist.
 }
 
-\item{\code{signature(object = "workbook", sheet = "numeric", veryHidden = "missing")}}{
-As above - \code{sheet} specified by index and \code{veryHidden = FALSE}.
-}
-}}
 \author{
 Martin Studer\cr
-Mirai Solutions GmbH \url{http://www.mirai-solutions.com}
+\href{http://www.mirai-solutions.com}{Mirai Solutions GmbH}
 }
 \note{
-Note that hidden worksheets can be unhidden by users directly within Excel via standard functionality. Therefore Excel 
-knows the concept of "very hidden" worksheets. These worksheets cannot be unhidden with standard Excel functionality
-but need programatic intervention to be made visible.\cr\cr
-Also note that in case the specified worksheet to hide is the currently active worksheet, then \code{hideSheet} tries to
-set the active worksheet to the first non-hidden (not hidden and not very hidden) worksheet in the workbook. If there is no
-such worksheet, \code{hideSheet} will throw a corresponding exception.
+  Note that hidden worksheets can be unhidden by users directly within
+  Excel via standard functionality. Therefore Excel  knows the concept
+  of "very hidden" worksheets. These worksheets cannot be unhidden with
+  standard Excel functionality but need programatic intervention to be
+  made visible.\cr\cr
+  
+  Also note that in case the specified worksheet to hide is the
+  currently active worksheet, then \code{hideSheet} tries to set the
+  active worksheet to the first non-hidden (not hidden and not very
+  hidden) worksheet in the workbook. If there is no such worksheet,
+  \code{hideSheet} will throw a corresponding exception. 
 }
 \seealso{
 \code{\linkS4class{workbook}}, \code{\link[=unhideSheet-methods]{unhideSheet}},

@@ -8,21 +8,28 @@
 \description{
 Sets cell styles for specific cells in a \code{\linkS4class{workbook}}.
 }
-\section{Methods}{
-\describe{
-
-\item{\code{signature(object = "workbook", sheet = "character", row = "numeric", col = "numeric", cellstyle = "cellstyle")}}{
-Sets the specified \code{\linkS4class{cellstyle}} for the specified cell (\code{row}, \code{col}) on the specified (named) \code{sheet}. Note
-that the arguments are vectorized such that multiple cells can be styled with one method call.
+\usage{
+\S4method{setCellStyle}{workbook,character,numeric,numeric,cellstyle}(object,sheet,row,col,cellstyle)
+\S4method{setCellStyle}{workbook,numeric,numeric,numeric,cellstyle}(object,sheet,row,col,cellstyle)
 }
 
-\item{\code{signature(object = "workbook", sheet = "numeric", row = "numeric", col = "numeric", cellstyle = "cellstyle")}}{
-As above but with the \code{sheet} specified by index.
+\arguments{
+  \item{object}{The workbook to use}
+  \item{sheet}{Name or index of the sheet the cell is on}
+  \item{row}{Row index of the cell to edit}
+  \item{col}{Column index of the cell to edit}
+  \item{cellstyle}{\code{cellstyle} object to apply to the cell}
 }
-}}
+
+\description{
+Sets the specified \code{\linkS4class{cellstyle}} for the specified cell
+(\code{row}, \code{col}) on the specified \code{sheet}. Note that the
+arguments are vectorized such that multiple cells can be styled with one
+method call. 
+}
 \author{
 Martin Studer\cr
-Mirai Solutions GmbH \url{http://www.mirai-solutions.com}
+\href{http://www.mirai-solutions.com}{Mirai Solutions GmbH}
 }
 \seealso{
 \code{\linkS4class{workbook}}, \code{\linkS4class{cellstyle}}, \code{\link[=createCellStyle-methods]{createCellStyle}},

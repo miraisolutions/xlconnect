@@ -7,16 +7,20 @@
 \description{
 Queries the index of the active worksheet in a \code{\linkS4class{workbook}} object.
 }
-\section{Methods}{
-\describe{
+\usage{
+\S4method{getActiveSheetIndex}{workbook}(object)
+}
 
-\item{\code{signature(object = "workbook")}}{
+\arguments{
+  \item{object}{The workbook to use}
+}
+
+\description{
 Queries the index of the active worksheet of the provided \code{\linkS4class{workbook}} object.
 }
-}}
 \author{
 Martin Studer\cr
-Mirai Solutions GmbH \url{http://www.mirai-solutions.com}
+\href{http://www.mirai-solutions.com}{Mirai Solutions GmbH}
 }
 \seealso{
 \code{\linkS4class{workbook}}, \code{\link[=getActiveSheetName-methods]{getActiveSheetName}}
