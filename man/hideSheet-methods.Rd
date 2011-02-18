@@ -16,17 +16,15 @@
 }
 
 \arguments{
-  \item{object}{The workbook to use}
+  \item{object}{The \code{\linkS4class{workbook}} to use}
   \item{sheet}{The name or index of the sheet to hide}
   \item{veryHidden}{Hides the specified named \code{sheet}. If
   \code{veryHidden = TRUE}, the specified \code{sheet} is "very" hidden
   (see note), otherwise it is just hidden. If missing, behaves like
   \code{veryHidden = FALSE}.}
-
 }
 
-
-\description{
+\details{
   The arguments \code{sheet} and \code{veryHidden} are vectorized such
   that multiple worksheets can be (very) hidden with one method call. An
   exception is thrown if the specified \code{sheet} does not exist.
@@ -34,7 +32,7 @@
 
 \author{
 Martin Studer\cr
-\href{http://www.mirai-solutions.com}{Mirai Solutions GmbH}
+Mirai Solutions GmbH \url{http://www.mirai-solutions.com}
 }
 \note{
   Note that hidden worksheets can be unhidden by users directly within

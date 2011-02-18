@@ -13,21 +13,16 @@ Retrieves the defined names in a \code{\linkS4class{workbook}} object.
 }
 
 \arguments{
-  \item{object}{The workbook to use}
+  \item{object}{The \code{\linkS4class{workbook}} to use}
   \item{validOnly}{If \code{validOnly = TRUE} only names with valid references
 are returned. Valid references are ones not starting with #REF! or
-  #NULL! - which could result e.g. due to a missing sheet reference. If
-  \code{validOnly} is missing, it is treated as \code{validOnly = TRUE}.}
+  #NULL! - which could result e.g. due to a missing sheet reference. The default
+  value for \code{validOnly} is \code{TRUE}.}
 }
 
-
-\description{
-Queries the defined names in a \code{\linkS4class{workbook}} object.  
-
-}
 \author{
 Martin Studer\cr
-\href{http://www.mirai-solutions.com}{Mirai Solutions GmbH}
+Mirai Solutions GmbH \url{http://www.mirai-solutions.com}
 }
 \seealso{
 \code{\linkS4class{workbook}}, \code{\link[=createName-methods]{createName}}, \code{\link[=removeName-methods]{removeName}}, 

@@ -13,14 +13,12 @@
 }
 
 \arguments{
-  \item{object}{The workbook to use}
+  \item{object}{The \code{\linkS4class{workbook}} to summarize}
 }
 
-\description{Outputs a summary of the specified \code{\linkS4class{workbook}} object.
-}
 \author{
 Martin Studer\cr
-\href{http://www.mirai-solutions.com}{Mirai Solutions GmbH}
+Mirai Solutions GmbH \url{http://www.mirai-solutions.com}
 }
 \seealso{
 \code{\linkS4class{workbook}}, \code{\link[=getSheets-methods]{getSheets}}, 

@@ -12,12 +12,12 @@ Manipulate Excel files from R
 \tabular{ll}{
 Package: \tab XLConnect\cr
 Type: \tab Package\cr
-Version: \tab 0.1-2\cr
-Date: \tab 2010-11-12\cr
+Version: \tab 0.1-3\cr
+Date: \tab 2011-02-25\cr
 URL: \tab \url{http://www.mirai-solutions.com}\cr
 SystemRequirements: \tab java\cr
-Depends: \tab R (>= 2.9.0), rJava, utils, methods\cr
-Suggests: \tab RUnit\cr
+Depends: \tab R (>= 2.10.0), rJava, utils, methods\cr
+Suggests: \tab RUnit, lattice\cr
 License: \tab GPL-3\cr
 LazyLoad: \tab yes\cr
 }

@@ -13,7 +13,7 @@ Checks if worksheets with specified names exist in a \code{\linkS4class{workbook
 }
 
 \arguments{
-  \item{object}{The workbook to use}
+  \item{object}{The \code{\linkS4class{workbook}} to use}
   \item{name}{The sheet name to check for}
 }
 
@@ -25,7 +25,7 @@ which allows to check for existence of multiple worksheets with one call.
 
 \author{
 Martin Studer\cr
-\href{http://www.mirai-solutions.com}{Mirai Solutions GmbH}
+Mirai Solutions GmbH \url{http://www.mirai-solutions.com}
 }
 \seealso{
 \code{\linkS4class{workbook}}, \code{\link[=createSheet-methods]{createSheet}},

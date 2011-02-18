@@ -12,16 +12,16 @@
 }
 
 \arguments{
-  \item{object}{The workbook object to save}
+  \item{object}{The \code{\linkS4class{workbook}} to save}
  }
 
-\description{
+\details{
 Saves the specified \code{\linkS4class{workbook}} object to disk. The \code{\linkS4class{workbook}}'s underlying filename specifies the
 path (see the \code{\linkS4class{workbook}} class for more information).
 }
 \author{
 Martin Studer\cr
-\href{http://www.mirai-solutions.com}{Mirai Solutions GmbH}
+Mirai Solutions GmbH \url{http://www.mirai-solutions.com}
 }
 \note{
 As already mentioned in the documentation of the

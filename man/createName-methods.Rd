@@ -13,13 +13,14 @@ Creates a name for a specified formula in a \code{\linkS4class{workbook}} object
 }
 
 \arguments{
-  \item{object}{The workbook to use}
+  \item{object}{The \code{\linkS4class{workbook}} to use}
   \item{name}{The new name to create}
   \item{formula}{Excel formula specifying the name}
   \item{overwrite}{If a name with the same \code{name} already exists
     and \code{overwrite = TRUE}, then this name is removed first before
     the new one is created. If a name already exists and
-    \code{overwrite = FALSE}, then an exception is thrown.}
+    \code{overwrite = FALSE}, then an exception is thrown. The default
+    value for \code{overwrite} is \code{FALSE}.}
 }
 
 \details{
@@ -31,20 +32,17 @@ exist that you are referring to in the \code{formula}.
 
 The \code{name}, \code{formula} and \code{overwrite} arguments are
 vectorized such that multiple names can be created in one method call.
-
-If \code{overwrite} is missing, it is treated as \code{overwrite = FALSE}.
 }
 
-
 \references{
-\href{http://www.officearticles.com/excel/named_ranges_in_microsoft_excel.htm}{What
-  are named regions/ranges?} 
-
-\href{http://www.youtube.com/watch?v=iAE9a0uRtpM}{How to create named regions/ranges?}
+What are named regions/ranges?\cr
+\url{http://www.officearticles.com/excel/named_ranges_in_microsoft_excel.htm}\cr
+How to create named regions/ranges?\cr
+\url{http://www.youtube.com/watch?v=iAE9a0uRtpM}
 }
 \author{
 Martin Studer\cr
-\href{Mirai Solutions GmbH}{http://www.mirai-solutions.com}
+Mirai Solutions GmbH \url{http://www.mirai-solutions.com}
 }
 \seealso{
 \code{\linkS4class{workbook}}, \code{\link[=removeName-methods]{removeName}}, \code{\link[=existsName-methods]{existsName}},

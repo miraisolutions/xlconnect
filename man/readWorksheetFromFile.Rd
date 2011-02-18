@@ -10,16 +10,21 @@ readWorksheetFromFile(file, ...)
 }
 \arguments{
 \item{file}{The path name of the file to read from.}
-\item{...}{arguments passed to \link[=readWorksheet-methods]{readWorksheet})}
+\item{...}{Arguments passed to \link[=readWorksheet-methods]{readWorksheet}}
 }
+
+\details{
+See \link[=readWorksheet-methods]{readWorksheet} for more information.
+}
+
 \author{
 Thomas Themel\cr
 Mirai Solutions GmbH \url{http://www.mirai-solutions.com}
 }
 
 \seealso{
-\code{\link[=readWorksheet-methods]{readWorksheet}}, \code{\link{readWorksheetFromFile}}, 
-\code{\link{readWorksheetFromFile}}, \code{\link{writeWorksheetToFile}}
+\code{\link[=readWorksheet-methods]{readWorksheet}}, \code{\link{readNamedRegionFromFile}}, 
+\code{\link{writeWorksheetToFile}}, \code{\link{writeNamedRegionToFile}}
 }
 \examples{
 # multiregion xlsx file from demoFiles subfolder of package XLConnect

@@ -12,17 +12,17 @@ Removes a name from a \code{\linkS4class{workbook}} object.
 }
 
 \arguments{
-  \item{object}{The workbook to use}
+  \item{object}{The \code{\linkS4class{workbook}} to use}
   \item{name}{The name to delete}
 }
 
-\description{
+\details{
 Removes the name named \code{name} from the specified workbook
 \code{object} if it does exist. Multiple names can be specified to be removed.
 }
 \author{
 Martin Studer\cr
-\href{http://www.mirai-solutions.com}{Mirai Solutions GmbH}
+Mirai Solutions GmbH \url{http://www.mirai-solutions.com}
 }
 \seealso{
 \code{\linkS4class{workbook}}, \code{\link[=createName-methods]{createName}}, \code{\link[=existsName-methods]{existsName}},

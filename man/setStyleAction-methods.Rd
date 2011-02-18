@@ -12,7 +12,7 @@ Controls the application of cell styles when writing data to Excel.
 }
 
 \arguments{
-  \item{object}{The workbook to use}
+  \item{object}{The \code{\linkS4class{cellstyle}} to use}
   \item{type}{Defines the style action to be used when writing data
   (\code{\link[=writeNamedRegion-methods]{writeNamedRegion}},
   \code{\link[=writeWorksheet-methods]{writeWorksheet}}) to the
@@ -78,7 +78,7 @@ Controls the application of cell styles when writing data to Excel.
 
 \author{
 Martin Studer\cr
-\href{http://www.mirai-solutions.com}{Mirai Solutions GmbH}
+Mirai Solutions GmbH \url{http://www.mirai-solutions.com}
 }
 \seealso{
 \code{\linkS4class{workbook}}, \code{\linkS4class{cellstyle}}, \code{\link[=createCellStyle-methods]{createCellStyle}},

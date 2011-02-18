@@ -5,20 +5,18 @@
 \alias{getSheets,workbook-method}
 \title{Querying available worksheets in a workbook}
 \description{
-Queries the available worksheets (names) in a \code{\linkS4class{workbook}} object.
+Returns all worksheet names in a \code{\linkS4class{workbook}} object.
 }
 \usage{
 \S4method{getSheets}{workbook}(object)
 }
 \arguments{
-  \item{object}{The workbook to use}
+  \item{object}{The \code{\linkS4class{workbook}} to use}
 }
-\description{
-Returns all the worksheet names of the specified \code{\linkS4class{workbook}} object.
-}
+
 \author{
 Martin Studer\cr
-\href{http://www.mirai-solutions.com}{Mirai Solutions GmbH}
+Mirai Solutions GmbH \url{http://www.mirai-solutions.com}
 }
 \seealso{
 \code{\linkS4class{workbook}}, \code{\link[=createSheet-methods]{createSheet}},

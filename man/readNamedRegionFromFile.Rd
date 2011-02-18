@@ -11,17 +11,16 @@ readNamedRegionFromFile(file, name, header = "TRUE")
 \arguments{
   \item{file}{The file name of the workbook to read}
   \item{name}{The name of the region to read from}
-  \item{header}{see \link[=readWorksheet-methods]{readWorksheet}}
+  \item{header}{see \link[=readNamedRegion-methods]{readNamedRegion}}
 }
 
 \details{This is a convenience wrapper to read named regions from a file
-  without creating an intermediate workbook object.}
+  without creating an intermediate \code{\linkS4class{workbook}} object.
+  See \link[=readNamedRegion-methods]{readNamedRegion} for more details.}
 
 \author{
 Thomas Themel\cr
 Mirai Solutions GmbH \url{http://www.mirai-solutions.com}
-}
-\note{
 }
 
 \seealso{

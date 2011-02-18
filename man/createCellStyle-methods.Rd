@@ -13,7 +13,7 @@ Creates a custom named or anonymous cell style.
 }
 
 \arguments{
-  \item{object}{The workbook to use}
+  \item{object}{The \code{\linkS4class{workbook}} to use}
   \item{name}{The name of the newly created cell style}
 }
 
@@ -32,7 +32,7 @@ Anonymous cell styles can be used in conjunction with the
 
 \author{
 Martin Studer\cr
-\href{Mirai Solutions GmbH}{http://www.mirai-solutions.com}
+Mirai Solutions GmbH \url{http://www.mirai-solutions.com}
 }
 \seealso{
 \code{\linkS4class{workbook}}, \code{\linkS4class{cellstyle}}, \code{\link[=setStyleAction-methods]{setStyleAction}}, 

@@ -20,15 +20,14 @@ Cell styles are created by calling the \code{\link[=createCellStyle-methods]{cre
   }
 }
 \references{
-\href{http://office.microsoft.com/en-us/excel-help/using-styles-in-excel-HA001110199.aspx}{Cell
-  styles in Excel 2003} 
-
-\href{http://office.microsoft.com/en-us/excel-help/apply-create-or-remove-a-cell-style-HP001216732.aspx}{Cell
-  styles in Excel 2007} 
+Cell styles in Excel 2003:\cr
+\url{http://office.microsoft.com/en-us/excel-help/using-styles-in-excel-HA001110199.aspx}\cr
+Cell styles in Excel 2007:\cr
+\url{http://office.microsoft.com/en-us/excel-help/apply-create-or-remove-a-cell-style-HP001216732.aspx} 
 }
 \author{
 Martin Studer\cr
-\href{http://www.mirai-solutions.com}{Mirai Solutions GmbH}
+Mirai Solutions GmbH \url{http://www.mirai-solutions.com}
 }
 \note{
 \pkg{XLConnect} generally makes use of custom (named) cell styles. This allows Excel users to more easily manage cell styles

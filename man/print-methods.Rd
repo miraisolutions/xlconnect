@@ -12,17 +12,17 @@ Prints the \code{\linkS4class{workbook}}'s underlying filename.
 }
 
 \arguments{
-  \item{x}{The workbook to print}
+  \item{x}{The \code{\linkS4class{workbook}} to print}
   \item{...}{Arguments passed on to standard \code{print}}
 }
 
-\description{
+\details{
 Prints the specified \code{\linkS4class{workbook}}'s filename (see also the S4 \code{filename}
 slot of the \code{\linkS4class{workbook}} class).
 }
 \author{
 Martin Studer\cr
-\href{http://www.mirai-solutions.com}{Mirai Solutions GmbH}
+Mirai Solutions GmbH \url{http://www.mirai-solutions.com}
 }
 \seealso{
 \code{\linkS4class{workbook}}

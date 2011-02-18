@@ -14,14 +14,14 @@ Sets cell styles for specific cells in a \code{\linkS4class{workbook}}.
 }
 
 \arguments{
-  \item{object}{The workbook to use}
+  \item{object}{The \code{\linkS4class{workbook}} to use}
   \item{sheet}{Name or index of the sheet the cell is on}
   \item{row}{Row index of the cell to edit}
   \item{col}{Column index of the cell to edit}
-  \item{cellstyle}{\code{cellstyle} object to apply to the cell}
+  \item{cellstyle}{\code{\linkS4class{cellstyle}} object to apply to the cell}
 }
 
-\description{
+\details{
 Sets the specified \code{\linkS4class{cellstyle}} for the specified cell
 (\code{row}, \code{col}) on the specified \code{sheet}. Note that the
 arguments are vectorized such that multiple cells can be styled with one
@@ -29,7 +29,7 @@ method call.
 }
 \author{
 Martin Studer\cr
-\href{http://www.mirai-solutions.com}{Mirai Solutions GmbH}
+Mirai Solutions GmbH \url{http://www.mirai-solutions.com}
 }
 \seealso{
 \code{\linkS4class{workbook}}, \code{\linkS4class{cellstyle}}, \code{\link[=createCellStyle-methods]{createCellStyle}},

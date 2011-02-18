@@ -12,7 +12,7 @@ Specifies borders for a \code{\linkS4class{cellstyle}}.
 }
 
 \arguments{
-  \item{object}{The cell style to edit}
+  \item{object}{The \code{\linkS4class{cellstyle}} to edit}
   \item{side}{A vector with any combination of \{"bottom", "left",
     "right", "top", "all"\}}
   \item{type}{Specifies the border type to be used - it is normally
@@ -20,10 +20,10 @@ Specifies borders for a \code{\linkS4class{cellstyle}}.
   \code{\link{XLC}} border constant,
   e.g. \code{XLC$"BORDER.MEDIUM_DASHED"})}
   \item{color}{Defines the border color and is normally also specified
-    via an \code{\link{XLC}} constant}
+    via an \code{\link{XLC}} constant.}
 }
 
-\description{
+\details{
 Specifies the border for a cell style. Note that the arguments
 \code{type} and  \code{color} should be of the same length as side. In
 other words, for each specified \code{side} there should be a
@@ -33,7 +33,7 @@ length of \code{side}.
 }
 \author{
 Martin Studer\cr
-\href{http://www.mirai-solutions.com}{Mirai Solutions GmbH}
+Mirai Solutions GmbH \url{http://www.mirai-solutions.com}
 }
 \seealso{
 \code{\linkS4class{workbook}}, \code{\linkS4class{cellstyle}}, \code{\link[=setCellStyle-methods]{setCellStyle}}, 

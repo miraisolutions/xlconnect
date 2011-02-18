@@ -13,6 +13,7 @@ xlcMemoryReport()
 This function uses Java's Runtime class to query the free JVM memory.
 }
 \references{
+java.lang.Runtime:\cr
 \url{http://download.oracle.com/javase/6/docs/api/java/lang/Runtime.html}
 }
 \author{

@@ -14,17 +14,13 @@ Removes a worksheet from a \code{\linkS4class{workbook}} object.
 }
 
 \arguments{
-  \item{object}{The workbook to use}
+  \item{object}{The \code{\linkS4class{workbook}} to use}
   \item{sheet}{The name or index of the sheet to remove}
 }
 
-\description{
-Removes the specified \code{sheet}(s) from the workbook.
-
-}
 \author{
 Martin Studer\cr
-\href{http://www.mirai-solutions.com}{Mirai Solutions GmbH}
+Mirai Solutions GmbH \url{http://www.mirai-solutions.com}
 }
 \note{
 When removing a worksheet that is the currently active sheet then \pkg{XLConnect} resets

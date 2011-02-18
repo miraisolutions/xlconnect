@@ -14,13 +14,13 @@ Sets the height of a row in a worksheet.
 }
 
 \arguments{
-  \item{object}{The workbook to use}
+  \item{object}{The \code{\linkS4class{workbook}} to use}
   \item{sheet}{The name or index of the sheet to edit}
   \item{row}{The index of the row to resize}
   \item{height}{The height in points of the specified row}
 }
 
-\description{
+\details{
 Note that the arguments \code{sheet}, \code{row} and \code{height} are
 vectorized. As such the row height of multiple rows (potentially on
 different worksheets) can be set with one method call. 
@@ -28,7 +28,7 @@ different worksheets) can be set with one method call.
 
 \author{
 Martin Studer\cr
-\href{http://www.mirai-solutions.com}{Mirai Solutions GmbH}
+Mirai Solutions GmbH \url{http://www.mirai-solutions.com}
 }
 \seealso{
 \code{\linkS4class{workbook}}, \code{\link[=setColumnWidth-methods]{setColumnWidth}}

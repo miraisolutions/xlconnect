@@ -12,19 +12,15 @@ Specifies the fill foreground color for a \code{\linkS4class{cellstyle}}.
 }
 
 \arguments{
-  \item{object}{The cell style to manipulate}
-  \item{color}{The fill foreground color to use for the
-    \code{\linkS4class{cellstyle}}.}
+  \item{object}{The \code{\linkS4class{cellstyle}} to manipulate}
+  \item{color}{The fill foreground color to use for the \code{\linkS4class{cellstyle}}. 
+  The \code{color} is normally specified via a corresponding color constant from the 
+  \code{\link{XLC}} object. }
 }
 
-
-\description{
-The \code{color} is normally specified via a corresponding color
-constant from the \code{\link{XLC}} object. 
-}
 \author{
 Martin Studer\cr
-\href{http://www.mirai-solutions.com}{Mirai Solutions GmbH}
+Mirai Solutions GmbH \url{http://www.mirai-solutions.com}
 }
 \seealso{
 \code{\linkS4class{workbook}}, \code{\linkS4class{cellstyle}}, \code{\link[=setCellStyle-methods]{setCellStyle}}, 

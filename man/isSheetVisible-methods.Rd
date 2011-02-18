@@ -14,12 +14,11 @@ Checks if the specified worksheets are visible in a \code{\linkS4class{workbook}
 }
 
 \arguments{
-  \item{object}{The workbook to use}
+  \item{object}{The \code{\linkS4class{workbook}} to use}
   \item{sheet}{The name or index of the sheet to check}
 }
 
-
-\description{
+\details{
 Returns \code{TRUE} if the specified named \code{sheet} is visible (not
 hidden and not very hidden), otherwise \code{FALSE}. \code{sheet} is
 vectorized such that multiple worksheets can be queried with one method
@@ -28,7 +27,7 @@ exist.
 }
 \author{
 Martin Studer\cr
-\href{http://www.mirai-solutions.com}{Mirai Solutions GmbH}
+Mirai Solutions GmbH \url{http://www.mirai-solutions.com}
 }
 \seealso{
 \code{\linkS4class{workbook}}, \code{\link[=hideSheet-methods]{hideSheet}}, \code{\link[=unhideSheet-methods]{unhideSheet}},

@@ -11,16 +11,19 @@ writeWorksheetToFile(file, styleAction = XLC$STYLE_ACTION.XLCONNECT, ...)
 \arguments{
 \item{file}{The path name of the file to write to.}
 \item{...}{Arguments passed on to \link[=writeWorksheet-methods]{writeWorksheet}}
-\item{styleAction}{A string indicating how to style the output - not vectorized!}
+\item{styleAction}{Style action to be used when writing the data - not vectorized! 
+The default is \code{XLC$STYLE_ACTION.XLCONNECT}. 
+See \code{\link[=setStyleAction-methods]{setStyleAction}} for more information.}
 }
+
 \author{
 Thomas Themel\cr
 Mirai Solutions GmbH \url{http://www.mirai-solutions.com}
 }
 
 \seealso{
-\code{\link[=writeWorksheet-methods]{writeWorksheet}}, \code{\link{readWorksheetFromFile}}, 
-\code{\link{readNamedRegionFromFile}}, \code{\link{writeNamedRegionToFile}}
+\code{\link[=writeWorksheet-methods]{writeWorksheet}}, \code{\link{writeNamedRegionToFile}},
+\code{\link{readWorksheetFromFile}}, \code{\link{readNamedRegionFromFile}} 
 }
 \examples{
 # multiregion xlsx file from demoFiles subfolder of package XLConnect

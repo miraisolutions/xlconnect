@@ -20,17 +20,19 @@ writeNamedRegionToFile(file, data, name, formula=NA, header = TRUE, styleAction 
 the named region identified by the corresponding entry of
 \code{name}. Use this if you want to create the document from scratch
 instead of writing to a template!}
-\item{styleAction}{A text specified indicating how to style the output.}
-
+\item{styleAction}{Style action to be used when writing the data. 
+The default is \code{XLC$STYLE_ACTION.XLCONNECT}. 
+See \code{\link[=setStyleAction-methods]{setStyleAction}} for more information.}
 }
+
 \author{
 Thomas Themel\cr
 Mirai Solutions GmbH \url{http://www.mirai-solutions.com}
 }
 
 \seealso{
-\code{\link[=writeNamedRegion-methods]{writeNamedRegion}}, \code{\link{readWorksheetFromFile}}, 
-\code{\link{readNamedRegionFromFile}}, \code{\link{writeWorksheetToFile}}
+\code{\link[=writeNamedRegion-methods]{writeNamedRegion}}, \code{\link{writeWorksheetToFile}},
+\code{\link{readNamedRegionFromFile}}, \code{\link{readWorksheetFromFile}}
 }
 \examples{
 # multiregion xlsx file from demoFiles subfolder of package XLConnect

@@ -14,11 +14,11 @@ Checks if the specified worksheets are very hidden (but not just hidden) in a \c
 }
 
 \arguments{
-  \item{object}{The workbook to use}
+  \item{object}{The \code{\linkS4class{workbook}} to use}
   \item{sheet}{The name or index of the sheet to check}
 }
 
-\description{
+\details{
 Returns \code{TRUE} if the specified named \code{sheet} is very hidden
 (not visible but also not just hidden), otherwise
 \code{FALSE}. \code{sheet} is vectorized such that multiple worksheets
@@ -27,7 +27,7 @@ specified \code{sheet} does not exist.
 }
 \author{
 Martin Studer\cr
-\href{http://www.mirai-solutions.com}{Mirai Solutions GmbH}
+Mirai Solutions GmbH \url{http://www.mirai-solutions.com}
 }
 \seealso{
 \code{\linkS4class{workbook}}, \code{\link[=hideSheet-methods]{hideSheet}}, \code{\link[=unhideSheet-methods]{unhideSheet}},

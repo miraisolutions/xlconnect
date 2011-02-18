@@ -13,17 +13,17 @@ Retrieves a named cell style from a workbook.
 }
 
 \arguments{
-  \item{object}{The workbook to use}
+  \item{object}{The \code{\linkS4class{workbook}} to use}
   \item{name}{The name of the cell style to retrieve}
 }
 
 \details{
-Retrieves cell style with the specified \code{name}. 
+Retrieves the \code{\linkS4class{cellstyle}} with the specified \code{name}. 
 }
 
 \author{
 Martin Studer\cr
-\href{Mirai Solutions GmbH}{http://www.mirai-solutions.com}
+Mirai Solutions GmbH \url{http://www.mirai-solutions.com}
 }
 
 \seealso{

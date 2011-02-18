@@ -15,7 +15,7 @@ XLConnectSettings(pdesc)
 }
 }
 \details{
-This function is called by \pkg{XLConnect}'s .onLoad function to perform general settings
+This function is called by \pkg{XLConnect}'s \code{.onLoad} function to perform general settings
 used by \pkg{XLConnect}.
 }
 \author{

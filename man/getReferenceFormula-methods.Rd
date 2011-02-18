@@ -12,17 +12,14 @@ Queries the reference formula of an Excel name in a \code{\linkS4class{workbook}
 }
 
 \arguments{
-  \item{object}{The workbook to use}
+  \item{object}{The \code{\linkS4class{workbook}} to use}
   \item{name}{The name to query. This argument is vectorized such that
-  multiple names can be queried with one method call}
+  multiple names can be queried with one method call.}
 }
 
-\description{
-Queries the reference formula of the specified \code{name}. 
-}
 \author{
 Martin Studer\cr
-\href{http://www.mirai-solutions.com}{Mirai Solutions GmbH}
+Mirai Solutions GmbH \url{http://www.mirai-solutions.com}
 }
 \seealso{
 \code{\linkS4class{workbook}}, \code{\link[=createName-methods]{createName}}, \code{\link[=existsName-methods]{existsName}},

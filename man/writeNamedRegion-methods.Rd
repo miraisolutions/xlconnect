@@ -13,10 +13,10 @@ Writes named regions to a \code{\linkS4class{workbook}} object.
 }
 
 \arguments{
-  \item{object}{The workbook to use}
+  \item{object}{The \code{\linkS4class{workbook}} to use}
   \item{data}{Data to write}
-  \item{name}{Name of the region to write to}
-  \item{header}{see \link[=writeNamedRegion-methods]{writeNamedRegion}}
+  \item{name}{Name of the named region to write to}
+  \item{header}{Specifies if the column names should be written. The default is \code{TRUE}.}
 }
 
 \details{
@@ -29,12 +29,14 @@ written with one call. In this case \code{data} is assumed to be a list
 of data objects (\code{data.frame}'s).
 }
 \references{
-What are named regions/ranges? \url{http://www.officearticles.com/excel/named_ranges_in_microsoft_excel.htm}\cr
-How to create named regions/ranges? \url{http://www.youtube.com/watch?v=iAE9a0uRtpM}
+What are named regions/ranges?\cr
+\url{http://www.officearticles.com/excel/named_ranges_in_microsoft_excel.htm}\cr
+How to create named regions/ranges?\cr
+\url{http://www.youtube.com/watch?v=iAE9a0uRtpM}
 }
 \author{
 Martin Studer\cr
-\href{http://www.mirai-solutions.com}{Mirai Solutions GmbH}
+Mirai Solutions GmbH \url{http://www.mirai-solutions.com}
 }
 \note{
 Named regions are automatically redefined to the area occupied by the
@@ -50,7 +52,8 @@ styles to the cells as defined by the \code{\linkS4class{workbook}}'s
 }
 \seealso{
 \code{\linkS4class{workbook}}, \code{\link[=writeWorksheet-methods]{writeWorksheet}},
-\code{\link[=readNamedRegion-methods]{readNamedRegion}}, \code{\link[=readWorksheet-methods]{readWorksheet}}
+\code{\link[=readNamedRegion-methods]{readNamedRegion}}, \code{\link[=readWorksheet-methods]{readWorksheet}},
+\code{\link{writeNamedRegionToFile}}
 }
 \examples{
 # Load workbook (create if not existing)

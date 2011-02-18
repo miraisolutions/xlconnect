@@ -11,17 +11,15 @@ Allows to execute \code{\linkS4class{workbook}} methods in \code{workbook-object
 \usage{
 \S4method{$}{workbook}(x)
 }
-
 \arguments{
-  \item{x}{The workbook to use}
+  \item{x}{The \code{\linkS4class{workbook}} to use}
 }
-
-\description{
+\details{
 \code{x$method(...)} (where \code{x} is a \code{\linkS4class{workbook}}-object) is equivalent to \code{method(x, ...)}
 }
 \author{
 Martin Studer\cr
-\href{http://www.mirai-solutions.com}{Mirai Solutions GmbH}
+Mirai Solutions GmbH \url{http://www.mirai-solutions.com}
 }
 \note{
 The \code{\linkS4class{workbook}} \code{$}-operator allows to call \code{\linkS4class{workbook}}-methods in \code{workbook-object$method(...)} form. 
@@ -42,7 +40,6 @@ wb$writeWorksheet(CO2, sheet = "CO2", startRow = 4, startCol = 2)
 
 # Save workbook
 wb$saveWorkbook()
-
 }
 \keyword{methods}
 \keyword{utilities}

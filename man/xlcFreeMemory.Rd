@@ -24,6 +24,7 @@ R and Java automatically perform garbage collection at times. However, this func
 to reclaim memory after removing a large data object that has been written/read to/from Excel.
 }
 \references{
+java.lang.Runtime:\cr
 \url{http://download.oracle.com/javase/6/docs/api/java/lang/Runtime.html}
 }
 \author{

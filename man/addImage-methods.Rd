@@ -13,24 +13,19 @@ Adds an image to a worksheet using a named region.
 }
 
 \arguments{
-  \item{object}{The workbook to use}
-  \item{filename}{Name of the image file}
+  \item{object}{The \code{\linkS4class{workbook}} to use}
+  \item{filename}{Name of the image file. Supported are images of 
+  the following formats: JPG/JPEG, PNG, WMF, EMF, BMP, PICT.}
   \item{name}{Name of the named region that the image is set to}
   \item{originalSize}{If \code{originalSize = TRUE}, the image is
   inserted in the top left corner of the named region and not
-  scaled. Otherwise, the image is scaled to fit the named region.}
-}
-
-\details{  
-  If \code{originalSize} is missing, it is treated as \code{originalSize = FALSE}.
-  
-  Supported are images of the following formats: JPG/JPEG, PNG, WMF,
-  EMF, BMP, PICT.
+  scaled. Otherwise, the image is scaled to fit the named region.
+  The default value for \code{originalSize} is \code{FALSE}.}
 }
 
 \author{
 Martin Studer\cr
-\href{http://www.mirai-solutions.com}{Mirai Solutions GmbH}
+Mirai Solutions GmbH \url{http://www.mirai-solutions.com}
 }
 \seealso{
 \code{\linkS4class{workbook}}, \code{\link[=createName-methods]{createName}}

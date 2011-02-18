@@ -14,16 +14,13 @@ Sets the active worksheet of a \code{\linkS4class{workbook}}.
 }
 
 \arguments{
-  \item{object}{The workbook to use}
+  \item{object}{The \code{\linkS4class{workbook}} to use}
   \item{sheet}{The name or index of the sheet to activate}
 }
 
-\description{
-Sets the \code{sheet} as the active worksheet.
-}
 \author{
 Martin Studer\cr
-\href{http://www.mirai-solutions.com}{Mirai Solutions GmbH}
+Mirai Solutions GmbH \url{http://www.mirai-solutions.com}
 }
 \note{
 The active worksheet of a \code{\linkS4class{workbook}} is the worksheet that is displayed

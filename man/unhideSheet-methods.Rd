@@ -13,16 +13,13 @@ Unhides the specified worksheets in a \code{\linkS4class{workbook}} object.
 \S4method{unhideSheet}{workbook,numeric}(object,sheet)
 }
 \arguments{
-  \item{object}{The workbook to use}
+  \item{object}{The \code{\linkS4class{workbook}} to use}
   \item{sheet}{The name or index of the sheet to unhide}
 }
 
-\description{
-Unhides the specified \code{sheet}(s).
-}
 \author{
 Martin Studer\cr
-\href{http://www.mirai-solutions.com}{Mirai Solutions GmbH}
+Mirai Solutions GmbH \url{http://www.mirai-solutions.com}
 }
 \seealso{
 \code{\linkS4class{workbook}}, \code{\link[=hideSheet-methods]{hideSheet}},

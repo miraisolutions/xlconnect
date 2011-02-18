@@ -12,15 +12,12 @@ Queries the index of the active worksheet in a \code{\linkS4class{workbook}} obj
 }
 
 \arguments{
-  \item{object}{The workbook to use}
+  \item{object}{The \code{\linkS4class{workbook}} to use}
 }
 
-\description{
-Queries the index of the active worksheet of the provided \code{\linkS4class{workbook}} object.
-}
 \author{
 Martin Studer\cr
-\href{http://www.mirai-solutions.com}{Mirai Solutions GmbH}
+Mirai Solutions GmbH \url{http://www.mirai-solutions.com}
 }
 \seealso{
 \code{\linkS4class{workbook}}, \code{\link[=getActiveSheetName-methods]{getActiveSheetName}}

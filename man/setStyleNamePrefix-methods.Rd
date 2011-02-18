@@ -12,16 +12,16 @@ Sets the style name prefix for the "name prefix" style action.
 }
 
 \arguments{
-  \item{object}{The workbook to use}
+  \item{object}{The \code{\linkS4class{workbook}} to use}
   \item{prefix}{The name prefix}
 }
 
-\description{
+\details{
 Sets the \code{prefix} for the "name prefix" style action. See the method \code{\link[=setStyleAction-methods]{setStyleAction}} for more information.
 }
 \author{
 Martin Studer\cr
-\href{http://www.mirai-solutions.com}{Mirai Solutions GmbH}
+Mirai Solutions GmbH \url{http://www.mirai-solutions.com}
 }
 \seealso{
 \code{\linkS4class{workbook}}, \code{\linkS4class{cellstyle}}, \code{\link[=setStyleAction-methods]{setStyleAction}}, 

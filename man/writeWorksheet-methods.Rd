@@ -19,17 +19,15 @@ Writes data to worksheets of a \code{\linkS4class{workbook}} object.
 }
 
 \arguments{
-  \item{object}{The workbook to write to}
+  \item{object}{The \code{\linkS4class{workbook}} to write to}
   \item{data}{Data to write}
   \item{sheet}{The name or index of the sheet to write to}
-  \item{startRow}{Index of the first row to write to. Behaves like
-  \code{startRow = 1} if missing}
-  \item{startCol}{Index of the first column to write to. Behaves like
-  \code{startCol = 1} if missing}
-  \item{header}{Specifies if the column names should be written}
+  \item{startRow}{Index of the first row to write to. The default is code{startRow = 1}.}
+  \item{startCol}{Index of the first column to write to. The default is code{startCol = 1}.}
+  \item{header}{Specifies if the column names should be written. The default is \code{TRUE}.}
 }
 
-\description{
+\details{
 Writes \code{data} to the (named) worksheet specified by
 \code{sheet}. \code{data} is assumed to be a  \code{data.frame} and is
 coerced to one if this is not already the case. \code{startRow} and
@@ -42,7 +40,7 @@ of data objects (\code{data.frame}s).
 
 \author{
 Martin Studer\cr
-\href{http://www.mirai-solutions.com}{Mirai Solutions GmbH}
+Mirai Solutions GmbH \url{http://www.mirai-solutions.com}
 }
 \note{
 When writing data to Excel, \code{writeWorksheet} further applies cell
@@ -52,7 +50,8 @@ styles to the cells as defined by the \code{\linkS4class{workbook}}'s
 }
 \seealso{
 \code{\linkS4class{workbook}}, \code{\link[=writeNamedRegion-methods]{writeNamedRegion}},
-\code{\link[=readWorksheet-methods]{readWorksheet}}, \code{\link[=readNamedRegion-methods]{readNamedRegion}} 
+\code{\link[=readWorksheet-methods]{readWorksheet}}, \code{\link[=readNamedRegion-methods]{readNamedRegion}},
+\code{\link{writeWorksheetToFile}}
 }
 \examples{
 # Load workbook (create if not existing)

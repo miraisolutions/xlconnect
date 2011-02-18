@@ -23,6 +23,7 @@ a shortcut form of \code{new("workbook", filename, create)} with some additional
   via the corresponding methods.
 }
 \references{
+Wikipedia: Office Open XML\cr
 \url{http://en.wikipedia.org/wiki/Office_Open_XML}
 }
 \author{

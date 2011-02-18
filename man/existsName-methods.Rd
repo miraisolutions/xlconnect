@@ -13,7 +13,7 @@ Checks the existence of a name in a \code{\linkS4class{workbook}} object.
 }
 
 \arguments{
-  \item{object}{The workbook to use}
+  \item{object}{The \code{\linkS4class{workbook}} to use}
   \item{name}{The name to check for}
 }
 
@@ -25,7 +25,7 @@ therefore multiple names can be checked for existence in one method call.
 
 \author{
 Martin Studer\cr
-\href{http://www.mirai-solutions.com}{Mirai Solutions GmbH}
+Mirai Solutions GmbH \url{http://www.mirai-solutions.com}
 }
 \seealso{
 \code{\linkS4class{workbook}}, \code{\link[=createName-methods]{createName}}, \code{\link[=removeName-methods]{removeName}},

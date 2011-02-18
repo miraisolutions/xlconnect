@@ -12,23 +12,23 @@ Specifies a custom data format for a \code{\linkS4class{cellstyle}}.
 }
 
 \arguments{
-  \item{object}{The workbook to use}
+  \item{object}{The \code{\linkS4class{cellstyle}} to use}
   \item{format}{A data format string}
 }
 
-
-\description{
+\details{
 Specifies the data \code{format} to be used by the corresponding
-\code{\linkS4class{cellstyle}}. Data formats are specified he standard
+\code{\linkS4class{cellstyle}}. Data formats are specified the standard
 Excel way. Refer to the Excel help or to the link below for more
 information. 
 }
 \references{
-Excel custom data formats: \url{http://www.ozgrid.com/Excel/CustomFormats.htm}
+Excel custom data formats:\cr
+\url{http://www.ozgrid.com/Excel/CustomFormats.htm}
 }
 \author{
 Martin Studer\cr
-\href{http://www.mirai-solutions.com}{Mirai Solutions GmbH}
+Mirai Solutions GmbH \url{http://www.mirai-solutions.com}
 }
 \seealso{
 \code{\linkS4class{workbook}}, \code{\linkS4class{cellstyle}}, \code{\link[=setCellStyle-methods]{setCellStyle}}, 

@@ -24,6 +24,7 @@ loadWorkbook(filename, create = FALSE)
 Returns a \code{\linkS4class{workbook}} object for further manipulation.
 }
 \references{
+Wikipedia: Office Open XML\cr
 \url{http://en.wikipedia.org/wiki/Office_Open_XML}
 }
 \author{

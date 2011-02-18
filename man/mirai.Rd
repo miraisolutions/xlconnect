@@ -9,6 +9,6 @@ Utility object to easily get to the Mirai Solutions GmbH web page. Just enter \c
 }
 \usage{mirai}
 \references{
-\url{http://www.mirai-solutions.com}
+Mirai Solutions GmbH \url{http://www.mirai-solutions.com}
 }
 \keyword{datasets}

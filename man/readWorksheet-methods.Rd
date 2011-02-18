@@ -26,17 +26,17 @@ Reads data from worksheets of a \code{\linkS4class{workbook}} object.
 }
 
 \arguments{
-  \item{object}{The workbook to use}
+  \item{object}{The \code{\linkS4class{workbook}} to use}
   \item{sheet}{The name or index of the worksheet to read from}
   \item{startRow}{The index of the first row to read from}
   \item{startCol}{The index of the first column to read from}
   \item{endRow}{The index of the last row to read from}
   \item{endCol}{The index of the last column to read from}
   \item{header}{Interpret the first row of the specified area as column
-    headers. If missing, behaves like \code{header=TRUE}}
+    headers. The default is \code{TRUE}.}
 }
 
-\description{
+\details{
 Reads data from the worksheet specified by \code{sheet}. Data is read
 starting at the top left corner specified by \code{startRow} and
 \code{startCol} down to the bottom right corner specified by
@@ -49,22 +49,23 @@ cell of the start row (\code{startRow}) is assumed. If \code{endRow} <=
 0 then the column of the last (logical) cell of the end column
 (\code{endCol}) is assumed. In other words, if no boundaries are
 specified \code{readWorksheet} assumes the "bounding box" of the data as
-the corresponding boundaries.
+the corresponding boundaries.\cr\cr
 
 If all four coordinate arguments are missing, behaves as above with
 \code{startRow = 0}, \code{startCol = 0}, \code{endRow = 0} and
 \code{endCol = 0}. In this case  \code{readWorksheet} assumes the
-"bounding box" of the data as the corresponding boundaries.
-}
-\author{
-Martin Studer\cr
-\href{http://www.mirai-solutions.com}{Mirai Solutions GmbH}
-}
-\note{
+"bounding box" of the data as the corresponding boundaries.\cr\cr
+
 All arguments (except \code{object}) are vectorized. As such, multiple worksheets (and also multiple data regions
 from the same worksheet) can be read with one method call. If only one single data region is read, the return value 
 is a \code{data.frame}. If multiple data regions are specified, the return value is a \code{list} of \code{data.frame}'s 
-returned in the order they have been specified.\cr\cr
+returned in the order they have been specified.
+}
+\author{
+Martin Studer\cr
+Mirai Solutions GmbH \url{http://www.mirai-solutions.com}
+}
+\note{
 \code{readWorksheet} tries to determine the resulting column types based on the read cell types. If different cell
 types are found in a specific column, the most general of those is used and mapped to the corresponding R data type.
 The order of data types from least to most general is Boolean (\code{logical}) < DateTime (\code{POSIXct}) < 
@@ -74,7 +75,8 @@ type.
 }
 \seealso{
 \code{\linkS4class{workbook}}, \code{\link[=writeWorksheet-methods]{writeWorksheet}}, 
-\code{\link[=readNamedRegion-methods]{readNamedRegion}}, \code{\link[=writeNamedRegion-methods]{writeNamedRegion}} 
+\code{\link[=readNamedRegion-methods]{readNamedRegion}}, \code{\link[=writeNamedRegion-methods]{writeNamedRegion}},
+\code{\link{readWorksheetFromFile}} 
 }
 \examples{
 # mtcars xlsx file from demoFiles subfolder of package XLConnect
