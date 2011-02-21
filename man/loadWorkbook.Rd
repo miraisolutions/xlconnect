@@ -4,7 +4,7 @@
 Loading Microsoft Excel workbooks
 }
 \description{
-Loads or creates a Microsoft Excel workbook for further manipulation.
+Loads or creates a Microsoft Excel \code{\linkS4class{workbook}} for further manipulation.
 }
 \usage{
 loadWorkbook(filename, create = FALSE)

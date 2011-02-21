@@ -1,17 +1,17 @@
 \name{readNamedRegionFromFile}
 \alias{readNamedRegionFromFile}
-\title{Reading named regions from a file (wrapper function)}
+\title{Reading named regions from an Excel file (wrapper function)}
 \description{
-  \code{readNamedRegionFromFile} reads named regions from a file
-  specified by path.  
+Reads named regions from an Excel file.
 }
 \usage{
 readNamedRegionFromFile(file, name, header = "TRUE")
 }
 \arguments{
   \item{file}{The file name of the workbook to read}
-  \item{name}{The name of the region to read from}
-  \item{header}{see \link[=readNamedRegion-methods]{readNamedRegion}}
+  \item{name}{The name of the named region to read from}
+  \item{header}{The argument \code{header} specifies if the first row
+    should be interpreted as column names. The default value is \code{TRUE}.}
 }
 
 \details{This is a convenience wrapper to read named regions from a file
@@ -24,7 +24,7 @@ Mirai Solutions GmbH \url{http://www.mirai-solutions.com}
 }
 
 \seealso{
-\code{\link[=readNamedRegion-methods]{readNamedRegion}}, \code{\link{readWorksheetFromFile}}, 
+\code{\link[=readNamedRegion-methods]{readNamedRegion}}, \code{\link{readWorksheetFromFile}},
 \code{\link{writeNamedRegionToFile}}, \code{\link{writeWorksheetToFile}}
 }
 \examples{
@@ -32,7 +32,7 @@ Mirai Solutions GmbH \url{http://www.mirai-solutions.com}
 demoExcelFile <- system.file("demoFiles/multiregion.xlsx", package = "XLConnect")
 # Load a single named region into a single data.frame.
 df <- readNamedRegionFromFile(demoExcelFile, name="Iris")
-# Load multiple regions at once - returns a list of named data.frames.
+# Load multiple regions at once - returns a (named) list of data.frames.
 df <- readNamedRegionFromFile(demoExcelFile, name=c("Calendar", "Iris", "IQ"))
 }
 \keyword{IO}

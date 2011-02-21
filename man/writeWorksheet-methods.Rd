@@ -11,7 +11,7 @@
 \alias{writeWorksheet,workbook,ANY,numeric,numeric,numeric,logical-method}
 \title{Writing data to worksheets}
 \description{
-Writes data to worksheets of a \code{\linkS4class{workbook}} object.
+Writes data to worksheets of a \code{\linkS4class{workbook}}.
 }
 \usage{
 \S4method{writeWorksheet}{workbook,ANY,character,numeric,numeric,logical}(object,data,sheet,startRow,startCol,header)
@@ -22,20 +22,20 @@ Writes data to worksheets of a \code{\linkS4class{workbook}} object.
   \item{object}{The \code{\linkS4class{workbook}} to write to}
   \item{data}{Data to write}
   \item{sheet}{The name or index of the sheet to write to}
-  \item{startRow}{Index of the first row to write to. The default is code{startRow = 1}.}
-  \item{startCol}{Index of the first column to write to. The default is code{startCol = 1}.}
+  \item{startRow}{Index of the first row to write to. The default is \code{startRow = 1}.}
+  \item{startCol}{Index of the first column to write to. The default is \code{startCol = 1}.}
   \item{header}{Specifies if the column names should be written. The default is \code{TRUE}.}
 }
 
 \details{
-Writes \code{data} to the (named) worksheet specified by
+Writes \code{data} to the worksheet specified by
 \code{sheet}. \code{data} is assumed to be a  \code{data.frame} and is
 coerced to one if this is not already the case. \code{startRow} and
 \code{startCol} define the top left corner of the data region to be
 written.  Note that the arguments are vectorized and as such multiple
 data objects (\code{data.frame}'s) can be written to different
-worksheets in one call. In this case \code{data} is assumed to be a list
-of data objects (\code{data.frame}s). 
+worksheets in one call. In this case \code{data} is assumed to be a \code{list}
+of \code{data.frame}s. 
 }
 
 \author{

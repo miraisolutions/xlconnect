@@ -6,7 +6,7 @@
 \alias{readNamedRegion,workbook,character,missing-method}
 \title{Reading named regions from a workbook}
 \description{
-Reads named regions from a \code{\linkS4class{workbook}} object.
+Reads named regions from a \code{\linkS4class{workbook}}.
 }
 \usage{
 \S4method{readNamedRegion}{workbook,character,logical}(object,name,header)

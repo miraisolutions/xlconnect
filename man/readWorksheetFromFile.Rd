@@ -1,9 +1,8 @@
 \name{readWorksheetFromFile}
 \alias{readWorksheetFromFile}
-\title{Reading data from specified positions in a file (wrapper function)}
+\title{Reading data from worksheets in an Excel file (wrapper function)}
 \description{
-  \code{readWorksheetFromFile} reads data from a file
-  specified by path.
+Reads data from worksheets in an Excel file.
 }
 \usage{
 readWorksheetFromFile(file, ...)
@@ -23,7 +22,7 @@ Mirai Solutions GmbH \url{http://www.mirai-solutions.com}
 }
 
 \seealso{
-\code{\link[=readWorksheet-methods]{readWorksheet}}, \code{\link{readNamedRegionFromFile}}, 
+\code{\link[=readWorksheet-methods]{readWorksheet}}, \code{\link{readNamedRegionFromFile}},
 \code{\link{writeWorksheetToFile}}, \code{\link{writeNamedRegionToFile}}
 }
 \examples{
@@ -32,14 +31,14 @@ demoExcelFile <- system.file("demoFiles/multiregion.xlsx", package = "XLConnect"
 
 # Read single area from first sheet of existing file,
 # "B2:C3" in Excel speak
-df.one <- readWorksheetFromFile(demoExcelFile, sheet=1, header=FALSE,
-                           startCol=2,startRow=2,endCol=3,endRow=3)
+df.one <- readWorksheetFromFile(demoExcelFile, sheet = 1, header = FALSE,
+                           startCol = 2, startRow = 2, endCol = 3, endRow = 3)
 
 # Read three data sets in one from known positions
 dflist <- readWorksheetFromFile(demoExcelFile,
-             sheet=c("FirstSheet", "FirstSheet", "SecondSheet"),
-             header=TRUE, startRow=c(2,2,3), startCol=c(2,5,2),
-             endCol=c(5,8,6), endRow=c(9,15,153))
+             sheet = c("FirstSheet", "FirstSheet", "SecondSheet"),
+             header = TRUE, startRow = c(2,2,3), startCol = c(2,5,2),
+             endCol = c(5,8,6), endRow = c(9,15,153))
 
 }
 \keyword{IO}

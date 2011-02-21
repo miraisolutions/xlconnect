@@ -6,7 +6,7 @@
 \alias{writeNamedRegion,workbook,ANY,character,missing-method}
 \title{Writing named regions to a workbook}
 \description{
-Writes named regions to a \code{\linkS4class{workbook}} object.
+Writes named regions to a \code{\linkS4class{workbook}}.
 }
 \usage{
 \S4method{writeNamedRegion}{workbook,ANY,character,logical}(object,data,name,header)

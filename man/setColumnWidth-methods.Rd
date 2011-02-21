@@ -15,7 +15,7 @@ Sets the width of a column in a worksheet.
 
 \arguments{
   \item{object}{The \code{\linkS4class{workbook}} to use}
-  \item{sheet}{The name or index of the sheet affected}
+  \item{sheet}{The name or index of the sheet}
   \item{column}{The index of the column to resize}
   \item{width}{The width of the specified column in  units of 1/256th of a character width}
 }

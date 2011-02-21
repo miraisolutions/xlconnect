@@ -4,7 +4,7 @@
 XLConnect Unit Testing Framework
 }
 \description{
-Runs XLConnect's unit testing suite.
+Runs \pkg{XLConnect}'s unit testing suite.
 }
 \usage{
 runUnitTests()

@@ -5,7 +5,7 @@
 \alias{getActiveSheetName,workbook-method}
 \title{Querying the active worksheet name}
 \description{
-Queries the name of the active worksheet in a \code{\linkS4class{workbook}} object.
+Queries the name of the active worksheet in a \code{\linkS4class{workbook}}.
 }
 \usage{
 \S4method{getActiveSheetName}{workbook}(object)

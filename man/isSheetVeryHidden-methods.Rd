@@ -6,7 +6,7 @@
 \alias{isSheetVeryHidden,workbook,numeric-method}
 \title{Checking if worksheets are very hidden in a workbook}
 \description{
-Checks if the specified worksheets are very hidden (but not just hidden) in a \code{\linkS4class{workbook}} object.
+Checks if the specified worksheets are very hidden (but not just hidden) in a \code{\linkS4class{workbook}}.
 }
 \usage{
 \S4method{isSheetVeryHidden}{workbook,character}(object,sheet)

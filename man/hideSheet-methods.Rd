@@ -8,7 +8,7 @@
 \alias{hideSheet,workbook,numeric,missing-method}
 \title{Hiding worksheets in a workbook}
 \description{
- (Very) hides the specified worksheets in a \code{\linkS4class{workbook}} object.
+ (Very) hides the specified worksheets in a \code{\linkS4class{workbook}}.
 }
 \usage{
 \S4method{hideSheet}{workbook,character,logical}(object,sheet,veryHidden)
@@ -18,10 +18,8 @@
 \arguments{
   \item{object}{The \code{\linkS4class{workbook}} to use}
   \item{sheet}{The name or index of the sheet to hide}
-  \item{veryHidden}{Hides the specified named \code{sheet}. If
-  \code{veryHidden = TRUE}, the specified \code{sheet} is "very" hidden
-  (see note), otherwise it is just hidden. If missing, behaves like
-  \code{veryHidden = FALSE}.}
+  \item{veryHidden}{If \code{veryHidden = TRUE}, the specified \code{sheet} is "very" hidden
+  (see note), otherwise it is just hidden. Default is \code{FALSE}.}
 }
 
 \details{
@@ -45,7 +43,7 @@ Mirai Solutions GmbH \url{http://www.mirai-solutions.com}
   currently active worksheet, then \code{hideSheet} tries to set the
   active worksheet to the first non-hidden (not hidden and not very
   hidden) worksheet in the workbook. If there is no such worksheet,
-  \code{hideSheet} will throw a corresponding exception. 
+  \code{hideSheet} will throw an exception. 
 }
 \seealso{
 \code{\linkS4class{workbook}}, \code{\link[=unhideSheet-methods]{unhideSheet}},

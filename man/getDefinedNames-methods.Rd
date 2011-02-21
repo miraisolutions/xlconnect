@@ -6,7 +6,7 @@
 \alias{getDefinedNames,workbook,missing-method}
 \title{Retrieving defined names in a workbook}
 \description{
-Retrieves the defined names in a \code{\linkS4class{workbook}} object.
+Retrieves the defined names in a \code{\linkS4class{workbook}}.
 }
 \usage{
 \S4method{getDefinedNames}{workbook,logical}(object,validOnly)

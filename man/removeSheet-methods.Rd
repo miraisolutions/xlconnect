@@ -6,7 +6,7 @@
 \alias{removeSheet,workbook,numeric-method}
 \title{Removing worksheets from workbooks}
 \description{
-Removes a worksheet from a \code{\linkS4class{workbook}} object.
+Removes a worksheet from a \code{\linkS4class{workbook}}.
 }
 \usage{
 \S4method{removeSheet}{workbook,character}(object,sheet)
@@ -28,7 +28,7 @@ the active sheet to the first possible worksheet in the \code{\linkS4class{workb
 Also note that deleting worksheets may result in invalid name references.
 }
 \seealso{
-\code{\linkS4class{workbook}}, \code{\link[=createSheet-methods]{createSheet}}, 
+\code{\linkS4class{workbook}}, \code{\link[=createSheet-methods]{createSheet}},
 \code{\link[=existsSheet-methods]{existsSheet}}, \code{\link[=getSheets-methods]{getSheets}},
 \code{\link[=setActiveSheet-methods]{setActiveSheet}}
 }

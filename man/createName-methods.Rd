@@ -6,7 +6,7 @@
 \alias{createName,workbook,character,character,missing-method}
 \title{Creating names in a workbook}
 \description{
-Creates a name for a specified formula in a \code{\linkS4class{workbook}} object.
+Creates a name for a specified formula in a \code{\linkS4class{workbook}}.
 }
 \usage{
 \S4method{createName}{workbook,character,character,logical}(object,name,formula,overwrite)
@@ -14,7 +14,7 @@ Creates a name for a specified formula in a \code{\linkS4class{workbook}} object
 
 \arguments{
   \item{object}{The \code{\linkS4class{workbook}} to use}
-  \item{name}{The new name to create}
+  \item{name}{The name's name to create}
   \item{formula}{Excel formula specifying the name}
   \item{overwrite}{If a name with the same \code{name} already exists
     and \code{overwrite = TRUE}, then this name is removed first before
@@ -27,7 +27,7 @@ Creates a name for a specified formula in a \code{\linkS4class{workbook}} object
 Creates a name named \code{name} for the specified \code{formula}. 
 
 The \code{formula} should be specified as you would type it
-in Excel. Make sure that the referenced worksheets, functions, ...
+in Excel. Make sure that the worksheets, functions, ...
 exist that you are referring to in the \code{formula}.
 
 The \code{name}, \code{formula} and \code{overwrite} arguments are

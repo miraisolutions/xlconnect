@@ -5,7 +5,7 @@
 \alias{getReferenceFormula,workbook,character-method}
 \title{Querying reference formulas of Excel names}
 \description{
-Queries the reference formula of an Excel name in a \code{\linkS4class{workbook}} object.
+Queries the reference formula of an Excel name in a \code{\linkS4class{workbook}}.
 }
 \usage{
 \S4method{getReferenceFormula}{workbook,character}(object,name)

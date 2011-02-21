@@ -6,7 +6,7 @@
 \alias{isSheetVisible,workbook,numeric-method}
 \title{Checking if worksheets are visible in a workbook}
 \description{
-Checks if the specified worksheets are visible in a \code{\linkS4class{workbook}} object.
+Checks if the specified worksheets are visible in a \code{\linkS4class{workbook}}.
 }
 \usage{
 \S4method{isSheetVisible}{workbook,character}(object,sheet)

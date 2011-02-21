@@ -24,7 +24,7 @@ Specifies borders for a \code{\linkS4class{cellstyle}}.
 }
 
 \details{
-Specifies the border for a cell style. Note that the arguments
+Specifies the border for a \code{\linkS4class{cellstyle}}. Note that the arguments
 \code{type} and  \code{color} should be of the same length as side. In
 other words, for each specified \code{side} there should be a
 corresponding specification of \code{type} and \code{color}. If this is
@@ -44,11 +44,13 @@ Mirai Solutions GmbH \url{http://www.mirai-solutions.com}
 wb <- loadWorkbook("setBorder.xlsx", create = TRUE)
 # Create a worksheet
 createSheet(wb, name = "cellstyles")
-# Create a custom (unnamed) cell style
+# Create a custom anonymous cell style
 cs <- createCellStyle(wb)
 # Specify the border for the cell style created above
-setBorder(cs, side = c("bottom", "right"), type = XLC$"BORDER.THICK", color = c(XLC$"COLOR.BLACK", XLC$"COLOR.RED"))
-# Set the cell style created above for the top left cell (A1) in the 'cellstyles' worksheet
+setBorder(cs, side = c("bottom", "right"), type = XLC$"BORDER.THICK", 
+	color = c(XLC$"COLOR.BLACK", XLC$"COLOR.RED"))
+# Set the cell style created above for the top left cell (A1) in the 
+# 'cellstyles' worksheet
 setCellStyle(wb, sheet = "cellstyles", row = 1, col = 1, cellstyle = cs)
 # Save the workbook
 saveWorkbook(wb)

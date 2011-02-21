@@ -1,9 +1,8 @@
 \name{writeWorksheetToFile}
 \alias{writeWorksheetToFile}
-\title{Writing named regions to a file (wrapper function)}
+\title{Writing data to worksheets in an Excel file (wrapper function)}
 \description{
-  \code{writeWorksheetToFile} writes named regions to a file
-  specified by path.
+Writes data to worksheets in an Excel file.
 }
 \usage{
 writeWorksheetToFile(file, styleAction = XLC$STYLE_ACTION.XLCONNECT, ...)

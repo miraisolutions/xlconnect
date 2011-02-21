@@ -5,7 +5,7 @@
 \alias{getActiveSheetIndex,workbook-method}
 \title{Querying the active worksheet index}
 \description{
-Queries the index of the active worksheet in a \code{\linkS4class{workbook}} object.
+Queries the index of the active worksheet in a \code{\linkS4class{workbook}}.
 }
 \usage{
 \S4method{getActiveSheetIndex}{workbook}(object)

@@ -5,7 +5,7 @@
 \alias{removeName,workbook,character-method}
 \title{Removing names from workbooks}
 \description{
-Removes a name from a \code{\linkS4class{workbook}} object.
+Removes a name from a \code{\linkS4class{workbook}}.
 }
 \usage{
 \S4method{removeName}{workbook,character}(object,name)

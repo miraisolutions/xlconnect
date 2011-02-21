@@ -13,7 +13,7 @@
 \alias{readWorksheet,workbook,numeric,numeric,numeric,numeric,numeric,missing-method}
 \title{Reading data from worksheets}
 \description{
-Reads data from worksheets of a \code{\linkS4class{workbook}} object.
+Reads data from worksheets of a \code{\linkS4class{workbook}}.
 }
 \usage{
 \S4method{readWorksheet}{workbook,numeric,numeric,numeric,numeric,numeric,logical}(object,sheet,startRow,startCol,endRow,endCol,header)
@@ -42,16 +42,16 @@ starting at the top left corner specified by \code{startRow} and
 \code{startCol} down to the bottom right corner specified by
 \code{endRow} and \code{endCol}. If \code{header = TRUE}, the first row
 is interpreted as column names of the resulting \code{data.frame}.\cr If
-\code{startRow} <= 0 then the first available (logical) row is
-assumed. If \code{startCol} <= 0 then the column  of the first (logical)
-cell of the start row (\code{startRow}) is assumed. If \code{endRow} <=
-0 then the last available  (logical) row is assumed. If \code{endCol} <=
-0 then the column of the last (logical) cell of the end column
+\code{startRow <= 0} then the first available (logical) row is
+assumed. If \code{startCol <= 0} then the column  of the first (logical)
+cell of the start row (\code{startRow}) is assumed. If \code{endRow <= 0}
+then the last available  (logical) row is assumed. If \code{endCol <= 0}
+then the column of the last (logical) cell of the end column
 (\code{endCol}) is assumed. In other words, if no boundaries are
 specified \code{readWorksheet} assumes the "bounding box" of the data as
 the corresponding boundaries.\cr\cr
 
-If all four coordinate arguments are missing, behaves as above with
+If all four coordinate arguments are missing this behaves as above with
 \code{startRow = 0}, \code{startCol = 0}, \code{endRow = 0} and
 \code{endCol = 0}. In this case  \code{readWorksheet} assumes the
 "bounding box" of the data as the corresponding boundaries.\cr\cr

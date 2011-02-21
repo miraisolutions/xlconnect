@@ -5,7 +5,7 @@
 \alias{$,cellstyle-method}
 \title{Class "cellstyle"}
 \description{
-This class represents a cell style in a Microsoft Excel workbook. S4 objects of this class
+This class represents a cell style in a Microsoft Excel \code{\linkS4class{workbook}}. S4 objects of this class
 and corresponding methods are used to manipulate cell styles. This includes setting data formats,
 borders, background- and foreground-colors, etc.
 }
@@ -16,23 +16,23 @@ Cell styles are created by calling the \code{\link[=createCellStyle-methods]{cre
 \section{Slots}{
   \describe{
     \item{\code{jobj}:}{Object of class \code{jobjRef} (see package \pkg{rJava}) which represents a Java object reference that is used
-    in the back-end to manipulate the underlying Excel cellstyle instance.}
+    in the back-end to manipulate the underlying Excel cell style instance.}
   }
 }
 \references{
 Cell styles in Excel 2003:\cr
-\url{http://office.microsoft.com/en-us/excel-help/using-styles-in-excel-HA001110199.aspx}\cr
+\url{http://bit.ly/c1VUZ6}\cr
 Cell styles in Excel 2007:\cr
-\url{http://office.microsoft.com/en-us/excel-help/apply-create-or-remove-a-cell-style-HP001216732.aspx} 
+\url{http://bit.ly/gj1KRx} 
 }
 \author{
 Martin Studer\cr
 Mirai Solutions GmbH \url{http://www.mirai-solutions.com}
 }
 \note{
-\pkg{XLConnect} generally makes use of custom (named) cell styles. This allows Excel users to more easily manage cell styles
-in a workbook. For example, assuming you were using a specific custom cell style for your data table headers, you can change the header
-styling with a few clicks across all tables.
+\pkg{XLConnect} generally makes use of custom (named) cell styles. This allows users to more easily manage cell styles via Excel's cell style
+menu. For example, assuming you were using a specific custom cell style for your data table headers, you can change the header
+styling with a few clicks in Excel's cell style menu across all tables.
 }
 \seealso{
 \code{\linkS4class{workbook}}, \code{\link[=createCellStyle-methods]{createCellStyle}}, \code{\link[=setStyleAction-methods]{setStyleAction}},
@@ -58,9 +58,9 @@ writeNamedRegion(wb, mtcars, name = "mtcars")
 # Now let's color all weight cells of cars with a weight > 3.5 in red
 # (mtcars$wt > 3.5)
 
-# First, create a corresponding (named) cellstyle
+# First, create a corresponding (named) cell style
 heavyCar <- createCellStyle(wb, name = "HeavyCar")
-# Specify the cellstyle to use a solid foreground color
+# Specify the cell style to use a solid foreground color
 setFillPattern(heavyCar, fill = XLC$"FILL.SOLID_FOREGROUND")
 # Specify the foreground color to be used
 setFillForegroundColor(heavyCar, color = XLC$"COLOR.RED")
@@ -77,7 +77,7 @@ rowIndex <- rowIndex + 4
 # The same holds for the column index
 colIndex <- which(names(mtcars) == "wt") + 2
 
-# Set the 'HeavyCar' cellstyle for the corresponding cells.
+# Set the 'HeavyCar' cell style for the corresponding cells.
 # Note: the row and col arguments are vectorized!
 setCellStyle(wb, sheet = "mtcars", row = rowIndex, col = colIndex,
              cellstyle = heavyCar)

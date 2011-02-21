@@ -6,7 +6,7 @@
 \alias{createCellStyle,workbook,missing-method}
 \title{Creating custom named and anonymous cell styles}
 \description{
-Creates a custom named or anonymous cell style.
+Creates a custom named or anonymous \code{\linkS4class{cellstyle}}.
 }
 \usage{
 \S4method{createCellStyle}{workbook,character}(object,name)
@@ -14,18 +14,19 @@ Creates a custom named or anonymous cell style.
 
 \arguments{
   \item{object}{The \code{\linkS4class{workbook}} to use}
-  \item{name}{The name of the newly created cell style}
+  \item{name}{The name of the new \code{\linkS4class{cellstyle}} to create. Omit
+  to create an anonymous \code{\linkS4class{cellstyle}}.}
 }
 
 \details{
-Creates a named cell style with the specified \code{name}. Named cell
+Creates a named \code{\linkS4class{cellstyle}} with the specified \code{name}. Named cell
 styles may be used in conjunction with the \emph{name prefix} style
 action (see \code{\link[=setStyleAction-methods]{setStyleAction}}) or
 may also be used directly with the method
 \code{\link[=setCellStyle-methods]{setCellStyle}}. Named cell styles can
 easily be changed from within Excel using the cell styles menu.
 
-If \code{name} is missing, creates an anonymous cell style.
+If \code{name} is missing, an anonymous cell style is created.
 Anonymous cell styles can be used in conjunction with the
 \code{\link[=setCellStyle-methods]{setCellStyle}} method.
 }
@@ -61,9 +62,9 @@ writeNamedRegion(wb, mtcars, name = "mtcars")
 # Now let's color all weight cells of cars with a weight > 3.5 in red
 # (mtcars$wt > 3.5)
 
-# First, create a corresponding (named) cellstyle
+# First, create a corresponding (named) cell style
 heavyCar <- createCellStyle(wb, name = "HeavyCar")
-# Specify the cellstyle to use a solid foreground color
+# Specify the cell style to use a solid foreground color
 setFillPattern(heavyCar, fill = XLC$"FILL.SOLID_FOREGROUND")
 # Specify the foreground color to be used
 setFillForegroundColor(heavyCar, color = XLC$"COLOR.RED")
@@ -80,7 +81,7 @@ rowIndex <- rowIndex + 4
 # The same holds for the column index
 colIndex <- which(names(mtcars) == "wt") + 2
 
-# Set the 'HeavyCar' cellstyle for the corresponding cells.
+# Set the 'HeavyCar' cell style for the corresponding cells.
 # Note: the row and col arguments are vectorized!
 setCellStyle(wb, sheet = "mtcars", row = rowIndex, col = colIndex, 
 	cellstyle = heavyCar)

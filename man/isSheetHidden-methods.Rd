@@ -6,7 +6,7 @@
 \alias{isSheetHidden,workbook,numeric-method}
 \title{Checking if worksheets are hidden in a workbook}
 \description{
-Checks if the specified worksheets are hidden (but not very hidden) in a \code{\linkS4class{workbook}} object.
+Checks if the specified worksheets are hidden (but not very hidden) in a \code{\linkS4class{workbook}}.
 }
 \usage{
 \S4method{isSheetHidden}{workbook,character}(object,sheet)

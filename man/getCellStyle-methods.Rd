@@ -6,7 +6,7 @@
 \alias{getCellStyle,workbook,missing-method}
 \title{Creating custom named and anonymous cell styles}
 \description{
-Retrieves a named cell style from a workbook.
+Retrieves a named cell style from a \code{\linkS4class{workbook}}.
 }
 \usage{
 \S4method{getCellStyle}{workbook,character}(object,name)
@@ -14,7 +14,7 @@ Retrieves a named cell style from a workbook.
 
 \arguments{
   \item{object}{The \code{\linkS4class{workbook}} to use}
-  \item{name}{The name of the cell style to retrieve}
+  \item{name}{The name of the \code{\linkS4class{cellstyle}} to retrieve}
 }
 
 \details{
@@ -43,7 +43,7 @@ createCellStyle(wb, 'Header')
 # ... but if you did it doesn't hurt.
 cs <- getCellStyle(wb, 'Header')
 
-# Specify the cellstyle to use a solid foreground color
+# Specify the cell style to use a solid foreground color
 setFillPattern(cs, fill = XLC$"FILL.SOLID_FOREGROUND")
 # Specify the foreground color to be used
 setFillForegroundColor(cs, color = XLC$"COLOR.RED")

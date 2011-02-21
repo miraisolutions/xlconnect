@@ -18,7 +18,7 @@ Sets cell styles for specific cells in a \code{\linkS4class{workbook}}.
   \item{sheet}{Name or index of the sheet the cell is on}
   \item{row}{Row index of the cell to edit}
   \item{col}{Column index of the cell to edit}
-  \item{cellstyle}{\code{\linkS4class{cellstyle}} object to apply to the cell}
+  \item{cellstyle}{\code{\linkS4class{cellstyle}} to apply to the cell}
 }
 
 \details{
@@ -57,9 +57,9 @@ writeNamedRegion(wb, mtcars, name = "mtcars")
 # Now let's color all weight cells of cars with a weight > 3.5 in red
 # (mtcars$wt > 3.5)
 
-# First, create a corresponding (named) cellstyle
+# First, create a corresponding (named) cell style
 heavyCar <- createCellStyle(wb, name = "HeavyCar")
-# Specify the cellstyle to use a solid foreground color
+# Specify the cell style to use a solid foreground color
 setFillPattern(heavyCar, fill = XLC$"FILL.SOLID_FOREGROUND")
 # Specify the foreground color to be used
 setFillForegroundColor(heavyCar, color = XLC$"COLOR.RED")
@@ -76,7 +76,7 @@ rowIndex <- rowIndex + 4
 # The same holds for the column index
 colIndex <- which(names(mtcars) == "wt") + 2
 
-# Set the 'HeavyCar' cellstyle for the corresponding cells.
+# Set the 'HeavyCar' cell style for the corresponding cells.
 # Note: the row and col arguments are vectorized!
 setCellStyle(wb, sheet = "mtcars", row = rowIndex, col = colIndex, 
 	cellstyle = heavyCar)

@@ -1,26 +1,23 @@
 \name{writeNamedRegionToFile}
 \alias{writeNamedRegionToFile}
-\title{Writing named regions to a file (wrapper function)}
+\title{Writing named regions to an Excel file (wrapper function)}
 \description{
-  \code{writeNamedRegionToFile} writes named regions to a file
-  specified by path.
+Writes named regions to an Excel file.
 }
 \usage{
-writeNamedRegionToFile(file, data, name, formula=NA, header = TRUE, styleAction = XLC$STYLE_ACTION.XLCONNECT)
+writeNamedRegionToFile(file, data, name, formula=NA, header = TRUE,
+styleAction = XLC$STYLE_ACTION.XLCONNECT)
 }
 \arguments{
-\item{file}{The path name of the file to write to.}
-\item{name}{Name of the named region to write to (see
-\link[=writeNamedRegion-methods]{writeNamedRegion})}
-\item{data}{Data to be written  (see
-\link[=writeNamedRegion-methods]{writeNamedRegion})}
-\item{header}{Include a header? (see
-\link[=writeNamedRegion-methods]{writeNamedRegion})}
+\item{file}{The path name of the file to write to}
+\item{name}{Name of the named region to write to}
+\item{data}{Data to write}
+\item{header}{Specifies if the column names should be written. The default is \code{TRUE}.}
 \item{formula}{If formula is specified, each item defines the formula of
 the named region identified by the corresponding entry of
 \code{name}. Use this if you want to create the document from scratch
 instead of writing to a template!}
-\item{styleAction}{Style action to be used when writing the data. 
+\item{styleAction}{Style action to be used when writing the data.\cr
 The default is \code{XLC$STYLE_ACTION.XLCONNECT}. 
 See \code{\link[=setStyleAction-methods]{setStyleAction}} for more information.}
 }

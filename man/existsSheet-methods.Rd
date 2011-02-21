@@ -5,7 +5,7 @@
 \alias{existsSheet,workbook,character-method}
 \title{Checking for existence of worksheets in a workbook}
 \description{
-Checks if worksheets with specified names exist in a \code{\linkS4class{workbook}} object.
+Checks the existence of a worksheet in a \code{\linkS4class{workbook}}.
 }
 
 \usage{

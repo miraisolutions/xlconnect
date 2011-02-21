@@ -6,7 +6,7 @@
 \alias{unhideSheet,workbook,numeric-method}
 \title{Unhiding worksheets in a workbook}
 \description{
-Unhides the specified worksheets in a \code{\linkS4class{workbook}} object.
+Unhides the specified worksheets in a \code{\linkS4class{workbook}}.
 }
 \usage{
 \S4method{unhideSheet}{workbook,character}(object,sheet)

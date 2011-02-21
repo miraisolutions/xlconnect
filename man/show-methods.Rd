@@ -5,7 +5,7 @@
 \alias{show,workbook-method}
 \title{Display a workbook object}
 \description{
- Displays a \code{\linkS4class{workbook}} object by printing it. This actually calls the \code{\linkS4class{workbook}}'s
+ Displays a \code{\linkS4class{workbook}} by printing it. This actually calls the \code{\linkS4class{workbook}}'s
  \code{\link[=print-methods]{print}} method.
 }
 \usage{

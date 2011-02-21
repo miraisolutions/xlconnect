@@ -5,7 +5,7 @@
 \alias{getSheets,workbook-method}
 \title{Querying available worksheets in a workbook}
 \description{
-Returns all worksheet names in a \code{\linkS4class{workbook}} object.
+Returns all worksheet names in a \code{\linkS4class{workbook}}.
 }
 \usage{
 \S4method{getSheets}{workbook}(object)
