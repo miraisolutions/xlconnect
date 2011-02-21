@@ -42,13 +42,14 @@ styling with a few clicks in Excel's cell style menu across all tables.
 # Load workbook (create if not existing)
 wb <- loadWorkbook("cellstyles.xlsx", create = TRUE)
 
-# We don't set a specific style action in this demo, so the default 'XLConnect'
-# will be used (XLC$"STYLE_ACTION.XLCONNECT")
+# We don't set a specific style action in this demo, so the 
+# default 'XLConnect' will be used (XLC$"STYLE_ACTION.XLCONNECT")
 
 # Create a sheet named 'mtcars'
 createSheet(wb, name = "mtcars")
 
-# Create a named region called 'mtcars' referring to the sheet called 'mtcars'
+# Create a named region called 'mtcars' referring to the sheet
+# called 'mtcars'
 createName(wb, name = "mtcars", formula = "mtcars!$C$4")
 
 # Write built-in data set 'mtcars' to the above defined named region.
@@ -68,10 +69,10 @@ setFillForegroundColor(heavyCar, color = XLC$"COLOR.RED")
 # Which cars have a weight > 3.5 ?
 rowIndex <- which(mtcars$wt > 3.5)
 
-# NOTE: The mtcars data.frame has been written offset with top left cell
-# C4 - and we have also written a header row!
-# So, let's take that into account appropriately. Obviously, the two steps
-# could be combined directly into one ...
+# NOTE: The mtcars data.frame has been written offset with top 
+# left cell C4 - and we have also written a header row!
+# So, let's take that into account appropriately. Obviously,
+# the two steps could be combined directly into one ...
 rowIndex <- rowIndex + 4
 
 # The same holds for the column index

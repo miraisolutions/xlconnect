@@ -43,7 +43,8 @@ are only written to disk with specifically calling \code{\link[=saveWorkbook-met
 \code{\link{loadWorkbook}}, \code{\link[=saveWorkbook-methods]{saveWorkbook}}
 }
 \examples{
-# Create a new workbook 'myWorkbook.xlsx' (assuming the file to not exist already)
+# Create a new workbook 'myWorkbook.xlsx' 
+# (assuming the file to not exist already)
 wb <- loadWorkbook("myWorkbook.xlsx", create = TRUE)
 # Create a worksheet called 'mtcars'
 createSheet(wb, name = "mtcars")

@@ -32,7 +32,7 @@ demoExcelFile <- system.file("demoFiles/multiregion.xlsx", package = "XLConnect"
 # Read single area from first sheet of existing file,
 # "B2:C3" in Excel speak
 df.one <- readWorksheetFromFile(demoExcelFile, sheet = 1, header = FALSE,
-                           startCol = 2, startRow = 2, endCol = 3, endRow = 3)
+                       startCol = 2, startRow = 2, endCol = 3, endRow = 3)
 
 # Read three data sets in one from known positions
 dflist <- readWorksheetFromFile(demoExcelFile,

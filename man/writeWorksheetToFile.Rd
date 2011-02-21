@@ -5,7 +5,8 @@
 Writes data to worksheets in an Excel file.
 }
 \usage{
-writeWorksheetToFile(file, styleAction = XLC$STYLE_ACTION.XLCONNECT, ...)
+writeWorksheetToFile(file, styleAction = XLC$STYLE_ACTION.XLCONNECT, 
+...)
 }
 \arguments{
 \item{file}{The path name of the file to write to.}
