@@ -74,9 +74,11 @@ Numeric and String then the resulting column in R would be \code{character} sinc
 type.
 }
 \seealso{
-\code{\linkS4class{workbook}}, \code{\link[=writeWorksheet-methods]{writeWorksheet}}, 
-\code{\link[=readNamedRegion-methods]{readNamedRegion}}, \code{\link[=writeNamedRegion-methods]{writeNamedRegion}},
-\code{\link{readWorksheetFromFile}} 
+  \code{\linkS4class{workbook}},
+  \code{\link[=writeWorksheet-methods]{writeWorksheet}},
+  \code{\link[=readNamedRegion-methods]{readNamedRegion}},
+  \code{\link[=writeNamedRegion-methods]{writeNamedRegion}},\cr
+  \code{\link{readWorksheetFromFile}} 
 }
 \examples{
 # mtcars xlsx file from demoFiles subfolder of package XLConnect

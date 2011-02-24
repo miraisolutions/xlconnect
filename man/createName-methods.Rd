@@ -45,9 +45,12 @@ Martin Studer\cr
 Mirai Solutions GmbH \url{http://www.mirai-solutions.com}
 }
 \seealso{
-\code{\linkS4class{workbook}}, \code{\link[=removeName-methods]{removeName}}, \code{\link[=existsName-methods]{existsName}},
-\code{\link[=getDefinedNames-methods]{getDefinedNames}},
-\code{\link[=readNamedRegion-methods]{readNamedRegion}}, \code{\link[=writeNamedRegion-methods]{writeNamedRegion}}
+\code{\linkS4class{workbook}},
+\code{\link[=removeName-methods]{removeName}},
+\code{\link[=existsName-methods]{existsName}},
+\code{\link[=getDefinedNames-methods]{getDefinedNames}},\cr
+\code{\link[=readNamedRegion-methods]{readNamedRegion}},
+\code{\link[=writeNamedRegion-methods]{writeNamedRegion}}
 }
 \examples{
 # Load workbook (create if not existing)

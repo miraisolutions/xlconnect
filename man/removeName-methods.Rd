@@ -25,9 +25,12 @@ Martin Studer\cr
 Mirai Solutions GmbH \url{http://www.mirai-solutions.com}
 }
 \seealso{
-\code{\linkS4class{workbook}}, \code{\link[=createName-methods]{createName}}, \code{\link[=existsName-methods]{existsName}},
-\code{\link[=getDefinedNames-methods]{getDefinedNames}},
-\code{\link[=readNamedRegion-methods]{readNamedRegion}}, \code{\link[=writeNamedRegion-methods]{writeNamedRegion}}
+  \code{\linkS4class{workbook}},
+  \code{\link[=createName-methods]{createName}},
+  \code{\link[=existsName-methods]{existsName}},\cr
+  \code{\link[=getDefinedNames-methods]{getDefinedNames}},
+  \code{\link[=readNamedRegion-methods]{readNamedRegion}},
+  \code{\link[=writeNamedRegion-methods]{writeNamedRegion}}
 }
 \examples{
 # mtcars xlsx file from demoFiles subfolder of package XLConnect

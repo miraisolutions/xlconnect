@@ -49,9 +49,11 @@ resulting column in R would be \code{character} since \code{character}
 is the most general type.
 }
 \seealso{
-\code{\linkS4class{workbook}}, \code{\link[=readWorksheet-methods]{readWorksheet}}, 
-\code{\link[=writeNamedRegion-methods]{writeNamedRegion}}, \code{\link[=writeWorksheet-methods]{writeWorksheet}},
-\code{\link{readNamedRegionFromFile}}
+  \code{\linkS4class{workbook}},
+  \code{\link[=readWorksheet-methods]{readWorksheet}},
+  \code{\link[=writeNamedRegion-methods]{writeNamedRegion}},\cr
+  \code{\link[=writeWorksheet-methods]{writeWorksheet}},
+  \code{\link{readNamedRegionFromFile}}
 }
 \examples{
 # mtcars xlsx file from demoFiles subfolder of package XLConnect

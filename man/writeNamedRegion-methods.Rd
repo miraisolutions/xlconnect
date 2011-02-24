@@ -51,9 +51,11 @@ styles to the cells as defined by the \code{\linkS4class{workbook}}'s
 \code{\link[=setStyleAction-methods]{setStyleAction}}). 
 }
 \seealso{
-\code{\linkS4class{workbook}}, \code{\link[=writeWorksheet-methods]{writeWorksheet}},
-\code{\link[=readNamedRegion-methods]{readNamedRegion}}, \code{\link[=readWorksheet-methods]{readWorksheet}},
-\code{\link{writeNamedRegionToFile}}
+  \code{\linkS4class{workbook}},
+  \code{\link[=writeWorksheet-methods]{writeWorksheet}},
+  \code{\link[=readNamedRegion-methods]{readNamedRegion}},
+  \code{\link[=readWorksheet-methods]{readWorksheet}},\cr
+  \code{\link{writeNamedRegionToFile}}
 }
 \examples{
 # Load workbook (create if not existing)

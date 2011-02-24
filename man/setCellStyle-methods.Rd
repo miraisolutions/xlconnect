@@ -32,10 +32,15 @@ Martin Studer\cr
 Mirai Solutions GmbH \url{http://www.mirai-solutions.com}
 }
 \seealso{
-\code{\linkS4class{workbook}}, \code{\linkS4class{cellstyle}}, \code{\link[=createCellStyle-methods]{createCellStyle}},
-\code{\link[=setDataFormat-methods]{setDataFormat}}, \code{\link[=setBorder-methods]{setBorder}},
-\code{\link[=setFillBackgroundColor-methods]{setFillBackgroundColor}}, \code{\link[=setFillForegroundColor-methods]{setFillForegroundColor}},
-\code{\link[=setFillPattern-methods]{setFillPattern}}, \code{\link[=setWrapText-methods]{setWrapText}}
+  \code{\linkS4class{workbook}},
+  \code{\linkS4class{cellstyle}},
+  \code{\link[=createCellStyle-methods]{createCellStyle}},
+  \code{\link[=setDataFormat-methods]{setDataFormat}},
+  \code{\link[=setBorder-methods]{setBorder}},\cr
+  \code{\link[=setFillBackgroundColor-methods]{setFillBackgroundColor}},
+  \code{\link[=setFillForegroundColor-methods]{setFillForegroundColor}},
+  \code{\link[=setFillPattern-methods]{setFillPattern}},
+  \code{\link[=setWrapText-methods]{setWrapText}}
 }
 \examples{
 # Load workbook (create if not existing)
