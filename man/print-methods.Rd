@@ -30,7 +30,8 @@ Mirai Solutions GmbH \url{http://www.mirai-solutions.com}
 \examples{
 # Load existing demo Excel file 'mtcars.xlsx' from the XLConnect package
 wb.mtcars <- loadWorkbook(system.file("demoFiles/mtcars.xlsx", 
-	package = "XLConnect"))
+                          package = "XLConnect"))
+
 # Print the workbook's underlying filename
 print(wb.mtcars)
 }

@@ -90,8 +90,10 @@ type.
 \examples{
 # mtcars xlsx file from demoFiles subfolder of package XLConnect
 demoExcelFile <- system.file("demoFiles/mtcars.xlsx", package = "XLConnect")
+
 # Load workbook
 wb <- loadWorkbook(demoExcelFile)
+
 # Read worksheet 'mtcars' (providing no specific area bounds;
 # with default header = TRUE)
 data <- readWorksheet(wb, sheet = "mtcars")

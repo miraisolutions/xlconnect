@@ -40,8 +40,8 @@ wb <- loadWorkbook("isSheetVisible.xlsx", create = TRUE)
 # Write a couple of built-in data.frame's into sheets
 # with corresponding name
 for(obj in c("CO2", "airquality", "swiss")) {
-	createSheet(wb, name = obj)
-	writeWorksheet(wb, get(obj), sheet = obj)
+  createSheet(wb, name = obj)
+  writeWorksheet(wb, get(obj), sheet = obj)
 }
 
 # Hide sheet 'CO2'

@@ -36,7 +36,7 @@ Mirai Solutions GmbH \url{http://www.mirai-solutions.com}
 \examples{
 # multiregion xlsx file from demoFiles subfolder of package XLConnect
 demoExcelFile <- system.file("demoFiles/multiregion.xlsx", 
-	package = "XLConnect")
+                             package = "XLConnect")
 
 template <- "template-ws.xlsx"
 file.copy(demoExcelFile, template) 
@@ -47,6 +47,7 @@ writeNamedRegionToFile(template, name = "Iris", iris)
 # Write to a new file, defining the sheet and named region as we write.
 # Format according to XLConnect defaults
 writeNamedRegionToFile("iris.xlsx", name = "Iris", data = iris,
-	formula = "IrisData!$C$4", styleAction = "XLCONNECT")
+                       formula = "IrisData!$C$4", 
+                       styleAction = "XLCONNECT")
 }
 \keyword{IO}

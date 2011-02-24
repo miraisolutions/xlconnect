@@ -45,6 +45,7 @@ cs <- getCellStyle(wb, 'Header')
 
 # Specify the cell style to use a solid foreground color
 setFillPattern(cs, fill = XLC$"FILL.SOLID_FOREGROUND")
+
 # Specify the foreground color to be used
 setFillForegroundColor(cs, color = XLC$"COLOR.RED")
 

@@ -41,7 +41,7 @@ it is the preferred way of creating \code{\linkS4class{workbook}} instances.
 \examples{
 # Load existing demo Excel file 'mtcars.xlsx' from the XLConnect package
 wb.mtcars <- loadWorkbook(system.file("demoFiles/mtcars.xlsx", 
-	package = "XLConnect"))
+                          package = "XLConnect"))
 
 # Create new workbook
 wb.new <- loadWorkbook("myNewExcelFile.xlsx", create = TRUE)

@@ -61,8 +61,10 @@ writeNamedRegion(wb, mtcars, name = "mtcars")
 
 # First, create a corresponding (named) cell style
 heavyCar <- createCellStyle(wb, name = "HeavyCar")
+
 # Specify the cell style to use a solid foreground color
 setFillPattern(heavyCar, fill = XLC$"FILL.SOLID_FOREGROUND")
+
 # Specify the foreground color to be used
 setFillForegroundColor(heavyCar, color = XLC$"COLOR.RED")
 

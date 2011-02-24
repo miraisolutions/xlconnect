@@ -25,8 +25,10 @@ Mirai Solutions GmbH \url{http://www.mirai-solutions.com}
 \examples{
 # mtcars xlsx file from demoFiles subfolder of package XLConnect
 demoExcelFile <- system.file("demoFiles/mtcars.xlsx", package = "XLConnect")
+
 # Load workbook
 wb <- loadWorkbook(demoExcelFile)
+
 # Query the active sheet index
 activeSheet <- getActiveSheetIndex(wb)
 }

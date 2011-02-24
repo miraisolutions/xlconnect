@@ -44,9 +44,9 @@ writeWorksheetToFile(template, data=iris, sheet="FirstSheet",
 template <- "template-multi-ws.xlsx"
 
 # Write a few copies of the data.frame all over a new file
-writeWorksheetToFile(template, data=list(i1=iris,i2=iris,i3=iris),
-sheet=c("FirstSheet","SecondSheet", "FirstSheet"),
-startRow=c(1,101,201), startCol = c(1,11,21))
+writeWorksheetToFile(template, data = list(i1 = iris, i2 = iris, i3 = iris),
+                     sheet = c("FirstSheet", "SecondSheet", "FirstSheet"),
+                     startRow = c(1,101,201), startCol = c(1,11,21))
 
 }
 \keyword{IO}

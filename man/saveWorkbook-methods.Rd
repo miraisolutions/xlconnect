@@ -43,10 +43,13 @@ disk with specifically calling \code{saveWorkbook}.
 # Create a new workbook 'saveMe.xlsx'
 # (assuming the file to not exist already)
 wb <- loadWorkbook("saveMe.xlsx", create = TRUE)
+
 # Create a worksheet called 'mtcars'
 createSheet(wb, name = "mtcars")
+
 # Write built-in dataset 'mtcars' to sheet 'mtcars' created above
 writeWorksheet(wb, mtcars, sheet = "mtcars")
+
 # Save workbook - this actually writes the file 'saveMe.xlsx' to disk
 saveWorkbook(wb)
 }

@@ -65,8 +65,10 @@ writeNamedRegion(wb, mtcars, name = "mtcars")
 
 # First, create a corresponding (named) cell style
 heavyCar <- createCellStyle(wb, name = "HeavyCar")
+
 # Specify the cell style to use a solid foreground color
 setFillPattern(heavyCar, fill = XLC$"FILL.SOLID_FOREGROUND")
+
 # Specify the foreground color to be used
 setFillForegroundColor(heavyCar, color = XLC$"COLOR.RED")
 
@@ -85,7 +87,7 @@ colIndex <- which(names(mtcars) == "wt") + 2
 # Set the 'HeavyCar' cell style for the corresponding cells.
 # Note: the row and col arguments are vectorized!
 setCellStyle(wb, sheet = "mtcars", row = rowIndex, col = colIndex, 
-	cellstyle = heavyCar)
+             cellstyle = heavyCar)
 
 # Save workbook (this actually writes the file to disk)
 saveWorkbook(wb)

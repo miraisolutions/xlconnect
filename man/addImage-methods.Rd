@@ -63,7 +63,6 @@ dev.off()
 # specified cell's top left corner 
 addImage(wb, filename = "earthquake.png", name = "earthquake",
          originalSize = TRUE)
-
 }
 \keyword{methods}
 \keyword{utilities}
