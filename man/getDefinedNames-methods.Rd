@@ -26,8 +26,8 @@ Mirai Solutions GmbH \url{http://www.mirai-solutions.com}
 }
 \seealso{
 \code{\linkS4class{workbook}}, \code{\link[=createName-methods]{createName}}, \code{\link[=removeName-methods]{removeName}}, 
-\code{\link[=existsName-methods]{existsName}},
-\code{\link[=readNamedRegion-methods]{readNamedRegion}}, \code{\link[=writeNamedRegion-methods]{writeNamedRegion}}
+\code{\link[=existsName-methods]{existsName}}, \code{\link[=readNamedRegion-methods]{readNamedRegion}},\cr
+\code{\link[=writeNamedRegion-methods]{writeNamedRegion}}
 }
 \examples{
 # mtcars xlsx file from demoFiles subfolder of package XLConnect

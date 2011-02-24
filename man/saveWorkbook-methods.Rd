@@ -40,7 +40,8 @@ disk with specifically calling \code{saveWorkbook}.
 \code{\linkS4class{workbook}}, \code{\link{loadWorkbook}}
 }
 \examples{
-# Create a new workbook 'saveMe.xlsx' (assuming the file to not exist already)
+# Create a new workbook 'saveMe.xlsx'
+# (assuming the file to not exist already)
 wb <- loadWorkbook("saveMe.xlsx", create = TRUE)
 # Create a worksheet called 'mtcars'
 createSheet(wb, name = "mtcars")
