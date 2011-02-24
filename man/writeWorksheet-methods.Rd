@@ -14,8 +14,10 @@
 Writes data to worksheets of a \code{\linkS4class{workbook}}.
 }
 \usage{
-\S4method{writeWorksheet}{workbook,ANY,character,numeric,numeric,logical}(object,data,sheet,startRow,startCol,header)
-\S4method{writeWorksheet}{workbook,ANY,numeric,numeric,numeric,logical}(object,data,sheet,startRow,startCol,header)
+\S4method{writeWorksheet}{workbook,ANY,character,numeric,
+numeric,logical}(object,data,sheet,startRow,startCol,header)
+\S4method{writeWorksheet}{workbook,ANY,numeric,numeric,
+numeric,logical}(object,data,sheet,startRow,startCol,header)
 }
 
 \arguments{

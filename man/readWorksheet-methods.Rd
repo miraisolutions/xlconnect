@@ -16,13 +16,20 @@
 Reads data from worksheets of a \code{\linkS4class{workbook}}.
 }
 \usage{
-\S4method{readWorksheet}{workbook,numeric,numeric,numeric,numeric,numeric,logical}(object,sheet,startRow,startCol,endRow,endCol,header)
-\S4method{readWorksheet}{workbook,character,missing,missing,missing,missing,logical}(object,sheet,startRow,startCol,endRow,endCol,header)
-\S4method{readWorksheet}{workbook,numeric,missing,missing,missing,missing,logical}(object,sheet,startRow,startCol,endRow,endCol,header)
-\S4method{readWorksheet}{workbook,character,missing,missing,missing,missing,missing}(object,sheet,startRow,startCol,endRow,endCol,header)
-\S4method{readWorksheet}{workbook,numeric,missing,missing,missing,missing,missing}(object,sheet,startRow,startCol,endRow,endCol,header)
-\S4method{readWorksheet}{workbook,character,numeric,numeric,numeric,numeric,missing}(object,sheet,startRow,startCol,endRow,endCol,header)
-\S4method{readWorksheet}{workbook,numeric,numeric,numeric,numeric,numeric,missing}(object,sheet,startRow,startCol,endRow,endCol,header)
+\S4method{readWorksheet}{workbook,numeric,numeric,
+numeric,numeric,numeric,logical}(object,sheet,startRow,startCol,endRow,endCol,header)
+\S4method{readWorksheet}{workbook,character,missing,
+missing,missing,missing,logical}(object,sheet,startRow,startCol,endRow,endCol,header)
+\S4method{readWorksheet}{workbook,numeric,missing,
+missing,missing,missing,logical}(object,sheet,startRow,startCol,endRow,endCol,header)
+\S4method{readWorksheet}{workbook,character,missing,
+missing,missing,missing,missing}(object,sheet,startRow,startCol,endRow,endCol,header)
+\S4method{readWorksheet}{workbook,numeric,missing,
+missing,missing,missing,missing}(object,sheet,startRow,startCol,endRow,endCol,header)
+\S4method{readWorksheet}{workbook,character,numeric,
+numeric,numeric,numeric,missing}(object,sheet,startRow,startCol,endRow,endCol,header)
+\S4method{readWorksheet}{workbook,numeric,numeric,
+numeric,numeric,numeric,missing}(object,sheet,startRow,startCol,endRow,endCol,header)
 }
 
 \arguments{
