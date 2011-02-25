@@ -63,6 +63,9 @@ dev.off()
 # specified cell's top left corner 
 addImage(wb, filename = "earthquake.png", name = "earthquake",
          originalSize = TRUE)
+
+# Save workbook (this actually writes the file to disk)
+saveWorkbook(wb)
 }
 \keyword{methods}
 \keyword{utilities}

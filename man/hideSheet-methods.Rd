@@ -65,6 +65,9 @@ for(obj in c("CO2", "airquality", "swiss")) {
 # the sheet may be unhidden by a user from within Excel
 # since veryHidden defaults to FALSE
 hideSheet(wb, sheet = "airquality")
+
+# Save workbook
+saveWorkbook(wb)
 }
 \keyword{methods}
 \keyword{utilities}
