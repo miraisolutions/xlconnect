@@ -1,7 +1,7 @@
 XLConnect
 Copyright 2010 Mirai Solutions GmbH
 
-This product contains Apache POI (http://poi.apache.org/).
+This product uses Apache POI (http://poi.apache.org/).
 Copyright 2009 The Apache Software Foundation (http://www.apache.org/).
 
 The corresponding license can be found at http://www.apache.org/licenses/LICENSE-2.0

@@ -16,7 +16,7 @@ Version: \tab 0.1-3\cr
 Date: \tab 2011-02-25\cr
 URL: \tab \url{http://www.mirai-solutions.com}\cr
 SystemRequirements: \tab java\cr
-Depends: \tab R (>= 2.10.0), rJava, utils, methods\cr
+Depends: \tab R (>= 2.10.0), XLConnectJars (>= 0.1-0), XLConnectJars(<= 0.1-0), rJava, utils, methods\cr
 Suggests: \tab RUnit, lattice\cr
 License: \tab GPL-3\cr
 LazyLoad: \tab yes\cr

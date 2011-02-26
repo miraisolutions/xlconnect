@@ -9,10 +9,8 @@
 Sets cell styles for specific cells in a \code{\linkS4class{workbook}}.
 }
 \usage{
-\S4method{setCellStyle}{workbook,character,numeric,
-numeric,cellstyle}(object,sheet,row,col,cellstyle)
-\S4method{setCellStyle}{workbook,numeric,numeric,
-numeric,cellstyle}(object,sheet,row,col,cellstyle)
+\S4method{setCellStyle}{workbook,character,numeric,numeric,cellstyle}(object,sheet,row,col,cellstyle)
+\S4method{setCellStyle}{workbook,numeric,numeric,numeric,cellstyle}(object,sheet,row,col,cellstyle)
 }
 
 \arguments{
