@@ -11,3 +11,4 @@ cellstyles1				Using cellstyles in combination with the 'name prefix' style acti
 cellstyles2				Using cellstyles in combination with the 'predefined' style action
 cellstyles3				Using cellstyles for specific selected cells
 cellsize				Setting row height and column width in a worksheet
+dataformat				Using Excel data formats in combination with the 'data format only' style action

@@ -32,6 +32,12 @@
 # XLConnect Constants
 XLC <- list()
 
+# Data Type Constants (for method workbook.setDataFormat)
+XLC$"DATA_TYPE.BOOLEAN" <- "BOOLEAN"
+XLC$"DATA_TYPE.NUMERIC" <- "NUMERIC"
+XLC$"DATA_TYPE.STRING" <- "STRING"
+XLC$"DATA_TYPE.DATETIME" <- "DATETIME"
+
 
 # Style Action Constants (for method workbook.setStyleAction)
 
@@ -39,6 +45,7 @@ XLC$"STYLE_ACTION.XLCONNECT" <- "XLCONNECT"
 XLC$"STYLE_ACTION.NONE" <- "NONE"
 XLC$"STYLE_ACTION.PREDEFINED" <- "PREDEFINED"
 XLC$"STYLE_ACTION.NAME_PREFIX" <- "STYLE_NAME_PREFIX"
+XLC$"STYLE_ACTION.DATA_FORMAT_ONLY" <- "DATA_FORMAT_ONLY"
 
 
 # Border Constants (for methods cellstyle.setBorderXXX)

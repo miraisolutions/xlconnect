@@ -73,7 +73,16 @@ Controls the application of \code{\linkS4class{cellstyle}}s when writing data to
  \var{<STYLE_NAME_PREFIX>.Column.<COLUMN_DATA_TYPE>}\cr with
  \var{<COLUMN_DATA_TYPE>} being the corresponding data type from the
  set:  \var{\{Numeric, String, Boolean, DateTime\}}. As a last resort,
- it would make use of the workbook's default cell style. 
+ it would make use of the workbook's default cell style.
+ 
+ \item \code{XLC$"STYLE_ACTION.DATA_FORMAT_ONLY"}: This style action instructs
+ \pkg{XLConnect} to only set the data format for a cell but not to apply any other
+ styling but rather keep the existing one. The data format to apply is determined
+ by the data type of the cell (which is in turn determined by the corresponding R data
+ type). The data format for a specific type can be set via the method
+ \code{\link[=setDataFormatForType-methods]{setDataFormatForType}}. The default data format
+ is "General" for the data types \var{Numeric}, \var{String} and \var{Boolean} and is
+ "mm/dd/yyyy hh:mm:ss" for the data type \var{DateTime}.
 }}
 
 \author{
@@ -82,7 +91,8 @@ Mirai Solutions GmbH \url{http://www.mirai-solutions.com}
 }
 \seealso{
 \code{\linkS4class{workbook}}, \code{\linkS4class{cellstyle}}, \code{\link[=createCellStyle-methods]{createCellStyle}},
-\code{\link[=writeNamedRegion-methods]{writeNamedRegion}}, \code{\link[=writeWorksheet-methods]{writeWorksheet}}, \code{\link[=setStyleNamePrefix-methods]{setStyleNamePrefix}}
+\code{\link[=writeNamedRegion-methods]{writeNamedRegion}}, \code{\link[=writeWorksheet-methods]{writeWorksheet}}, \code{\link[=setStyleNamePrefix-methods]{setStyleNamePrefix}},
+\code{\link[=setDataFormatForType-methods]{setDataFormatForType}}
 }
 \examples{
 # Load workbook (create if not existing)
