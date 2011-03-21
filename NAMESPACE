@@ -26,6 +26,7 @@ exportMethods(
 	readWorksheet,
 	removeName,
 	removeSheet,
+	renameSheet,
 	saveWorkbook,
 	setActiveSheet,
 	setBorder,

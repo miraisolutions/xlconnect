@@ -20,7 +20,7 @@ Mirai Solutions GmbH \url{http://www.mirai-solutions.com}
 }
 \seealso{
 \code{\linkS4class{workbook}}, \code{\link[=createSheet-methods]{createSheet}},
-\code{\link[=removeSheet-methods]{removeSheet}}
+\code{\link[=removeSheet-methods]{removeSheet}}, \code{\link[=renameSheet-methods]{renameSheet}}
 }
 \examples{
 # mtcars xlsx file from demoFiles subfolder of package XLConnect

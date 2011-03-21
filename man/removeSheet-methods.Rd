@@ -30,7 +30,7 @@ Also note that deleting worksheets may result in invalid name references.
 \seealso{
 \code{\linkS4class{workbook}}, \code{\link[=createSheet-methods]{createSheet}},
 \code{\link[=existsSheet-methods]{existsSheet}}, \code{\link[=getSheets-methods]{getSheets}},
-\code{\link[=setActiveSheet-methods]{setActiveSheet}}
+\code{\link[=renameSheet-methods]{renameSheet}}, \code{\link[=setActiveSheet-methods]{setActiveSheet}}
 }
 \examples{
 # mtcars xlsx file from demoFiles subfolder of package XLConnect

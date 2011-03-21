@@ -28,8 +28,8 @@ when the corresponding Excel file is opened.
 }
 \seealso{
 \code{\linkS4class{workbook}}, \code{\link[=createSheet-methods]{createSheet}},
-\code{\link[=removeSheet-methods]{removeSheet}}, \code{\link[=existsSheet-methods]{existsSheet}}, 
-\code{\link[=getSheets-methods]{getSheets}}
+\code{\link[=removeSheet-methods]{removeSheet}}, \code{\link[=renameSheet-methods]{renameSheet}},
+\code{\link[=existsSheet-methods]{existsSheet}}, \code{\link[=getSheets-methods]{getSheets}}
 }
 \examples{
 # mtcars xlsx file from demoFiles subfolder of package XLConnect
