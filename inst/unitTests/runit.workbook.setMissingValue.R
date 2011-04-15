@@ -1,0 +1,75 @@
+#############################################################################
+#
+# XLConnect
+# Copyright (C) 2010 Mirai Solutions GmbH
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+#
+#############################################################################
+
+#############################################################################
+#
+# Tests around setting missing value string
+# 
+# Author: Martin Studer, Mirai Solutions GmbH
+#
+#############################################################################
+
+test.workbook.setMissingValue <- function() {
+	
+	# Create workbooks
+	wb.xls <- loadWorkbook(rsrc("resources/testWorkbookSetMissingValue.xls"), create = TRUE)
+	wb.xlsx <- loadWorkbook(rsrc("resources/testWorkbookSetMissingValue.xlsx"), create = TRUE)
+	
+	# Test data
+	data <- data.frame(A = c(4.2, -3.2, NA, 1.34), B = c("A", NA, "C", "D"), stringsAsFactors = FALSE)
+	
+	name = "missing"
+
+	createSheet(wb.xls, name = name)
+	createName(wb.xls, name = name, formula = paste(name, "$A$1", sep = "!"))
+	
+	createSheet(wb.xlsx, name = name)
+	createName(wb.xlsx, name = name, formula = paste(name, "$A$1", sep = "!"))
+	
+	# Check that writing and reading the data with the default missing value behaviour returns
+	# the original data (*.xls)
+	writeNamedRegion(wb.xls, data, name = name)
+	res <- readNamedRegion(wb.xls, name = name)
+	checkEquals(data, res)
+	
+	# Check that writing and reading the data with the default missing value behaviour returns
+	# the original data (*.xlsx)
+	writeNamedRegion(wb.xlsx, data, name = name)
+	res <- readNamedRegion(wb.xlsx, name = name)
+	checkEquals(data, res)
+	
+	# Check that writing and reading the data with a specific missing value string 
+	# returns the original data but with the numeric column as a character and corresonding
+	# missing value (*.xls)
+	expect <- data.frame(A = c("4.2", "-3.2", "missing", "1.34"), B = c("A", "missing", "C", "D"), stringsAsFactors = FALSE)
+	setMissingValue(wb.xls, value = "missing")
+	writeNamedRegion(wb.xls, data, name = name)
+	res <- readNamedRegion(wb.xls, name = name)
+	checkEquals(expect, res)
+	
+	# Check that writing and reading the data with a specific missing value string 
+	# returns the original data but with the numeric column as a character and corresonding
+	# missing value (*.xls)
+	expect <- data.frame(A = c("4.2", "-3.2", "missing", "1.34"), B = c("A", "missing", "C", "D"), stringsAsFactors = FALSE)
+	setMissingValue(wb.xlsx, value = "missing")
+	writeNamedRegion(wb.xlsx, data, name = name)
+	res <- readNamedRegion(wb.xlsx, name = name)
+	checkEquals(expect, res)
+}

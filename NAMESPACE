@@ -37,6 +37,7 @@ exportMethods(
 	setFillBackgroundColor,
 	setFillForegroundColor,
 	setFillPattern,
+	setMissingValue,
 	setRowHeight,
 	setStyleAction,
 	setStyleNamePrefix,
@@ -51,6 +52,8 @@ exportMethods(
 
 # XLConnect exports the following functions & variables
 export(
+	col2idx,
+	idx2col,
 	mirai,
 	loadWorkbook,
         readNamedRegionFromFile,
