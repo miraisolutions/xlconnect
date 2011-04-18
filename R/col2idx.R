@@ -26,6 +26,7 @@
 #
 #############################################################################
 
-col2idx = function(x) { 
-	sapply(x, J("org.apache.poi.ss.util.CellReference")$convertColStringToIndex, USE.NAMES = FALSE)
+col2idx = function(x) {
+	if(!is.character(x)) stop("x must be a vector of column names (character)!")
+	sapply(x, J("org.apache.poi.ss.util.CellReference")$convertColStringToIndex, USE.NAMES = FALSE) + 1
 }

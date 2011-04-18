@@ -20,13 +20,29 @@
 
 #############################################################################
 #
-# Converting indices to column names
+# Tests around converting Excel columns to and from indices
 # 
 # Author: Martin Studer, Mirai Solutions GmbH
 #
 #############################################################################
 
-idx2col = function(x) {
-	if(!is.numeric(x)) stop("x must be a vector of indices (numeric)!")
-	sapply(as.integer(x - 1), J("org.apache.poi.ss.util.CellReference")$convertNumToColString, USE.NAMES = FALSE)
+test.colidx <- function() {
+	
+	checkEquals(col2idx("A"), 1)
+	checkEquals(col2idx("AA"), 27)
+	checkEquals(col2idx("HZR"), 6102)
+	
+	checkEquals(idx2col(1), "A")
+	checkEquals(idx2col(27), "AA")
+	checkEquals(idx2col(6102), "HZR")
+	
+	checkEquals(idx2col(col2idx("AWT")), "AWT")
+	checkEquals(idx2col(col2idx("FRT")), "FRT")
+	
+	checkEquals(col2idx(idx2col(3628)), 3628)
+	checkEquals(col2idx(idx2col(867)), 867)
+	
+	checkEquals(idx2col(0), "")
+	checkEquals(idx2col(-1), "")
+	checkEquals(idx2col(-2628), "")
 }
