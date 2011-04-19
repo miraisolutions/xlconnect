@@ -32,7 +32,7 @@ setGeneric("setDataFormatForType",
 setMethod("setDataFormatForType", 
 		signature(object = "workbook", type = "character", format = "character"), 
 		function(object, type, format) {
-			xlcCall(object@jobj$setDataFormat, type, format)
+			xlcCall(object, "setDataFormat", type, format)
 			invisible()
 		}
 )

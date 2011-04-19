@@ -34,7 +34,7 @@ setMethod("writeNamedRegion",
 	function(object, data, name, header) {
 		# pass data.frame's to Java - construct RDataFrameWrapper Java object references
 		data <- lapply(wrapList(data), dataframeToJava)
-		xlcCall(object@jobj$writeNamedRegion, data, name, header, SIMPLIFY = FALSE)
+		xlcCall(object, "writeNamedRegion", data, name, header, SIMPLIFY = FALSE)
 		invisible()
 	}
 )

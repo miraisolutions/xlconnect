@@ -32,6 +32,10 @@
 # XLConnect Constants
 XLC <- list()
 
+# Error handling
+XLC$"ERROR.WARN" <- "WARN"
+XLC$"ERROR.STOP" <- "STOP"
+
 # Data Type Constants (for method workbook.setDataFormat)
 XLC$"DATA_TYPE.BOOLEAN" <- "BOOLEAN"
 XLC$"DATA_TYPE.NUMERIC" <- "NUMERIC"

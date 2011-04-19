@@ -33,7 +33,7 @@ setMethod("readNamedRegion",
 	signature(object = "workbook", name = "character", header = "logical"), 
 	function(object, name, header) {	
 		# returns a list of RDataFrameWrapper Java object references
-		dataFrame <- xlcCall(object@jobj$readNamedRegion, name, header, SIMPLIFY = FALSE)
+		dataFrame <- xlcCall(object, "readNamedRegion", name, header, SIMPLIFY = FALSE)
 		# construct data.frame
 		dataFrame <- lapply(dataFrame, dataframeFromJava)
 		names(dataFrame) <- name

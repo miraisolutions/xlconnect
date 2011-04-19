@@ -36,7 +36,7 @@ setGeneric("hideSheet",
 setMethod("hideSheet", 
 		signature(object = "workbook", sheet = "numeric", veryHidden = "logical"), 
 		function(object, sheet, veryHidden) {
-			xlcCall(object@jobj$hideSheet, as.integer(sheet - 1), veryHidden)
+			xlcCall(object, "hideSheet", as.integer(sheet - 1), veryHidden)
 			invisible()
 		}
 )
@@ -51,7 +51,7 @@ setMethod("hideSheet",
 setMethod("hideSheet", 
 		signature(object = "workbook", sheet = "character", veryHidden = "logical"), 
 		function(object, sheet, veryHidden) {
-			xlcCall(object@jobj$hideSheet, sheet, veryHidden)
+			xlcCall(object, "hideSheet", sheet, veryHidden)
 			invisible()
 		}
 )

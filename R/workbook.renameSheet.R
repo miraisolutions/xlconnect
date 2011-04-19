@@ -32,7 +32,7 @@ setGeneric("renameSheet",
 setMethod("renameSheet", 
 		signature(object = "workbook", sheet = "numeric", newName = "character"), 
 		function(object, sheet, newName) {
-			xlcCall(object@jobj$renameSheet, as.integer(sheet - 1), newName)
+			xlcCall(object, "renameSheet", as.integer(sheet - 1), newName)
 			invisible()
 		}
 )
@@ -40,7 +40,7 @@ setMethod("renameSheet",
 setMethod("renameSheet", 
 		signature(object = "workbook", sheet = "character", newName = "character"), 
 		function(object, sheet, newName) {
-			xlcCall(object@jobj$renameSheet, sheet,  newName)
+			xlcCall(object, "renameSheet", sheet,  newName)
 			invisible()
 		}
 )

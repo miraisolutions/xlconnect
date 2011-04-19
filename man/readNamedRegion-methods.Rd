@@ -53,7 +53,8 @@ is the most general type.
   \code{\link[=readWorksheet-methods]{readWorksheet}},
   \code{\link[=writeNamedRegion-methods]{writeNamedRegion}},\cr
   \code{\link[=writeWorksheet-methods]{writeWorksheet}},
-  \code{\link{readNamedRegionFromFile}}
+  \code{\link{readNamedRegionFromFile}},
+  \code{\link[=onErrorCell-methods]{onErrorCell}}
 }
 \examples{
 # mtcars xlsx file from demoFiles subfolder of package XLConnect

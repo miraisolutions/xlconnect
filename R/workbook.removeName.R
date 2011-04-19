@@ -32,7 +32,7 @@ setGeneric("removeName",
 setMethod("removeName", 
 		signature(object = "workbook", name = "character"), 
 		function(object, name) {
-			xlcCall(object@jobj$removeName, name)
+			xlcCall(object, "removeName", name)
 			invisible()
 		}
 )

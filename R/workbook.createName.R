@@ -33,7 +33,7 @@ setMethod("createName",
 		signature(object = "workbook", name = "character", formula = "character", 
 				overwrite = "logical"), 
 		function(object, name, formula, overwrite) {
-			xlcCall(object@jobj$createName, name, formula, overwrite)
+			xlcCall(object, "createName", name, formula, overwrite)
 			invisible()
 		}
 )

@@ -1,18 +1,23 @@
 \name{xlcCall}
 \alias{xlcCall}
 \title{
-Automatic argument vectorization & default Java exception handling for XLConnect
+Automatic argument vectorization, default Java exception and warnings handling for XLConnect
 }
 \description{
-Performs automatic argument vectorization and provides default Java
-exception handling for \pkg{XLConnect}.
+Performs automatic argument vectorization, provides default Java
+exception and warnings handling for \pkg{XLConnect}.
 }
 \usage{
-xlcCall(fun, ..., SIMPLIFY = TRUE)
+xlcCall(obj, fun, ..., SIMPLIFY = TRUE)
 }
 \arguments{
+  \item{obj}{
+  \pkg{XLConnect} S4 object (e.g \code{\linkS4class{workbook}}, \code{\linkS4class{cellstyle}}) which
+  has a slot \code{jobj} representing a \pkg{rJava} \code{jobjRef} object whose method represented
+  by the argument \code{fun} should be called.
+}
   \item{fun}{
-  Function to be called.
+  Name of function to be called.
 }
   \item{\dots}{
   Arguments to the function to be called. These arguments will be automatically vectorized using \code{\link{mapply}}.
@@ -25,7 +30,8 @@ xlcCall(fun, ..., SIMPLIFY = TRUE)
 This function makes use of \code{\link{mapply}} to perform automatic argument vectorization. Non-atomic arguments are
 wrapped in a list using \code{\link{wrapList}} first. The list of the resulting arguments is then being vectorized
 using \code{\link{mapply}} before the specified function is being called. The function call is wrapped with
-\code{\link{jTryCatch}} to catch Java exceptions.
+\code{\link{jTryCatch}} to catch Java exceptions. Further, any warnings are retrieved from the Java side and are logged
+via R's standard warning mechanism.
 }
 \value{
 Result of the specified function by calling it with the vectorized argument list.

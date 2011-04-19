@@ -78,7 +78,8 @@ type.
   \code{\link[=writeWorksheet-methods]{writeWorksheet}},
   \code{\link[=readNamedRegion-methods]{readNamedRegion}},
   \code{\link[=writeNamedRegion-methods]{writeNamedRegion}},\cr
-  \code{\link{readWorksheetFromFile}} 
+  \code{\link{readWorksheetFromFile}},
+  \code{\link[=onErrorCell-methods]{onErrorCell}}
 }
 \examples{
 # mtcars xlsx file from demoFiles subfolder of package XLConnect

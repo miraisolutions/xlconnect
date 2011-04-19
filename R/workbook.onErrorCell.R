@@ -20,25 +20,18 @@
 
 #############################################################################
 #
-# Setting the missing value string
-#
-# This defines what string is written to a cell in case a missing value (NA)
-# is encountered. If NULL, missing values are represented by blank cells.
+# Behavior when error cells are detected
 # 
 # Author: Martin Studer, Mirai Solutions GmbH
 #
 #############################################################################
 
-setGeneric("setMissingValue",
-		function(object, value) standardGeneric("setMissingValue"))
+setGeneric("onErrorCell",
+		function(object, behavior) standardGeneric("onErrorCell"))
 
-setMethod("setMissingValue", 
-		signature(object = "workbook", value = "ANY"), 
-		function(object, value) {
-			if(is.null(value))
-				xlcCall(object, "setMissingValue", .jnull("java/lang/String"))
-			else
-				xlcCall(object, "setMissingValue", as.character(value))
-			invisible()
+setMethod("onErrorCell", 
+		signature(object = "workbook", behavior = "character"), 
+		function(object, behavior) {
+			xlcCall(object, "onErrorCell", behavior)
 		}
 )

@@ -27,7 +27,8 @@ Mirai Solutions GmbH \url{http://www.mirai-solutions.com}
   \code{\link[=readNamedRegion-methods]{readNamedRegion}},
   \code{\link{readWorksheetFromFile}},
   \code{\link{writeNamedRegionToFile}},\cr
-  \code{\link{writeWorksheetToFile}}
+  \code{\link{writeWorksheetToFile}},
+  \code{\link[=onErrorCell-methods]{onErrorCell}}
 }
 \examples{
 # multiregion xlsx file from demoFiles subfolder of package XLConnect

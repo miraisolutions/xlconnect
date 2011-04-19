@@ -36,7 +36,7 @@ setMethod("writeWorksheet",
 		function(object, data, sheet, startRow, startCol, header) {
 			# pass data.frame's to Java - construct RDataFrameWrapper Java object references
 			data <- lapply(wrapList(data), dataframeToJava)
-			xlcCall(object@jobj$writeWorksheet, data, as.integer(sheet - 1), as.integer(startRow - 1),
+			xlcCall(object, "writeWorksheet", data, as.integer(sheet - 1), as.integer(startRow - 1),
 				as.integer(startCol - 1), header)
 			invisible()
 		}
@@ -49,7 +49,7 @@ setMethod("writeWorksheet",
 		function(object, data, sheet, startRow, startCol, header) {
 			# pass data.frame's to Java - construct RDataFrameWrapper Java object references
 			data <- lapply(wrapList(data), dataframeToJava)
-			xlcCall(object@jobj$writeWorksheet, data, sheet, as.integer(startRow - 1), 
+			xlcCall(object, "writeWorksheet", data, sheet, as.integer(startRow - 1), 
 				as.integer(startCol - 1), header)
 			invisible()
 		}
@@ -69,7 +69,7 @@ setMethod("writeWorksheet",
 		function(object, data, sheet, startRow, startCol, header) {
 			# pass data.frame's to Java - construct RDataFrameWrapper Java object references
 			data <- lapply(wrapList(data), dataframeToJava)
-			xlcCall(object@jobj$writeWorksheet, data, as.integer(sheet - 1), header)
+			xlcCall(object, "writeWorksheet", data, as.integer(sheet - 1), header)
 			invisible()
 		}
 )
@@ -81,7 +81,7 @@ setMethod("writeWorksheet",
 		function(object, data, sheet, startRow, startCol, header) {
 			# pass data.frame's to Java - construct RDataFrameWrapper Java object references
 			data <- lapply(wrapList(data), dataframeToJava)
-			xlcCall(object@jobj$writeWorksheet, data, sheet, header)
+			xlcCall(object, "writeWorksheet", data, sheet, header)
 			invisible()
 		}
 )
@@ -93,7 +93,7 @@ setMethod("writeWorksheet",
 		function(object, data, sheet, startRow, startCol, header) {
 			# pass data.frame's to Java - construct RDataFrameWrapper Java object references
 			data <- lapply(wrapList(data), dataframeToJava)
-			xlcCall(object@jobj$writeWorksheet, data, as.integer(sheet - 1), header)
+			xlcCall(object, "writeWorksheet", data, as.integer(sheet - 1), header)
 			invisible()
 		}
 )

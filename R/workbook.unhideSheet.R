@@ -32,7 +32,7 @@ setGeneric("unhideSheet",
 setMethod("unhideSheet", 
 		signature(object = "workbook", sheet = "numeric"), 
 		function(object, sheet) {
-			xlcCall(object@jobj$unhideSheet, as.integer(sheet - 1))
+			xlcCall(object, "unhideSheet", as.integer(sheet - 1))
 			invisible()
 		}
 )
@@ -40,7 +40,7 @@ setMethod("unhideSheet",
 setMethod("unhideSheet", 
 		signature(object = "workbook", sheet = "character"), 
 		function(object, sheet) {
-			xlcCall(object@jobj$unhideSheet, sheet)
+			xlcCall(object, "unhideSheet", sheet)
 			invisible()
 		}
 )

@@ -32,6 +32,6 @@ setGeneric("existsName",
 setMethod("existsName", 
 		signature(object = "workbook", name = "character"), 
 		function(object, name) {
-			xlcCall(object@jobj$existsName, name)
+			xlcCall(object, "existsName", name)
 		}
 )

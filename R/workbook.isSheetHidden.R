@@ -32,13 +32,13 @@ setGeneric("isSheetHidden",
 setMethod("isSheetHidden", 
 		signature(object = "workbook", sheet = "numeric"), 
 		function(object, sheet) {
-			xlcCall(object@jobj$isSheetHidden, as.integer(sheet - 1))
+			xlcCall(object, "isSheetHidden", as.integer(sheet - 1))
 		}
 )
 
 setMethod("isSheetHidden", 
 		signature(object = "workbook", sheet = "character"), 
 		function(object, sheet) {
-			xlcCall(object@jobj$isSheetHidden, sheet)
+			xlcCall(object, "isSheetHidden", sheet)
 		}
 )

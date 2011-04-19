@@ -33,7 +33,7 @@ setMethod("addImage",
 		signature(object = "workbook", filename = "character", name = "character", 
 				originalSize = "logical"), 
 		function(object, filename, name, originalSize) {
-			xlcCall(object@jobj$addImage, filename, name, originalSize)
+			xlcCall(object, "addImage", filename, name, originalSize)
 			invisible()
 		}
 )

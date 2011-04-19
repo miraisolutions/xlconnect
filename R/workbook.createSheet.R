@@ -32,7 +32,7 @@ setGeneric("createSheet",
 setMethod("createSheet", 
 	signature(object = "workbook", name = "character"), 
 	function(object, name) {
-		xlcCall(object@jobj$createSheet, name)
+		xlcCall(object, "createSheet", name)
 		invisible()
 	}
 )

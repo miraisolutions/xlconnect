@@ -30,11 +30,16 @@
 #
 #############################################################################
 
-xlcCall <- function(fun, ..., SIMPLIFY = TRUE) {
+xlcCall <- function(obj, fun, ..., SIMPLIFY = TRUE) {
+	f = eval(parse(text = paste("obj@jobj$", fun, sep = "")))
 	args <- list(...)
 	args <- lapply(args, function(x) {
-		if(is.atomic(x)) x
-		else wrapList(x)
-	})
-	jTryCatch(do.call("mapply", args = c(FUN = fun, args, SIMPLIFY = SIMPLIFY)))
+				if(is.atomic(x)) x
+				else wrapList(x)
+			})
+	res = jTryCatch(do.call("mapply", args = c(FUN = f, args, SIMPLIFY = SIMPLIFY)))
+	warnings = obj@jobj$retrieveWarnings()
+	for(w in warnings) warning(w, call. = FALSE)
+	
+	res
 }

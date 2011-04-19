@@ -32,7 +32,7 @@ setGeneric("setColumnWidth",
 setMethod("setColumnWidth", 
 		signature(object = "workbook", sheet = "numeric", column = "numeric", width = "numeric"), 
 		function(object, sheet, column, width) {
-			xlcCall(object@jobj$setColumnWidth, as.integer(sheet - 1), as.integer(column - 1),
+			xlcCall(object, "setColumnWidth", as.integer(sheet - 1), as.integer(column - 1),
 				as.integer(width))
 			invisible()
 		}
@@ -41,7 +41,7 @@ setMethod("setColumnWidth",
 setMethod("setColumnWidth", 
 		signature(object = "workbook", sheet = "character", column = "numeric", width = "numeric"), 
 		function(object, sheet, column, width) {
-			xlcCall(object@jobj$setColumnWidth, sheet, as.integer(column - 1),
+			xlcCall(object, "setColumnWidth", sheet, as.integer(column - 1),
 				as.integer(width))
 			invisible()
 		}

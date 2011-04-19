@@ -35,7 +35,7 @@ setMethod("readWorksheet",
 				endRow = "numeric", endCol = "numeric", header = "logical"), 
 		function(object, sheet, startRow, startCol, endRow, endCol, header) {	
 			# returns a list of RDataFrameWrapper Java object references)
-			dataFrame <- xlcCall(object@jobj$readWorksheet, as.integer(sheet - 1), as.integer(startRow - 1), 
+			dataFrame <- xlcCall(object, "readWorksheet", as.integer(sheet - 1), as.integer(startRow - 1), 
 				as.integer(startCol - 1), as.integer(endRow - 1), as.integer(endCol - 1), header, SIMPLIFY = FALSE)
 			# construct data.frame
 			dataFrame <- lapply(dataFrame, dataframeFromJava)
@@ -59,7 +59,7 @@ setMethod("readWorksheet",
 				endRow = "numeric", endCol = "numeric", header = "logical"), 
 		function(object, sheet, startRow, startCol, endRow, endCol, header) {	
 			# returns a list of RDataFrameWrapper Java object references)
-			dataFrame <- xlcCall(object@jobj$readWorksheet, sheet, as.integer(startRow - 1), as.integer(startCol - 1), 
+			dataFrame <- xlcCall(object, "readWorksheet", sheet, as.integer(startRow - 1), as.integer(startCol - 1), 
 				as.integer(endRow - 1), as.integer(endCol - 1), header, SIMPLIFY = FALSE)
 			# construct data.frame
 			dataFrame <- lapply(dataFrame, dataframeFromJava)
@@ -83,7 +83,7 @@ setMethod("readWorksheet",
 				endRow = "missing", endCol = "missing", header = "logical"), 
 		function(object, sheet, startRow, startCol, endRow, endCol, header) {	
 			# returns a list of RDataFrameWrapper Java object references)
-			dataFrame <- xlcCall(object@jobj$readWorksheet, as.integer(sheet - 1), header, SIMPLIFY = FALSE)
+			dataFrame <- xlcCall(object, "readWorksheet", as.integer(sheet - 1), header, SIMPLIFY = FALSE)
 			# construct data.frame
 			dataFrame <- lapply(dataFrame, dataframeFromJava)
 			
@@ -106,7 +106,7 @@ setMethod("readWorksheet",
 				endRow = "missing", endCol = "missing", header = "logical"), 
 		function(object, sheet, startRow, startCol, endRow, endCol, header) {	
 			# returns a list of RDataFrameWrapper Java object references)
-			dataFrame <- xlcCall(object@jobj$readWorksheet, sheet, header, SIMPLIFY = FALSE)
+			dataFrame <- xlcCall(object, "readWorksheet", sheet, header, SIMPLIFY = FALSE)
 			# construct data.frame
 			dataFrame <- lapply(dataFrame, dataframeFromJava)
 			

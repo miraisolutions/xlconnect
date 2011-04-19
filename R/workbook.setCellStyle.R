@@ -33,7 +33,7 @@ setMethod("setCellStyle",
 		signature(object = "workbook", sheet = "numeric", row = "numeric", col = "numeric", 
 			cellstyle = "cellstyle"), 
 		function(object, sheet, row, col, cellstyle) {
-			xlcCall(object@jobj$setCellStyle, as.integer(sheet - 1), as.integer(row - 1),
+			xlcCall(object, "setCellStyle", as.integer(sheet - 1), as.integer(row - 1),
 				as.integer(col - 1), cellstyle)
 			invisible()
 		}
@@ -43,7 +43,7 @@ setMethod("setCellStyle",
 		signature(object = "workbook", sheet = "character", row = "numeric", col = "numeric", 
 				cellstyle = "cellstyle"), 
 		function(object, sheet, row, col, cellstyle) {
-			xlcCall(object@jobj$setCellStyle, sheet, as.integer(row - 1),
+			xlcCall(object, "setCellStyle", sheet, as.integer(row - 1),
 					as.integer(col - 1), cellstyle)
 			invisible()
 		}

@@ -9,7 +9,9 @@ List structure defining several constants used across \pkg{XLConnect}.
 \format{
   The format is:
   \preformatted{
-List of 88
+List of 90
+ $ ERROR.WARN					: chr "WARN"
+ $ ERROR.STOP					: chr "STOP"
  $ DATA_TYPE.BOOLEAN            : chr "BOOLEAN"
  $ DATA_TYPE.NUMERIC            : chr "NUMERIC"
  $ DATA_TYPE.STRING             : chr "STRING"

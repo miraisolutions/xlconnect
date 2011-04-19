@@ -32,6 +32,6 @@ setGeneric("getReferenceFormula",
 setMethod("getReferenceFormula", 
 		signature(object = "workbook", name = "character"), 
 		function(object, name) {
-			xlcCall(object@jobj$getReferenceFormula, name)
+			xlcCall(object, "getReferenceFormula", name)
 		}
 )
