@@ -22,7 +22,7 @@ Martin Studer\cr
 Mirai Solutions GmbH \url{http://www.mirai-solutions.com}
 }
 \seealso{
-\code{\link{col2idx}}
+\code{\link{col2idx}}, \code{\link{idx2cref}}, \code{\link{cref2idx}}
 }
 \examples{
 idx2col(c(1, 347))

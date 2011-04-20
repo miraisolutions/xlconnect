@@ -20,21 +20,23 @@
 
 #############################################################################
 #
-# Tests around converting Excel columns to and from indices
+# Tests around converting Excel cell references to row & column indices
 # 
 # Author: Martin Studer, Mirai Solutions GmbH
 #
 #############################################################################
 
-test.colidx <- function() {
+test.crefidx <- function() {
 	
-	checkEquals(col2idx(c("A", "AA", "HZR")), c(1, 27, 6102))
+	target <- matrix(c(5, 8, 14, 38), ncol = 2, byrow = TRUE)
+	checkEquals(cref2idx(c("$H$5", "$AL$14")), target)
 	
-	checkEquals(idx2col(c(1, 27, 6102)), c("A", "AA", "HZR"))
+	checkEquals(idx2cref(c(5, 8, 14, 38)), c("$H$5", "$AL$14"))
 	
-	checkEquals(idx2col(col2idx(c("AWT", "FRT"))), c("AWT", "FRT"))
+	checkEquals(idx2cref(cref2idx(c("$KRE3799", "J$26789", "$DX$357")), absRow = FALSE, absCol = FALSE), c("KRE3799", "J26789", "DX357"))
 	
-	checkEquals(col2idx(idx2col(c(3628, 867))), c(3628, 867))
+	x <- c(36, 43, 25, 13, 356, 46)
+	target <- matrix(x, ncol = 2, byrow = TRUE)
+	checkEquals(cref2idx(idx2cref(x)), target)
 	
-	checkEquals(idx2col(c(0, -1, -2628)), rep("", 3))
 }

@@ -20,21 +20,16 @@
 
 #############################################################################
 #
-# Tests around converting Excel columns to and from indices
+# Converting cell references to row and column indices
 # 
 # Author: Martin Studer, Mirai Solutions GmbH
 #
 #############################################################################
 
-test.colidx <- function() {
-	
-	checkEquals(col2idx(c("A", "AA", "HZR")), c(1, 27, 6102))
-	
-	checkEquals(idx2col(c(1, 27, 6102)), c("A", "AA", "HZR"))
-	
-	checkEquals(idx2col(col2idx(c("AWT", "FRT"))), c("AWT", "FRT"))
-	
-	checkEquals(col2idx(idx2col(c(3628, 867))), c(3628, 867))
-	
-	checkEquals(idx2col(c(0, -1, -2628)), rep("", 3))
+cref2idx <- function(x) {
+	if(!is.character(x)) stop("x must be a vector of cell references (character)!")
+	t(sapply(x, function(xx) {
+						cf <- new(J("org.apache.poi.ss.util.CellReference"), xx)
+						c(cf$getRow(), cf$getCol())
+					}, USE.NAMES = FALSE) + 1)
 }

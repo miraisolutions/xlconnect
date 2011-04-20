@@ -54,7 +54,9 @@ exportMethods(
 # XLConnect exports the following functions & variables
 export(
 	col2idx,
+	cref2idx,
 	idx2col,
+	idx2cref,
 	mirai,
 	loadWorkbook,
 	readNamedRegionFromFile,
