@@ -21,7 +21,7 @@ are detected.
   generated (this is the default behavior). \code{XLC$"ERROR.STOP"} means that an exception
   will be thrown and further execution will be stopped immediately.
 }
-
+}
 \author{
 Martin Studer\cr
 Mirai Solutions GmbH \url{http://www.mirai-solutions.com}
@@ -32,6 +32,31 @@ Mirai Solutions GmbH \url{http://www.mirai-solutions.com}
 \code{\link{readWorksheetFromFile}}
 }
 \examples{
+# mtcars xlsx file from demoFiles subfolder of package XLConnect
+demoExcelFile <- system.file("demoFiles/errorCell.xlsx", 
+							  package = "XLConnect")
+
+# Load workbook
+wb <- loadWorkbook(demoExcelFile)
+
+# Set error behavior to XLC$ERROR.WARN when detecting error cells
+# Note: this is the default behavior
+onErrorCell(wb, XLC$ERROR.WARN)
+# Alternatively: wb$onErrorCell(XLC$ERROR.WARN)
+
+# Read named region 'MyData' (with default header = TRUE)
+data <- readNamedRegion(wb, name = "MyData")
+
+# Now set error behavior to XLC$ERROR.STOP to immediately
+# issue an exception and stop in case an error cell is
+# detected
+onErrorCell(wb, XLC$ERROR.STOP)
+# Alternatively: wb$onErrorCell(XLC$ERROR.STOP)
+
+# Read (again) named region 'MyData' (with default header = TRUE)
+res <- try(readNamedRegion(wb, name = "MyData"))
+# Did we get an error?
+print(is(res, "try-error"))
 }
 \keyword{utilities}
 \keyword{error}

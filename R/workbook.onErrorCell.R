@@ -33,5 +33,6 @@ setMethod("onErrorCell",
 		signature(object = "workbook", behavior = "character"), 
 		function(object, behavior) {
 			xlcCall(object, "onErrorCell", behavior)
+			invisible()
 		}
 )

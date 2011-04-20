@@ -21,6 +21,7 @@ exportMethods(
 	isSheetHidden,
 	isSheetVeryHidden,
 	isSheetVisible,
+	onErrorCell,
 	print,
 	readNamedRegion,
 	readWorksheet,
