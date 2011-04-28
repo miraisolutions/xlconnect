@@ -35,7 +35,7 @@ writeWorksheetToFile <- function(file, styleAction = XLC$STYLE_ACTION.XLCONNECT,
   create <- is.character(args$sheet)
 
   wb <- loadWorkbook(file,create=create)  
-
+  setStyleAction(wb,styleAction) # new line
   if(create) {	
     createSheet(wb, args$sheet)
   }
