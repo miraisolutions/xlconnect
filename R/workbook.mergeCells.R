@@ -20,18 +20,27 @@
 
 #############################################################################
 #
-# Querying available worksheets in a workbook
+# Merging cells in a worksheet
 # 
 # Author: Martin Studer, Mirai Solutions GmbH
 #
 #############################################################################
 
-setGeneric("getSheets",
-	function(object) standardGeneric("getSheets"))
+setGeneric("mergeCells",
+		function(object, sheet, reference) standardGeneric("mergeCells"))
 
-setMethod("getSheets", 
-	signature(object = "workbook"), 
-	function(object) {
-		jTryCatch(as.vector(object@jobj$getSheets()))
-	}
+setMethod("mergeCells", 
+		signature(object = "workbook", sheet = "numeric", reference = "character"), 
+		function(object, sheet, reference) {
+			xlcCall(object, "mergeCells", as.integer(sheet - 1), reference)
+			invisible()
+		}
+)
+
+setMethod("mergeCells", 
+		signature(object = "workbook", sheet = "character", reference = "character"), 
+		function(object, sheet, reference) {
+			xlcCall(object, "mergeCells", sheet, reference)
+			invisible()
+		}
 )

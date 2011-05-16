@@ -20,18 +20,27 @@
 
 #############################################################################
 #
-# Querying available worksheets in a workbook
+# Cloning worksheets in a workbook
 # 
 # Author: Martin Studer, Mirai Solutions GmbH
 #
 #############################################################################
 
-setGeneric("getSheets",
-	function(object) standardGeneric("getSheets"))
+setGeneric("cloneSheet",
+		function(object, sheet, name) standardGeneric("cloneSheet"))
 
-setMethod("getSheets", 
-	signature(object = "workbook"), 
-	function(object) {
-		jTryCatch(as.vector(object@jobj$getSheets()))
-	}
+setMethod("cloneSheet", 
+		signature(object = "workbook", sheet = "numeric", name = "character"), 
+		function(object, sheet, name) {
+			xlcCall(object, "cloneSheet", as.integer(sheet - 1), name)
+			invisible()
+		}
+)
+
+setMethod("cloneSheet", 
+		signature(object = "workbook", sheet = "character", name = "character"), 
+		function(object, sheet, name) {
+			xlcCall(object, "cloneSheet", sheet, name)
+			invisible()
+		}
 )

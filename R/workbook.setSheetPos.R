@@ -20,18 +20,26 @@
 
 #############################################################################
 #
-# Querying available worksheets in a workbook
+# Setting worksheet position
 # 
 # Author: Martin Studer, Mirai Solutions GmbH
 #
 #############################################################################
 
-setGeneric("getSheets",
-	function(object) standardGeneric("getSheets"))
+setGeneric("setSheetPos",
+		function(object, sheet, pos) standardGeneric("setSheetPos"))
 
-setMethod("getSheets", 
-	signature(object = "workbook"), 
-	function(object) {
-		jTryCatch(as.vector(object@jobj$getSheets()))
-	}
+setMethod("setSheetPos", 
+		signature(object = "workbook", sheet = "character", pos = "numeric"), 
+		function(object, sheet, pos) {
+			xlcCall(object, "setSheetPos", sheet, as.integer(pos - 1))
+			invisible()
+		}
+)
+
+setMethod("setSheetPos", 
+		signature(object = "workbook", sheet = "character", pos = "missing"), 
+		function(object, sheet, pos) {
+			callGeneric(object, sheet, seq(along = sheet) - 1)
+		}
 )

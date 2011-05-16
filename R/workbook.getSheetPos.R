@@ -20,18 +20,18 @@
 
 #############################################################################
 #
-# Querying available worksheets in a workbook
+# Querying worksheet position
 # 
 # Author: Martin Studer, Mirai Solutions GmbH
 #
 #############################################################################
 
-setGeneric("getSheets",
-	function(object) standardGeneric("getSheets"))
+setGeneric("getSheetPos",
+		function(object, sheet) standardGeneric("getSheetPos"))
 
-setMethod("getSheets", 
-	signature(object = "workbook"), 
-	function(object) {
-		jTryCatch(as.vector(object@jobj$getSheets()))
-	}
+setMethod("getSheetPos", 
+		signature(object = "workbook", sheet = "character"), 
+		function(object, sheet) {
+			xlcCall(object, "getSheetPos", sheet) + 1
+		}
 )

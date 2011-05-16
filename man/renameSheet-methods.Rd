@@ -29,7 +29,8 @@ Note that renaming worksheets may result in invalid name references.
 \seealso{
 \code{\linkS4class{workbook}}, \code{\link[=createSheet-methods]{createSheet}},
 \code{\link[=existsSheet-methods]{existsSheet}}, \code{\link[=getSheets-methods]{getSheets}},
-\code{\link[=removeSheet-methods]{removeSheet}}, \code{\link[=setActiveSheet-methods]{setActiveSheet}}
+\code{\link[=removeSheet-methods]{removeSheet}}, \code{\link[=cloneSheet-methods]{cloneSheet}},
+\code{\link[=setActiveSheet-methods]{setActiveSheet}}
 }
 \examples{
 # mtcars xlsx file from demoFiles subfolder of package XLConnect
