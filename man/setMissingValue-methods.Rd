@@ -2,6 +2,7 @@
 \docType{methods}
 \alias{setMissingValue}
 \alias{setMissingValue-methods}
+\alias{setMissingValue,workbook-method}
 \alias{setMissingValue,workbook,ANY-method}
 \title{Setting a missing value string}
 \description{

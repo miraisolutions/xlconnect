@@ -1,8 +1,9 @@
-\name{getSheetPos-methods}
+\name{setSheetPos-methods}
 \docType{methods}
 \alias{setSheetPos}
 \alias{setSheetPos-methods}
-\alias{setSheetPos,workbook,character-method}
+\alias{setSheetPos,workbook,character,missing-method}
+\alias{setSheetPos,workbook,character,numeric-method}
 \title{Setting worksheet position}
 \description{
 Sets the position of a worksheets in a \code{\linkS4class{workbook}}.
@@ -15,7 +16,8 @@ Sets the position of a worksheets in a \code{\linkS4class{workbook}}.
   \item{sheet}{The name of the worksheet (\code{character}) whose position to set. 
   This argument is vectorized such that the positions of multiple worksheets can be 
   set with one method call.}
-  \item{pos}{The position index to set for the corresponding \code{sheet}.}
+  \item{pos}{The position index to set for the corresponding \code{sheet}. If missing, sheets
+  will be positioned in the order they are specified in the argument \code{sheet}.}
 }
 \details{
 It is important to note that the worksheet positions will be applied one after the other in the order

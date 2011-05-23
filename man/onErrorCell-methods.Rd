@@ -28,7 +28,7 @@ Mirai Solutions GmbH \url{http://www.mirai-solutions.com}
 }
 \seealso{
 \code{\linkS4class{workbook}}, \code{\link[=readNamedRegion-methods]{readNamedRegion}},
-\code{\link{readNamedRegionFromFile}}, \code{\link[=readWorksheet-methods]{readWorksheet}},
+\code{\link{readNamedRegionFromFile}}, \code{\link[=readWorksheet-methods]{readWorksheet}},\cr
 \code{\link{readWorksheetFromFile}}
 }
 \examples{

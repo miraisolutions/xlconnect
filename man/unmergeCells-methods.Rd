@@ -1,4 +1,4 @@
-\name{mergeCells-methods}
+\name{unmergeCells-methods}
 \docType{methods}
 \alias{unmergeCells}
 \alias{unmergeCells-methods}

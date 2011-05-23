@@ -34,7 +34,11 @@ provides better performance in that several changes can be written in
 one go (normally at the end, rather than  after every operation causing
 the file to be rewritten again completely each time). This is due to the
 fact that workbooks are manipulated in-memory and are only written to
-disk with specifically calling \code{saveWorkbook}. 
+disk with specifically calling \code{saveWorkbook}.\cr\cr
+Further note that calling \code{saveWorkbook} more than once leads to an
+exception. This is due to a current issue in the underlying POI libraries.
+However, with \pkg{XLConnect} there should be no need to call \code{saveWorkbook}
+more than once so virtually this is no issue.
 }
 \seealso{
 \code{\linkS4class{workbook}}, \code{\link{loadWorkbook}}
