@@ -1,0 +1,56 @@
+\name{setForceFormulaRecalculation-methods}
+\docType{methods}
+\alias{setForceFormulaRecalculation}
+\alias{setForceFormulaRecalculation-methods}
+\alias{setForceFormulaRecalculation,workbook,character,logical-method}
+\alias{setForceFormulaRecalculation,workbook,numeric,logical-method}
+\title{Forcing Excel to recalculate formula values when opening a workbook}
+\description{
+ This function controls a flag that forces Excel to recalculate formula values when a workbook
+ is openend. 
+}
+\usage{
+\S4method{setForceFormulaRecalculation}{workbook,character,logical}(object,sheet,value)
+\S4method{setForceFormulaRecalculation}{workbook,numeric,logical}(object,sheet,value)
+}
+
+\arguments{
+  \item{object}{The \code{\linkS4class{workbook}} to use}
+  \item{sheet}{The name or index of the sheet to hide}
+  \item{value}{If \code{value = TRUE}, the specified \code{sheet} is "very" hidden
+  (see note), otherwise it is just hidden. Default is \code{FALSE}.}
+}
+
+\details{
+  The arguments \code{sheet} and \code{value} are vectorized such
+  that multiple worksheets can be controlled with one method call. 
+}
+
+\author{
+Thomas Themel\cr
+Mirai Solutions GmbH \url{http://www.mirai-solutions.com}
+}
+\note{
+  A typical use for this flag is forcing Excel into updating formulas
+  that reference cells affected by \code{writeWorksheet} or
+  \code{writeNamedRegion} class. The exact behavior of Excel when 
+  the flag is set depends on version and file format.
+}
+\seealso{
+\code{\linkS4class{workbook}}, 
+\code{\link[=getForceFormulaRecalculation-methods]{getForceFormulaRecalculation}}
+}
+\examples{
+# mtcars xlsx file from demoFiles subfolder of package XLConnect
+demoExcelFile <- system.file("demoFiles/mtcars.xlsx", package = "XLConnect")
+
+# Load workbook
+wb <- loadWorkbook(demoExcelFile)
+
+# Tell Excel to automatically recalculate formulas on sheet mtcars
+setForceFormulaRecalculation(wb, sheet = "mtcars", TRUE)
+# The same with a numerical sheet index
+setForceFormulaRecalculation(wb, sheet = 1, TRUE)
+}
+\keyword{methods}
+\keyword{utilities}
