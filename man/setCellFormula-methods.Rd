@@ -38,9 +38,6 @@ Mirai Solutions GmbH \url{http://www.mirai-solutions.com}
 # Load workbook (create if not existing)
 wb <- loadWorkbook("setCellFormula.xls", create = TRUE)
 
-# We don't set a specific style action in this demo, so the default 
-# 'XLConnect' will be used (XLC$"STYLE_ACTION.XLCONNECT")
-
 # Create a sheet named 'mtcars'
 createSheet(wb, name = "mtcars")
 

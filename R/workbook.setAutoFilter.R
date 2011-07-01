@@ -20,31 +20,27 @@
 
 #############################################################################
 #
-# Set a flag to force excel to recalculate formula values
+# Setting autofilters on worksheets
 # 
 # Author: Martin Studer, Mirai Solutions GmbH
 #
 #############################################################################
 
-setGeneric("setForceFormulaRecalculation",
-		function(object, sheet, value) standardGeneric("setForceFormulaRecalculation"))
+setGeneric("setAutoFilter",
+		function(object, sheet, reference) standardGeneric("setAutoFilter"))
 
-setMethod("setForceFormulaRecalculation", 
-		signature(object = "workbook", sheet = "character", value = "logical"), 
-		function(object, sheet, value) {
-			if(sheet == "*") {
-				callGeneric(object, getSheets(object), value)
-			} else
-				xlcCall(object, "setForceFormulaRecalculation", sheet, value)
-			
+setMethod("setAutoFilter", 
+		signature(object = "workbook", sheet = "numeric", reference = "character"), 
+		function(object, sheet, reference) {
+			xlcCall(object, "setAutoFilter", as.integer(sheet - 1), reference)
 			invisible()
 		}
 )
 
-setMethod("setForceFormulaRecalculation", 
-		signature(object = "workbook", sheet = "numeric", value = "logical"), 
-		function(object, sheet, value) {
-			xlcCall(object, "setForceFormulaRecalculation", as.integer(sheet-1), value)
+setMethod("setAutoFilter", 
+		signature(object = "workbook", sheet = "character", reference = "character"), 
+		function(object, sheet, reference) {
+			xlcCall(object, "setAutoFilter", sheet, reference)
 			invisible()
 		}
 )

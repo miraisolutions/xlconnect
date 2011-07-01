@@ -32,7 +32,7 @@ Mirai Solutions GmbH \url{http://www.mirai-solutions.com}
 \code{\link{readWorksheetFromFile}}
 }
 \examples{
-# mtcars xlsx file from demoFiles subfolder of package XLConnect
+# errorCell xlsx file from demoFiles subfolder of package XLConnect
 demoExcelFile <- system.file("demoFiles/errorCell.xlsx", 
 							  package = "XLConnect")
 

@@ -20,31 +20,19 @@
 
 #############################################################################
 #
-# Set a flag to force excel to recalculate formula values
+# Converting row and column based area references to Excel area references
 # 
 # Author: Martin Studer, Mirai Solutions GmbH
 #
 #############################################################################
 
-setGeneric("setForceFormulaRecalculation",
-		function(object, sheet, value) standardGeneric("setForceFormulaRecalculation"))
-
-setMethod("setForceFormulaRecalculation", 
-		signature(object = "workbook", sheet = "character", value = "logical"), 
-		function(object, sheet, value) {
-			if(sheet == "*") {
-				callGeneric(object, getSheets(object), value)
-			} else
-				xlcCall(object, "setForceFormulaRecalculation", sheet, value)
-			
-			invisible()
-		}
-)
-
-setMethod("setForceFormulaRecalculation", 
-		signature(object = "workbook", sheet = "numeric", value = "logical"), 
-		function(object, sheet, value) {
-			xlcCall(object, "setForceFormulaRecalculation", as.integer(sheet-1), value)
-			invisible()
-		}
-)
+idx2aref <- function(x) {
+	if(!is.numeric(x)) stop("x must be a numeric matrix or vector of indices!")
+	if(!is.matrix(x)) x <- matrix(x, ncol = 4, byrow = TRUE)
+	apply(x, 1, function(xx) {
+		paste(
+			idx2cref(xx[1:2], absRow = FALSE, absCol = FALSE),
+			idx2cref(xx[3:4], absRow = FALSE, absCol = FALSE),
+			sep = ":")
+	})
+}

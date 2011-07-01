@@ -15,8 +15,10 @@ Queries the "force formula recalculation" flag on an Excel worksheet.
 
 \arguments{
   \item{object}{The \code{\linkS4class{workbook}} to use}
-  \item{sheet}{The sheet to query. This argument is vectorized such that
-  multiple sheets can be queried with one method call.}
+  \item{sheet}{The name or index of the sheet to query. This argument is vectorized such that
+  multiple sheets can be queried with one method call. If \code{sheet = "*"}, the flag is
+  queried for all sheets in the \code{\linkS4class{workbook}} (in the order as returned
+  by \code{\link[=getSheets-methods]{getSheets}}).}
 }
 
 \author{

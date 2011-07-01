@@ -17,7 +17,7 @@ exportMethods(
 	getCellStyle,
 	getCellFormula,
 	getDefinedNames,
-        getForceFormulaRecalculation,
+	getForceFormulaRecalculation,
 	getReferenceFormula,
 	getReferenceCoordinates,
 	getSheetPos,
@@ -36,6 +36,7 @@ exportMethods(
 	renameSheet,
 	saveWorkbook,
 	setActiveSheet,
+	setAutoFilter,
 	setBorder,
 	setCellStyle,
 	setCellFormula,
@@ -45,7 +46,7 @@ exportMethods(
 	setFillBackgroundColor,
 	setFillForegroundColor,
 	setFillPattern,
-        setForceFormulaRecalculation,
+    setForceFormulaRecalculation,
 	setMissingValue,
 	setRowHeight,
 	setSheetPos,
@@ -63,8 +64,11 @@ exportMethods(
 
 # XLConnect exports the following functions & variables
 export(
+	aref,
+	aref2idx,
 	col2idx,
 	cref2idx,
+	idx2aref,
 	idx2col,
 	idx2cref,
 	mirai,

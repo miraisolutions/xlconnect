@@ -20,31 +20,19 @@
 
 #############################################################################
 #
-# Set a flag to force excel to recalculate formula values
+# Creates an Excel area reference
 # 
 # Author: Martin Studer, Mirai Solutions GmbH
 #
 #############################################################################
 
-setGeneric("setForceFormulaRecalculation",
-		function(object, sheet, value) standardGeneric("setForceFormulaRecalculation"))
-
-setMethod("setForceFormulaRecalculation", 
-		signature(object = "workbook", sheet = "character", value = "logical"), 
-		function(object, sheet, value) {
-			if(sheet == "*") {
-				callGeneric(object, getSheets(object), value)
-			} else
-				xlcCall(object, "setForceFormulaRecalculation", sheet, value)
-			
-			invisible()
-		}
-)
-
-setMethod("setForceFormulaRecalculation", 
-		signature(object = "workbook", sheet = "numeric", value = "logical"), 
-		function(object, sheet, value) {
-			xlcCall(object, "setForceFormulaRecalculation", as.integer(sheet-1), value)
-			invisible()
-		}
-)
+aref <- function(topLeft, dimension) {
+	if(is.character(topLeft))
+		topLeft <- as.vector(cref2idx(topLeft))
+	if(!is.numeric(topLeft))
+		stop("topLeft must be either a cell reference (character) in the form 'A1' or a numeric vector of length 2!")
+	if(!is.numeric(dimension) || length(dimension) != 2)
+		stop("dimension must be a numeric vector of length 2!")
+	
+	idx2aref(c(topLeft, topLeft + dimension - 1))
+}

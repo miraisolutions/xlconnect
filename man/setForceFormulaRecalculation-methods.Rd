@@ -7,7 +7,7 @@
 \title{Forcing Excel to recalculate formula values when opening a workbook}
 \description{
  This function controls a flag that forces Excel to recalculate formula values when a workbook
- is openend. 
+ is opened. 
 }
 \usage{
 \S4method{setForceFormulaRecalculation}{workbook,character,logical}(object,sheet,value)
@@ -16,9 +16,9 @@
 
 \arguments{
   \item{object}{The \code{\linkS4class{workbook}} to use}
-  \item{sheet}{The name or index of the sheet to hide}
-  \item{value}{If \code{value = TRUE}, the specified \code{sheet} is "very" hidden
-  (see note), otherwise it is just hidden. Default is \code{FALSE}.}
+  \item{sheet}{The name or index of the sheet for which to force formula recalculation.
+  If \code{sheet = "*"}, the flag is set for all sheets in the \code{\linkS4class{workbook}}.}
+  \item{value}{\code{logical} specifying if formula recalculation should be forced or not}
 }
 
 \details{
@@ -32,9 +32,9 @@ Mirai Solutions GmbH \url{http://www.mirai-solutions.com}
 }
 \note{
   A typical use for this flag is forcing Excel into updating formulas
-  that reference cells affected by \code{writeWorksheet} or
-  \code{writeNamedRegion} class. The exact behavior of Excel when 
-  the flag is set depends on version and file format.
+  that reference cells affected by \code{\link[=writeWorksheet-methods]{writeWorksheet}} 
+  or \code{\link[=writeNamedRegion-methods]{writeNamedRegion}}. 
+  The exact behavior of Excel when the flag is set depends on version and file format.
 }
 \seealso{
 \code{\linkS4class{workbook}}, 

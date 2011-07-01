@@ -35,5 +35,5 @@ with.workbook <- function(data, expr, ...) {
 			}
 		)
 	}
-	eval(substitute(expr), env = env)
+	eval(substitute(expr), envir = env)
 }

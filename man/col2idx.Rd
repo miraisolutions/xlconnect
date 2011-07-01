@@ -22,7 +22,8 @@ Martin Studer\cr
 Mirai Solutions GmbH \url{http://www.mirai-solutions.com}
 }
 \seealso{
-\code{\link{idx2col}}, \code{\link{cref2idx}}, \code{\link{idx2cref}}
+\code{\link{idx2col}}, \code{\link{cref2idx}}, \code{\link{idx2cref}},
+\code{\link{idx2aref}}, \code{\link{aref2idx}}, \code{\link{aref}}
 }
 \examples{
 col2idx(c("A", "BTG"))

@@ -20,31 +20,15 @@
 
 #############################################################################
 #
-# Set a flag to force excel to recalculate formula values
+# Converting Excel cell references to row and column based cell references
 # 
 # Author: Martin Studer, Mirai Solutions GmbH
 #
 #############################################################################
 
-setGeneric("setForceFormulaRecalculation",
-		function(object, sheet, value) standardGeneric("setForceFormulaRecalculation"))
-
-setMethod("setForceFormulaRecalculation", 
-		signature(object = "workbook", sheet = "character", value = "logical"), 
-		function(object, sheet, value) {
-			if(sheet == "*") {
-				callGeneric(object, getSheets(object), value)
-			} else
-				xlcCall(object, "setForceFormulaRecalculation", sheet, value)
-			
-			invisible()
-		}
-)
-
-setMethod("setForceFormulaRecalculation", 
-		signature(object = "workbook", sheet = "numeric", value = "logical"), 
-		function(object, sheet, value) {
-			xlcCall(object, "setForceFormulaRecalculation", as.integer(sheet-1), value)
-			invisible()
-		}
-)
+aref2idx <- function(x) {
+	if(!is.character(x)) stop("x must be a vector of area references (character)!")
+	t(sapply(x, function(xx) {
+		as.vector(t(cref2idx(strsplit(xx, split = ":", fixed = TRUE)[[1]])))
+	}, USE.NAMES = FALSE))
+}
