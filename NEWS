@@ -1,0 +1,56 @@
+XLConnect News
+--------------
+
+0.1-5	2011-07-07
+	*	Support for setting/getting cell formulas. See methods
+		set/getCellFormula.
+	*	Support for setting/getting the force formula recalculation flag on
+		worksheets. See methods set/getForceFormulaRecalculation.
+	*	Support for setting auto-filters via the setAutoFilter method.
+	*	There is a set of new utility functions:
+		- aref2idx, idx2aref: Converts Excel area references (such as A5:D14)
+		  to row & column based cell references and vice versa.
+		- aref: Constructs an Excel area reference from a specification of the
+		  top left corner and the dimensionality of an object.
+		- getReferenceCoordinates: Queries the coordinates of an Excel name
+		  representing an Excel area reference (such as A5:D14)
+
+0.1-4	2011-05-26
+	*	An issue was fixed where cell styles would not be applied correctly.
+	*	There is a new style action called NONE: This style action instructs 
+		XLConnect to apply no cell styles when writing data. Cell styles are kept 
+		as they are. This is useful in a scenario where all styling is predefined 
+		in an Excel template which is then only filled with data.
+	*	There is a new DATA_FORMAT_ONLY style action: This style action instructs
+		XLConnect to only set the data format for a cell but not to apply any other 
+		styling but rather keep the existing one. The data format to be applied is 
+		determined by the corresponding R data type and can be defined by the user. 
+		This style action may be useful in scenarios where Excel templates with 
+		pre-defined styling are to be filled with XLConnect.
+	*	Worksheets can be renamed with the new renameSheet method.
+	*	The positions (indices) of worksheets can be queried & redefined using the 
+		new methods getSheetPos & setSheetPos.
+	*	Worksheets can be cloned using the new method cloneSheet.
+	*	There is a set of new utility functions:
+		- col2idx, idx2col: Converts Excel column names such as BD to indices and 
+		  vice versa.
+		- cref2idx, idx2cref: Converts cell references to row & column indices and 
+		  vice versa.
+	*	Setting a missing value string when writing missing values from R to Excel. 
+		By default missing values result in blank/empty cells. This is to have a nice 
+		type mapping between R and Excel. In some cases, however, you might want to 
+		define a specific missing value string to be used by XLConnect when writing 
+		cells representing missing values instead of blank/empty cells. This can be 
+		done using the new method setMissingValue.
+	*	The handling of error cells (cells that result in an error when trying to 
+		evaluate them) has been greatly improved. With XLConnect 0.1-3 error cells 
+		directly resulted in an exception. With XLConnect 0.1-4 this behavior can 
+		be controlled using the onErrorCell method. By default error cells now result 
+		in a missing value and the corresponding error cells will be reported via 
+		warnings. The behavior may be changed to get an exception with the first 
+		occurrence of an error cell.
+	*	There is two new methods for merging & un-merging cells: mergeCells & 
+		unmergeCells.
+
+0.1-3	2011-02-27
+	*	Initial Release

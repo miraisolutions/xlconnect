@@ -27,6 +27,14 @@ Adds an image to a worksheet using a named region.
 Martin Studer\cr
 Mirai Solutions GmbH \url{http://www.mirai-solutions.com}
 }
+\note{
+There is an known issue in Apache POI with adding images to xls workbooks. The result of adding
+images to workbooks that already contain shapes or images may be that previous images are
+removed or that existing images are replaced with newly added ones. It is therefore advised that
+you use the \code{addImage} functionality only with workbooks that have no existing shapes or images.
+Note that this only holds for xls workbooks (Excel 97-2003) and not for xlsx (Excel 2007+). There should
+be no issues with xlsx workbooks.
+}
 \seealso{
 \code{\linkS4class{workbook}}, \code{\link[=createName-methods]{createName}}
 }

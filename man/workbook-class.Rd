@@ -31,7 +31,7 @@ Martin Studer\cr
 Mirai Solutions GmbH \url{http://www.mirai-solutions.com}
 }
 \note{
-\pkg{XLConnect} supports both Excel '97 (*.xls) and OOXML (Excel 2007+, *.xlsx) file formats.\cr\cr
+\pkg{XLConnect} supports both Excel 97-2003 (*.xls) and OOXML (Excel 2007+, *.xlsx) file formats.\cr\cr
 
 A \code{workbook}'s underlying Excel file is not saved (or being created in case the file did not exist and \code{create = TRUE} has been
 specified) unless the \code{\link[=saveWorkbook-methods]{saveWorkbook}} method has been called on the object. This provides more flexibility to the user to decide

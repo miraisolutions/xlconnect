@@ -36,7 +36,9 @@ Controls the application of \code{\linkS4class{cellstyle}}s when writing data to
  \pkg{XLConnect} to apply no cell styles when writing data. Cell styles
  are kept as they are. This is useful in a scenario where all styling is
  predefined in an Excel template which is then only filled with
- data. item \code{XLC$"STYLE_ACTION.PREDEFINED"}: This style action
+ data.
+ 
+ \item \code{XLC$"STYLE_ACTION.PREDEFINED"}: This style action
  instructs \pkg{XLConnect} to use existing (predefined) \code{\linkS4class{cellstyle}}s when
  writing headers and columns. This is useful in a template-based approach
  where an Excel template with predefined \code{\linkS4class{cellstyle}}s for headers and
