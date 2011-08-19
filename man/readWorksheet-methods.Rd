@@ -46,10 +46,9 @@ is interpreted as column names of the resulting \code{data.frame}.\cr If
 assumed. If \code{startCol <= 0} then the column  of the first (logical)
 cell of the start row (\code{startRow}) is assumed. If \code{endRow <= 0}
 then the last available  (logical) row is assumed. If \code{endCol <= 0}
-then the column of the last (logical) cell of the end column
-(\code{endCol}) is assumed. In other words, if no boundaries are
-specified \code{readWorksheet} assumes the "bounding box" of the data as
-the corresponding boundaries.\cr\cr
+then the maximum column between \code{startRow} and \code{endRow} is assumed. 
+In other words, if no boundaries are specified \code{readWorksheet} assumes 
+the "bounding box" of the data as the corresponding boundaries.\cr\cr
 
 If all four coordinate arguments are missing this behaves as above with
 \code{startRow = 0}, \code{startCol = 0}, \code{endRow = 0} and

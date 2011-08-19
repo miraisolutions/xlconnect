@@ -1,8 +1,8 @@
 Package: XLConnect
 Type: Package
 Title: Excel Connector for R
-Version: 0.1-5
-Date: 2011-07-07
+Version: 0.1-6
+Date: 2011-08-19
 Author: Mirai Solutions GmbH
 Maintainer: Mirai Solutions GmbH <xlconnect@mirai-solutions.com>
 URL: http://www.mirai-solutions.com

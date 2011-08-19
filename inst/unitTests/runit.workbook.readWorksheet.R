@@ -37,7 +37,7 @@ test.workbook.readWorksheet <- function() {
 			"StringColumn" = c("Hello", NA, NA, NA, "World"),
 			"BooleanColumn" = c(TRUE, FALSE, FALSE, NA, NA),
 			"DateTimeColumn" = as.POSIXct(c(NA, NA, "2010-09-09 21:03:07", "2010-09-10 21:03:07", "2010-09-11 21:03:07"), tz = "UTC"),
-			stringsAsFactors = F
+			stringsAsFactors = FALSE
 	)
 	
 	# Read worksheet without specifying range
@@ -83,4 +83,22 @@ test.workbook.readWorksheet <- function() {
 	# Check that an exception is thrown when attempting to read from a blank sheet (*.xlsx)
 	checkException(readWorksheet(wb.xlsx, 3))
 	checkException(readWorksheet(wb.xlsx, "Test3"))
+	
+	checkDf <- data.frame(
+		A = c(1:2, NA, 3:6, NA),
+		B = letters[1:8],
+		C = c("z", "y", "x", "w", NA, "v", "u", NA),
+		D = c(NA, 1:5, NA, NA),
+		stringsAsFactors = FALSE
+	)
+	
+	# Check that the data bounding box is correctly inferred even if there are blank cells
+	# in the last row (*.xls)
+	res <- readWorksheet(wb.xls, "Test4")
+	checkEquals(res, checkDf)
+
+	# Check that the data bounding box is correctly inferred even if there are blank cells
+	# in the last row (*.xlsx)
+	res <- readWorksheet(wb.xlsx, "Test4")
+	checkEquals(res, checkDf)
 }
