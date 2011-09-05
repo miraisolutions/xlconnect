@@ -32,10 +32,8 @@
 
 dataframeToJava <- function(df) {
 	# Force data.frame
-	if(!is.data.frame(df)) {
-		warning("Supplied object is not a data.frame! Trying to continue by converting it to a data.frame.")
+	if(!is.data.frame(df))
 		df <- as.data.frame(df)
-	}
 	
 	dFrame <- jTryCatch(new(J("com.miraisolutions.xlconnect.integration.r.RDataFrameWrapper")))
 	cnames <- colnames(df)
