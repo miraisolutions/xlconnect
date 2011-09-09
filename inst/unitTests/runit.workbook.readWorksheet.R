@@ -84,9 +84,17 @@ test.workbook.readWorksheet <- function() {
 	checkException(readWorksheet(wb.xlsx, 3))
 	checkException(readWorksheet(wb.xlsx, "Test3"))
 	
-	checkDf <- data.frame(
+	checkDf1 <- data.frame(
 		A = c(1:2, NA, 3:6, NA),
 		B = letters[1:8],
+		C = c("z", "y", "x", "w", NA, "v", "u", NA),
+		D = c(NA, 1:5, NA, NA),
+		stringsAsFactors = FALSE
+	)
+	
+	checkDf2 <- data.frame(
+		A = c(rep(NA, 3), 3:6, NA),
+		B = c(NA, letters[2:8]),
 		C = c("z", "y", "x", "w", NA, "v", "u", NA),
 		D = c(NA, 1:5, NA, NA),
 		stringsAsFactors = FALSE
@@ -95,10 +103,14 @@ test.workbook.readWorksheet <- function() {
 	# Check that the data bounding box is correctly inferred even if there are blank cells
 	# in the last row (*.xls)
 	res <- readWorksheet(wb.xls, "Test4")
-	checkEquals(res, checkDf)
+	checkEquals(res, checkDf1)
+	res <- readWorksheet(wb.xls, "Test5")
+	checkEquals(res, checkDf2)
 
 	# Check that the data bounding box is correctly inferred even if there are blank cells
 	# in the last row (*.xlsx)
 	res <- readWorksheet(wb.xlsx, "Test4")
-	checkEquals(res, checkDf)
+	checkEquals(res, checkDf1)
+	res <- readWorksheet(wb.xlsx, "Test5")
+	checkEquals(res, checkDf2)
 }

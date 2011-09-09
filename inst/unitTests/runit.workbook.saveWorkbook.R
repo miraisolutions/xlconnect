@@ -48,4 +48,16 @@ test.workbook.saveWorkbook <- function() {
 	
 	# Check that file exists after saving (*.xlsx)
 	checkTrue(file.exists(file.xlsx))
+	
+	# Check save as (*.xls)
+	newFile.xls <- "saveAsWorkbook.xls"
+	if(file.exists(newFile.xls)) file.remove(newFile.xls)
+	saveWorkbook(wb.xls, file = newFile.xls)
+	checkTrue(file.exists(newFile.xls))
+	
+	# Check save as (*.xlsx)
+	newFile.xlsx <- "saveAsWorkbook.xlsx"
+	if(file.exists(newFile.xlsx)) file.remove(newFile.xlsx)
+	saveWorkbook(wb.xlsx, file = newFile.xlsx)
+	checkTrue(file.exists(newFile.xlsx))
 }

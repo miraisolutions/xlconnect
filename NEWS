@@ -1,6 +1,23 @@
 XLConnect News
 --------------
 
+0.1-7	<XXX>
+	*	Moved to Apache POI 3.8-beta4
+	*	Performance improvements when writing large xlsx files. This
+		fix was implemented on the Apache POI side.
+	*	An issue was fixed where the bounding box was not appropriately
+		determined when using readWorksheet. The bounding box is now
+		determined by first determining start and end row. Afterwards,
+		for all rows between the start and the end row the minimum and 
+		maximum column is determined.
+	*	An issue was fixed where the named region was automatically
+		expanded by one row when writing data to a named region without
+		column headers.
+	*	Support for saving workbooks to a new file ("save as").
+	*	...
+	
+0.1-6	Non-public release
+		
 0.1-5	2011-07-07
 	*	Support for setting/getting cell formulas. See methods
 		set/getCellFormula.

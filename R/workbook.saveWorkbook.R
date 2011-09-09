@@ -36,8 +36,12 @@
 #############################################################################
 
 setGeneric("saveWorkbook",
-	function(object) standardGeneric("saveWorkbook"))
+	function(object, file) standardGeneric("saveWorkbook"))
 
-setMethod("saveWorkbook", signature(object = "workbook"), function(object) {
+setMethod("saveWorkbook", signature(object = "workbook", "missing"), function(object, file) {
 	jTryCatch(object@jobj$save())
+})
+
+setMethod("saveWorkbook", signature(object = "workbook", "character"), function(object, file) {
+	jTryCatch(object@jobj$save(file))
 })
