@@ -2,7 +2,6 @@
 \Rdversion{1.1}
 \docType{class}
 \alias{workbook-class}
-\alias{$,workbook-method}
 \title{Class "workbook"}
 \description{
 This is \pkg{XLConnect}'s main entity representing a Microsoft Excel workbook. S4 objects of this class

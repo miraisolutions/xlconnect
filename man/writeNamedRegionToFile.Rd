@@ -5,18 +5,18 @@
 Writes named regions to an Excel file.
 }
 \usage{
-writeNamedRegionToFile(file, data, name, formula=NA, header = TRUE,
+writeNamedRegionToFile(file, data, name, formula=NA, ...,
 styleAction = XLC$STYLE_ACTION.XLCONNECT)
 }
 \arguments{
 \item{file}{The path name of the file to write to}
-\item{name}{Name of the named region to write to}
 \item{data}{Data to write}
-\item{header}{Specifies if the column names should be written. The default is \code{TRUE}.}
+\item{name}{Name of the named region to write to}
 \item{formula}{If formula is specified, each item defines the formula of
 the named region identified by the corresponding entry of
 \code{name}. Use this if you want to create the document from scratch
 instead of writing to a template!}
+\item{...}{Additional arguments passed to \code{\link[=writeNamedRegion-methods]{writeNamedRegion}}}
 \item{styleAction}{Style action to be used when writing the data.\cr
 The default is \code{XLC$STYLE_ACTION.XLCONNECT}. 
 See \code{\link[=setStyleAction-methods]{setStyleAction}} for more information.}

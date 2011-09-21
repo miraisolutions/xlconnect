@@ -27,21 +27,12 @@
 #############################################################################
 
 setGeneric("createName",
-	function(object, name, formula, overwrite) standardGeneric("createName"))
+	function(object, name, formula, ...) standardGeneric("createName"))
 
 setMethod("createName", 
-		signature(object = "workbook", name = "character", formula = "character", 
-				overwrite = "logical"), 
-		function(object, name, formula, overwrite) {
+		signature(object = "workbook", name = "character", formula = "character"), 
+		function(object, name, formula, overwrite = FALSE) {
 			xlcCall(object, "createName", name, formula, overwrite)
 			invisible()
-		}
-)
-
-setMethod("createName", 
-		signature(object = "workbook", name = "character", formula = "character", 
-				overwrite = "missing"), 
-		function(object, name, formula, overwrite) {
-			callGeneric(object, name, formula, FALSE)
 		}
 )

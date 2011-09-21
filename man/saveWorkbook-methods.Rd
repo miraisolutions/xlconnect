@@ -2,22 +2,31 @@
 \docType{methods}
 \alias{saveWorkbook}
 \alias{saveWorkbook-methods}
-\alias{saveWorkbook,workbook-method}
+\alias{saveWorkbook,workbook,missing-method}
+\alias{saveWorkbook,workbook,character-method}
 \title{Saving Microsoft Excel workbooks}
 \description{
  Saves a \code{\linkS4class{workbook}} to the corresponding Excel file. This method actually writes the \code{\linkS4class{workbook}} object to disk.
 }
 \usage{
-\S4method{saveWorkbook}{workbook}(object)
+\S4method{saveWorkbook}{workbook,missing}(object,file)
+\S4method{saveWorkbook}{workbook,character}(object,file)
 }
 
 \arguments{
   \item{object}{The \code{\linkS4class{workbook}} to save}
+  \item{file}{The file to which to save the \code{\linkS4class{workbook}} ("save as").
+  If not specified (missing), the workbook will be saved to the \code{\linkS4class{workbook}}'s underlying 
+  file which is the file specified in \code{\link{loadWorkbook}} (also see the \code{\linkS4class{workbook}} 
+  class for more information). Note that due to currently missing functionality in Apache POI, workbooks can
+  only be saved in the same file format - i.e. if the workbooks underlying file format is xls, then the 
+  \code{file} argument may only specify another xls file. Also note that when specifying the \code{file} 
+  argument the \code{\linkS4class{workbook}}'s underlying filename changes to reflect the "save as" behavior.
  }
+}
 
 \details{
-Saves the specified \code{\linkS4class{workbook}} object to disk. The \code{\linkS4class{workbook}}'s underlying filename specifies the
-path (see the \code{\linkS4class{workbook}} class for more information).
+Saves the specified \code{\linkS4class{workbook}} object to disk.
 }
 \author{
 Martin Studer\cr

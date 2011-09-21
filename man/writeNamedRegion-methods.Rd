@@ -2,14 +2,13 @@
 \docType{methods}
 \alias{writeNamedRegion}
 \alias{writeNamedRegion-methods}
-\alias{writeNamedRegion,workbook,ANY,character,logical-method}
-\alias{writeNamedRegion,workbook,ANY,character,missing-method}
+\alias{writeNamedRegion,workbook,ANY,character-method}
 \title{Writing named regions to a workbook}
 \description{
 Writes named regions to a \code{\linkS4class{workbook}}.
 }
 \usage{
-\S4method{writeNamedRegion}{workbook,ANY,character,logical}(object,data,name,header)
+\S4method{writeNamedRegion}{workbook,ANY,character}(object,data,name,header,rownames)
 }
 
 \arguments{
@@ -17,6 +16,10 @@ Writes named regions to a \code{\linkS4class{workbook}}.
   \item{data}{Data to write}
   \item{name}{Name of the named region to write to}
   \item{header}{Specifies if the column names should be written. The default is \code{TRUE}.}
+  \item{rownames}{Name (\code{character}) of column to use for the row names of the provided
+  \code{data} object. If specified, the row names of the data object (\code{data.frame}) will be
+  included as an additional column with the specified name. If \code{rownames = NULL} (default),
+  no row names will be included.}
 }
 
 \details{

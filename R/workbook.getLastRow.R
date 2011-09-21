@@ -20,26 +20,25 @@
 
 #############################################################################
 #
-# Reading named regions from an Excel file
+# Queries the last available (non-empty) row in a worksheet
 # 
 # Author: Martin Studer, Mirai Solutions GmbH
 #
 #############################################################################
 
-setGeneric("readNamedRegion",
-	function(object, name, ...) standardGeneric("readNamedRegion"))
+setGeneric("getLastRow",
+		function(object, sheet) standardGeneric("getLastRow"))
 
-setMethod("readNamedRegion", 
-	signature(object = "workbook", name = "character"), 
-	function(object, name, header = TRUE) {	
-		# returns a list of RDataFrameWrapper Java object references
-		dataFrame <- xlcCall(object, "readNamedRegion", name, header, SIMPLIFY = FALSE)
-		# construct data.frame
-		dataFrame <- lapply(dataFrame, dataframeFromJava)
-		names(dataFrame) <- name
-		
-		# Return data.frame directly in case only one data.frame is read
-		if(length(dataFrame) == 1) dataFrame[[1]]
-		else dataFrame
-	}
+setMethod("getLastRow", 
+		signature(object = "workbook", sheet = "numeric"), 
+		function(object, sheet) {
+			xlcCall(object, "getLastRow", as.integer(sheet-1))
+		}
+)
+
+setMethod("getLastRow", 
+		signature(object = "workbook", sheet = "character"), 
+		function(object, sheet) {
+			xlcCall(object, "getLastRow", sheet)
+		}
 )

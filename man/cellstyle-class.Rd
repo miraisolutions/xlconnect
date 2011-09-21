@@ -2,7 +2,6 @@
 \Rdversion{1.1}
 \docType{class}
 \alias{cellstyle-class}
-\alias{$,cellstyle-method}
 \title{Class "cellstyle"}
 \description{
 This class represents a cell style in a Microsoft Excel \code{\linkS4class{workbook}}. S4 objects of this class

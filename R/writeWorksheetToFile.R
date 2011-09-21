@@ -28,17 +28,13 @@
 #############################################################################
 
 
-writeWorksheetToFile <- function(file, styleAction = XLC$STYLE_ACTION.XLCONNECT, ...) {
-  args <- list(...)
+writeWorksheetToFile <- function(file, data, sheet, ..., styleAction = XLC$STYLE_ACTION.XLCONNECT) {
+  args <- list(data = data, sheet = sheet, ...)
 
-  # only create sheets when we have names specified
-  create <- is.character(args$sheet)
-
-  wb <- loadWorkbook(file,create=create)  
-  setStyleAction(wb,styleAction) # new line
-  if(create) {	
+  wb <- loadWorkbook(file, create = !file.exists(file))  
+  setStyleAction(wb, styleAction)
+  if(!is.element(sheet, getSheets(wb)))
     createSheet(wb, args$sheet)
-  }
 
   args$object <- wb
   do.call(writeWorksheet, args)
@@ -46,4 +42,3 @@ writeWorksheetToFile <- function(file, styleAction = XLC$STYLE_ACTION.XLCONNECT,
   saveWorkbook(wb)
   invisible(wb)  
 }
-

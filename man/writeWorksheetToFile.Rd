@@ -5,12 +5,13 @@
 Writes data to worksheets in an Excel file.
 }
 \usage{
-writeWorksheetToFile(file, styleAction = XLC$STYLE_ACTION.XLCONNECT, 
-...)
+writeWorksheetToFile(file, data, sheet, ..., styleAction = XLC$STYLE_ACTION.XLCONNECT)
 }
 \arguments{
 \item{file}{The path name of the file to write to.}
-\item{...}{Arguments passed on to \link[=writeWorksheet-methods]{writeWorksheet}}
+\item{data}{Data to write}
+\item{sheet}{The name or index of the sheet to write to}
+\item{...}{Additional arguments passed to \link[=writeWorksheet-methods]{writeWorksheet}}
 \item{styleAction}{Style action to be used when writing the data - not vectorized! 
 The default is \code{XLC$STYLE_ACTION.XLCONNECT}. 
 See \code{\link[=setStyleAction-methods]{setStyleAction}} for more information.}

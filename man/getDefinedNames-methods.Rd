@@ -2,14 +2,13 @@
 \docType{methods}
 \alias{getDefinedNames}
 \alias{getDefinedNames-methods}
-\alias{getDefinedNames,workbook,logical-method}
-\alias{getDefinedNames,workbook,missing-method}
+\alias{getDefinedNames,workbook-method}
 \title{Retrieving defined names in a workbook}
 \description{
 Retrieves the defined names in a \code{\linkS4class{workbook}}.
 }
 \usage{
-\S4method{getDefinedNames}{workbook,logical}(object,validOnly)
+\S4method{getDefinedNames}{workbook}(object, validOnly)
 }
 
 \arguments{

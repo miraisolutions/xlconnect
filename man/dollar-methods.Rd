@@ -8,11 +8,8 @@
 \description{
 Allows to execute \code{\linkS4class{workbook}} methods in \code{workbook-object$method(...)} form.
 }
-\usage{
-\S4method{$}{workbook}(x)
-}
 \arguments{
-  \item{x}{The \code{\linkS4class{workbook}} to use}
+  \item{x}{The object (\code{\linkS4class{workbook}}, \code{\linkS4class{cellstyle}}) to use}
 }
 \details{
 \code{x$method(...)} (where \code{x} is a \code{\linkS4class{workbook}}-object) is equivalent to \code{method(x, ...)}

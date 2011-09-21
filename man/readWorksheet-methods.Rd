@@ -2,27 +2,15 @@
 \docType{methods}
 \alias{readWorksheet}
 \alias{readWorksheet-methods}
-\alias{readWorksheet,workbook,character,missing,missing,missing,missing,logical-method}
-\alias{readWorksheet,workbook,character,missing,missing,missing,missing,missing-method}
-\alias{readWorksheet,workbook,character,numeric,numeric,numeric,numeric,logical-method}
-\alias{readWorksheet,workbook,character,numeric,numeric,numeric,numeric,missing-method}
-\alias{readWorksheet,workbook,numeric,missing,missing,missing,missing,logical-method}
-\alias{readWorksheet,workbook,numeric,missing,missing,missing,missing,missing-method}
-\alias{readWorksheet,workbook,character,numeric,missing,missing,missing,missing-method}
-\alias{readWorksheet,workbook,numeric,numeric,numeric,numeric,numeric,logical-method}
-\alias{readWorksheet,workbook,numeric,numeric,numeric,numeric,numeric,missing-method}
+\alias{readWorksheet,workbook,character-method}
+\alias{readWorksheet,workbook,numeric-method}
 \title{Reading data from worksheets}
 \description{
 Reads data from worksheets of a \code{\linkS4class{workbook}}.
 }
 \usage{
-\S4method{readWorksheet}{workbook,numeric,numeric,numeric,numeric,numeric,logical}(object,sheet,startRow,startCol,endRow,endCol,header)
-\S4method{readWorksheet}{workbook,character,missing,missing,missing,missing,logical}(object,sheet,startRow,startCol,endRow,endCol,header)
-\S4method{readWorksheet}{workbook,numeric,missing,missing,missing,missing,logical}(object,sheet,startRow,startCol,endRow,endCol,header)
-\S4method{readWorksheet}{workbook,character,missing,missing,missing,missing,missing}(object,sheet,startRow,startCol,endRow,endCol,header)
-\S4method{readWorksheet}{workbook,numeric,missing,missing,missing,missing,missing}(object,sheet,startRow,startCol,endRow,endCol,header)
-\S4method{readWorksheet}{workbook,character,numeric,numeric,numeric,numeric,missing}(object,sheet,startRow,startCol,endRow,endCol,header)
-\S4method{readWorksheet}{workbook,numeric,numeric,numeric,numeric,numeric,missing}(object,sheet,startRow,startCol,endRow,endCol,header)
+\S4method{readWorksheet}{workbook,numeric}(object,sheet,startRow,startCol,endRow,endCol,header)
+\S4method{readWorksheet}{workbook,character}(object,sheet,startRow,startCol,endRow,endCol,header)
 }
 
 \arguments{

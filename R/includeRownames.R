@@ -20,26 +20,17 @@
 
 #############################################################################
 #
-# Reading named regions from an Excel file
+# Utility function to include rownames in a data.frame
 # 
 # Author: Martin Studer, Mirai Solutions GmbH
 #
 #############################################################################
 
-setGeneric("readNamedRegion",
-	function(object, name, ...) standardGeneric("readNamedRegion"))
-
-setMethod("readNamedRegion", 
-	signature(object = "workbook", name = "character"), 
-	function(object, name, header = TRUE) {	
-		# returns a list of RDataFrameWrapper Java object references
-		dataFrame <- xlcCall(object, "readNamedRegion", name, header, SIMPLIFY = FALSE)
-		# construct data.frame
-		dataFrame <- lapply(dataFrame, dataframeFromJava)
-		names(dataFrame) <- name
-		
-		# Return data.frame directly in case only one data.frame is read
-		if(length(dataFrame) == 1) dataFrame[[1]]
-		else dataFrame
-	}
-)
+includeRownames <- function(x, colname) {
+	if(!is.null(rownames(x))) {
+		res <- cbind(rownames(x), x)
+		names(res)[1] <- colname
+		res
+	} else
+		x
+}

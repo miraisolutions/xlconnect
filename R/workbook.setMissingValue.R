@@ -36,9 +36,17 @@ setMethod("setMissingValue",
 		signature(object = "workbook", value = "ANY"), 
 		function(object, value) {
 			if(is.null(value))
-				xlcCall(object, "setMissingValue", .jnull("java/lang/String"))
-			else
-				xlcCall(object, "setMissingValue", as.character(value))
+				xlcCall(object, "setMissingValue", .jarray(.jnull("java/lang/String")))
+			else {
+				value = unique(as.character(value))
+				# convert to array
+				res = .jarray(value)
+				# NA to Java null
+				if(any(is.na(value)))
+					res[[which(is.na(value))]] = .jnull("java/lang/String")
+				
+				xlcCall(object, "setMissingValue", res)
+			}
 			invisible()
 		}
 )

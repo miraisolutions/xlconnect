@@ -2,14 +2,13 @@
 \docType{methods}
 \alias{createName}
 \alias{createName-methods}
-\alias{createName,workbook,character,character,logical-method}
-\alias{createName,workbook,character,character,missing-method}
+\alias{createName,workbook,character,character-method}
 \title{Creating names in a workbook}
 \description{
 Creates a name for a specified formula in a \code{\linkS4class{workbook}}.
 }
 \usage{
-\S4method{createName}{workbook,character,character,logical}(object,name,formula,overwrite)
+\S4method{createName}{workbook,character,character}(object, name, formula, overwrite)
 }
 
 \arguments{

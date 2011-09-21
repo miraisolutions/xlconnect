@@ -2,14 +2,13 @@
 \docType{methods}
 \alias{readNamedRegion}
 \alias{readNamedRegion-methods}
-\alias{readNamedRegion,workbook,character,logical-method}
-\alias{readNamedRegion,workbook,character,missing-method}
+\alias{readNamedRegion,workbook,character-method}
 \title{Reading named regions from a workbook}
 \description{
 Reads named regions from a \code{\linkS4class{workbook}}.
 }
 \usage{
-\S4method{readNamedRegion}{workbook,character,logical}(object,name,header)
+\S4method{readNamedRegion}{workbook,character}(object, name, header)
 }
 
 \arguments{

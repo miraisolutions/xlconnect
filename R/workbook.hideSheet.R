@@ -31,34 +31,20 @@
 #############################################################################
  
 setGeneric("hideSheet",
-	function(object, sheet, veryHidden) standardGeneric("hideSheet"))
+	function(object, sheet, ...) standardGeneric("hideSheet"))
 
 setMethod("hideSheet", 
-		signature(object = "workbook", sheet = "numeric", veryHidden = "logical"), 
-		function(object, sheet, veryHidden) {
+		signature(object = "workbook", sheet = "numeric"), 
+		function(object, sheet, veryHidden = FALSE) {
 			xlcCall(object, "hideSheet", as.integer(sheet - 1), veryHidden)
 			invisible()
 		}
 )
 
 setMethod("hideSheet", 
-		signature(object = "workbook", sheet = "numeric", veryHidden = "missing"), 
-		function(object, sheet, veryHidden) {
-			callGeneric(object, sheet, FALSE)
-		}
-)
-
-setMethod("hideSheet", 
-		signature(object = "workbook", sheet = "character", veryHidden = "logical"), 
-		function(object, sheet, veryHidden) {
+		signature(object = "workbook", sheet = "character"), 
+		function(object, sheet, veryHidden = FALSE) {
 			xlcCall(object, "hideSheet", sheet, veryHidden)
 			invisible()
-		}
-)
-
-setMethod("hideSheet", 
-		signature(object = "workbook", sheet = "character", veryHidden = "missing"), 
-		function(object, sheet, veryHidden) {
-			callGeneric(object, sheet, FALSE)
 		}
 )

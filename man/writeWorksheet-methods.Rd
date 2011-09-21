@@ -2,20 +2,15 @@
 \docType{methods}
 \alias{writeWorksheet}
 \alias{writeWorksheet-methods}
-\alias{writeWorksheet,workbook,ANY,character,missing,missing,logical-method}
-\alias{writeWorksheet,workbook,ANY,character,missing,missing,missing-method}
-\alias{writeWorksheet,workbook,ANY,character,numeric,numeric,logical-method}
-\alias{writeWorksheet,workbook,ANY,character,numeric,numeric,missing-method}
-\alias{writeWorksheet,workbook,ANY,numeric,missing,missing,logical-method}
-\alias{writeWorksheet,workbook,ANY,numeric,missing,missing,missing-method}
-\alias{writeWorksheet,workbook,ANY,numeric,numeric,numeric,logical-method}
+\alias{writeWorksheet,workbook,ANY,character-method}
+\alias{writeWorksheet,workbook,ANY,numeric-method}
 \title{Writing data to worksheets}
 \description{
 Writes data to worksheets of a \code{\linkS4class{workbook}}.
 }
 \usage{
-\S4method{writeWorksheet}{workbook,ANY,character,numeric,numeric,logical}(object,data,sheet,startRow,startCol,header)
-\S4method{writeWorksheet}{workbook,ANY,numeric,numeric,numeric,logical}(object,data,sheet,startRow,startCol,header)
+\S4method{writeWorksheet}{workbook,ANY,character}(object,data,sheet,startRow,startCol,header,rownames)
+\S4method{writeWorksheet}{workbook,ANY,numeric}(object,data,sheet,startRow,startCol,header,rownames)
 }
 
 \arguments{
@@ -25,6 +20,10 @@ Writes data to worksheets of a \code{\linkS4class{workbook}}.
   \item{startRow}{Index of the first row to write to. The default is \code{startRow = 1}.}
   \item{startCol}{Index of the first column to write to. The default is \code{startCol = 1}.}
   \item{header}{Specifies if the column names should be written. The default is \code{TRUE}.}
+  \item{rownames}{Name (\code{character}) of column to use for the row names of the provided
+  \code{data} object. If specified, the row names of the data object (\code{data.frame}) will be
+  included as an additional column with the specified name. If \code{rownames = NULL} (default),
+  no row names will be included.}
 }
 
 \details{
