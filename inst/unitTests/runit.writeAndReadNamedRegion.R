@@ -111,4 +111,17 @@ test.writeAndReadNamedRegion <- function() {
 	# (*.xlsx)
 	testDataFrame(wb.xlsx, cdf, "$X$100")
 	
+	# Check writing of data.frame with row names (*.xls)
+	createSheet(wb.xls, name = "rownames")
+	createName(wb.xls, name = "rownames", formula = "rownames!$F$16")
+	writeNamedRegion(wb.xls, mtcars, name = "rownames", header = TRUE, rownames = "Car")
+	res <- readNamedRegion(wb.xls, "rownames")
+	checkEquals(normalizeDataframe(includeRownames(mtcars, "Car")), res)
+	
+	# Check writing of data.frame with row names (*.xlsx)
+	createSheet(wb.xlsx, name = "rownames")
+	createName(wb.xlsx, name = "rownames", formula = "rownames!$F$16")
+	writeNamedRegion(wb.xlsx, mtcars, name = "rownames", header = TRUE, rownames = "Car")
+	res <- readNamedRegion(wb.xlsx, "rownames")
+	checkEquals(normalizeDataframe(includeRownames(mtcars, "Car")), res)
 }

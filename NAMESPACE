@@ -18,6 +18,7 @@ exportMethods(
 	getCellFormula,
 	getDefinedNames,
 	getForceFormulaRecalculation,
+	getLastRow,
 	getReferenceFormula,
 	getReferenceCoordinates,
 	getSheetPos,

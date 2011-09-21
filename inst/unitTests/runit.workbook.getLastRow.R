@@ -20,37 +20,31 @@
 
 #############################################################################
 #
-# Setting missing value strings
-#
-# Missing value strings are used when reading and writing data. If data is
-# written, the first element of the missing value string vector is used
-# as a missing value identifier. If data is read, values are checked against
-# the set of defined missing value strings - if the string value matches
-# any of the defined missing values, NA will be assumed.
+# Tests around querying the last (non-empty) row of a worksheet
 # 
 # Author: Martin Studer, Mirai Solutions GmbH
 #
 #############################################################################
 
-setGeneric("setMissingValue",
-		function(object, value) standardGeneric("setMissingValue"))
-
-setMethod("setMissingValue", 
-		signature(object = "workbook", value = "ANY"), 
-		function(object, value) {
-			if(is.null(value))
-				xlcCall(object, "setMissingValue", 
-					.jarray(.jnull("java/lang/String"), contents.class = "java/lang/String"))
-			else {
-				value = unique(as.character(value))
-				# convert to array
-				res = .jarray(value)
-				# NA to Java null
-				if(any(is.na(value)))
-					res[[which(is.na(value))]] = .jnull("java/lang/String")
-				
-				xlcCall(object, "setMissingValue", res)
-			}
-			invisible()
-		}
-)
+test.workbook.getLastRow <- function() {
+	
+	# Create workbooks
+	wb.xls <- loadWorkbook(rsrc("resources/testWorkbookGetLastRow.xls"), create = FALSE)
+	wb.xlsx <- loadWorkbook(rsrc("resources/testWorkbookGetLastRow.xlsx"), create = FALSE)
+	
+	# Check if last row is determined correctly (*.xls)
+	checkEquals(as.vector(getLastRow(wb.xls, "mtcars")), 33)
+	checkEquals(as.vector(getLastRow(wb.xls, "mtcars2")), 41)
+	checkEquals(as.vector(getLastRow(wb.xls, "mtcars3")), 49)
+	
+	# Check if last row is determined correctly (*.xlsx)
+	checkEquals(as.vector(getLastRow(wb.xlsx, "mtcars")), 33)
+	checkEquals(as.vector(getLastRow(wb.xlsx, "mtcars2")), 41)
+	checkEquals(as.vector(getLastRow(wb.xlsx, "mtcars3")), 49)
+	
+	# Check that querying the last row of a non-existing worksheet throws an exception (*.xls)
+	checkException(getLastRow(wb.xls, "doesNotExist"))
+	
+	# Check that querying the last row of a non-existing worksheet throws an exception (*.xlsx)
+	checkException(getLastRow(wb.xlsx, "doesNotExist"))
+}

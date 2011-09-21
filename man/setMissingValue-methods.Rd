@@ -4,9 +4,9 @@
 \alias{setMissingValue-methods}
 \alias{setMissingValue,workbook-method}
 \alias{setMissingValue,workbook,ANY-method}
-\title{Setting a missing value string}
+\title{Setting missing value identifiers}
 \description{
-Sets the missing value string used when writing missing values to Excel.
+Defines the set of missing value strings used when reading and writing data.
 }
 \usage{
 \S4method{setMissingValue}{workbook,ANY}(object,value)
@@ -14,19 +14,23 @@ Sets the missing value string used when writing missing values to Excel.
 
 \arguments{
   \item{object}{The \code{\linkS4class{workbook}} to use}
-  \item{value}{The missing value string to use when writing data to Excel.
-  If \code{NULL}, missing values result in blank cells (which is the default behavior). Any
-  other values are coerced to \code{character} and used as missing value string.}
+  \item{value}{\code{character} vector of missing value identifiers that
+  are recognized as missing (\code{NA}) when reading data. The first
+  element of this vector will be used as missing value identifier when writing
+  data. If \code{value = NULL} (default), missing values are represented by
+  blank cells and only blank cells are recognized as missing.}
 }
 
 \details{
-If no specific missing value string is set using \code{setMissingValue} then the default behavior is
-to map missing values to blank (empty) cells. The reason for this default mechanism is that the reverse
-operation of reading the data back into R results in the same original data types. However, if a missing 
-value string is used (such as "NA"), then a numeric column for example with corresponding missing values 
-would be read back in as a string (character) column.\cr
-If you want to use e.g. numeric missing value identifiers such as e.g. \code{-9999} then you should replace
-missing values first before you write them to Excel using \pkg{XLConnect}.
+If there are no specific missing value identifiers defined the default behavior is
+to map missing values to blank (empty) cells. Otherwise, each string cell is checked if it
+matches one of the defined missing value identifiers. In addition, the first missing value
+identifier (i.e. the first element of the \code{value} argument) is used to represent missing
+values when writing data.\cr
+Note that the missing value mapping only works with string identifiers. If you want to use e.g. 
+numeric missing value identifiers such as e.g. \code{-9999} then you have to perform the mapping
+manually (i.e. replace items with \code{NA} before writing / replace items with \code{NA} after
+reading).
 }
 
 \author{

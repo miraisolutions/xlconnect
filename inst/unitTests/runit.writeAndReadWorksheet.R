@@ -111,4 +111,15 @@ test.workbook.writeAndReadWorksheet <- function() {
 	# (*.xlsx)
 	testDataFrame(wb.xlsx, cdf, 1, 1)
 	
+	# Check writing of data.frame with row names (*.xls)
+	createSheet(wb.xls, "rownames")
+	writeWorksheet(wb.xls, mtcars, "rownames", startRow = 9, startCol = 10, header = TRUE, rownames = "Car")
+	res <- readWorksheet(wb.xls, "rownames", startRow = 9, startCol = 10)
+	checkEquals(normalizeDataframe(includeRownames(mtcars, "Car")), res)
+	
+	# Check writing of data.frame with row names (*.xlsx)
+	createSheet(wb.xlsx, "rownames")
+	writeWorksheet(wb.xlsx, mtcars, "rownames", startRow = 9, startCol = 10, header = TRUE, rownames = "Car")
+	res <- readWorksheet(wb.xlsx, "rownames", startRow = 9, startCol = 10)
+	checkEquals(normalizeDataframe(includeRownames(mtcars, "Car")), res)
 }

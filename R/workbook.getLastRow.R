@@ -32,13 +32,13 @@ setGeneric("getLastRow",
 setMethod("getLastRow", 
 		signature(object = "workbook", sheet = "numeric"), 
 		function(object, sheet) {
-			xlcCall(object, "getLastRow", as.integer(sheet-1))
+			xlcCall(object, "getLastRow", as.integer(sheet-1)) + 1
 		}
 )
 
 setMethod("getLastRow", 
 		signature(object = "workbook", sheet = "character"), 
 		function(object, sheet) {
-			xlcCall(object, "getLastRow", sheet)
+			xlcCall(object, "getLastRow", sheet) + 1
 		}
 )
