@@ -117,5 +117,17 @@ test.writeNamedRegionToFile <- function() {
 	# (*.xls)
 	testDataFrame(file.xls, cdf)
 	# (*.xlsx)
-	testDataFrame(file.xlsx, cdf)	
+	testDataFrame(file.xlsx, cdf)
+	
+	# Check that writing a data.frame to a named region with a formula that contains a white space in
+	# the sheet name does not cause any grief (*.xls)
+	checkNoException(writeNamedRegionToFile("wnrtf1.xls", data = mtcars, name = "mtcars",
+		formula = "'My Cars'!$A$1", header = TRUE))
+	checkTrue(file.exists("wnrtf1.xls"))
+	
+	# Check that writing a data.frame to a named region with a formula that contains a white space in
+	# the sheet name does not cause any grief (*.xlsx)
+	checkNoException(writeNamedRegionToFile("wnrtf1.xlsx", data = mtcars, name = "mtcars",
+					formula = "'My Cars'!$A$1", header = TRUE))
+	checkTrue(file.exists("wnrtf1.xlsx"))
 }

@@ -24,7 +24,9 @@ XLConnect News
 	*	Improvements to the definition of several generic functions &
 		methods
 	*	Improvements to the functions writeNamedRegionToFile &
-		writeWorksheetToFile
+		writeWorksheetToFile. Also, an issue was fixed with
+		writeNamedRegionToFile where quoted sheet names (e.g. due to
+		a whitespace in the sheet name) would have caused an error.
 	
 0.1-6	Non-public release
 		

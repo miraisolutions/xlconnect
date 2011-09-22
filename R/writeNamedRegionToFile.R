@@ -33,13 +33,15 @@ writeNamedRegionToFile <- function(file, data, name, formula = NA, ...,
   wb <- loadWorkbook(file, create = !file.exists(file))  
   setStyleAction(wb, styleAction)
   
-  if(!is.na(formula)) { 
-    # extract "SheetX" from "SheetX!$A$1:$B$2"
-    sheetNames <- function(formula) {
-      sub("!.*", "", formula[grep("!", formula)])
-    }
+  if(!is.na(formula)) {
+	# Note: This matches up to the last occurrence of '!' since the regexpr is greedy
+	idx = regexpr(".*!", formula)
+	# Extract sheet names
+	sheets = substring(formula, idx, idx + attr(idx, "match.length") - 2)
+	# Replace leading & trailing '
+	sheets = gsub("^'|'$", "", sheets)
 
-    createSheet(wb, sheetNames(formula))
+    createSheet(wb, sheets[sheets != ""])
     createName(wb, name, formula)
   }
   
