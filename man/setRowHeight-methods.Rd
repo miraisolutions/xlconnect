@@ -17,7 +17,8 @@ Sets the height of a row in a worksheet.
   \item{object}{The \code{\linkS4class{workbook}} to use}
   \item{sheet}{The name or index of the sheet to edit}
   \item{row}{The index of the row to resize}
-  \item{height}{The height in points of the specified row}
+  \item{height}{The height in points. If \code{height < 0} (default: -1),
+  the row will be sized to the sheet's default row height.}
 }
 
 \details{

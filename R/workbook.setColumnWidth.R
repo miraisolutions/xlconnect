@@ -31,7 +31,7 @@ setGeneric("setColumnWidth",
 
 setMethod("setColumnWidth", 
 		signature(object = "workbook", sheet = "numeric"), 
-		function(object, sheet, column, width) {
+		function(object, sheet, column, width = -1) {
 			xlcCall(object, "setColumnWidth", as.integer(sheet - 1), as.integer(column - 1),
 				as.integer(width))
 			invisible()
@@ -40,7 +40,7 @@ setMethod("setColumnWidth",
 
 setMethod("setColumnWidth", 
 		signature(object = "workbook", sheet = "character"), 
-		function(object, sheet, column, width) {
+		function(object, sheet, column, width = -1) {
 			xlcCall(object, "setColumnWidth", sheet, as.integer(column - 1),
 				as.integer(width))
 			invisible()
