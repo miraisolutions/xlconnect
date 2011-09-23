@@ -20,27 +20,17 @@
 
 #############################################################################
 #
-# Wrapper function to write data to an Excel file in one line.
+# Utility function to extract the sheet name from a formula
 # 
-# Author: Thomas Themel, Mirai Solutions GmbH
+# Author: Martin Studer, Mirai Solutions GmbH
 #
 #############################################################################
 
-
-writeNamedRegionToFile <- function(file, data, name, formula = NA, ..., 
-		styleAction = XLC$STYLE_ACTION.XLCONNECT) {
-
-  wb <- loadWorkbook(file, create = !file.exists(file))  
-  setStyleAction(wb, styleAction)
-  
-  if(!is.na(formula)) {
-	sheets = extractSheetName(formula)
-    createSheet(wb, sheets[sheets != ""])
-    createName(wb, name, formula)
-  }
-  
-  writeNamedRegion(wb, data, name, ...);
-  
-  saveWorkbook(wb)
-  invisible(wb)  
+extractSheetName <- function(formula) {
+	# Note: This matches up to the last occurrence of '!' since the regexpr is greedy
+	idx = regexpr(".*!", formula)
+	# Extract sheet name
+	sheet = substring(formula, idx, idx + attr(idx, "match.length") - 2)
+	# Replace leading & trailing '
+	gsub("^'|'$", "", sheet)
 }

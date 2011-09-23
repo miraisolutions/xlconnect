@@ -22,7 +22,11 @@
 #
 # Workbook operators
 #
-# $: Execute workbook methods in object$method(...) form
+# $: 	Execute workbook methods in object$method(...) form
+# [:	Alias for readWorksheet
+# [<-:	Alias for writeWorksheet
+# [[:	Alias for readNamedRegion
+# [[<-:	Alias for writeNamedRegion
 # 
 # Author: Martin Studer, Mirai Solutions GmbH
 #
@@ -34,5 +38,46 @@ setMethod("$",
 		g <- getGeneric(name)
 		if(is.null(g)) stop("Method undefined for class 'workbook'")
 		function(...) g(x, ...)
+	}
+)
+
+setMethod("[",
+	signature(x = "workbook"),
+	function(x, i, j, ..., drop = FALSE) {
+		readWorksheet(x, sheet = i, ...)
+	}
+)
+
+setMethod("[<-",
+	signature(x = "workbook"),
+	function(x, i, j, ..., value) {
+		idx = !(i %in% getSheets(x))
+		if(any(idx))
+			createSheet(x, name = i[idx])
+		writeWorksheet(x, data = value, sheet = i, ...)
+		x
+	}
+)
+
+setMethod("[[",
+	signature(x = "workbook"),
+	function(x, i, j, ...) {
+		readNamedRegion(x, name = i, ...)
+	}
+)
+
+setMethod("[[<-",
+	signature(x = "workbook"),
+	function(x, i, j, ..., value) {
+		idxn = !(i %in% getDefinedNames(x))
+		if(any(idxn)) {
+			sheet = extractSheetName(j[idxn])
+			idxs = !(sheet %in% getSheets(x))
+			if(any(idxs))
+				createSheet(x, name = sheet[idxs])
+			createName(x, name = i[idxn], formula = j[idxn])
+		}
+		writeNamedRegion(x, data = value, name = i, ...)
+		x
 	}
 )

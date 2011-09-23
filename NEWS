@@ -13,6 +13,10 @@ XLConnect News
 	*	An issue was fixed where the named region was automatically
 		expanded by one row when writing data to a named region without
 		column headers.
+	*	New workbook data extraction & replacement operators [, [<-,
+		[[, [[<-. These are "syntactic sugar" for the already existing
+		methods readWorksheet, writeWorksheet, readNamedRegion and
+		writeNamedRegion.
 	*	Support for saving workbooks to a new file ("save as").
 	*	Support for querying the last (non-empty) row in a worksheet
 	*	Support for including the row names of a data.frame when

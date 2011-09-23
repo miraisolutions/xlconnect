@@ -69,6 +69,7 @@ export(
 	aref2idx,
 	col2idx,
 	cref2idx,
+	extractSheetName,
 	idx2aref,
 	idx2col,
 	idx2cref,
