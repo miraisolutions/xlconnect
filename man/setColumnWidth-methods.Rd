@@ -2,15 +2,15 @@
 \docType{methods}
 \alias{setColumnWidth}
 \alias{setColumnWidth-methods}
-\alias{setColumnWidth,workbook,character,numeric,numeric-method}
-\alias{setColumnWidth,workbook,numeric,numeric,numeric-method}
+\alias{setColumnWidth,workbook,character-method}
+\alias{setColumnWidth,workbook,numeric-method}
 \title{Setting the width of a column in a worksheet}
 \description{
 Sets the width of a column in a worksheet.
 }
 \usage{
-\S4method{setColumnWidth}{workbook,character,numeric,numeric}(object,sheet,column,width)
-\S4method{setColumnWidth}{workbook,numeric,numeric,numeric}(object,sheet,column,width)
+\S4method{setColumnWidth}{workbook,character}(object,sheet,column,width)
+\S4method{setColumnWidth}{workbook,numeric}(object,sheet,column,width)
 }
 
 \arguments{

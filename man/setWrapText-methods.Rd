@@ -2,13 +2,13 @@
 \docType{methods}
 \alias{setWrapText}
 \alias{setWrapText-methods}
-\alias{setWrapText,cellstyle,logical-method}
+\alias{setWrapText,cellstyle-method}
 \title{Specifying text wrapping behaviour}
 \description{
 Specifies if text should be wrapped in a cell.
 }
 \usage{
-\S4method{setWrapText}{cellstyle,logical}(object,wrap)
+\S4method{setWrapText}{cellstyle}(object,wrap)
 }
 
 \arguments{

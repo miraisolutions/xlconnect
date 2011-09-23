@@ -2,16 +2,16 @@
 \docType{methods}
 \alias{setForceFormulaRecalculation}
 \alias{setForceFormulaRecalculation-methods}
-\alias{setForceFormulaRecalculation,workbook,character,logical-method}
-\alias{setForceFormulaRecalculation,workbook,numeric,logical-method}
+\alias{setForceFormulaRecalculation,workbook,character-method}
+\alias{setForceFormulaRecalculation,workbook,numeric-method}
 \title{Forcing Excel to recalculate formula values when opening a workbook}
 \description{
  This function controls a flag that forces Excel to recalculate formula values when a workbook
  is opened. 
 }
 \usage{
-\S4method{setForceFormulaRecalculation}{workbook,character,logical}(object,sheet,value)
-\S4method{setForceFormulaRecalculation}{workbook,numeric,logical}(object,sheet,value)
+\S4method{setForceFormulaRecalculation}{workbook,character}(object,sheet,value)
+\S4method{setForceFormulaRecalculation}{workbook,numeric}(object,sheet,value)
 }
 
 \arguments{

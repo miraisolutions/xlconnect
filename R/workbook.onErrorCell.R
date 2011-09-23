@@ -27,10 +27,10 @@
 #############################################################################
 
 setGeneric("onErrorCell",
-		function(object, behavior) standardGeneric("onErrorCell"))
+		function(object, ...) standardGeneric("onErrorCell"))
 
 setMethod("onErrorCell", 
-		signature(object = "workbook", behavior = "character"), 
+		signature(object = "workbook"), 
 		function(object, behavior) {
 			xlcCall(object, "onErrorCell", behavior)
 			invisible()

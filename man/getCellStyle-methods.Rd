@@ -2,14 +2,13 @@
 \docType{methods}
 \alias{getCellStyle}
 \alias{getCellStyle-methods}
-\alias{getCellStyle,workbook,character-method}
-\alias{getCellStyle,workbook,missing-method}
-\title{Creating custom named and anonymous cell styles}
+\alias{getCellStyle,workbook-method}
+\title{Retrieving named cell styles}
 \description{
 Retrieves a named cell style from a \code{\linkS4class{workbook}}.
 }
 \usage{
-\S4method{getCellStyle}{workbook,character}(object,name)
+\S4method{getCellStyle}{workbook}(object,name)
 }
 
 \arguments{
@@ -22,7 +21,7 @@ Retrieves the \code{\linkS4class{cellstyle}} with the specified \code{name}.
 }
 
 \author{
-Martin Studer\cr
+Thomas Themel\cr
 Mirai Solutions GmbH \url{http://www.mirai-solutions.com}
 }
 

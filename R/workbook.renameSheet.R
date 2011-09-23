@@ -27,10 +27,10 @@
 #############################################################################
  
 setGeneric("renameSheet",
-	function(object, sheet, newName) standardGeneric("renameSheet"))
+	function(object, sheet, ...) standardGeneric("renameSheet"))
 
 setMethod("renameSheet", 
-		signature(object = "workbook", sheet = "numeric", newName = "character"), 
+		signature(object = "workbook", sheet = "numeric"), 
 		function(object, sheet, newName) {
 			xlcCall(object, "renameSheet", as.integer(sheet - 1), newName)
 			invisible()
@@ -38,7 +38,7 @@ setMethod("renameSheet",
 )
 
 setMethod("renameSheet", 
-		signature(object = "workbook", sheet = "character", newName = "character"), 
+		signature(object = "workbook", sheet = "character"), 
 		function(object, sheet, newName) {
 			xlcCall(object, "renameSheet", sheet,  newName)
 			invisible()

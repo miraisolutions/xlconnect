@@ -27,10 +27,10 @@
 #############################################################################
 
 setGeneric("createSheet",
-	function(object, name) standardGeneric("createSheet"))
+	function(object, ...) standardGeneric("createSheet"))
 
 setMethod("createSheet", 
-	signature(object = "workbook", name = "character"), 
+	signature(object = "workbook"), 
 	function(object, name) {
 		xlcCall(object, "createSheet", name)
 		invisible()

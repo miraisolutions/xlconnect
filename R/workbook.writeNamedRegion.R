@@ -27,10 +27,10 @@
 #############################################################################
 
 setGeneric("writeNamedRegion",
-	function(object, data, name, ...) standardGeneric("writeNamedRegion"))
+	function(object, data, ...) standardGeneric("writeNamedRegion"))
 
 setMethod("writeNamedRegion", 
-	signature(object = "workbook", data = "ANY", name = "character"), 
+	signature(object = "workbook", data = "ANY"), 
 	function(object, data, name, header = TRUE, rownames = NULL) {
 		if(is.character(rownames))
 			data <- includeRownames(data, rownames)

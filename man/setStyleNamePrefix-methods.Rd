@@ -2,13 +2,13 @@
 \docType{methods}
 \alias{setStyleNamePrefix}
 \alias{setStyleNamePrefix-methods}
-\alias{setStyleNamePrefix,workbook,character-method}
+\alias{setStyleNamePrefix,workbook-method}
 \title{Setting the style name prefix for the "name prefix" style action}
 \description{
 Sets the style name prefix for the "name prefix" style action.
 }
 \usage{
-\S4method{setStyleNamePrefix}{workbook,character}(object,prefix)
+\S4method{setStyleNamePrefix}{workbook}(object,prefix)
 }
 
 \arguments{

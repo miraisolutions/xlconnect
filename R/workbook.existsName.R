@@ -27,10 +27,10 @@
 #############################################################################
 
 setGeneric("existsName",
-	function(object, name) standardGeneric("existsName"))
+	function(object, ...) standardGeneric("existsName"))
 
 setMethod("existsName", 
-		signature(object = "workbook", name = "character"), 
+		signature(object = "workbook"), 
 		function(object, name) {
 			xlcCall(object, "existsName", name)
 		}

@@ -2,15 +2,15 @@
 \docType{methods}
 \alias{unmergeCells}
 \alias{unmergeCells-methods}
-\alias{unmergeCells,workbook,character,character-method}
-\alias{unmergeCells,workbook,numeric,character-method}
+\alias{unmergeCells,workbook,character-method}
+\alias{unmergeCells,workbook,numeric-method}
 \title{Unmerging cells}
 \description{
 Unmerges cells in a worksheet.
 }
 \usage{
-\S4method{unmergeCells}{workbook,character,character}(object,sheet,reference)
-\S4method{unmergeCells}{workbook,numeric,character}(object,sheet,reference)
+\S4method{unmergeCells}{workbook,character}(object,sheet,reference)
+\S4method{unmergeCells}{workbook,numeric}(object,sheet,reference)
 }
 
 \arguments{

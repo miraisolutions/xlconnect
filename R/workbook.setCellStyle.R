@@ -27,11 +27,10 @@
 #############################################################################
 
 setGeneric("setCellStyle",
-		function(object, sheet, row, col, cellstyle) standardGeneric("setCellStyle"))
+		function(object, sheet, ...) standardGeneric("setCellStyle"))
 
 setMethod("setCellStyle", 
-		signature(object = "workbook", sheet = "numeric", row = "numeric", col = "numeric", 
-			cellstyle = "cellstyle"), 
+		signature(object = "workbook", sheet = "numeric"), 
 		function(object, sheet, row, col, cellstyle) {
 			xlcCall(object, "setCellStyle", as.integer(sheet - 1), as.integer(row - 1),
 				as.integer(col - 1), cellstyle)
@@ -40,8 +39,7 @@ setMethod("setCellStyle",
 )
 
 setMethod("setCellStyle", 
-		signature(object = "workbook", sheet = "character", row = "numeric", col = "numeric", 
-				cellstyle = "cellstyle"), 
+		signature(object = "workbook", sheet = "character"), 
 		function(object, sheet, row, col, cellstyle) {
 			xlcCall(object, "setCellStyle", sheet, as.integer(row - 1),
 					as.integer(col - 1), cellstyle)

@@ -2,13 +2,13 @@
 \docType{methods}
 \alias{setStyleAction}
 \alias{setStyleAction-methods}
-\alias{setStyleAction,workbook,character-method}
+\alias{setStyleAction,workbook-method}
 \title{Controlling application of cell styles when writing data to Excel}
 \description{
 Controls the application of \code{\linkS4class{cellstyle}}s when writing data to Excel.
 }
 \usage{
-\S4method{setStyleAction}{workbook,character}(object,type)
+\S4method{setStyleAction}{workbook}(object,type)
 }
 
 \arguments{

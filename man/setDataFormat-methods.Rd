@@ -2,13 +2,13 @@
 \docType{methods}
 \alias{setDataFormat}
 \alias{setDataFormat-methods}
-\alias{setDataFormat,cellstyle,character-method}
+\alias{setDataFormat,cellstyle-method}
 \title{Specifying custom data formats for cell styles}
 \description{
 Specifies a custom data format for a \code{\linkS4class{cellstyle}}.
 }
 \usage{
-\S4method{setDataFormat}{cellstyle,character}(object,format)
+\S4method{setDataFormat}{cellstyle}(object,format)
 }
 
 \arguments{

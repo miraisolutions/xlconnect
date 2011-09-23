@@ -27,10 +27,10 @@
 #############################################################################
 
 setGeneric("getReferenceFormula",
-		function(object, name) standardGeneric("getReferenceFormula"))
+		function(object, ...) standardGeneric("getReferenceFormula"))
 
 setMethod("getReferenceFormula", 
-		signature(object = "workbook", name = "character"), 
+		signature(object = "workbook"), 
 		function(object, name) {
 			xlcCall(object, "getReferenceFormula", name)
 		}

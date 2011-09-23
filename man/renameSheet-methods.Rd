@@ -2,15 +2,15 @@
 \docType{methods}
 \alias{renameSheet}
 \alias{renameSheet-methods}
-\alias{renameSheet,workbook,character,character-method}
-\alias{renameSheet,workbook,numeric,character-method}
+\alias{renameSheet,workbook,character-method}
+\alias{renameSheet,workbook,numeric-method}
 \title{Renaming worksheets from workbooks}
 \description{
 Renames a worksheet from a \code{\linkS4class{workbook}}.
 }
 \usage{
-\S4method{renameSheet}{workbook,character,character}(object,sheet,newName)
-\S4method{renameSheet}{workbook,numeric,character}(object,sheet,newName)
+\S4method{renameSheet}{workbook,character}(object,sheet,newName)
+\S4method{renameSheet}{workbook,numeric}(object,sheet,newName)
 }
 
 \arguments{

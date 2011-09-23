@@ -2,14 +2,14 @@
 \docType{methods}
 \alias{onErrorCell}
 \alias{onErrorCell-methods}
-\alias{onErrorCell,workbook,character-method}
+\alias{onErrorCell,workbook-method}
 \title{ Behavior when error cells are detected }
 \description{
 This function defines the behavior when reading data from a worksheet and error cells
 are detected.
 }
 \usage{
-\S4method{onErrorCell}{workbook,character}(object,behavior)
+\S4method{onErrorCell}{workbook}(object,behavior)
 }
 
 \arguments{

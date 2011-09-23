@@ -27,10 +27,10 @@
 #############################################################################
 
 setGeneric("readNamedRegion",
-	function(object, name, ...) standardGeneric("readNamedRegion"))
+	function(object, ...) standardGeneric("readNamedRegion"))
 
 setMethod("readNamedRegion", 
-	signature(object = "workbook", name = "character"), 
+	signature(object = "workbook"), 
 	function(object, name, header = TRUE) {	
 		# returns a list of RDataFrameWrapper Java object references
 		dataFrame <- xlcCall(object, "readNamedRegion", name, header, SIMPLIFY = FALSE)

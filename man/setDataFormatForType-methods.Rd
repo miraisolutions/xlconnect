@@ -2,13 +2,13 @@
 \docType{methods}
 \alias{setDataFormatForType}
 \alias{setDataFormatForType-methods}
-\alias{setDataFormatForType,workbook,character,character-method}
+\alias{setDataFormatForType,workbook-method}
 \title{Setting the data format for the DATA_FORMAT_ONLY style action}
 \description{
 Sets the data format for a specific data type as used by the DATA_FORMAT_ONLY style action.
 }
 \usage{
-\S4method{setDataFormatForType}{workbook,character,character}(object,type,format)
+\S4method{setDataFormatForType}{workbook}(object,type,format)
 }
 
 \arguments{

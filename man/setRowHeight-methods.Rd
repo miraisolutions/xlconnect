@@ -2,15 +2,15 @@
 \docType{methods}
 \alias{setRowHeight}
 \alias{setRowHeight-methods}
-\alias{setRowHeight,workbook,character,numeric,numeric-method}
-\alias{setRowHeight,workbook,numeric,numeric,numeric-method}
+\alias{setRowHeight,workbook,character-method}
+\alias{setRowHeight,workbook,numeric-method}
 \title{Setting the height of a row in a worksheet}
 \description{
 Sets the height of a row in a worksheet.
 }
 \usage{
-\S4method{setRowHeight}{workbook,character,numeric,numeric}(object,sheet,row,height)
-\S4method{setRowHeight}{workbook,numeric,numeric,numeric}(object,sheet,row,height)
+\S4method{setRowHeight}{workbook,character}(object,sheet,row,height)
+\S4method{setRowHeight}{workbook,numeric}(object,sheet,row,height)
 }
 
 \arguments{

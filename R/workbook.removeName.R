@@ -27,10 +27,10 @@
 #############################################################################
 
 setGeneric("removeName",
-	function(object, name) standardGeneric("removeName"))
+	function(object, ...) standardGeneric("removeName"))
 
 setMethod("removeName", 
-		signature(object = "workbook", name = "character"), 
+		signature(object = "workbook"), 
 		function(object, name) {
 			xlcCall(object, "removeName", name)
 			invisible()

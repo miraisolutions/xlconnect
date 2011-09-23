@@ -27,10 +27,10 @@
 #############################################################################
 
 setGeneric("unmergeCells",
-		function(object, sheet, reference) standardGeneric("unmergeCells"))
+		function(object, sheet, ...) standardGeneric("unmergeCells"))
 
 setMethod("unmergeCells", 
-		signature(object = "workbook", sheet = "numeric", reference = "character"), 
+		signature(object = "workbook", sheet = "numeric"), 
 		function(object, sheet, reference) {
 			xlcCall(object, "unmergeCells", as.integer(sheet - 1), reference)
 			invisible()
@@ -38,7 +38,7 @@ setMethod("unmergeCells",
 )
 
 setMethod("unmergeCells", 
-		signature(object = "workbook", sheet = "character", reference = "character"), 
+		signature(object = "workbook", sheet = "character"), 
 		function(object, sheet, reference) {
 			xlcCall(object, "unmergeCells", sheet, reference)
 			invisible()

@@ -27,10 +27,10 @@
 #############################################################################
 
 setGeneric("setColumnWidth",
-		function(object, sheet, column, width) standardGeneric("setColumnWidth"))
+		function(object, sheet, ...) standardGeneric("setColumnWidth"))
 
 setMethod("setColumnWidth", 
-		signature(object = "workbook", sheet = "numeric", column = "numeric", width = "numeric"), 
+		signature(object = "workbook", sheet = "numeric"), 
 		function(object, sheet, column, width) {
 			xlcCall(object, "setColumnWidth", as.integer(sheet - 1), as.integer(column - 1),
 				as.integer(width))
@@ -39,7 +39,7 @@ setMethod("setColumnWidth",
 )
 
 setMethod("setColumnWidth", 
-		signature(object = "workbook", sheet = "character", column = "numeric", width = "numeric"), 
+		signature(object = "workbook", sheet = "character"), 
 		function(object, sheet, column, width) {
 			xlcCall(object, "setColumnWidth", sheet, as.integer(column - 1),
 				as.integer(width))

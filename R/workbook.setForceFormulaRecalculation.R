@@ -27,10 +27,10 @@
 #############################################################################
 
 setGeneric("setForceFormulaRecalculation",
-		function(object, sheet, value) standardGeneric("setForceFormulaRecalculation"))
+		function(object, sheet, ...) standardGeneric("setForceFormulaRecalculation"))
 
 setMethod("setForceFormulaRecalculation", 
-		signature(object = "workbook", sheet = "character", value = "logical"), 
+		signature(object = "workbook", sheet = "character"), 
 		function(object, sheet, value) {
 			if(sheet == "*") {
 				callGeneric(object, getSheets(object), value)
@@ -42,7 +42,7 @@ setMethod("setForceFormulaRecalculation",
 )
 
 setMethod("setForceFormulaRecalculation", 
-		signature(object = "workbook", sheet = "numeric", value = "logical"), 
+		signature(object = "workbook", sheet = "numeric"), 
 		function(object, sheet, value) {
 			xlcCall(object, "setForceFormulaRecalculation", as.integer(sheet-1), value)
 			invisible()

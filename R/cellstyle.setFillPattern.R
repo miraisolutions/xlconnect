@@ -27,10 +27,10 @@
 #############################################################################
 
 setGeneric("setFillPattern",
-		function(object, fill) standardGeneric("setFillPattern"))
+		function(object, ...) standardGeneric("setFillPattern"))
 
 setMethod("setFillPattern", 
-		signature(object = "cellstyle", fill = "numeric"), 
+		signature(object = "cellstyle"), 
 		function(object, fill) {
 			jTryCatch(object@jobj$setFillPattern(as.integer(fill)))
 		}

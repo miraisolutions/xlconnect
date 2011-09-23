@@ -22,15 +22,15 @@
 #
 # Accessing named cell styles
 # 
-# Author: Martin Studer, Mirai Solutions GmbH
+# Author: Thomas Themel, Mirai Solutions GmbH
 #
 #############################################################################
 
 setGeneric("getCellStyle",
-		function(object, name) standardGeneric("getCellStyle"))
+		function(object, ...) standardGeneric("getCellStyle"))
 
 setMethod("getCellStyle", 
-		signature(object = "workbook", name = "character"), 
+		signature(object = "workbook"), 
 		function(object, name) {
 			jobj <- jTryCatch(object@jobj$getCellStyle(name))
                         new("cellstyle", jobj = jobj)

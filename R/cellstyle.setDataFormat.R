@@ -27,10 +27,10 @@
 #############################################################################
 
 setGeneric("setDataFormat",
-		function(object, format) standardGeneric("setDataFormat"))
+		function(object, ...) standardGeneric("setDataFormat"))
 
 setMethod("setDataFormat", 
-		signature(object = "cellstyle", format = "character"), 
+		signature(object = "cellstyle"), 
 		function(object, format) {
 			jTryCatch(object@jobj$setDataFormat(format))
 		}

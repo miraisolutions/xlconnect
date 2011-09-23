@@ -2,16 +2,16 @@
 \docType{methods}
 \alias{cloneSheet}
 \alias{cloneSheet-methods}
-\alias{cloneSheet,workbook,character,character-method}
-\alias{cloneSheet,workbook,numeric,character-method}
+\alias{cloneSheet,workbook,character-method}
+\alias{cloneSheet,workbook,numeric-method}
 \title{Cloning/copying worksheets}
 \description{
 Clones (copies) a worksheet in a \code{\linkS4class{workbook}}.
 }
 
 \usage{
-\S4method{cloneSheet}{workbook,numeric,character}(object,sheet,name)
-\S4method{cloneSheet}{workbook,character,character}(object,sheet,name)
+\S4method{cloneSheet}{workbook,numeric}(object,sheet,name)
+\S4method{cloneSheet}{workbook,character}(object,sheet,name)
 }
 
 \arguments{

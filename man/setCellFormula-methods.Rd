@@ -2,15 +2,15 @@
 \docType{methods}
 \alias{setCellFormula}
 \alias{setCellFormula-methods}
-\alias{setCellFormula,workbook,character,numeric,numeric,character-method}
-\alias{setCellFormula,workbook,numeric,numeric,numeric,character-method}
+\alias{setCellFormula,workbook,character-method}
+\alias{setCellFormula,workbook,numeric-method}
 \title{Setting cell formulas}
 \description{
 Sets cell formulas for specific cells in a \code{\linkS4class{workbook}}.
 }
 \usage{
-\S4method{setCellFormula}{workbook,character,numeric,numeric,character}(object,sheet,row,col,formula)
-\S4method{setCellFormula}{workbook,numeric,numeric,numeric,character}(object,sheet,row,col,formula)
+\S4method{setCellFormula}{workbook,character}(object,sheet,row,col,formula)
+\S4method{setCellFormula}{workbook,numeric}(object,sheet,row,col,formula)
 }
 
 \arguments{

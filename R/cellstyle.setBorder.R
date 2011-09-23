@@ -27,11 +27,10 @@
 #############################################################################
 
 setGeneric("setBorder",
-		function(object, side, type, color) standardGeneric("setBorder"))
+		function(object, ...) standardGeneric("setBorder"))
 
 setMethod("setBorder", 
-		signature(object = "cellstyle", side = "character", type = "numeric", 
-				color = "numeric"), 
+		signature(object = "cellstyle"), 
 		function(object, side, type, color) {
 			side <- tolower(side)
 			if("all" %in% side)

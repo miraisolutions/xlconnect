@@ -2,13 +2,13 @@
 \docType{methods}
 \alias{setBorder}
 \alias{setBorder-methods}
-\alias{setBorder,cellstyle,character,numeric,numeric-method}
+\alias{setBorder,cellstyle-method}
 \title{Specifying borders for cell styles}
 \description{
 Specifies borders for a \code{\linkS4class{cellstyle}}.
 }
 \usage{
-\S4method{setBorder}{cellstyle,character,numeric,numeric}(object,side,type,color)
+\S4method{setBorder}{cellstyle}(object,side,type,color)
 }
 
 \arguments{

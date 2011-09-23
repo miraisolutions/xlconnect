@@ -2,15 +2,15 @@
 \docType{methods}
 \alias{setCellStyle}
 \alias{setCellStyle-methods}
-\alias{setCellStyle,workbook,character,numeric,numeric,cellstyle-method}
-\alias{setCellStyle,workbook,numeric,numeric,numeric,cellstyle-method}
+\alias{setCellStyle,workbook,character-method}
+\alias{setCellStyle,workbook,numeric-method}
 \title{Setting cell styles}
 \description{
 Sets cell styles for specific cells in a \code{\linkS4class{workbook}}.
 }
 \usage{
-\S4method{setCellStyle}{workbook,character,numeric,numeric,cellstyle}(object,sheet,row,col,cellstyle)
-\S4method{setCellStyle}{workbook,numeric,numeric,numeric,cellstyle}(object,sheet,row,col,cellstyle)
+\S4method{setCellStyle}{workbook,character}(object,sheet,row,col,cellstyle)
+\S4method{setCellStyle}{workbook,numeric}(object,sheet,row,col,cellstyle)
 }
 
 \arguments{

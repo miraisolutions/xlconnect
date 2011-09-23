@@ -2,13 +2,14 @@
 \docType{methods}
 \alias{writeNamedRegion}
 \alias{writeNamedRegion-methods}
-\alias{writeNamedRegion,workbook,ANY,character-method}
+\alias{writeNamedRegion,workbook-method}
+\alias{writeNamedRegion,workbook,ANY-method}
 \title{Writing named regions to a workbook}
 \description{
 Writes named regions to a \code{\linkS4class{workbook}}.
 }
 \usage{
-\S4method{writeNamedRegion}{workbook,ANY,character}(object,data,name,header,rownames)
+\S4method{writeNamedRegion}{workbook,ANY}(object,data,name,header,rownames)
 }
 
 \arguments{

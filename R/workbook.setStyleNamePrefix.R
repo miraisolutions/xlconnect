@@ -28,10 +28,10 @@
 #############################################################################
 
 setGeneric("setStyleNamePrefix",
-		function(object, prefix) standardGeneric("setStyleNamePrefix"))
+		function(object, ...) standardGeneric("setStyleNamePrefix"))
 
 setMethod("setStyleNamePrefix", 
-		signature(object = "workbook", prefix = "character"), 
+		signature(object = "workbook"), 
 		function(object, prefix) {
 			jTryCatch(object@jobj$setStyleNamePrefix(prefix))
 		}

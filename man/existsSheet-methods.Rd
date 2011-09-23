@@ -2,14 +2,14 @@
 \docType{methods}
 \alias{existsSheet}
 \alias{existsSheet-methods}
-\alias{existsSheet,workbook,character-method}
+\alias{existsSheet,workbook-method}
 \title{Checking for existence of worksheets in a workbook}
 \description{
 Checks the existence of a worksheet in a \code{\linkS4class{workbook}}.
 }
 
 \usage{
-\S4method{existsSheet}{workbook,character}(object,name)
+\S4method{existsSheet}{workbook}(object,name)
 }
 
 \arguments{

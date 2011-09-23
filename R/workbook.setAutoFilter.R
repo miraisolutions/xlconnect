@@ -27,10 +27,10 @@
 #############################################################################
 
 setGeneric("setAutoFilter",
-		function(object, sheet, reference) standardGeneric("setAutoFilter"))
+		function(object, sheet, ...) standardGeneric("setAutoFilter"))
 
 setMethod("setAutoFilter", 
-		signature(object = "workbook", sheet = "numeric", reference = "character"), 
+		signature(object = "workbook", sheet = "numeric"), 
 		function(object, sheet, reference) {
 			xlcCall(object, "setAutoFilter", as.integer(sheet - 1), reference)
 			invisible()
@@ -38,7 +38,7 @@ setMethod("setAutoFilter",
 )
 
 setMethod("setAutoFilter", 
-		signature(object = "workbook", sheet = "character", reference = "character"), 
+		signature(object = "workbook", sheet = "character"), 
 		function(object, sheet, reference) {
 			xlcCall(object, "setAutoFilter", sheet, reference)
 			invisible()

@@ -2,13 +2,13 @@
 \docType{methods}
 \alias{getReferenceCoordinates}
 \alias{getReferenceCoordinates-methods}
-\alias{getReferenceCoordinates,workbook,character-method}
+\alias{getReferenceCoordinates,workbook-method}
 \title{Querying the coordinates of the range reference by an Excel name}
 \description{
 Queries the coordinates of an Excel name in a \code{\linkS4class{workbook}}.
 }
 \usage{
-\S4method{getReferenceCoordinates}{workbook,character}(object,name)
+\S4method{getReferenceCoordinates}{workbook}(object,name)
 }
 
 \arguments{

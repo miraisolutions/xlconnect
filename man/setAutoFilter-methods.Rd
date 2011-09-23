@@ -2,15 +2,15 @@
 \docType{methods}
 \alias{setAutoFilter}
 \alias{setAutoFilter-methods}
-\alias{setAutoFilter,workbook,character,character-method}
-\alias{setAutoFilter,workbook,numeric,character-method}
+\alias{setAutoFilter,workbook,character-method}
+\alias{setAutoFilter,workbook,numeric-method}
 \title{Setting auto-filters on worksheets}
 \description{
 Sets an auto-filter on a specified worksheet. 
 }
 \usage{
-\S4method{setAutoFilter}{workbook,character,character}(object,sheet,reference)
-\S4method{setAutoFilter}{workbook,numeric,character}(object,sheet,reference)
+\S4method{setAutoFilter}{workbook,character}(object,sheet,reference)
+\S4method{setAutoFilter}{workbook,numeric}(object,sheet,reference)
 }
 
 \arguments{

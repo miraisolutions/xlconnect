@@ -2,13 +2,13 @@
 \docType{methods}
 \alias{createSheet}
 \alias{createSheet-methods}
-\alias{createSheet,workbook,character-method}
+\alias{createSheet,workbook-method}
 \title{Creating worksheets in a workbook}
 \description{
 Creates worksheets with specified names in a \code{\linkS4class{workbook}}.
 }
 \usage{
-  \S4method{createSheet}{workbook,character}(object, name)
+  \S4method{createSheet}{workbook}(object, name)
 }
 
 \arguments{

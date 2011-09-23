@@ -2,14 +2,14 @@
 \docType{methods}
 \alias{existsName}
 \alias{existsName-methods}
-\alias{existsName,workbook,character-method}
+\alias{existsName,workbook-method}
 \title{Checking existence of names in a workbook}
 \description{
 Checks the existence of a name in a \code{\linkS4class{workbook}}.
 }
 
 \usage{
-\S4method{existsName}{workbook,character}(object, name)
+\S4method{existsName}{workbook}(object, name)
 }
 
 \arguments{

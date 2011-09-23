@@ -2,13 +2,13 @@
 \docType{methods}
 \alias{getReferenceFormula}
 \alias{getReferenceFormula-methods}
-\alias{getReferenceFormula,workbook,character-method}
+\alias{getReferenceFormula,workbook-method}
 \title{Querying reference formulas of Excel names}
 \description{
 Queries the reference formula of an Excel name in a \code{\linkS4class{workbook}}.
 }
 \usage{
-\S4method{getReferenceFormula}{workbook,character}(object,name)
+\S4method{getReferenceFormula}{workbook}(object,name)
 }
 
 \arguments{

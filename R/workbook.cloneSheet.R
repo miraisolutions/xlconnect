@@ -27,10 +27,10 @@
 #############################################################################
 
 setGeneric("cloneSheet",
-		function(object, sheet, name) standardGeneric("cloneSheet"))
+		function(object, sheet, ...) standardGeneric("cloneSheet"))
 
 setMethod("cloneSheet", 
-		signature(object = "workbook", sheet = "numeric", name = "character"), 
+		signature(object = "workbook", sheet = "numeric"), 
 		function(object, sheet, name) {
 			xlcCall(object, "cloneSheet", as.integer(sheet - 1), name)
 			invisible()
@@ -38,7 +38,7 @@ setMethod("cloneSheet",
 )
 
 setMethod("cloneSheet", 
-		signature(object = "workbook", sheet = "character", name = "character"), 
+		signature(object = "workbook", sheet = "character"), 
 		function(object, sheet, name) {
 			xlcCall(object, "cloneSheet", sheet, name)
 			invisible()

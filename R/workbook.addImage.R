@@ -27,10 +27,10 @@
 #############################################################################
 
 setGeneric("addImage", 
-	function(object, filename, name, ...) standardGeneric("addImage"))
+	function(object, ...) standardGeneric("addImage"))
 
 setMethod("addImage", 
-		signature(object = "workbook", filename = "character", name = "character"), 
+		signature(object = "workbook"), 
 		function(object, filename, name, originalSize = FALSE) {
 			xlcCall(object, "addImage", filename, name, originalSize)
 			invisible()

@@ -2,13 +2,13 @@
 \docType{methods}
 \alias{setFillPattern}
 \alias{setFillPattern-methods}
-\alias{setFillPattern,cellstyle,numeric-method}
+\alias{setFillPattern,cellstyle-method}
 \title{Specifying the fill pattern for cell styles}
 \description{
 Specifies the fill pattern for a \code{\linkS4class{cellstyle}}.
 }
 \usage{
-\S4method{setFillPattern}{cellstyle,numeric}(object,fill)
+\S4method{setFillPattern}{cellstyle}(object,fill)
 }
 
 \arguments{

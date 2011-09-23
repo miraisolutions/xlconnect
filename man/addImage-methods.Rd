@@ -2,13 +2,13 @@
 \docType{methods}
 \alias{addImage}
 \alias{addImage-methods}
-\alias{addImage,workbook,character,character-method}
+\alias{addImage,workbook-method}
 \title{Adding images to a worksheet}
 \description{
 Adds an image to a worksheet using a named region.
 }
 \usage{
- \S4method{addImage}{workbook,character,character}(object, filename, name, originalSize)
+ \S4method{addImage}{workbook}(object, filename, name, originalSize)
 }
 
 \arguments{

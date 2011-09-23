@@ -2,15 +2,15 @@
 \docType{methods}
 \alias{getCellFormula}
 \alias{getCellFormula-methods}
-\alias{getCellFormula,workbook,character,numeric,numeric-method}
-\alias{getCellFormula,workbook,numeric,numeric,numeric-method}
+\alias{getCellFormula,workbook,character-method}
+\alias{getCellFormula,workbook,numeric-method}
 \title{Retrieving formula definitions from cells}
 \description{
 Retrieves a cell formula from a \code{\linkS4class{workbook}}.
 }
 \usage{
-\S4method{getCellFormula}{workbook,character,numeric,numeric}(object,sheet,row,col)
-\S4method{getCellFormula}{workbook,numeric,numeric,numeric}(object,sheet,row,col)
+\S4method{getCellFormula}{workbook,character}(object,sheet,row,col)
+\S4method{getCellFormula}{workbook,numeric}(object,sheet,row,col)
 }
 
 \arguments{

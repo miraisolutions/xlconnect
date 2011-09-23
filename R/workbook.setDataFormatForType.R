@@ -27,10 +27,10 @@
 #############################################################################
 
 setGeneric("setDataFormatForType",
-		function(object, type, format) standardGeneric("setDataFormatForType"))
+		function(object, ...) standardGeneric("setDataFormatForType"))
 
 setMethod("setDataFormatForType", 
-		signature(object = "workbook", type = "character", format = "character"), 
+		signature(object = "workbook"), 
 		function(object, type, format) {
 			xlcCall(object, "setDataFormat", type, format)
 			invisible()

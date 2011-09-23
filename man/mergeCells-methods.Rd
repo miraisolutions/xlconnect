@@ -2,15 +2,15 @@
 \docType{methods}
 \alias{mergeCells}
 \alias{mergeCells-methods}
-\alias{mergeCells,workbook,character,character-method}
-\alias{mergeCells,workbook,numeric,character-method}
+\alias{mergeCells,workbook,character-method}
+\alias{mergeCells,workbook,numeric-method}
 \title{Merging cells}
 \description{
 Merges cells in a worksheet.
 }
 \usage{
-\S4method{mergeCells}{workbook,character,character}(object,sheet,reference)
-\S4method{mergeCells}{workbook,numeric,character}(object,sheet,reference)
+\S4method{mergeCells}{workbook,character}(object,sheet,reference)
+\S4method{mergeCells}{workbook,numeric}(object,sheet,reference)
 }
 
 \arguments{

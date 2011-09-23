@@ -27,10 +27,10 @@
 #############################################################################
 
 setGeneric("setStyleAction",
-		function(object, type) standardGeneric("setStyleAction"))
+		function(object, ...) standardGeneric("setStyleAction"))
 
 setMethod("setStyleAction", 
-		signature(object = "workbook", type = "character"), 
+		signature(object = "workbook"), 
 		function(object, type) {
 			jTryCatch(object@jobj$setStyleAction(type))
 		}

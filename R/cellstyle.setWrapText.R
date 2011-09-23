@@ -27,10 +27,10 @@
 #############################################################################
 
 setGeneric("setWrapText",
-		function(object, wrap) standardGeneric("setWrapText"))
+		function(object, ...) standardGeneric("setWrapText"))
 
 setMethod("setWrapText", 
-		signature(object = "cellstyle", wrap = "logical"), 
+		signature(object = "cellstyle"), 
 		function(object, wrap) {
 			jTryCatch(object@jobj$setWrapText(wrap))
 		}

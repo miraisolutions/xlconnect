@@ -27,10 +27,10 @@
 #############################################################################
 
 setGeneric("getReferenceCoordinates",
-		function(object, name) standardGeneric("getReferenceCoordinates"))
+		function(object, ...) standardGeneric("getReferenceCoordinates"))
 
 setMethod("getReferenceCoordinates", 
-		signature(object = "workbook", name = "character"), 
+		signature(object = "workbook"), 
 		function(object, name) {
 			res <- xlcCall(object, "getReferenceCoordinates", name)
                         if(is.numeric(res)) { matrix(res, nrow=2, byrow=TRUE)+1 } else { res } 

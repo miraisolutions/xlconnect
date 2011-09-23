@@ -27,11 +27,10 @@
 #############################################################################
 
 setGeneric("setCellFormula",
-		function(object, sheet, row, col, formula) standardGeneric("setCellFormula"))
+		function(object, sheet, ...) standardGeneric("setCellFormula"))
 
 setMethod("setCellFormula", 
-		signature(object = "workbook", sheet = "numeric", row = "numeric", col = "numeric", 
-			 formula = "character"), 
+		signature(object = "workbook", sheet = "numeric"), 
 		function(object, sheet, row, col, formula) {
 			xlcCall(object, "setCellFormula", as.integer(sheet - 1), as.integer(row - 1),
 				as.integer(col - 1), formula)
@@ -40,8 +39,7 @@ setMethod("setCellFormula",
 )
 
 setMethod("setCellFormula", 
-		signature(object = "workbook", sheet = "character", row = "numeric", col = "numeric", 
-				formula = "character"), 
+		signature(object = "workbook", sheet = "character"), 
 		function(object, sheet, row, col, formula) {
 			xlcCall(object, "setCellFormula", sheet, as.integer(row - 1),
 					as.integer(col - 1), formula)

@@ -27,10 +27,10 @@
 #############################################################################
 
 setGeneric("mergeCells",
-		function(object, sheet, reference) standardGeneric("mergeCells"))
+		function(object, sheet, ...) standardGeneric("mergeCells"))
 
 setMethod("mergeCells", 
-		signature(object = "workbook", sheet = "numeric", reference = "character"), 
+		signature(object = "workbook", sheet = "numeric"), 
 		function(object, sheet, reference) {
 			xlcCall(object, "mergeCells", as.integer(sheet - 1), reference)
 			invisible()
@@ -38,7 +38,7 @@ setMethod("mergeCells",
 )
 
 setMethod("mergeCells", 
-		signature(object = "workbook", sheet = "character", reference = "character"), 
+		signature(object = "workbook", sheet = "character"), 
 		function(object, sheet, reference) {
 			xlcCall(object, "mergeCells", sheet, reference)
 			invisible()
