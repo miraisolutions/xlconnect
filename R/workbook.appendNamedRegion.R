@@ -20,37 +20,23 @@
 
 #############################################################################
 #
-# Writing data to worksheets of an Excel file
+# Appending data to named regions
 # 
 # Author: Martin Studer, Mirai Solutions GmbH
 #
 #############################################################################
 
-setGeneric("writeWorksheet",
-	function(object, data, sheet, ...) standardGeneric("writeWorksheet"))
+setGeneric("appendNamedRegion",
+	function(object, data, ...) standardGeneric("appendNamedRegion"))
 
-setMethod("writeWorksheet", 
-	signature(object = "workbook", data = "ANY", sheet = "numeric"), 
-	function(object, data, sheet, startRow = 1, startCol = 1, header = TRUE, rownames = NULL) {
+setMethod("appendNamedRegion", 
+	signature(object = "workbook", data = "ANY"), 
+	function(object, data, name, header = FALSE, rownames = NULL) {
 		if(is.character(rownames))
 			data <- includeRownames(data, rownames)
 		# pass data.frame's to Java - construct RDataFrameWrapper Java object references
 		data <- lapply(wrapList(data), dataframeToJava)
-		xlcCall(object, "writeWorksheet", data, as.integer(sheet - 1), as.integer(startRow - 1),
-			as.integer(startCol - 1), header)
-		invisible()
-	}
-)
-
-setMethod("writeWorksheet", 
-	signature(object = "workbook", data = "ANY", sheet = "character"), 
-	function(object, data, sheet, startRow = 1, startCol = 1, header = TRUE, rownames = NULL) {
-		if(is.character(rownames))
-			data <- includeRownames(data, rownames)
-		# pass data.frame's to Java - construct RDataFrameWrapper Java object references
-		data <- lapply(wrapList(data), dataframeToJava)
-		xlcCall(object, "writeWorksheet", data, sheet, as.integer(startRow - 1), 
-			as.integer(startCol - 1), header)
+		xlcCall(object, "appendNamedRegion", data, name, header, SIMPLIFY = FALSE)
 		invisible()
 	}
 )

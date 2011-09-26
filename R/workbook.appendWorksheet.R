@@ -20,37 +20,35 @@
 
 #############################################################################
 #
-# Writing data to worksheets of an Excel file
+# Appending data to a worksheet
 # 
 # Author: Martin Studer, Mirai Solutions GmbH
 #
 #############################################################################
 
-setGeneric("writeWorksheet",
-	function(object, data, sheet, ...) standardGeneric("writeWorksheet"))
+setGeneric("appendWorksheet",
+		function(object, data, sheet, ...) standardGeneric("appendWorksheet"))
 
-setMethod("writeWorksheet", 
+setMethod("appendWorksheet", 
 	signature(object = "workbook", data = "ANY", sheet = "numeric"), 
-	function(object, data, sheet, startRow = 1, startCol = 1, header = TRUE, rownames = NULL) {
+	function(object, data, sheet, header = FALSE, rownames = NULL) {
 		if(is.character(rownames))
 			data <- includeRownames(data, rownames)
 		# pass data.frame's to Java - construct RDataFrameWrapper Java object references
 		data <- lapply(wrapList(data), dataframeToJava)
-		xlcCall(object, "writeWorksheet", data, as.integer(sheet - 1), as.integer(startRow - 1),
-			as.integer(startCol - 1), header)
+		xlcCall(object, "appendWorksheet", data, as.integer(sheet - 1), header)
 		invisible()
 	}
 )
 
-setMethod("writeWorksheet", 
+setMethod("appendWorksheet", 
 	signature(object = "workbook", data = "ANY", sheet = "character"), 
-	function(object, data, sheet, startRow = 1, startCol = 1, header = TRUE, rownames = NULL) {
+	function(object, data, sheet, header = FALSE, rownames = NULL) {
 		if(is.character(rownames))
 			data <- includeRownames(data, rownames)
 		# pass data.frame's to Java - construct RDataFrameWrapper Java object references
 		data <- lapply(wrapList(data), dataframeToJava)
-		xlcCall(object, "writeWorksheet", data, sheet, as.integer(startRow - 1), 
-			as.integer(startCol - 1), header)
+		xlcCall(object, "appendWorksheet", data, sheet, header)
 		invisible()
 	}
 )

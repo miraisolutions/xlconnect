@@ -32,6 +32,8 @@ XLConnect News
 		writeNamedRegionToFile where quoted sheet names (e.g. due to
 		a whitespace in the sheet name) would have caused an error.
 	*	Support for auto-sizing of columns.
+	*	New functionality to append data to named regions and work-
+		sheets: appendNamedRegion & appendWorksheet.
 	
 0.1-6	Non-public release
 		

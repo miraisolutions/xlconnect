@@ -50,8 +50,10 @@ styles to the cells as defined by the \code{\linkS4class{workbook}}'s
 \seealso{
   \code{\linkS4class{workbook}},
   \code{\link[=writeNamedRegion-methods]{writeNamedRegion}},
+  \code{\link[=appendWorksheet-methods]{appendWorksheet}},
+  \code{\link[=appendNamedRegion-methods]{appendNamedRegion}},
   \code{\link[=readWorksheet-methods]{readWorksheet}},
-  \code{\link[=readNamedRegion-methods]{readNamedRegion}},\cr
+  \code{\link[=readNamedRegion-methods]{readNamedRegion}},
   \code{\link{writeWorksheetToFile}}
 }
 \examples{
