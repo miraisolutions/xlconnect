@@ -35,11 +35,13 @@ test.workbook.appendWorksheet <- function() {
 	# Check that appending data to a worksheet produces the expected result (*.xls)
 	appendWorksheet(wb.xls, mtcars, sheet = "mtcars")
 	res = readWorksheet(wb.xls, sheet = "mtcars")
+	checkEquals(getLastRow(wb.xls, "mtcars"), c(mtcars = 73))
 	checkEquals(res, normalizeDataframe(rbind(mtcars, mtcars)))
 	
 	# Check that appending data to a named region produces the expected result (*.xlsx)
 	appendWorksheet(wb.xlsx, mtcars, sheet = "mtcars")
 	res = readWorksheet(wb.xlsx, sheet = "mtcars")
+	checkEquals(getLastRow(wb.xlsx, "mtcars"), c(mtcars = 73))
 	checkEquals(res, normalizeDataframe(rbind(mtcars, mtcars)))
 	
 	# Check that trying to append to an non-existing worksheet throws an error (*.xls)

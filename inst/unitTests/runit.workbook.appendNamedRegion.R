@@ -32,19 +32,39 @@ test.workbook.appendNamedRegion <- function() {
 	wb.xls <- loadWorkbook(rsrc("resources/testWorkbookAppend.xls"))
 	wb.xlsx <- loadWorkbook(rsrc("resources/testWorkbookAppend.xlsx"))
 	
+	refCoord = matrix(c(9, 5, 73, 15), ncol = 2, byrow = TRUE)
+	
 	# Check that appending data to a named region produces the expected result (*.xls)
 	appendNamedRegion(wb.xls, mtcars, name = "mtcars")
 	res = readNamedRegion(wb.xls, name = "mtcars")
 	checkEquals(res, normalizeDataframe(rbind(mtcars, mtcars)))
+	checkEquals(getReferenceCoordinates(wb.xls, "mtcars"), refCoord)
 	
 	# Check that appending data to a named region produces the expected result (*.xlsx)
 	appendNamedRegion(wb.xlsx, mtcars, name = "mtcars")
 	res = readNamedRegion(wb.xlsx, name = "mtcars")
 	checkEquals(res, normalizeDataframe(rbind(mtcars, mtcars)))
+	checkEquals(getReferenceCoordinates(wb.xlsx, "mtcars"), refCoord)
 	
 	# Check that trying to append to an non-existing named region throws an error (*.xls)
 	checkException(appendNamedRegion(wb.xls, mtcars, name = "doesNotExist"))
 	
 	# Check that trying to append to an non-existing named region throws an error (*.xlsx)
 	checkException(appendNamedRegion(wb.xlsx, mtcars, name = "doesNotExist"))
+	
+	# Re-create workbooks
+	wb.xls <- loadWorkbook(rsrc("resources/testWorkbookAppend.xls"))
+	wb.xlsx <- loadWorkbook(rsrc("resources/testWorkbookAppend.xlsx"))
+	
+	refCoord = matrix(c(9, 5, 194, 15), ncol = 2, byrow = TRUE)
+	
+	# Check that appending data to a named region with a different structure results
+	# in the correct bounding box for the re-defined named region (*.xls)
+	appendNamedRegion(wb.xls, airquality, name = "mtcars")
+	checkEquals(getReferenceCoordinates(wb.xls, "mtcars"), refCoord)
+	
+	# Check that appending data to a named region with a different structure results
+	# in the correct bounding box for the re-defined named region (*.xlsx)
+	appendNamedRegion(wb.xlsx, airquality, name = "mtcars")
+	checkEquals(getReferenceCoordinates(wb.xlsx, "mtcars"), refCoord)
 }
