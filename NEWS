@@ -34,6 +34,10 @@ XLConnect News
 	*	Support for auto-sizing of columns.
 	*	New functionality to append data to named regions and work-
 		sheets: appendNamedRegion & appendWorksheet.
+	*	Several internal changes on the Java side: removing Java
+		logging, using java.util.ArrayList instead of java.util.Vector
+	*	Functionality for dumping and restoring objects to/from Excel
+		files (xlcDump, xlcRestore)
 	
 0.1-6	Non-public release
 		

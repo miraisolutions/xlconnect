@@ -82,8 +82,10 @@ export(
 	runUnitTests,
 	writeNamedRegionToFile,
 	writeWorksheetToFile,
+	xlcDump,
 	xlcFreeMemory,
 	xlcMemoryReport,
+	xlcRestore,
 	XLC
 )
 

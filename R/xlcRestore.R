@@ -20,15 +20,20 @@
 
 #############################################################################
 #
-# Set XLConnect Java log level.
-#
-# This controls the logging behaviour of XLConnect's underlying Java code. If 
-# turned on, Java prints logging statements to the standard error.
+# Restoring objects from an Excel file (that was created via xlcDump)
 # 
 # Author: Martin Studer, Mirai Solutions GmbH
 #
 #############################################################################
 
-setJavaLogLevel <- function(level) {
-	J("com.miraisolutions.xlconnect.utils.Logging")$withLevel(level)
+xlcRestore <- function(file = "dump.xlsx", envir = parent.frame(), overwrite = FALSE) {
+	wb = loadWorkbook(file, create = FALSE)
+	sheets = setdiff(getSheets(wb), getOption("XLConnect.Sheet"))
+	sapply(sheets, function(obj) {
+		if(exists(obj, envir = envir) && !overwrite)
+			return(FALSE)
+		data = readWorksheet(wb, sheet = obj, rownames = getOption("XLConnect.RownameCol"))
+		assign(obj, data, envir = envir)
+		TRUE
+	})
 }

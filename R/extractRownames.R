@@ -20,17 +20,22 @@
 
 #############################################################################
 #
-# Utility function to include rownames in a data.frame
+# Utility function to extract row names (stored in a column) of a data.frame
+# and to add them as proper row names
 # 
 # Author: Martin Studer, Mirai Solutions GmbH
 #
 #############################################################################
 
-includeRownames <- function(x, colname) {
-	if(is.character(colname) && !is.null(rownames(x))) {
-		res <- cbind(rownames(x), x)
-		names(res)[1] <- colname
-		res
+extractRownames <- function(x, col) {
+	if((is.numeric(col) || is.character(col)) && 
+		!is.null(x[[col]])) {
+		
+		rownames(x) = x[[col]]
+		if(is.numeric(col))
+			x[,-col]
+		else
+			x[, !(col %in% names(x))]
 	} else
 		x
 }

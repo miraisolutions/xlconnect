@@ -31,11 +31,13 @@ setGeneric("readNamedRegion",
 
 setMethod("readNamedRegion", 
 	signature(object = "workbook"), 
-	function(object, name, header = TRUE) {	
+	function(object, name, header = TRUE, rownames = NULL) {	
 		# returns a list of RDataFrameWrapper Java object references
 		dataFrame <- xlcCall(object, "readNamedRegion", name, header, SIMPLIFY = FALSE)
 		# construct data.frame
-		dataFrame <- lapply(dataFrame, dataframeFromJava)
+		dataFrame <- lapply(dataFrame, function(x) {
+			extractRownames(dataframeFromJava(x), rownames)
+		})
 		names(dataFrame) <- name
 		
 		# Return data.frame directly in case only one data.frame is read
