@@ -39,7 +39,7 @@ test.writeAndReadNamedRegion <- function() {
 		createName(wb, name = namedRegion, formula = paste(namedRegion, lref, sep = "!"))
 		writeNamedRegion(wb, df, name = namedRegion, header = TRUE)
 		res <- readNamedRegion(wb, namedRegion)
-		checkEquals(normalizeDataframe(df), res)
+		checkEquals(normalizeDataframe(df), res, check.attributes = FALSE, check.names = TRUE)
 	}
 	
 	# built-in dataset mtcars (*.xls)
@@ -116,26 +116,28 @@ test.writeAndReadNamedRegion <- function() {
 	createName(wb.xls, name = "rownames", formula = "rownames!$F$16")
 	writeNamedRegion(wb.xls, mtcars, name = "rownames", header = TRUE, rownames = "Car")
 	res <- readNamedRegion(wb.xls, "rownames")
-	checkEquals(includeRownames(mtcars, "Car"), res)
+	checkEquals(includeRownames(mtcars, "Car"), res, check.attributes = FALSE, check.names = TRUE)
 	
 	# Check writing of data.frame with row names (*.xlsx)
 	createSheet(wb.xlsx, name = "rownames")
 	createName(wb.xlsx, name = "rownames", formula = "rownames!$F$16")
 	writeNamedRegion(wb.xlsx, mtcars, name = "rownames", header = TRUE, rownames = "Car")
 	res <- readNamedRegion(wb.xlsx, "rownames")
-	checkEquals(includeRownames(mtcars, "Car"), res)
+	checkEquals(includeRownames(mtcars, "Car"), res, check.attributes = FALSE, check.names = TRUE)
 	
 	# Check writing & reading of data.frame with row names (*.xls)
 	createSheet(wb.xls, name = "rownames2")
 	createName(wb.xls, name = "rownames2", formula = "rownames2!$K$5")
 	writeNamedRegion(wb.xls, mtcars, name = "rownames2", header = TRUE, rownames = "Car")
 	res <- readNamedRegion(wb.xls, "rownames2", rownames = "Car")
-	checkEquals(mtcars, res)
+	checkEquals(mtcars, res, check.attributes = FALSE, check.names = TRUE)
+	checkEquals(attr(mtcars, "row.names"), attr(res, "row.names"))
 	
 	# Check writing & reading of data.frame with row names (*.xlsx)
 	createSheet(wb.xlsx, name = "rownames2")
 	createName(wb.xlsx, name = "rownames2", formula = "rownames2!$K$5")
 	writeNamedRegion(wb.xlsx, mtcars, name = "rownames2", header = TRUE, rownames = "Car")
 	res <- readNamedRegion(wb.xlsx, "rownames2", rownames = "Car")
-	checkEquals(mtcars, res)
+	checkEquals(mtcars, res, check.attributes = FALSE, check.names = TRUE)
+	checkEquals(attr(mtcars, "row.names"), attr(res, "row.names"))
 }

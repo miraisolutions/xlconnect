@@ -39,7 +39,7 @@ test.workbook.writeAndReadWorksheet <- function() {
 		writeWorksheet(wb, df, worksheet, startRow = startRow, startCol = startCol)
 		res <- readWorksheet(wb, worksheet, startRow = startRow, startCol = startCol,
 				endRow = -1, endCol = -1)	
-		checkEquals(normalizeDataframe(df), res)
+		checkEquals(normalizeDataframe(df), res, check.attributes = FALSE, check.names = TRUE)
 	}
 	
 	# built-in dataset mtcars (*.xls)
@@ -115,23 +115,25 @@ test.workbook.writeAndReadWorksheet <- function() {
 	createSheet(wb.xls, "rownames")
 	writeWorksheet(wb.xls, mtcars, "rownames", startRow = 9, startCol = 10, header = TRUE, rownames = "Car")
 	res <- readWorksheet(wb.xls, "rownames", startRow = 9, startCol = 10)
-	checkEquals(includeRownames(mtcars, "Car"), res)
+	checkEquals(includeRownames(mtcars, "Car"), res, check.attributes = FALSE, check.names = TRUE)
 	
 	# Check writing of data.frame with row names (*.xlsx)
 	createSheet(wb.xlsx, "rownames")
 	writeWorksheet(wb.xlsx, mtcars, "rownames", startRow = 9, startCol = 10, header = TRUE, rownames = "Car")
 	res <- readWorksheet(wb.xlsx, "rownames", startRow = 9, startCol = 10)
-	checkEquals(includeRownames(mtcars, "Car"), res)
+	checkEquals(includeRownames(mtcars, "Car"), res, check.attributes = FALSE, check.names = TRUE)
 	
 	# Check writing & reading of data.frame with row names (*.xls)
 	createSheet(wb.xls, name = "rownames2")
 	writeWorksheet(wb.xls, mtcars, "rownames2", startRow = 31, startCol = 8, header = TRUE, rownames = "Car")
 	res <- readWorksheet(wb.xls, "rownames2", rownames = "Car")
-	checkEquals(mtcars, res)
+	checkEquals(mtcars, res, check.attributes = FALSE, check.names = TRUE)
+	checkEquals(attr(mtcars, "row.names"), attr(res, "row.names"))
 	
 	# Check writing & reading of data.frame with row names (*.xlsx)
 	createSheet(wb.xlsx, name = "rownames2")
 	writeWorksheet(wb.xlsx, mtcars, "rownames2", startRow = 31, startCol = 8, header = TRUE, rownames = "Car")
 	res <- readWorksheet(wb.xlsx, "rownames2", rownames = "Car")
-	checkEquals(mtcars, res)
+	checkEquals(mtcars, res, check.attributes = FALSE, check.names = TRUE)
+	checkEquals(attr(mtcars, "row.names"), attr(res, "row.names"))
 }

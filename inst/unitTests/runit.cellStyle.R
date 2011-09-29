@@ -19,7 +19,8 @@
 #############################################################################
 
 #############################################################################
-
+#
+# Tests around cell styles
 # 
 # Author: Thomas Themel, Mirai Solutions GmbH
 #
@@ -43,4 +44,3 @@ test.cellStyle <- function() {
         cs.xls2 <- getCellStyle(wb.xls, 'Header')
         cs.xlsx2 <- getCellStyle(wb.xlsx, 'Header')
 }
-

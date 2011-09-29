@@ -47,7 +47,7 @@ test.writeNamedRegionToFile <- function() {
                 name <- paste(worksheet, "Region", sep="") 
 		writeNamedRegionToFile(file, df, name, formula=paste(worksheet, "A1", sep="!"))
 		res <- readNamedRegionFromFile(file, name)                
-                checkEquals(normalizeDataframe(df), res)
+                checkEquals(normalizeDataframe(df), res, check.attributes = FALSE, check.names = TRUE)
         }
 	
 	# built-in dataset mtcars (*.xls)

@@ -48,7 +48,7 @@ test.writeWorksheetToFile <- function() {
                 name <- paste(worksheet, "Region", sep="")
 		writeWorksheetToFile(file, data=df, sheet=name)
 		res <- readWorksheetFromFile(file, sheet=name)                
-                checkEquals(normalizeDataframe(df), res)
+                checkEquals(normalizeDataframe(df), res, check.attributes = FALSE, check.names = TRUE)
         }
 	
 	# built-in dataset mtcars (*.xls)

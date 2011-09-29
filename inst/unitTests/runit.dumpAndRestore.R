@@ -20,37 +20,31 @@
 
 #############################################################################
 #
-# "Normalizes" a data.frame with respect to column types.
-# This is necessary for comparing data.frames written to Excel and then
-# read back in from Excel.
-#
-# Note that Excel does not know e.g. factor types. Factor variables
-# in fact are written to Excel as ordinary strings. Therefore, when read
-# back in to R, they are treated as character variables.
-#
-# 'normalizeDataframe' is used for RUnit tests to compare data.frame's
-# written to and read from Excel
+# Testing dumping & restoring objects to/from Excel files
 # 
-# Author: Martin Studer, Mirai Solutions GmbH
+# Author: Martin, Mirai Solutions GmbH
 #
 #############################################################################
 
-normalizeDataframe <- function(df) {
-	att = attr(df, "row.names")
-	res <- lapply(df, 
-		function(col) {
-			if(is(col, "factor")) {
-				as.character(col)
-			} else if(is(col, "Date") || is(col, "POSIXt")) {
-				# Get rid of "original" timezone and assume UTC
-				as.POSIXct(
-					format(col, format = options("XLConnect.dateTimeFormat")[[1]]), 
-					tz = "UTC")
-			} else
-				col
-		}
-	)
-	res = data.frame(res, stringsAsFactors = F)
-	attr(res, "row.names") = att
-	res
+test.dumpAndRestore <- function() {
+	require(datasets)
+	pos = "package:datasets"
+
+	# Get all data.frame's from 'package:datasets'
+	objs = ls(pos = pos)
+	idx = sapply(objs, function(obj) is.data.frame(get(obj, pos = pos)))
+	objs = objs[idx]
+
+	for(file in c("testDumpAndRestore.xls", "testDumpAndRestore.xlsx")) {
+		
+		out = xlcDump(objs, file = file, pos = pos, overwrite = TRUE)
+		xlcRestore(file = file, pos = globalenv(), overwrite = TRUE)
+		
+		sapply(names(out)[out], function(obj) {
+			data.orig = normalizeDataframe(get(obj, pos = pos))
+			data.restored = get(obj)
+			checkEquals(data.orig, data.restored, check.attributes = FALSE, check.names = TRUE)
+			checkEquals(attr(data.orig, "row.names"), attr(data.restored, "row.names"))
+		})
+	}
 }

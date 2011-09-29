@@ -27,9 +27,12 @@
 #############################################################################
 
 includeRownames <- function(x, colname) {
-	if(is.character(colname) && !is.null(rownames(x))) {
-		res <- cbind(rownames(x), x, stringsAsFactors = FALSE)
-		rownames(res) <- NULL
+	# use attr(x, "row.names") instead of row.names or rownames
+	# since row.names coerces to character for backward compatibility
+	# see help(row.names) for more information
+	if(is.character(colname) && !is.null(attr(x, "row.names"))) {
+		res <- cbind(attr(x, "row.names"), x, stringsAsFactors = FALSE)
+		row.names(res) <- NULL
 		names(res)[1] <- colname
 		res
 	} else

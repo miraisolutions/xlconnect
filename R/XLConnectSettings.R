@@ -43,7 +43,7 @@ XLConnectSettings <- function(pdesc) {
 	# Dummy sheet name (used by xlcDump, xlcRestore)
 	options(XLConnect.Sheet = "#xlc#")
 	# Rowname column (used by xlcDump, xlcRestore)
-	options(XLConnect.RownameCol = "#rownames")
+	options(XLConnect.RownameCol = ".rownames")
 	
 	invisible()
 }

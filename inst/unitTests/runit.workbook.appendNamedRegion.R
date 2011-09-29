@@ -37,13 +37,13 @@ test.workbook.appendNamedRegion <- function() {
 	# Check that appending data to a named region produces the expected result (*.xls)
 	appendNamedRegion(wb.xls, mtcars, name = "mtcars")
 	res = readNamedRegion(wb.xls, name = "mtcars")
-	checkEquals(res, normalizeDataframe(rbind(mtcars, mtcars)))
+	checkEquals(res, normalizeDataframe(rbind(mtcars, mtcars)), check.attributes = FALSE, check.names = TRUE)
 	checkEquals(getReferenceCoordinates(wb.xls, "mtcars"), refCoord)
 	
 	# Check that appending data to a named region produces the expected result (*.xlsx)
 	appendNamedRegion(wb.xlsx, mtcars, name = "mtcars")
 	res = readNamedRegion(wb.xlsx, name = "mtcars")
-	checkEquals(res, normalizeDataframe(rbind(mtcars, mtcars)))
+	checkEquals(res, normalizeDataframe(rbind(mtcars, mtcars)), check.attributes = FALSE, check.names = TRUE)
 	checkEquals(getReferenceCoordinates(wb.xlsx, "mtcars"), refCoord)
 	
 	# Check that trying to append to an non-existing named region throws an error (*.xls)

@@ -32,7 +32,7 @@ test.dataframeConversion <- function() {
 	
 	testDataFrame <- function(df) {
 		res <- dataframeFromJava(dataframeToJava(df))
-		checkEquals(normalizeDataframe(df), res)
+		checkEquals(normalizeDataframe(df), res, check.attributes = FALSE, check.names = TRUE)
 	}
 	
 	# built-in dataset mtcars
