@@ -9,8 +9,8 @@
 Reads data from worksheets of a \code{\linkS4class{workbook}}.
 }
 \usage{
-\S4method{readWorksheet}{workbook,numeric}(object,sheet,startRow,startCol,endRow,endCol,header)
-\S4method{readWorksheet}{workbook,character}(object,sheet,startRow,startCol,endRow,endCol,header)
+\S4method{readWorksheet}{workbook,numeric}(object,sheet,startRow,startCol,endRow,endCol,header,rownames)
+\S4method{readWorksheet}{workbook,character}(object,sheet,startRow,startCol,endRow,endCol,header,rownames)
 }
 
 \arguments{
@@ -22,6 +22,9 @@ Reads data from worksheets of a \code{\linkS4class{workbook}}.
   \item{endCol}{The index of the last column to read from}
   \item{header}{Interpret the first row of the specified area as column
     headers. The default is \code{TRUE}.}
+  \item{rownames}{Index (\code{numeric}) or name (\code{character}) of column that
+  should be used as row names. The corresponding column will be removed from the data
+  set. Defaults to \code{NULL} which means that no row names are applied.}
 }
 
 \details{

@@ -28,7 +28,8 @@
 
 includeRownames <- function(x, colname) {
 	if(is.character(colname) && !is.null(rownames(x))) {
-		res <- cbind(rownames(x), x)
+		res <- cbind(rownames(x), x, stringsAsFactors = FALSE)
+		rownames(res) <- NULL
 		names(res)[1] <- colname
 		res
 	} else

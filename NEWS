@@ -20,7 +20,9 @@ XLConnect News
 	*	Support for saving workbooks to a new file ("save as").
 	*	Support for querying the last (non-empty) row in a worksheet
 	*	Support for including the row names of a data.frame when
-		writing to a worksheet or a named region
+		writing to a worksheet or a named region. In addition, when
+		reading data from a worksheet or a named region a column
+		can be specified that should be turned into row names.
 	*	Extended use of setMissingValue. setMissingValue allows to
 		define a set of missing value identifiers that are recognized
 		as missing values when reading in data. The first element of

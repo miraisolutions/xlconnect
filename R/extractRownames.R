@@ -35,7 +35,7 @@ extractRownames <- function(x, col) {
 		if(is.numeric(col))
 			x[,-col]
 		else
-			x[, !(col %in% names(x))]
+			x[, names(x) != col]
 	} else
 		x
 }

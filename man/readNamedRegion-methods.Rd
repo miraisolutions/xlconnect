@@ -8,7 +8,7 @@
 Reads named regions from a \code{\linkS4class{workbook}}.
 }
 \usage{
-\S4method{readNamedRegion}{workbook}(object, name, header)
+\S4method{readNamedRegion}{workbook}(object, name, header, rownames)
 }
 
 \arguments{
@@ -16,6 +16,9 @@ Reads named regions from a \code{\linkS4class{workbook}}.
   \item{name}{The name of the named region to read}
   \item{header}{The argument \code{header} specifies if the first row
     should be interpreted as column names. The default value is \code{TRUE}.}
+  \item{rownames}{Index (\code{numeric}) or name (\code{character}) of column that
+  should be used as row names. The corresponding column will be removed from the data
+  set. Defaults to \code{NULL} which means that no row names are applied.}
 }
 
 \details{

@@ -115,11 +115,23 @@ test.workbook.writeAndReadWorksheet <- function() {
 	createSheet(wb.xls, "rownames")
 	writeWorksheet(wb.xls, mtcars, "rownames", startRow = 9, startCol = 10, header = TRUE, rownames = "Car")
 	res <- readWorksheet(wb.xls, "rownames", startRow = 9, startCol = 10)
-	checkEquals(normalizeDataframe(includeRownames(mtcars, "Car")), res)
+	checkEquals(includeRownames(mtcars, "Car"), res)
 	
 	# Check writing of data.frame with row names (*.xlsx)
 	createSheet(wb.xlsx, "rownames")
 	writeWorksheet(wb.xlsx, mtcars, "rownames", startRow = 9, startCol = 10, header = TRUE, rownames = "Car")
 	res <- readWorksheet(wb.xlsx, "rownames", startRow = 9, startCol = 10)
-	checkEquals(normalizeDataframe(includeRownames(mtcars, "Car")), res)
+	checkEquals(includeRownames(mtcars, "Car"), res)
+	
+	# Check writing & reading of data.frame with row names (*.xls)
+	createSheet(wb.xls, name = "rownames2")
+	writeWorksheet(wb.xls, mtcars, "rownames2", startRow = 31, startCol = 8, header = TRUE, rownames = "Car")
+	res <- readWorksheet(wb.xls, "rownames2", rownames = "Car")
+	checkEquals(mtcars, res)
+	
+	# Check writing & reading of data.frame with row names (*.xlsx)
+	createSheet(wb.xlsx, name = "rownames2")
+	writeWorksheet(wb.xlsx, mtcars, "rownames2", startRow = 31, startCol = 8, header = TRUE, rownames = "Car")
+	res <- readWorksheet(wb.xlsx, "rownames2", rownames = "Car")
+	checkEquals(mtcars, res)
 }

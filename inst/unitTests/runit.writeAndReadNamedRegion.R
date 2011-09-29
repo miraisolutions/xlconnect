@@ -116,12 +116,26 @@ test.writeAndReadNamedRegion <- function() {
 	createName(wb.xls, name = "rownames", formula = "rownames!$F$16")
 	writeNamedRegion(wb.xls, mtcars, name = "rownames", header = TRUE, rownames = "Car")
 	res <- readNamedRegion(wb.xls, "rownames")
-	checkEquals(normalizeDataframe(includeRownames(mtcars, "Car")), res)
+	checkEquals(includeRownames(mtcars, "Car"), res)
 	
 	# Check writing of data.frame with row names (*.xlsx)
 	createSheet(wb.xlsx, name = "rownames")
 	createName(wb.xlsx, name = "rownames", formula = "rownames!$F$16")
 	writeNamedRegion(wb.xlsx, mtcars, name = "rownames", header = TRUE, rownames = "Car")
 	res <- readNamedRegion(wb.xlsx, "rownames")
-	checkEquals(normalizeDataframe(includeRownames(mtcars, "Car")), res)
+	checkEquals(includeRownames(mtcars, "Car"), res)
+	
+	# Check writing & reading of data.frame with row names (*.xls)
+	createSheet(wb.xls, name = "rownames2")
+	createName(wb.xls, name = "rownames2", formula = "rownames2!$K$5")
+	writeNamedRegion(wb.xls, mtcars, name = "rownames2", header = TRUE, rownames = "Car")
+	res <- readNamedRegion(wb.xls, "rownames2", rownames = "Car")
+	checkEquals(mtcars, res)
+	
+	# Check writing & reading of data.frame with row names (*.xlsx)
+	createSheet(wb.xlsx, name = "rownames2")
+	createName(wb.xlsx, name = "rownames2", formula = "rownames2!$K$5")
+	writeNamedRegion(wb.xlsx, mtcars, name = "rownames2", header = TRUE, rownames = "Car")
+	res <- readNamedRegion(wb.xlsx, "rownames2", rownames = "Car")
+	checkEquals(mtcars, res)
 }
