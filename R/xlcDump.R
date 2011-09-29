@@ -26,14 +26,14 @@
 #
 #############################################################################
 
-xlcDump <- function(list, ..., file = "dump.xlsx", envir = parent.frame(), overwrite = FALSE) {
+xlcDump <- function(list, ..., file = "dump.xlsx", pos = -1, overwrite = FALSE) {
 	# Name of dummy sheet
 	# (required since there always needs to be at least one worksheet)
 	xlc = getOption("XLConnect.Sheet")
 
 	wb = loadWorkbook(file, create = TRUE)
 	if(missing(list))
-		list = ls(..., envir = envir)
+		list = ls(..., pos = pos)
 	# Create dummy sheet
 	createSheet(wb, name = xlc)
 	sheets = setdiff(getSheets(wb), xlc)
@@ -47,7 +47,7 @@ xlcDump <- function(list, ..., file = "dump.xlsx", envir = parent.frame(), overw
 		
 		createSheet(wb, name = obj)
 		tryCatch({
-			writeWorksheet(wb, data = get(obj, envir = envir), sheet = obj,
+			writeWorksheet(wb, data = get(obj, pos = pos), sheet = obj,
 				rownames = getOption("XLConnect.RownameCol"))
 			TRUE
 		}, error = function(e) {

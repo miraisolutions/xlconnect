@@ -26,14 +26,19 @@
 #
 #############################################################################
 
-xlcRestore <- function(file = "dump.xlsx", envir = parent.frame(), overwrite = FALSE) {
+xlcRestore <- function(file = "dump.xlsx", pos = -1, overwrite = FALSE) {
 	wb = loadWorkbook(file, create = FALSE)
 	sheets = setdiff(getSheets(wb), getOption("XLConnect.Sheet"))
 	sapply(sheets, function(obj) {
-		if(exists(obj, envir = envir) && !overwrite)
+		if(exists(obj, where = pos) && !overwrite)
 			return(FALSE)
-		data = readWorksheet(wb, sheet = obj, rownames = getOption("XLConnect.RownameCol"))
-		assign(obj, data, envir = envir)
-		TRUE
+		tryCatch({
+			data = readWorksheet(wb, sheet = obj, rownames = getOption("XLConnect.RownameCol"))
+			assign(obj, data, pos = pos)
+			TRUE
+		}, error = function(e) {
+			warning("Object '", obj, "' has not been restored. Reason: ", conditionMessage(e), call. = FALSE)
+			FALSE
+		})
 	})
 }
