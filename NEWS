@@ -1,7 +1,7 @@
 XLConnect News
 --------------
 
-0.1-7	<XXX>
+0.1-7	2011-10-19
 	*	Moved to Apache POI 3.8-beta4
 	*	Performance improvements when writing large xlsx files. This
 		fix was implemented on the Apache POI side.
@@ -40,6 +40,7 @@ XLConnect News
 		logging, using java.util.ArrayList instead of java.util.Vector
 	*	Functionality for dumping and restoring objects to/from Excel
 		files (xlcDump, xlcRestore)
+	*	Added a package vignette
 	
 0.1-6	Non-public release
 		

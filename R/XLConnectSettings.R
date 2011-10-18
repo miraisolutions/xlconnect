@@ -35,6 +35,9 @@ XLConnectSettings <- function(pdesc) {
 	# URL to Mirai Solutions GmbH Website
 	options(MiraiSolutions.URL = pdesc$URL)
 	
+	# XLConnect Version
+	options(XLConnect.Version = pdesc$Version)
+	
 	# Date/time format used for conversion to string;
 	# This is used for communicating a string-based date/time
 	# representation to Java which will then convert it to java.util.Date

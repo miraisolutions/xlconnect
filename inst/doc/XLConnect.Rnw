@@ -1,0 +1,380 @@
+% !TEX TS-program = Sweave
+
+\documentclass{article}
+
+%\VignetteIndexEntry{The XLConnect Package}
+%\VignetteDepends{tikzDevice}
+%\VignetteDepends{XLConnect}
+% \usepackage{Sweave}
+\usepackage[scaled=.9]{couriers}
+\usepackage[colorlinks]{hyperref}
+\usepackage{datetime}
+
+% So that more colours can be used, not only the pre-defined ones
+% List of colours here: http://en.wikibooks.org/wiki/LaTeX/Colors
+\usepackage[usenames,dvipsnames]{color}
+
+% Set colours of links in the document
+\hypersetup
+{
+    colorlinks,
+    citecolor	=	black,		% color of links to bibliography
+    filecolor	=	black,		% color of file links
+    linkcolor	=	CadetBlue,	% color of internal links, e.g. Table of Contents
+    urlcolor	=	CadetBlue	% color of external links
+}
+
+
+% Extra text effects (strikethrough)
+\usepackage{ulem}
+
+% Various TeX logos---included in the Oberdiek bundle which contains hyperref,
+% so there is a good chance it will be installed.
+\usepackage{hologo}
+
+% Sexyness
+\usepackage{tikz}
+\usetikzlibrary{calc,positioning}
+\usetikzlibrary{shapes.multipart,shapes.geometric,shapes.symbols,shapes.arrows}
+\usetikzlibrary{decorations.shapes,decorations.text,decorations.pathreplacing}
+
+% Page layout
+\usepackage[parfill]{parskip}
+\usepackage[letterpaper,margin=1in]{geometry}
+\usepackage{epigraph}
+\usepackage{multicol}
+\usepackage{pdflscape}
+
+% Graphics control.
+\usepackage{graphicx}
+\usepackage{float}
+
+% Bibliography
+\usepackage{natbib}
+\bibliographystyle{agufull04}
+
+% Extra pretty pretty printing.
+\usepackage{tikzCodeBlock}
+
+% Macros created for this document
+\input{tikzDeviceMacros}
+
+% Make sure you input tikzDeviceMacros first- or
+% LaTeX will smite you!
+\usepackage{Sweave}
+
+
+<<setup,echo=F,results=hide>>=
+	require(tikzDevice)
+	require(XLConnect)
+@
+
+\title{The \pkg{XLConnect} Package\\
+	{\large\url{http://mirai-solutions.com}}\\
+	{\large\url{http://cran.r-project.org/web/packages/XLConnect/index.html}}
+}
+
+\author{\small{Author of the \pkg{XLConnect} package:} \\\textcolor{Fuchsia}{\bf{Martin Studer}}, \\\small{Mirai Solutions GmbH}
+\\\\ \small{Author of this Vignette:}	\\\textcolor{Fuchsia}{\bf{Anna Maria Ksiezopolska}}, \\\small{Mirai Solutions GmbH}}
+
+\date{Version \Sexpr{getOption("XLConnect.Version")}\qquad \monthname, \the\year}
+
+\begin{document}
+	
+\SweaveOpts{echo=F,prefix.string=figs/fig}
+
+
+%----------------------------  Cover Page -----------------------------------------------------------
+
+\thispagestyle{empty}
+
+% The title page
+
+\vbox{}
+\vspace{0.5\textheight}
+\begin{tikzpicture}[remember picture,overlay]
+
+	\node[anchor=west,scale=3, inner sep=0pt, outer sep=0pt] (title) at (1cm,0) 
+		{\LARGE\bfseries{\color{black}XLConnect}\thinspace\Huge};
+	
+	\draw[line width=2pt] ([yshift=-5pt]title.base west) -- ([yshift=-5pt]title.base east);	
+
+
+	\coordinate (titleOut) at ($(title.north east) + (24pt,0pt)$);
+	\coordinate (titleIn) at ($(title.base west) - (6pt,24pt)$);
+		
+	\node[color=black!80,below=24pt of title.base east,anchor=west] (sub) at (3cm,-1)
+		{\bfseries\itshape\Large{} A platform-independent interface to Excel};
+
+\end{tikzpicture}
+\vfill	
+\vbox{}
+
+\begin{tikzpicture}[remember picture,overlay,>=stealth]
+
+	\node (R) at ($(current page.south west) + (17cm,3cm)$)
+		 {\scalebox{0.4}{\includegraphics[width=0.8\textwidth]{img/Rlogo}}};
+
+	\tikzset{
+		bigger/.style={decoration={shape start size=.125cm, shape end size=.3cm}},
+		decoration={shape backgrounds,
+			shape sep={.25cm, between borders},shape scaled,shape=circle}
+	}
+			
+	\fill[decorate,bigger, black!25] (R) to[out=170,in=240] (titleIn);	
+	
+\end{tikzpicture}
+
+% Excel icon on top right of the title page
+% Source: http://www.iconarchive.com/show/softdimension-icons-by-benjigarner/Excel-icon.html
+
+\begin{tikzpicture}[remember picture,overlay,>=stealth]
+
+	\node (Excel) at ($(current page.north west) + (3.5cm,-3.5cm)$)
+		 {\scalebox{0.35}{\includegraphics[width=0.8\textwidth]{img/Excel}}};
+		 
+	\tikzset{
+		bigger/.style={decoration={shape start size=.125cm, shape end size=.3cm}},
+		decoration={shape backgrounds,
+			%shape sep={.25cm, between borders},shape scaled,shape=dart}
+			shape sep={.25cm, between borders},shape scaled,shape=circle}
+	}
+
+	\fill[decorate,thick,bigger,color=black!25]
+		(titleOut) to[out=20,in=260] (Excel);
+	
+\end{tikzpicture}
+
+\newpage
+
+%----------------------------  Table of Contents -----------------------------------------------------------
+
+\pagenumbering{roman}
+
+\maketitle
+
+\tableofcontents
+
+\newpage
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Documentation starts here.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\pagenumbering{arabic}
+
+\section{Introduction}
+
+\subsection{Scope and purpose of this document}
+This document is a user manual for the \pkg{XLConnect} R package. It is meant to be a top-level introduction and some of the 
+more advanced features of \pkg{XLConnect} are not presented here. For such details, please refer to the
+\href{http://cran.r-project.org/web/packages/XLConnect/XLConnect.pdf}{Reference Manual}.
+
+\subsection{Introduction to XLConnect}
+
+\pkg{XLConnect} is a package that allows for reading, writing and manipulating Microsoft Excel 
+files from within R. It uses the Apache POI API\footnote{ For more information on the Apache POI API, see the \url{http://poi.apache.org/} webpage.}  
+as the underlying interface.
+
+%\footnotetext{ For more information on the Apache POI API, see the \url{http://poi.apache.org/} webpage.} 
+
+XLConnect allows you to produce formatted Excel reports, including graphics, straight from within R. 
+This enables automation of manual formatting and reporting processes. Reading and writing named ranges 
+enables you to process complex inputs and outputs in an efficient way.
+
+\vspace{0.5cm}
+
+% Box with XLConnect's main features
+\tikzDocDisclaim{\bfseries{XLConnect}'s Main Features\vspace{2mm}}
+{
+\vskip\baselineskip
+
+\begin{itemize}
+
+  \item{Reading \& writing of {\bf Excel worksheets} (via data.frames)}
+  \item{Reading \& writing of {\bf named ranges} (via data.frames)}
+  \item{Creating, removing, renaming and cloning worksheets}
+  \item{Adding {\bf graphics}}
+  \item{Specifying {\bf cellstyles}: data formats, borders, back- and foreground fill color, fill pattern, text wrapping}
+  \item{Controlling {\bf sheet visibility}}
+  \item{Defining {\bf column width} and {\bf row height}}
+  \item{{\bf Merging/unmerging} cells}
+  \item{Setting/getting {\bf cell formulas}}
+  \item{Defining {\bf formula recalculation} behavior (when workbooks are opened)}
+  \item{Setting {\bf auto-filters}}
+  \item{{\bf Style actions}: controlling application of cell styles when writing (e.g. when using templates)}
+  \item{Defining behavior when {\bf error cells} are encountered}
+
+\end{itemize}
+  
+\vskip\baselineskip
+
+\vspace{0.5cm}
+
+}
+
+\section{Installation}
+\label{part:one}
+
+%----------------------------  Package Loading -----------------------------------------------------------
+
+\subsection{Software Requirements}
+
+\pkg{XLConnect} is completely cross-platform and as such runs under Windows, Unix/Linux and Mac (32- and 64-bit).
+It does {\bf not} require an installation of Microsoft Excel, or any special drivers. 
+
+All you need to use \pkg{XLConnect} are the following:
+
+\begin{itemize}
+\item{R, version 2.10.0 or higher}
+\item{Java Runtime Environment (JRE), version 5.0 or higher}
+\end{itemize}
+
+\vspace{0.5cm}
+
+\subsection{Package Installation}
+
+The \pkg{XLConnect} package is part of the Comprehensive R Archive Network (CRAN). 
+It can be easily installed by using the \code{install.packages()} command in your R session:
+
+\vspace{0.2cm}
+\begin{Verbatim}[frame=single]
+install.packages("XLConnect")
+\end{Verbatim}
+
+\section{Usage and Examples}
+\label{part:two}
+
+\subsection{Getting Started}
+
+To load the package, use the \code{library()} or \code{require()} command in your R session:
+
+\vspace{0.2cm}
+\begin{Verbatim}[frame=single]
+library(XLConnect)
+\end{Verbatim}
+
+Now, you are ready to use \pkg{XLConnect}! 
+
+The package includes a User Manual (this document), which you can view by entering the following command:
+
+\vspace{0.2cm}
+\begin{Verbatim}[frame=single]
+vignette("XLConnect")
+\end{Verbatim}
+
+The Reference Manual, containing help pages for each function within the package, can be opened by using the \code{help()} command.
+
+\vspace{0.2cm}
+\begin{Verbatim}[frame=single]
+help(XLConnect)
+\end{Verbatim}
+
+\subsection{Basic XLConnect functions}
+
+% As a first step, let's get familiar with the most basic functions in the \pkg{XLConnect} package.
+
+\subsubsection{Loading/creating an Excel workbook}
+
+The \code{loadWorkbook()} function loads a Microsoft Excel workbook, so that it can then be further manipulated. 
+Setting the \code{create} argument to \code{TRUE} will ensure the file will be created, if it does not exist yet. 
+\\Both .xls and .xlsx file formats can be used.
+\begin{tikzCodeBlock}[title={Load an Excel workbook (create if not existing)},listing style=sweavechunk]
+loadWorkbook(filename, create = TRUE)
+\end{tikzCodeBlock}
+
+\subsubsection{Creating a sheet within an Excel file}
+
+The \code{createSheet()} function creates a sheet of a chosen \code{name} into the workbook specified as the \code{object}
+argument.
+\begin{tikzCodeBlock}[title={Create a worksheet of a chosen name within a workbook},listing style=sweavechunk]
+createSheet(object, name)
+\end{tikzCodeBlock}
+
+\subsubsection{Creating names}
+
+The \code{createName()} function creates a name of a chosen \code{name} for a specified \code{formula} into a workbook.
+The \code{overwrite} argument lets you define the behaviour if the name already exists. If set to \code{TRUE}, the existing
+name will be removed first, before creating a new one. If set to \code{FALSE} (default setting), an exception will be thrown.
+\begin{tikzCodeBlock}[title={Create a name for a specified formula within a workbook},listing style=sweavechunk]
+createName(object, name, formula, overwrite)
+\end{tikzCodeBlock}
+
+\subsubsection{Writing named regions}
+ 
+The \code{writeNamedRegion()} method writes a named range into a workbook. The \code{data} argument is assumed to be 
+a \code{data.frame}. The \code{header} argument allows you to specify whether column names should be written. 
+The arguments are vectorized, which allows for writing multiple named regions with one call. In such a case, \code{data}
+is assumed to be a list of \code{data.frames}.
+\begin{tikzCodeBlock}[title={Write a named range into a workbook},listing style=sweavechunk]
+writeNamedRegion(object, data, name, header)
+\end{tikzCodeBlock}
+
+\subsubsection{Saving an Excel file to disk}
+
+The \code{saveWorkbook()} function saves a workbook to the corresponding Excel file and actually writes
+the workbook object to disk.
+\begin{tikzCodeBlock}[title={Save a workbook to a chosen Excel file},listing style=sweavechunk]
+saveWorkbook(object)
+\end{tikzCodeBlock}
+
+\subsubsection{Example using basic functions}\label{sec:options}
+
+Let's see how the basic functions introduced in this section can be used to create and save an Excel file.
+We will use the in-built {\bf mtcars} dataset for this simple example. 
+\\\\The code below first loads the "XLConnect.xlsx" workbook, using \code{loadWorkbook()}. 
+If the workbook does not exist yet, the function creates it. 
+\\\\ Then, via \code{createSheet()}, a sheet named "mtcars" is created witin the workbook. 
+\\\\ We then use \code{createName()} to create the "name.mtcars" name in the workbook and specify 
+its location in the mtcars sheet, with the \$C\$5 cell as the top-left corner. 
+\\\\We then call \code{writeNamedRegion()} to write a named range to the workbook, 
+using the mtcars dataset and the name.mtcars name.
+\\\\At the end, we use \code{saveWorkbook()} to save the XLConnect.xlsx file. 
+
+<<simpleEx,echo=T,results=hide>>=
+require(XLConnect)
+wb = loadWorkbook("XLConnect.xlsx", create = TRUE)
+createSheet(wb, name = "mtcars")
+createName(wb, name = "name.mtcars", formula = "mtcars!$C$5", overwrite = TRUE)
+writeNamedRegion(wb, mtcars, name = "name.mtcars")
+saveWorkbook(wb)
+@
+
+We have now got the mtcars data written to an Excel file! The figure below illustrates the result.
+
+\begin{figure}[htb]
+\begin{center}
+\caption{name.mtcars named region written into the XLConnect.xlsx file}
+\includegraphics[scale=0.7]{img/mtcars.png}
+\end{center}
+\end{figure}
+
+Please note that only at the point when we call \code{saveWorkbook()}, the Excel file is written to disk. 
+All the previous operations are performed in-memory, which has great performance advantages.
+
+\newpage
+
+% Bye bye box
+\tikzDocDisclaim{Thanks for giving \bfseries{XLConnect} a try!\vspace{2mm}}
+{
+\vskip\baselineskip
+
+Please note, that this is the very first version of the Vignette for \pkg{XLConnect}. We are planning to regularly add 
+more descriptions of features and examples of usage, so please look out for updates!
+
+\vspace{0.5cm}
+  
+\vskip\baselineskip
+
+}
+
+
+% \subsection{More advances examples}
+
+% \subsubsection{How to do this...}
+% \subsubsection{How to do that...}
+
+\end{document}\n

@@ -53,7 +53,8 @@ Mirai Solutions GmbH \url{http://www.mirai-solutions.com}
 }
 \examples{
 require(datasets)
-xlcDump(c("airquality", "CO2", "iris", "PlantGrowth", "swiss"), file = "myDump.xlsx", pos = "package:datasets")
+xlcDump(c("airquality", "CO2", "iris", "PlantGrowth", "swiss"),
+        file = "myDump.xlsx", pos = "package:datasets")
 xlcRestore(file = "myDump.xlsx", overwrite = TRUE)
 }
 \keyword{utilities}

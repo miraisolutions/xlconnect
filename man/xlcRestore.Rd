@@ -35,12 +35,13 @@ Mirai Solutions GmbH \url{http://www.mirai-solutions.com}
 }
 \seealso{
 \code{\link{xlcDump}}, \code{\link[=readNamedRegion-methods]{readNamedRegion}}, 
-\code{\link[=readWorksheet-methods]{readWorksheet}}, \code{\link{readNamedRegionFromFile}},
+\code{\link[=readWorksheet-methods]{readWorksheet}}, \code{\link{readNamedRegionFromFile}},\cr
 \code{\link{readWorksheetFromFile}}
 }
 \examples{
 require(datasets)
-xlcDump(c("airquality", "CO2", "iris", "PlantGrowth", "swiss"), file = "myDump.xlsx", pos = "package:datasets")
+xlcDump(c("airquality", "CO2", "iris", "PlantGrowth", "swiss"),
+        file = "myDump.xlsx", pos = "package:datasets")
 xlcRestore(file = "myDump.xlsx", overwrite = TRUE)
 }
 \keyword{utilities}

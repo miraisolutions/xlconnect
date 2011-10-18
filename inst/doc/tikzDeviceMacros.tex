@@ -1,0 +1,100 @@
+% tikzDeviceMacros.tex from tikzDevice package
+
+% !TEX TS-program = Sweave
+% !TEX root = tikzDevice.Rnw
+
+% Font macros
+\newcommand{\lang}{\textsf}
+% Mbox it to prevent hyphenation of code
+\newcommand{\code}[1]{\mbox{\ttfamily #1}}
+\newcommand{\pkg}{\textbf}
+
+% Other LaTeX macros
+\renewcommand{\sectionautorefname}{Section}
+\renewcommand{\subsectionautorefname}{Subsection}
+
+% Text macros
+\newcommand{\TikZ}{Ti\textit{k}Z}
+
+% Source code formatting macros
+\lstloadlanguages{R}
+
+\lstset{basicstyle = \ttfamily}
+
+\lstdefinestyle{sweavechunk}{
+	language = R,
+	% The hacked version of the Sweave output function inserts these tags
+	% around each output portion- we can grab them and apply formatting
+	% to everything inside.
+	moredelim=[is][\color{gray}]
+		{swe@veSt@rtOutput}
+		{swe@veEndOutput},
+	% Normal TeX tildes are kind of ugly- let's substitute a math symbol instead.
+	% Shit, why not replace <- as well? *Mad typographic scientist cackle*
+	literate={~}{{$\sim$}}1,
+	showstringspaces = false,
+	upquote = false,
+	commentstyle = {\color{blue!70}\itshape}
+}
+
+\lstdefinestyle{latexsource}{
+	language = [LaTeX]TeX,
+	showstringspaces = false,
+	upquote = false,
+	commentstyle = {\color{red!80}\itshape}
+}
+
+\lstdefinestyle{latexexample}{
+	language = [LaTeX]TeX,
+	showstringspaces = false,
+	upquote = false,
+	commentstyle = {\color{red!80}\itshape},
+	moredelim=[is][\color{red}]{XX}{XX}
+}
+
+\lstdefinestyle{bashsource}{
+	language = bash,
+	% literate={~}{{$\sim$}}1,
+	moredelim=[is][\color{gray}]
+		{!out}
+		{!/out},
+	showstringspaces = false,
+	upquote = false,
+	commentstyle = {\color{blue!80}\itshape}
+}
+
+
+% TikZ Style definitions.
+\tikzset{
+	% Taken from one of the first examples in the PGF manuel.
+	package warning/.style={
+		rectangle split,
+		rectangle split parts = 2,
+		rounded corners,
+		draw = red!50,
+		thick,
+		fill = red!10, 
+		inner sep = 1ex,
+		text width = \textwidth
+	}
+}
+
+
+% TikZ Macros.
+
+\newcommand{\tikzDocDisclaim}[2]{
+
+	\begin{tikzpicture}
+		
+		\node[package warning]{
+			\begin{center}
+				\large\bfseries
+				#1	
+			\end{center}	
+			\nodepart{second}		
+				#2	
+		};
+
+	\end{tikzpicture}
+
+}
