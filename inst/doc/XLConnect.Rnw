@@ -3,7 +3,6 @@
 \documentclass{article}
 
 %\VignetteIndexEntry{The XLConnect Package}
-%\VignetteDepends{tikzDevice}
 %\VignetteDepends{XLConnect}
 % \usepackage{Sweave}
 \usepackage[scaled=.9]{couriers}
@@ -27,10 +26,6 @@
 
 % Extra text effects (strikethrough)
 \usepackage{ulem}
-
-% Various TeX logos---included in the Oberdiek bundle which contains hyperref,
-% so there is a good chance it will be installed.
-\usepackage{hologo}
 
 % Sexyness
 \usepackage{tikz}
@@ -65,7 +60,6 @@
 
 
 <<setup,echo=F,results=hide>>=
-	require(tikzDevice)
 	require(XLConnect)
 @
 
