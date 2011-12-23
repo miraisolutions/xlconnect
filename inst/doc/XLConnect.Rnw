@@ -175,7 +175,7 @@ as the underlying interface.
 
 %\footnotetext{ For more information on the Apache POI API, see the \url{http://poi.apache.org/} webpage.} 
 
-XLConnect allows you to produce formatted Excel reports, including graphics, straight from within R. 
+\pkg{XLConnect} allows you to produce formatted Excel reports, including graphics, straight from within R. 
 This enables automation of manual formatting and reporting processes. Reading and writing named ranges 
 enables you to process complex inputs and outputs in an efficient way.
 
@@ -224,7 +224,7 @@ All you need to use \pkg{XLConnect} are the following:
 
 \begin{itemize}
 \item{R, version 2.10.0 or higher}
-\item{Java Runtime Environment (JRE), version 5.0 or higher}
+\item{Java Runtime Environment (JRE), version 6.0 or higher}
 \end{itemize}
 
 \vspace{0.5cm}
@@ -370,5 +370,51 @@ more descriptions of features and examples of usage, so please look out for upda
 
 % \subsubsection{How to do this...}
 % \subsubsection{How to do that...}
+
+
+% Extend the Usage and Examples Section
+% 1. Section for writing into Excel files
+
+% * writing SHEETS
+
+% wb <- loadWorkbook(...)
+% createSheet(...)
+% writeWorksheet(...)
+% save()
+
+% Same in one call:
+% writeWorksheetToFile(...)
+% use when only one sheet to write, since it opens, writes the file and then closes with each call,
+% whereas with the above calls you can open, do multiple operations and then close
+
+% * Writing named regions
+% Example that's already there
+
+% 2. Similar structure to above, but with READING
+
+% 3. Advanced Usage
+% Take the example from Zurich R
+% "For this examole we are going to usage some further dependecies"
+% list the packages used, with versions
+
+% 4. What's new in XLConnect version (insert version dynamically)
+% xlcEdit()
+% write a data frame into Excel, edit in Excel, get data back - get Martin's help to write this part
+% also see news file on CRAN
+
+% 4. FAQ
+% Take whatever we have on the Mirai website
+
+% 5. Futher resources and references
+% Mirai Wordpress
+% Mirai Solutions Website
+% Mirai on LinkedIN
+% Jaguar :) JGR (Iain McFellow)
+% Spanish YouTube video
+% Find some more references to XlConnect
+% PLEASE VOTE FOR US
+% http://www.inside-r.org/packages/xlconnect
+% http://crantastic.org/packages/XLConnect
+
 
 \end{document}\n
