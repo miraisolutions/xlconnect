@@ -411,6 +411,7 @@ more descriptions of features and examples of usage, so please look out for upda
 % Mirai on LinkedIN
 % Jaguar :) JGR (Iain McFellow)
 % Spanish YouTube video
+% R Base Course with XLConnect from Brasil: ROberto de Pinho
 % Find some more references to XlConnect
 % PLEASE VOTE FOR US
 % http://www.inside-r.org/packages/xlconnect
