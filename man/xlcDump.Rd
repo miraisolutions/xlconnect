@@ -49,7 +49,7 @@ Mirai Solutions GmbH \url{http://www.mirai-solutions.com}
 \seealso{
 \code{\link{xlcRestore}}, \code{\link[=writeNamedRegion-methods]{writeNamedRegion}}, 
 \code{\link[=writeWorksheet-methods]{writeWorksheet}}, \code{\link{writeNamedRegionToFile}},
-\code{\link{writeWorksheetToFile}}
+\code{\link{writeWorksheetToFile}}, \code{\link{xlcEdit}}
 }
 \examples{
 require(datasets)

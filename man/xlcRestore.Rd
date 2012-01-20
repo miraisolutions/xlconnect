@@ -36,7 +36,7 @@ Mirai Solutions GmbH \url{http://www.mirai-solutions.com}
 \seealso{
 \code{\link{xlcDump}}, \code{\link[=readNamedRegion-methods]{readNamedRegion}}, 
 \code{\link[=readWorksheet-methods]{readWorksheet}}, \code{\link{readNamedRegionFromFile}},\cr
-\code{\link{readWorksheetFromFile}}
+\code{\link{readWorksheetFromFile}}, \code{\link{xlcEdit}}
 }
 \examples{
 require(datasets)

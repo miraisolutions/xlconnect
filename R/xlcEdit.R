@@ -20,37 +20,22 @@
 
 #############################################################################
 #
-# "Normalizes" a data.frame with respect to column types.
-# This is necessary for comparing data.frames written to Excel and then
-# read back in from Excel.
-#
-# Note that Excel does not know e.g. factor types. Factor variables
-# in fact are written to Excel as ordinary strings. Therefore, when read
-# back in to R, they are treated as character variables.
-#
-# 'normalizeDataframe' is used for RUnit tests to compare data.frame's
-# written to and read from Excel
+# Function for editing R data.frames in an Excel editor (e.g. MS Excel)
 # 
 # Author: Martin Studer, Mirai Solutions GmbH
 #
 #############################################################################
 
-normalizeDataframe <- function(df) {
-	att = attr(df, "row.names")
-	res <- lapply(df, 
-		function(col) {
-			if(is(col, "logical") || is(col, "numeric") || is(col, "character"))
-				col
-			else if(is(col, "Date") || is(col, "POSIXt")) {
-				# Get rid of "original" timezone and assume UTC
-				as.POSIXct(
-					format(col, format = options("XLConnect.dateTimeFormat")[[1]]), 
-					tz = "UTC")
-			} else
-				as.character(col)
-		}
+xlcEdit <- function(obj, pos = globalenv(), ext = ".xlsx") {
+	tmp = tempfile(fileext = ext)
+	on.exit(try(unlink(tmp)))
+	xlcDump(deparse(substitute(obj)), file = tmp, pos = pos)
+	cmd = switch(Sys.info()["sysname"],
+		Windows	= 'cmd /C start /WAIT %s',
+		Darwin = 'open -W -F %s',
+		# Linux	= 'xdg-open %s',
+		stop("xlcEdit is currently not supported on your system!")
 	)
-	res = data.frame(res, stringsAsFactors = F)
-	attr(res, "row.names") = att
-	res
+	system(sprintf(cmd, tmp), wait = TRUE)
+	invisible(xlcRestore(file = tmp, overwrite = TRUE, pos = pos))
 }

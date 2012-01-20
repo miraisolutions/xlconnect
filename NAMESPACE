@@ -83,6 +83,7 @@ export(
 	writeNamedRegionToFile,
 	writeWorksheetToFile,
 	xlcDump,
+	xlcEdit,
 	xlcFreeMemory,
 	xlcMemoryReport,
 	xlcRestore,
