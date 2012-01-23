@@ -64,14 +64,15 @@
 @
 
 \title{The \pkg{XLConnect} Package\\
-	{\large\url{http://mirai-solutions.com}}\\
-	{\large\url{http://cran.r-project.org/web/packages/XLConnect/index.html}}
+{\small\href{http://mirai-solutions.com}{http://mirai-solutions.com}}\\[-0.3cm]
+{\small\href{http://cran.r-project.org/web/packages/XLConnect/index.html}{http://cran.r-project.org/web/packages/XLConnect/index.html}}
 }
 
-\author{\small{Author of the \pkg{XLConnect} package:} \\\textcolor{Fuchsia}{\bf{Martin Studer}}, \\\small{Mirai Solutions GmbH}
-\\\\ \small{Author of this Vignette:}	\\\textcolor{Fuchsia}{\bf{Anna Maria Ksiezopolska}}, \\\small{Mirai Solutions GmbH}}
 
-\date{Version \Sexpr{getOption("XLConnect.Version")}\qquad \monthname, \the\year}
+% \author{\small{Author of the \pkg{XLConnect} package:} \\\textcolor{Fuchsia}{\bf{Martin Studer}}, \\\small{Mirai Solutions GmbH}
+\author{\small{Author of this Vignette:}	\\\textcolor{Fuchsia}{\bf{Anna Maria Ksiezopolska}}, \\\small{\href{http://mirai-solutions.com}{\textcolor{Black}{Mirai Solutions GmbH}}}}
+
+\date{\pkg{XLConnect} Version \Sexpr{getOption("XLConnect.Version")}\qquad \monthname, \the\year}
 
 \begin{document}
 	
@@ -234,40 +235,36 @@ All you need to use \pkg{XLConnect} are the following:
 The \pkg{XLConnect} package is part of the Comprehensive R Archive Network (CRAN). 
 It can be easily installed by using the \code{install.packages()} command in your R session:
 
-\vspace{0.2cm}
-\begin{Verbatim}[frame=single]
-install.packages("XLConnect")
-\end{Verbatim}
+\begin{tikzCodeBlock}[listing style=bashsource, code body/.append style={codebody color=white}]
+	install.packages("XLConnect")
+\end{tikzCodeBlock}	
 
-\section{Usage and Examples}
+\section{Basic Usage and Examples}
 \label{part:two}
 
 \subsection{Getting Started}
 
 To load the package, use the \code{library()} or \code{require()} command in your R session:
 
-\vspace{0.2cm}
-\begin{Verbatim}[frame=single]
-library(XLConnect)
-\end{Verbatim}
+\begin{tikzCodeBlock}[listing style=bashsource, code body/.append style={codebody color=white}]
+	library(XLConnect)
+\end{tikzCodeBlock}
 
 Now, you are ready to use \pkg{XLConnect}! 
 
 The package includes a User Manual (this document), which you can view by entering the following command:
 
-\vspace{0.2cm}
-\begin{Verbatim}[frame=single]
-vignette("XLConnect")
-\end{Verbatim}
+\begin{tikzCodeBlock}[listing style=bashsource, code body/.append style={codebody color=white}]
+	vignette("XLConnect")
+\end{tikzCodeBlock}
 
 The Reference Manual, containing help pages for each function within the package, can be opened by using the \code{help()} command.
 
-\vspace{0.2cm}
-\begin{Verbatim}[frame=single]
-help(XLConnect)
-\end{Verbatim}
+\begin{tikzCodeBlock}[listing style=bashsource, code body/.append style={codebody color=white}]
+	help(XLConnect)
+\end{tikzCodeBlock}
 
-\subsection{Basic XLConnect functions}
+\subsection{Writing Excel files: basic functions}
 
 % As a first step, let's get familiar with the most basic functions in the \pkg{XLConnect} package.
 
@@ -315,7 +312,7 @@ the workbook object to disk.
 saveWorkbook(object)
 \end{tikzCodeBlock}
 
-\subsubsection{Example using basic functions}\label{sec:options}
+\subsection{Writing Excel files: example}\label{sec:options}
 
 Let's see how the basic functions introduced in this section can be used to create and save an Excel file.
 We will use the in-built {\bf mtcars} dataset for this simple example. 
@@ -327,6 +324,11 @@ its location in the mtcars sheet, with the \$C\$5 cell as the top-left corner.
 \\\\We then call \code{writeNamedRegion()} to write a named range to the workbook, 
 using the mtcars dataset and the name.mtcars name.
 \\\\At the end, we use \code{saveWorkbook()} to save the XLConnect.xlsx file. 
+
+<<removeFile,echo=F,results=hide>>=
+	if(file.exists("XLConnect.xlsx"))
+		file.remove("XLConnect.xlsx")
+@
 
 <<simpleEx,echo=T,results=hide>>=
 require(XLConnect)
@@ -348,6 +350,134 @@ We have now got the mtcars data written to an Excel file! The figure below illus
 
 Please note that only at the point when we call \code{saveWorkbook()}, the Excel file is written to disk. 
 All the previous operations are performed in-memory, which has great performance advantages.
+
+\subsection{Reading Excel files: basic functions}
+\subsubsection{Sialala}
+\subsubsection{Tralala}
+
+\subsection{Reading Excel files: example}
+
+\section{Advanced Usage and Examples}
+\subsection{Example from Zurich R...}
+
+\section{What's new in XLConnect version \Sexpr{getOption("XLConnect.Version")}}
+
+\section{Frequently Asked Questions}
+
+\subsection{Running out of memory when processing large data sets}
+{\bf \large Question}: \\\\ 
+I'm running out of memory when processing large data sets:
+\begin{tikzCodeBlock}[listing style=bashsource, code body/.append style={codebody color=white}]
+	writeNamedRegionToFile(file = "huge.xls", data = giant.data.frame, 
+	namedRegion = "LargeRegion", formula = "LotsOfData!A1")
+
+	Error: OutOfMemoryError (Java): Java heap space
+\end{tikzCodeBlock}
+
+\vspace{3 mm}
+{\bf \large Answer}: \\
+ 
+This is caused by the fact that XLConnect needs to copy your entire data object over 
+to the JVM in order to write it to a file and the JVM has to be initialized with a fixed 
+upper limit on its memory size. To change this amount, you can pass parameters to the R's 
+JVM just like you can to a command line Java process via rJava's options support:
+ 
+\begin{tikzCodeBlock}[listing style=bashsource, code body/.append style={codebody color=white}]
+	options(java.parameters = "-Xmx1024m")
+	library(XLConnect)
+\end{tikzCodeBlock}
+ 
+Note, however, that these parameters are evaluated exactly once per R session when the JVM is 
+initialized - this is usually once you load the first package that uses Java support, so you 
+should do this as early as possible.
+
+If you're using R from within Eclipse/StatET, the JVM is initialized as soon as the R process is 
+started due to the required communication between Eclipse and R (the rj/rj-server components). 
+Therefore, you need to set the Java heap size in Eclipse's "Run Configurations" for the R engine:\\
+
+\begin{figure}[htb]
+	\begin{center}
+		\caption{Setting the Java heap size in Eclipse}
+		\includegraphics[scale=1]{img/RunConfigurations.png}
+	\end{center}
+\end{figure}
+
+\newpage Some general Java advice: The upper limit of the Xmx parameter is system dependent - most prominently, 
+32bit Windows will fail to work with anything much larger than 1500m, and it is usually a bad idea to 
+set Xmx larger than your physical memory size because garbage collection and virtual memory do not play 
+well together.
+
+% Another Question for FAQ
+\subsection{How can I style my output - set fonts, colors etc?}
+
+{\bf \large Question}: \\\\ 
+How can I style my output - set fonts, colors etc? \\
+
+{\bf \large Answer}: \\\\
+\pkg{XLConnect} does not currently allow direct access to low-level formatting options. However, it is possible to assign 
+named cell styles to cells, so the preferred workflow would be to:
+
+\begin{enumerate}
+	\item define some named cell styles in an Excel document ("Format" -> "Styles" in pre-2007 Excel, "Cell styles" on the default pane of Excel 2007 and on)
+	\item save the document to a file
+	\item then load this template in \pkg{XLConnect} and use the setCellStyle method to assign the predefined styles:
+\end{enumerate}
+	
+\begin{tikzCodeBlock}[listing style=bashsource, code body/.append style={codebody color=white}]
+	library(XLConnect)
+	w <- loadWorkbook("template.xls")
+	df <- data.frame("foo")
+	c <- getCellStyle(w, "FatFont")
+
+	writeWorksheet(w, data=df, sheet=1,startRow=1,startCol=1,header=TRUE)
+	setCellStyle(w, sheet=1,row=1,col=1,cellstyle=c)
+	saveWorkbook(w)
+\end{tikzCodeBlock}	
+	
+(Unfortunately, this does not work with the \pkg{XLConnect} 0.1-3 due to a bug (\#50912) 
+in the version of Apache POI that it uses. \pkg{XLConnect} 0.1-4 comes with a fixed POI 
+and should no longer suffer from this issue.)
+
+% Yet another Question for FAQ
+\subsection{I'm getting errors trying to import Excel data}
+
+{\bf \large Question}: \\\\ 
+I'm getting errors trying to import Excel data like:
+\begin{tikzCodeBlock}[listing style=bashsource, code body/.append style={codebody color=white}]
+Unexpected eval type 
+(org.apache.poi.hssf.record.formula.eval.MissingArgEval)
+\end{tikzCodeBlock}	
+or
+\begin{tikzCodeBlock}[listing style=bashsource, code body/.append style={codebody color=white}]
+Error: NotImplementedException (Java): Error evaluating cell Sheet1!A1
+\end{tikzCodeBlock}	
+
+\vspace{3mm}
+{\bf \large Answer}: \\\\
+This type of error is triggered when \pkg{XLConnect} can not determine the value of a cell in the 
+region you're trying to import. Usually, this happens because Apache POI does not support all possible 
+Excel formulae. A particular problem are array formulas and array functions such as \code{TRANSPOSE}.
+
+There is no direct solution for accessing the values of fields that Apache POI doesn't know how to compute. 
+However, if you can live without the cell values and just want to ignore uncomputable cells, have a look 
+at the \code{onErrorCell} function (new in \pkg{XLConnect} 0.1-4) to tell \pkg{XLConnect} that you want to 
+ignore errors.
+
+If you have Excel and are willing to invest some manual effort, you can manually create a static copy, 
+that can be imported as follows:
+
+\begin{itemize}
+	\item Select the region containing your data
+	\item {\bf Edit} -> {\bf Copy}
+	\item Select an empty cell and {\bf Edit} -> {\bf Paste Special}
+	\item In the Paste radio group, select {\bf Values}
+\end{itemize}
+
+You should then be able to import the pasted region without problems.
+
+\section{Support}
+
+\section{Further Resources and References}
 
 \newpage
 
@@ -394,7 +524,7 @@ more descriptions of features and examples of usage, so please look out for upda
 
 % 3. Advanced Usage
 % Take the example from Zurich R
-% "For this examole we are going to usage some further dependecies"
+% "For this example we are going to usage some further dependecies"
 % list the packages used, with versions
 
 % 4. What's new in XLConnect version (insert version dynamically)
@@ -402,16 +532,16 @@ more descriptions of features and examples of usage, so please look out for upda
 % write a data frame into Excel, edit in Excel, get data back - get Martin's help to write this part
 % also see news file on CRAN
 
-% 4. FAQ
+% 5. FAQ
 % Take whatever we have on the Mirai website
 
-% 5. Futher resources and references
+% 6. Futher resources and references
 % Mirai Wordpress
 % Mirai Solutions Website
 % Mirai on LinkedIN
 % Jaguar :) JGR (Iain McFellow)
 % Spanish YouTube video
-% R Base Course with XLConnect from Brasil: ROberto de Pinho
+% R Base Course with XLConnect from Brasil: Roberto de Pinho
 % Find some more references to XlConnect
 % PLEASE VOTE FOR US
 % http://www.inside-r.org/packages/xlconnect
