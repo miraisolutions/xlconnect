@@ -66,6 +66,31 @@
 % LaTeX will smite you!
 \usepackage{Sweave}
 
+<<setup,echo=F,results=hide>>=
+
+	if( !file.exists( 'figs' ) ) dir.create( 'figs' )
+	require(tikzDevice)
+	
+	# *** Begin Mother of All R Hacks ****
+
+  source( 'patchSweave.R' )
+	
+	# *** End Mother of All R Hacks ***
+	
+	# Now we have some extra code chunk options to play
+	# with:
+	#
+	#   wrapoutput: a vector of two character strings that will be used
+	#                       to surround R output chunks. Were formally hardwired
+	#                       to '\n\begin{Soutput}\n' and '\n\end{Soutput}\n'.
+	#
+	#   wrapinput:  Same idea as wrapoutput- both of these options must be
+	#                      set using options() as they are difficult to pass directly to
+	#                      Sweave
+	
+	options( wrapoutput = c('\nswe@veSt@rtOutput','swe@veEndOutput\n') )
+	
+@
 
 <<setup,echo=F,results=hide>>=
 	require(XLConnect)
@@ -293,6 +318,15 @@ argument.
 createSheet(object, name)
 \end{tikzCodeBlock}
 
+\subsubsection{Writing into a sheet within an Excel file}
+The \code{writeWorksheet()} function writes \code{data} into a worksheet (name or index specified as the \code{sheet} argument) 
+of an Excel workbook (\code{object}). The \code{startRow} and \code{startCol} are both 1 by default, meaning that if they are
+not explicitly specified, the data will start being filled into the A1 cell of the worksheet.
+
+\begin{tikzCodeBlock}[title={Write into a worksheet},listing style=sweavechunk]
+writeWorksheet(object, data, sheet, startRow, startCol, header)
+\end{tikzCodeBlock}
+
 \subsubsection{Creating names}
 
 The \code{createName()} function creates a name of a chosen \code{name} for a specified \code{formula} into a workbook.
@@ -320,20 +354,49 @@ the workbook object to disk.
 saveWorkbook(object)
 \end{tikzCodeBlock}
 
-\subsection{Writing Excel files: example}\label{sec:options}
+% Shift into the figs directory here so that we don't have
+% to have separate Sweave code chunks with the 'figs/' path in
+% them.
+%<<pathStepIn,results=hide>>=
+%	setwd('figs')
+%@
 
+\subsection{Example: writing a sheet}\label{sec:options}
 Let's see how the basic functions introduced in this section can be used to create and save an Excel file.
-We will use the in-built {\bf mtcars} dataset for this simple example. 
-\\\\The code below first loads the "XLConnect.xlsx" workbook, using \code{loadWorkbook()}. 
-If the workbook does not exist yet, the function creates it. 
-\\\\ Then, via \code{createSheet()}, a sheet named "mtcars" is created witin the workbook. 
-\\\\ We then use \code{createName()} to create the "name.mtcars" name in the workbook and specify 
-its location in the mtcars sheet, with the \$C\$5 cell as the top-left corner. 
-\\\\We then call \code{writeNamedRegion()} to write a named range to the workbook, 
-using the mtcars dataset and the name.mtcars name.
-\\\\At the end, we use \code{saveWorkbook()} to save the XLConnect.xlsx file. 
+We will use the in-built {\bf mtcars} dataset for this simple example.
 
-<<removeFile,echo=F,results=hide>>=
+The code below first loads the "XLConnect.xlsx" workbook, using \code{loadWorkbook()}. 
+If the workbook does not exist yet, the function creates it (since the \code{create} argument is set to \code{TRUE}).
+
+Then, via \code{createSheet()}, a sheet named "mtcarsSheet" is created within the workbook. 
+We then use \code{writeWorksheet()} to write the {\bf mtcars} data frame into mtcarsSheet.
+
+At the end, we use \code{saveWorkbook()} to save the XLConnect.xlsx file.
+
+<<removeFile1,echo=F,results=hide>>=
+	if(file.exists("XLConnect.xlsx"))
+		file.remove("XLConnect.xlsx")
+@
+
+<<simpleEx,echo=T,results=hide>>=
+require(XLConnect)
+wb <- loadWorkbook("XLConnect.xlsx", create = TRUE)
+createSheet(wb, name = "mtcarsSheet")
+writeWorksheet(wb, mtcars, sheet = "mtcarsSheet", startRow = 3, startCol = 4)
+saveWorkbook(wb)
+@
+
+
+\subsection{Example: writing a named region}\label{sec:options}
+
+
+We then use \code{createName()} to create the "name.mtcars" name in the workbook and specify 
+its location in the mtcars sheet, with the \$C\$5 cell as the top-left corner. 
+We then call \code{writeNamedRegion()} to write a named range to the workbook, 
+using the mtcars dataset and the name.mtcars name.
+At the end, we use \code{saveWorkbook()} to save the XLConnect.xlsx file. 
+
+<<removeFile2,echo=F,results=hide>>=
 	if(file.exists("XLConnect.xlsx"))
 		file.remove("XLConnect.xlsx")
 @
@@ -369,6 +432,19 @@ All the previous operations are performed in-memory, which has great performance
 \subsection{Example from Zurich R...}
 
 \section{What's new in XLConnect version \Sexpr{getOption("XLConnect.Version")}}
+\subsection{xlcEdit()}
+
+\pkg{XLConnect} version \Sexpr{getOption("XLConnect.Version")} contains a new function: \code{xlcEdit()}
+
+\code{xlcEdit()} allows you to do the following:
+
+\begin{enumerate}
+	\item Write a data frame from R into Excel
+	\item Edit the data frame in Excel
+	\item Get the updated data back into R
+\end{enumerate}
+
+\textcolor{red}{Add an example, discuss with Martin}
 
 \section{Frequently Asked Questions}
 
@@ -606,6 +682,11 @@ review, on \href{http://crantastic.org/packages/XLConnect}{crantastic!}
 % xlcEdit()
 % write a data frame into Excel, edit in Excel, get data back - get Martin's help to write this part
 % also see news file on CRAN
+
+% GLOSSARY?
+% workbook
+% worksheet
+% named region
 
 
 \end{document}\n
