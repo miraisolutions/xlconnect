@@ -13,6 +13,14 @@
 % List of colours here: http://en.wikibooks.org/wiki/LaTeX/Colors
 \usepackage[usenames,dvipsnames]{color}
 
+% To get URLs in a normal font, by using \urlwofont
+\usepackage{url}
+
+\newcommand{\urlwofont}[1]
+{
+\urlstyle{same}\url{#1}
+}
+
 % Set colours of links in the document
 \hypersetup
 {
@@ -64,8 +72,8 @@
 @
 
 \title{The \pkg{XLConnect} Package\\
-{\small\href{http://mirai-solutions.com}{http://mirai-solutions.com}}\\[-0.3cm]
-{\small\href{http://cran.r-project.org/web/packages/XLConnect/index.html}{http://cran.r-project.org/web/packages/XLConnect/index.html}}
+{\small\urlwofont{http://mirai-solutions.com}}\\[-0.3cm]
+{\small\urlwofont{http://cran.r-project.org/web/packages/XLConnect/index.html}}
 }
 
 
@@ -476,7 +484,7 @@ that can be imported as follows:
 
 You should then be able to import the pasted region without problems.
 
-\section{Support}
+\section{Contact and Support}
 
 We are very glad you are using \pkg{XLConnect} and we would be happy to hear from you!\\
  
@@ -485,7 +493,7 @@ We are very glad you are using \pkg{XLConnect} and we would be happy to hear fro
 \end{minipage}
 \begin{minipage}[c]{0.9\textwidth}
 Please mail any bug reports, feature requests or technical inquiries to: \\
-\href{mailto:xlconnect-bugs@mirai-solutions.com}{xlconnect-bugs@mirai-solutions.com}
+\urlwofont{mailto:xlconnect-bugs@mirai-solutions.com}
 \end{minipage}
 
 \begin{minipage}[c]{0.08\textwidth}
@@ -493,29 +501,49 @@ Please mail any bug reports, feature requests or technical inquiries to: \\
 \end{minipage}
 \begin{minipage}[c]{0.9\textwidth}
 For any other feedback you may have, please contact as at: \\
-\href{mailto:xlconnect@mirai-solutions.com}{xlconnect@mirai-solutions.com}
+\urlwofont{mailto:xlconnect@mirai-solutions.com}
 \end{minipage}
 
 \begin{minipage}[c]{0.08\textwidth}
 \includegraphics[width=10mm, height=10mm]{img/LinkedIn-Icon.png}
 \end{minipage}
 \begin{minipage}[c]{0.9\textwidth}
-You can also follow and contact us through {\bf LinkedIn}: \\
-\url{http://www.linkedin.com/company/mirai-solutions-gmbh}
+You can also follow and contact us on {\bf LinkedIn}: \\
+\urlwofont{http://www.linkedin.com/company/mirai-solutions-gmbh}
 \end{minipage}
 
 \vspace{3mm}
-We will do our best to reply to your enquires as quickly as possible.
-
-
-
-
-
-
-
-
+We will do our best to reply to your enquires as quickly as possible!
 
 \section{Further Resources and References}
+
+\begin{enumerate}
+	\item	Mirai Solutions website: 
+			\\\urlwofont{http://www.mirai-solutions.com}
+	\item 	Mirai Solutions blog on Wordpress: 
+			\\\urlwofont{http://miraisolutions.wordpress.com/}
+	\item 	Mirai Solutions LinkedIn Page: 
+			\\\urlwofont{http://www.linkedin.com/company/mirai-solutions-gmbh}
+	\item 	\pkg{XLConnect} on cran: 
+			\\\urlwofont{http://cran.r-project.org/web/packages/XLConnect/index.html}
+	\item 	\pkg{XLConnect} on crantastic!: 
+			\\\urlwofont{http://crantastic.org/packages/XLConnect}
+	\item 	\pkg{XLConnect} on inside-R!: 
+			\\\urlwofont{http://www.inside-r.org/packages/xlconnect}
+	\item 	R Base course by Dr. Roberto Dantas de Pinho, referring to \pkg{XLConnect} (Portugese):
+			\\\urlwofont{http://www.slideshare.net/RobertodePinho/curso-bsico-de-r}
+	\item 	YouTube tutorial by bebilda, on importing and exporting data using \pkg{XLConnect} (Spanish): 
+			\\\urlwofont{http://www.youtube.com/watch?v=84ShWUiq5Mg}	
+	\item 	YouTube tutorial by MrIanfellows, on importing data into R using JGR and \pkg{XLConnect}:
+			\\\urlwofont{http://www.youtube.com/watch?v=1QA_7ks1pnc} 
+	\item 	\pkg{XLConnect} usage described in the R Programming/Data Management section in Wikibooks 
+			\\(Reading and saving data > Importing and exporting data > Excel (xls,xlsx)):
+			\\\urlwofont{http://en.wikibooks.org/wiki/R_Programming/Data_Management}
+			
+	
+	
+	
+\end{enumerate}
 
 \newpage
 
@@ -524,8 +552,17 @@ We will do our best to reply to your enquires as quickly as possible.
 {
 \vskip\baselineskip
 
-Please note, that this is the very first version of the Vignette for \pkg{XLConnect}. We are planning to regularly add 
-more descriptions of features and examples of usage, so please look out for updates!
+We hope that you enjoy using \pkg{XLConnect}. We would be very happy to hear your feedback about
+the package and about this Vignette.
+
+\vspace{3mm}
+
+Also, we would be very grateful if you were willing to spare a few minutes and rate the package, or write a 
+review, on \href{http://crantastic.org/packages/XLConnect}{crantastic!}
+
+\vspace{3mm}
+
+\textit{- Mirai Solutions -} 
 
 \vspace{0.5cm}
   
@@ -569,21 +606,6 @@ more descriptions of features and examples of usage, so please look out for upda
 % xlcEdit()
 % write a data frame into Excel, edit in Excel, get data back - get Martin's help to write this part
 % also see news file on CRAN
-
-% 5. FAQ
-% Take whatever we have on the Mirai website
-
-% 6. Futher resources and references
-% Mirai Wordpress
-% Mirai Solutions Website
-% Mirai on LinkedIN
-% Jaguar :) JGR (Iain McFellow)
-% Spanish YouTube video
-% R Base Course with XLConnect from Brasil: Roberto de Pinho
-% Find some more references to XlConnect
-% PLEASE VOTE FOR US
-% http://www.inside-r.org/packages/xlconnect
-% http://crantastic.org/packages/XLConnect
 
 
 \end{document}\n
