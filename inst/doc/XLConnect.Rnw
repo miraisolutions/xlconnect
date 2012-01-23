@@ -393,12 +393,13 @@ should do this as early as possible.
 
 If you're using R from within Eclipse/StatET, the JVM is initialized as soon as the R process is 
 started due to the required communication between Eclipse and R (the rj/rj-server components). 
-Therefore, you need to set the Java heap size in Eclipse's "Run Configurations" for the R engine:\\
+Therefore, you need to set the Java heap size in Eclipse's "Run Configurations" (Run > Run 
+Configurations on top menu) for the R engine:\\
 
 \begin{figure}[htb]
 	\begin{center}
-		\caption{Setting the Java heap size in Eclipse}
-		\includegraphics[scale=1]{img/RunConfigurations.png}
+		\caption{Setting the Java heap size in Eclipse: }
+		\includegraphics[width=16.1cm]{img/RunConfigurations.png}
 	\end{center}
 \end{figure}
 
@@ -476,6 +477,43 @@ that can be imported as follows:
 You should then be able to import the pasted region without problems.
 
 \section{Support}
+
+We are very glad you are using \pkg{XLConnect} and we would be happy to hear from you!\\
+ 
+\begin{minipage}[c]{0.08\textwidth}
+\includegraphics[width=10mm, height=10mm]{img/BrownBug.png}
+\end{minipage}
+\begin{minipage}[c]{0.9\textwidth}
+Please mail any bug reports, feature requests or technical inquiries to: \\
+\href{mailto:xlconnect-bugs@mirai-solutions.com}{xlconnect-bugs@mirai-solutions.com}
+\end{minipage}
+
+\begin{minipage}[c]{0.08\textwidth}
+\includegraphics[width=10mm, height=10mm]{img/Feedback.png}
+\end{minipage}
+\begin{minipage}[c]{0.9\textwidth}
+For any other feedback you may have, please contact as at: \\
+\href{mailto:xlconnect@mirai-solutions.com}{xlconnect@mirai-solutions.com}
+\end{minipage}
+
+\begin{minipage}[c]{0.08\textwidth}
+\includegraphics[width=10mm, height=10mm]{img/LinkedIn-Icon.png}
+\end{minipage}
+\begin{minipage}[c]{0.9\textwidth}
+You can also follow and contact us through {\bf LinkedIn}: \\
+\url{http://www.linkedin.com/company/mirai-solutions-gmbh}
+\end{minipage}
+
+\vspace{3mm}
+We will do our best to reply to your enquires as quickly as possible.
+
+
+
+
+
+
+
+
 
 \section{Further Resources and References}
 
