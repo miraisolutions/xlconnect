@@ -9,8 +9,8 @@
 Reads data from worksheets of a \code{\linkS4class{workbook}}.
 }
 \usage{
-\S4method{readWorksheet}{workbook,numeric}(object,sheet,startRow,startCol,endRow,endCol,header,rownames)
-\S4method{readWorksheet}{workbook,character}(object,sheet,startRow,startCol,endRow,endCol,header,rownames)
+\S4method{readWorksheet}{workbook,numeric}(object,sheet,startRow,startCol,endRow,endCol,header,rownames,colTypes)
+\S4method{readWorksheet}{workbook,character}(object,sheet,startRow,startCol,endRow,endCol,header,rownames,colTypes)
 }
 
 \arguments{
@@ -25,6 +25,15 @@ Reads data from worksheets of a \code{\linkS4class{workbook}}.
   \item{rownames}{Index (\code{numeric}) or name (\code{character}) of column that
   should be used as row names. The corresponding column will be removed from the data
   set. Defaults to \code{NULL} which means that no row names are applied.}
+  \item{colTypes}{Column types to use when reading in the data. Specified as a \code{character}
+  vector of the corresponding type names (see \code{\link{XLC}}; \code{XLC$DATA_TYPE.<?>}). 
+  The types are applied in the given order to the columns - elements are recycled if necessary.
+  Defaults to \code{character(0)} meaning that column types are determined automatically (see the
+  Note section for more information).\cr
+  By default, type conversions are only applied if the specified column type is a more generic type
+  (e.g. from Numeric to String) - otherwise \code{NA} is returned. The force conversion flag can be
+  set (see \code{\link[=setForceConversion-methods]{setForceConversion}}) to force conversion into
+  less generic types where possible.}
 }
 
 \details{
@@ -56,6 +65,7 @@ Martin Studer\cr
 Mirai Solutions GmbH \url{http://www.mirai-solutions.com}
 }
 \note{
+If no specific column types (see argument \code{colTypes}) are specified,
 \code{readWorksheet} tries to determine the resulting column types based on the read cell types. If different cell
 types are found in a specific column, the most general of those is used and mapped to the corresponding R data type.
 The order of data types from least to most general is Boolean (\code{logical}) < DateTime (\code{POSIXct}) < 
@@ -69,7 +79,8 @@ type.
   \code{\link[=readNamedRegion-methods]{readNamedRegion}},
   \code{\link[=writeNamedRegion-methods]{writeNamedRegion}},\cr
   \code{\link{readWorksheetFromFile}},
-  \code{\link[=onErrorCell-methods]{onErrorCell}}
+  \code{\link[=onErrorCell-methods]{onErrorCell}},
+  \code{\link[=setForceConversion-methods]{setForceConversion}}
 }
 \examples{
 # mtcars xlsx file from demoFiles subfolder of package XLConnect

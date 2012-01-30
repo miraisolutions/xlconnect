@@ -49,6 +49,7 @@ exportMethods(
 	setFillBackgroundColor,
 	setFillForegroundColor,
 	setFillPattern,
+	setForceConversion,
     setForceFormulaRecalculation,
 	setMissingValue,
 	setRowHeight,

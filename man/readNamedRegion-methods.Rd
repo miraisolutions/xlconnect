@@ -8,7 +8,7 @@
 Reads named regions from a \code{\linkS4class{workbook}}.
 }
 \usage{
-\S4method{readNamedRegion}{workbook}(object, name, header, rownames)
+\S4method{readNamedRegion}{workbook}(object, name, header, rownames, colTypes)
 }
 
 \arguments{
@@ -19,6 +19,15 @@ Reads named regions from a \code{\linkS4class{workbook}}.
   \item{rownames}{Index (\code{numeric}) or name (\code{character}) of column that
   should be used as row names. The corresponding column will be removed from the data
   set. Defaults to \code{NULL} which means that no row names are applied.}
+  \item{colTypes}{Column types to use when reading in the data. Specified as a \code{character}
+  vector of the corresponding type names (see \code{\link{XLC}}; \code{XLC$DATA_TYPE.<?>}). 
+  The types are applied in the given order to the columns - elements are recycled if necessary.
+  Defaults to \code{character(0)} meaning that column types are determined automatically (see the
+  Note section for more information).\cr
+  By default, type conversions are only applied if the specified column type is a more generic type
+  (e.g. from Numeric to String) - otherwise \code{NA} is returned. The force conversion flag can be
+  set (see \code{\link[=setForceConversion-methods]{setForceConversion}}) to force conversion into
+  less generic types where possible.}
 }
 
 \details{
@@ -40,6 +49,7 @@ Martin Studer\cr
 Mirai Solutions GmbH \url{http://www.mirai-solutions.com}
 }
 \note{
+If no specific column types (see argument \code{colTypes}) are specified,
 \code{readNamedRegion} tries to determine the resulting column types
 based on the read cell types. If different cell types are found in a
 specific column, the most general of those is used and mapped to the
@@ -56,7 +66,8 @@ is the most general type.
   \code{\link[=writeNamedRegion-methods]{writeNamedRegion}},\cr
   \code{\link[=writeWorksheet-methods]{writeWorksheet}},
   \code{\link{readNamedRegionFromFile}},
-  \code{\link[=onErrorCell-methods]{onErrorCell}}
+  \code{\link[=onErrorCell-methods]{onErrorCell}},
+  \code{\link[=setForceConversion-methods]{setForceConversion}}
 }
 \examples{
 # mtcars xlsx file from demoFiles subfolder of package XLConnect

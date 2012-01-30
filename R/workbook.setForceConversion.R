@@ -20,28 +20,19 @@
 
 #############################################################################
 #
-# Reading named regions from an Excel file
+# Set a flag to force conversion between data types when reading in data
 # 
 # Author: Martin Studer, Mirai Solutions GmbH
 #
 #############################################################################
 
-setGeneric("readNamedRegion",
-	function(object, ...) standardGeneric("readNamedRegion"))
+setGeneric("setForceConversion",
+		function(object, ...) standardGeneric("setForceConversion"))
 
-setMethod("readNamedRegion", 
-	signature(object = "workbook"), 
-	function(object, name, header = TRUE, rownames = NULL, colTypes = character(0)) {
-		# returns a list of RDataFrameWrapper Java object references
-		dataFrame <- xlcCall(object, "readNamedRegion", name, header, .jarray(colTypes), SIMPLIFY = FALSE)
-		# construct data.frame
-		dataFrame <- lapply(dataFrame, function(x) {
-			extractRownames(dataframeFromJava(x), rownames)
-		})
-		names(dataFrame) <- name
-		
-		# Return data.frame directly in case only one data.frame is read
-		if(length(dataFrame) == 1) dataFrame[[1]]
-		else dataFrame
-	}
+setMethod("setForceConversion", 
+		signature(object = "workbook"), 
+		function(object, value = FALSE) {
+			xlcCall(object, "setForceConversion", value)
+			invisible()
+		}
 )
