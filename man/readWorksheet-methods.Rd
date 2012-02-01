@@ -9,8 +9,8 @@
 Reads data from worksheets of a \code{\linkS4class{workbook}}.
 }
 \usage{
-\S4method{readWorksheet}{workbook,numeric}(object,sheet,startRow,startCol,endRow,endCol,header,rownames,colTypes)
-\S4method{readWorksheet}{workbook,character}(object,sheet,startRow,startCol,endRow,endCol,header,rownames,colTypes)
+\S4method{readWorksheet}{workbook,numeric}(object,sheet,startRow,startCol,endRow,endCol,header,rownames,colTypes,forceConversion,dateTimeFormat)
+\S4method{readWorksheet}{workbook,character}(object,sheet,startRow,startCol,endRow,endCol,header,rownames,colTypes,forceConversion,dateTimeFormat)
 }
 
 \arguments{
@@ -31,9 +31,19 @@ Reads data from worksheets of a \code{\linkS4class{workbook}}.
   Defaults to \code{character(0)} meaning that column types are determined automatically (see the
   Note section for more information).\cr
   By default, type conversions are only applied if the specified column type is a more generic type
-  (e.g. from Numeric to String) - otherwise \code{NA} is returned. The force conversion flag can be
-  set (see \code{\link[=setForceConversion-methods]{setForceConversion}}) to force conversion into
-  less generic types where possible.}
+  (e.g. from Numeric to String) - otherwise \code{NA} is returned. The \code{forceConversion} flag can be
+  set to force conversion into less generic types where possible.}
+  \item{forceConversion}{\code{logical} specifying if conversions to less generic types should be
+  forced. Defaults to \code{FALSE} meaning that if a column is specified
+  to be of a certain type via the \code{colTypes} argument and a more generic type is detected in
+  the column, then \code{NA} will be returned (example: column is specified to be DateTime but a
+  more generic String is found). Specifying \code{forceConversion = TRUE} will try to enforce a
+  conversion - if it succeeds the corresponding (converted) value will be returned, otherwise
+  \code{NA}.}
+  \item{dateTimeFormat}{Date/time format used when doing date/time conversions. Defaults to
+  \code{getOption("XLConnect.dateTimeFormat")}. This should be a POSIX format specifier according
+  to \code{\link{strptime}} although not all specifications have been implemented yet - the most
+  important ones however are available.}
 }
 
 \details{
@@ -79,10 +89,10 @@ type.
   \code{\link[=readNamedRegion-methods]{readNamedRegion}},
   \code{\link[=writeNamedRegion-methods]{writeNamedRegion}},\cr
   \code{\link{readWorksheetFromFile}},
-  \code{\link[=onErrorCell-methods]{onErrorCell}},
-  \code{\link[=setForceConversion-methods]{setForceConversion}}
+  \code{\link[=onErrorCell-methods]{onErrorCell}}
 }
 \examples{
+## Example 1:
 # mtcars xlsx file from demoFiles subfolder of package XLConnect
 demoExcelFile <- system.file("demoFiles/mtcars.xlsx", package = "XLConnect")
 
@@ -92,6 +102,24 @@ wb <- loadWorkbook(demoExcelFile)
 # Read worksheet 'mtcars' (providing no specific area bounds;
 # with default header = TRUE)
 data <- readWorksheet(wb, sheet = "mtcars")
+
+## Example 2:
+# conversion xlsx file from demoFiles subfolder of package XLConnect
+excelFile <- system.file("demoFiles/conversion.xlsx", package = "XLConnect")
+
+# Load workbook
+wb <- loadWorkbook(excelFile)
+
+# Read worksheet 'Conversion' with pre-specified column types
+# Note: in the worksheet all data was entered as strings!
+# forceConversion = TRUE is used to force conversion from String
+# into the less generic data types Numeric, DateTime & Boolean
+df <- readWorksheet(wb, sheet = "Conversion", header = TRUE,
+                    colTypes = c(XLC$DATA_TYPE.NUMERIC,
+                                 XLC$DATA_TYPE.DATETIME,
+                                 XLC$DATA_TYPE.BOOLEAN),
+                    forceConversion = TRUE,
+                    dateTimeFormat = "\%Y-\%m-\%d \%H:\%M:\%S")
 }
 \keyword{methods}
 \keyword{IO}

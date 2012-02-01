@@ -31,9 +31,11 @@ setGeneric("readNamedRegion",
 
 setMethod("readNamedRegion", 
 	signature(object = "workbook"), 
-	function(object, name, header = TRUE, rownames = NULL, colTypes = character(0)) {
+	function(object, name, header = TRUE, rownames = NULL, colTypes = character(0),
+			forceConversion = FALSE, dateTimeFormat = getOption("XLConnect.dateTimeFormat")) {
 		# returns a list of RDataFrameWrapper Java object references
-		dataFrame <- xlcCall(object, "readNamedRegion", name, header, .jarray(colTypes), SIMPLIFY = FALSE)
+		dataFrame <- xlcCall(object, "readNamedRegion", name, header, .jarray(colTypes), 
+				forceConversion, dateTimeFormat, SIMPLIFY = FALSE)
 		# construct data.frame
 		dataFrame <- lapply(dataFrame, function(x) {
 			extractRownames(dataframeFromJava(x), rownames)

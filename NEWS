@@ -9,8 +9,16 @@ XLConnect News
 	*	Columns in data.frames that have a type/class with no direct
 		correspondence in Excel (i.e. everything which is not a logical,
 		numeric, character or Date/POSIXt) are converted to character
-		using as.character rather than the following error being thrown:
+		using as.character when writing to Excel rather than the 
+		following error being thrown:
 		"Unsupported data type (class) detected!"
+	*	New arguments colTypes, forceConversion and dateTimeFormat
+		for methods readNamedRegion and readWorksheet. colTypes allows
+		to pre-specify column types (and force them in conjunction with
+		forceConversion) when reading in data. forceConversion forces 
+		conversion to less generic types (e.g. a string in Excel to a 
+		POSIXt in R). dateTimeFormat is a format specifier used when 
+		doing date/time conversions.
 	
 0.1-7	2011-10-19
 	*	Moved to Apache POI 3.8-beta4
