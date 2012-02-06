@@ -285,7 +285,7 @@ To load the package, use the \code{library()} or \code{require()} command in you
 
 Now, you are ready to use \pkg{XLConnect}! 
 
-The package includes a User Manual (this document), which you can view by entering the following command:
+The User Manual (this document) can be opened by entering the following command:
 
 \begin{tikzCodeBlock}[listing style=bashsource, code body/.append style={codebody color=white}]
 	vignette("XLConnect")
@@ -303,7 +303,7 @@ The Reference Manual, containing help pages for each function within the package
 
 \subsubsection{Loading/creating an Excel workbook}
 
-The \code{loadWorkbook()} function loads a Microsoft Excel workbook, so that it can then be further manipulated. 
+\code{loadWorkbook()} loads a Microsoft Excel workbook, so that it can then be further manipulated. 
 Setting the \code{create} argument to \code{TRUE} will ensure the file will be created, if it does not exist yet. 
 \\Both .xls and .xlsx file formats can be used.
 \begin{tikzCodeBlock}[title={Load an Excel workbook (create if not existing)},listing style=sweavechunk]
@@ -312,14 +312,13 @@ loadWorkbook(filename, create = TRUE)
 
 \subsubsection{Creating a sheet within an Excel file}
 
-The \code{createSheet()} function creates a sheet of a chosen \code{name} into the workbook specified as the \code{object}
-argument.
+\code{createSheet()} creates a sheet of a chosen \code{name} in the workbook specified as the \code{object} argument. 
 \begin{tikzCodeBlock}[title={Create a worksheet of a chosen name within a workbook},listing style=sweavechunk]
 createSheet(object, name)
 \end{tikzCodeBlock}
 
 \subsubsection{Writing into a sheet within an Excel file}
-The \code{writeWorksheet()} function writes \code{data} into a worksheet (name or index specified as the \code{sheet} argument) 
+\code{writeWorksheet()} writes \code{data} into a worksheet (name or index specified as the \code{sheet} argument) 
 of an Excel workbook (\code{object}). The \code{startRow} and \code{startCol} are both 1 by default, meaning that if they are
 not explicitly specified, the data will start being filled into the A1 cell of the worksheet.
 
@@ -329,98 +328,103 @@ writeWorksheet(object, data, sheet, startRow, startCol, header)
 
 \subsubsection{Creating names}
 
-The \code{createName()} function creates a name of a chosen \code{name} for a specified \code{formula} into a workbook.
-The \code{overwrite} argument lets you define the behaviour if the name already exists. If set to \code{TRUE}, the existing
-name will be removed first, before creating a new one. If set to \code{FALSE} (default setting), an exception will be thrown.
+\code{createName()} creates a \code{name} for a specified \code{formula} in a workbook.
+The \code{overwrite} argument lets you define behaviour if the name already exists. If set to \code{TRUE}, the existing
+name will be removed before creating a new one. If set to \code{FALSE} (default setting), an exception will be thrown.
 \begin{tikzCodeBlock}[title={Create a name for a specified formula within a workbook},listing style=sweavechunk]
 createName(object, name, formula, overwrite)
 \end{tikzCodeBlock}
 
 \subsubsection{Writing named regions}
  
-The \code{writeNamedRegion()} method writes a named range into a workbook. The \code{data} argument is assumed to be 
-a \code{data.frame}. The \code{header} argument allows you to specify whether column names should be written. 
-The arguments are vectorized, which allows for writing multiple named regions with one call. In such a case, \code{data}
-is assumed to be a list of \code{data.frames}.
+\code{writeNamedRegion()} writes a named range into a workbook. The \code{data} is assumed to be 
+a \code{data.frame} (or list of \code{data.frames}, if multiple named regions are written with one call). 
+The \code{header} argument allows you to specify whether column names should be written. 
 \begin{tikzCodeBlock}[title={Write a named range into a workbook},listing style=sweavechunk]
 writeNamedRegion(object, data, name, header)
 \end{tikzCodeBlock}
 
 \subsubsection{Saving an Excel file to disk}
 
-The \code{saveWorkbook()} function saves a workbook to the corresponding Excel file and actually writes
-the workbook object to disk.
+\code{saveWorkbook()} saves a workbook to the corresponding Excel file and writes the file to disk.
 \begin{tikzCodeBlock}[title={Save a workbook to a chosen Excel file},listing style=sweavechunk]
 saveWorkbook(object)
 \end{tikzCodeBlock}
 
-% Shift into the figs directory here so that we don't have
-% to have separate Sweave code chunks with the 'figs/' path in
-% them.
-%<<pathStepIn,results=hide>>=
-%	setwd('figs')
-%@
 
 \subsection{Example: writing a sheet}\label{sec:options}
 Let's see how the basic functions introduced in this section can be used to create and save an Excel file.
-We will use the in-built {\bf mtcars} dataset for this simple example.
+We will use the {\bf ChickWeight} dataset (built-in R dataset) for this simple example.
 
-The code below first loads the "XLConnect.xlsx" workbook, using \code{loadWorkbook()}. 
+The code below first loads the "XLConnectExample1.xlsx" workbook, using \code{loadWorkbook()}. 
 If the workbook does not exist yet, the function creates it (since the \code{create} argument is set to \code{TRUE}).
 
-Then, via \code{createSheet()}, a sheet named "mtcarsSheet" is created within the workbook. 
-We then use \code{writeWorksheet()} to write the {\bf mtcars} data frame into mtcarsSheet.
+Then, via \code{createSheet()}, a sheet named "chickSheet" is created within the workbook. 
+We then use \code{writeWorksheet()} to write the {\bf ChickWeight} data frame into chickSheet.
 
-At the end, we use \code{saveWorkbook()} to save the XLConnect.xlsx file.
+At the end, we use \code{saveWorkbook()} to save the XLConnectExample1.xlsx file.
 
 <<removeFile1,echo=F,results=hide>>=
-	if(file.exists("XLConnect.xlsx"))
-		file.remove("XLConnect.xlsx")
+	if(file.exists("XLConnectExample1.xlsx"))
+		file.remove("XLConnectExample1.xlsx")
 @
 
 <<simpleEx,echo=T,results=hide>>=
 require(XLConnect)
-wb <- loadWorkbook("XLConnect.xlsx", create = TRUE)
-createSheet(wb, name = "mtcarsSheet")
-writeWorksheet(wb, mtcars, sheet = "mtcarsSheet", startRow = 3, startCol = 4)
+wb <- loadWorkbook("XLConnectExample1.xlsx", create = TRUE)
+createSheet(wb, name = "chickSheet")
+writeWorksheet(wb, ChickWeight, sheet = "chickSheet", startRow = 3, startCol = 4)
 saveWorkbook(wb)
 @
-
-
-\subsection{Example: writing a named region}\label{sec:options}
-
-
-We then use \code{createName()} to create the "name.mtcars" name in the workbook and specify 
-its location in the mtcars sheet, with the \$C\$5 cell as the top-left corner. 
-We then call \code{writeNamedRegion()} to write a named range to the workbook, 
-using the mtcars dataset and the name.mtcars name.
-At the end, we use \code{saveWorkbook()} to save the XLConnect.xlsx file. 
-
-<<removeFile2,echo=F,results=hide>>=
-	if(file.exists("XLConnect.xlsx"))
-		file.remove("XLConnect.xlsx")
-@
-
-<<simpleEx,echo=T,results=hide>>=
-require(XLConnect)
-wb = loadWorkbook("XLConnect.xlsx", create = TRUE)
-createSheet(wb, name = "mtcars")
-createName(wb, name = "name.mtcars", formula = "mtcars!$C$5", overwrite = TRUE)
-writeNamedRegion(wb, mtcars, name = "name.mtcars")
-saveWorkbook(wb)
-@
-
-We have now got the mtcars data written to an Excel file! The figure below illustrates the result.
-
-\begin{figure}[htb]
-\begin{center}
-\caption{name.mtcars named region written into the XLConnect.xlsx file}
-\includegraphics[scale=0.7]{img/mtcars.png}
-\end{center}
-\end{figure}
 
 Please note that only at the point when we call \code{saveWorkbook()}, the Excel file is written to disk. 
 All the previous operations are performed in-memory, which has great performance advantages.
+
+The figure below illustrates the result.
+
+\begin{figure}[htb]
+\begin{center}
+\caption{ChickWeight data frame written into the XLConnectExample1.xlsx file}
+\includegraphics[width=11cm]{img/XLConnectExample1.png}
+\end{center}
+\end{figure}
+
+\newpage
+\subsection{Example: writing a named region}\label{sec:options}
+
+In this example we will show how to write data into an Excel named region. Again, we will use the
+{\bf ChickWeight} dataset.
+
+Similarly as in the example of writing an Excel sheet, we first load the workbook, using \code{loadWorkbook()}, 
+and then create a sheet named chickSheet, using \code{createSheet()}.
+
+We then use \code{createName()} to produce a named region "chicks", starting in the C5 cell of the chickSheet.
+Calling \code{writeNamedRegion()} writes the name into the workbook. 
+
+At the end, we use \code{saveWorkbook()} to write the Excel file to disk.
+
+<<removeFile2,echo=F,results=hide>>=
+	if(file.exists("XLConnectExample2.xlsx"))
+		file.remove("XLConnectExample2.xlsx")
+@
+
+<<simpleEx,echo=T,results=hide>>=
+require(XLConnect)
+wb = loadWorkbook("XLConnectExample2.xlsx", create = TRUE)
+createSheet(wb, name = "chickSheet")
+createName(wb, name = "chicks", formula = "chickSheet!$C$5", overwrite = TRUE)
+writeNamedRegion(wb, ChickWeight, name = "chicks")
+saveWorkbook(wb)
+@
+
+The figure below illustrates the result.
+
+\begin{figure}[htb]
+\begin{center}
+\caption{chicks named region written into the XLConnectExample2.xlsx file}
+\includegraphics[width=11cm]{img/XLConnectExample2.png}
+\end{center}
+\end{figure}
 
 \subsection{Reading Excel files: basic functions}
 \subsubsection{Sialala}
