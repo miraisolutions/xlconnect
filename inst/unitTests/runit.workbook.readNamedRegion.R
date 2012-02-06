@@ -53,4 +53,49 @@ test.workbook.readNamedRegion <- function() {
 	
 	# Check that attempting to read a non-existing named region throws an exception (*.xlsx)
 	checkException(readNamedRegion(wb.xlsx, "NameThatDoesNotExist"))
+	
+	targetNoForce <- data.frame(
+			AAA = c(NA, NA, NA, 780.9, NA),
+			BBB = c("hello", "42.24", "true", NA, "11.01.1984 12:00:00"),
+			CCC = c(TRUE, NA, NA, NA, NA),
+			DDD = as.POSIXct(c("1984-01-11 12:00:00", NA, NA, NA, NA), tz = "UTC"),
+			stringsAsFactors = FALSE
+	)
+	
+	targetForce <- data.frame(
+			AAA = c(-14.65, NA, 11.70, 780.9, NA),
+			BBB = c("hello", "42.24", "true", NA, "11.01.1984 12:00:00"),
+			CCC = c(TRUE, TRUE, NA, FALSE, FALSE),
+			DDD = as.POSIXct(c("1984-01-11 12:00:00", "2012-02-06 16:15:23", "1984-01-11 12:00:00", 
+					NA, "1900-12-22 16:04:48"), tz = "UTC"),
+			stringsAsFactors = FALSE
+	)
+	
+	# Check that conversion performs ok (without forcing conversion; *.xls)
+	res <- readNamedRegion(wb.xls, name = "Conversion", header = TRUE,
+			colTypes = c(XLC$DATA_TYPE.NUMERIC, XLC$DATA_TYPE.STRING, XLC$DATA_TYPE.BOOLEAN, XLC$DATA_TYPE.DATETIME),
+			forceConversion = FALSE,
+			dateTimeFormat = "%d.%m.%Y %H:%M:%S")
+	checkEquals(res, targetNoForce)
+	
+	# Check that conversion performs ok (without forcing conversion; *.xlsx)
+	res <- readNamedRegion(wb.xlsx, name = "Conversion", header = TRUE,
+		colTypes = c(XLC$DATA_TYPE.NUMERIC, XLC$DATA_TYPE.STRING, XLC$DATA_TYPE.BOOLEAN, XLC$DATA_TYPE.DATETIME),
+		forceConversion = FALSE,
+		dateTimeFormat = "%d.%m.%Y %H:%M:%S")
+	checkEquals(res, targetNoForce)
+	
+	# Check that conversion performs ok (with forcing conversion; *.xls)
+	res <- readNamedRegion(wb.xls, name = "Conversion", header = TRUE,
+			colTypes = c(XLC$DATA_TYPE.NUMERIC, XLC$DATA_TYPE.STRING, XLC$DATA_TYPE.BOOLEAN, XLC$DATA_TYPE.DATETIME),
+			forceConversion = TRUE,
+			dateTimeFormat = "%d.%m.%Y %H:%M:%S")
+	checkEquals(res, targetForce)
+	
+	# Check that conversion performs ok (with forcing conversion; *.xlsx)
+	res <- readNamedRegion(wb.xlsx, name = "Conversion", header = TRUE,
+			colTypes = c(XLC$DATA_TYPE.NUMERIC, XLC$DATA_TYPE.STRING, XLC$DATA_TYPE.BOOLEAN, XLC$DATA_TYPE.DATETIME),
+			forceConversion = TRUE,
+			dateTimeFormat = "%d.%m.%Y %H:%M:%S")
+	checkEquals(res, targetForce)
 }

@@ -39,7 +39,7 @@ Reads data from worksheets of a \code{\linkS4class{workbook}}.
   the column, then \code{NA} will be returned (example: column is specified to be DateTime but a
   more generic String is found). Specifying \code{forceConversion = TRUE} will try to enforce a
   conversion - if it succeeds the corresponding (converted) value will be returned, otherwise
-  \code{NA}.}
+  \code{NA}. See the Note section for some additional information.}
   \item{dateTimeFormat}{Date/time format used when doing date/time conversions. Defaults to
   \code{getOption("XLConnect.dateTimeFormat")}. This should be a POSIX format specifier according
   to \code{\link{strptime}} although not all specifications have been implemented yet - the most
@@ -81,7 +81,19 @@ types are found in a specific column, the most general of those is used and mapp
 The order of data types from least to most general is Boolean (\code{logical}) < DateTime (\code{POSIXct}) < 
 Numeric (\code{numeric}) < String (\code{character}). E.g. if a column is read that contains cells of type Boolean,
 Numeric and String then the resulting column in R would be \code{character} since \code{character} is the most general
-type.
+type.\cr\cr
+Some additional information with respect to forcing data type conversion
+using \code{forceConversion = TRUE}:
+\itemize{
+\item Forcing conversion from String to Boolean: \code{TRUE} is returned
+if and only if the target string is "true" (ignoring any capitalization).
+Any other string will return \code{FALSE}.
+\item Forcing conversion from Numeric to DateTime: since Excel understands
+Dates/Times as Numerics with some additional formatting, a conversion from
+a Numeric to a DateTime is actually possible. Numerics in this case represent
+the number of days since 1900-01-01. Fractional days represent hours, minutes, 
+and seconds.
+}
 }
 \seealso{
   \code{\linkS4class{workbook}},
