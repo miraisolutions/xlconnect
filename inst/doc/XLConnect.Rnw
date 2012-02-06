@@ -562,7 +562,7 @@ You should then be able to import the pasted region without problems.
 
 \section{Contact and Support}
 
-We are very glad you are using \pkg{XLConnect} and we would be happy to hear from you!\\
+We are very glad that you are using \pkg{XLConnect} and we would be happy to hear from you!\\
  
 \begin{minipage}[c]{0.08\textwidth}
 \includegraphics[width=10mm, height=10mm]{img/BrownBug.png}
