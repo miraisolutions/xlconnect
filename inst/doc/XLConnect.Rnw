@@ -297,36 +297,34 @@ The Reference Manual, containing help pages for each function within the package
 	help(XLConnect)
 \end{tikzCodeBlock}
 
-\subsection{Writing Excel files: basic functions}
-
-% As a first step, let's get familiar with the most basic functions in the \pkg{XLConnect} package.
-
-\subsubsection{Loading/creating an Excel workbook}
-
-\code{loadWorkbook()} loads a Microsoft Excel workbook, so that it can then be further manipulated. 
+\subsection{loadWorkbook() - loading/creating an Excel workbook}
+The \code{loadWorkbook()} function loads a Microsoft Excel workbook, so that it can then be further manipulated. 
 Setting the \code{create} argument to \code{TRUE} will ensure the file will be created, if it does not exist yet. 
 \\Both .xls and .xlsx file formats can be used.
 \begin{tikzCodeBlock}[title={Load an Excel workbook (create if not existing)},listing style=sweavechunk]
 loadWorkbook(filename, create = TRUE)
 \end{tikzCodeBlock}
 
-\subsubsection{Creating a sheet within an Excel file}
+\subsection{Writing Excel files: basic functions}
+
+\subsubsection{createSheet() - creating sheets within an Excel workbook}
 
 \code{createSheet()} creates a sheet of a chosen \code{name} in the workbook specified as the \code{object} argument. 
 \begin{tikzCodeBlock}[title={Create a worksheet of a chosen name within a workbook},listing style=sweavechunk]
 createSheet(object, name)
 \end{tikzCodeBlock}
 
-\subsubsection{Writing into a sheet within an Excel file}
+\subsubsection{writeWorksheet() - writing into sheets within an Excel workbook}
 \code{writeWorksheet()} writes \code{data} into a worksheet (name or index specified as the \code{sheet} argument) 
 of an Excel workbook (\code{object}). The \code{startRow} and \code{startCol} are both 1 by default, meaning that if they are
 not explicitly specified, the data will start being filled into the A1 cell of the worksheet.
 
 \begin{tikzCodeBlock}[title={Write into a worksheet},listing style=sweavechunk]
-writeWorksheet(object, data, sheet, startRow, startCol, header)
+writeWorksheet(object, data, sheet, startRow = 1, startCol = 1, 
+header = TRUE)
 \end{tikzCodeBlock}
 
-\subsubsection{Creating names}
+\subsubsection{createName() - creating names within an Excel workbook}
 
 \code{createName()} creates a \code{name} for a specified \code{formula} in a workbook.
 The \code{overwrite} argument lets you define behaviour if the name already exists. If set to \code{TRUE}, the existing
@@ -335,7 +333,7 @@ name will be removed before creating a new one. If set to \code{FALSE} (default 
 createName(object, name, formula, overwrite)
 \end{tikzCodeBlock}
 
-\subsubsection{Writing named regions}
+\subsubsection{writeNamedRegion() - writing named regions into an Excel workbook}
  
 \code{writeNamedRegion()} writes a named range into a workbook. The \code{data} is assumed to be 
 a \code{data.frame} (or list of \code{data.frames}, if multiple named regions are written with one call). 
@@ -344,15 +342,46 @@ The \code{header} argument allows you to specify whether column names should be 
 writeNamedRegion(object, data, name, header)
 \end{tikzCodeBlock}
 
-\subsubsection{Saving an Excel file to disk}
+\subsubsection{saveWorkbook() - saving a workbook to an Excel file}
 
 \code{saveWorkbook()} saves a workbook to the corresponding Excel file and writes the file to disk.
 \begin{tikzCodeBlock}[title={Save a workbook to a chosen Excel file},listing style=sweavechunk]
 saveWorkbook(object)
 \end{tikzCodeBlock}
 
+\subsubsection{writeWorksheetToFile() - writing into sheets of an Excel file}
 
-\subsection{Example: writing a sheet}\label{sec:options}
+\code{writeWorksheetToFile()} is a wrapper function, calling \code{loadWorkbook()}, \code{createSheet()} and 
+\code{saveWorkbook()} functions subsequently. It therefore allows for writing data into worksheets of an Excel 
+file in one call. 
+
+The \code{file} is the path name of the file to write to. The \code{styleAction} argument controls
+the application of cell styles when writing to Excel (type \code{?setStyleAction} into the console to
+see the supported styles). Within the \code{'...'} argument, arguments for the \code{writeWorksheet} function
+can be passed.
+
+\begin{tikzCodeBlock}[title={Write data to an Excel worksheet},listing style=sweavechunk]
+writeWorksheetToFile(file, styleAction = XLC\$STYLE_ACTION.XLCONNECT, ...)
+\end{tikzCodeBlock}
+
+\subsubsection{writeNamedRegionToFile() - writing named regions into an Excel file}
+\code{writeNamedRegionToFile()} is a convenient wrapper function, calling \code{loadWorkbook()}, \code{createSheet()},
+\code{createName()}, \code{writeNamedRegion()} and \code{saveWorkbook()} functions subsequently, therefore allowing
+for writing named regions to an Excel file in one call.
+
+The \code{file} is the path name of the file to write to. The name of the named region is passed as the \code{name}
+argument and the data to write, as \code{data}. The \code{header} argument specifies if column names should be written. 
+If you are writing data to a template in which the named region already exists, you don't need to specify the \code{formula}.
+Otherwise, if you are creating the file from scratch, supply the named region location as \code{formula}. The \code{styleAction} 
+argument controls the application of cell styles when writing to Excel (type \code{?setStyleAction} into the console to
+see the supported styles).
+
+\begin{tikzCodeBlock}[title={Write data into an Excel named region},listing style=sweavechunk]
+writeNamedRegionToFile(file, data, name, formula = NA, header = TRUE,
+styleAction = XLC\$STYLE_ACTION.XLCONNECT)
+\end{tikzCodeBlock}
+
+\subsection{Example: writing a sheet}\label{Example1}
 Let's see how the basic functions introduced in this section can be used to create and save an Excel file.
 We will use the {\bf ChickWeight} dataset (built-in R dataset) for this simple example.
 
@@ -389,7 +418,26 @@ The figure below illustrates the result.
 \end{center}
 \end{figure}
 
-\newpage
+\subsection{Example: writing a sheet with one call}\label{sec:options}
+The four lines of code presented in the previous example can be replaced with a single call of
+the \\\code{writeWorksheetToFile()} function:
+
+<<removeFile1,echo=F,results=hide>>=
+	if(file.exists("XLConnectExample2.xlsx"))
+		file.remove("XLConnectExample2.xlsx")
+@
+
+<<simpleEx,echo=T,results=hide>>=
+require(XLConnect)
+writeWorksheetToFile("XLConnectExample2.xlsx", data = ChickWeight, sheet = "chickSheet", startRow = 3, startCol = 4)
+@
+
+\code{writeWorksheetToFile()} loads the workbook, creates the sheet within in and saves the workbook. When you only need 
+to write one sheet into an Excel file, this is probably the better choice. If you need to write more sheets, however, 
+using the functions presented in the previous example will be more efficient. This is because calling \code{writeWorksheetToFile()}
+multiple times will open, write and close the Excel file with each call. Using the functions in the first example will,
+in contrast, allow you to open the workbook, do multiple operations on it and only then close it.
+
 \subsection{Example: writing a named region}\label{sec:options}
 
 In this example we will show how to write data into an Excel named region. Again, we will use the
@@ -404,13 +452,13 @@ Calling \code{writeNamedRegion()} writes the name into the workbook.
 At the end, we use \code{saveWorkbook()} to write the Excel file to disk.
 
 <<removeFile2,echo=F,results=hide>>=
-	if(file.exists("XLConnectExample2.xlsx"))
-		file.remove("XLConnectExample2.xlsx")
+	if(file.exists("XLConnectExample3.xlsx"))
+		file.remove("XLConnectExample3.xlsx")
 @
 
 <<simpleEx,echo=T,results=hide>>=
 require(XLConnect)
-wb = loadWorkbook("XLConnectExample2.xlsx", create = TRUE)
+wb = loadWorkbook("XLConnectExample3.xlsx", create = TRUE)
 createSheet(wb, name = "chickSheet")
 createName(wb, name = "chicks", formula = "chickSheet!$C$5", overwrite = TRUE)
 writeNamedRegion(wb, ChickWeight, name = "chicks")
@@ -421,22 +469,119 @@ The figure below illustrates the result.
 
 \begin{figure}[htb]
 \begin{center}
-\caption{chicks named region written into the XLConnectExample2.xlsx file}
-\includegraphics[width=11cm]{img/XLConnectExample2.png}
+\caption{chicks named region written into the XLConnectExample3.xlsx file}
+\includegraphics[width=11cm]{img/XLConnectExample3.png}
 \end{center}
 \end{figure}
 
-\subsection{Reading Excel files: basic functions}
-\subsubsection{Sialala}
-\subsubsection{Tralala}
+\subsection{Example: writing a named region with one call}\label{sec:options}
+The \code{writeNamedRegionToFile()} function can be used to produce the same result as in
+the previous example, with only one function call:
 
-\subsection{Reading Excel files: example}
+<<removeFile2,echo=F,results=hide>>=
+	if(file.exists("XLConnectExample4.xlsx"))
+		file.remove("XLConnectExample4.xlsx")
+@
+
+<<simpleEx,echo=T,results=hide>>=
+require(XLConnect)
+writeNamedRegionToFile("XLConnectExample4.xlsx", ChickWeight, name = "chicks", 
+		formula = "chickSheet!$C$5")
+@
+
+\subsection{Reading Excel files: basic functions}
+
+\subsubsection{readWorksheet() - reading worksheets of an Excel workbook}
+\code{readWorksheet()} allows for reading data from a workbook that has been previously loaded
+and is passed as the \code{object} argument. The name or index of the worksheet to read from should
+be passed as the \code{sheet} argument. The \code{startRow} and \code{startCol} arguments specify the
+location of the top left corner of data to be read, while \code{endRow} and \code{endCol} specify
+the bottom right corner. If \code{header = TRUE}, the first row is interpreted as column names of
+the data.frame object read in. 
+
+If the \code{startRow}, \code{startCol}, \code{endRow} and \code{endCol} arguments are not specified, 
+or are passed as \code{<= 0}, the "bounding box" of the data is treated as the corresponding boundaries.
+
+All arguments (except \code{object}) are vectorized, which allows for reading of multiple worksheets 
+with one call.
+
+\begin{tikzCodeBlock}[title={Read data from a worksheet of an Excel workbook},listing style=sweavechunk]
+readWorksheet(object, sheet, startRow, startCol, endRow, endCol, 
+header = TRUE)
+\end{tikzCodeBlock}
+
+\subsubsection{readWorksheetFromFile() - reading worksheets of an Excel file}
+\code{readWorksheetFromFile()} allows for reading data from a workbook with one call, without 
+loading the workbook first. The \code{file} argument is the path of the file to read from. All
+arguments of the \code{readWorksheet()} function can be passed within the \code{'...'} argument.
+
+\begin{tikzCodeBlock}[title={Read data from a worksheet of an Excel workbook with one call},listing style=sweavechunk]
+readWorksheetFromFile(file, ...)
+\end{tikzCodeBlock}
+
+\subsubsection{readNamedRegion() - reading named regions of an Excel workbook}
+\code{readNamedRegion()} can be used for reading data from named region in an Excel workbook.
+The workbook must first be loaded and passed as the \code{object} argument. Remaining arguments are
+the \code{name} of the named region and \code{header}, specifying whether the first row of data
+should be interpreted as column names.
+
+\begin{tikzCodeBlock}[title={Read data from a named region of an Excel workbook},listing style=sweavechunk]
+readNamedRegion(object, name, header = TRUE)
+\end{tikzCodeBlock}
+
+\subsubsection{readNamedRegionFromFile() - reading named regions of an Excel file}
+\code{readNamedRegionFromFile()} is a conveniece wrapper function which allows for reading named regions
+from an Excel file with one call. The function subsequently calls \code{loadWorkbook()} and 
+\code{readNamedRegion()}.
+
+The \code{file} argument specifies the path to the Excel file to be read and \code{name} - the named
+region to be read. The \code{header} argument specifies whether the first row of data should be interpreted 
+as column names.
+
+\begin{tikzCodeBlock}[title={Read data from a named region of an Excel file},listing style=sweavechunk]
+readNamedRegionFromFile(file, name, header = TRUE)
+\end{tikzCodeBlock}
+
+\subsection{Example: reading from an Excel sheet}
+In this example, we will show how you can use \code{XLConnect} to read from an Excel sheet. For this purpose,
+we will use the file created in the example in section \ref{Example1}. We set the \code{endRow} argument to
+\code{10}, to limit the result. We set the rest of arguments specifying boundaries as \code{0}, so that they
+are automatically determined.
+
+Please note, that alternatively to setting the \code{sheet} argument to the name of the sheet we want to read from,
+\code{"chickSheet"}, we could also specify it with the sheet index, as \code{sheet = 1}.
+
+<<latexEx,echo=T,keep.source=T>>=
+require(XLConnect)
+wb = loadWorkbook("XLConnectExample1.xlsx", create = TRUE)
+data = readWorksheet(wb, sheet = "chickSheet", startRow = 0, endRow = 10, 
+		startCol = 0, endCol = 0)
+data
+@
+
+\subsection{Example: reading from an Excel sheet with one call}
+The \code{readWorksheetFromFile()} function can be used to, with only one call, obtain the same result
+as was shown in the previous example:
+
+<<latexEx,echo=T,keep.source=T>>=
+require(XLConnect)
+data = readWorksheetFromFile("XLConnectExample1.xlsx", 
+		sheet = "chickSheet", startRow = 0, endRow = 10, 
+		startCol = 0, endCol = 0)
+data
+@
+
+
+
+\subsection{Example: reading from an Excel named region}
+\subsection{Example: reading from an Excel named region with one call}
 
 \section{Advanced Usage and Examples}
-\subsection{Example from Zurich R...}
+\subsection{Generating an Excel report of currency exchange rates development}
+For this example we are going to usage some further dependecies (list the packages used, with versions)
 
 \section{What's new in XLConnect version \Sexpr{getOption("XLConnect.Version")}}
-\subsection{xlcEdit()}
+\subsection{xlsEdit()}
 
 \pkg{XLConnect} version \Sexpr{getOption("XLConnect.Version")} contains a new function: \code{xlcEdit()}
 
@@ -594,6 +739,10 @@ You can also follow and contact us on {\bf LinkedIn}: \\
 
 \vspace{3mm}
 We will do our best to reply to your enquires as quickly as possible!
+
+\section{Glossary}
+
+
 
 \section{Further Resources and References}
 
