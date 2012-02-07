@@ -983,7 +983,7 @@ You can also follow and contact us on {\bf LinkedIn}: \\
 \vspace{3mm}
 We will do our best to reply to your enquires as quickly as possible!
 
-\section{Glossary}
+% \section{Glossary}
 
 
 
