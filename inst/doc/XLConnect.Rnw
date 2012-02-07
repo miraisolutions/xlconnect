@@ -300,7 +300,8 @@ The Reference Manual, containing help pages for each function within the package
 \subsection{loadWorkbook() - loading/creating an Excel workbook}
 The \code{loadWorkbook()} function loads a Microsoft Excel workbook, so that it can then be further manipulated. 
 Setting the \code{create} argument to \code{TRUE} will ensure the file will be created, if it does not exist yet. 
-\\Both .xls and .xlsx file formats can be used.
+
+Both .xls and .xlsx file formats can be used.
 \begin{tikzCodeBlock}[title={Load an Excel workbook (create if not existing)},listing style=sweavechunk]
 loadWorkbook(filename, create = TRUE)
 \end{tikzCodeBlock}
@@ -409,8 +410,6 @@ saveWorkbook(wb)
 Please note that only at the point when we call \code{saveWorkbook()}, the Excel file is written to disk. 
 All the previous operations are performed in-memory, which has great performance advantages.
 
-The figure below illustrates the result.
-
 \begin{figure}[htb]
 \begin{center}
 \caption{ChickWeight data frame written into the XLConnectExample1.xlsx file}
@@ -438,20 +437,18 @@ using the functions presented in the previous example will be more efficient. Th
 multiple times will open, write and close the Excel file with each call. Using the functions in the first example will,
 in contrast, allow you to open the workbook, do multiple operations on it and only then close it.
 
-\subsection{Example: writing a named region}\label{sec:options}
+\subsection{Example: writing a named region}\label{Example3}
 
-In this example we will show how to write data into an Excel named region. Again, we will use the
-{\bf ChickWeight} dataset.
+In this example we will show how to write data into a named region. We will use the {\bf women} dataset.
 
 Similarly as in the example of writing an Excel sheet, we first load the workbook, using \code{loadWorkbook()}, 
-and then create a sheet named chickSheet, using \code{createSheet()}.
+and then create a sheet named womenData, using \code{createSheet()}.
 
-We then use \code{createName()} to produce a named region "chicks", starting in the C5 cell of the chickSheet.
-Calling \code{writeNamedRegion()} writes the name into the workbook. 
+We then use \code{createName()} to produce a named region "womekName", starting in the C5 cell of the womenData sheet.
+Calling \code{writeNamedRegion()} writes the name into the workbook. At the end, we use \code{saveWorkbook()} to write 
+the Excel file to disk.
 
-At the end, we use \code{saveWorkbook()} to write the Excel file to disk.
-
-<<removeFile2,echo=F,results=hide>>=
+<<removeFile3,echo=F,results=hide>>=
 	if(file.exists("XLConnectExample3.xlsx"))
 		file.remove("XLConnectExample3.xlsx")
 @
@@ -459,34 +456,32 @@ At the end, we use \code{saveWorkbook()} to write the Excel file to disk.
 <<simpleEx,echo=T,results=hide>>=
 require(XLConnect)
 wb = loadWorkbook("XLConnectExample3.xlsx", create = TRUE)
-createSheet(wb, name = "chickSheet")
-createName(wb, name = "chicks", formula = "chickSheet!$C$5", overwrite = TRUE)
-writeNamedRegion(wb, ChickWeight, name = "chicks")
+createSheet(wb, name = "womenData")
+createName(wb, name = "womenName", formula = "womenData!$C$5", overwrite = TRUE)
+writeNamedRegion(wb, women, name = "womenName")
 saveWorkbook(wb)
 @
 
-The figure below illustrates the result.
-
 \begin{figure}[htb]
 \begin{center}
-\caption{chicks named region written into the XLConnectExample3.xlsx file}
-\includegraphics[width=11cm]{img/XLConnectExample3.png}
+\caption{women dataset written into womenName named region in the XLConnectExample3.xlsx file}
+\includegraphics[width=10cm]{img/XLConnectExample3.png}
 \end{center}
 \end{figure}
 
-\subsection{Example: writing a named region with one call}\label{sec:options}
+\newpage\subsection{Example: writing a named region with one call}\label{sec:options}
 The \code{writeNamedRegionToFile()} function can be used to produce the same result as in
 the previous example, with only one function call:
 
-<<removeFile2,echo=F,results=hide>>=
+<<removeFile4,echo=F,results=hide>>=
 	if(file.exists("XLConnectExample4.xlsx"))
 		file.remove("XLConnectExample4.xlsx")
 @
 
 <<simpleEx,echo=T,results=hide>>=
 require(XLConnect)
-writeNamedRegionToFile("XLConnectExample4.xlsx", ChickWeight, name = "chicks", 
-		formula = "chickSheet!$C$5")
+writeNamedRegionToFile("XLConnectExample4.xlsx", women, 
+		name = "womenName", formula = "womenData!$C$5")
 @
 
 \subsection{Reading Excel files: basic functions}
@@ -543,7 +538,7 @@ readNamedRegionFromFile(file, name, header = TRUE)
 \end{tikzCodeBlock}
 
 \subsection{Example: reading from an Excel sheet}
-In this example, we will show how you can use \code{XLConnect} to read from an Excel sheet. For this purpose,
+In this example, we will show how you can use \pkg{XLConnect} to read from an Excel sheet. For this purpose,
 we will use the file created in the example in section \ref{Example1}. We set the \code{endRow} argument to
 \code{10}, to limit the result. We set the rest of arguments specifying boundaries as \code{0}, so that they
 are automatically determined.
@@ -563,24 +558,272 @@ data
 The \code{readWorksheetFromFile()} function can be used to, with only one call, obtain the same result
 as was shown in the previous example:
 
-<<latexEx,echo=T,keep.source=T>>=
+<<simpleEx,echo=T,results=hide>>=
 require(XLConnect)
 data = readWorksheetFromFile("XLConnectExample1.xlsx", 
 		sheet = "chickSheet", startRow = 0, endRow = 10, 
 		startCol = 0, endCol = 0)
+@
+
+\subsection{Example: reading from an Excel named region}
+In this example, we will show how to use \pkg{XLConnect}'s functions to read from a named region
+in an Excel file. We will use the file created in the example in section \ref{Example3}.
+
+<<latexEx,echo=T,keep.source=T>>=
+require(XLConnect)
+wb = loadWorkbook("XLConnectExample3.xlsx", create = TRUE)
+data = readNamedRegion(wb, name = "womenName")
 data
 @
 
-
-
-\subsection{Example: reading from an Excel named region}
 \subsection{Example: reading from an Excel named region with one call}
+The result obtained in the previous example can be reproduced by calling the wrapper function:
+\\\code{readNamedRegionFromFile()}, witout the necessity of loading the workbook first:
+
+<<simpleEx,echo=T,results=hide>>=
+require(XLConnect)
+data = readNamedRegionFromFile("XLConnectExample3.xlsx", "womenName")
+@
 
 \section{Advanced Usage and Examples}
 \subsection{Generating an Excel report of currency exchange rates development}
-For this example we are going to usage some further dependecies (list the packages used, with versions)
+In this example, we will show an example use case of \pkg{XLConnect}: generation of 
+a simple Excel report, showing the recent development of currency exchange rates 
+(EUR, USD, GBP, JPY vs Swiss Franc (CHF)).
 
-\section{What's new in XLConnect version \Sexpr{getOption("XLConnect.Version")}}
+For this example we are going to also use some other packages:
+\begin{itemize}
+	\item \pkg{fImport}: Rmetrics - Economical and Financial Data Import
+	\item \pkg{forecast}: Forecasting functions for time series
+	\item \pkg{zoo}: S3 Infrastructure for Regular and Irregular Time Series
+	\item \pkg{ggplot2}: An implementation of the Grammar of Graphics
+\end{itemize}
+
+\begin{tikzCodeBlock}
+	install.packages(c("XLConnect", "fImport", "forecast", "zoo", "ggplot2"))
+\end{tikzCodeBlock}
+
+Loading the required packages:
+<<AdvancedExampleP1,echo=T,results=hide>>=
+	require(XLConnect)
+	require(fImport)
+	require(forecast)
+	require(zoo)
+	require(ggplot2)
+@ 
+
+Preparing the data to be reported:
+
+<<AdvancedExampleP2,echo=T,results=hide,keep.source=T>>=
+# Currencies we're interested in compared to CHF
+currencies = c("EUR", "USD", "GBP", "JPY")
+
+# Fetch currency exchange rates (currency to CHF) 
+# from OANDA (last 366 days)
+curr = do.call("cbind", args = lapply(currencies,
+               function(cur) oandaSeries(paste(cur, "CHF", sep = "/"))))
+# Make a copy for later use
+curr.orig = curr
+# Scale currencies to exchange rate on first day in the series (baseline)
+curr = curr * matrix(1/curr[1,], nrow = nrow(curr),
+                     ncol = ncol(curr), byrow = TRUE) - 1
+# Some data transformations to bring the data into a simple data.frame
+curr = transform(curr, Time = time(curr)@Data)
+names(curr) = c(currencies, "Time")
+# Cyclic shift to bring the Time column to the front
+curr = curr[(seq(along = curr) - 2) %% ncol(curr) + 1]
+
+# Number of days to predict
+predictDays = 20
+# For each currency ...
+currFit = sapply(curr[, -1], function(cur) {
+  as.numeric(forecast(cur, h = predictDays)$mean)
+})
+# Add Time column to predictions
+currFit = cbind(
+  Time = seq(from = curr[nrow(curr), "Time"],
+             length.out = predictDays + 1, by = "days")[-1],
+  as.data.frame(currFit))
+
+# Bind actual data with predictions
+curr = rbind(curr, currFit)
+@ 
+
+Now, let's write the data to Excel:
+
+<<removeFile2,echo=F,results=hide>>=
+	if(file.exists("swiss_franc.xlsx"))
+		file.remove("swiss_franc.xlsx")
+@
+
+<<AdvancedExampleP3,echo=T,results=hide,keep.source=T>>=
+
+# Workbook filename
+wbFilename = "swiss_franc.xlsx"
+# Create a new workbook
+wb = loadWorkbook(wbFilename, create = TRUE)
+
+# Create a new sheet named 'Swiss_Franc'
+sheet = "Swiss_Franc"
+createSheet(wb, name = sheet)
+
+# Create a new Excel name referring to the top left corner
+# of the sheet 'Swiss_Franc' - this name is going to hold
+# our currency data
+dataName = "currency"
+nameLocation = paste(sheet, "$A$1", sep = "!")
+createName(wb, name = dataName, formula = nameLocation)
+
+# Write the currency data to the named region created above
+# Note: the named region will be automatically redefined to encompass all
+# written data
+writeNamedRegion(wb, data = curr, name = dataName, header = TRUE)
+# Save the workbook (this actually writes the file to disk)
+saveWorkbook(wb)
+
+@
+
+The figure below illustrates the first few rows of the named region we have 
+written to the Excel file. Please note, the data in your file will look different,
+since you will be running the example at a different time.
+
+\begin{figure}[htb]
+\begin{center}
+\caption{currency named region we have written}
+\includegraphics[width=12cm]{img/AdvancedExample1a.png}
+\end{center}
+\end{figure}
+
+\newpage Now, we are going to work on the report further, to make it {\bf look} nicer.
+Let's say that for each currency, we want to highlight the points in time when 
+there was a change of more than 2\% compared to the previous day.
+
+<<AdvancedExampleP4,echo=T,results=hide,keep.source=T>>=
+
+# Load the workbook created above
+wb = loadWorkbook(wbFilename)
+
+# Create a date cell style with a custom format for the Time column
+# (only show year, month and day without any time fields)
+csDate = createCellStyle(wb, name = "date")
+setDataFormat(csDate, format = "yyyy-mm-dd")
+# Create a time/date cell style for the prediction records
+csPrediction = createCellStyle(wb, name = "prediction")
+setDataFormat(csPrediction, format = "yyyy-mm-dd")
+setFillPattern(csPrediction, fill = XLC$FILL.SOLID_FOREGROUND)
+setFillForegroundColor(csPrediction, color = XLC$COLOR.GREY_25_PERCENT)
+# Create a percentage cell style
+# Number format: 2 digits after decimal point
+csPercentage = createCellStyle(wb, name = "currency")
+setDataFormat(csPercentage, format = "0.00%")
+# Create a highlighting cell style
+csHlight = createCellStyle(wb, name = "highlight")
+setFillPattern(csHlight, fill = XLC$FILL.SOLID_FOREGROUND)
+setFillForegroundColor(csHlight, color = XLC$COLOR.CORNFLOWER_BLUE)
+setDataFormat(csHlight, format = "0.00%")
+
+# Index for all rows except header row
+allRows = seq(length = nrow(curr)) + 1
+
+# Apply date cell style to the Time column
+setCellStyle(wb, sheet = sheet, row = allRows, col = 1, 
+		cellstyle = csDate)
+# Set column width such that the full date column is visible
+setColumnWidth(wb, sheet = sheet, column = 1, width = 2800)
+# Apply prediction cell style
+setCellStyle(wb, sheet = sheet, row = tail(allRows, n = predictDays), 
+		col = 1, cellstyle = csPrediction)
+# Apply number format to the currency columns
+currencyColumns = seq(along = currencies) + 1
+for(col in currencyColumns) {
+	setCellStyle(wb, sheet = sheet, row = allRows, col = col,
+	cellstyle = csPercentage)
+}
+
+# Check if there was a change of more than 2% compared 
+# to the previous day (per currency)
+idx = rollapply(curr.orig, width = 2, 
+		FUN = function(x) abs(x[2] / x[1] - 1),
+by.column = TRUE) > 0.02
+idx = rbind(rep(FALSE, ncol(idx)), idx)
+widx = apply(idx, 2, which)
+# Apply highlighting cell style
+for(i in seq(along = currencies)) {
+	setCellStyle(wb, sheet = sheet, row = widx[[i]] + 1, col = i + 1,
+	cellstyle = csHlight)
+# Note:
+# +1 for row since there is a header row
+# +1 for column since the first column is the time column
+}
+
+saveWorkbook(wb)
+@
+
+The illustration below shows the updated swiss\_franc.xlsx file, with highlighted cells,
+where day-to-day change was bigger than 2\%. Please note, the data in your file will look different,
+since you will be running the example at a different time.
+
+\begin{figure}[htb]
+\begin{center}
+\caption{Highlighted cells, where day-to-day change bigger than 2\%}
+\includegraphics[width=12cm]{img/AdvancedExample1b.png}
+\end{center}
+\end{figure}
+
+\newpage Further, we will add a graph to our report.
+
+<<AdvancedExampleP5,echo=T,results=hide,keep.source=T>>=
+wb = loadWorkbook(wbFilename)
+
+# Stack currencies into a currency variable (for use with ggplot2 below)
+gcurr = reshape(curr, varying = currencies, direction = "long",
+v.names = "Value", times = currencies, timevar = "Currency")
+
+# Also add a discriminator column to differentiate between actual and
+# prediction values
+gcurr[["Type"]] = ifelse(gcurr$Time %in% currFit$Time, 
+		"prediction", "actual")
+
+# Create a png graph showing the currencies in the context 
+# of the Swiss Franc
+png(filename = "swiss_franc.png", width = 800, height = 600)
+ggplot(gcurr, aes(Time, Value, colour = Currency, linetype = Type)) +
+geom_line() + stat_smooth(method = "loess") + xlab("") +
+scale_y_continuous("Change to baseline", formatter = "percent") +
+opts(title = "Currencies vs Swiss Franc",
+axis.title.y = theme_text(size = 10, angle = 90, vjust = 0.3))
+dev.off()
+
+# Define where the image should be placed via a named region;
+# let's put the image two columns left to the data starting 
+# in the 5th row
+createName(wb, name = "graph",
+formula = paste(sheet, idx2cref(c(5, ncol(curr) + 2)), sep = "!"))
+# Note: idx2cref converts indices (row, col) to Excel cell references
+
+# Put the image created above at the corresponding location
+addImage(wb, filename = "swiss_franc.png", name = "graph",
+originalSize = TRUE)
+
+saveWorkbook(wb)
+@
+
+As a result, we obtain the following graph, written into Excel file as 
+"graph" named region. Please note, your graph will look different, since
+you will be running the code at a different time.
+
+\begin{figure}[htb]
+\begin{center}
+\caption{Graph showing the currency trends}
+\includegraphics[width=15cm]{img/AdvancedExample1c.png}
+\end{center}
+\end{figure}
+
+% As the final step to producing our report, let's enrich it with some formulae!
+% We will add the maximum downturn (= minimum) for the currencies at the bottom
+% of the data (offset by three rows).
+
+\newpage\section{What's new in XLConnect version \Sexpr{getOption("XLConnect.Version")}}
 \subsection{xlsEdit()}
 
 \pkg{XLConnect} version \Sexpr{getOption("XLConnect.Version")} contains a new function: \code{xlcEdit()}
@@ -589,7 +832,7 @@ For this example we are going to usage some further dependecies (list the packag
 
 \begin{enumerate}
 	\item Write a data frame from R into Excel
-	\item Edit the data frame in Excel
+	\item Edit the data in Excel
 	\item Get the updated data back into R
 \end{enumerate}
 
@@ -610,7 +853,7 @@ I'm running out of memory when processing large data sets:
 \vspace{3 mm}
 {\bf \large Answer}: \\
  
-This is caused by the fact that XLConnect needs to copy your entire data object over 
+This is caused by the fact that \pkg{XLConnect} needs to copy your entire data object over 
 to the JVM in order to write it to a file and the JVM has to be initialized with a fixed 
 upper limit on its memory size. To change this amount, you can pass parameters to the R's 
 JVM just like you can to a command line Java process via rJava's options support:
@@ -718,7 +961,7 @@ We are very glad that you are using \pkg{XLConnect} and we would be happy to hea
 \end{minipage}
 \begin{minipage}[c]{0.9\textwidth}
 Please mail any bug reports, feature requests or technical inquiries to: \\
-\urlwofont{mailto:xlconnect-bugs@mirai-solutions.com}
+\href{mailto:xlconnect-bugs@mirai-solutions.com}{xlconnect-bugs@mirai-solutions.com}
 \end{minipage}
 
 \begin{minipage}[c]{0.08\textwidth}
@@ -726,7 +969,7 @@ Please mail any bug reports, feature requests or technical inquiries to: \\
 \end{minipage}
 \begin{minipage}[c]{0.9\textwidth}
 For any other feedback you may have, please contact as at: \\
-\urlwofont{mailto:xlconnect@mirai-solutions.com}
+\href{mailto:xlconnect@mirai-solutions.com}{xlconnect@mirai-solutions.com}
 \end{minipage}
 
 \begin{minipage}[c]{0.08\textwidth}
@@ -776,7 +1019,7 @@ We will do our best to reply to your enquires as quickly as possible!
 \newpage
 
 % Bye bye box
-\tikzDocDisclaim{Thanks for giving \bfseries{XLConnect} a try!\vspace{2mm}}
+\tikzDocDisclaim{Thanks for giving XLConnect a try!\vspace{2mm}}
 {
 \vskip\baselineskip
 
