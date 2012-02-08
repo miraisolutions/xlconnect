@@ -824,7 +824,7 @@ you will be running the code at a different time.
 % of the data (offset by three rows).
 
 \newpage\section{What's new in XLConnect version \Sexpr{getOption("XLConnect.Version")}}
-\subsection{xlsEdit()}
+\subsection{xlcEdit()}
 
 \pkg{XLConnect} version \Sexpr{getOption("XLConnect.Version")} contains a new function: \code{xlcEdit()}
 
@@ -978,6 +978,14 @@ For any other feedback you may have, please contact as at: \\
 \begin{minipage}[c]{0.9\textwidth}
 You can also follow and contact us on {\bf LinkedIn}: \\
 \urlwofont{http://www.linkedin.com/company/mirai-solutions-gmbh}
+\end{minipage}
+
+\begin{minipage}[c]{0.08\textwidth}
+\includegraphics[width=10mm, height=10mm]{img/TwitterLogo.png}
+\end{minipage}
+\begin{minipage}[c]{0.9\textwidth}
+We encourage you to also follow us on {\bf Twitter}: \\
+\href{http://twitter.com/miraisolutions}{@miraisolutions}
 \end{minipage}
 
 \vspace{3mm}
