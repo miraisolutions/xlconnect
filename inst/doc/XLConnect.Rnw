@@ -417,7 +417,7 @@ require(XLConnect)
 writeWorksheetToFile("XLConnectExample2.xlsx", data = ChickWeight, sheet = "chickSheet", startRow = 3, startCol = 4)
 @
 
-\code{writeWorksheetToFile()} loads the workbook, creates the sheet within in and saves the workbook. When you only need 
+\code{writeWorksheetToFile()} loads the workbook, creates the sheet and finally saves the workbook. When you only need 
 to write one sheet into an Excel file, this is probably the better choice. If you need to write more sheets, however, 
 using the functions presented in the previous example will be more efficient. This is because calling \code{writeWorksheetToFile()}
 multiple times will open, write and close the Excel file with each call. Using the functions in the first example will,
@@ -428,9 +428,9 @@ in contrast, allow you to open the workbook, do multiple operations on it and on
 In this example we will show how to write data into a named region. We will use the {\bf women} dataset.
 
 Similarly as in the example of writing an Excel sheet, we first load the workbook, using \code{loadWorkbook()}, 
-and then create a sheet named womenData, using \code{createSheet()}.
+and then create a sheet named "womenData", using \code{createSheet()}.
 
-We then use \code{createName()} to produce a named region "womekName", starting in the C5 cell of the womenData sheet.
+We then use \code{createName()} to produce a named region "womenName", starting in the C5 cell of the "womenData" sheet.
 Calling \code{writeNamedRegion()} writes the name into the workbook. At the end, we use \code{saveWorkbook()} to write 
 the Excel file to disk.
 
@@ -954,7 +954,7 @@ Please mail any bug reports, feature requests or technical inquiries to: \\
 \includegraphics[width=10mm, height=10mm]{img/Feedback.png}
 \end{minipage}
 \begin{minipage}[c]{0.9\textwidth}
-For any other feedback you may have, please contact as at: \\
+For any other feedback you may have, please contact us at: \\
 \href{mailto:xlconnect@mirai-solutions.com}{xlconnect@mirai-solutions.com}
 \end{minipage}
 
@@ -1004,9 +1004,7 @@ We will do our best to reply to your enquires as quickly as possible!
 			\\\urlwofont{http://www.youtube.com/watch?v=1QA_7ks1pnc} 
 	\item 	\pkg{XLConnect} usage described in the R Programming/Data Management section in Wikibooks 
 			\\(Reading and saving data > Importing and exporting data > Excel (xls,xlsx)):
-			\\\urlwofont{http://en.wikibooks.org/wiki/R_Programming/Data_Management}
-	\item 	\pkg{XLConnect} in RStudio:
-			\\\urlwofont{http://wiki.alpine-geckos.at/index.php/RStudio}			
+			\\\urlwofont{http://en.wikibooks.org/wiki/R_Programming/Data_Management}			
 	
 \end{enumerate}
 
