@@ -20,30 +20,35 @@
 
 #############################################################################
 #
-# Reading named regions from an Excel file
+# Helper function to map R classes to XLC types (XLC$DATA_TYPE.?)
 # 
 # Author: Martin Studer, Mirai Solutions GmbH
 #
 #############################################################################
 
-setGeneric("readNamedRegion",
-	function(object, ...) standardGeneric("readNamedRegion"))
-
-setMethod("readNamedRegion", 
-	signature(object = "workbook"), 
-	function(object, name, header = TRUE, rownames = NULL, colTypes = character(0),
-			forceConversion = FALSE, dateTimeFormat = getOption("XLConnect.dateTimeFormat")) {
-		# returns a list of RDataFrameWrapper Java object references
-		dataFrame <- xlcCall(object, "readNamedRegion", name, header, .jarray(classToXlcType(colTypes)), 
-				forceConversion, dateTimeFormat, SIMPLIFY = FALSE)
-		# construct data.frame
-		dataFrame <- lapply(dataFrame, function(x) {
-			extractRownames(dataframeFromJava(x), rownames)
-		})
-		names(dataFrame) <- name
-		
-		# Return data.frame directly in case only one data.frame is read
-		if(length(dataFrame) == 1) dataFrame[[1]]
-		else dataFrame
-	}
-)
+classToXlcType <- function(cls) {
+	if(length(cls) > 0) {
+		xlcTypes = c(XLC$DATA_TYPE.NUMERIC, XLC$DATA_TYPE.BOOLEAN, XLC$DATA_TYPE.STRING, XLC$DATA_TYPE.DATETIME)
+		as.vector(sapply(cls, function(x) {
+			switch(x,
+				"numeric" = XLC$DATA_TYPE.NUMERIC,
+				"integer" = XLC$DATA_TYPE.NUMERIC,
+				"logical" = XLC$DATA_TYPE.BOOLEAN,
+				"character" = XLC$DATA_TYPE.STRING,
+				"Date" = XLC$DATA_TYPE.DATETIME,
+				"POSIXt" = XLC$DATA_TYPE.DATETIME,
+				"POSIXct" = XLC$DATA_TYPE.DATETIME,
+				{
+					if(x %in% xlcTypes)
+						x
+					else {
+						warning(sprintf("Class or XLConnect data type '%s' is not supported! Continue with 'character'.", x),
+							call. = FALSE)
+						XLC$DATA_TYPE.STRING
+					}
+				}
+			)
+		}))
+	} else
+		cls
+}

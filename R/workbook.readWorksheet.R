@@ -38,7 +38,7 @@ setMethod("readWorksheet",
 			# returns a list of RDataFrameWrapper Java object references)
 			dataFrame <- xlcCall(object, "readWorksheet", as.integer(sheet - 1), as.integer(startRow - 1), 
 				as.integer(startCol - 1), as.integer(endRow - 1), as.integer(endCol - 1), header, 
-				.jarray(colTypes), forceConversion, dateTimeFormat, SIMPLIFY = FALSE)
+				.jarray(classToXlcType(colTypes)), forceConversion, dateTimeFormat, SIMPLIFY = FALSE)
 			# construct data.frame
 			dataFrame <- lapply(dataFrame, function(x) {
 				extractRownames(dataframeFromJava(x), rownames)
@@ -57,7 +57,7 @@ setMethod("readWorksheet",
 				 dateTimeFormat = getOption("XLConnect.dateTimeFormat")) {	
 			# returns a list of RDataFrameWrapper Java object references)
 			dataFrame <- xlcCall(object, "readWorksheet", sheet, as.integer(startRow - 1), as.integer(startCol - 1), 
-				as.integer(endRow - 1), as.integer(endCol - 1), header, .jarray(colTypes), 
+				as.integer(endRow - 1), as.integer(endCol - 1), header, .jarray(classToXlcType(colTypes)), 
 				forceConversion, dateTimeFormat, SIMPLIFY = FALSE)
 			# construct data.frame
 			dataFrame <- lapply(dataFrame, function(x) {

@@ -4,6 +4,11 @@
 
 %\VignetteIndexEntry{The XLConnect Package}
 %\VignetteDepends{XLConnect}
+%\VignetteDepends{fImport}
+%\VignetteDepends{forecast}
+%\VignetteDepends{ggplot2}
+%\VignetteDepends{tikzDevice}
+%\VignetteDepends{zoo}
 % \usepackage{Sweave}
 \usepackage[scaled=.9]{couriers}
 \usepackage[colorlinks]{hyperref}
@@ -70,25 +75,6 @@
 
 	if( !file.exists( 'figs' ) ) dir.create( 'figs' )
 	require(tikzDevice)
-	
-	# *** Begin Mother of All R Hacks ****
-
-  source( 'patchSweave.R' )
-	
-	# *** End Mother of All R Hacks ***
-	
-	# Now we have some extra code chunk options to play
-	# with:
-	#
-	#   wrapoutput: a vector of two character strings that will be used
-	#                       to surround R output chunks. Were formally hardwired
-	#                       to '\n\begin{Soutput}\n' and '\n\end{Soutput}\n'.
-	#
-	#   wrapinput:  Same idea as wrapoutput- both of these options must be
-	#                      set using options() as they are difficult to pass directly to
-	#                      Sweave
-	
-	options( wrapoutput = c('\nswe@veSt@rtOutput','swe@veEndOutput\n') )
 	
 @
 

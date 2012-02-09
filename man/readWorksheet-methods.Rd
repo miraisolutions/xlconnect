@@ -26,7 +26,8 @@ Reads data from worksheets of a \code{\linkS4class{workbook}}.
   should be used as row names. The corresponding column will be removed from the data
   set. Defaults to \code{NULL} which means that no row names are applied.}
   \item{colTypes}{Column types to use when reading in the data. Specified as a \code{character}
-  vector of the corresponding type names (see \code{\link{XLC}}; \code{XLC$DATA_TYPE.<?>}). 
+  vector of the corresponding type names (see \code{\link{XLC}}; \code{XLC$DATA_TYPE.<?>}). You
+  may also use R class names such as \code{numeric}, \code{character}, \code{logical} and \code{POSIXt}.
   The types are applied in the given order to the columns - elements are recycled if necessary.
   Defaults to \code{character(0)} meaning that column types are determined automatically (see the
   Note section for more information).\cr
