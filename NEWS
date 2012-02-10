@@ -1,7 +1,7 @@
 XLConnect News
 --------------
 
-0.1-8	???
+0.1-8	2012-02-10
 	*	Moved to Apache POI 3.8-beta5
 	*	Improved & extended package vignette
 	*	Introduced xlcEdit for editing data.frames in an Excel editor,

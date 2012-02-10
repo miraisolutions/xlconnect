@@ -41,7 +41,7 @@ Reads data from worksheets of a \code{\linkS4class{workbook}}.
   more generic String is found). Specifying \code{forceConversion = TRUE} will try to enforce a
   conversion - if it succeeds the corresponding (converted) value will be returned, otherwise
   \code{NA}. See the Note section for some additional information.}
-  \item{dateTimeFormat}{Date/time format used when doing date/time conversions. Defaults to
+  \item{dateTimeFormat}{Date/time format used when doing date/time conversions. Defaults to\cr
   \code{getOption("XLConnect.dateTimeFormat")}. This should be a POSIX format specifier according
   to \code{\link{strptime}} although not all specifications have been implemented yet - the most
   important ones however are available.}

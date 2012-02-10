@@ -348,7 +348,7 @@ see the supported styles). Within the \code{'...'} argument, arguments for the \
 can be passed.
 
 \begin{tikzCodeBlock}[title={Write data to an Excel worksheet},listing style=sweavechunk]
-writeWorksheetToFile(file, styleAction = XLC\$STYLE_ACTION.XLCONNECT, ...)
+writeWorksheetToFile(file, styleAction = XLC$STYLE_ACTION.XLCONNECT, ...)
 \end{tikzCodeBlock}
 
 \subsubsection{writeNamedRegionToFile() - writing named regions into an Excel file}
@@ -365,7 +365,7 @@ see the supported styles).
 
 \begin{tikzCodeBlock}[title={Write data into an Excel named region},listing style=sweavechunk]
 writeNamedRegionToFile(file, data, name, formula = NA, header = TRUE,
-styleAction = XLC\$STYLE_ACTION.XLCONNECT)
+styleAction = XLC$STYLE_ACTION.XLCONNECT)
 \end{tikzCodeBlock}
 
 \subsection{Example: writing a sheet}\label{Example1}
@@ -809,20 +809,22 @@ you will be running the code at a different time.
 % We will add the maximum downturn (= minimum) for the currencies at the bottom
 % of the data (offset by three rows).
 
-\newpage\section{What's new in XLConnect version \Sexpr{getOption("XLConnect.Version")}}
-\subsection{xlcEdit()}
+\pagebreak
+\section{What's new in XLConnect version \Sexpr{getOption("XLConnect.Version")}}
 
-\pkg{XLConnect} version \Sexpr{getOption("XLConnect.Version")} contains a new function: \code{xlcEdit()}
-
-\code{xlcEdit()} allows you to do the following:
-
-\begin{enumerate}
-	\item Write a data frame from R into Excel
-	\item Edit the data in Excel
-	\item Get the updated data back into R
-\end{enumerate}
-
-\textcolor{red}{Add an example, discuss with Martin}
+With version \Sexpr{getOption("XLConnect.Version")} of \pkg{XLConnect} we moved to Apache POI 3.8-beta5. The
+most prominent new features/extensions are an improved vignette (this document!) which provides more information
+and examples to get people started with the package. A new type conversion mechanism was introduced which allows
+users to pre-specify column types/classes and even force conversions between types (e.g. from \code{character} to
+\code{numeric}) when reading in data using \code{readNamedRegion} or \code{readWorksheet}. Instead of relying
+completely on cell types (which is the default mechanism), this allows to specify column classes of the data to
+be read in upfront. Possible type conversion issues will be reported back to the user/developer via warnings referring
+to the actual cell that is causing problems. Another new feature that was introduced is the function \code{xlcEdit}.
+It allows to edit plain \code{data.frame}s in an Excel file editor (e.g. MS Excel). Changes will be applied to the
+underlying data object after closing the editor. Note that this functionality is only available under Windows and
+Mac OS X. For more information please see the \href{http://cran.r-project.org/web/packages/XLConnect/XLConnect.pdf}{Reference Manual}.\\\\
+A summary of news in \pgk{XLConnect} \Sexpr{getOption("XLConnect.Version")} can be found in the 
+\href{http://cran.r-project.org/web/packages/XLConnect/NEWS}{NEWS} file on CRAN.
 
 \section{Frequently Asked Questions}
 
