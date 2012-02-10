@@ -823,7 +823,7 @@ to the actual cell that is causing problems. Another new feature that was introd
 It allows to edit plain \code{data.frame}s in an Excel file editor (e.g. MS Excel). Changes will be applied to the
 underlying data object after closing the editor. Note that this functionality is only available under Windows and
 Mac OS X. For more information please see the \href{http://cran.r-project.org/web/packages/XLConnect/XLConnect.pdf}{Reference Manual}.\\\\
-A summary of news in \pgk{XLConnect} \Sexpr{getOption("XLConnect.Version")} can be found in the 
+A summary of news in \pkg{XLConnect} \Sexpr{getOption("XLConnect.Version")} can be found in the 
 \href{http://cran.r-project.org/web/packages/XLConnect/NEWS}{NEWS} file on CRAN.
 
 \section{Frequently Asked Questions}
