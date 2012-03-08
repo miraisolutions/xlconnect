@@ -12,7 +12,7 @@ loadWorkbook(filename, create = FALSE)
 \arguments{
   \item{filename}{
   Filename (absolute or relative) of Excel workbook to be loaded. Supported are Excel '97 (*.xls) and
-  OOXML (Excel 2007+, *.xlsx) file formats.
+  OOXML (Excel 2007+, *.xlsx) file formats. Paths are expanded using \code{path.expand}.
 }
   \item{create}{
   Specifies if the file should be created if it does not already exist (default is \code{FALSE}). Note that

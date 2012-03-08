@@ -7,6 +7,7 @@
 %\VignetteDepends{fImport}
 %\VignetteDepends{forecast}
 %\VignetteDepends{ggplot2}
+%\VignetteDepends{scales}
 %\VignetteDepends{tikzDevice}
 %\VignetteDepends{zoo}
 % \usepackage{Sweave}
@@ -583,10 +584,12 @@ For this example we are going to also use some other packages:
 	\item \pkg{forecast}: Forecasting functions for time series
 	\item \pkg{zoo}: S3 Infrastructure for Regular and Irregular Time Series
 	\item \pkg{ggplot2}: An implementation of the Grammar of Graphics
+	\item \pkg{scales}: Provides methods for automatically determining breaks and labels for axes and legends
 \end{itemize}
 
 \begin{tikzCodeBlock}
-	install.packages(c("XLConnect", "fImport", "forecast", "zoo", "ggplot2"))
+	install.packages(c("XLConnect", "fImport", "forecast", "zoo", "ggplot2", 
+					   "scales"))
 \end{tikzCodeBlock}
 
 Loading the required packages:
@@ -595,7 +598,8 @@ Loading the required packages:
 	require(fImport)
 	require(forecast)
 	require(zoo)
-	require(ggplot2)
+	require(ggplot2) # >= 0.9.0
+	require(scales)
 @ 
 
 Preparing the data to be reported:
@@ -775,7 +779,7 @@ gcurr[["Type"]] = ifelse(gcurr$Time %in% currFit$Time,
 png(filename = "swiss_franc.png", width = 800, height = 600)
 ggplot(gcurr, aes(Time, Value, colour = Currency, linetype = Type)) +
 geom_line() + stat_smooth(method = "loess") + xlab("") +
-scale_y_continuous("Change to baseline", formatter = "percent") +
+scale_y_continuous("Change to baseline", labels = percent) +
 opts(title = "Currencies vs Swiss Franc",
 axis.title.y = theme_text(size = 10, angle = 90, vjust = 0.3))
 dev.off()

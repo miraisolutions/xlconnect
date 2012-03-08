@@ -29,12 +29,21 @@
 setGeneric("readWorksheet",
 	function(object, sheet, ...) standardGeneric("readWorksheet"))
 
-
 setMethod("readWorksheet", 
 		signature(object = "workbook", sheet = "numeric"), 
-		function(object, sheet, startRow = 0, startCol = 0, endRow = 0, endCol = 0, header = TRUE,
-				 rownames = NULL, colTypes = character(0), forceConversion = FALSE, 
-				 dateTimeFormat = getOption("XLConnect.dateTimeFormat")) {	
+		function(object, sheet, startRow = 0, startCol = 0, endRow = 0, endCol = 0, region = NULL,
+				 header = TRUE, rownames = NULL, colTypes = character(0), forceConversion = FALSE, 
+				 dateTimeFormat = getOption("XLConnect.dateTimeFormat")) {
+			 
+			if(!is.null(region)) {
+				# Convert region to indices
+				idx = rg2idx(region)
+				startRow = idx[,1]
+				startCol = idx[,2]
+				endRow = idx[,3]
+				endCol = idx[,4]
+			}
+			
 			# returns a list of RDataFrameWrapper Java object references)
 			dataFrame <- xlcCall(object, "readWorksheet", as.integer(sheet - 1), as.integer(startRow - 1), 
 				as.integer(startCol - 1), as.integer(endRow - 1), as.integer(endCol - 1), header, 
@@ -52,20 +61,11 @@ setMethod("readWorksheet",
 
 setMethod("readWorksheet", 
 		signature(object = "workbook", sheet = "character"), 
-		function(object, sheet, startRow = 0, startCol = 0, endRow = 0, endCol = 0, header = TRUE,
-				 rownames = NULL, colTypes = character(0), forceConversion = FALSE, 
-				 dateTimeFormat = getOption("XLConnect.dateTimeFormat")) {	
-			# returns a list of RDataFrameWrapper Java object references)
-			dataFrame <- xlcCall(object, "readWorksheet", sheet, as.integer(startRow - 1), as.integer(startCol - 1), 
-				as.integer(endRow - 1), as.integer(endCol - 1), header, .jarray(classToXlcType(colTypes)), 
-				forceConversion, dateTimeFormat, SIMPLIFY = FALSE)
-			# construct data.frame
-			dataFrame <- lapply(dataFrame, function(x) {
-				extractRownames(dataframeFromJava(x), rownames)
-			})
+		function(object, sheet, startRow = 0, startCol = 0, endRow = 0, endCol = 0, region = NULL,
+				 header = TRUE, rownames = NULL, colTypes = character(0), forceConversion = FALSE, 
+				 dateTimeFormat = getOption("XLConnect.dateTimeFormat")) {
 			
-			# Return data.frame directly in case only one data.frame is read
-			if(length(dataFrame) == 1) dataFrame[[1]]
-			else dataFrame
+			sheet = getSheetPos(object, sheet)
+			callGeneric()
 		}
 )

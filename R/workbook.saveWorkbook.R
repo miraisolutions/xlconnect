@@ -43,5 +43,5 @@ setMethod("saveWorkbook", signature(object = "workbook", "missing"), function(ob
 })
 
 setMethod("saveWorkbook", signature(object = "workbook", "character"), function(object, file) {
-	jTryCatch(object@jobj$save(file))
+	jTryCatch(object@jobj$save(path.expand(file)))
 })

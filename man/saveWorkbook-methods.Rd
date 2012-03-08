@@ -21,7 +21,8 @@
   class for more information). Note that due to currently missing functionality in Apache POI, workbooks can
   only be saved in the same file format - i.e. if the workbooks underlying file format is xls, then the 
   \code{file} argument may only specify another xls file. Also note that when specifying the \code{file} 
-  argument the \code{\linkS4class{workbook}}'s underlying filename changes to reflect the "save as" behavior.
+  argument the \code{\linkS4class{workbook}}'s underlying filename changes to reflect the "save as" behavior.\cr
+  Paths are expanded using \code{path.expand}.
  }
 }
 

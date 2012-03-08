@@ -1,6 +1,14 @@
 XLConnect News
 --------------
 
+0.1-9	2012-03-08
+	*	Vignette examples now run with ggplot2 0.9.0+
+	*	loadWorkbook and saveWorkbook now expand paths using
+		path.expand
+	*	readWorksheet provides a new argument 'region' that allows
+		to specify area bounds in an alternative way to startRow,
+		startCol, endRow and endCol.
+
 0.1-8	2012-02-10
 	*	Moved to Apache POI 3.8-beta5
 	*	Improved & extended package vignette

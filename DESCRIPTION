@@ -1,14 +1,14 @@
 Package: XLConnect
 Type: Package
 Title: Excel Connector for R
-Version: 0.1-8
-Date: 2012-02-10
+Version: 0.1-9
+Date: 2012-03-08
 Author: Mirai Solutions GmbH
 Maintainer: Mirai Solutions GmbH <xlconnect@mirai-solutions.com>
 URL: http://www.mirai-solutions.com , http://miraisolutions.wordpress.com
 SystemRequirements: java (>= 6.0)
 Depends: R (>= 2.10.0), XLConnectJars (>= 0.1-4), XLConnectJars(<= 0.1-4), rJava, utils, methods
-Suggests: RUnit, lattice, tikzDevice, ggplot2, fImport, forecast, zoo
+Suggests: RUnit, lattice, tikzDevice, ggplot2 (>= 0.9.0), scales, fImport, forecast, zoo
 Description: Manipulate Excel files from R
 License: GPL-3
 LazyLoad: yes

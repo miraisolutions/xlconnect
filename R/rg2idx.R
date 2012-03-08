@@ -20,14 +20,14 @@
 
 #############################################################################
 #
-# Helper function for opening workbooks
-# This is to be able to write loadWorkbook(...) rather than 
-# new("workbook", filename = ..., create = ...)
-#
+# Converts a region such as A10:B20 to the corresponding indices.
+# This is a helper function for use in readWorksheet.
+# 
 # Author: Martin Studer, Mirai Solutions GmbH
 #
 #############################################################################
 
-loadWorkbook <- function(filename, create = FALSE) {
-	jTryCatch(new("workbook", filename = path.expand(filename), create = create))
+
+rg2idx = function(x) {
+	aref2idx(ifelse(regexpr(":", x) > 0, x, paste(x, x, sep = ":")))
 }

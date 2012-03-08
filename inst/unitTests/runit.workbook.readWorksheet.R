@@ -68,6 +68,34 @@ test.workbook.readWorksheet <- function() {
 	res.name <- readWorksheet(wb.xlsx, "Test2", startRow = 17, startCol = 6, endRow = 22, endCol = 9, header = TRUE)
 	checkEquals(res.name, checkDf)
 	
+	# Read worksheet by specifying a range via the region argument
+	# Check that the read data region equals the defined data.frame (*.xls)
+	res.index <- readWorksheet(wb.xls, 2, region = "F17:I22", header = TRUE)
+	checkEquals(res.index, checkDf)
+	res.name <- readWorksheet(wb.xls, "Test2", region = "F17:I22", header = TRUE)
+	checkEquals(res.name, checkDf)
+	
+	# Read worksheet by specifying a range via the region argument
+	# Check that the read data region equals the defined data.frame (*.xlsx)
+	res.index <- readWorksheet(wb.xlsx, 2, region = "F17:I22", header = TRUE)
+	checkEquals(res.index, checkDf)
+	res.name <- readWorksheet(wb.xlsx, "Test2", region = "F17:I22", header = TRUE)
+	checkEquals(res.name, checkDf)
+	
+	# Read worksheet by specifying a range via the region argument (region takes precedence over index specifications)
+	# Check that the read data region equals the defined data.frame (*.xls)
+	res.index <- readWorksheet(wb.xls, 2, region = "F17:I22", startRow = 88, endCol = 45, header = TRUE)
+	checkEquals(res.index, checkDf)
+	res.name <- readWorksheet(wb.xls, "Test2", region = "F17:I22", startRow = 88, endCol = 45, header = TRUE)
+	checkEquals(res.name, checkDf)
+	
+	# Read worksheet by specifying a range via the region argument (region takes precedence over index specifications)
+	# Check that the read data region equals the defined data.frame (*.xlsx)
+	res.index <- readWorksheet(wb.xlsx, 2, region = "F17:I22", startRow = 88, endCol = 45, header = TRUE)
+	checkEquals(res.index, checkDf)
+	res.name <- readWorksheet(wb.xlsx, "Test2", region = "F17:I22", startRow = 88, endCol = 45, header = TRUE)
+	checkEquals(res.name, checkDf)
+	
 	# Check that an exception is thrown when trying to read from an invalid worksheet (*.xls)
 	checkException(readWorksheet(wb.xls, 23))
 	checkException(readWorksheet(wb.xls, "SheetDoesNotExist"))

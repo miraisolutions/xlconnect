@@ -9,8 +9,8 @@
 Reads data from worksheets of a \code{\linkS4class{workbook}}.
 }
 \usage{
-\S4method{readWorksheet}{workbook,numeric}(object,sheet,startRow,startCol,endRow,endCol,header,rownames,colTypes,forceConversion,dateTimeFormat)
-\S4method{readWorksheet}{workbook,character}(object,sheet,startRow,startCol,endRow,endCol,header,rownames,colTypes,forceConversion,dateTimeFormat)
+\S4method{readWorksheet}{workbook,numeric}(object,sheet,startRow,startCol,endRow,endCol,region,header,rownames,colTypes,forceConversion,dateTimeFormat)
+\S4method{readWorksheet}{workbook,character}(object,sheet,startRow,startCol,endRow,endCol,region,header,rownames,colTypes,forceConversion,dateTimeFormat)
 }
 
 \arguments{
@@ -20,6 +20,9 @@ Reads data from worksheets of a \code{\linkS4class{workbook}}.
   \item{startCol}{The index of the first column to read from}
   \item{endRow}{The index of the last row to read from}
   \item{endCol}{The index of the last column to read from}
+  \item{region}{A range specifier in the form 'A10:B18'. This provides an alternative way to specify
+  \code{startRow}, \code{startCol}, \code{endRow} and \code{endCol}. Range specifications take precedence
+  over index specifications.}
   \item{header}{Interpret the first row of the specified area as column
     headers. The default is \code{TRUE}.}
   \item{rownames}{Index (\code{numeric}) or name (\code{character}) of column that
@@ -116,7 +119,32 @@ wb <- loadWorkbook(demoExcelFile)
 # with default header = TRUE)
 data <- readWorksheet(wb, sheet = "mtcars")
 
+
 ## Example 2:
+# mtcars xlsx file from demoFiles subfolder of package XLConnect
+demoExcelFile <- system.file("demoFiles/mtcars.xlsx", package = "XLConnect")
+
+# Load workbook
+wb <- loadWorkbook(demoExcelFile)
+
+# Read worksheet 'mtcars' (providing area bounds; with default header = TRUE)
+data <- readWorksheet(wb, sheet = "mtcars", startRow = 1, startCol = 3,
+                      endRow = 15, endCol = 8)
+
+
+## Example 3:
+# mtcars xlsx file from demoFiles subfolder of package XLConnect
+demoExcelFile <- system.file("demoFiles/mtcars.xlsx", package = "XLConnect")
+
+# Load workbook
+wb <- loadWorkbook(demoExcelFile)
+
+# Read worksheet 'mtcars' (providing area bounds using the region argument;
+# with default header = TRUE)
+data <- readWorksheet(wb, sheet = "mtcars", region = "C1:H15")
+
+
+## Example 4:
 # conversion xlsx file from demoFiles subfolder of package XLConnect
 excelFile <- system.file("demoFiles/conversion.xlsx", package = "XLConnect")
 
