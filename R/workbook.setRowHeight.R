@@ -27,7 +27,7 @@
 #############################################################################
 
 setGeneric("setRowHeight",
-		function(object, sheet, ...) standardGeneric("setRowHeight"))
+		function(object, sheet, row, height = -1) standardGeneric("setRowHeight"))
 
 setMethod("setRowHeight", 
 		signature(object = "workbook", sheet = "numeric"), 

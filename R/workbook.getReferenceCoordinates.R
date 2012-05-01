@@ -27,7 +27,7 @@
 #############################################################################
 
 setGeneric("getReferenceCoordinates",
-		function(object, ...) standardGeneric("getReferenceCoordinates"))
+		function(object, name) standardGeneric("getReferenceCoordinates"))
 
 setMethod("getReferenceCoordinates", 
 		signature(object = "workbook"), 

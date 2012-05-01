@@ -8,7 +8,7 @@
 Reads named regions from a \code{\linkS4class{workbook}}.
 }
 \usage{
-\S4method{readNamedRegion}{workbook}(object, name, header, rownames, colTypes, forceConversion, dateTimeFormat)
+\S4method{readNamedRegion}{workbook}(object, name, header, rownames, colTypes, forceConversion, dateTimeFormat, check.names)
 }
 
 \arguments{
@@ -39,6 +39,9 @@ Reads named regions from a \code{\linkS4class{workbook}}.
   \code{getOption("XLConnect.dateTimeFormat")}. This should be a POSIX format specifier according
   to \code{\link{strptime}} although not all specifications have been implemented yet - the most
   important ones however are available.}
+  \item{check.names}{\code{logical} specifying if column names of the resulting \code{data.frame}
+  should be checked to ensure that they are syntactically valid valid variable names and are not
+  duplicated. See the \code{check.names} argument of \code{\link{data.frame}}. Defaults to \code{TRUE}.}
 }
 
 \details{

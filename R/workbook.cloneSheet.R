@@ -27,7 +27,7 @@
 #############################################################################
 
 setGeneric("cloneSheet",
-		function(object, sheet, ...) standardGeneric("cloneSheet"))
+		function(object, sheet, name) standardGeneric("cloneSheet"))
 
 setMethod("cloneSheet", 
 		signature(object = "workbook", sheet = "numeric"), 

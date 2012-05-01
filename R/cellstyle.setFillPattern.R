@@ -27,7 +27,7 @@
 #############################################################################
 
 setGeneric("setFillPattern",
-		function(object, ...) standardGeneric("setFillPattern"))
+		function(object, fill) standardGeneric("setFillPattern"))
 
 setMethod("setFillPattern", 
 		signature(object = "cellstyle"), 

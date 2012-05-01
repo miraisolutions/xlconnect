@@ -1,6 +1,19 @@
 XLConnect News
 --------------
 
+0.2-0	2012-04-25
+	*	Moved to Apache POI 3.8
+	*	Fixed lazy evaluation issues with S4 generics. Generic methods
+		now fully expand the argument list in order to have the
+		arguments immediately evaluated.
+	*	readWorksheet now returns a _named_ list if more than one worksheet
+		is read. This provides convenient access to the corresponding data
+		by list subsetting.
+	*	readWorksheet and readNamedRegion now provide a new argument named
+		'check.names' that controls whether data.frame column names are
+		checked for syntactically valid variable names (see the 'check.names'
+		argument of data.frame).
+	
 0.1-9	2012-03-08
 	*	Vignette examples now run with ggplot2 0.9.0+
 	*	loadWorkbook and saveWorkbook now expand paths using

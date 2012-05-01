@@ -98,4 +98,42 @@ test.workbook.readNamedRegion <- function() {
 			forceConversion = TRUE,
 			dateTimeFormat = "%d.%m.%Y %H:%M:%S")
 	checkEquals(res, targetForce)
+	
+	target = list(
+		AAA = data.frame(
+			A = 1:3,
+			B = letters[1:3],
+			C = c(TRUE, TRUE, FALSE),
+			stringsAsFactors = FALSE
+		),
+		BBB = data.frame(
+			D = 4:6,
+			E = letters[4:6],
+			F = c(FALSE, TRUE, TRUE),
+			stringsAsFactors = FALSE
+		)
+	)
+	
+	# Check that reading multiple named regions returns a named list (*.xls)
+	res <- readNamedRegion(wb.xls, name = c("AAA", "BBB"), header = TRUE)
+	checkEquals(res, target)
+	
+	# Check that reading multiple named regions returns a named list (*.xlsx)
+	res <- readNamedRegion(wb.xlsx, name = c("AAA", "BBB"), header = TRUE)
+	checkEquals(res, target)
+	
+	target = data.frame(
+		"With whitespace" = 1:4,
+		"And some other funky characters: _=?^~!$@#%§" = letters[1:4],
+		check.names = FALSE,
+		stringsAsFactors = FALSE
+	)
+	
+	# Check that reading named regions with check.names = FALSE works (*.xls)
+	res <- readNamedRegion(wb.xls, name = "VariableNames", header = TRUE, check.names = FALSE)
+	checkEquals(res, target)
+	
+	# Check that reading named regions with check.names = FALSE works (*.xlsx)
+	res <- readNamedRegion(wb.xlsx, name = "VariableNames", header = TRUE, check.names = FALSE)
+	checkEquals(res, target)
 }

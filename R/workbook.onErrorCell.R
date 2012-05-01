@@ -27,7 +27,7 @@
 #############################################################################
 
 setGeneric("onErrorCell",
-		function(object, ...) standardGeneric("onErrorCell"))
+		function(object, behavior) standardGeneric("onErrorCell"))
 
 setMethod("onErrorCell", 
 		signature(object = "workbook"), 

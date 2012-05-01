@@ -28,7 +28,7 @@
 #
 #############################################################################
 
-dataframeFromJava <- function(df) {
+dataframeFromJava <- function(df, check.names) {
 	
 	if(!is(df, "jobjRef"))
 		stop("Invalid object - object of class 'jobjRef' required!")
@@ -74,5 +74,5 @@ dataframeFromJava <- function(df) {
 	# Apply names
 	names(res) <- columnNames
 	
-	data.frame(res, stringsAsFactors = FALSE)
+	data.frame(res, check.names = check.names, stringsAsFactors = FALSE)
 }

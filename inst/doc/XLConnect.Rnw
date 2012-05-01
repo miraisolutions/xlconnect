@@ -1002,6 +1002,8 @@ We will do our best to reply to your enquires as quickly as possible!
 			\\\urlwofont{http://crantastic.org/packages/XLConnect}
 	\item 	\pkg{XLConnect} on inside-R!: 
 			\\\urlwofont{http://www.inside-r.org/packages/xlconnect}
+	\item	The R-Podcast Episode 6: Importing Data from External Sources:
+			\\\urlwofont{http://www.r-podcast.org/the-r-podcast-episode-6-importing-data-from-external-sources/}
 	\item 	R Base course by Dr. Roberto Dantas de Pinho, referring to \pkg{XLConnect} (Portugese):
 			\\\urlwofont{http://www.slideshare.net/RobertodePinho/curso-bsico-de-r}
 	\item 	YouTube tutorial by bebilda, on importing and exporting data using \pkg{XLConnect} (Spanish): 

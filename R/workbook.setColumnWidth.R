@@ -27,7 +27,7 @@
 #############################################################################
 
 setGeneric("setColumnWidth",
-		function(object, sheet, ...) standardGeneric("setColumnWidth"))
+		function(object, sheet, column, width = -1) standardGeneric("setColumnWidth"))
 
 setMethod("setColumnWidth", 
 		signature(object = "workbook", sheet = "numeric"), 

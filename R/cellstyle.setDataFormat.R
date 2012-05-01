@@ -27,7 +27,7 @@
 #############################################################################
 
 setGeneric("setDataFormat",
-		function(object, ...) standardGeneric("setDataFormat"))
+		function(object, format) standardGeneric("setDataFormat"))
 
 setMethod("setDataFormat", 
 		signature(object = "cellstyle"), 

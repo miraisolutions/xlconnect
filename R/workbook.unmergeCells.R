@@ -27,7 +27,7 @@
 #############################################################################
 
 setGeneric("unmergeCells",
-		function(object, sheet, ...) standardGeneric("unmergeCells"))
+		function(object, sheet, reference) standardGeneric("unmergeCells"))
 
 setMethod("unmergeCells", 
 		signature(object = "workbook", sheet = "numeric"), 

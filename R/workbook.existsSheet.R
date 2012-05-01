@@ -27,7 +27,7 @@
 #############################################################################
 
 setGeneric("existsSheet",
-	function(object, ...) standardGeneric("existsSheet"))
+	function(object, name) standardGeneric("existsSheet"))
 
 setMethod("existsSheet", 
 		signature(object = "workbook"), 

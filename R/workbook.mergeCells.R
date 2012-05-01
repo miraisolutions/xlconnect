@@ -27,7 +27,7 @@
 #############################################################################
 
 setGeneric("mergeCells",
-		function(object, sheet, ...) standardGeneric("mergeCells"))
+		function(object, sheet, reference) standardGeneric("mergeCells"))
 
 setMethod("mergeCells", 
 		signature(object = "workbook", sheet = "numeric"), 

@@ -27,7 +27,7 @@
 #############################################################################
 
 setGeneric("getCellFormula",
-		function(object, sheet, ...) standardGeneric("getCellFormula"))
+		function(object, sheet, row, col) standardGeneric("getCellFormula"))
 
 setMethod("getCellFormula", 
 		signature(object = "workbook", sheet = "numeric"),

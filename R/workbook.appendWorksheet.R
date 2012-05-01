@@ -27,7 +27,7 @@
 #############################################################################
 
 setGeneric("appendWorksheet",
-		function(object, data, sheet, ...) standardGeneric("appendWorksheet"))
+		function(object, data, sheet, header = FALSE, rownames = NULL) standardGeneric("appendWorksheet"))
 
 setMethod("appendWorksheet", 
 	signature(object = "workbook", data = "ANY", sheet = "numeric"), 

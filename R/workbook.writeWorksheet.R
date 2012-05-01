@@ -27,7 +27,7 @@
 #############################################################################
 
 setGeneric("writeWorksheet",
-	function(object, data, sheet, ...) standardGeneric("writeWorksheet"))
+	function(object, data, sheet, startRow = 1, startCol = 1, header = TRUE, rownames = NULL) standardGeneric("writeWorksheet"))
 
 setMethod("writeWorksheet", 
 	signature(object = "workbook", data = "ANY", sheet = "numeric"), 

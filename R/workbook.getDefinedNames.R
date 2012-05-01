@@ -27,7 +27,7 @@
 #############################################################################
 
 setGeneric("getDefinedNames",
-	function(object, ...) standardGeneric("getDefinedNames"))
+	function(object, validOnly = TRUE) standardGeneric("getDefinedNames"))
 
 setMethod("getDefinedNames", 
 	signature(object = "workbook"), 

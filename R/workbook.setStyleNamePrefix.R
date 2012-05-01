@@ -28,7 +28,7 @@
 #############################################################################
 
 setGeneric("setStyleNamePrefix",
-		function(object, ...) standardGeneric("setStyleNamePrefix"))
+		function(object, prefix) standardGeneric("setStyleNamePrefix"))
 
 setMethod("setStyleNamePrefix", 
 		signature(object = "workbook"), 

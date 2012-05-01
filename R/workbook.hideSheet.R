@@ -31,7 +31,7 @@
 #############################################################################
  
 setGeneric("hideSheet",
-	function(object, sheet, ...) standardGeneric("hideSheet"))
+	function(object, sheet, veryHidden = FALSE) standardGeneric("hideSheet"))
 
 setMethod("hideSheet", 
 		signature(object = "workbook", sheet = "numeric"), 

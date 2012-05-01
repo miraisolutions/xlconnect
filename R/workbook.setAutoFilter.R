@@ -27,7 +27,7 @@
 #############################################################################
 
 setGeneric("setAutoFilter",
-		function(object, sheet, ...) standardGeneric("setAutoFilter"))
+		function(object, sheet, reference) standardGeneric("setAutoFilter"))
 
 setMethod("setAutoFilter", 
 		signature(object = "workbook", sheet = "numeric"), 

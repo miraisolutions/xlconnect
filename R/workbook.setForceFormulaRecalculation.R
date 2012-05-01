@@ -27,7 +27,7 @@
 #############################################################################
 
 setGeneric("setForceFormulaRecalculation",
-		function(object, sheet, ...) standardGeneric("setForceFormulaRecalculation"))
+		function(object, sheet, value) standardGeneric("setForceFormulaRecalculation"))
 
 setMethod("setForceFormulaRecalculation", 
 		signature(object = "workbook", sheet = "character"), 

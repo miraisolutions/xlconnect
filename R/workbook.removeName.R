@@ -27,7 +27,7 @@
 #############################################################################
 
 setGeneric("removeName",
-	function(object, ...) standardGeneric("removeName"))
+	function(object, name) standardGeneric("removeName"))
 
 setMethod("removeName", 
 		signature(object = "workbook"), 

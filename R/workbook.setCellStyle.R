@@ -27,7 +27,7 @@
 #############################################################################
 
 setGeneric("setCellStyle",
-		function(object, sheet, ...) standardGeneric("setCellStyle"))
+		function(object, sheet, row, col, cellstyle) standardGeneric("setCellStyle"))
 
 setMethod("setCellStyle", 
 		signature(object = "workbook", sheet = "numeric"), 

@@ -27,7 +27,7 @@
 #############################################################################
  
 setGeneric("renameSheet",
-	function(object, sheet, ...) standardGeneric("renameSheet"))
+	function(object, sheet, newName) standardGeneric("renameSheet"))
 
 setMethod("renameSheet", 
 		signature(object = "workbook", sheet = "numeric"), 

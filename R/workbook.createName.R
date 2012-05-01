@@ -27,7 +27,7 @@
 #############################################################################
 
 setGeneric("createName",
-	function(object, ...) standardGeneric("createName"))
+	function(object, name, formula, overwrite = FALSE) standardGeneric("createName"))
 
 setMethod("createName", 
 		signature(object = "workbook"), 

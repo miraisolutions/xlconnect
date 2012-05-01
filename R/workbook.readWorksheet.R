@@ -27,13 +27,16 @@
 #############################################################################
 
 setGeneric("readWorksheet",
-	function(object, sheet, ...) standardGeneric("readWorksheet"))
+	function(object, sheet, startRow = 0, startCol = 0, endRow = 0, endCol = 0, region = NULL,
+			header = TRUE, rownames = NULL, colTypes = character(0), forceConversion = FALSE, 
+			dateTimeFormat = getOption("XLConnect.dateTimeFormat"), check.names = TRUE) 
+		standardGeneric("readWorksheet"))
 
 setMethod("readWorksheet", 
 		signature(object = "workbook", sheet = "numeric"), 
 		function(object, sheet, startRow = 0, startCol = 0, endRow = 0, endCol = 0, region = NULL,
 				 header = TRUE, rownames = NULL, colTypes = character(0), forceConversion = FALSE, 
-				 dateTimeFormat = getOption("XLConnect.dateTimeFormat")) {
+				 dateTimeFormat = getOption("XLConnect.dateTimeFormat"), check.names = TRUE) {
 			 
 			if(!is.null(region)) {
 				# Convert region to indices
@@ -50,7 +53,7 @@ setMethod("readWorksheet",
 				.jarray(classToXlcType(colTypes)), forceConversion, dateTimeFormat, SIMPLIFY = FALSE)
 			# construct data.frame
 			dataFrame <- lapply(dataFrame, function(x) {
-				extractRownames(dataframeFromJava(x), rownames)
+				extractRownames(dataframeFromJava(x, check.names), rownames)
 			})
 			
 			# Return data.frame directly in case only one data.frame is read
@@ -63,9 +66,18 @@ setMethod("readWorksheet",
 		signature(object = "workbook", sheet = "character"), 
 		function(object, sheet, startRow = 0, startCol = 0, endRow = 0, endCol = 0, region = NULL,
 				 header = TRUE, rownames = NULL, colTypes = character(0), forceConversion = FALSE, 
-				 dateTimeFormat = getOption("XLConnect.dateTimeFormat")) {
+				 dateTimeFormat = getOption("XLConnect.dateTimeFormat"), check.names = TRUE) {
 			
+			# Remember sheet names
+			sheetNames = sheet
 			sheet = getSheetPos(object, sheet)
-			callGeneric()
+			# Get result from calling generic with sheet positions
+			dataFrame = callGeneric()
+			# If more than one worksheet is read the results will be a list
+			# --> assign names of sheets to list
+			if(length(sheet) > 1)
+				names(dataFrame) = sheetNames
+			
+			dataFrame
 		}
 )

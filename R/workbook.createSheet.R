@@ -27,7 +27,7 @@
 #############################################################################
 
 setGeneric("createSheet",
-	function(object, ...) standardGeneric("createSheet"))
+	function(object, name) standardGeneric("createSheet"))
 
 setMethod("createSheet", 
 	signature(object = "workbook"), 

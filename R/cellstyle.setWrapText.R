@@ -27,7 +27,7 @@
 #############################################################################
 
 setGeneric("setWrapText",
-		function(object, ...) standardGeneric("setWrapText"))
+		function(object, wrap) standardGeneric("setWrapText"))
 
 setMethod("setWrapText", 
 		signature(object = "cellstyle"), 

@@ -27,7 +27,7 @@
 #############################################################################
 
 setGeneric("setStyleAction",
-		function(object, ...) standardGeneric("setStyleAction"))
+		function(object, type) standardGeneric("setStyleAction"))
 
 setMethod("setStyleAction", 
 		signature(object = "workbook"), 

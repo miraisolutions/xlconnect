@@ -27,7 +27,7 @@
 #############################################################################
 
 setGeneric("writeNamedRegion",
-	function(object, data, ...) standardGeneric("writeNamedRegion"))
+	function(object, data, name, header = TRUE, rownames = NULL) standardGeneric("writeNamedRegion"))
 
 setMethod("writeNamedRegion", 
 	signature(object = "workbook", data = "ANY"), 

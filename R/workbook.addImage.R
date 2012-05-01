@@ -27,7 +27,7 @@
 #############################################################################
 
 setGeneric("addImage", 
-	function(object, ...) standardGeneric("addImage"))
+	function(object, filename, name, originalSize = FALSE) standardGeneric("addImage"))
 
 setMethod("addImage", 
 		signature(object = "workbook"), 

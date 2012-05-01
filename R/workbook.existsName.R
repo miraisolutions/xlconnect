@@ -27,7 +27,7 @@
 #############################################################################
 
 setGeneric("existsName",
-	function(object, ...) standardGeneric("existsName"))
+	function(object, name) standardGeneric("existsName"))
 
 setMethod("existsName", 
 		signature(object = "workbook"), 

@@ -27,7 +27,7 @@
 #############################################################################
 
 setGeneric("setDataFormatForType",
-		function(object, ...) standardGeneric("setDataFormatForType"))
+		function(object, type, format) standardGeneric("setDataFormatForType"))
 
 setMethod("setDataFormatForType", 
 		signature(object = "workbook"), 

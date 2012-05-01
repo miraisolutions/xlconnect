@@ -31,7 +31,7 @@
 test.dataframeConversion <- function() {
 	
 	testDataFrame <- function(df) {
-		res <- dataframeFromJava(dataframeToJava(df))
+		res <- dataframeFromJava(dataframeToJava(df), check.names = TRUE)
 		checkEquals(normalizeDataframe(df), res, check.attributes = FALSE, check.names = TRUE)
 	}
 	

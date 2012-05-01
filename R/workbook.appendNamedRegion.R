@@ -27,7 +27,7 @@
 #############################################################################
 
 setGeneric("appendNamedRegion",
-	function(object, data, ...) standardGeneric("appendNamedRegion"))
+	function(object, data, name, header = FALSE, rownames = NULL) standardGeneric("appendNamedRegion"))
 
 setMethod("appendNamedRegion", 
 	signature(object = "workbook", data = "ANY"), 

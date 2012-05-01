@@ -9,8 +9,8 @@
 Reads data from worksheets of a \code{\linkS4class{workbook}}.
 }
 \usage{
-\S4method{readWorksheet}{workbook,numeric}(object,sheet,startRow,startCol,endRow,endCol,region,header,rownames,colTypes,forceConversion,dateTimeFormat)
-\S4method{readWorksheet}{workbook,character}(object,sheet,startRow,startCol,endRow,endCol,region,header,rownames,colTypes,forceConversion,dateTimeFormat)
+\S4method{readWorksheet}{workbook,numeric}(object,sheet,startRow,startCol,endRow,endCol,region,header,rownames,colTypes,forceConversion,dateTimeFormat,check.names)
+\S4method{readWorksheet}{workbook,character}(object,sheet,startRow,startCol,endRow,endCol,region,header,rownames,colTypes,forceConversion,dateTimeFormat,check.names)
 }
 
 \arguments{
@@ -48,6 +48,9 @@ Reads data from worksheets of a \code{\linkS4class{workbook}}.
   \code{getOption("XLConnect.dateTimeFormat")}. This should be a POSIX format specifier according
   to \code{\link{strptime}} although not all specifications have been implemented yet - the most
   important ones however are available.}
+  \item{check.names}{\code{logical} specifying if column names of the resulting \code{data.frame}
+  should be checked to ensure that they are syntactically valid valid variable names and are not
+  duplicated. See the \code{check.names} argument of \code{\link{data.frame}}. Defaults to \code{TRUE}.}
 }
 
 \details{
@@ -72,7 +75,8 @@ If all four coordinate arguments are missing this behaves as above with
 All arguments (except \code{object}) are vectorized. As such, multiple worksheets (and also multiple data regions
 from the same worksheet) can be read with one method call. If only one single data region is read, the return value 
 is a \code{data.frame}. If multiple data regions are specified, the return value is a \code{list} of \code{data.frame}'s 
-returned in the order they have been specified.
+returned in the order they have been specified. If worksheets have been specified by name, the \code{list} will be a
+named \code{list} named by the corresponding worksheets.
 }
 \author{
 Martin Studer\cr

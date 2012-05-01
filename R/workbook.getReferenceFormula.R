@@ -27,7 +27,7 @@
 #############################################################################
 
 setGeneric("getReferenceFormula",
-		function(object, ...) standardGeneric("getReferenceFormula"))
+		function(object, name) standardGeneric("getReferenceFormula"))
 
 setMethod("getReferenceFormula", 
 		signature(object = "workbook"), 

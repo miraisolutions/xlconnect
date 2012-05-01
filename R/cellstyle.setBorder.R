@@ -27,7 +27,7 @@
 #############################################################################
 
 setGeneric("setBorder",
-		function(object, ...) standardGeneric("setBorder"))
+		function(object, side, type, color) standardGeneric("setBorder"))
 
 setMethod("setBorder", 
 		signature(object = "cellstyle"), 

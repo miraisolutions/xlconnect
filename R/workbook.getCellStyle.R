@@ -27,7 +27,7 @@
 #############################################################################
 
 setGeneric("getCellStyle",
-		function(object, ...) standardGeneric("getCellStyle"))
+		function(object, name) standardGeneric("getCellStyle"))
 
 setMethod("getCellStyle", 
 		signature(object = "workbook"), 
