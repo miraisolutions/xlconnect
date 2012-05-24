@@ -52,6 +52,7 @@ exportMethods(
     setForceFormulaRecalculation,
 	setMissingValue,
 	setRowHeight,
+	setSheetColor,
 	setSheetPos,
 	setStyleAction,
 	setStyleNamePrefix,

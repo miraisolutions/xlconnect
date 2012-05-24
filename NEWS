@@ -13,6 +13,8 @@ XLConnect News
 		'check.names' that controls whether data.frame column names are
 		checked for syntactically valid variable names (see the 'check.names'
 		argument of data.frame).
+	*	Support for setting the color of worksheet tabs via the setSheetColor
+		method (only for *.xlsx files).		
 	
 0.1-9	2012-03-08
 	*	Vignette examples now run with ggplot2 0.9.0+
