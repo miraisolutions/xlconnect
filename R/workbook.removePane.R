@@ -20,27 +20,27 @@
 
 #############################################################################
 #
-# Creating freeze panes
+# Removing freeze/split panes
 # 
 # Author: Nicola Lambiase, Mirai Solutions GmbH
 #
 #############################################################################
 
-setGeneric("createFreezePane",
-	function(object, sheet, colSplit, rowSplit, leftColumn = colSplit, topRow = rowSplit) standardGeneric("createFreezePane"))
+setGeneric("removePane",
+		function(object, sheet) standardGeneric("removePane"))
 
-setMethod("createFreezePane", 
+setMethod("removePane", 
 		signature(object = "workbook", sheet = "numeric"), 
-		function(object, sheet, colSplit, rowSplit, leftColumn, topRow) {
-			xlcCall(object, "createFreezePane", as.integer(sheet - 1), as.integer(colSplit-1), as.integer(rowSplit-1), as.integer(leftColumn-1), as.integer(topRow-1))
-			invisible()	
+		function(object, sheet) {
+			xlcCall(object, "removePane", as.integer(sheet - 1))
+			invisible()
 		}
 )
 
-setMethod("createFreezePane", 
+setMethod("removePane", 
 		signature(object = "workbook", sheet = "character"), 
-		function(object, sheet, colSplit, rowSplit, leftColumn, topRow) {
-			xlcCall(object, "createFreezePane", sheet, as.integer(colSplit-1), as.integer(rowSplit-1), as.integer(leftColumn-1), as.integer(topRow-1))
+		function(object, sheet) {
+			xlcCall(object, "removePane", sheet)
 			invisible()
 		}
 )

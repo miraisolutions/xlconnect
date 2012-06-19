@@ -20,27 +20,27 @@
 
 #############################################################################
 #
-# Creating freeze panes
+# Creating split panes
 # 
 # Author: Nicola Lambiase, Mirai Solutions GmbH
 #
 #############################################################################
 
-setGeneric("createFreezePane",
-	function(object, sheet, colSplit, rowSplit, leftColumn = colSplit, topRow = rowSplit) standardGeneric("createFreezePane"))
+setGeneric("createSplitPane",
+		function(object, sheet, xSplitPos, ySplitPos, leftColumn, topRow) standardGeneric("createSplitPane"))
 
-setMethod("createFreezePane", 
+setMethod("createSplitPane", 
 		signature(object = "workbook", sheet = "numeric"), 
-		function(object, sheet, colSplit, rowSplit, leftColumn, topRow) {
-			xlcCall(object, "createFreezePane", as.integer(sheet - 1), as.integer(colSplit-1), as.integer(rowSplit-1), as.integer(leftColumn-1), as.integer(topRow-1))
-			invisible()	
+		function(object, sheet, xSplitPos, ySplitPos, leftColumn, topRow) {
+				xlcCall(object, "createSplitPane", as.integer(sheet - 1), as.integer(xSplitPos), as.integer(ySplitPos), as.integer(leftColumn-1), as.integer(topRow-1))
+				invisible()
 		}
 )
 
-setMethod("createFreezePane", 
+setMethod("createSplitPane", 
 		signature(object = "workbook", sheet = "character"), 
-		function(object, sheet, colSplit, rowSplit, leftColumn, topRow) {
-			xlcCall(object, "createFreezePane", sheet, as.integer(colSplit-1), as.integer(rowSplit-1), as.integer(leftColumn-1), as.integer(topRow-1))
-			invisible()
+		function(object, sheet, xSplitPos, ySplitPos, leftColumn, topRow) {
+				xlcCall(object, "createSplitPane", sheet, as.integer(xSplitPos), as.integer(ySplitPos), as.integer(leftColumn-1), as.integer(topRow-1))
+				invisible()
 		}
 )

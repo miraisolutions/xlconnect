@@ -2,15 +2,15 @@
 \docType{methods}
 \alias{setSheetColor}
 \alias{setSheetColor-methods}
-\alias{setSheetColor,workbook,character,numeric-method}
-\alias{setSheetColor,workbook,numeric,numeric-method}
+\alias{setSheetColor,workbook,character-method}
+\alias{setSheetColor,workbook,numeric-method}
 \title{Setting colors on worksheet tabs}
 \description{
 Sets a color on a specified worksheet tab. This only works for xlsx files. 
 }
 \usage{
-\S4method{setSheetColor}{workbook,character,numeric}(object,sheet,color)
-\S4method{setSheetColor}{workbook,numeric,numeric}(object,sheet,color)
+\S4method{setSheetColor}{workbook,character}(object,sheet,color)
+\S4method{setSheetColor}{workbook,numeric}(object,sheet,color)
 }
 
 \arguments{

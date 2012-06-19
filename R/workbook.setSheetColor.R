@@ -30,7 +30,7 @@ setGeneric("setSheetColor",
 		function(object, sheet, color) standardGeneric("setSheetColor"))
 
 setMethod("setSheetColor", 
-		signature(object = "workbook", sheet = "numeric", color = "numeric"), 
+		signature(object = "workbook", sheet = "numeric"), 
 		function(object, sheet, color) {
 			xlcCall(object, "setSheetColor", as.integer(sheet - 1), as.integer(color))
 			invisible()
@@ -38,7 +38,7 @@ setMethod("setSheetColor",
 )
 
 setMethod("setSheetColor", 
-		signature(object = "workbook", sheet = "character", color = "numeric"), 
+		signature(object = "workbook", sheet = "character"), 
 		function(object, sheet, color) {
 			xlcCall(object, "setSheetColor", sheet, as.integer(color))
 			invisible()
