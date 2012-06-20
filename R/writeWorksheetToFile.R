@@ -33,8 +33,9 @@ writeWorksheetToFile <- function(file, data, sheet, ..., styleAction = XLC$STYLE
 
   wb <- loadWorkbook(file, create = !file.exists(file))  
   setStyleAction(wb, styleAction)
-  if(!is.element(sheet, getSheets(wb)))
-    createSheet(wb, args$sheet)
+
+  # create missing sheets 
+  createSheet(wb, setdiff(sheet, getSheets(wb)))
 
   args$object <- wb
   do.call(writeWorksheet, args)
