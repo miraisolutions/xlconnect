@@ -25,6 +25,16 @@ How to create a freeze pane/split pane in Office 2007
 Nicola Lambiase\cr
 Mirai Solutions GmbH \url{http://www.mirai-solutions.com}
 }
+\note{
+To keep an area of a worksheet visible while you scroll to another area of the worksheet,
+you can lock specific rows or columns in one area by freezing or splitting panes.
+
+When you freeze panes, you keep specific rows or columns visible when you scroll in the worksheet.
+For example, you might want to keep row and column labels visible as you scroll.
+
+When you split panes, you create separate worksheet areas that you can scroll within,
+while rows or columns in the non-scrolled area remain visible.
+}
 \seealso{
 \code{\linkS4class{workbook}}
 \code{\link[=createFreezePane-methods]{createFreezePane}}
@@ -37,7 +47,8 @@ wb <- loadWorkbook("removePaneTest.xlsx", create = TRUE)
 # Create a worksheet named 'Sheet1'
 createSheet(wb, name = "Sheet1")
 
-# Create a split pane on Sheet1, with coordinates (10000, 5000) expressed as 1/20th of a point, 10 (-> J) as left column visible in right pane and 10 as top row visible in bottom pane 
+# Create a split pane on Sheet1, with coordinates (10000, 5000) expressed as 1/20th of a point,
+# 10 (-> J) as left column visible in right pane and 10 as top row visible in bottom pane 
 createSplitPane(wb, "Sheet1", 10000, 5000, 10, 10)
 
 # Remove the split pane from Sheet1

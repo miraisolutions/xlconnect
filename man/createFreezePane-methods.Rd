@@ -18,8 +18,8 @@ Creates a freeze pane on a specified worksheet.
   \item{sheet}{The name or index of the sheet on which to create a freeze pane}
   \item{colSplit}{Horizontal position of freeze (as number of columns)}
   \item{rowSplit}{Vertical position of freeze (as number of rows)}
-  \item{leftColumn}{(Optional) Left column (as index) visible in right pane.}
-  \item{topRow}{(Optional) Top row (as index) visible in bottom pane.}
+  \item{leftColumn}{Left column (as index) visible in right pane. If not specified, the default is \code{leftColumn}=\code{colSplit}}
+  \item{topRow}{Top row (as index) visible in bottom pane. If not specified, the default is \code{topRow}=\code{rowSplit}}
 }
 \references{
 How to create a freeze pane/split pane in Office 2007
@@ -28,6 +28,16 @@ How to create a freeze pane/split pane in Office 2007
 \author{
 Nicola Lambiase\cr
 Mirai Solutions GmbH \url{http://www.mirai-solutions.com}
+}
+\note{
+To keep an area of a worksheet visible while you scroll to another area of the worksheet,
+you can lock specific rows or columns in one area by freezing or splitting panes.
+
+When you freeze panes, you keep specific rows or columns visible when you scroll in the worksheet.
+For example, you might want to keep row and column labels visible as you scroll.
+
+When you split panes, you create separate worksheet areas that you can scroll within,
+while rows or columns in the non-scrolled area remain visible.
 }
 \seealso{
 \code{\linkS4class{workbook}}
@@ -41,7 +51,9 @@ wb <- loadWorkbook("freezePaneTest.xlsx", create = TRUE)
 # Create a worksheet named 'Sheet1'
 createSheet(wb, name = "Sheet1")
 
-# Create a freeze pane on Sheet1, using as reference position the 5th column and the 5th row, showing the 10th column as the leftmost visible one in the right pane and the 10th row as the top visible one in the bottom pane.
+# Create a freeze pane on Sheet1, using as reference position the 5th column and the 5th row,
+# showing the 10th column as the leftmost visible one in the right pane
+# and the 10th row as the top visible one in the bottom pane.
 createFreezePane(wb, "Sheet1", 5, 5, 10, 10)
 
 # Save workbook (this actually writes the file to disk)
