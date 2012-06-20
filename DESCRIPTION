@@ -6,7 +6,7 @@ Date: 2012-04-25
 Author: Mirai Solutions GmbH
 Maintainer: Mirai Solutions GmbH <xlconnect@mirai-solutions.com>
 URL: http://www.mirai-solutions.com , http://miraisolutions.wordpress.com
-SystemRequirements: java (>= 6.0)
+SystemRequirements: java (>= 1.6)
 Depends: R (>= 2.10.0), XLConnectJars (>= 0.2-0), XLConnectJars(<= 0.2-0), rJava, utils, methods
 Suggests: RUnit, lattice, tikzDevice, ggplot2 (>= 0.9.0), scales, fImport, forecast, zoo
 Description: Manipulate Excel files from R
