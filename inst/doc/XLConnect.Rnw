@@ -189,12 +189,17 @@ This document is a user manual for the \pkg{XLConnect} R package. It is meant to
 more advanced features of \pkg{XLConnect} are not presented here. For such details, please refer to the
 \href{http://cran.r-project.org/web/packages/XLConnect/XLConnect.pdf}{Reference Manual}.
 
+\vspace{0.5cm}
 
 \tikzDocDisclaim{\bfseries{Examples}\vspace{2mm}}
 {
+\vskip\baselineskip
 Any examples presented in this vignette can be found in the XLConnect.R script file, which you can find in the top level library
 directory. You can also open the document by using the following command:
-{\bf edit(file = system.file("XLConnect.R", package = "XLConnect"))}
+\vspace{0.2cm}
+\\\code{edit(file = system.file("XLConnect.R", package = "XLConnect"))}
+\vskip\baselineskip
+\vspace{0.5cm}
 }
 
 \subsection{Introduction to XLConnect}
