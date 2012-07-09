@@ -1027,8 +1027,10 @@ We will do our best to reply to your enquires as quickly as possible!
 	\item 	\pkg{XLConnect} usage described in the R Programming/Data Management section in Wikibooks 
 			\\(Reading and saving data > Importing and exporting data > Excel (xls,xlsx)):
 			\\\urlwofont{http://en.wikibooks.org/wiki/R_Programming/Data_Management}		
-	\item 	"How to Read Data from Excel into R" by Joris Meys and Andrie de Vries:
+	\item 	"How to Read Data from Excel into R", article by Joris Meys and Andrie de Vries:
 			\\\urlwofont{http://www.dummies.com/how-to/content/how-to-read-data-from-excel-into-r.html} 		
+	\item 	"R for Dummies", book by Joris Meys and Andrie de Vries, page 211:
+			\\\urlwofont{http://tinyurl.com/c54e35m}
 	
 \end{enumerate}
 
