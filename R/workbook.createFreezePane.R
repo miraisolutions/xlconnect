@@ -30,7 +30,7 @@ setGeneric("createFreezePane",
 	function(object, sheet, colSplit, rowSplit, leftColumn = colSplit, topRow = rowSplit) standardGeneric("createFreezePane"))
 
 setMethod("createFreezePane", 
-		signature(object = "workbook", sheet = "numeric"), 
+		signature(object = "workbook", sheet = "numeric", colSplit="numeric", leftColumn = "numeric"), 
 		function(object, sheet, colSplit, rowSplit, leftColumn, topRow) {
 			xlcCall(object, "createFreezePane", as.integer(sheet - 1), as.integer(colSplit-1), as.integer(rowSplit-1), as.integer(leftColumn-1), as.integer(topRow-1))
 			invisible()	
@@ -38,9 +38,57 @@ setMethod("createFreezePane",
 )
 
 setMethod("createFreezePane", 
-		signature(object = "workbook", sheet = "character"), 
+		signature(object = "workbook", sheet = "numeric", colSplit="numeric", leftColumn = "character"), 
+		function(object, sheet, colSplit, rowSplit, leftColumn, topRow) {
+			xlcCall(object, "createFreezePane", as.integer(sheet - 1), as.integer(colSplit-1), as.integer(rowSplit-1), as.integer(col2idx(leftColumn)-1), as.integer(topRow-1))
+			invisible()	
+		}
+)
+
+setMethod("createFreezePane", 
+		signature(object = "workbook", sheet = "numeric", colSplit="character", leftColumn = "numeric"), 
+		function(object, sheet, colSplit, rowSplit, leftColumn, topRow) {
+			xlcCall(object, "createFreezePane", as.integer(sheet - 1), as.integer(col2idx(colSplit)-1), as.integer(rowSplit-1), as.integer(leftColumn-1), as.integer(topRow-1))
+			invisible()	
+		}
+)
+
+setMethod("createFreezePane", 
+		signature(object = "workbook", sheet = "numeric", colSplit="character", leftColumn = "character"), 
+		function(object, sheet, colSplit, rowSplit, leftColumn, topRow) {
+			xlcCall(object, "createFreezePane", as.integer(sheet - 1), as.integer(col2idx(colSplit)-1), as.integer(rowSplit-1), as.integer(col2idx(leftColumn)-1), as.integer(topRow-1))
+			invisible()	
+		}
+)
+
+setMethod("createFreezePane", 
+		signature(object = "workbook", sheet = "character", colSplit="numeric", leftColumn = "numeric"), 
 		function(object, sheet, colSplit, rowSplit, leftColumn, topRow) {
 			xlcCall(object, "createFreezePane", sheet, as.integer(colSplit-1), as.integer(rowSplit-1), as.integer(leftColumn-1), as.integer(topRow-1))
+			invisible()
+		}
+)
+
+setMethod("createFreezePane", 
+		signature(object = "workbook", sheet = "character", colSplit="numeric", leftColumn = "character"), 
+		function(object, sheet, colSplit, rowSplit, leftColumn, topRow) {
+			xlcCall(object, "createFreezePane", sheet, as.integer(colSplit-1), as.integer(rowSplit-1), as.integer(col2idx(leftColumn)-1), as.integer(topRow-1))
+			invisible()
+		}
+)
+
+setMethod("createFreezePane", 
+		signature(object = "workbook", sheet = "character", colSplit="character", leftColumn = "numeric"), 
+		function(object, sheet, colSplit, rowSplit, leftColumn, topRow) {
+			xlcCall(object, "createFreezePane", sheet, as.integer(col2idx(colSplit)-1), as.integer(rowSplit-1), as.integer(leftColumn-1), as.integer(topRow-1))
+			invisible()
+		}
+)
+
+setMethod("createFreezePane", 
+		signature(object = "workbook", sheet = "character", colSplit="character", leftColumn = "character"), 
+		function(object, sheet, colSplit, rowSplit, leftColumn, topRow) {
+			xlcCall(object, "createFreezePane", sheet, as.integer(col2idx(colSplit)-1), as.integer(rowSplit-1), as.integer(col2idx(leftColumn)-1), as.integer(topRow-1))
 			invisible()
 		}
 )

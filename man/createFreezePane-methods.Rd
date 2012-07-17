@@ -16,9 +16,9 @@ Creates a freeze pane on a specified worksheet.
 \arguments{
   \item{object}{The \code{\linkS4class{workbook}} to use}
   \item{sheet}{The name or index of the sheet on which to create a freeze pane}
-  \item{colSplit}{Horizontal position of freeze (as number of columns)}
+  \item{colSplit}{Horizontal position of freeze (as column index or name)}
   \item{rowSplit}{Vertical position of freeze (as number of rows)}
-  \item{leftColumn}{Left column (as index) visible in right pane. If not specified, the default is \code{leftColumn}=\code{colSplit}}
+  \item{leftColumn}{Left column (as column index or name) visible in right pane. If not specified, the default is \code{leftColumn}=\code{colSplit}}
   \item{topRow}{Top row (as index) visible in bottom pane. If not specified, the default is \code{topRow}=\code{rowSplit}}
 }
 \references{

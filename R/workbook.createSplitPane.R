@@ -30,7 +30,7 @@ setGeneric("createSplitPane",
 		function(object, sheet, xSplitPos, ySplitPos, leftColumn, topRow) standardGeneric("createSplitPane"))
 
 setMethod("createSplitPane", 
-		signature(object = "workbook", sheet = "numeric"), 
+		signature(object = "workbook", sheet = "numeric", leftColumn = "numeric"), 
 		function(object, sheet, xSplitPos, ySplitPos, leftColumn, topRow) {
 				xlcCall(object, "createSplitPane", as.integer(sheet - 1), as.integer(xSplitPos), as.integer(ySplitPos), as.integer(leftColumn-1), as.integer(topRow-1))
 				invisible()
@@ -38,9 +38,25 @@ setMethod("createSplitPane",
 )
 
 setMethod("createSplitPane", 
-		signature(object = "workbook", sheet = "character"), 
+		signature(object = "workbook", sheet = "numeric", leftColumn = "character"), 
+		function(object, sheet, xSplitPos, ySplitPos, leftColumn, topRow) {
+			xlcCall(object, "createSplitPane", as.integer(sheet - 1), as.integer(xSplitPos), as.integer(ySplitPos), as.integer(col2idx(leftColumn)-1), as.integer(topRow-1))
+			invisible()
+		}
+)
+
+setMethod("createSplitPane", 
+		signature(object = "workbook", sheet = "character", leftColumn = "numeric"), 
 		function(object, sheet, xSplitPos, ySplitPos, leftColumn, topRow) {
 				xlcCall(object, "createSplitPane", sheet, as.integer(xSplitPos), as.integer(ySplitPos), as.integer(leftColumn-1), as.integer(topRow-1))
 				invisible()
+		}
+)
+
+setMethod("createSplitPane", 
+		signature(object = "workbook", sheet = "character", leftColumn = "character"), 
+		function(object, sheet, xSplitPos, ySplitPos, leftColumn, topRow) {
+			xlcCall(object, "createSplitPane", sheet, as.integer(xSplitPos), as.integer(ySplitPos), as.integer(col2idx(leftColumn)-1), as.integer(topRow-1))
+			invisible()
 		}
 )

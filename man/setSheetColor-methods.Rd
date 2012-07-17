@@ -16,7 +16,8 @@ Sets a color on a specified worksheet tab. This only works for xlsx files.
 \arguments{
   \item{object}{The \code{\linkS4class{workbook}} to use}
   \item{sheet}{The name or index of the sheet on which to set the tab color}
-  \item{color}{The color chosen for the sheet tab, as integer or in the form \code{XLC$COLOR.VIOLET}}
+  \item{color}{The color to use for the sheet tab. The color is normally specified
+  via a corresponding color constant from the \code{\link[=XLC]{XLC}} object.}
 }
 
 \author{

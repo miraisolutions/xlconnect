@@ -18,7 +18,7 @@ Creates a split pane on a specified worksheet.
   \item{sheet}{The name or index of the sheet on which to create a split pane}
   \item{xSplitPos}{Horizontal position of split (in 1/20th of a point)}
   \item{ySplitPos}{Vertical position of split (in 1/20th of a point)}
-  \item{leftColumn}{Left column (as index) visible in right pane}
+  \item{leftColumn}{Left column (as index or column name) visible in right pane}
   \item{topRow}{Top row visible in bottom pane}
 }
 \references{
