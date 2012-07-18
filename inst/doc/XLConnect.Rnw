@@ -8,7 +8,7 @@
 %\VignetteDepends{forecast}
 %\VignetteDepends{ggplot2}
 %\VignetteDepends{scales}
-%\VignetteDepends{tikzDevice}
+%%\VignetteDepends{tikzDevice}
 %\VignetteDepends{zoo}
 % \usepackage{Sweave}
 \usepackage[scaled=.9]{couriers}
@@ -75,7 +75,7 @@
 <<setup,echo=F,results=hide>>=
 
 	if( !file.exists( 'figs' ) ) dir.create( 'figs' )
-	require(tikzDevice)
+	# require(tikzDevice)
 	
 @
 
