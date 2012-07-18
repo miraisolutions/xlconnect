@@ -17,7 +17,10 @@ XLConnect News
 		method (only for *.xlsx files).		
 	*	Support for freeze panes and split panes.
 	*	Removing dependency to tikzDevice package
-	*	Updates to the package vignette
+	*	Updates to the package vignette. Package vignette code examples can
+		be found in the XLConnect.R script file in the top level library
+		directory or by typing edit(file = system.file("XLConnect.R", 
+		package = "XLConnect"))
 	
 0.1-9	2012-03-08
 	*	Vignette examples now run with ggplot2 0.9.0+
