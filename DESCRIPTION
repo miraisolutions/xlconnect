@@ -4,7 +4,7 @@ Title: Excel Connector for R
 Version: 0.2-0
 Date: 2012-07-18
 Author: Mirai Solutions GmbH
-Maintainer: Mirai Solutions GmbH <xlconnect@mirai-solutions.com>
+Maintainer: Martin Studer <martin.studer@mirai-solutions.com>
 URL: http://www.mirai-solutions.com , http://miraisolutions.wordpress.com
 SystemRequirements: java (>= 1.6)
 Depends: R (>= 2.10.0), XLConnectJars (>= 0.2-0), XLConnectJars(<= 0.2-0), rJava, utils, methods
