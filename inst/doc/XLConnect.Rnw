@@ -830,17 +830,18 @@ you will be running the code at a different time.
 \pagebreak
 \section{What's new in XLConnect version \Sexpr{getOption("XLConnect.Version")}}
 
-With version \Sexpr{getOption("XLConnect.Version")} of \pkg{XLConnect} we moved to Apache POI 3.8-beta5. The
-most prominent new features/extensions are an improved vignette (this document!) which provides more information
-and examples to get people started with the package. A new type conversion mechanism was introduced which allows
-users to pre-specify column types/classes and even force conversions between types (e.g. from \code{character} to
-\code{numeric}) when reading in data using \code{readNamedRegion} or \code{readWorksheet}. Instead of relying
-completely on cell types (which is the default mechanism), this allows to specify column classes of the data to
-be read in upfront. Possible type conversion issues will be reported back to the user/developer via warnings referring
-to the actual cell that is causing problems. Another new feature that was introduced is the function \code{xlcEdit}.
-It allows to edit plain \code{data.frame}s in an Excel file editor (e.g. MS Excel). Changes will be applied to the
-underlying data object after closing the editor. Note that this functionality is only available under Windows and
-Mac OS X. For more information please see the \href{http://cran.r-project.org/web/packages/XLConnect/XLConnect.pdf}{Reference Manual}.\\\\
+We have introduced the following updates in version \Sexpr{getOption("XLConnect.Version")} of \pkg{XLConnect}:
+\begin{itemize}
+	\item{Moved to Apache POI 3.8}
+	\item{Fixed lazy evaluation issues with S4 generics. Generic methods now fully expand the argument list in order to have the arguments immediately evaluated.}	
+	\item{\code{readWorksheet} now returns a named list if more than one worksheet is read. This provides convenient access to the corresponding data by list subsetting.}
+	\item{\code{readWorksheet} and \code{readNamedRegion} now provide a new argument named \code{check.names} that controls whether \code{data.frame} column names are checked for syntactically valid variable names (see the \code{check.names} argument of \code{data.frame}).}	
+ 	\item{Support for setting the color of worksheet tabs via the \code{setSheetColor} method (only for .xlsx files).} 	
+  	\item{Support for freeze panes and split panes.} 
+	\item{You can now find all code examples presented in this vignette in the XLConnect.R script file. You can find the file in the top level library directory. Alternatively, you can open the document by typing the following command into your console:
+	\\\code{edit(file = system.file("XLConnect.R", package = "XLConnect"))}}
+\end{itemize}
+
 A summary of news in \pkg{XLConnect} \Sexpr{getOption("XLConnect.Version")} can be found in the 
 \href{http://cran.r-project.org/web/packages/XLConnect/NEWS}{NEWS} file on CRAN.
 
