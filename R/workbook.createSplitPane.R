@@ -30,33 +30,31 @@ setGeneric("createSplitPane",
 		function(object, sheet, xSplitPos, ySplitPos, leftColumn, topRow) standardGeneric("createSplitPane"))
 
 setMethod("createSplitPane", 
-		signature(object = "workbook", sheet = "numeric", leftColumn = "numeric"), 
+		signature(object = "workbook", sheet = "numeric"), 
 		function(object, sheet, xSplitPos, ySplitPos, leftColumn, topRow) {
-				xlcCall(object, "createSplitPane", as.integer(sheet - 1), as.integer(xSplitPos), as.integer(ySplitPos), as.integer(leftColumn-1), as.integer(topRow-1))
-				invisible()
-		}
-)
-
-setMethod("createSplitPane", 
-		signature(object = "workbook", sheet = "numeric", leftColumn = "character"), 
-		function(object, sheet, xSplitPos, ySplitPos, leftColumn, topRow) {
-			xlcCall(object, "createSplitPane", as.integer(sheet - 1), as.integer(xSplitPos), as.integer(ySplitPos), as.integer(col2idx(leftColumn)-1), as.integer(topRow-1))
+			if (is.numeric(leftColumn)) {
+				leftColumn = leftColumn
+			} else if (is.character(leftColumn)){
+				leftColumn = col2idx(leftColumn)
+			} else {
+				stop(sprintf("leftColumn should be numeric or character"))
+			}
+			xlcCall(object, "createSplitPane", as.integer(sheet - 1), as.integer(xSplitPos), as.integer(ySplitPos), as.integer(leftColumn-1), as.integer(topRow-1))
 			invisible()
 		}
 )
 
 setMethod("createSplitPane", 
-		signature(object = "workbook", sheet = "character", leftColumn = "numeric"), 
+		signature(object = "workbook", sheet = "character"), 
 		function(object, sheet, xSplitPos, ySplitPos, leftColumn, topRow) {
-				xlcCall(object, "createSplitPane", sheet, as.integer(xSplitPos), as.integer(ySplitPos), as.integer(leftColumn-1), as.integer(topRow-1))
-				invisible()
-		}
-)
-
-setMethod("createSplitPane", 
-		signature(object = "workbook", sheet = "character", leftColumn = "character"), 
-		function(object, sheet, xSplitPos, ySplitPos, leftColumn, topRow) {
-			xlcCall(object, "createSplitPane", sheet, as.integer(xSplitPos), as.integer(ySplitPos), as.integer(col2idx(leftColumn)-1), as.integer(topRow-1))
+			if (is.numeric(leftColumn)) {
+				leftColumn = leftColumn
+			} else if (is.character(leftColumn)){
+				leftColumn = col2idx(leftColumn)
+			} else {
+				stop(sprintf("leftColumn should be numeric or character"))
+			}
+			xlcCall(object, "createSplitPane", sheet, as.integer(xSplitPos), as.integer(ySplitPos), as.integer(leftColumn-1), as.integer(topRow-1))
 			invisible()
 		}
 )
