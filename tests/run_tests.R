@@ -26,6 +26,9 @@
 #
 #############################################################################
 
+# Limit number of GC threads
+options(java.parameters = c("-XX:+UseParallelGC", "-XX:ParallelGCThreads=1"))
+
 # Load library built by R CMD check
 library(package = "XLConnect", character.only = TRUE)
 # Run unit tests
