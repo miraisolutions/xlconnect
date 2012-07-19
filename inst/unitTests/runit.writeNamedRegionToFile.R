@@ -50,50 +50,52 @@ test.writeNamedRegionToFile <- function() {
                 checkEquals(normalizeDataframe(df), res, check.attributes = FALSE, check.names = TRUE)
         }
 	
-	# built-in dataset mtcars (*.xls)
-	testDataFrame(file.xls, mtcars)
-	# built-in dataset mtcars (*.xlsx)
-	testDataFrame(file.xlsx, mtcars)
-	
-	# built-in dataset airquality (*.xls)
-	testDataFrame(file.xls, airquality)
-	# built-in dataset airquality (*.xlsx)
-	testDataFrame(file.xlsx, airquality)
-	
-	# built-in dataset attenu (*.xls)
-	testDataFrame(file.xls, attenu)
-	# built-in dataset attenu (*.xlsx)
-	testDataFrame(file.xlsx, attenu)
-	
-	# built-in dataset ChickWeight (*.xls)
-	testDataFrame(file.xls, ChickWeight)
-	# built-in dataset ChickWeight (*.xlsx)
-	testDataFrame(file.xlsx, ChickWeight)
-	
-	# built-in dataset CO2 (*.xls)
-	testDataFrame(file.xls, CO2)
-	# built-in dataset CO2 (*.xlsx)
-	testDataFrame(file.xlsx, CO2)
-	
-	# built-in dataset iris (*.xls)
-	testDataFrame(file.xls, iris)
-	# built-in dataset iris (*.xlsx)
-	testDataFrame(file.xlsx, iris)
-	
-	# built-in dataset longley (*.xls)
-	testDataFrame(file.xls, longley)
-	# built-in dataset longley (*.xlsx)
-	testDataFrame(file.xlsx, longley)
-	
-	# built-in dataset morley (*.xls)
-	testDataFrame(file.xls, morley)
-	# built-in dataset morley (*.xlsx)
-	testDataFrame(file.xlsx, morley)
-	
-	# built-in dataset swiss (*.xls)
-	testDataFrame(file.xls, swiss)
-	# built-in dataset swiss (*.xlsx)
-	testDataFrame(file.xlsx, swiss)
+	if(getOption("FULL.TEST.SUITE")) {
+		# built-in dataset mtcars (*.xls)
+		testDataFrame(file.xls, mtcars)
+		# built-in dataset mtcars (*.xlsx)
+		testDataFrame(file.xlsx, mtcars)
+		
+		# built-in dataset airquality (*.xls)
+		testDataFrame(file.xls, airquality)
+		# built-in dataset airquality (*.xlsx)
+		testDataFrame(file.xlsx, airquality)
+		
+		# built-in dataset attenu (*.xls)
+		testDataFrame(file.xls, attenu)
+		# built-in dataset attenu (*.xlsx)
+		testDataFrame(file.xlsx, attenu)
+		
+		# built-in dataset ChickWeight (*.xls)
+		testDataFrame(file.xls, ChickWeight)
+		# built-in dataset ChickWeight (*.xlsx)
+		testDataFrame(file.xlsx, ChickWeight)
+		
+		# built-in dataset CO2 (*.xls)
+		testDataFrame(file.xls, CO2)
+		# built-in dataset CO2 (*.xlsx)
+		testDataFrame(file.xlsx, CO2)
+		
+		# built-in dataset iris (*.xls)
+		testDataFrame(file.xls, iris)
+		# built-in dataset iris (*.xlsx)
+		testDataFrame(file.xlsx, iris)
+		
+		# built-in dataset longley (*.xls)
+		testDataFrame(file.xls, longley)
+		# built-in dataset longley (*.xlsx)
+		testDataFrame(file.xlsx, longley)
+		
+		# built-in dataset morley (*.xls)
+		testDataFrame(file.xls, morley)
+		# built-in dataset morley (*.xlsx)
+		testDataFrame(file.xlsx, morley)
+		
+		# built-in dataset swiss (*.xls)
+		testDataFrame(file.xls, swiss)
+		# built-in dataset swiss (*.xlsx)
+		testDataFrame(file.xlsx, swiss)
+	}
 	
 	# custom test dataset
 	cdf <- data.frame(

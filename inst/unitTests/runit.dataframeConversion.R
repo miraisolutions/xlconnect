@@ -35,32 +35,34 @@ test.dataframeConversion <- function() {
 		checkEquals(normalizeDataframe(df), res, check.attributes = FALSE, check.names = TRUE)
 	}
 	
-	# built-in dataset mtcars
-	testDataFrame(mtcars)
-	
-	# built-in dataset airquality
-	testDataFrame(airquality)
-	
-	# built-in dataset attenu
-	testDataFrame(attenu)
-	
-	# built-in dataset ChickWeight
-	testDataFrame(ChickWeight)
-	
-	# built-in dataset CO2
-	testDataFrame(CO2)
-	
-	# built-in dataset iris
-	testDataFrame(iris)
-	
-	# built-in dataset longley
-	testDataFrame(longley)
-	
-	# built-in dataset morley
-	testDataFrame(morley)
-	
-	# built-in dataset swiss
-	testDataFrame(swiss)
+	if(getOption("FULL.TEST.SUITE")) {
+		# built-in dataset mtcars
+		testDataFrame(mtcars)
+		
+		# built-in dataset airquality
+		testDataFrame(airquality)
+		
+		# built-in dataset attenu
+		testDataFrame(attenu)
+		
+		# built-in dataset ChickWeight
+		testDataFrame(ChickWeight)
+		
+		# built-in dataset CO2
+		testDataFrame(CO2)
+		
+		# built-in dataset iris
+		testDataFrame(iris)
+		
+		# built-in dataset longley
+		testDataFrame(longley)
+		
+		# built-in dataset morley
+		testDataFrame(morley)
+		
+		# built-in dataset swiss
+		testDataFrame(swiss)
+	}
 	
 	# custom test dataset
 	cdf <- data.frame(
