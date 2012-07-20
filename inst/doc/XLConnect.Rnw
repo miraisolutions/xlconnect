@@ -1032,6 +1032,8 @@ We will do our best to reply to your enquires as quickly as possible!
 			\\\urlwofont{http://www.dummies.com/how-to/content/how-to-read-data-from-excel-into-r.html} 		
 	\item 	"R for Dummies", book by Joris Meys and Andrie de Vries, page 211:
 			\\\urlwofont{http://tinyurl.com/c54e35m}
+	\item 	"Grundlagen der Datenanalyse mit R: Eine anwendungsorientierte Einführung", book by Daniel Wollschläger:
+			\\\urlwofont{http://books.google.ch/books/about/Grundlagen_der_Datenanalyse_mit_R.html?id=tlmcPQ9YZP4C&redir_esc=y}
 	
 \end{enumerate}
 
