@@ -29,7 +29,7 @@
 .onLoad <- function(libname, pkgname) {
 	# Print package information
 	pdesc <- packageDescription(pkgname)
-	packageStartupMessage(pdesc$Package, " ", pdesc$Version, " by ", pdesc$Maintainer)
+	packageStartupMessage(pdesc$Package, " ", pdesc$Version, " by ", pdesc$Author)
 	packageStartupMessage(pdesc$URL)
 	
 	# Load Java dependencies (all jars inside the java subfolder)

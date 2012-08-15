@@ -29,9 +29,6 @@
 # Limit number of GC threads
 options(java.parameters = c("-XX:+UseParallelGC", "-XX:ParallelGCThreads=1"))
 
-# Option to determine if full test suite should be run
-options("FULL.TEST.SUITE" = Sys.getenv("FULL_TEST_SUITE") == "1")
-
 # Load library built by R CMD check
 library(package = "XLConnect", character.only = TRUE)
 # Run unit tests
