@@ -1,0 +1,62 @@
+\name{clearNamedRegion-methods}
+\docType{methods}
+\alias{clearNamedRegion}
+\alias{clearNamedRegion-methods}
+\alias{clearNamedRegion,workbook-method}
+\title{Clearing named regions in a workbook}
+\description{
+Clears named regions in a \code{\linkS4class{workbook}}.
+}
+\usage{
+  \S4method{clearNamedRegion}{workbook}(object, name)
+}
+
+\arguments{
+  \item{object}{The \code{\linkS4class{workbook}} to use}
+  \item{name}{The name of the named region to clear}
+}
+
+\details{
+Clearing a named region/range means to remove any cells associated with that named
+region. Clearing named regions can be useful if (named) data sets in a worksheet need 
+to be replaced, i.e. data is first read, modified in R and finally written back to the 
+the same named region. Without clearing the named region first, (parts of) the original 
+data may still be visible if it occupied a larger range in the worksheet.
+}
+
+\author{
+Nicola Lambiase\cr
+Mirai Solutions GmbH \url{http://www.mirai-solutions.com}
+}
+\seealso{
+\code{\linkS4class{workbook}}, \code{\link[=clearSheet-methods]{clearSheet}}, 
+\code{\link[=clearRange-methods]{clearRange}}, 
+\code{\link[=clearRangeFromReference-methods]{clearRangeFromReference}}
+}
+\examples{
+# mtcars xlsx file from demoFiles subfolder of 
+# package XLConnect
+demoExcelFile <- system.file("demoFiles/mtcars.xlsx", 
+                             package = "XLConnect")
+
+# Load workbook
+wb <- loadWorkbook(demoExcelFile)
+
+# Read named region 'mtcars'
+data <- readNamedRegion(wb, name = "mtcars", header = TRUE)
+
+# Only consider cars with a weight >= 5
+data <- data[data$wt >= 5, ]
+
+# Clear original named region
+clearNamedRegion(wb, name = "mtcars")
+
+# Write subsetted data back
+# Note: this is covering a smaller area now -
+# writeNamedRegion automatically redefines the named region
+# to the size/area of the data
+writeNamedRegion(wb, data = data, name = "mtcars",
+                 header = TRUE) 
+}
+\keyword{methods}
+\keyword{utilities}
