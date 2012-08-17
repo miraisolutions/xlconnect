@@ -6,6 +6,8 @@ XLConnect News
 	*	Fixed issue with failing unit tests on R-devel
 		(issue with Excel date/time values and increased precision of
 		all.equal for POSIXct)
+	*	Added new methods for clearing cells from a sheet, a named region
+		or a range (clearSheet, clearNamedRegion, clearRange, clearRangeFromReference)
 
 0.2-0	2012-07-18
 	*	Moved to Apache POI 3.8
