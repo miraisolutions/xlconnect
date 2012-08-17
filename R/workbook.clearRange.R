@@ -30,8 +30,11 @@ setGeneric("clearRange",
 		function(object, sheet, coords) standardGeneric("clearRange"))
 
 setMethod("clearRange", 
-		signature(object = "workbook", sheet = "numeric", coords = "numeric"), 
+		signature(object = "workbook", sheet = "numeric"), 
 		function(object, sheet, coords) {
+			if(!is.numeric(coords))
+				stop("Argument coords needs to be numeric")
+				
 			if(!is.matrix(coords))
 				coords = matrix(coords, ncol = 4, byrow = TRUE)
 			
@@ -43,8 +46,11 @@ setMethod("clearRange",
 )
 
 setMethod("clearRange", 
-		signature(object = "workbook", sheet = "character", coords = "numeric"), 
+		signature(object = "workbook", sheet = "character"), 
 		function(object, sheet, coords) {
+			if(!is.numeric(coords))
+				stop("Argument coords needs to be numeric")
+			
 			if(!is.matrix(coords))
 				coords = matrix(coords, ncol = 4, byrow = TRUE)
 			
