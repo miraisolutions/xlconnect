@@ -833,14 +833,10 @@ you will be running the code at a different time.
 
 We have introduced the following updates in version \Sexpr{getOption("XLConnect.Version")} of \pkg{XLConnect}:
 \begin{itemize}
-	\item{Moved to Apache POI 3.8}
-	\item{Fixed lazy evaluation issues with S4 generics. Generic methods now fully expand the argument list in order to have the arguments immediately evaluated.}	
-	\item{\code{readWorksheet} now returns a named list if more than one worksheet is read. This provides convenient access to the corresponding data by list subsetting.}
-	\item{\code{readWorksheet} and \code{readNamedRegion} now provide a new argument named \code{check.names} that controls whether \code{data.frame} column names are checked for syntactically valid variable names (see the \code{check.names} argument of \code{data.frame}).}	
- 	\item{Support for setting the color of worksheet tabs via the \code{setSheetColor} method (only for .xlsx files).} 	
-  	\item{Support for freeze panes and split panes.} 
-	\item{You can now find all code examples presented in this vignette in the XLConnect.R script file. You can find the file in the top level library directory. Alternatively, you can open the document by typing the following command into your console:
-	\\\code{edit(file = system.file("XLConnect.R", package = "XLConnect"))}}
+	\item{Added new methods for clearing sheets, named regions and cell ranges}
+	\item{Fixed an issue with overwriting cells of a different type}
+	\item{Fixed issue with failing unit tests on R-devel (issue with Excel date/time values and increased precision of
+		  all.equal for POSIXct)}
 \end{itemize}
 
 A summary of news in \pkg{XLConnect} \Sexpr{getOption("XLConnect.Version")} can be found in the 
