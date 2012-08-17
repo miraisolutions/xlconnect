@@ -2,13 +2,13 @@
 \docType{methods}
 \alias{clearNamedRegion}
 \alias{clearNamedRegion-methods}
-\alias{clearNamedRegion,workbook-method}
+\alias{clearNamedRegion,workbook,character-method}
 \title{Clearing named regions in a workbook}
 \description{
 Clears named regions in a \code{\linkS4class{workbook}}.
 }
 \usage{
-  \S4method{clearNamedRegion}{workbook}(object, name)
+  \S4method{clearNamedRegion}{workbook,character}(object, name)
 }
 
 \arguments{

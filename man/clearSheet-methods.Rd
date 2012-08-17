@@ -2,13 +2,15 @@
 \docType{methods}
 \alias{clearSheet}
 \alias{clearSheet-methods}
-\alias{clearSheet,workbook-method}
+\alias{clearSheet,workbook,numeric-method}
+\alias{clearSheet,workbook,character-method}
 \title{Clearing worksheets in a workbook}
 \description{
 Clears worksheets with specified names or indices in a \code{\linkS4class{workbook}}.
 }
 \usage{
-  \S4method{clearSheet}{workbook}(object, sheet)
+  \S4method{clearSheet}{workbook,numeric}(object, sheet)
+  \S4method{clearSheet}{workbook,character}(object, sheet)
 }
 
 \arguments{

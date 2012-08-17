@@ -2,13 +2,15 @@
 \docType{methods}
 \alias{clearRange}
 \alias{clearRange-methods}
-\alias{clearRange,workbook-method}
+\alias{clearRange,workbook,numeric-method}
+\alias{clearRange,workbook,character-method}
 \title{Clearing cell ranges in a workbook}
 \description{
 Clears cell ranges in a \code{\linkS4class{workbook}}.
 }
 \usage{
-  \S4method{clearRange}{workbook}(object, sheet, coords)
+  \S4method{clearRange}{workbook,numeric}(object, sheet, coords)
+  \S4method{clearRange}{workbook,character}(object, sheet, coords)
 }
 
 \arguments{

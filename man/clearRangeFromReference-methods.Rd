@@ -2,13 +2,13 @@
 \docType{methods}
 \alias{clearRangeFromReference}
 \alias{clearRangeFromReference-methods}
-\alias{clearRangeFromReference,workbook-method}
+\alias{clearRangeFromReference,workbook,character-method}
 \title{Clearing cell ranges in a workbook}
 \description{
 Clears cell ranges specified by area reference in a \code{\linkS4class{workbook}}.
 }
 \usage{
-  \S4method{clearRangeFromReference}{workbook}(object, reference)
+  \S4method{clearRangeFromReference}{workbook,character}(object, reference)
 }
 
 \arguments{
