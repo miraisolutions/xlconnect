@@ -11,7 +11,7 @@
 %%\VignetteDepends{tikzDevice}
 %\VignetteDepends{zoo}
 % \usepackage{Sweave}
-\usepackage[utf8]{inputenc}
+\usepackage[latin1]{inputenc}
 \usepackage[scaled=.9]{couriers}
 \usepackage[colorlinks]{hyperref}
 \usepackage{datetime}
