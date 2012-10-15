@@ -754,8 +754,10 @@ idx = rbind(rep(FALSE, ncol(idx)), idx)
 widx = apply(idx, 2, which)
 # Apply highlighting cell style
 for(i in seq(along = currencies)) {
-	setCellStyle(wb, sheet = sheet, row = widx[[i]] + 1, col = i + 1,
-	cellstyle = csHlight)
+	if(length(widx[[i]]) > 0) {
+		setCellStyle(wb, sheet = sheet, row = widx[[i]] + 1, col = i + 1,
+			cellstyle = csHlight)
+	}
 # Note:
 # +1 for row since there is a header row
 # +1 for column since the first column is the time column
