@@ -51,10 +51,10 @@ setMethod("readWorksheet",
 			dataFrame <- xlcCall(object, "readWorksheet", as.integer(sheet - 1), as.integer(startRow - 1), 
 				as.integer(startCol - 1), as.integer(endRow - 1), as.integer(endCol - 1), header, 
 				.jarray(classToXlcType(colTypes)), forceConversion, dateTimeFormat, SIMPLIFY = FALSE)
-			# construct data.frame
-			dataFrame <- lapply(dataFrame, function(x) {
-				extractRownames(dataframeFromJava(x, check.names), rownames)
-			})
+			# get data.frames from Java
+			dataFrame = lapply(dataFrame, dataframeFromJava, check.names = check.names)
+			# extract rownames
+			dataFrame = extractRownames(dataFrame, rownames)
 			
 			# Return data.frame directly in case only one data.frame is read
 			if(length(dataFrame) == 1) dataFrame[[1]]

@@ -28,17 +28,22 @@
 #############################################################################
 
 extractRownames <- function(x, col) {
-	# use attr(x, "row.names") instead of row.names or rownames
-	# since row.names coerces to character for backward compatibility
-	# see help(row.names) for more information
-	if((is.numeric(col) || is.character(col)) && 
-		!is.null(x[[col]])) {
-
-		attr(x, "row.names") <- if(is.numeric(x[[col]])) as.integer(x[[col]]) else x[[col]]
-		if(is.numeric(col))
-			x[,-col]
-		else
-			x[, names(x) != col]
-	} else
-		x
+  if(is(x, "list")) {
+    if(is.null(col)) col = list(NULL)
+    mapply(extractRownames, x, col, SIMPLIFY = FALSE)
+  } else{
+  	# use attr(x, "row.names") instead of row.names or rownames
+  	# since row.names coerces to character for backward compatibility
+  	# see help(row.names) for more information
+  	if((is.numeric(col) || is.character(col)) && 
+  		!is.null(x[[col]])) {
+  
+  		attr(x, "row.names") <- if(is.numeric(x[[col]])) as.integer(x[[col]]) else x[[col]]
+  		if(is.numeric(col))
+  			x[,-col]
+  		else
+  			x[, names(x) != col]
+  	} else
+  		x
+  }
 }

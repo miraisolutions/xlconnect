@@ -27,14 +27,23 @@
 #############################################################################
 
 includeRownames <- function(x, colname) {
-	# use attr(x, "row.names") instead of row.names or rownames
-	# since row.names coerces to character for backward compatibility
-	# see help(row.names) for more information
-	if(is.character(colname) && !is.null(attr(x, "row.names"))) {
-		res <- cbind(attr(x, "row.names"), x, stringsAsFactors = FALSE)
-		row.names(res) <- NULL
-		names(res)[1] <- colname
-		res
-	} else
-		x
+  if(is(x, "list")) {
+    if(is.null(colname)) colname = list(NULL)
+    mapply(includeRownames, x, colname, SIMPLIFY = FALSE)
+  } else {
+    # Force data.frame
+    if(!is.data.frame(x))
+      x <- as.data.frame(x)
+    
+  	# use attr(x, "row.names") instead of row.names or rownames
+  	# since row.names coerces to character for backward compatibility
+  	# see help(row.names) for more information
+  	if(is.character(colname) && !is.null(attr(x, "row.names"))) {
+  		res <- cbind(attr(x, "row.names"), x, stringsAsFactors = FALSE)
+  		row.names(res) <- NULL
+  		names(res)[1] <- colname
+  		res
+  	} else
+  		x
+  }
 }

@@ -96,6 +96,7 @@
 \date{\pkg{XLConnect} Version \Sexpr{getOption("XLConnect.Version")}\qquad \monthname, \the\year}
 
 \begin{document}
+\SweaveOpts{concordance=TRUE}
 	
 \SweaveOpts{echo=F,prefix.string=figs/fig}
 
@@ -751,7 +752,7 @@ idx = rollapply(curr.orig, width = 2,
 		FUN = function(x) abs(x[2] / x[1] - 1),
 by.column = TRUE) > 0.02
 idx = rbind(rep(FALSE, ncol(idx)), idx)
-widx = apply(idx, 2, which)
+widx = lapply(as.data.frame(idx), which)
 # Apply highlighting cell style
 for(i in seq(along = currencies)) {
 	if(length(widx[[i]]) > 0) {
@@ -1031,7 +1032,7 @@ We will do our best to reply to your enquires as quickly as possible!
 			\\\urlwofont{http://www.dummies.com/how-to/content/how-to-read-data-from-excel-into-r.html} 		
 	\item 	"R for Dummies", book by Joris Meys and Andrie de Vries, page 211:
 			\\\urlwofont{http://tinyurl.com/c54e35m}
-	\item 	"Grundlagen der Datenanalyse mit R: Eine anwendungsorientierte Einführung", book by Daniel Wollschläger:
+	\item 	"Grundlagen der Datenanalyse mit R: Eine anwendungsorientierte Einf?hrung", book by Daniel Wollschl?ger:
 			\\\urlwofont{http://books.google.ch/books/about/Grundlagen_der_Datenanalyse_mit_R.html?id=tlmcPQ9YZP4C&redir_esc=y}
 	
 \end{enumerate}

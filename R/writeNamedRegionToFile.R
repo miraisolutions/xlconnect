@@ -34,12 +34,12 @@ writeNamedRegionToFile <- function(file, data, name, formula = NA, ...,
   setStyleAction(wb, styleAction)
   
   if(!is.na(formula)) {
-	sheets = extractSheetName(formula)
+	  sheets = extractSheetName(formula)
     createSheet(wb, sheets[sheets != ""])
     createName(wb, name, formula)
   }
   
-  writeNamedRegion(wb, data, name, ...);
+  writeNamedRegion(wb, data, name, ...)
   
   saveWorkbook(wb)
   invisible(wb)  

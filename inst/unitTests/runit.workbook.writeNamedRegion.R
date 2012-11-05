@@ -57,4 +57,19 @@ test.workbook.writeNamedRegion <- function() {
 	# causes an exception (*.xlsx)
 	createName(wb.xlsx, "nope", "NonExistingSheet!A1")
 	checkException(writeNamedRegion(wb.xlsx, mtcars, "nope"))
+  
+	# Check that writing an empty data.frame does not cause an error (*.xls)
+  createSheet(wb.xls, "empty")
+	createName(wb.xls, "empty1", "empty!A1")
+  createName(wb.xls, "empty2", "empty!D10")
+	checkNoException(writeNamedRegion(wb.xls, data.frame(), "empty1"))
+	checkNoException(writeNamedRegion(wb.xls, data.frame(a = character(0), b = numeric(0)), "empty2"))
+	
+	# Check that writing an empty data.frame does not cause an error (*.xlsx)
+	createSheet(wb.xlsx, "empty")
+	createName(wb.xlsx, "empty1", "empty!A1")
+	createName(wb.xlsx, "empty2", "empty!D10")
+	checkNoException(writeNamedRegion(wb.xlsx, data.frame(), "empty1"))
+	checkNoException(writeNamedRegion(wb.xlsx, data.frame(a = character(0), b = numeric(0)), "empty2"))
+	
 }

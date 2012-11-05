@@ -2,3 +2,4 @@
 ^\.project$
 [.]svn$
 [.]Rproj$
+^.*\.Rproj$

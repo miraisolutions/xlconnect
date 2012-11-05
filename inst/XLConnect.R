@@ -249,7 +249,7 @@ idx = rollapply(curr.orig, width = 2,
 		FUN = function(x) abs(x[2] / x[1] - 1),
 by.column = TRUE) > 0.02
 idx = rbind(rep(FALSE, ncol(idx)), idx)
-widx = apply(idx, 2, which)
+widx = lapply(as.data.frame(idx), which)
 # Apply highlighting cell style
 for(i in seq(along = currencies)) {
 	if(length(widx[[i]]) > 0) {

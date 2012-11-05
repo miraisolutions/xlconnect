@@ -1,6 +1,13 @@
 XLConnect News
 --------------
 
+0.2-3 2012-11-05
+  * Fixed issue when trying to write empty data.frame with writeNamedRegion and
+    writeNamedRegionToFile
+  * Fixed issue in package vignette sample code
+  * Added vectorization for rownames argument in readWorksheet, readNamedRegion, 
+    writeWorksheet and writeNamedRegion
+
 0.2-2	2012-10-15
 	*	Fixed issue in package vignette sample code
 	
