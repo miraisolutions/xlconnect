@@ -18,7 +18,7 @@ Clears cell ranges specified by area reference in a \code{\linkS4class{workbook}
 }
 
 \details{
-Clearing a cell range means to remove any cells associated with that range. This
+Clearing a cell range means to clear all the cells associated with that range. This
 method is very similar to \code{\link[=clearRange-methods]{clearRange}}.
 }
 
@@ -29,7 +29,8 @@ Mirai Solutions GmbH \url{http://www.mirai-solutions.com}
 \seealso{
 \code{\linkS4class{workbook}}, \code{\link[=clearSheet-methods]{clearSheet}}, 
 \code{\link[=clearNamedRegion-methods]{clearNamedRegion}}, 
-\code{\link[=clearRange-methods]{clearRange}}
+\code{\link[=clearRange-methods]{clearRange}},
+\code{\link[=clearSheet-methods]{clearSheet}}
 }
 \examples{
 # mtcars xlsx file from demoFiles subfolder of 

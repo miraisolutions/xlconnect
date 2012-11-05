@@ -17,11 +17,11 @@ Clears named regions in a \code{\linkS4class{workbook}}.
 }
 
 \details{
-Clearing a named region/range means to remove any cells associated with that named
+Clearing a named region/range means to clear all the cells associated with that named
 region. Clearing named regions can be useful if (named) data sets in a worksheet need 
 to be replaced, i.e. data is first read, modified in R and finally written back to the 
 the same named region. Without clearing the named region first, (parts of) the original 
-data may still be visible if it occupied a larger range in the worksheet.
+data may still be visible if they occupied a larger range in the worksheet.
 }
 
 \author{
@@ -31,7 +31,8 @@ Mirai Solutions GmbH \url{http://www.mirai-solutions.com}
 \seealso{
 \code{\linkS4class{workbook}}, \code{\link[=clearSheet-methods]{clearSheet}}, 
 \code{\link[=clearRange-methods]{clearRange}}, 
-\code{\link[=clearRangeFromReference-methods]{clearRangeFromReference}}
+\code{\link[=clearRangeFromReference-methods]{clearRangeFromReference}},
+\code{\link[=clearSheet-methods]{clearSheet}}
 }
 \examples{
 # mtcars xlsx file from demoFiles subfolder of 

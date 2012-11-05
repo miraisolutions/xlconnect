@@ -19,11 +19,11 @@ Clears worksheets with specified names or indices in a \code{\linkS4class{workbo
 }
 
 \details{
-Clearing a worksheet means to remove any cells in that worksheet. Consequently,
+Clearing a worksheet means to clear all the cells in that worksheet. Consequently,
 the saved workbook should be smaller in size. Clearing a worksheet can be useful
-if data sets in a worksheet need to be replaced, i.e. data is first read, modified
+if data sets in a worksheet need to be replaced, i.e. data are first read, modified
 in R and finally written back to the worksheet. Without clearing the worksheet first, 
-(parts of) the original data may still be visible if it occupied a larger range of 
+(parts of) the original data may still be visible if they occupied a larger range of 
 the worksheet.
 }
 
