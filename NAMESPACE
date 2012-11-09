@@ -27,6 +27,7 @@ exportMethods(
 	getDefinedNames,
 	getForceFormulaRecalculation,
 	getLastRow,
+	getLastColumn,
 	getReferenceFormula,
 	getReferenceCoordinates,
 	getSheetPos,
