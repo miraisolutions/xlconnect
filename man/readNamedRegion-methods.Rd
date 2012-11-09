@@ -8,7 +8,7 @@
 Reads named regions from a \code{\linkS4class{workbook}}.
 }
 \usage{
-\S4method{readNamedRegion}{workbook}(object, name, header, rownames, colTypes, forceConversion, dateTimeFormat, check.names)
+\S4method{readNamedRegion}{workbook}(object, name, header, rownames, colTypes, forceConversion, dateTimeFormat, check.names, useCachedValues)
 }
 
 \arguments{
@@ -42,6 +42,10 @@ Reads named regions from a \code{\linkS4class{workbook}}.
   \item{check.names}{\code{logical} specifying if column names of the resulting \code{data.frame}
   should be checked to ensure that they are syntactically valid valid variable names and are not
   duplicated. See the \code{check.names} argument of \code{\link{data.frame}}. Defaults to \code{TRUE}.}
+  \item{useCachedValues}{\code{logical} specifying whether to read cached formula results from the 
+  workbook instead of re-evaluating them. This is particularly helpful in cases for reading data
+  produced by Excel features not supported in XLConnect like references to external workbooks. 
+  Defaults to \code{FALSE}, which means that formulas will be evaluated by XLConnect.}
 }
 
 \details{

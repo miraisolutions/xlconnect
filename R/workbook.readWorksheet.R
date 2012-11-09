@@ -29,14 +29,14 @@
 setGeneric("readWorksheet",
 	function(object, sheet, startRow = 0, startCol = 0, endRow = 0, endCol = 0, region = NULL,
 			header = TRUE, rownames = NULL, colTypes = character(0), forceConversion = FALSE, 
-			dateTimeFormat = getOption("XLConnect.dateTimeFormat"), check.names = TRUE) 
+			dateTimeFormat = getOption("XLConnect.dateTimeFormat"), check.names = TRUE, useCachedValues = FALSE) 
 		standardGeneric("readWorksheet"))
 
 setMethod("readWorksheet", 
 		signature(object = "workbook", sheet = "numeric"), 
 		function(object, sheet, startRow = 0, startCol = 0, endRow = 0, endCol = 0, region = NULL,
 				 header = TRUE, rownames = NULL, colTypes = character(0), forceConversion = FALSE, 
-				 dateTimeFormat = getOption("XLConnect.dateTimeFormat"), check.names = TRUE) {
+				 dateTimeFormat = getOption("XLConnect.dateTimeFormat"), check.names = TRUE, useCachedValues = FALSE) {
 			 
 			if(!is.null(region)) {
 				# Convert region to indices
@@ -50,7 +50,7 @@ setMethod("readWorksheet",
 			# returns a list of RDataFrameWrapper Java object references)
 			dataFrame <- xlcCall(object, "readWorksheet", as.integer(sheet - 1), as.integer(startRow - 1), 
 				as.integer(startCol - 1), as.integer(endRow - 1), as.integer(endCol - 1), header, 
-				.jarray(classToXlcType(colTypes)), forceConversion, dateTimeFormat, SIMPLIFY = FALSE)
+				.jarray(classToXlcType(colTypes)), forceConversion, dateTimeFormat, useCachedValues, SIMPLIFY = FALSE)
 			# get data.frames from Java
 			dataFrame = lapply(dataFrame, dataframeFromJava, check.names = check.names)
 			# extract rownames
@@ -66,7 +66,7 @@ setMethod("readWorksheet",
 		signature(object = "workbook", sheet = "character"), 
 		function(object, sheet, startRow = 0, startCol = 0, endRow = 0, endCol = 0, region = NULL,
 				 header = TRUE, rownames = NULL, colTypes = character(0), forceConversion = FALSE, 
-				 dateTimeFormat = getOption("XLConnect.dateTimeFormat"), check.names = TRUE) {
+				 dateTimeFormat = getOption("XLConnect.dateTimeFormat"), check.names = TRUE, useCachedValues = TRUE) {
 			
 			# Remember sheet names
 			sheetNames = sheet

@@ -136,4 +136,47 @@ test.workbook.readNamedRegion <- function() {
 	# Check that reading named regions with check.names = FALSE works (*.xlsx)
 	res <- readNamedRegion(wb.xlsx, name = "VariableNames", header = TRUE, check.names = FALSE)
 	checkEquals(res, target)
+
+	# Cached value tests: Create workbook
+	wb.xls <- loadWorkbook(rsrc("resources/testCachedValues.xls"), create = FALSE)
+	wb.xlsx <- loadWorkbook(rsrc("resources/testCachedValues.xlsx"), create = FALSE)
+
+	# "AllLocal" contains no formulae
+	ref.xls.uncached <- readNamedRegion(wb.xls, "AllLocal", useCachedValues = FALSE)
+	ref.xls.cached <- readNamedRegion(wb.xls, "AllLocal", useCachedValues = TRUE)
+	# cached and uncached results should be identical
+	checkEquals(ref.xls.uncached, ref.xls.cached)
+
+	ref.xlsx.uncached <- readNamedRegion(wb.xlsx, "AllLocal", useCachedValues = FALSE)
+	ref.xlsx.cached <- readNamedRegion(wb.xlsx, "AllLocal", useCachedValues = TRUE)
+	checkEquals(ref.xlsx.uncached, ref.xlsx.cached)
+
+	# XLS and XLSX results should be identical
+	checkEquals(ref.xlsx.uncached, ref.xls.uncached)
+
+	# the other three named regions reference external worksheets and can't be read
+	# with useCachedValues=FALSE
+	onErrorCell(wb.xls, XLC$ERROR.STOP)
+	checkException(readNamedRegion(wb.xls, "HeaderRemote", useCachedValues = FALSE))
+	checkException(readNamedRegion(wb.xls, "BodyRemote", useCachedValues = FALSE))
+	checkException(readNamedRegion(wb.xls, "AllRemote", useCachedValues = FALSE))
+
+	onErrorCell(wb.xlsx, XLC$ERROR.STOP)
+	checkException(readNamedRegion(wb.xlsx, "HeaderRemote", useCachedValues = FALSE))
+	checkException(readNamedRegion(wb.xlsx, "BodyRemote", useCachedValues = FALSE))
+	checkException(readNamedRegion(wb.xlsx, "AllRemote", useCachedValues = FALSE))
+
+	res <- readNamedRegion(wb.xls, "HeadersRemote", useCachedValues = TRUE)
+	checkEquals(ref.xls.uncached, res)
+	res <- readNamedRegion(wb.xls, "BodyRemote", useCachedValues = TRUE)
+	checkEquals(ref.xls.uncached, res)
+	res <- readNamedRegion(wb.xls, "BothRemote", useCachedValues = TRUE)
+	checkEquals(ref.xls.uncached, res)
+
+	res <- readNamedRegion(wb.xlsx, "HeadersRemote", useCachedValues = TRUE)
+	checkEquals(ref.xls.uncached, res)
+	res <- readNamedRegion(wb.xlsx, "BodyRemote", useCachedValues = TRUE)
+	checkEquals(ref.xls.uncached, res)
+	res <- readNamedRegion(wb.xlsx, "BothRemote", useCachedValues = TRUE)
+	checkEquals(ref.xls.uncached, res)
 }
