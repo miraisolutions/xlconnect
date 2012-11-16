@@ -29,14 +29,14 @@
 setGeneric("readWorksheet",
 	function(object, sheet, startRow = 0, startCol = 0, endRow = 0, endCol = 0, region = NULL,
 			header = TRUE, rownames = NULL, colTypes = character(0), forceConversion = FALSE, 
-			dateTimeFormat = getOption("XLConnect.dateTimeFormat"), check.names = TRUE, useCachedValues = FALSE) 
+			dateTimeFormat = getOption("XLConnect.dateTimeFormat"), check.names = TRUE, useCachedValues = FALSE, keep = NULL, drop = NULL) 
 		standardGeneric("readWorksheet"))
 
 setMethod("readWorksheet", 
 		signature(object = "workbook", sheet = "numeric"), 
 		function(object, sheet, startRow = 0, startCol = 0, endRow = 0, endCol = 0, region = NULL,
 				 header = TRUE, rownames = NULL, colTypes = character(0), forceConversion = FALSE, 
-				 dateTimeFormat = getOption("XLConnect.dateTimeFormat"), check.names = TRUE, useCachedValues = FALSE) {
+				 dateTimeFormat = getOption("XLConnect.dateTimeFormat"), check.names = TRUE, useCachedValues = FALSE, keep = NULL, drop = NULL) {
 			 
 			if(!is.null(region)) {
 				# Convert region to indices
@@ -47,10 +47,78 @@ setMethod("readWorksheet",
 				endCol = idx[,4]
 			}
 			
+			boundingBoxDim=getBoundingBox(object, sheet, startRow=startRow, startCol=startCol, endRow=endRow, endCol=endCol)
+			startRow = boundingBoxDim[1,]
+			startCol = boundingBoxDim[2,]
+			endRow = boundingBoxDim[3,]
+			endCol = boundingBoxDim[4,]
+			numcols= endCol-startCol+1
+			
 			# returns a list of RDataFrameWrapper Java object references)
-			dataFrame <- xlcCall(object, "readWorksheet", as.integer(sheet - 1), as.integer(startRow - 1), 
-				as.integer(startCol - 1), as.integer(endRow - 1), as.integer(endCol - 1), header, 
-				.jarray(classToXlcType(colTypes)), forceConversion, dateTimeFormat, useCachedValues, SIMPLIFY = FALSE)
+
+			if (is.null(keep) && is.null(drop)) {
+				dataFrame <- xlcCall(object, "readWorksheet", as.integer(sheet - 1), as.integer(startRow - 1), 
+						as.integer(startCol - 1), as.integer(endRow - 1), as.integer(endCol - 1), header, 
+						.jarray(classToXlcType(colTypes)), forceConversion, dateTimeFormat, useCachedValues, .jnull("java/lang/Integer"), SIMPLIFY = FALSE)
+			} else
+			if (!is.null(keep) && !is.null(drop)) {
+				stop(sprintf("Specify either keep OR drop (not both)"))
+			} else { 
+				if (is.null(drop)){
+					if(!is.list(keep)) keep = list(keep)
+					subset = lapply(keep, function(kp) {
+						if (is.numeric(kp)) {
+							outerCols=setdiff(kp, seq(numcols))
+							if (length(outerCols)!=0) {
+								stop(sprintf("Column(s) '%s' out of the bounding box!", paste(outerCols, collapse = ", ")))
+							} else {
+								subset = kp
+							}
+						} else
+						if (is.character(kp)) {
+							headerdf <- readWorksheet(object, sheet, startRow = startRow, endRow = startRow, startCol = startCol, endCol = endCol, header = FALSE)
+							columnNames = unlist(headerdf)
+							idx = match(kp, columnNames)
+							subset = idx
+							idx.na = is.na(idx)
+							if(any(idx.na)) {
+								stop(sprintf("Column name(s) '%s' not existing or out of the bounding box!", paste(kp[idx.na], collapse = ", ")))
+							}
+						}
+						
+						.jarray(as.integer(subset-1))
+					})
+				} else {
+					if(!is.list(drop)) drop = list(drop)
+					drop = rep(drop, len=length(numcols))
+					subset = lapply(1:length(numcols), function(dpel) {
+						if (is.numeric(drop[[dpel]])) {
+							outerCols=setdiff(drop[[dpel]], seq(numcols[dpel]))
+							if (length(outerCols)!=0) {
+								stop(sprintf("Column(s) '%s' out of the bounding box!", paste(outerCols, collapse = ", ")))
+							} else {
+								subset = setdiff(seq(numcols[dpel]), drop[[dpel]])
+							}
+						} else
+						if (is.character(drop[[dpel]])) {
+							headerdf <- readWorksheet(object, sheet, startRow = startRow, endRow = startRow, startCol = startCol, endCol = endCol, header = FALSE)
+							columnNames = unlist(headerdf)
+							idx = match(drop[[dpel]], columnNames)
+							subset = setdiff(seq(numcols[[dpel]]), idx)
+							idx.na = is.na(idx)
+							if(any(idx.na)) {
+								stop(sprintf("Column name(s) '%s' not existing or out of the bounding box!", paste(dp[idx.na], collapse = ", ")))
+							}
+						}
+						.jarray(as.integer(subset-1))
+					})
+				}
+				dataFrame <- xlcCall(object, "readWorksheet", as.integer(sheet - 1), as.integer(startRow - 1), 
+						as.integer(startCol - 1), as.integer(endRow - 1), as.integer(endCol - 1), header, 
+						.jarray(classToXlcType(colTypes)), forceConversion, dateTimeFormat, useCachedValues, subset, SIMPLIFY = FALSE)
+			}
+			
+			
 			# get data.frames from Java
 			dataFrame = lapply(dataFrame, dataframeFromJava, check.names = check.names)
 			# extract rownames
@@ -66,7 +134,7 @@ setMethod("readWorksheet",
 		signature(object = "workbook", sheet = "character"), 
 		function(object, sheet, startRow = 0, startCol = 0, endRow = 0, endCol = 0, region = NULL,
 				 header = TRUE, rownames = NULL, colTypes = character(0), forceConversion = FALSE, 
-				 dateTimeFormat = getOption("XLConnect.dateTimeFormat"), check.names = TRUE, useCachedValues = TRUE) {
+				 dateTimeFormat = getOption("XLConnect.dateTimeFormat"), check.names = TRUE, useCachedValues = TRUE, keep = NULL, drop = NULL) {
 			
 			# Remember sheet names
 			sheetNames = sheet

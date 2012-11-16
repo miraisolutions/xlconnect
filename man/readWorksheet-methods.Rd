@@ -9,8 +9,8 @@
 Reads data from worksheets of a \code{\linkS4class{workbook}}.
 }
 \usage{
-\S4method{readWorksheet}{workbook,numeric}(object,sheet,startRow,startCol,endRow,endCol,region,header,rownames,colTypes,forceConversion,dateTimeFormat,check.names,useCachedValues)
-\S4method{readWorksheet}{workbook,character}(object,sheet,startRow,startCol,endRow,endCol,region,header,rownames,colTypes,forceConversion,dateTimeFormat,check.names,useCachedValues)
+\S4method{readWorksheet}{workbook,numeric}(object,sheet,startRow,startCol,endRow,endCol,region,header,rownames,colTypes,forceConversion,dateTimeFormat,check.names,useCachedValues,keep,drop)
+\S4method{readWorksheet}{workbook,character}(object,sheet,startRow,startCol,endRow,endCol,region,header,rownames,colTypes,forceConversion,dateTimeFormat,check.names,useCachedValues,keep,drop)
 }
 
 \arguments{
@@ -55,6 +55,12 @@ Reads data from worksheets of a \code{\linkS4class{workbook}}.
   workbook instead of re-evaluating them. This is particularly helpful in cases for reading data
   produced by Excel features not supported in XLConnect like references to external workbooks. 
   Defaults to \code{FALSE}, which means that formulas will be evaluated by XLConnect.}
+  \item{keep}{Vector of Excel column names or indices to be kept in the output data frame.
+  It is possible to specify either \code{keep} or \code{drop}, but not both at the same time.
+  If not specified, it defaults to \code{0}.}
+  \item{drop}{Vector of Excel column names or indices to be dropped in the output data frame.
+  It is possible to specify either \code{keep} or \code{drop}, but not both at the same time.
+  If not specified, it defaults to \code{0}.}
 }
 
 \details{
@@ -169,6 +175,16 @@ df <- readWorksheet(wb, sheet = "Conversion", header = TRUE,
                                  XLC$DATA_TYPE.BOOLEAN),
                     forceConversion = TRUE,
                     dateTimeFormat = "\%Y-\%m-\%d \%H:\%M:\%S")
+                    
+## Example 5:
+# mtcars xlsx file from demoFiles subfolder of package XLConnect
+demoExcelFile <- system.file("demoFiles/mtcars.xlsx", package = "XLConnect")
+
+# Load workbook
+wb <- loadWorkbook(demoExcelFile)
+
+# Read the columns 1, 3 and 5 from the sheet 'mtcars' (with default header = TRUE)
+data <- readWorksheet(wb, sheet = "mtcars", keep=c(1,3,5))
 }
 \keyword{methods}
 \keyword{IO}

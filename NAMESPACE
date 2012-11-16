@@ -22,6 +22,7 @@ exportMethods(
 	existsSheet,
 	getActiveSheetIndex,
 	getActiveSheetName,
+	getBoundingBox,
 	getCellStyle,
 	getCellFormula,
 	getDefinedNames,

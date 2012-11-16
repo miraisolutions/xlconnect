@@ -8,7 +8,7 @@
 Reads named regions from a \code{\linkS4class{workbook}}.
 }
 \usage{
-\S4method{readNamedRegion}{workbook}(object, name, header, rownames, colTypes, forceConversion, dateTimeFormat, check.names, useCachedValues)
+\S4method{readNamedRegion}{workbook}(object, name, header, rownames, colTypes, forceConversion, dateTimeFormat, check.names, useCachedValues, keep, drop)
 }
 
 \arguments{
@@ -46,6 +46,12 @@ Reads named regions from a \code{\linkS4class{workbook}}.
   workbook instead of re-evaluating them. This is particularly helpful in cases for reading data
   produced by Excel features not supported in XLConnect like references to external workbooks. 
   Defaults to \code{FALSE}, which means that formulas will be evaluated by XLConnect.}
+  \item{keep}{Vector of Excel column names or indices to be kept in the output data frame.
+  It is possible to specify either \code{keep} or \code{drop}, but not both at the same time.
+  If not specified, it defaults to \code{0}.}
+  \item{drop}{Vector of Excel column names or indices to be dropped in the output data frame.
+  It is possible to specify either \code{keep} or \code{drop}, but not both at the same time.
+  If not specified, it defaults to \code{0}.}
 }
 
 \details{
@@ -126,6 +132,16 @@ df <- readNamedRegion(wb, name = "conversion", header = TRUE,
                                    XLC$DATA_TYPE.BOOLEAN),
                       forceConversion = TRUE,
                       dateTimeFormat = "\%Y-\%m-\%d \%H:\%M:\%S")
+                      
+## Example 3:
+# mtcars xlsx file from demoFiles subfolder of package XLConnect
+demoExcelFile <- system.file("demoFiles/mtcars.xlsx", package = "XLConnect")
+
+# Load workbook
+wb <- loadWorkbook(demoExcelFile)
+
+# Read the columns 1, 3 and 5 of the named region 'mtcars' (with default header = TRUE)
+data <- readNamedRegion(wb, name = "mtcars", keep=c(1,3,5))
 }
 \keyword{methods}
 \keyword{IO}

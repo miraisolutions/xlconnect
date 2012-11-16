@@ -136,6 +136,98 @@ test.workbook.readNamedRegion <- function() {
 	# Check that reading named regions with check.names = FALSE works (*.xlsx)
 	res <- readNamedRegion(wb.xlsx, name = "VariableNames", header = TRUE, check.names = FALSE)
 	checkEquals(res, target)
+	
+	# Check that attempting to specify both keep and drop throws an exception (*.xls)
+	checkException(readNamedRegion(wb.xls, "Conversion", header = TRUE, keep=c('AAA','BBB'), drop=c('CCC','DDD')))	
+	
+	# Check that attempting to specify both keep and drop throws an exception (*.xlsx)
+	checkException(readNamedRegion(wb.xlsx, "Conversion", header = TRUE, keep=c('AAA','BBB'), drop=c('CCC','DDD')))	
+	
+	# Check that attempting to keep a non-existing column (indicated by header name) throws an exception (*.xls)
+	checkException(readNamedRegion(wb.xls, "Conversion", header = TRUE, keep=c('AAA','BBB', 'ZZZ')))	
+	
+	# Check that attempting to keep a non-existing column (indicated by header name) throws an exception (*.xlsx)
+	checkException(readNamedRegion(wb.xlsx, "Conversion", header = TRUE, keep=c('AAA','BBB', 'ZZZ')))
+	
+	# Check that attempting to keep a column (indicated by index) out of named region bounds throws an exception (*.xls)
+	checkException(readNamedRegion(wb.xls, "Conversion", header = TRUE, keep=c(1,2,5)))	
+	
+	# Check that attempting to keep a column (indicated by index) out of named region bounds throws an exception (*.xlsx)
+	checkException(readNamedRegion(wb.xlsx, "Conversion", header = TRUE, keep=c(1,2,5)))	
+	
+	# Check that attempting to drop a non-existing column (indicated by header name) throws an exception (*.xls)
+	checkException(readNamedRegion(wb.xls, "Conversion", header = TRUE, drop=c('AAA','BBB', 'ZZZ')))	
+	
+	# Check that attempting to drop a non-existing column (indicated by header name) throws an exception (*.xlsx)
+	checkException(readNamedRegion(wb.xlsx, "Conversion", header = TRUE, drop=c('AAA','BBB', 'ZZZ')))
+	
+	# Check that attempting to drop a column (indicated by index) out of named region bounds throws an exception (*.xls)
+	checkException(readNamedRegion(wb.xls, "Conversion", header = TRUE, drop=c(1,2,5)))	
+	
+	# Check that attempting to drop a column (indicated by index) out of named region bounds throws an exception (*.xlsx)
+	checkException(readNamedRegion(wb.xlsx, "Conversion", header = TRUE, drop=c(1,2,5)))	
+	
+	targetNoForceSubset <- data.frame(
+			BBB = c("hello", "42.24", "true", NA, "11.01.1984 12:00:00"),
+			DDD = as.POSIXct(c("1984-01-11 12:00:00", NA, NA, NA, NA), tz = "UTC"),
+			stringsAsFactors = FALSE
+	)
+	
+	# Check that conversion performs ok (without forcing conversion, keeping columns BBB and DDD; *.xls)
+	res <- readNamedRegion(wb.xls, name = "Conversion", header = TRUE,
+			colTypes = c(XLC$DATA_TYPE.NUMERIC, XLC$DATA_TYPE.STRING, XLC$DATA_TYPE.BOOLEAN, XLC$DATA_TYPE.DATETIME),
+			forceConversion = FALSE,
+			dateTimeFormat = "%d.%m.%Y %H:%M:%S", keep=c('BBB', 'DDD'))
+	checkEquals(res, targetNoForceSubset)
+
+	# Check that conversion performs ok (without forcing conversion, keeping columns BBB and DDD; *.xlsx)
+	res <- readNamedRegion(wb.xlsx, name = "Conversion", header = TRUE,
+			colTypes = c(XLC$DATA_TYPE.NUMERIC, XLC$DATA_TYPE.STRING, XLC$DATA_TYPE.BOOLEAN, XLC$DATA_TYPE.DATETIME),
+			forceConversion = FALSE,
+			dateTimeFormat = "%d.%m.%Y %H:%M:%S", keep=c('BBB', 'DDD'))
+	checkEquals(res, targetNoForceSubset)
+	
+	# Check that conversion performs ok (without forcing conversion, dropping columns AAA and CCC; *.xls)
+	res <- readNamedRegion(wb.xls, name = "Conversion", header = TRUE,
+			colTypes = c(XLC$DATA_TYPE.NUMERIC, XLC$DATA_TYPE.STRING, XLC$DATA_TYPE.BOOLEAN, XLC$DATA_TYPE.DATETIME),
+			forceConversion = FALSE,
+			dateTimeFormat = "%d.%m.%Y %H:%M:%S", drop=c('AAA', 'CCC'))
+	checkEquals(res, targetNoForceSubset)
+	
+	# Check that conversion performs ok (without forcing conversion, dropping columns AAA and CCC; *.xlsx)
+	res <- readNamedRegion(wb.xlsx, name = "Conversion", header = TRUE,
+			colTypes = c(XLC$DATA_TYPE.NUMERIC, XLC$DATA_TYPE.STRING, XLC$DATA_TYPE.BOOLEAN, XLC$DATA_TYPE.DATETIME),
+			forceConversion = FALSE,
+			dateTimeFormat = "%d.%m.%Y %H:%M:%S", drop=c('AAA', 'CCC'))
+	checkEquals(res, targetNoForceSubset)
+	
+	# Check that conversion performs ok (without forcing conversion, keeping columns 2 and 4; *.xls)
+	res <- readNamedRegion(wb.xls, name = "Conversion", header = TRUE,
+			colTypes = c(XLC$DATA_TYPE.NUMERIC, XLC$DATA_TYPE.STRING, XLC$DATA_TYPE.BOOLEAN, XLC$DATA_TYPE.DATETIME),
+			forceConversion = FALSE,
+			dateTimeFormat = "%d.%m.%Y %H:%M:%S", keep=c(2,4))
+	checkEquals(res, targetNoForceSubset)
+	
+	# Check that conversion performs ok (without forcing conversion, keeping columns 2 and 4; *.xlsx)
+	res <- readNamedRegion(wb.xlsx, name = "Conversion", header = TRUE,
+			colTypes = c(XLC$DATA_TYPE.NUMERIC, XLC$DATA_TYPE.STRING, XLC$DATA_TYPE.BOOLEAN, XLC$DATA_TYPE.DATETIME),
+			forceConversion = FALSE,
+			dateTimeFormat = "%d.%m.%Y %H:%M:%S", keep=c(2,4))
+	checkEquals(res, targetNoForceSubset)
+	
+	# Check that conversion performs ok (without forcing conversion, dropping columns 1 and 3; *.xls)
+	res <- readNamedRegion(wb.xls, name = "Conversion", header = TRUE,
+			colTypes = c(XLC$DATA_TYPE.NUMERIC, XLC$DATA_TYPE.STRING, XLC$DATA_TYPE.BOOLEAN, XLC$DATA_TYPE.DATETIME),
+			forceConversion = FALSE,
+			dateTimeFormat = "%d.%m.%Y %H:%M:%S", drop=c(1,3))
+	checkEquals(res, targetNoForceSubset)
+	
+	# Check that conversion performs ok (without forcing conversion, dropping columns 1 and 3; *.xlsx)
+	res <- readNamedRegion(wb.xlsx, name = "Conversion", header = TRUE,
+			colTypes = c(XLC$DATA_TYPE.NUMERIC, XLC$DATA_TYPE.STRING, XLC$DATA_TYPE.BOOLEAN, XLC$DATA_TYPE.DATETIME),
+			forceConversion = FALSE,
+			dateTimeFormat = "%d.%m.%Y %H:%M:%S", drop=c(1,3))
+	checkEquals(res, targetNoForceSubset)
 
 	# Cached value tests: Create workbook
 	wb.xls <- loadWorkbook(rsrc("resources/testCachedValues.xls"), create = FALSE)

@@ -20,36 +20,29 @@
 
 #############################################################################
 #
-# Tests around clearing named regions from an Excel Workbook
+# Querying the coordinates of a worksheet bounding box
 # 
 # Author: Nicola Lambiase, Mirai Solutions GmbH
 #
 #############################################################################
 
-test.workbook.clearNamedRegion <- function() {
-	
-	# Create workbooks
-	wb.xls <- loadWorkbook(rsrc("resources/testWorkbookClearCells.xls"), create = FALSE)
-	wb.xlsx <- loadWorkbook(rsrc("resources/testWorkbookClearCells.xlsx"), create = FALSE)
-	
-	checkDf <- data.frame(
-			"one" = 1:5,	
-			"two" = 6:10,
-			"three" = 11:15,
-			"four" = 16:20,
-			"five" = 21:25,
-			"six" = 26:30,
-			"seven" = 31:35,
-			stringsAsFactors = F
-	)
-	
-	# Check that clearing 2 of 3 named regions in a sheet returns only the third one (*.xls)
-	clearNamedRegion(wb.xls, c("region1", "region2"))
-	res <- readWorksheet(wb.xls, "clearNamedRegion", header = TRUE)
-	checkEquals(res, checkDf)
-	
-	# Check that clearing 2 of 3 named regions in a sheet returns only the third one (*.xlsx)
-	clearNamedRegion(wb.xlsx, c("region1", "region2"))
-	res <- readWorksheet(wb.xlsx, "clearNamedRegion", header = TRUE)
-	checkEquals(res, checkDf)
-}
+setGeneric("getBoundingBox",
+		function(object, sheet, startRow = 0, startCol = 0, endRow = 0, endCol = 0) standardGeneric("getBoundingBox"))
+
+setMethod("getBoundingBox", 
+		signature(object = "workbook", sheet = "numeric"), 
+		function(object, sheet, startRow = 0, startCol = 0, endRow = 0, endCol = 0) {
+			res <- xlcCall(object, "getBoundingBox", as.integer(sheet - 1), as.integer(startRow - 1), 
+					as.integer(startCol - 1), as.integer(endRow - 1), as.integer(endCol - 1))
+			res + 1
+		}
+)
+
+setMethod("getBoundingBox", 
+		signature(object = "workbook", sheet = "character"), 
+		function(object, sheet, startRow = 0, startCol = 0, endRow = 0, endCol = 0) {
+			res <- xlcCall(object, "getBoundingBox", sheet, as.integer(startRow - 1), 
+					as.integer(startCol - 1), as.integer(endRow - 1), as.integer(endCol - 1))
+			res + 1
+		}
+)

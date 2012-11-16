@@ -225,6 +225,199 @@ test.workbook.readWorksheet <- function() {
 	res <- readWorksheet(wb.xlsx, sheet = "VariableNames", header = TRUE, check.names = FALSE)
 	checkEquals(res, target)
 
+	
+	# Check that attempting to specify both keep and drop throws an exception (*.xls)
+	checkException(readWorksheet(wb.xls, sheet = "Test5", header = TRUE, keep=c('A','C'), drop=c('B','D')))
+	
+	# Check that attempting to specify both keep and drop throws an exception (*.xlsx)
+	checkException(readWorksheet(wb.xlsx, sheet = "Test5", header = TRUE, keep=c('A','C'), drop=c('B','D')))
+	
+	# Check that attempting to keep a non-existing column (indicated by header name) throws an exception (*.xls)
+	checkException(readWorksheet(wb.xls, sheet = "Test5", header = TRUE, keep=c('A','Z')))
+	
+	# Check that attempting to keep a non-existing column (indicated by header name) throws an exception (*.xlsx)
+	checkException(readWorksheet(wb.xlsx, sheet = "Test5", header = TRUE, keep=c('A','Z')))
+	
+	# Check that attempting to keep a column (indicated by index) out of the bounding box throws an exception (*.xls)
+	checkException(readWorksheet(wb.xls, sheet = "Test5", header = TRUE, keep=c(1,5)))
+	
+	# Check that attempting to keep a column (indicated by index) out of the bounding box throws an exception (*.xlsx)
+	checkException(readWorksheet(wb.xlsx, sheet = "Test5", header = TRUE, keep=c(1,5)))
+	
+	# Check that attempting to drop a non-existing column (indicated by header name) throws an exception (*.xls)
+	checkException(readWorksheet(wb.xls, sheet = "Test5", header = TRUE, drop=c('A','Z')))
+	
+	# Check that attempting to drop a non-existing column (indicated by header name) throws an exception (*.xlsx)
+	checkException(readWorksheet(wb.xlsx, sheet = "Test5", header = TRUE, drop=c('A','Z')))
+	
+	# Check that attempting to drop a column (indicated by index) out of the bounding box throws an exception (*.xls)
+	checkException(readWorksheet(wb.xls, sheet = "Test5", header = TRUE, drop=c(1,5)))
+	
+	# Check that attempting to drop a column (indicated by index) out of the bounding box throws an exception (*.xlsx)
+	checkException(readWorksheet(wb.xlsx, sheet = "Test5", header = TRUE, drop=c(1,5)))
+	
+	checkDfSubset <- data.frame(
+			A = c(rep(NA, 3), 3:6, NA),
+			C = c("z", "y", "x", "w", NA, "v", "u", NA),
+			stringsAsFactors = FALSE
+	)
+	
+	# Check that keeping columns A and C (= by name) works fine (*.xls)
+	res <- readWorksheet(wb.xls, "Test5", header = TRUE, keep=c('A','C'))
+	checkEquals(res, checkDfSubset)
+	
+	# Check that keeping columns A and C (= by name) works fine (*.xlsx)
+	res <- readWorksheet(wb.xlsx, "Test5", header = TRUE, keep=c('A','C'))
+	checkEquals(res, checkDfSubset)	
+	
+	# Check that dropping columns B and D (= by name) works fine (*.xls)
+	res <- readWorksheet(wb.xls, "Test5", header = TRUE, drop=c('B','D'))
+	checkEquals(res, checkDfSubset)
+	
+	# Check that dropping columns B and D (= by name) works fine (*.xlsx)
+	res <- readWorksheet(wb.xlsx, "Test5", header = TRUE, drop=c('B','D'))
+	checkEquals(res, checkDfSubset)
+	
+	# Check that keeping columns 1 and 3 (= by index) works fine (*.xls)
+	res <- readWorksheet(wb.xls, "Test5", header = TRUE, keep=c(1,3))
+	checkEquals(res, checkDfSubset)
+	
+	# Check that keeping columns 1 and 3 (= by index) works fine (*.xlsx)
+	res <- readWorksheet(wb.xlsx, "Test5", header = TRUE, keep=c(1,3))
+	checkEquals(res, checkDfSubset)
+	
+	# Check that dropping columns 2 and 4 (= by index) works fine (*.xls)
+	res <- readWorksheet(wb.xls, "Test5", header = TRUE, drop=c(2,4))
+	checkEquals(res, checkDfSubset)
+	
+	# Check that dropping columns 2 and 4 (= by index) works fine (*.xlsx)
+	res <- readWorksheet(wb.xlsx, "Test5", header = TRUE, drop=c(2,4))
+	checkEquals(res, checkDfSubset)
+	
+	# Go on with checks on a selected area
+	# (On a selected area) Check that attempting to specify both keep and drop throws an exception (*.xls)
+	checkException(readWorksheet(wb.xls, sheet = "Test5", startRow = 17, startCol = 7, endRow = 24, endCol=9, header = TRUE, keep=c('B','D'), drop=c('C')))
+	
+	# (On a selected area) Check that attempting to specify both keep and drop throws an exception (*.xlsx)
+	checkException(readWorksheet(wb.xlsx, sheet = "Test5", startRow = 17, startCol = 7, endRow = 24, endCol=9, header = TRUE, keep=c('B','D'), drop=c('C')))
+	
+	# (On a selected area) Check that attempting to keep a non-existing column (indicated by header name) throws an exception (*.xls)
+	checkException(readWorksheet(wb.xls, sheet = "Test5", startRow = 17, startCol = 7, endRow = 24, endCol=9, header = TRUE, keep=c('B','Z')))
+	
+	# (On a selected area) Check that attempting to keep a non-existing column (indicated by header name) throws an exception (*.xlsx)
+	checkException(readWorksheet(wb.xlsx, sheet = "Test5", startRow = 17, startCol = 7, endRow = 24, endCol=9, header = TRUE, keep=c('B','Z')))
+	
+	# (On a selected area) Check that attempting to keep a column (indicated by index) out of the bounding box throws an exception (*.xls)
+	checkException(readWorksheet(wb.xls, sheet = "Test5", startRow = 17, startCol = 7, endRow = 24, endCol=9, header = TRUE, keep=c(1,5)))
+	
+	# (On a selected area) Check that attempting to keep a column (indicated by index) out of the bounding box throws an exception (*.xlsx)
+	checkException(readWorksheet(wb.xlsx, sheet = "Test5", startRow = 17, startCol = 7, endRow = 24, endCol=9, header = TRUE, keep=c(1,5)))
+	
+	# (On a selected area) Check that attempting to drop a non-existing column (indicated by header name) throws an exception (*.xls)
+	checkException(readWorksheet(wb.xls, sheet = "Test5", startRow = 17, startCol = 7, endRow = 24, endCol=9, header = TRUE, drop=c('B','Z')))
+	
+	# (On a selected area) Check that attempting to drop a non-existing column (indicated by header name) throws an exception (*.xlsx)
+	checkException(readWorksheet(wb.xlsx, sheet = "Test5", startRow = 17, startCol = 7, endRow = 24, endCol=9, header = TRUE, drop=c('B','Z')))
+	
+	# (On a selected area) Check that attempting to drop a column (indicated by index) out of the bounding box throws an exception (*.xls)
+	checkException(readWorksheet(wb.xls, sheet = "Test5", startRow = 17, startCol = 7, endRow = 24, endCol=9, header = TRUE, drop=c(1,5)))
+	
+	# (On a selected area) Check that attempting to drop a column (indicated by index) out of the bounding box throws an exception (*.xlsx)
+	checkException(readWorksheet(wb.xlsx, sheet = "Test5", startRow = 17, startCol = 7, endRow = 24, endCol=9, header = TRUE, drop=c(1,5)))
+	
+	checkDfAreaSubset <- data.frame(
+		B = c(NA, letters[2:7]),
+		D = c(NA, 1:5, NA),
+		stringsAsFactors = FALSE
+	)
+	
+	# (On a selected area) Check that keeping columns B and D (= by name) works fine (*.xls)
+	res <- readWorksheet(wb.xls, "Test5", startRow = 17, startCol = 7, endRow = 24, endCol=9, header = TRUE, keep=c('B','D'))
+	checkEquals(res, checkDfAreaSubset)
+	
+	# (On a selected area) Check that keeping columns B and D (= by name) works fine (*.xlsx)
+	res <- readWorksheet(wb.xlsx, "Test5", startRow = 17, startCol = 7, endRow = 24, endCol=9, header = TRUE, keep=c('B','D'))
+	checkEquals(res, checkDfAreaSubset)	
+	
+	# (On a selected area) Check that dropping column C (= by name) works fine (*.xls)
+	res <- readWorksheet(wb.xls, "Test5", startRow = 17, startCol = 7, endRow = 24, endCol=9, header = TRUE, drop=c('C'))
+	checkEquals(res, checkDfAreaSubset)
+	
+	# (On a selected area) Check that dropping columns B and D (= by name) works fine (*.xlsx)
+	res <- readWorksheet(wb.xlsx, "Test5", startRow = 17, startCol = 7, endRow = 24, endCol=9, header = TRUE, drop=c('C'))
+	checkEquals(res, checkDfAreaSubset)
+	
+	# (On a selected area) Check that keeping columns 1 and 3 (= by index) works fine (*.xls)
+	res <- readWorksheet(wb.xls, "Test5", startRow = 17, startCol = 7, endRow = 24, endCol=9, header = TRUE, keep=c(1,3))
+	checkEquals(res, checkDfAreaSubset)
+	
+	# (On a selected area) Check that keeping columns 1 and 3 (= by index) works fine (*.xlsx)
+	res <- readWorksheet(wb.xlsx, "Test5", startRow = 17, startCol = 7, endRow = 24, endCol=9, header = TRUE, keep=c(1,3))
+	checkEquals(res, checkDfAreaSubset)
+	
+	# (On a selected area) Check that dropping column 2 (= by index) works fine (*.xls)
+	res <- readWorksheet(wb.xls, "Test5", startRow = 17, startCol = 7, endRow = 24, endCol=9, header = TRUE, drop=c(2))
+	checkEquals(res, checkDfAreaSubset)
+	
+	# (On a selected area) Check that dropping column 2 (= by index) works fine (*.xlsx)
+	res <- readWorksheet(wb.xlsx, "Test5", startRow = 17, startCol = 7, endRow = 24, endCol=9, header = TRUE, drop=c(2))
+	checkEquals(res, checkDfAreaSubset)
+	
+	# Keeping the same columns from multiple sheets (*.xls)
+	res <- readWorksheet(wb.xls, sheet=c("Test1","Test4","Test5"), header = TRUE, keep = c(1,2,3))
+	checkEquals(res, list(Test1=checkDf[1:3], Test4=checkDf1[1:3], Test5=checkDf2[1:3]))
+	
+	# Keeping the same columns from multiple sheets (*.xlsx)
+	res <- readWorksheet(wb.xlsx, sheet=c("Test1","Test4","Test5"), header = TRUE, keep = c(1,2,3))
+	checkEquals(res, list(Test1=checkDf[1:3], Test4=checkDf1[1:3], Test5=checkDf2[1:3]))
+	
+	# Keeping different columns from multiple sheets (*.xls)
+	res <- readWorksheet(wb.xls, sheet = c("Test1", "Test4", "Test5"), header = TRUE, keep = list(c(1,2),c(2,3),c(1,3)) )
+	checkEquals(res, list(Test1=checkDf[1:2], Test4=checkDf1[2:3], Test5=checkDf2[c(1,3)]))
+	
+	# Keeping different columns from multiple sheets (*.xlsx)
+	res <- readWorksheet(wb.xlsx, sheet = c("Test1", "Test4", "Test5"), header = TRUE, keep = list(c(1,2),c(2,3),c(1,3)) )
+	checkEquals(res, list(Test1=checkDf[1:2], Test4=checkDf1[2:3], Test5=checkDf2[c(1,3)]))
+	
+	testAAA = data.frame(
+			A = 1:3,
+			B = letters[1:3],
+			C = c(TRUE, TRUE, FALSE),
+			stringsAsFactors = FALSE
+	)
+	
+	#Keeping different columns from multiple sheets (2 keep list elements for 4 sheets) (*.xls)
+	res <- readWorksheet(wb.xls, sheet = c("Test1", "Test4", "Test5", "AAA"), header = TRUE, keep = list(c(1,2),c(2,3)) )
+	checkEquals(res, list(Test1=checkDf[1:2], Test4=checkDf1[2:3], Test5=checkDf2[1:2], AAA=testAAA[2:3]))
+	
+	#Keeping different columns from multiple sheets (2 keep list elements for 4 sheets) (*.xls)
+	res <- readWorksheet(wb.xlsx, sheet = c("Test1", "Test4", "Test5", "AAA"), header = TRUE, keep = list(c(1,2),c(2,3)) )
+	checkEquals(res, list(Test1=checkDf[1:2], Test4=checkDf1[2:3], Test5=checkDf2[1:2], AAA=testAAA[2:3]))
+	
+    # Dropping the same columns from multiple sheets (*.xls)
+	res <- readWorksheet(wb.xls, sheet=c("Test1","Test4","Test5"), header = TRUE, drop = c(1,2))
+	checkEquals(res, list(Test1=checkDf[3:4], Test4=checkDf1[3:4], Test5=checkDf2[3:4]))
+	
+	# Dropping the same columns from multiple sheets (*.xlsx)
+	res <- readWorksheet(wb.xlsx, sheet=c("Test1","Test4","Test5"), header = TRUE, drop = c(1,2))
+	checkEquals(res, list(Test1=checkDf[3:4], Test4=checkDf1[3:4], Test5=checkDf2[3:4]))
+
+	# Dropping different columns from multiple sheets (*.xls)
+	res <- readWorksheet(wb.xls, sheet = c("Test1", "Test4", "Test5"), header = TRUE, drop = list(c(1,2),c(2,3),c(1,3)) )
+	checkEquals(res, list(Test1=checkDf[3:4], Test4=checkDf1[c(1,4)], Test5=checkDf2[c(2,4)]))
+	
+	# Dropping different columns from multiple sheets (*.xlsx)
+	res <- readWorksheet(wb.xlsx, sheet = c("Test1", "Test4", "Test5"), header = TRUE, drop = list(c(1,2),c(2,3),c(1,3)) )
+	checkEquals(res, list(Test1=checkDf[3:4], Test4=checkDf1[c(1,4)], Test5=checkDf2[c(2,4)]))
+	
+	#Dropping different columns from multiple sheets (2 drop list elements for 4 sheets) (*.xls)
+	res <- readWorksheet(wb.xls, sheet = c("Test1", "Test4", "Test5", "AAA"), header = TRUE, drop = list(c(1,2),c(2,3)) )
+	checkEquals(res, list(Test1=checkDf[3:4], Test4=checkDf1[c(1,4)], Test5=checkDf2[3:4], AAA=testAAA[c(1)]))
+	
+	#Dropping different columns from multiple sheets (2 drop list elements for 4 sheets) (*.xlsx)
+	res <- readWorksheet(wb.xlsx, sheet = c("Test1", "Test4", "Test5", "AAA"), header = TRUE, drop = list(c(1,2),c(2,3)) )
+	checkEquals(res, list(Test1=checkDf[3:4], Test4=checkDf1[c(1,4)], Test5=checkDf2[3:4], AAA=testAAA[c(1)]))
+
 	# Cached value tests: Create workbook
 	wb.xls <- loadWorkbook(rsrc("resources/testCachedValues.xls"), create = FALSE)
 	wb.xlsx <- loadWorkbook(rsrc("resources/testCachedValues.xlsx"), create = FALSE)
