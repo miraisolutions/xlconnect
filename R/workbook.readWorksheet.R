@@ -22,7 +22,9 @@
 #
 # Reading data from Excel worksheets
 # 
-# Author: Martin Studer, Mirai Solutions GmbH
+# Authors:  Martin Studer, Mirai Solutions GmbH
+#           Thomas Themel, Mirai Solutions GmbH
+#           Nicola Lambiase, Mirai Solutions GmbH
 #
 #############################################################################
 
@@ -99,15 +101,14 @@ setMethod("readWorksheet",
 							} else {
 								subset = setdiff(seq(numcols[dpel]), drop[[dpel]])
 							}
-						} else
-						if (is.character(drop[[dpel]])) {
+						} else if (is.character(drop[[dpel]])) {
 							headerdf <- readWorksheet(object, sheet, startRow = startRow, endRow = startRow, startCol = startCol, endCol = endCol, header = FALSE)
 							columnNames = unlist(headerdf)
 							idx = match(drop[[dpel]], columnNames)
 							subset = setdiff(seq(numcols[[dpel]]), idx)
 							idx.na = is.na(idx)
 							if(any(idx.na)) {
-								stop(sprintf("Column name(s) '%s' not existing or out of the bounding box!", paste(dp[idx.na], collapse = ", ")))
+								stop(sprintf("Column name(s) '%s' not existing or out of the bounding box!", paste(drop[[dpel]][idx.na], collapse = ", ")))
 							}
 						}
 						.jarray(as.integer(subset-1))

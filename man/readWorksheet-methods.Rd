@@ -55,12 +55,12 @@ Reads data from worksheets of a \code{\linkS4class{workbook}}.
   workbook instead of re-evaluating them. This is particularly helpful in cases for reading data
   produced by Excel features not supported in XLConnect like references to external workbooks. 
   Defaults to \code{FALSE}, which means that formulas will be evaluated by XLConnect.}
-  \item{keep}{Vector of Excel column names or indices to be kept in the output data frame.
+  \item{keep}{Vector of column names or indices to be kept in the output data frame.
   It is possible to specify either \code{keep} or \code{drop}, but not both at the same time.
-  If not specified, it defaults to \code{0}.}
-  \item{drop}{Vector of Excel column names or indices to be dropped in the output data frame.
+  Defaults to \code{NULL}.}
+  \item{drop}{Vector of column names or indices to be dropped in the output data frame.
   It is possible to specify either \code{keep} or \code{drop}, but not both at the same time.
-  If not specified, it defaults to \code{0}.}
+  Defaults to \code{NULL}.}
 }
 
 \details{
@@ -90,6 +90,8 @@ named \code{list} named by the corresponding worksheets.
 }
 \author{
 Martin Studer\cr
+Thomas Themel\cr
+Nicola Lambiase\cr
 Mirai Solutions GmbH \url{http://www.mirai-solutions.com}
 }
 \note{

@@ -112,4 +112,22 @@ test.workbook.setMissingValue <- function() {
 	setMissingValue(wb.xlsx, value = c("NA", "missing", "empty"))
 	res <- readNamedRegion(wb.xlsx, name = "Missing1")
 	checkEquals(res, expect)
+  
+	expect <- data.frame(
+	  A = c(NA, -3.2, NA, NA, 8, NA),
+	  B = c("a", NA, "c", "x", "a", "o"),
+	  C = c(TRUE, NA, FALSE, NA, FALSE, NA),
+	  D = as.POSIXct(c("1981-12-01 00:00:00", "1981-12-02 00:00:00", NA, NA, NA, "1981-12-06 00:00:00"), tz = "UTC"),
+	  stringsAsFactors = FALSE
+	)
+  
+	# Check that reading data with multiple missing value strings works (*.xls)
+	setMissingValue(wb.xls, value = list("NA", "missing", "empty", -9999))
+	res <- readNamedRegion(wb.xls, name = "Missing2")
+	checkEquals(res, expect)
+	
+	# Check that reading data with multiple missing value strings works (*.xlsx)
+	setMissingValue(wb.xlsx, value = list("NA", "missing", "empty", -9999))
+	res <- readNamedRegion(wb.xlsx, name = "Missing2")
+	checkEquals(res, expect)
 }

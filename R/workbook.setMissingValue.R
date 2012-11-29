@@ -20,12 +20,12 @@
 
 #############################################################################
 #
-# Setting missing value strings
+# Setting missing values (character or numeric)
 #
-# Missing value strings are used when reading and writing data. If data is
-# written, the first element of the missing value string vector is used
+# Missing values are used when reading and writing data. If data is
+# written, the first element of the missing values vector/list is used
 # as a missing value identifier. If data is read, values are checked against
-# the set of defined missing value strings - if the string value matches
+# the set of defined missing values - if the value matches
 # any of the defined missing values, NA will be assumed.
 # 
 # Author: Martin Studer, Mirai Solutions GmbH
@@ -38,19 +38,20 @@ setGeneric("setMissingValue",
 setMethod("setMissingValue", 
 		signature(object = "workbook", value = "ANY"), 
 		function(object, value) {
-			if(is.null(value))
-				xlcCall(object, "setMissingValue", 
-					.jarray(.jnull("java/lang/String"), contents.class = "java/lang/String"))
-			else {
-				value = unique(as.character(value))
-				# convert to array
-				res = .jarray(value)
-				# NA to Java null
-				if(any(is.na(value)))
-					res[[which(is.na(value))]] = .jnull("java/lang/String")
-				
-				xlcCall(object, "setMissingValue", res)
-			}
+		  res = lapply(as.list(value), function(x) {
+        if(is.null(x) || is.na(x)) {
+          .jnull()
+		    } else if(is.character(x)) {
+		      .jnew("java/lang/String", x)
+		    } else if(is.numeric(x)) {
+		      .jnew("java/lang/Double", as.double(x))
+		    } else {
+		      NULL
+		    }
+		  })
+		  res = res[!sapply(res, is.null)]
+		  arr = .jarray(res, contents.class = "java/lang/Object")
+		  xlcCall(object, "setMissingValue", arr)
 			invisible()
 		}
 )

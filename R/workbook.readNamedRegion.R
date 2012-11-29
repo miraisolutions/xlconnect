@@ -22,7 +22,9 @@
 #
 # Reading named regions from an Excel file
 # 
-# Author: Martin Studer, Mirai Solutions GmbH
+# Authors:  Martin Studer, Mirai Solutions GmbH
+#           Thomas Themel, Mirai Solutions GmbH
+#           Nicola Lambiase, Mirai Solutions GmbH
 #
 #############################################################################
 

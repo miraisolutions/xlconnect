@@ -6,7 +6,7 @@
 \alias{setMissingValue,workbook,ANY-method}
 \title{Setting missing value identifiers}
 \description{
-Defines the set of missing value strings used when reading and writing data.
+Defines the set of missing values (character or numeric) used when reading and writing data.
 }
 \usage{
 \S4method{setMissingValue}{workbook,ANY}(object,value)
@@ -14,23 +14,19 @@ Defines the set of missing value strings used when reading and writing data.
 
 \arguments{
   \item{object}{The \code{\linkS4class{workbook}} to use}
-  \item{value}{\code{character} vector of missing value identifiers that
-  are recognized as missing (\code{NA}) when reading data. The first
-  element of this vector will be used as missing value identifier when writing
-  data. If \code{value = NULL} (default), missing values are represented by
-  blank cells and only blank cells are recognized as missing.}
+  \item{value}{\code{vector} or \code{list} of missing value identifiers (either
+  \code{character} or \code{numeric}) that are recognized as missing (\code{NA}) 
+  when reading data. The first element of this vector will be used as missing value 
+  identifier when writing data. If \code{value = NULL} (default), missing values are 
+  represented by blank cells and only blank cells are recognized as missing.}
 }
 
 \details{
 If there are no specific missing value identifiers defined the default behavior is
-to map missing values to blank (empty) cells. Otherwise, each string cell is checked if it
-matches one of the defined missing value identifiers. In addition, the first missing value
-identifier (i.e. the first element of the \code{value} argument) is used to represent missing
-values when writing data.\cr
-Note that the missing value mapping only works with string identifiers. If you want to use e.g. 
-numeric missing value identifiers such as e.g. \code{-9999} then you have to perform the mapping
-manually (i.e. replace items with \code{NA} before writing / replace items with \code{NA} after
-reading).
+to map missing values to blank (empty) cells. Otherwise, each string or numeric cell is 
+checked if it matches one of the defined missing value identifiers. In addition, the first 
+missing value identifier (i.e. the first element of the \code{value} argument) is used to represent missing values when writing data.\cr
+Note that the missing value identifiers have to be either \code{character} or \code{numeric}.
 }
 
 \author{

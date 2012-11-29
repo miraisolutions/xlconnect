@@ -122,7 +122,7 @@ data = readNamedRegionFromFile("XLConnectExample3.xlsx", "womenName")
 	require(fImport)
 	require(forecast)
 	require(zoo)
-	require(ggplot2) # >= 0.9.0
+	require(ggplot2) # >= 0.9.2
 	require(scales)
 
 
@@ -281,11 +281,12 @@ gcurr[["Type"]] = ifelse(gcurr$Time %in% currFit$Time,
 # Create a png graph showing the currencies in the context 
 # of the Swiss Franc
 png(filename = "swiss_franc.png", width = 800, height = 600)
-ggplot(gcurr, aes(Time, Value, colour = Currency, linetype = Type)) +
-geom_line() + stat_smooth(method = "loess") + xlab("") +
-scale_y_continuous("Change to baseline", labels = percent) +
-opts(title = "Currencies vs Swiss Franc",
-axis.title.y = theme_text(size = 10, angle = 90, vjust = 0.3))
+p = ggplot(gcurr, aes(Time, Value, colour = Currency, linetype = Type)) +
+  geom_line() + stat_smooth(method = "loess") +
+  scale_y_continuous("Change to baseline", labels = percent) +
+  labs(title = "Currencies vs Swiss Franc", x = "") +
+  theme(axis.title.y = element_text(size = 10, angle = 90, vjust = 0.3))
+print(p)
 dev.off()
 
 # Define where the image should be placed via a named region;

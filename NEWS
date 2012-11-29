@@ -1,6 +1,22 @@
 XLConnect News
 --------------
 
+0.2-4 2012-01-??
+  * Ability to read cached cell values. There is a new argument useCachedValues
+    to methods readWorksheet and readNamedRegion. This is especially useful for
+    cells with complex formulas that XLConnect (Apache POI) cannot evaluate and
+    so far would have resulted in NAs being returned. With this new option
+    XLConnect can now read the cached values of cells.
+  * There are new arguments keep and drop to readWorksheet and readNamedRegion
+    which allow filtering of columns before the data is imported to R. This can
+    result in much better performance compared to importing the full data to R
+    and then doing the subsetting in R.
+  * Support for numeric missing value identifiers (see method setMissingValue)
+  * Added a new function getLastColumn to query the last non-empty column in a
+    worksheet
+  * Fixed an issue with writing empty data.frames
+  * ggplot2 0.9.3 ...... ??
+
 0.2-3 2012-11-05
   * Fixed issue when trying to write empty data.frame with writeNamedRegion and
     writeNamedRegionToFile
