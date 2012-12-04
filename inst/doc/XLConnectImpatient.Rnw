@@ -1,0 +1,152 @@
+% !TEX TS-program = Sweave
+
+\documentclass[10pt,landscape,a4paper]{article}
+
+\usepackage[latin1]{inputenc}
+\usepackage[scaled=.9]{couriers}
+\usepackage[colorlinks]{hyperref}
+\usepackage{datetime}
+
+% So that more colours can be used, not only the pre-defined ones
+% List of colours here: http://en.wikibooks.org/wiki/LaTeX/Colors
+\usepackage[usenames,dvipsnames]{color}
+
+% To get URLs in a normal font, by using \urlwofont
+\usepackage{url}
+
+\newcommand{\urlwofont}[1]
+{
+\urlstyle{same}\url{#1}
+}
+
+% Set colours of links in the document
+\hypersetup
+{
+    colorlinks,
+    citecolor	=	black,		% color of links to bibliography
+    filecolor	=	black,		% color of file links
+    linkcolor	=	CadetBlue,	% color of internal links, e.g. Table of Contents
+    urlcolor	=	CadetBlue	% color of external links
+}
+
+% Extra text effects (strikethrough)
+\usepackage{ulem}
+
+% Sexyness
+\usepackage{tikz}
+\usetikzlibrary{calc,positioning}
+\usetikzlibrary{shapes.multipart,shapes.geometric,shapes.symbols,shapes.arrows}
+\usetikzlibrary{decorations.shapes,decorations.text,decorations.pathreplacing}
+
+% For the table
+\usetikzlibrary{matrix}
+
+% Page layout
+\usepackage[parfill]{parskip}
+\usepackage[letterpaper,margin=1in]{geometry}
+\usepackage{epigraph}
+\usepackage{multicol}
+\usepackage{pdflscape}
+
+% Graphics control.
+\usepackage{graphicx}
+\usepackage{float}
+
+% Extra pretty pretty printing.
+\usepackage{tikzCodeBlock}
+
+% Macros created for this document
+\input{tikzDeviceMacros}
+
+% Make sure you input tikzDeviceMacros first- or
+% LaTeX will smite you!
+\usepackage{Sweave}
+
+<<setup,echo=F,results=hide>>=
+
+	if( !file.exists( 'figs' ) ) dir.create( 'figs' )
+	# require(tikzDevice)
+	
+@
+
+<<setup,echo=F,results=hide>>=
+	require(XLConnect)
+@
+
+\title{\pkg{XLConnect} for the Impatient}
+\date{\pkg{XLConnect} Version \Sexpr{getOption("XLConnect.Version")}\qquad \monthname, \the\year}
+
+\begin{document}
+\SweaveOpts{concordance=TRUE}
+\SweaveOpts{echo=F,prefix.string=figs/fig}
+
+
+%----------------------------  Cover Page -----------------------------------------------------------
+
+\maketitle
+\thispagestyle{empty}
+\pagestyle{empty}
+
+% http://tex.stackexchange.com/questions/25517/table-with-two-headers
+% http://tex.stackexchange.com/questions/69838/positioning-of-rotated-nodes-in-a-matrix
+
+\begin{tikzpicture}
+\tikzstyle{phase} =[draw,fill=white,rotate=90,sloped, minimum width = 20em];
+\tikzstyle{title} =[draw,fill=white,sloped, minimum width = \widthof{This is a long name long name long name long name}+.6666em];
+\tikzstyle{codeEx}=[draw,fill=white,sloped, minimum height = 10em, minimum width = \widthof{This is a long name long name long name long name}+.6666em];
+\tikzstyle{every matrix}=[ampersand replacement={\&}];
+
+    \matrix (xAB)[draw,rounded corners,fill=blue!20]
+    {
+        \node[phase](phase1) {Reading / writing a single data region};\\
+    };
+    
+    \matrix (xA)[right = of xAA,draw,rounded corners,fill=red!20]
+    {
+        \node[codeEx](codeEx1) {readWorksheetFromFile(...)}; \\[1ex]
+        \node[codeEx](codeEx2) {writeWorksheetToFile(...)};\\
+    };
+    
+    \matrix (xAC)[above = of xA, draw,rounded corners,fill=blue!20]
+    {
+        \node[title](title1) {Reading / writing worksheets};\\
+    };
+
+    \matrix (xB)[right = of xA,draw,rounded corners,fill=red!20]
+    {
+        \node[codeEx](codeEx3) {data = readNamedRegionFromFile(...)}; \\[1ex]
+        \node[codeEx](codeEx4) {writeNamedRegionToFile(...)};\\
+    };
+    
+    \matrix (xBD)[above = of xB, draw,rounded corners,fill=blue!20]
+    {
+        \node[title](title2) {Reading / writing named regions};\\
+    };
+    
+    \matrix (xCD)[below = of xAB,draw,rounded corners,fill=blue!20]
+    {
+        \node[phase](phase1) {Reading / writing multiple data regions};\\
+    };
+    
+    \matrix (xC)[below = of xA,draw,rounded corners,fill=red!20]
+    {
+        \node[codeEx](codeEx5) {wb = loadWorkbook(...)}; \\[1ex]
+        \node[codeEx](codeEx6) {Tralalla};\\
+    };
+
+    \matrix (xD)[below = of xB,draw,rounded corners,fill=red!20]
+    {
+        \node[codeEx](codeEx7) {Blablbala}; \\[1ex]
+        \node[codeEx](codeEx8) {Blablbala};\\
+    };
+    
+    % \draw[decorate,decoration={brace,raise=1ex}] (xA.north west) -- ( xA.north east) node[pos=.5,above=.3] {Reading / writing worksheets};
+    % \draw[decorate,decoration={brace,raise=1ex}] (xB.north west) -- ( xB.north east) node[pos=.5,above=.3] {Reading / writing named regions};
+	% \draw[decorate,decoration={brace,raise=1ex}] (xA.south west) -- ( xA.north west) node[pos=.5,above =.5,rotate=90] {Reading / writing a single data region};
+	% \draw[decorate,decoration={brace,raise=1ex}] (xC.south west) -- ( xC.north west) node[pos=.5,above =.5,rotate=90] {Reading / writing multiple data regions};
+
+\end{tikzpicture}
+
+
+
+\end{document}
