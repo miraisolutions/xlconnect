@@ -167,6 +167,79 @@ test.workbook.readNamedRegion <- function() {
 	# Check that attempting to drop a column (indicated by index) out of named region bounds throws an exception (*.xlsx)
 	checkException(readNamedRegion(wb.xlsx, "Conversion", header = TRUE, drop=c(1,2,5)))	
 	
+	AAA = data.frame(
+			A = 1:3,
+			B = letters[1:3],
+			C = c(TRUE, TRUE, FALSE),
+			stringsAsFactors = FALSE
+	)
+	BBB = data.frame(
+			D = 4:6,
+			E = letters[4:6],
+			F = c(FALSE, TRUE, TRUE),
+			stringsAsFactors = FALSE
+	)
+	
+	# Check that keeping columns "NumericColumn" and "BooleanColumn" (= by name) with header=FALSE throws an exception (*.xls)
+	checkException(readNamedRegion(wb.xls, "Test", header = FALSE, keep=c("NumericColumn","BooleanColumn")))
+	
+	# Check that keeping columns "NumericColumn" and "BooleanColumn" (= by name) with header=FALSE throws an exception (*.xlsx)
+	checkException(readNamedRegion(wb.xlsx, "Test", header = FALSE, keep=c("NumericColumn","BooleanColumn")))
+	
+	# Check that dropping columns "StringColumn" and "DateTimeColumn" (= by name) with header=FALSE throws an exception (*.xls)
+	checkException(readNamedRegion(wb.xls, "Test", header = FALSE, drop=c("StringColumn", "DateTimeColumn")))
+	
+	# Check that dropping columns "StringColumn" and "DateTimeColumn" (= by name) with header=FALSE throws an exception (*.xlsx)
+	checkException(readNamedRegion(wb.xlsx, "Test", header = FALSE, drop=c("StringColumn", "DateTimeColumn")))
+	
+	# Keeping the same columns from multiple named regions (*.xls)
+	res <- readNamedRegion(wb.xls, name=c("Test","AAA","BBB"), header = TRUE, keep = c(1,3))
+	checkEquals(res, list(Test=checkDf[,c(1,3)], AAA=AAA[,c(1,3)], BBB=BBB[,c(1,3)]))
+
+	# Keeping the same columns from multiple named regions (*.xlsx)
+	res <- readNamedRegion(wb.xlsx, name=c("Test","AAA","BBB"), header = TRUE, keep = c(1,3))
+	checkEquals(res, list(Test=checkDf[,c(1,3)], AAA=AAA[,c(1,3)], BBB=BBB[,c(1,3)]))	
+	
+	# Keeping different columns from multiple named regions (*.xls)
+	res <- readNamedRegion(wb.xls, name = c("Test", "AAA", "BBB"), header = TRUE, keep = list(c(1,2),c(2,3),c(1,3)) )
+	checkEquals(res, list(Test=checkDf[,c(1,2)], AAA=AAA[,c(2,3)], BBB=BBB[,c(1,3)]))
+
+	# Keeping different columns from multiple named regions (*.xlsx)
+	res <- readNamedRegion(wb.xlsx, name = c("Test", "AAA", "BBB"), header = TRUE, keep = list(c(1,2),c(2,3),c(1,3)) )
+	checkEquals(res, list(Test=checkDf[,c(1,2)], AAA=AAA[,c(2,3)], BBB=BBB[,c(1,3)]))
+		
+	#Keeping different columns from multiple named regions (2 keep list elements for 4 named regions) (*.xls)
+	res <- readNamedRegion(wb.xls, name = c("Test", "AAA", "BBB", "Test"), header = TRUE, keep = list(c(1,2),c(2,3)))
+	checkEquals(res, list(Test=checkDf[,c(1,2)], AAA=AAA[,c(2,3)], BBB=BBB[,c(1,2)], Test=checkDf[,c(2,3)]))
+
+	#Keeping different columns from multiple named regions (2 keep list elements for 4 named regions) (*.xlsx)
+	res <- readNamedRegion(wb.xlsx, name = c("Test", "AAA", "BBB", "Test"), header = TRUE, keep = list(c(1,2),c(2,3)))
+	checkEquals(res, list(Test=checkDf[,c(1,2)], AAA=AAA[,c(2,3)], BBB=BBB[,c(1,2)], Test=checkDf[,c(2,3)]))
+	
+	# Dropping the same columns from multiple named regions (*.xls)
+	res <- readNamedRegion(wb.xls, name=c("Test", "AAA", "BBB"), header = TRUE, drop = c(1,2))
+	checkEquals(res, list(Test=checkDf[,c(3,4)], AAA=data.frame(C=AAA[,3], stringsAsFactors=F), BBB=data.frame(F=BBB[,3], stringsAsFactors=F)))
+
+	# Dropping the same columns from multiple named regions (*.xlsx)
+	res <- readNamedRegion(wb.xlsx, name=c("Test", "AAA", "BBB"), header = TRUE, drop = c(1,2))
+	checkEquals(res, list(Test=checkDf[,c(3,4)], AAA=data.frame(C=AAA[,3], stringsAsFactors=F), BBB=data.frame(F=BBB[,3], stringsAsFactors=F)))
+	
+	# Dropping different columns from multiple named regions (*.xls)
+	res <- readNamedRegion(wb.xls, name = c("Test", "AAA", "BBB"), header = TRUE, drop = list(c(1,2),c(2,3),c(1,3)) )
+	checkEquals(res, list(Test=checkDf[,c(3,4)], AAA=data.frame(A=AAA[,1], stringsAsFactors=F), BBB=data.frame(E=BBB[,2], stringsAsFactors=F)))
+	
+	# Dropping different columns from multiple named regions (*.xlsx)
+	res <- readNamedRegion(wb.xlsx, name = c("Test", "AAA", "BBB"), header = TRUE, drop = list(c(1,2),c(2,3),c(1,3)) )
+	checkEquals(res, list(Test=checkDf[,c(3,4)], AAA=data.frame(A=AAA[,1], stringsAsFactors=F), BBB=data.frame(E=BBB[,2], stringsAsFactors=F)))
+	
+	#Dropping different columns from multiple named regions (2 drop list elements for 4 named regions) (*.xls)
+	res <- readNamedRegion(wb.xls, name = c("Test", "AAA", "BBB", "Test"), header = TRUE, drop = list(c(1,2),c(2,3)))
+	checkEquals(res, list(Test=checkDf[,c(3,4)], AAA=data.frame(A=AAA[,1], stringsAsFactors=F), BBB=data.frame(F=BBB[,3], stringsAsFactors=F), Test=checkDf[,c(1,4)]))
+
+	#Dropping different columns from multiple named regions (2 drop list elements for 4 named regions) (*.xlsx)
+	res <- readNamedRegion(wb.xlsx, name = c("Test", "AAA", "BBB", "Test"), header = TRUE, drop = list(c(1,2),c(2,3)))
+	checkEquals(res, list(Test=checkDf[,c(3,4)], AAA=data.frame(A=AAA[,1], stringsAsFactors=F), BBB=data.frame(F=BBB[,3], stringsAsFactors=F), Test=checkDf[,c(1,4)]))
+	
 	targetNoForceSubset <- data.frame(
 			BBB = c("hello", "42.24", "true", NA, "11.01.1984 12:00:00"),
 			DDD = as.POSIXct(c("1984-01-11 12:00:00", NA, NA, NA, NA), tz = "UTC"),

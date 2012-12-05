@@ -270,6 +270,12 @@ test.workbook.readWorksheet <- function() {
 	res <- readWorksheet(wb.xlsx, "Test5", header = TRUE, keep=c('A','C'))
 	checkEquals(res, checkDfSubset)	
 	
+	# Check that keeping columns A and C (= by name) with header=FALSE throws an exception (*.xls)
+	checkException(readWorksheet(wb.xls, "Test5", header = FALSE, keep=c('A','C')))
+	
+	# Check that keeping columns A and C (= by name) with header=FALSE throws an exception (*.xlsx)
+	checkException(readWorksheet(wb.xlsx, "Test5", header = FALSE, keep=c('A','C')))	
+	
 	# Check that dropping columns B and D (= by name) works fine (*.xls)
 	res <- readWorksheet(wb.xls, "Test5", header = TRUE, drop=c('B','D'))
 	checkEquals(res, checkDfSubset)
@@ -277,6 +283,12 @@ test.workbook.readWorksheet <- function() {
 	# Check that dropping columns B and D (= by name) works fine (*.xlsx)
 	res <- readWorksheet(wb.xlsx, "Test5", header = TRUE, drop=c('B','D'))
 	checkEquals(res, checkDfSubset)
+	
+	# Check that dropping columns B and D (= by name) with header=FALSE throws an exception (*.xls)
+	checkException(readWorksheet(wb.xls, "Test5", header = FALSE, drop=c('B','D')))
+	
+	# Check that dropping columns B and D (= by name) with header=FALSE throws an exception (*.xlsx)
+	checkException(readWorksheet(wb.xlsx, "Test5", header = FALSE, drop=c('B','D')))
 	
 	# Check that keeping columns 1 and 3 (= by index) works fine (*.xls)
 	res <- readWorksheet(wb.xls, "Test5", header = TRUE, keep=c(1,3))

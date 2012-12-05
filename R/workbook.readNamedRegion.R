@@ -41,63 +41,22 @@ setMethod("readNamedRegion",
 			check.names = TRUE, useCachedValues = FALSE, keep=NULL, drop=NULL) {
 
 		# returns a list of RDataFrameWrapper Java object references
-			
 		sheet = as.vector(extractSheetName(getReferenceFormula(object, name)))
-		namedim = getReferenceCoordinates(object, name)
-		startRow = namedim[1,1]
-		startCol = namedim[1,2]
-		endCol = namedim[2,2]
+		namedim = matrix(as.vector(t(getReferenceCoordinates(object, name))), nrow=4, byrow=FALSE)
+		startRow = namedim[1,]
+		startCol = namedim[2,]
+		endRow = namedim[3,]
+		endCol = namedim[4,]
 		numcols = endCol-startCol+1
 
 		
 		if (is.null(keep) && is.null(drop)) {
 			dataFrame <- xlcCall(object, "readNamedRegion", name, header, .jarray(classToXlcType(colTypes)), 
 					forceConversion, dateTimeFormat, useCachedValues, .jnull("java/lang/Integer"), SIMPLIFY = FALSE)
-		} else
-		if (!is.null(keep) && !is.null(drop)) {
-			stop(sprintf("Specify either keep OR drop (not both)"))
-		} else { 
-			if (is.null(drop)){
-				if (is.numeric(keep)) {
-					outerCols=setdiff(keep, seq(numcols))
-					if (length(outerCols)!=0) {
-						stop(sprintf("Column(s) '%s' out of the named region!", paste(outerCols, collapse = ", ")))
-					} else {
-						subset = keep
-					}
-				} else
-				if (is.character(keep)) {
-					headerdf <- readWorksheet(object, sheet, startRow = startRow, endRow = startRow, startCol = startCol, endCol = endCol, header = FALSE)
-					columnNames = unlist(headerdf)
-					idx = match(keep, columnNames)
-					idx.na = is.na(idx)
-					if(any(idx.na)) {
-						stop(sprintf("Column name(s) '%s' not existing or out of the named region!", paste(keep[idx.na], collapse = ", ")))
-					}
-					subset = idx
-				}
-			} else {
-				if (is.numeric(drop)) {
-					outerCols=setdiff(drop, seq(numcols))
-					if (length(outerCols)!=0) {
-						stop(sprintf("Column(s) '%s' out of the named region!", paste(outerCols, collapse = ", ")))
-					} else {
-						subset = setdiff(seq(numcols), drop)
-					}
-				} else
-				if (is.character(drop)) {
-					headerdf <- readWorksheet(object, sheet, startRow = startRow, endRow = startRow, startCol = startCol, endCol = endCol, header = FALSE)
-					columnNames = unlist(headerdf)
-					idx = match(drop, columnNames)
-					subset = setdiff(seq(numcols), idx)
-					idx.na = is.na(idx)
-					if(any(idx.na)) {
-						stop(sprintf("Column name(s) '%s' not existing or out of the named region!", paste(drop[idx.na], collapse = ", ")))
-					}
-				}
-			}
+		} else{
+			subset <- getColSubset(object, sheet, startRow, endRow, startCol, endCol, header, numcols, keep, drop)
 			dataFrame <- xlcCall(object, "readNamedRegion", name, header, .jarray(classToXlcType(colTypes)), 
-					forceConversion, dateTimeFormat, useCachedValues, .jarray(as.integer(subset-1)), SIMPLIFY = FALSE)
+					forceConversion, dateTimeFormat, useCachedValues, subset, SIMPLIFY = FALSE)
 		}
 
     # get data.frames from Java
