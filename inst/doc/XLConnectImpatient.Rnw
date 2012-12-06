@@ -107,7 +107,7 @@
         \node[phase](phase1) {\textbf{Reading / writing} \\ \textbf{a single data region}};\\
     };
     
-    \matrix (xA)[right = 0.65cm of xAA,draw,rounded corners,fill=red!20]
+    \matrix (xA)[right = 0.65cm of xAA,draw,rounded corners,fill=green!20]
     {
         \node[codeEx](codeEx1) {\code{readWorksheetFromFile(...)}};\\[1ex]
         \node[codeEx](codeEx2) {\code{writeWorksheetToFile(...)}};\\
@@ -118,7 +118,7 @@
         \node[title](title1) {\textbf{Reading / writing} \\ \textbf{worksheets}};\\
     };
 
-    \matrix (xB)[right = 0cm of xA,draw,rounded corners,fill=red!20]
+    \matrix (xB)[right = 0cm of xA,draw,rounded corners,fill=green!20]
     {
         \node[codeEx](codeEx3) {\code{data = readNamedRegionFromFile(...)}}; \\[1ex]
         \node[codeEx](codeEx4) {\code{writeNamedRegionToFile(...)}};\\
@@ -134,13 +134,13 @@
         \node[phase](phase1) {\textbf{Reading / writing} \\ \textbf{multiple data regions}};\\
     };
     
-    \matrix (xC)[below = 0cm of xA,draw,rounded corners,fill=red!20]
+    \matrix (xC)[below = 0cm of xA,draw,rounded corners,fill=green!20]
     {
         \node[codeEx](codeEx5) {\code{wb = loadWorkbook(...)} \\ \code{data1 = readWorksheet(...)} \\ \code{data2 = readWorksheet(...)} \\ ...}; \\[1ex]
         \node[codeEx](codeEx6) {\code{wb = loadWorkbook(...)} \\ \code{createSheet(...)} \\ \code{writeWorksheet(wb, data1, ...)} \\ \code{writeWorksheet(wb, data2, ...)} \\ \code{saveWorkbook(wb)}};\\
     };
 
-    \matrix (xD)[below = 0cm of xB,draw,rounded corners,fill=red!20]
+    \matrix (xD)[below = 0cm of xB,draw,rounded corners,fill=green!20]
     {
         \node[codeEx](codeEx7) {\code{wb = loadWorkbook(...)} \\ \code{data1 = readNamedRegion(...)} \\ \code{data2 = readNamedRegion(...)} \\ ...}; \\[1ex]
         \node[codeEx](codeEx8) {\code{wb = loadWorkbook(...)} \\ \code{createName(...)} \\ \code{writeNamedRegion(wb, data1, ...)} \\ \code{writeNamedRegion(wb, data2, ...)} \\ \code{saveWorkbook(wb)}};\\
