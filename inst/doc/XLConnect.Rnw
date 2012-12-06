@@ -431,7 +431,8 @@ the \\\code{writeWorksheetToFile()} function:
 
 <<simpleEx,echo=T,results=hide>>=
 require(XLConnect)
-writeWorksheetToFile("XLConnectExample2.xlsx", data = ChickWeight, sheet = "chickSheet", startRow = 3, startCol = 4)
+writeWorksheetToFile("XLConnectExample2.xlsx", data = ChickWeight, 
+sheet = "chickSheet", startRow = 3, startCol = 4)
 @
 
 \code{writeWorksheetToFile()} loads the workbook, creates the sheet and finally saves the workbook. When you only need 
@@ -528,7 +529,7 @@ readNamedRegion(object, name, header = TRUE)
 \end{tikzCodeBlock}
 
 \subsubsection{readNamedRegionFromFile() - reading named regions of an Excel file}
-\code{readNamedRegionFromFile()} is a conveniece wrapper function which allows for reading named regions
+\code{readNamedRegionFromFile()} is a convenient wrapper function which allows for reading named regions
 from an Excel file with one call. The function subsequently calls \code{loadWorkbook()} and 
 \code{readNamedRegion()}.
 
@@ -968,7 +969,7 @@ We are very glad that you are using \pkg{XLConnect} and we would be happy to hea
 \includegraphics[width=10mm, height=10mm]{img/BrownBug.png}
 \end{minipage}
 \begin{minipage}[c]{0.9\textwidth}
-Please mail any bug reports, feature requests or technical inquiries to: \\
+Please send any bug reports, feature requests or technical inquiries to: \\
 \href{mailto:xlconnect-bugs@mirai-solutions.com}{xlconnect-bugs@mirai-solutions.com}
 \end{minipage}
 
@@ -1020,7 +1021,7 @@ We will do our best to reply to your enquires as quickly as possible!
 			\\\urlwofont{http://www.inside-r.org/packages/xlconnect}
 	\item	The R-Podcast Episode 6: Importing Data from External Sources:
 			\\\urlwofont{http://www.r-podcast.org/the-r-podcast-episode-6-importing-data-from-external-sources/}
-	\item 	R Base course by Dr. Roberto Dantas de Pinho, referring to \pkg{XLConnect} (Portugese):
+	\item 	R Base course by Dr. Roberto Dantas de Pinho, referring to \pkg{XLConnect} (Portuguese):
 			\\\urlwofont{http://www.slideshare.net/RobertodePinho/curso-bsico-de-r}
 	\item 	YouTube tutorial by bebilda, on importing and exporting data using \pkg{XLConnect} (Spanish): 
 			\\\urlwofont{http://www.youtube.com/watch?v=84ShWUiq5Mg}	
@@ -1033,8 +1034,8 @@ We will do our best to reply to your enquires as quickly as possible!
 			\\\urlwofont{http://www.dummies.com/how-to/content/how-to-read-data-from-excel-into-r.html} 		
 	\item 	"R for Dummies", book by Joris Meys and Andrie de Vries, page 211:
 			\\\urlwofont{http://tinyurl.com/c54e35m}
-	\item 	"Grundlagen der Datenanalyse mit R: Eine anwendungsorientierte Einf?hrung", book by Daniel Wollschl?ger:
-			\\\urlwofont{http://books.google.ch/books/about/Grundlagen_der_Datenanalyse_mit_R.html?id=tlmcPQ9YZP4C&redir_esc=y}
+	\item 	"Grundlagen der Datenanalyse mit R: Eine anwendungsorientierte Einfuhrung", book by Daniel Wollschl?ger:
+			\\\urlwofont{http://books.google.ch/books?id=tlmcPQ9YZP4C&printsec=frontcover&source=gbs_ge_summary_r&cad=0#v=onepage&q&f=false}
 	
 \end{enumerate}
 
