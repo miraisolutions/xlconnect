@@ -14,10 +14,11 @@ XLConnect News
   * String conversions when reading in data from Excel (readWorksheet, readNamedRegion)
     now respect the data format of the cells
   * Support for numeric missing value identifiers (see method setMissingValue)
+  * New Vignette "XLConnect for the Impatient" to get people started quickly
   * Added a new function getLastColumn to query the last non-empty column in a
     worksheet
   * Fixed an issue with writing empty data.frames
-  * Ensured vignette compatibility with ggplot2 0.9.2 and ggplot2 0.9.3 (RC)
+  * Ensured vignette compatibility with ggplot2 0.9.3
 
 0.2-3 2012-11-05
   * Fixed issue when trying to write empty data.frame with writeNamedRegion and

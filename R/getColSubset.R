@@ -29,7 +29,7 @@
 
 getColSubset <- function(object, sheet, startRow, endRow, startCol, endCol, header, numcols, keep, drop){
 	if (!is.null(keep) && !is.null(drop)) {
-		stop(sprintf("Specify either keep OR drop (not both)"))
+		stop("Specify either keep OR drop (not both)")
 	} else { 
 		if (is.null(drop)){
 			if(!is.list(keep)) keep = list(keep)
