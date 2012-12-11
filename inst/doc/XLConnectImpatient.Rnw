@@ -78,24 +78,21 @@
 \SweaveOpts{echo=F,prefix.string=figs/fig}
 
 \begin{center}
-\textcolor{MidnightBlue}{{\Large \pkg{XLConnect} for the Impatient} \\[12pt]}
+\textcolor{MidnightBlue}{\textbf{\huge \pkg{XLConnect} for the Impatient} \\[15pt]}
 \pkg{XLConnect} Version \Sexpr{getOption("XLConnect.Version")}\qquad \\
-\monthname, \the\year \\[10pt]
+\monthname, \the\year \\[15pt]
 \end{center}
 
-\textbf{\underline{Installation:}}\\
-\code{install.packages("XLConnect")}, Mac: \code{install.packages("XLConnect", type = "source")} \\[3pt]
-\textbf{\underline{Loading library:}}\\
-\code{library(XLConnect)} \\
+\begin{tabbing}
+\textbf{\underline{Installation:}} ~~~~~~~~~~\= \code{install.packages("XLConnect")}, Mac: \code{install.packages("XLConnect", type = "source")} \\[3pt]
+\textbf{\underline{Loading library:}} \> \code{library(XLConnect)} \\
+\end{tabbing}
 
 \thispagestyle{empty}
 \pagestyle{empty}
 
-% \begin{center}
 % http://tex.stackexchange.com/questions/69838/positioning-of-rotated-nodes-in-a-matrix
 \begin{tikzpicture}
-
-% minimum width = \widthof{This is a long name long name long name long name}+.6666em
 
 \tikzstyle{phase} =[draw,fill=white,rotate=90,sloped, minimum width = 14.5em, align=center];
 \tikzstyle{title} =[draw,fill=white,sloped, minimum width = 30em, align=center, minimum height = 3em];
@@ -107,47 +104,45 @@
         \node[phase](phase1) {\textbf{Reading / writing} \\ \textbf{a single data region}};\\
     };
     
-    \matrix (xA)[right = 0.65cm of xAA,draw,rounded corners,fill=green!20]
+    \matrix (xA)[right = 0.2cm of xAB,draw,rounded corners,fill=green!20]
     {
         \node[codeEx](codeEx1) {\code{readWorksheetFromFile(...)}};\\[1ex]
         \node[codeEx](codeEx2) {\code{writeWorksheetToFile(...)}};\\
     };
     
-    \matrix (xAC)[above = 0cm of xA, draw,rounded corners,fill=blue!20]
+    \matrix (xAC)[above = 0.2cm of xA, draw,rounded corners,fill=blue!20]
     {
         \node[title](title1) {\textbf{Reading / writing} \\ \textbf{worksheets}};\\
     };
 
-    \matrix (xB)[right = 0cm of xA,draw,rounded corners,fill=green!20]
+    \matrix (xB)[right = 0.2cm of xA,draw,rounded corners,fill=green!20]
     {
         \node[codeEx](codeEx3) {\code{data = readNamedRegionFromFile(...)}}; \\[1ex]
         \node[codeEx](codeEx4) {\code{writeNamedRegionToFile(...)}};\\
     };
     
-    \matrix (xBD)[above = 0cm of xB, draw,rounded corners,fill=blue!20]
+    \matrix (xBD)[above = 0.2cm of xB, draw,rounded corners,fill=blue!20]
     {
         \node[title](title2) {\textbf{Reading / writing} \\ \textbf{named regions}};\\
     };
     
-    \matrix (xCD)[below = 0cm of xAB,draw,rounded corners,fill=blue!20]
+    \matrix (xCD)[below = 0.2cm of xAB,draw,rounded corners,fill=blue!20]
     {
         \node[phase](phase1) {\textbf{Reading / writing} \\ \textbf{multiple data regions}};\\
     };
     
-    \matrix (xC)[below = 0cm of xA,draw,rounded corners,fill=green!20]
+    \matrix (xC)[below = 0.2cm of xA,draw,rounded corners,fill=green!20]
     {
         \node[codeEx](codeEx5) {\code{wb = loadWorkbook(...)} \\ \code{data1 = readWorksheet(...)} \\ \code{data2 = readWorksheet(...)} \\ ...}; \\[1ex]
         \node[codeEx](codeEx6) {\code{wb = loadWorkbook(...)} \\ \code{createSheet(...)} \\ \code{writeWorksheet(wb, data1, ...)} \\ \code{writeWorksheet(wb, data2, ...)} \\ \code{saveWorkbook(wb)}};\\
     };
 
-    \matrix (xD)[below = 0cm of xB,draw,rounded corners,fill=green!20]
+    \matrix (xD)[below = 0.2cm of xB,draw,rounded corners,fill=green!20]
     {
         \node[codeEx](codeEx7) {\code{wb = loadWorkbook(...)} \\ \code{data1 = readNamedRegion(...)} \\ \code{data2 = readNamedRegion(...)} \\ ...}; \\[1ex]
         \node[codeEx](codeEx8) {\code{wb = loadWorkbook(...)} \\ \code{createName(...)} \\ \code{writeNamedRegion(wb, data1, ...)} \\ \code{writeNamedRegion(wb, data2, ...)} \\ \code{saveWorkbook(wb)}};\\
     };
     
 \end{tikzpicture}
-
-% \end{center}
 
 \end{document}
