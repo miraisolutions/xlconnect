@@ -52,11 +52,11 @@ test.workbook.createName <- function() {
 	
 	# Check that trying to create a name with an illegal formula
 	# throws an exception (*.xls)
-	checkException(createName(wb.xls, "IllegalFormula", "öö-%&"))
+	checkException(createName(wb.xls, "IllegalFormula", "??-%&"))
 	
 	# Check that trying to create a name with an illegal formula
 	# throws an exception (*.xlsx)
-	checkException(createName(wb.xlsx, "IllegalFormula", "öö-%&"))
+	checkException(createName(wb.xlsx, "IllegalFormula", "??-%&"))
 	
 	# Check that trying to create an already existing name without
 	# specifying 'overwrite = TRUE' throws an exception (*.xls)

@@ -66,7 +66,7 @@ runUnitTests <- function() {
 		source(file.path(path, "normalizeDataframe.R"))
 		
 		# Set up and run test suite
-		orig.opts <- options(encoding = "latin1")
+		orig.opts <- options(encoding = "UTF-8")
 		TestSuite <- defineTestSuite(paste(pkg, "Test Suite"), dirs = path)
 		TestResult <- runTestSuite(TestSuite)
 		options(orig.opts)

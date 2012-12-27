@@ -27,22 +27,27 @@
 #############################################################################
 
 setGeneric("getBoundingBox",
-		function(object, sheet, startRow = 0, startCol = 0, endRow = 0, endCol = 0) standardGeneric("getBoundingBox"))
+		function(object, sheet, startRow = 0, startCol = 0, endRow = 0, endCol = 0,
+             autofitRow = TRUE, autofitCol = TRUE) standardGeneric("getBoundingBox"))
 
 setMethod("getBoundingBox", 
 		signature(object = "workbook", sheet = "numeric"), 
-		function(object, sheet, startRow = 0, startCol = 0, endRow = 0, endCol = 0) {
+		function(object, sheet, startRow = 0, startCol = 0, endRow = 0, endCol = 0,
+             autofitRow = TRUE, autofitCol = TRUE) {
 			res <- xlcCall(object, "getBoundingBox", as.integer(sheet - 1), as.integer(startRow - 1), 
-					as.integer(startCol - 1), as.integer(endRow - 1), as.integer(endCol - 1))
+                     as.integer(startCol - 1), as.integer(endRow - 1), as.integer(endCol - 1),
+                     autofitRow, autofitCol)
 			res + 1
 		}
 )
 
 setMethod("getBoundingBox", 
 		signature(object = "workbook", sheet = "character"), 
-		function(object, sheet, startRow = 0, startCol = 0, endRow = 0, endCol = 0) {
+		function(object, sheet, startRow = 0, startCol = 0, endRow = 0, endCol = 0,
+             autofitRow = TRUE, autofitCol = TRUE) {
 			res <- xlcCall(object, "getBoundingBox", sheet, as.integer(startRow - 1), 
-					as.integer(startCol - 1), as.integer(endRow - 1), as.integer(endCol - 1))
+                     as.integer(startCol - 1), as.integer(endRow - 1), as.integer(endCol - 1),
+                     autofitRow, autofitCol)
 			res + 1
 		}
 )

@@ -104,13 +104,13 @@ test.workbook.readWorksheet <- function() {
 	checkException(readWorksheet(wb.xlsx, 23))
 	checkException(readWorksheet(wb.xlsx, "SheetDoesNotExist"))
 	
-	# Check that an exception is thrown when attempting to read from a blank sheet (*.xls)
-	checkException(readWorksheet(wb.xls, 3))
-	checkException(readWorksheet(wb.xls, "Test3"))
+	# Check that reading from a blank sheet returns a data.frame with 0 rows and 0 columns (*.xls)
+	checkEquals(readWorksheet(wb.xls, 3), data.frame())
+	checkEquals(readWorksheet(wb.xls, "Test3"), data.frame())
 	
-	# Check that an exception is thrown when attempting to read from a blank sheet (*.xlsx)
-	checkException(readWorksheet(wb.xlsx, 3))
-	checkException(readWorksheet(wb.xlsx, "Test3"))
+	# Check that reading from a blank sheet returns a data.frame with 0 rows and 0 columns (*.xlsx)
+	checkEquals(readWorksheet(wb.xlsx, 3), data.frame())
+	checkEquals(readWorksheet(wb.xlsx, "Test3"), data.frame())
 	
 	checkDf1 <- data.frame(
 		A = c(1:2, NA, 3:6, NA),
@@ -212,11 +212,11 @@ test.workbook.readWorksheet <- function() {
 	
 	target = data.frame(
 		"With whitespace" = 1:4,
-		"And some other funky characters: _=?^~!$@#%ง" = letters[1:4],
+		"And some other funky characters: _=?^~!$@#%ยง" = letters[1:4],
 		check.names = FALSE,
 		stringsAsFactors = FALSE
 	)
-	
+  
 	# Check that reading worksheets with check.names = FALSE works (*.xls)
 	res <- readWorksheet(wb.xls, sheet = "VariableNames", header = TRUE, check.names = FALSE)
 	checkEquals(res, target)
@@ -406,7 +406,7 @@ test.workbook.readWorksheet <- function() {
 	res <- readWorksheet(wb.xlsx, sheet = c("Test1", "Test4", "Test5", "AAA"), header = TRUE, keep = list(c(1,2),c(2,3)) )
 	checkEquals(res, list(Test1=checkDf[1:2], Test4=checkDf1[2:3], Test5=checkDf2[1:2], AAA=testAAA[2:3]))
 	
-    # Dropping the same columns from multiple sheets (*.xls)
+  # Dropping the same columns from multiple sheets (*.xls)
 	res <- readWorksheet(wb.xls, sheet=c("Test1","Test4","Test5"), header = TRUE, drop = c(1,2))
 	checkEquals(res, list(Test1=checkDf[3:4], Test4=checkDf1[3:4], Test5=checkDf2[3:4]))
 	
@@ -422,14 +422,131 @@ test.workbook.readWorksheet <- function() {
 	res <- readWorksheet(wb.xlsx, sheet = c("Test1", "Test4", "Test5"), header = TRUE, drop = list(c(1,2),c(2,3),c(1,3)) )
 	checkEquals(res, list(Test1=checkDf[3:4], Test4=checkDf1[c(1,4)], Test5=checkDf2[c(2,4)]))
 	
-	#Dropping different columns from multiple sheets (2 drop list elements for 4 sheets) (*.xls)
+	# Dropping different columns from multiple sheets (2 drop list elements for 4 sheets) (*.xls)
 	res <- readWorksheet(wb.xls, sheet = c("Test1", "Test4", "Test5", "AAA"), header = TRUE, drop = list(c(1,2),c(2,3)) )
 	checkEquals(res, list(Test1=checkDf[3:4], Test4=checkDf1[c(1,4)], Test5=checkDf2[3:4], AAA=testAAA[c(1)]))
 	
-	#Dropping different columns from multiple sheets (2 drop list elements for 4 sheets) (*.xlsx)
+	# Dropping different columns from multiple sheets (2 drop list elements for 4 sheets) (*.xlsx)
 	res <- readWorksheet(wb.xlsx, sheet = c("Test1", "Test4", "Test5", "AAA"), header = TRUE, drop = list(c(1,2),c(2,3)) )
 	checkEquals(res, list(Test1=checkDf[3:4], Test4=checkDf1[c(1,4)], Test5=checkDf2[3:4], AAA=testAAA[c(1)]))
 
+	target1 <- data.frame(
+	  Col1 = c(NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,  NA, 7, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,  NA), 
+	  Col2 = c(NA, NA, NA, 3, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, 13),      
+	  Col3 = c(NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA), 
+	  Col4 = c(NA, NA, NA, 4, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, 9, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA),
+	  Col5 = c(1, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA), 
+	  Col6 = c(NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA), 
+	  Col7 = c(NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, 10, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA), 
+	  Col8 = c(2, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA), 
+	  Col9 = c(NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA), 
+	  Col10 = c(NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, 11, NA, NA, NA, NA, NA), 
+	  Col11 = c(NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA), 
+	  Col12 = c(NA, NA, NA, NA, NA, NA, 5, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, 12, NA, NA, NA, NA, NA), 
+	  Col13 = c(NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA), 
+	  Col14 = c(NA, NA, NA, NA, NA, NA, 6, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA), 
+	  Col15 = c(NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA), 
+	  Col16 = c(NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, 8, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA)
+	)
+	
+	target2 = data.frame(
+	  Col1 = c(9, NA, NA, NA, NA, NA), 
+	  Col2 = c(NA,  NA, NA, NA, NA, NA), 
+	  Col3 = c(NA, NA, NA, NA, NA, NA), 
+	  Col4 = c(10,  NA, NA, NA, NA, NA), 
+	  Col5 = c(NA, NA, NA, NA, NA, NA), 
+	  Col6 = c(NA,  NA, NA, NA, NA, NA), 
+	  Col7 = c(NA, NA, NA, NA, NA, 11)
+	)
+	
+	target3 = data.frame(
+	  Col1 = c(NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,  NA, NA), 
+	  Col2 = c(NA, NA, NA, 9, NA, NA, NA, NA, NA, NA, NA,  NA), 
+	  Col3 = c(NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA),
+	  Col4 = c(NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA),     
+	  Col5 = c(NA, NA, NA, 10, NA, NA, NA, NA, NA, NA, NA, NA),
+	  Col6 = c(NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA),
+	  Col7 = c(NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA),
+	  Col8 = c(NA, NA, NA, NA, NA, NA, NA, NA, 11, NA, NA, NA),
+	  Col9 = c(NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA)
+	)
+	
+	target4 = as.data.frame(matrix(NA, nrow = 10, ncol = 8))
+	names(target4) = paste("Col", 1:8, sep = "")
+	
+	target5 = data.frame(
+	  Col1 = c(NA, NA, NA, NA, 4, NA),
+	  Col2 = c(NA, 1, NA, NA, NA, NA)
+	)
+	
+	target6 = data.frame(
+	  Col1 = c(NA, NA, NA, NA), 
+	  Col2 = c(NA, NA, NA,  4), 
+	  Col3 = c(1, NA, NA, NA), 
+	  Col4 = c(NA, NA, NA, NA), 
+	  Col5 = c(NA,  NA, NA, NA)
+	)
+	
+	target7 = data.frame(
+	  Col1 = c(NA, NA, NA, 4),
+	  Col2 = c(1, NA, NA, NA)
+	)
+	
+	# Checking bounding-box resolution (*.xls)
+	res <- readWorksheet(wb.xls, sheet = "BoundingBox", autofitRow = TRUE, autofitCol = TRUE, header = FALSE)
+	checkEquals(res, target1)
+	res <- readWorksheet(wb.xls, sheet = "BoundingBox", autofitRow = FALSE, autofitCol = FALSE, header = FALSE)
+	checkEquals(res, target1)
+	res <- readWorksheet(wb.xls, sheet = "BoundingBox", startRow = 20, startCol = 5, endRow = 31, endCol = 13,
+	                     autofitRow = TRUE, autofitCol = TRUE, header = FALSE)
+	checkEquals(res, target2)
+	res <- readWorksheet(wb.xls, sheet = "BoundingBox", startRow = 20, startCol = 5, endRow = 31, endCol = 13,
+	                     autofitRow = FALSE, autofitCol = FALSE, header = FALSE)
+	checkEquals(res, target3)
+	res <- readWorksheet(wb.xls, sheet = "BoundingBox", startRow = 12, startCol = 5, endRow = 21, endCol = 12,
+	                     autofitRow = TRUE, autofitCol = TRUE, header = FALSE)
+	checkEquals(res, data.frame())
+	res <- readWorksheet(wb.xls, sheet = "BoundingBox", startRow = 12, startCol = 5, endRow = 21, endCol = 12,
+	                     autofitRow = FALSE, autofitCol = FALSE, header = FALSE)
+	checkEquals(res, target4)
+	res <- readWorksheet(wb.xls, sheet = "BoundingBox", startRow = 6, startCol = 5, endRow = 11, endCol = 9,
+	                     autofitRow = FALSE, autofitCol = TRUE, header = FALSE)
+	checkEquals(res, target5)
+	res <- readWorksheet(wb.xls, sheet = "BoundingBox", startRow = 6, startCol = 5, endRow = 11, endCol = 9,
+	                     autofitRow = TRUE, autofitCol = FALSE, header = FALSE)
+	checkEquals(res, target6)
+	res <- readWorksheet(wb.xls, sheet = "BoundingBox", startRow = 6, startCol = 5, endRow = 11, endCol = 9,
+	                     autofitRow = TRUE, autofitCol = TRUE, header = FALSE)
+	checkEquals(res, target7)
+	
+	# Checking bounding-box resolution (*.xlsx)
+	res <- readWorksheet(wb.xlsx, sheet = "BoundingBox", autofitRow = TRUE, autofitCol = TRUE, header = FALSE)
+	checkEquals(res, target1)
+	res <- readWorksheet(wb.xlsx, sheet = "BoundingBox", autofitRow = FALSE, autofitCol = FALSE, header = FALSE)
+	checkEquals(res, target1)
+	res <- readWorksheet(wb.xlsx, sheet = "BoundingBox", startRow = 20, startCol = 5, endRow = 31, endCol = 13,
+	                     autofitRow = TRUE, autofitCol = TRUE, header = FALSE)
+	checkEquals(res, target2)
+	res <- readWorksheet(wb.xlsx, sheet = "BoundingBox", startRow = 20, startCol = 5, endRow = 31, endCol = 13,
+	                     autofitRow = FALSE, autofitCol = FALSE, header = FALSE)
+	checkEquals(res, target3)
+	res <- readWorksheet(wb.xlsx, sheet = "BoundingBox", startRow = 12, startCol = 5, endRow = 21, endCol = 12,
+	                     autofitRow = TRUE, autofitCol = TRUE, header = FALSE)
+	checkEquals(res, data.frame())
+	res <- readWorksheet(wb.xlsx, sheet = "BoundingBox", startRow = 12, startCol = 5, endRow = 21, endCol = 12,
+	                     autofitRow = FALSE, autofitCol = FALSE, header = FALSE)
+	checkEquals(res, target4)
+	res <- readWorksheet(wb.xlsx, sheet = "BoundingBox", startRow = 6, startCol = 5, endRow = 11, endCol = 9,
+	                     autofitRow = FALSE, autofitCol = TRUE, header = FALSE)
+	checkEquals(res, target5)
+	res <- readWorksheet(wb.xlsx, sheet = "BoundingBox", startRow = 6, startCol = 5, endRow = 11, endCol = 9,
+	                     autofitRow = TRUE, autofitCol = FALSE, header = FALSE)
+	checkEquals(res, target6)
+	res <- readWorksheet(wb.xlsx, sheet = "BoundingBox", startRow = 6, startCol = 5, endRow = 11, endCol = 9,
+	                     autofitRow = TRUE, autofitCol = TRUE, header = FALSE)
+	checkEquals(res, target7)
+  
+  
 	# Cached value tests: Create workbook
 	wb.xls <- loadWorkbook(rsrc("resources/testCachedValues.xls"), create = FALSE)
 	wb.xlsx <- loadWorkbook(rsrc("resources/testCachedValues.xlsx"), create = FALSE)
@@ -471,5 +588,5 @@ test.workbook.readWorksheet <- function() {
 	res <- readWorksheet(wb.xlsx, "BodyRemote", useCachedValues = TRUE)
 	checkEquals(ref.xls.uncached, res)
 	res <- readWorksheet(wb.xlsx, "BothRemote", useCachedValues = TRUE)
-	checkEquals(ref.xls.uncached, res)
+	checkEquals(ref.xls.uncached, res)	
 }

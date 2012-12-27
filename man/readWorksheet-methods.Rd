@@ -9,17 +9,20 @@
 Reads data from worksheets of a \code{\linkS4class{workbook}}.
 }
 \usage{
-\S4method{readWorksheet}{workbook,numeric}(object,sheet,startRow,startCol,endRow,endCol,region,header,rownames,colTypes,forceConversion,dateTimeFormat,check.names,useCachedValues,keep,drop)
-\S4method{readWorksheet}{workbook,character}(object,sheet,startRow,startCol,endRow,endCol,region,header,rownames,colTypes,forceConversion,dateTimeFormat,check.names,useCachedValues,keep,drop)
+\S4method{readWorksheet}{workbook,numeric}(object,sheet,startRow,startCol,endRow,endCol,autofitRow,autofitCol,region,header,rownames,colTypes,forceConversion,dateTimeFormat,check.names,useCachedValues,keep,drop)
+\S4method{readWorksheet}{workbook,character}(object,sheet,startRow,startCol,endRow,endCol,autofitRow,autofitCol,region,header,rownames,colTypes,forceConversion,dateTimeFormat,check.names,useCachedValues,keep,drop)
 }
 
 \arguments{
   \item{object}{The \code{\linkS4class{workbook}} to use}
   \item{sheet}{The name or index of the worksheet to read from}
-  \item{startRow}{The index of the first row to read from}
-  \item{startCol}{The index of the first column to read from}
-  \item{endRow}{The index of the last row to read from}
-  \item{endCol}{The index of the last column to read from}
+  \item{startRow}{The index of the first row to read from. Defaults to \code{0} meaning that the start row is determined automatically.}
+  \item{startCol}{The index of the first column to read from. Defaults to \code{0} meaning that the start column is determined automatically.}
+  \item{endRow}{The index of the last row to read from. Defaults to \code{0} meaning that the end row is determined automatically.}
+  \item{endCol}{The index of the last column to read from. Defaults to \code{0} meaning that the end column is determined automatically.}
+  \item{autofitRow}{\code{logical} specifying if leading and trailing empty rows should be
+  skipped. Defaults to \code{TRUE}.}
+  \item{autofitCol}{\code{logical} specifying if leading and trailing empty columns should be skipped. Defaults to \code{TRUE}.}
   \item{region}{A range specifier in the form 'A10:B18'. This provides an alternative way to specify
   \code{startRow}, \code{startCol}, \code{endRow} and \code{endCol}. Range specifications take precedence
   over index specifications.}
@@ -49,7 +52,7 @@ Reads data from worksheets of a \code{\linkS4class{workbook}}.
   to \code{\link{strptime}} although not all specifications have been implemented yet - the most
   important ones however are available.}
   \item{check.names}{\code{logical} specifying if column names of the resulting \code{data.frame}
-  should be checked to ensure that they are syntactically valid valid variable names and are not
+  should be checked to ensure that they are syntactically valid variable names and are not
   duplicated. See the \code{check.names} argument of \code{\link{data.frame}}. Defaults to \code{TRUE}.}
   \item{useCachedValues}{\code{logical} specifying whether to read cached formula results from the 
   workbook instead of re-evaluating them. This is particularly helpful in cases for reading data
@@ -69,13 +72,12 @@ starting at the top left corner specified by \code{startRow} and
 \code{startCol} down to the bottom right corner specified by
 \code{endRow} and \code{endCol}. If \code{header = TRUE}, the first row
 is interpreted as column names of the resulting \code{data.frame}.\cr If
-\code{startRow <= 0} then the first available (logical) row is
-assumed. If \code{startCol <= 0} then the column  of the first (logical)
-cell of the start row (\code{startRow}) is assumed. If \code{endRow <= 0}
-then the last available  (logical) row is assumed. If \code{endCol <= 0}
-then the maximum column between \code{startRow} and \code{endRow} is assumed. 
-In other words, if no boundaries are specified \code{readWorksheet} assumes 
-the "bounding box" of the data as the corresponding boundaries.\cr\cr
+\code{startRow <= 0} then the first available row in the sheet is assumed. 
+If \code{endRow <= 0} then the last available row in the sheet is assumed.
+If \code{startCol <= 0} then the minimum column between \code{startRow} and
+\code{endRow} is assumed. If \code{endCol <= 0} then the maximum column between
+\code{startRow} and \code{endRow} is assumed. In other words, if no boundaries are specified \code{readWorksheet} assumes the "bounding box" of the data as the corresponding boundaries.\cr
+The arguments \code{autofitRow} and \code{autofitCol} (both defaulting to \code{TRUE}) can be used to skip leading and trailing empty rows even in case \code{startRow}, \code{endRow}, \code{startCol} and \code{endCol} are specified to values \code{> 0}. This can be useful if data is expected within certain given boundaries but the exact location is not available.\cr\cr
 
 If all four coordinate arguments are missing this behaves as above with
 \code{startRow = 0}, \code{startCol = 0}, \code{endRow = 0} and

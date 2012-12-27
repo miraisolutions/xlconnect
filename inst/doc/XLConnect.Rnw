@@ -8,7 +8,6 @@
 %\VignetteDepends{forecast}
 %\VignetteDepends{ggplot2}
 %\VignetteDepends{scales}
-%%\VignetteDepends{tikzDevice}
 %\VignetteDepends{zoo}
 % \usepackage{Sweave}
 \usepackage[latin1]{inputenc}
@@ -616,7 +615,7 @@ Loading the required packages:
 	require(forecast)
 	require(zoo)
 	require(ggplot2) # >= 0.9.3
-	require(scales)
+  require(scales)
 @ 
 
 Preparing the data to be reported:

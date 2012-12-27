@@ -45,10 +45,10 @@ test.workbook.getSheetPos <- function() {
 	
 	# Check that querying a non-existing worksheet results in a 0 index (*.xls)
 	checkEquals(getSheetPos(wb.xls, "NotExisting"), c("NotExisting" = 0))
-	checkEquals(as.vector(getSheetPos(wb.xls, "%#ç%+ü[-")), 0)
+	checkEquals(as.vector(getSheetPos(wb.xls, "%#?%+?[-")), 0)
 	
 	# Check that querying a non-existing worksheet results in a 0 index (*.xls)
 	checkEquals(getSheetPos(wb.xlsx, "NotExisting"), c("NotExisting" = 0))
-	checkEquals(as.vector(getSheetPos(wb.xlsx, "%#ç%+ü[-")), 0)
+	checkEquals(as.vector(getSheetPos(wb.xlsx, "%#?%+?[-")), 0)
 	
 }

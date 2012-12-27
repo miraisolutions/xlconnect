@@ -124,7 +124,7 @@ test.workbook.readNamedRegion <- function() {
 	
 	target = data.frame(
 		"With whitespace" = 1:4,
-		"And some other funky characters: _=?^~!$@#%ง" = letters[1:4],
+		"And some other funky characters: _=?^~!$@#%ยง" = letters[1:4],
 		check.names = FALSE,
 		stringsAsFactors = FALSE
 	)

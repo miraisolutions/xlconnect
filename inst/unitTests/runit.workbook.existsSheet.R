@@ -40,7 +40,7 @@ test.workbook.existsSheet <- function() {
 	# Check that the following do NOT exists (*.xls)
 	checkTrue(!existsSheet(wb.xls, "DDD"))
 	checkTrue(!existsSheet(wb.xls, "'illegal name"))
-	checkTrue(!existsSheet(wb.xls, "%&$$-^~@afk20 235-ääaü"))
+	checkTrue(!existsSheet(wb.xls, "%&$$-^~@afk20 235-??a?"))
 	
 	# Check that the following names exists (*.xlsx)
 	checkTrue(existsSheet(wb.xlsx, "AAA"))
@@ -50,6 +50,6 @@ test.workbook.existsSheet <- function() {
 	# Check that the following do NOT exists (*.xlsx)
 	checkTrue(!existsSheet(wb.xlsx, "DDD"))
 	checkTrue(!existsSheet(wb.xlsx, "'illegal name"))
-	checkTrue(!existsSheet(wb.xlsx, "%&$$-^~@afk20 235-ääaü"))
+	checkTrue(!existsSheet(wb.xlsx, "%&$$-^~@afk20 235-??a?"))
 	
 }

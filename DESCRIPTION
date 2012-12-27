@@ -8,7 +8,7 @@ Maintainer: Martin Studer <martin.studer@mirai-solutions.com>
 URL: http://www.mirai-solutions.com , http://miraisolutions.wordpress.com
 SystemRequirements: java (>= 1.6)
 Depends: R (>= 2.10.0), XLConnectJars (== 0.2-4), rJava, utils, methods
-Suggests: RUnit, lattice, ggplot2 (>= 0.9.3), fImport, forecast, zoo
+Suggests: RUnit, lattice, ggplot2 (>= 0.9.3), fImport, forecast, zoo, scales
 Description: Manipulate Excel files from R
 License: GPL-3
 LazyLoad: yes
