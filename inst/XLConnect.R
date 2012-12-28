@@ -44,7 +44,8 @@ saveWorkbook(wb)
 ### code chunk number 6: simpleEx
 ###################################################
 require(XLConnect)
-writeWorksheetToFile("XLConnectExample2.xlsx", data = ChickWeight, sheet = "chickSheet", startRow = 3, startCol = 4)
+writeWorksheetToFile("XLConnectExample2.xlsx", data = ChickWeight, 
+sheet = "chickSheet", startRow = 3, startCol = 4)
 
 
 ###################################################
@@ -122,8 +123,8 @@ data = readNamedRegionFromFile("XLConnectExample3.xlsx", "womenName")
 	require(fImport)
 	require(forecast)
 	require(zoo)
-	require(ggplot2) # >= 0.9.2
-	require(scales)
+	require(ggplot2) # >= 0.9.3
+  require(scales)
 
 
 ###################################################

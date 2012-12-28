@@ -837,10 +837,30 @@ you will be running the code at a different time.
 
 We have introduced the following updates in version \Sexpr{getOption("XLConnect.Version")} of \pkg{XLConnect}:
 \begin{itemize}
-	\item{Added new methods for clearing sheets, named regions and cell ranges}
-	\item{Fixed an issue with overwriting cells of a different type}
-	\item{Fixed issue with failing unit tests on R-devel (issue with Excel date/time values and increased precision of
-		  all.equal for POSIXct)}
+	\item{Ability to read cached cell values. There is a new argument useCachedValues
+    to methods readWorksheet and readNamedRegion. This is especially useful for
+    cells with complex formulas that XLConnect (Apache POI) cannot evaluate and
+    so far would have resulted in NAs being returned. With this new option
+    XLConnect can now read the cached values of cells.}
+	\item{There are new arguments keep and drop to readWorksheet and readNamedRegion
+    which allow filtering of columns before the data is imported to R. This can
+    result in much better performance compared to importing the full data to R
+    and then doing the subsetting in R.}
+  \item{String conversions when reading in data from Excel (readWorksheet, readNamedRegion)
+    now respect the data format of the cells}
+  \item{Support for numeric missing value identifiers (see method setMissingValue)}
+  \item{New Vignette "XLConnect for the Impatient" to get people started quickly}
+  \item{Added a new function getLastColumn to query the last non-empty column in a
+    worksheet}
+  \item{The bounding box detection algorithm for readWorksheet has been adapted to better
+    deal with leading and trailing rows and columns of blank cells. In addition, new
+    arguments autofitRow and autofitCol have been introduced that allow removal of
+    leading and trailing rows and columns even in case boundaries have been specified
+    by the user. This is useful in situations where the data is expected within certain
+    given boundaries but the exact location is not known.}
+  \item{Fixed an issue with writing empty data.frames}
+  \item{Moved to Apache POI 3.9 (see package XLConnectJars)}
+  \item{Ensured vignette compatibility with ggplot2 0.9.3}
 \end{itemize}
 
 A summary of news in \pkg{XLConnect} \Sexpr{getOption("XLConnect.Version")} can be found in the 
@@ -1033,7 +1053,7 @@ We will do our best to reply to your enquires as quickly as possible!
 			\\\urlwofont{http://www.dummies.com/how-to/content/how-to-read-data-from-excel-into-r.html} 		
 	\item 	"R for Dummies", book by Joris Meys and Andrie de Vries, page 211:
 			\\\urlwofont{http://tinyurl.com/c54e35m}
-	\item 	"Grundlagen der Datenanalyse mit R: Eine anwendungsorientierte Einfuhrung", book by Daniel Wollschl?ger:
+	\item 	"Grundlagen der Datenanalyse mit R: Eine anwendungsorientierte Einfuhrung", book by Daniel Wollschläger:
 			\\\urlwofont{http://books.google.ch/books?id=tlmcPQ9YZP4C&printsec=frontcover&source=gbs_ge_summary_r&cad=0#v=onepage&q&f=false}
 	
 \end{enumerate}

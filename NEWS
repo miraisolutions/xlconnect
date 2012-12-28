@@ -1,7 +1,7 @@
 XLConnect News
 --------------
 
-0.2-4 2012-01-??
+0.2-4 2013-01-??
   * Ability to read cached cell values. There is a new argument useCachedValues
     to methods readWorksheet and readNamedRegion. This is especially useful for
     cells with complex formulas that XLConnect (Apache POI) cannot evaluate and
@@ -17,7 +17,14 @@ XLConnect News
   * New Vignette "XLConnect for the Impatient" to get people started quickly
   * Added a new function getLastColumn to query the last non-empty column in a
     worksheet
+  * The bounding box detection algorithm for readWorksheet has been adapted to better
+    deal with leading and trailing rows and columns of blank cells. In addition, new
+    arguments autofitRow and autofitCol have been introduced that allow removal of
+    leading and trailing rows and columns even in case boundaries have been specified
+    by the user. This is useful in situations where the data is expected within certain
+    given boundaries but the exact location is not known.
   * Fixed an issue with writing empty data.frames
+  * Moved to Apache POI 3.9 (see package XLConnectJars)
   * Ensured vignette compatibility with ggplot2 0.9.3
 
 0.2-3 2012-11-05
