@@ -81,13 +81,13 @@
 
 \begin{center}
 \textcolor{MidnightBlue}{\textbf{\huge \pkg{XLConnect} for the Impatient} \\[15pt]}
-\pkg{XLConnect} Version \Sexpr{getOption("XLConnect.Version")}\qquad \\
-\monthname, \the\year \\[15pt]
+\pkg{XLConnect} Version \Sexpr{getOption("XLConnect.Version")}\qquad \monthname, \the\year \\[15pt]
 \end{center}
 
 \begin{tabbing}
-\textbf{\underline{Installation:}} ~~~~~~~~~~\= \code{install.packages("XLConnect")}, Mac: \code{install.packages("XLConnect", type = "source")} \\[3pt]
-\textbf{\underline{Loading library:}} \> \code{library(XLConnect)} \\
+\textbf{Installation:} ~~~~~~~~~~~~~~~~~~~~~~~\= \code{install.packages("XLConnect")}, Mac: \code{install.packages("XLConnect", type = "source")} \\
+\textbf{Loading library:} \> \code{library(XLConnect)} \\
+\textbf{Help on any function:} \> \code{help(functionName)} \\
 \end{tabbing}
 
 \thispagestyle{empty}
@@ -108,8 +108,8 @@
     
     \matrix (xA)[right = 0.2cm of xAB,draw,rounded corners,fill=green!20]
     {
-        \node[codeEx](codeEx1) {\code{readWorksheetFromFile(...)}};\\[1ex]
-        \node[codeEx](codeEx2) {\code{writeWorksheetToFile(...)}};\\
+        \node[codeEx](codeEx1) {\code{readWorksheetFromFile(file,...)}};\\[1ex]
+        \node[codeEx](codeEx2) {\code{writeWorksheetToFile(file, data, sheet,...)}};\\
     };
     
     \matrix (xAC)[above = 0.2cm of xA, draw,rounded corners,fill=blue!20]
@@ -119,8 +119,8 @@
 
     \matrix (xB)[right = 0.2cm of xA,draw,rounded corners,fill=green!20]
     {
-        \node[codeEx](codeEx3) {\code{data = readNamedRegionFromFile(...)}}; \\[1ex]
-        \node[codeEx](codeEx4) {\code{writeNamedRegionToFile(...)}};\\
+        \node[codeEx](codeEx3) {\code{data = readNamedRegionFromFile(file, name)}}; \\[1ex]
+        \node[codeEx](codeEx4) {\code{writeNamedRegionToFile(file, data, name, ...)}};\\
     };
     
     \matrix (xBD)[above = 0.2cm of xB, draw,rounded corners,fill=blue!20]
@@ -135,14 +135,14 @@
     
     \matrix (xC)[below = 0.2cm of xA,draw,rounded corners,fill=green!20]
     {
-        \node[codeEx](codeEx5) {\code{wb = loadWorkbook(...)} \\ \code{data1 = readWorksheet(...)} \\ \code{data2 = readWorksheet(...)} \\ ...}; \\[1ex]
-        \node[codeEx](codeEx6) {\code{wb = loadWorkbook(...)} \\ \code{createSheet(...)} \\ \code{writeWorksheet(wb, data1, ...)} \\ \code{writeWorksheet(wb, data2, ...)} \\ \code{saveWorkbook(wb)}};\\
+        \node[codeEx](codeEx5) {\code{wb = loadWorkbook(filename)} \\ \code{data1 = readWorksheet(wb,sheet1,...)} \\ \code{data2 = readWorksheet(wb,sheet2,...)} \\ ...}; \\[1ex]
+        \node[codeEx](codeEx6) {\code{wb = loadWorkbook(filename)} \\ \code{createSheet(wb, sheet1)} \\ \code{writeWorksheet(wb, data1, sheet1, ...)} \\ \code{saveWorkbook(wb)}};\\
     };
 
     \matrix (xD)[below = 0.2cm of xB,draw,rounded corners,fill=green!20]
     {
-        \node[codeEx](codeEx7) {\code{wb = loadWorkbook(...)} \\ \code{data1 = readNamedRegion(...)} \\ \code{data2 = readNamedRegion(...)} \\ ...}; \\[1ex]
-        \node[codeEx](codeEx8) {\code{wb = loadWorkbook(...)} \\ \code{createName(...)} \\ \code{writeNamedRegion(wb, data1, ...)} \\ \code{writeNamedRegion(wb, data2, ...)} \\ \code{saveWorkbook(wb)}};\\
+        \node[codeEx](codeEx7) {\code{wb = loadWorkbook(filename)} \\ \code{data1 = readNamedRegion(wb, name1,...)} \\ \code{data2 = readNamedRegion(wb, name2,...)} \\ ...}; \\[1ex]
+        \node[codeEx](codeEx8) {\code{wb = loadWorkbook(filename)} \\ \code{createName(wb, name1,...)} \\ \code{writeNamedRegion(wb, data1, name1, ...)} \\ \code{saveWorkbook(wb)}};\\
     };
     
 \end{tikzpicture}
