@@ -45,7 +45,7 @@
 
 % Page layout
 \usepackage[parfill]{parskip}
-\usepackage[letterpaper,margin=1in]{geometry}
+\usepackage[letterpaper,margin=2cm]{geometry}
 \usepackage{epigraph}
 \usepackage{multicol}
 \usepackage{pdflscape}
@@ -146,5 +146,10 @@
     };
     
 \end{tikzpicture}
+
+\vspace{0.5cm}
+\begin{center}
+\url{http://www.mirai-solutions.com}, \url{http://miraisolutions.wordpress.com}
+\end{center}
 
 \end{document}
