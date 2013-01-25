@@ -55,27 +55,21 @@ setMethod("readWorksheet",
 			
 			# returns a list of RDataFrameWrapper Java object references)
 
-			if (is.null(keep) && is.null(drop)) {
-				dataFrame <- xlcCall(object, "readWorksheet", as.integer(sheet - 1), as.integer(startRow - 1), 
-						as.integer(startCol - 1), as.integer(endRow - 1), as.integer(endCol - 1), header, 
-						.jarray(classToXlcType(colTypes)), forceConversion, dateTimeFormat, useCachedValues, .jnull("java/lang/Integer"),
-            autofitRow, autofitCol, SIMPLIFY = FALSE)
-			} else {
-			  boundingBoxDim = getBoundingBox(object, sheet, startRow = startRow, startCol = startCol, endRow = endRow, endCol = endCol,
-			                                  autofitRow = autofitRow, autofitCol = autofitCol)
-			  startRow = boundingBoxDim[1, ]
-			  startCol = boundingBoxDim[2, ]
-			  endRow = boundingBoxDim[3, ]
-			  endCol = boundingBoxDim[4, ]
-			  numcols = endCol - startCol + 1
-        
-				subset <- getColSubset(object, sheet, startRow, endRow, startCol, endCol, header, numcols, keep, drop)
-				dataFrame <- xlcCall(object, "readWorksheet", as.integer(sheet - 1), as.integer(startRow - 1), 
-						as.integer(startCol - 1), as.integer(endRow - 1), as.integer(endCol - 1), header, 
-						.jarray(classToXlcType(colTypes)), forceConversion, dateTimeFormat, useCachedValues, subset,
-            autofitRow, autofitCol, SIMPLIFY = FALSE)
-			}
-				
+
+			boundingBoxDim = getBoundingBox(object, sheet, startRow = startRow, startCol = startCol, endRow = endRow, endCol = endCol,
+		                                  autofitRow = autofitRow, autofitCol = autofitCol)
+			startRow = boundingBoxDim[1, ]
+		  	startCol = boundingBoxDim[2, ]
+		 	endRow = boundingBoxDim[3, ]
+		  	endCol = boundingBoxDim[4, ]
+		  	numcols = ifelse(endCol == 0, 0, endCol - startCol + 1)
+			
+			subset <- getColSubset(object, sheet, startRow, endRow, startCol, endCol, header, numcols, keep, drop)
+			dataFrame <- xlcCall(object, "readWorksheet", as.integer(sheet - 1), as.integer(startRow - 1), 
+					as.integer(startCol - 1), as.integer(endRow - 1), as.integer(endCol - 1), header, 
+					.jarray(classToXlcType(colTypes)), forceConversion, dateTimeFormat, useCachedValues, subset,
+        			autofitRow, autofitCol, SIMPLIFY = FALSE)
+	
 			# get data.frames from Java
 			dataFrame = lapply(dataFrame, dataframeFromJava, check.names = check.names)
 			# extract rownames

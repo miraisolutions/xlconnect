@@ -46,12 +46,26 @@ Reads named regions from a \code{\linkS4class{workbook}}.
   workbook instead of re-evaluating them. This is particularly helpful in cases for reading data
   produced by Excel features not supported in XLConnect like references to external workbooks. 
   Defaults to \code{FALSE}, which means that formulas will be evaluated by XLConnect.}
-  \item{keep}{Vector of column names or indices to be kept in the output data frame.
+  \item{keep}{List of column names or indices to be kept in the output data frame.
+  It is possible to specify either \code{keep} or \code{drop}, but not both at the same time. 
+  Defaults to \code{NULL}. If a vector is passed as argument, it will be wrapped into a list.
+  This list gets replicated to match the length of the other arguments.
+  Example: if name = c("NamedRegion1", "NamedRegion2", "NamedRegion3") and keep = c(1,2), keep will be
+  internally converted into list(c(1,2)) and then replicated to match the number of named regions, i.e.
+  keep = list(c(1,2), c(1,2), c(1,2)). The result is that the first two columns of each named region
+  are kept. If keep = list(1,2) is specified, it will be replicated as list(1,2,1), i.e. respectively
+  the first, second and first column of the named regions "NamedRegion1", "NamedRegion2", "NamedRegion3"
+  will be kept.}
+  \item{drop}{List of column names or indices to be dropped in the output data frame.
   It is possible to specify either \code{keep} or \code{drop}, but not both at the same time.
-  Defaults to \code{NULL}.}
-  \item{drop}{Vector of column names or indices to be dropped in the output data frame.
-  It is possible to specify either \code{keep} or \code{drop}, but not both at the same time.
-  Defaults to \code{NULL}.}
+  Defaults to \code{NULL}. If a vector is passed as argument, it will be wrapped into a list.
+  This list gets replicated to match the length of the other arguments.
+  Example: if name = c("NamedRegion1", "NamedRegion2", "NamedRegion3") and drop = c(1,2), drop will be
+  internally converted into list(c(1,2)) and then replicated to match the number of named regions, i.e.
+  drop = list(c(1,2), c(1,2), c(1,2)). The result is that the first two columns of each named region
+  are dropped. If drop = list(1,2) is specified, it will be replicated as list(1,2,1), i.e. respectively
+  the first, second and first column of the named regions "NamedRegion1", "NamedRegion2", "NamedRegion3"
+  will be dropped.}
 }
 
 \details{

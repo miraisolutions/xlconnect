@@ -28,65 +28,75 @@
 #############################################################################
 
 getColSubset <- function(object, sheet, startRow, endRow, startCol, endCol, header, numcols, keep, drop){
-	if (!is.null(keep) && !is.null(drop)) {
-		stop("Specify either keep OR drop (not both)")
-	} else { 
-		if (is.null(drop)){
-			if(!is.list(keep)) keep = list(keep)
-			charColKept <- unlist(lapply(keep, is.character))
-			if(any(charColKept) && !header)
-				stop(paste("Header=F and keep values", paste(unlist(keep)[charColKept], collapse=", "), "of type character", sep=" "))
-			subset = lapply(keep, function(kp) {
-						if (is.numeric(kp)) {
-							outerCols=setdiff(kp, seq(numcols))
-							if (length(outerCols)!=0) {
-								stop(sprintf("Column(s) '%s' out of the bounding box!", paste(outerCols, collapse = ", ")))
-							} else {
-								subset = kp
-							}
-						} else
-						if (is.character(kp)) {
-							headerdf <- readWorksheet(object, sheet, startRow = startRow, endRow = startRow, startCol = startCol, endCol = endCol, header = FALSE)
-							columnNames = unlist(headerdf)
-							idx = match(kp, columnNames)
-							subset = idx
-							idx.na = is.na(idx)
-							if(any(idx.na)) {
-								stop(sprintf("Column name(s) '%s' not existing or out of the bounding box!", paste(kp[idx.na], collapse = ", ")))
-							}
-						}
-						
-						.jarray(as.integer(subset-1))
-					})
+	globalSubset <- list()
+	args <-	list(sheet=sheet, 
+			startRow=startRow, 
+			endRow=endRow, 
+			startCol=startCol, 
+			endCol=endCol, 
+			header=header, 
+			numcols=numcols, 
+			keep=if(is(keep, "list")) keep else list(keep), 
+			drop=if(is(drop, "list")) drop else list(drop))
+	maxlen <- max(sapply(args, length))
+	args_repl <- lapply(args, function(x) rep(x, length = maxlen))
+	
+	for(i in seq_len(maxlen)) {
+		cargs = lapply(args_repl, "[[", i)
+		if(is.null(cargs$drop) && is.null(cargs$keep)){
+			subset = seq_len(cargs$numcols)
+			globalSubset[[i]] <- .jarray(as.integer(subset-1))
+		} else if(!is.null(cargs$drop) && !is.null(cargs$keep)) {
+			stop("Specify either keep OR drop (not both)")
 		} else {
-			if(!is.list(drop)) drop = list(drop)
-			charColDropped <- unlist(lapply(drop, is.character))
-			if(any(charColDropped) && !header)
-				stop(paste("Header=F and drop values", paste(unlist(drop)[charColDropped], collapse=", "), "of type character", sep=" "))
-			drop = rep(drop, len=length(numcols))
-			subset = lapply(1:length(numcols), function(dpel) {
-						if (is.numeric(drop[[dpel]])) {
-							outerCols=setdiff(drop[[dpel]], seq(numcols[dpel]))
-							if (length(outerCols)!=0) {
-								stop(sprintf("Column(s) '%s' out of the bounding box!", paste(outerCols, collapse = ", ")))
-							} else {
-								subset = setdiff(seq(numcols[dpel]), drop[[dpel]])
-							}
-						} else if (is.character(drop[[dpel]])) {
-							if(header==F)
-								stop(paste("Error: Header=F and drop value", drop[[dpel]], "of type character"))
-							headerdf <- readWorksheet(object, sheet, startRow = startRow, endRow = startRow, startCol = startCol, endCol = endCol, header = FALSE)
-							columnNames = unlist(headerdf)
-							idx = match(drop[[dpel]], columnNames)
-							subset = setdiff(seq(numcols[[dpel]]), idx)
-							idx.na = is.na(idx)
-							if(any(idx.na)) {
-								stop(sprintf("Column name(s) '%s' not existing or out of the bounding box!", paste(drop[[dpel]][idx.na], collapse = ", ")))
-							}
-						}
-						.jarray(as.integer(subset-1))
-					})
+			if (is.null(cargs$drop)){
+				if(is.character(cargs$keep) && !cargs$header)
+					stop(paste("Header=F and keep values", paste(cargs$keep, collapse=", "), "of type character", sep=" "))	
+				
+				if (is.numeric(cargs$keep)) {
+					outerCols=setdiff(cargs$keep, seq_len(cargs$numcols))
+					if (length(outerCols)!=0) {
+						stop(sprintf("Column(s) '%s' out of the bounding box!", paste(outerCols, collapse = ", ")))
+					} else {
+						subset = cargs$keep
+					}
+				} else
+				if (is.character(cargs$keep)) {
+					columnNames <- readWorksheet(object, cargs$sheet, startRow = cargs$startRow, endRow = cargs$startRow, startCol = cargs$startCol, endCol = cargs$endCol, header = FALSE)
+					idx = match(cargs$keep, columnNames)
+					subset = idx
+					idx.na = is.na(idx)
+					if(any(idx.na)) {
+						stop(sprintf("Column name(s) '%s' not existing or out of the bounding box!", paste(cargs$keep[idx.na], collapse = ", ")))
+					}
+				}
+				
+				globalSubset[[i]] <- .jarray(as.integer(subset-1))
+		
+			} else {
+				if(is.character(cargs$drop) && !cargs$header)
+					stop(paste("Header=F and drop values", paste(cargs$drop, collapse=", "), "of type character", sep=" "))
+				if (is.numeric(cargs$drop)) {
+					outerCols=setdiff(cargs$drop, seq_len(cargs$numcols))
+					if (length(outerCols)!=0) {
+						stop(sprintf("Column(s) '%s' out of the bounding box!", paste(outerCols, collapse = ", ")))
+					} else {
+						subset = setdiff(seq_len(cargs$numcols), cargs$drop)
+					}
+				} else if (is.character(cargs$drop)) {
+					columnNames <- readWorksheet(object, cargs$sheet, startRow = cargs$startRow, endRow = cargs$startRow, startCol = cargs$startCol, endCol = cargs$endCol, header = FALSE)
+					idx = match(cargs$drop, columnNames)
+					subset = setdiff(seq_len(cargs$numcols), idx)
+					idx.na = is.na(idx)
+					if(any(idx.na)) {
+						stop(sprintf("Column name(s) '%s' not existing or out of the bounding box!", paste(cargs$drop[idx.na], collapse = ", ")))
+					}
+				}
+				globalSubset[[i]] <- .jarray(as.integer(subset-1))
+
+			}
 		}
-	}	
-	subset
+	}
+	
+	globalSubset
 }

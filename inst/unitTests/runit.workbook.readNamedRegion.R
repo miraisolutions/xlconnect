@@ -198,7 +198,15 @@ test.workbook.readNamedRegion <- function() {
 
 	# Keeping the same columns from multiple named regions (*.xlsx)
 	res <- readNamedRegion(wb.xlsx, name=c("Test","AAA","BBB"), header = TRUE, keep = c(1,3))
-	checkEquals(res, list(Test=checkDf[,c(1,3)], AAA=AAA[,c(1,3)], BBB=BBB[,c(1,3)]))	
+	checkEquals(res, list(Test=checkDf[,c(1,3)], AAA=AAA[,c(1,3)], BBB=BBB[,c(1,3)]))
+	
+	# Testing the correct replication of the keep argument (reading from 3 named regions, while keep has length 2) (*.xls)
+	res <- readNamedRegion(wb.xls, name=c("Test","AAA","BBB"), header = TRUE, keep = list(1,3))
+	checkEquals(res, list(Test=checkDf[1], AAA=AAA[3], BBB=BBB[1]))
+	
+	# Testing the correct replication of the keep argument (reading from 3 named regions, while keep has length 2) (*.xlsx)
+	res <- readNamedRegion(wb.xlsx, name=c("Test","AAA","BBB"), header = TRUE, keep = list(1,3))
+	checkEquals(res, list(Test=checkDf[1], AAA=AAA[3], BBB=BBB[1]))	
 	
 	# Keeping different columns from multiple named regions (*.xls)
 	res <- readNamedRegion(wb.xls, name = c("Test", "AAA", "BBB"), header = TRUE, keep = list(c(1,2),c(2,3),c(1,3)) )
@@ -223,6 +231,14 @@ test.workbook.readNamedRegion <- function() {
 	# Dropping the same columns from multiple named regions (*.xlsx)
 	res <- readNamedRegion(wb.xlsx, name=c("Test", "AAA", "BBB"), header = TRUE, drop = c(1,2))
 	checkEquals(res, list(Test=checkDf[,c(3,4)], AAA=data.frame(C=AAA[,3], stringsAsFactors=F), BBB=data.frame(F=BBB[,3], stringsAsFactors=F)))
+
+	# Testing the correct replication of the drop argument (reading from 3 named regions, while drop has length 2) (*.xls)
+	res <- readNamedRegion(wb.xls, name=c("Test","AAA","BBB"), header = TRUE, drop = list(1,2))
+	checkEquals(res, list(Test=checkDf[,c(2,3,4)], AAA=AAA[,c(1,3)], BBB=BBB[,c(2,3)]))
+	
+	# Testing the correct replication of the drop argument (reading from 3 named regions, while drop has length 2) (*.xlsx)
+	res <- readNamedRegion(wb.xlsx, name=c("Test","AAA","BBB"), header = TRUE, drop = list(1,2))
+	checkEquals(res, list(Test=checkDf[,c(2,3,4)], AAA=AAA[,c(1,3)], BBB=BBB[,c(2,3)]))	
 	
 	# Dropping different columns from multiple named regions (*.xls)
 	res <- readNamedRegion(wb.xls, name = c("Test", "AAA", "BBB"), header = TRUE, drop = list(c(1,2),c(2,3),c(1,3)) )

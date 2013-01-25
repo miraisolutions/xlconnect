@@ -49,15 +49,10 @@ setMethod("readNamedRegion",
 		endCol = namedim[4,]
 		numcols = endCol-startCol+1
 
+		subset <- getColSubset(object, sheet, startRow, endRow, startCol, endCol, header, numcols, keep, drop)
+		dataFrame <- xlcCall(object, "readNamedRegion", name, header, .jarray(classToXlcType(colTypes)), 
+				forceConversion, dateTimeFormat, useCachedValues, subset, SIMPLIFY = FALSE)
 		
-		if (is.null(keep) && is.null(drop)) {
-			dataFrame <- xlcCall(object, "readNamedRegion", name, header, .jarray(classToXlcType(colTypes)), 
-					forceConversion, dateTimeFormat, useCachedValues, .jnull("java/lang/Integer"), SIMPLIFY = FALSE)
-		} else{
-			subset <- getColSubset(object, sheet, startRow, endRow, startCol, endCol, header, numcols, keep, drop)
-			dataFrame <- xlcCall(object, "readNamedRegion", name, header, .jarray(classToXlcType(colTypes)), 
-					forceConversion, dateTimeFormat, useCachedValues, subset, SIMPLIFY = FALSE)
-		}
 
     # get data.frames from Java
     dataFrame = lapply(dataFrame, dataframeFromJava, check.names = check.names)

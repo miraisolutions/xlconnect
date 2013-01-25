@@ -383,6 +383,14 @@ test.workbook.readWorksheet <- function() {
 	res <- readWorksheet(wb.xlsx, sheet=c("Test1","Test4","Test5"), header = TRUE, keep = c(1,2,3))
 	checkEquals(res, list(Test1=checkDf[1:3], Test4=checkDf1[1:3], Test5=checkDf2[1:3]))
 	
+	# Testing the correct replication of the keep argument (reading from 3 sheets, while keep has length 2) (*.xls)
+	res <- readWorksheet(wb.xls, sheet=c("Test1","Test4","Test5"), header = TRUE, keep = list(1,2))
+	checkEquals(res, list(Test1=checkDf[1], Test4=checkDf1[2], Test5=checkDf2[1]))	
+
+	# Testing the correct replication of the keep argument (reading from 3 sheets, while keep has length 2) (*.xlsx)
+	res <- readWorksheet(wb.xlsx, sheet=c("Test1","Test4","Test5"), header = TRUE, keep = list(1,2))
+	checkEquals(res, list(Test1=checkDf[1], Test4=checkDf1[2], Test5=checkDf2[1]))	
+	
 	# Keeping different columns from multiple sheets (*.xls)
 	res <- readWorksheet(wb.xls, sheet = c("Test1", "Test4", "Test5"), header = TRUE, keep = list(c(1,2),c(2,3),c(1,3)) )
 	checkEquals(res, list(Test1=checkDf[1:2], Test4=checkDf1[2:3], Test5=checkDf2[c(1,3)]))
@@ -406,14 +414,22 @@ test.workbook.readWorksheet <- function() {
 	res <- readWorksheet(wb.xlsx, sheet = c("Test1", "Test4", "Test5", "AAA"), header = TRUE, keep = list(c(1,2),c(2,3)) )
 	checkEquals(res, list(Test1=checkDf[1:2], Test4=checkDf1[2:3], Test5=checkDf2[1:2], AAA=testAAA[2:3]))
 	
-  # Dropping the same columns from multiple sheets (*.xls)
+  	# Dropping the same columns from multiple sheets (*.xls)
 	res <- readWorksheet(wb.xls, sheet=c("Test1","Test4","Test5"), header = TRUE, drop = c(1,2))
 	checkEquals(res, list(Test1=checkDf[3:4], Test4=checkDf1[3:4], Test5=checkDf2[3:4]))
 	
 	# Dropping the same columns from multiple sheets (*.xlsx)
 	res <- readWorksheet(wb.xlsx, sheet=c("Test1","Test4","Test5"), header = TRUE, drop = c(1,2))
 	checkEquals(res, list(Test1=checkDf[3:4], Test4=checkDf1[3:4], Test5=checkDf2[3:4]))
+	
+	# Testing the correct replication of the drop argument (reading from 3 sheets, while drop has length 2) (*.xls)
+	res <- readWorksheet(wb.xls, sheet=c("Test1","Test4","Test5"), header = TRUE, drop = list(1,2))
+	checkEquals(res, list(Test1=checkDf[2:4], Test4=checkDf1[c(1,3,4)], Test5=checkDf2[2:4]))
 
+	# Testing the correct replication of the drop argument (reading from 3 sheets, while drop has length 2) (*.xlsx)
+	res <- readWorksheet(wb.xlsx, sheet=c("Test1","Test4","Test5"), header = TRUE, drop = list(1,2))
+	checkEquals(res, list(Test1=checkDf[2:4], Test4=checkDf1[c(1,3,4)], Test5=checkDf2[2:4]))	
+	
 	# Dropping different columns from multiple sheets (*.xls)
 	res <- readWorksheet(wb.xls, sheet = c("Test1", "Test4", "Test5"), header = TRUE, drop = list(c(1,2),c(2,3),c(1,3)) )
 	checkEquals(res, list(Test1=checkDf[3:4], Test4=checkDf1[c(1,4)], Test5=checkDf2[c(2,4)]))
