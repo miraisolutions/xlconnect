@@ -2,30 +2,33 @@
 \docType{methods}
 \alias{setCellStyle}
 \alias{setCellStyle-methods}
-\alias{setCellStyle,workbook,character-method}
-\alias{setCellStyle,workbook,numeric-method}
+\alias{setCellStyle,workbook,missing,character-method}
+\alias{setCellStyle,workbook,missing,numeric-method}
+\alias{setCellStyle,workbook,character,missing-method}
 \title{Setting cell styles}
 \description{
 Sets cell styles for specific cells in a \code{\linkS4class{workbook}}.
 }
 \usage{
-\S4method{setCellStyle}{workbook,character}(object,sheet,row,col,cellstyle)
-\S4method{setCellStyle}{workbook,numeric}(object,sheet,row,col,cellstyle)
+\S4method{setCellStyle}{workbook,missing,character}(object,formula,sheet,row,col,cellstyle)
+\S4method{setCellStyle}{workbook,missing,numeric}(object,formula,sheet,row,col,cellstyle)
+\S4method{setCellStyle}{workbook,character,missing}(object,formula,sheet,row,col,cellstyle)
 }
 
 \arguments{
   \item{object}{The \code{\linkS4class{workbook}} to use}
-  \item{sheet}{Name or index of the sheet the cell is on}
-  \item{row}{Row index of the cell to edit}
-  \item{col}{Column index of the cell to edit}
-  \item{cellstyle}{\code{\linkS4class{cellstyle}} to apply to the cell}
+  \item{formula}{A formula specification in the form Sheet!B8:C17. Use either the argument \code{formula} or the combination of \code{sheet}, \code{row} and \code{col}.}
+  \item{sheet}{Name or index of the sheet the cell is on. Use either the argument \code{formula} or the combination of \code{sheet}, \code{row} and \code{col}.}
+  \item{row}{Row index of the cell to apply the cellstyle to.}
+  \item{col}{Column index of the cell to apply the cellstyle to.}
+  \item{cellstyle}{\code{\linkS4class{cellstyle}} to apply}
 }
 
 \details{
 Sets the specified \code{\linkS4class{cellstyle}} for the specified cell
-(\code{row}, \code{col}) on the specified \code{sheet}. Note that the
+(\code{row}, \code{col}) on the specified \code{sheet} or alternatively for the cells referred to by \code{formula}. Note that the
 arguments are vectorized such that multiple cells can be styled with one
-method call. 
+method call. Use either the argument \code{formula} or the combination of \code{sheet}, \code{row} and \code{col}.
 }
 \author{
 Martin Studer\cr

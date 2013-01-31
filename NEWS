@@ -1,7 +1,7 @@
 XLConnect News
 --------------
 
-0.2-4 2013-01-??
+0.2-4 2013-01-31
   * Ability to read cached cell values. There is a new argument useCachedValues
     to methods readWorksheet and readNamedRegion. This is especially useful for
     cells with complex formulas that XLConnect (Apache POI) cannot evaluate and
@@ -23,6 +23,9 @@ XLConnect News
     leading and trailing rows and columns even in case boundaries have been specified
     by the user. This is useful in situations where the data is expected within certain
     given boundaries but the exact location is not known.
+  * Exposed setCellStyle(formula, cellstyle) to be able to set a cellstyle on a whole
+    region for improved performance. Note that there is a slight API change to the
+    setCellStyle method.
   * Fixed an issue with writing empty data.frames
   * Moved to Apache POI 3.9 (see package XLConnectJars)
   * Ensured vignette compatibility with ggplot2 0.9.3

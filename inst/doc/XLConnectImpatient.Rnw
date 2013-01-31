@@ -108,7 +108,7 @@
     
     \matrix (xA)[right = 0.2cm of xAB,draw,rounded corners,fill=green!20]
     {
-        \node[codeEx](codeEx1) {\code{readWorksheetFromFile(file,...)}};\\[1ex]
+        \node[codeEx](codeEx1) {\code{data = readWorksheetFromFile(file,...)}};\\[1ex]
         \node[codeEx](codeEx2) {\code{writeWorksheetToFile(file, data, sheet,...)}};\\
     };
     
