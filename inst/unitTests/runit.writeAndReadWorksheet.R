@@ -116,13 +116,13 @@ test.workbook.writeAndReadWorksheet <- function() {
 	createSheet(wb.xls, "rownames")
 	writeWorksheet(wb.xls, mtcars, "rownames", startRow = 9, startCol = 10, header = TRUE, rownames = "Car")
 	res <- readWorksheet(wb.xls, "rownames", startRow = 9, startCol = 10)
-	checkEquals(includeRownames(mtcars, "Car"), res, check.attributes = FALSE, check.names = TRUE)
+	checkEquals(XLConnect:::includeRownames(mtcars, "Car"), res, check.attributes = FALSE, check.names = TRUE)
 	
 	# Check writing of data.frame with row names (*.xlsx)
 	createSheet(wb.xlsx, "rownames")
 	writeWorksheet(wb.xlsx, mtcars, "rownames", startRow = 9, startCol = 10, header = TRUE, rownames = "Car")
 	res <- readWorksheet(wb.xlsx, "rownames", startRow = 9, startCol = 10)
-	checkEquals(includeRownames(mtcars, "Car"), res, check.attributes = FALSE, check.names = TRUE)
+	checkEquals(XLConnect:::includeRownames(mtcars, "Car"), res, check.attributes = FALSE, check.names = TRUE)
 	
 	# Check writing & reading of data.frame with row names (*.xls)
 	createSheet(wb.xls, name = "rownames2")

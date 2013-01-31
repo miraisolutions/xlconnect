@@ -79,6 +79,7 @@ exportMethods(
 export(
 	aref,
 	aref2idx,
+  checkNoException,
 	col2idx,
 	cref2idx,
 	extractSheetName,
@@ -87,8 +88,10 @@ export(
 	idx2cref,
 	mirai,
 	loadWorkbook,
+  normalizeDataframe,
 	readNamedRegionFromFile,
 	readWorksheetFromFile,
+  rsrc,
 	runUnitTests,
 	writeNamedRegionToFile,
 	writeWorksheetToFile,

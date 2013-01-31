@@ -20,16 +20,12 @@
 
 #############################################################################
 #
-# XLConnect Package Initialization
+# Utility function used by unit tests to refer to unit test resources
 # 
 # Author: Martin Studer, Mirai Solutions GmbH
 #
 #############################################################################
 
-.onLoad <- function(libname, pkgname) {
-	# Load Java dependencies (all jars inside the java subfolder)
-	.jpackage(name = pkgname, jars = "*")
-	
-	# Perform general XLConnect settings - pass package description
-	XLConnectSettings(packageDescription(pkgname))
+rsrc <- function(resource) {
+  file.path(options()$path.unit.tests, resource)
 }
