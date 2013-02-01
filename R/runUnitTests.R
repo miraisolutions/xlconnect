@@ -51,7 +51,10 @@ runUnitTests <- function() {
 		options(path.unit.tests = path)
 		
 		# Set up and run test suite
-		orig.opts <- options(encoding = "UTF-8")
+		Sys.setlocale(category = "LC_NUMERIC", locale = "C")
+    jlocale = J("java.util.Locale")
+    jlocale$setDefault(jlocale$US)
+    orig.opts <- options(encoding = "UTF-8")
 		TestSuite <- defineTestSuite(paste(pkg, "Test Suite"), dirs = path)
 		TestResult <- runTestSuite(TestSuite)
 		options(orig.opts)
