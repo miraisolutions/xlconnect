@@ -1,6 +1,13 @@
 XLConnect News
 --------------
 
+0.2-5 2013-03-18
+  * Merged XLConnect & XLConnectJars
+  * Fixed namespace import issue with rJava
+  * Fixed an issue with empty cells in header rows
+  * Moved to Joda-Time 2.2
+  * Moved to xmlbeans 2.6.0 
+
 0.2-4 2013-01-31
   * Ability to read cached cell values. There is a new argument useCachedValues
     to methods readWorksheet and readNamedRegion. This is especially useful for
@@ -37,158 +44,158 @@ XLConnect News
   * Added vectorization for rownames argument in readWorksheet, readNamedRegion, 
     writeWorksheet and writeNamedRegion
 
-0.2-2	2012-10-15
-	*	Fixed issue in package vignette sample code
+0.2-2 2012-10-15
+  * Fixed issue in package vignette sample code
 	
-0.2-1	2012-08-15
-	*	Fixed issue with overwriting cells of different type
-	*	Fixed issue with failing unit tests on R-devel
-		(issue with Excel date/time values and increased precision of
-		all.equal for POSIXct)
-	*	Added new methods for clearing cells from a sheet, a named region
-		or a range (clearSheet, clearNamedRegion, clearRange, clearRangeFromReference)
+0.2-1 2012-08-15
+  * Fixed issue with overwriting cells of different type
+  * Fixed issue with failing unit tests on R-devel
+    (issue with Excel date/time values and increased precision of
+    all.equal for POSIXct)
+  * Added new methods for clearing cells from a sheet, a named region
+    or a range (clearSheet, clearNamedRegion, clearRange, clearRangeFromReference)
 
-0.2-0	2012-07-18
-	*	Moved to Apache POI 3.8
-	*	Fixed lazy evaluation issues with S4 generics. Generic methods
-		now fully expand the argument list in order to have the
-		arguments immediately evaluated.
-	*	readWorksheet now returns a _named_ list if more than one worksheet
-		is read. This provides convenient access to the corresponding data
-		by list subsetting.
-	*	readWorksheet and readNamedRegion now provide a new argument named
-		'check.names' that controls whether data.frame column names are
-		checked for syntactically valid variable names (see the 'check.names'
-		argument of data.frame).
-	*	Support for setting the color of worksheet tabs via the setSheetColor
-		method (only for *.xlsx files).		
-	*	Support for freeze panes and split panes.
-	*	Removing dependency to tikzDevice package
-	*	Updates to the package vignette. Package vignette code examples can
-		be found in the XLConnect.R script file in the top level library
-		directory or by typing edit(file = system.file("XLConnect.R", 
-		package = "XLConnect"))
+0.2-0 2012-07-18
+  * Moved to Apache POI 3.8
+  * Fixed lazy evaluation issues with S4 generics. Generic methods
+    now fully expand the argument list in order to have the
+    arguments immediately evaluated.
+  * readWorksheet now returns a _named_ list if more than one worksheet
+    is read. This provides convenient access to the corresponding data
+    by list subsetting.
+  * readWorksheet and readNamedRegion now provide a new argument named
+    'check.names' that controls whether data.frame column names are
+    checked for syntactically valid variable names (see the 'check.names'
+    argument of data.frame).
+  * Support for setting the color of worksheet tabs via the setSheetColor
+    method (only for *.xlsx files).		
+  * Support for freeze panes and split panes.
+  * Removing dependency to tikzDevice package
+  * Updates to the package vignette. Package vignette code examples can
+    be found in the XLConnect.R script file in the top level library
+    directory or by typing edit(file = system.file("XLConnect.R", 
+    package = "XLConnect"))
 	
-0.1-9	2012-03-08
-	*	Vignette examples now run with ggplot2 0.9.0+
-	*	loadWorkbook and saveWorkbook now expand paths using
-		path.expand
-	*	readWorksheet provides a new argument 'region' that allows
-		to specify area bounds in an alternative way to startRow,
-		startCol, endRow and endCol.
+0.1-9 2012-03-08
+  * Vignette examples now run with ggplot2 0.9.0+
+  * loadWorkbook and saveWorkbook now expand paths using
+    path.expand
+  * readWorksheet provides a new argument 'region' that allows
+    to specify area bounds in an alternative way to startRow,
+    startCol, endRow and endCol.
 
-0.1-8	2012-02-10
-	*	Moved to Apache POI 3.8-beta5
-	*	Improved & extended package vignette
-	*	Introduced xlcEdit for editing data.frames in an Excel editor,
-		e.g. MS Excel.
-	*	Columns in data.frames that have a type/class with no direct
-		correspondence in Excel (i.e. everything which is not a logical,
-		numeric, character or Date/POSIXt) are converted to character
-		using as.character when writing to Excel rather than the 
-		following error being thrown:
-		"Unsupported data type (class) detected!"
-	*	New arguments colTypes, forceConversion and dateTimeFormat
-		for methods readNamedRegion and readWorksheet. colTypes allows
-		to pre-specify column types (and force them in conjunction with
-		forceConversion) when reading in data. forceConversion forces 
-		conversion to less generic types (e.g. a string in Excel to a 
-		POSIXt in R). dateTimeFormat is a format specifier used when 
-		doing date/time conversions.
+0.1-8 2012-02-10
+  * Moved to Apache POI 3.8-beta5
+  * Improved & extended package vignette
+  * Introduced xlcEdit for editing data.frames in an Excel editor,
+    e.g. MS Excel.
+  * Columns in data.frames that have a type/class with no direct
+    correspondence in Excel (i.e. everything which is not a logical,
+    numeric, character or Date/POSIXt) are converted to character
+    using as.character when writing to Excel rather than the 
+    following error being thrown:
+    "Unsupported data type (class) detected!"
+  * New arguments colTypes, forceConversion and dateTimeFormat
+    for methods readNamedRegion and readWorksheet. colTypes allows
+    to pre-specify column types (and force them in conjunction with
+    forceConversion) when reading in data. forceConversion forces 
+    conversion to less generic types (e.g. a string in Excel to a 
+    POSIXt in R). dateTimeFormat is a format specifier used when 
+    doing date/time conversions.
 	
-0.1-7	2011-10-19
-	*	Moved to Apache POI 3.8-beta4
-	*	Performance improvements when writing large xlsx files. This
-		fix was implemented on the Apache POI side.
-	*	An issue was fixed where the bounding box was not appropriately
-		determined when using readWorksheet. The bounding box is now
-		determined by first determining start and end row. Afterwards,
-		for all rows between the start and the end row the minimum and 
-		maximum column is determined.
-	*	An issue was fixed where the named region was automatically
-		expanded by one row when writing data to a named region without
-		column headers.
-	*	New workbook data extraction & replacement operators [, [<-,
-		[[, [[<-. These are "syntactic sugar" for the already existing
-		methods readWorksheet, writeWorksheet, readNamedRegion and
-		writeNamedRegion.
-	*	Support for saving workbooks to a new file ("save as").
-	*	Support for querying the last (non-empty) row in a worksheet
-	*	Support for including the row names of a data.frame when
-		writing to a worksheet or a named region. In addition, when
-		reading data from a worksheet or a named region a column
-		can be specified that should be turned into row names.
-	*	Extended use of setMissingValue. setMissingValue allows to
-		define a set of missing value identifiers that are recognized
-		as missing values when reading in data. The first element of
-		this set is used as missing value identifier when writing data.
-	*	Improvements to the definition of several generic functions &
-		methods
-	*	Improvements to the functions writeNamedRegionToFile &
-		writeWorksheetToFile. Also, an issue was fixed with
-		writeNamedRegionToFile where quoted sheet names (e.g. due to
-		a whitespace in the sheet name) would have caused an error.
-	*	Support for auto-sizing of columns.
-	*	New functionality to append data to named regions and work-
-		sheets: appendNamedRegion & appendWorksheet.
-	*	Several internal changes on the Java side: removing Java
-		logging, using java.util.ArrayList instead of java.util.Vector
-	*	Functionality for dumping and restoring objects to/from Excel
-		files (xlcDump, xlcRestore)
-	*	Added a package vignette
+0.1-7 2011-10-19
+  * Moved to Apache POI 3.8-beta4
+  * Performance improvements when writing large xlsx files. This
+    fix was implemented on the Apache POI side.
+  * An issue was fixed where the bounding box was not appropriately
+    determined when using readWorksheet. The bounding box is now
+    determined by first determining start and end row. Afterwards,
+    for all rows between the start and the end row the minimum and 
+    maximum column is determined.
+  * An issue was fixed where the named region was automatically
+    expanded by one row when writing data to a named region without
+    column headers.
+  * New workbook data extraction & replacement operators [, [<-,
+    [[, [[<-. These are "syntactic sugar" for the already existing
+    methods readWorksheet, writeWorksheet, readNamedRegion and
+    writeNamedRegion.
+  * Support for saving workbooks to a new file ("save as").
+  * Support for querying the last (non-empty) row in a worksheet
+  * Support for including the row names of a data.frame when
+    writing to a worksheet or a named region. In addition, when
+    reading data from a worksheet or a named region a column
+    can be specified that should be turned into row names.
+  * Extended use of setMissingValue. setMissingValue allows to
+    define a set of missing value identifiers that are recognized
+    as missing values when reading in data. The first element of
+    this set is used as missing value identifier when writing data.
+  * Improvements to the definition of several generic functions &
+    methods
+  * Improvements to the functions writeNamedRegionToFile &
+    writeWorksheetToFile. Also, an issue was fixed with
+    writeNamedRegionToFile where quoted sheet names (e.g. due to
+    a whitespace in the sheet name) would have caused an error.
+  * Support for auto-sizing of columns.
+  * New functionality to append data to named regions and work-
+    sheets: appendNamedRegion & appendWorksheet.
+  * Several internal changes on the Java side: removing Java
+    logging, using java.util.ArrayList instead of java.util.Vector
+  * Functionality for dumping and restoring objects to/from Excel
+    files (xlcDump, xlcRestore)
+  * Added a package vignette
 	
-0.1-6	Non-public release
+0.1-6 Non-public release
 		
-0.1-5	2011-07-07
-	*	Support for setting/getting cell formulas. See methods
-		set/getCellFormula.
-	*	Support for setting/getting the force formula recalculation flag on
-		worksheets. See methods set/getForceFormulaRecalculation.
-	*	Support for setting auto-filters via the setAutoFilter method.
-	*	There is a set of new utility functions:
-		- aref2idx, idx2aref: Converts Excel area references (such as A5:D14)
-		  to row & column based cell references and vice versa.
-		- aref: Constructs an Excel area reference from a specification of the
-		  top left corner and the dimensionality of an object.
-		- getReferenceCoordinates: Queries the coordinates of an Excel name
-		  representing an Excel area reference (such as A5:D14)
+0.1-5 2011-07-07
+  * Support for setting/getting cell formulas. See methods
+    set/getCellFormula.
+  * Support for setting/getting the force formula recalculation flag on
+    worksheets. See methods set/getForceFormulaRecalculation.
+  * Support for setting auto-filters via the setAutoFilter method.
+  * There is a set of new utility functions:
+    - aref2idx, idx2aref: Converts Excel area references (such as A5:D14)
+      to row & column based cell references and vice versa.
+    - aref: Constructs an Excel area reference from a specification of the
+      top left corner and the dimensionality of an object.
+    - getReferenceCoordinates: Queries the coordinates of an Excel name
+      representing an Excel area reference (such as A5:D14)
 
-0.1-4	2011-05-26
-	*	An issue was fixed where cell styles would not be applied correctly.
-	*	There is a new style action called NONE: This style action instructs 
-		XLConnect to apply no cell styles when writing data. Cell styles are kept 
-		as they are. This is useful in a scenario where all styling is predefined 
-		in an Excel template which is then only filled with data.
-	*	There is a new DATA_FORMAT_ONLY style action: This style action instructs
-		XLConnect to only set the data format for a cell but not to apply any other 
-		styling but rather keep the existing one. The data format to be applied is 
-		determined by the corresponding R data type and can be defined by the user. 
-		This style action may be useful in scenarios where Excel templates with 
-		pre-defined styling are to be filled with XLConnect.
-	*	Worksheets can be renamed with the new renameSheet method.
-	*	The positions (indices) of worksheets can be queried & redefined using the 
-		new methods getSheetPos & setSheetPos.
-	*	Worksheets can be cloned using the new method cloneSheet.
-	*	There is a set of new utility functions:
-		- col2idx, idx2col: Converts Excel column names such as BD to indices and 
-		  vice versa.
-		- cref2idx, idx2cref: Converts cell references to row & column indices and 
-		  vice versa.
-	*	Setting a missing value string when writing missing values from R to Excel. 
-		By default missing values result in blank/empty cells. This is to have a nice 
-		type mapping between R and Excel. In some cases, however, you might want to 
-		define a specific missing value string to be used by XLConnect when writing 
-		cells representing missing values instead of blank/empty cells. This can be 
-		done using the new method setMissingValue.
-	*	The handling of error cells (cells that result in an error when trying to 
-		evaluate them) has been greatly improved. With XLConnect 0.1-3 error cells 
-		directly resulted in an exception. With XLConnect 0.1-4 this behavior can 
-		be controlled using the onErrorCell method. By default error cells now result 
-		in a missing value and the corresponding error cells will be reported via 
-		warnings. The behavior may be changed to get an exception with the first 
-		occurrence of an error cell.
-	*	There is two new methods for merging & un-merging cells: mergeCells & 
-		unmergeCells.
+0.1-4 2011-05-26
+  * An issue was fixed where cell styles would not be applied correctly.
+  * There is a new style action called NONE: This style action instructs 
+    XLConnect to apply no cell styles when writing data. Cell styles are kept 
+    as they are. This is useful in a scenario where all styling is predefined 
+    in an Excel template which is then only filled with data.
+  * There is a new DATA_FORMAT_ONLY style action: This style action instructs
+    XLConnect to only set the data format for a cell but not to apply any other 
+    styling but rather keep the existing one. The data format to be applied is 
+    determined by the corresponding R data type and can be defined by the user. 
+    This style action may be useful in scenarios where Excel templates with 
+    pre-defined styling are to be filled with XLConnect.
+  * Worksheets can be renamed with the new renameSheet method.
+  * The positions (indices) of worksheets can be queried & redefined using the 
+    new methods getSheetPos & setSheetPos.
+  * Worksheets can be cloned using the new method cloneSheet.
+  * There is a set of new utility functions:
+    - col2idx, idx2col: Converts Excel column names such as BD to indices and 
+      vice versa.
+    - cref2idx, idx2cref: Converts cell references to row & column indices and 
+      vice versa.
+  * Setting a missing value string when writing missing values from R to Excel. 
+    By default missing values result in blank/empty cells. This is to have a nice 
+    type mapping between R and Excel. In some cases, however, you might want to 
+    define a specific missing value string to be used by XLConnect when writing 
+    cells representing missing values instead of blank/empty cells. This can be 
+    done using the new method setMissingValue.
+  * The handling of error cells (cells that result in an error when trying to 
+    evaluate them) has been greatly improved. With XLConnect 0.1-3 error cells 
+    directly resulted in an exception. With XLConnect 0.1-4 this behavior can 
+    be controlled using the onErrorCell method. By default error cells now result 
+    in a missing value and the corresponding error cells will be reported via 
+    warnings. The behavior may be changed to get an exception with the first 
+    occurrence of an error cell.
+  * There is two new methods for merging & un-merging cells: mergeCells & 
+    unmergeCells.
 
-0.1-3	2011-02-27
-	*	Initial Release
+0.1-3 2011-02-27
+  * Initial Release

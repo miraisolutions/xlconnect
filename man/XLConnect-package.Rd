@@ -13,7 +13,7 @@ Manipulate Excel files from R
 Package: \tab XLConnect\cr
 Type: \tab Package\cr
 Version: \tab 0.2-5\cr
-Date: \tab 2013-02-14\cr
+Date: \tab 2013-03-18\cr
 URL: \tab \url{http://www.mirai-solutions.com}\cr
 \tab \url{http://miraisolutions.wordpress.com}\cr
 SystemRequirements: \tab java (>= 6.0)\cr
