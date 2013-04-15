@@ -5,6 +5,7 @@ language: python
 # environment variables
 env:
   - R_LIBS_USER=~/R
+  - FULL_TEST_SUITE=1
 
 # install dependencies
 install:
@@ -15,8 +16,7 @@ install:
   - R --version
   - sudo R CMD javareconf
   - R -e '.libPaths(); sessionInfo()'
-  - Rscript -e 'install.packages("devtools", dep = TRUE, repos = "http://cran.rstudio.com")'
-  - Rscript -e 'options(repos="http://cran.rstudio.com"); require(methods); require(devtools); install_github("xlconnect", username = "miraisolutions", ref = "master")'
+  - Rscript -e 'options(repos="http://cran.rstudio.com"); install.packages("devtools", dep = TRUE); require(methods); require(tools); require(devtools); install_github("xlconnect", username = "miraisolutions", ref = "master"); install.packages(package_dependencies("XLConnect", installed.packages(), which = "all")[[1]])'
 
 # run tests
 script:
