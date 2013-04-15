@@ -13,6 +13,7 @@ install:
   - sudo apt-get install r-base-dev qpdf texinfo texlive-latex-extra texlive-fonts-recommended texlive-fonts-extra openjdk-7-jdk
   - "[ ! -d ~/R ] && mkdir ~/R"
   - R --version
+  - sudo R CMD javareconf
   - R -e '.libPaths(); sessionInfo()'
   - Rscript -e 'install.packages("devtools", dep = TRUE, repos = "http://cran.rstudio.com")'
   - Rscript -e 'options(repos="http://cran.rstudio.com"); require(methods); require(devtools); install_github("xlconnect", username = "miraisolutions", ref = "master")'
