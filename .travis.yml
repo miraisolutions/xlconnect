@@ -16,7 +16,7 @@ install:
   - R --version
   - sudo R CMD javareconf
   - R -e '.libPaths(); sessionInfo()'
-  - Rscript -e 'options(repos="http://cran.rstudio.com"); install.packages("devtools", dep = TRUE); require(methods); require(tools); require(devtools); install_github("xlconnect", username = "miraisolutions", ref = "master"); install.packages(package_dependencies("XLConnect", installed.packages(), which = "all")[[1]])'
+  - Rscript -e 'options(repos="http://cran.rstudio.com"); install.packages(c("devtools", "XLConnect"), dep = TRUE); require(methods); require(devtools); install_github("xlconnect", username = "miraisolutions", ref = "master")'
 
 # run tests
 script:
