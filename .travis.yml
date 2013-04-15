@@ -4,8 +4,7 @@ language: python
 
 # environment variables
 env:
-  - R_LIBS_USER=~/R
-  - FULL_TEST_SUITE=1
+  - R_LIBS_USER=~/R FULL_TEST_SUITE=1
 
 # install dependencies
 install:
