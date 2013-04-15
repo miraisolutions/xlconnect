@@ -14,8 +14,8 @@ install:
   - "[ ! -d ~/R ] && mkdir ~/R"
   - R --version
   - R -e '.libPaths(); sessionInfo()'
-  - Rscript -e 'install.packages("devtools", dep = TRUE, repos = "http://cran.rstudio.org")'
-  - Rscript -e 'require(methods); require(devtools); install_github("xlconnect", username = "miraisolutions", ref = "master")'
+  - Rscript -e 'install.packages("devtools", dep = TRUE, repos = "http://cran.rstudio.com")'
+  - Rscript -e 'options(repo="http://cran.rstudio.com"); require(methods); require(devtools); install_github("xlconnect", username = "miraisolutions", ref = "master")'
 
 # run tests
 script:
