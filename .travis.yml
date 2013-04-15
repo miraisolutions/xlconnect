@@ -15,7 +15,7 @@ install:
   - R --version
   - R -e '.libPaths(); sessionInfo()'
   - Rscript -e 'install.packages("devtools", dep = TRUE, repos = "http://cran.rstudio.com")'
-  - Rscript -e 'options(repo="http://cran.rstudio.com"); require(methods); require(devtools); install_github("xlconnect", username = "miraisolutions", ref = "master")'
+  - Rscript -e 'options(repos="http://cran.rstudio.com"); require(methods); require(devtools); install_github("xlconnect", username = "miraisolutions", ref = "master")'
 
 # run tests
 script:
