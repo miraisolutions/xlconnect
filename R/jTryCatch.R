@@ -30,6 +30,10 @@ jTryCatch <- function(...) {
 	tryCatch(..., Throwable = 
 		function(e) {
 			if(!is.jnull(e$jobj)) {
+				sw <- new(J("java.io.StringWriter"))
+				pw <- new(J("java.io.PrintWriter"), sw)
+				e$jobj$printStackTrace(pw)
+				options("java.stacktrace"=sw$toString())
 				stop(paste(class(e)[1], e$jobj$getMessage(), sep = " (Java): "),
 					call. = FALSE)
 			} else 
