@@ -7,7 +7,7 @@ all: check clean
 
 build:
 	cd ..;\
-	R CMD build $(PKGSRC)
+	R CMD build --compact-vignettes=both --md5 $(PKGSRC)
 
 install: build
 	cd ..;\
