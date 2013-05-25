@@ -36,7 +36,7 @@ test.workbook.readWorksheet <- function() {
 			"NumericColumn" = c(-23.63, NA, NA, 5.8, 3),
 			"StringColumn" = c("Hello", NA, NA, NA, "World"),
 			"BooleanColumn" = c(TRUE, FALSE, FALSE, NA, NA),
-			"DateTimeColumn" = as.POSIXct(c(NA, NA, "2010-09-09 21:03:07", "2010-09-10 21:03:07", "2010-09-11 21:03:07"), tz = "UTC"),
+			"DateTimeColumn" = as.POSIXct(c(NA, NA, "2010-09-09 21:03:07", "2010-09-10 21:03:07", "2010-09-11 21:03:07")),
 			stringsAsFactors = FALSE
 	)
 	
@@ -146,7 +146,7 @@ test.workbook.readWorksheet <- function() {
 			AAA = c(NA, NA, NA, 780.9, NA),
 			BBB = c("hello", "42.24", "true", NA, "11.01.1984 12:00:00"),
 			CCC = c(TRUE, NA, NA, NA, NA),
-			DDD = as.POSIXct(c("1984-01-11 12:00:00", NA, NA, NA, NA), tz = "UTC"),
+			DDD = as.POSIXct(c("1984-01-11 12:00:00", NA, NA, NA, NA)),
 			stringsAsFactors = FALSE
 	)
 	
@@ -155,7 +155,7 @@ test.workbook.readWorksheet <- function() {
 			BBB = c("hello", "42.24", "true", NA, "11.01.1984 12:00:00"),
 			CCC = c(TRUE, TRUE, NA, FALSE, FALSE),
 			DDD = as.POSIXct(c("1984-01-11 12:00:00", "2012-02-06 16:15:23", "1984-01-11 12:00:00", 
-							NA, "1900-12-22 16:04:48"), tz = "UTC"),
+							NA, "1900-12-22 16:04:48")),
 			stringsAsFactors = FALSE
 	)
 	

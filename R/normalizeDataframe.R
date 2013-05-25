@@ -42,10 +42,8 @@ normalizeDataframe <- function(df) {
 			if(is(col, "logical") || is(col, "numeric") || is(col, "character"))
 				col
 			else if(is(col, "Date") || is(col, "POSIXt")) {
-				# Get rid of "original" timezone and assume UTC
-				as.POSIXct(
-					format(col, format = options("XLConnect.dateTimeFormat")[[1]]), 
-					tz = "UTC")
+        ms = round(as.numeric(as.POSIXct(col)), 3) # only consider up to milliseconds
+        as.POSIXct(ms, origin = "1970-01-01", tz = "")
 			} else
 				as.character(col)
 		}

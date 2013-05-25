@@ -49,11 +49,12 @@ dataframeToJava <- function(df) {
 		else if(is(v, "character")) {
 			jTryCatch(dFrame$addStringColumn(cnames[i], .jarray(v), .jarray(is.na(v))))
 		}
-		else if(is(v, "Date") || is(v, "POSIXt")) {
-			v <- format(v, format = options("XLConnect.dateTimeFormat")[[1]])
-			jTryCatch(dFrame$addDateTimeColumn(cnames[i], .jarray(v), .jarray(is.na(v))))
-		}
-		else { # e.g. factor or any other type
+		else if(is(v, "POSIXt")) {
+			jTryCatch(dFrame$addDateTimeColumn(cnames[i], .jarray(.jlong(as.numeric(v) * 1000)), .jarray(is.na(v))))
+		} else if(is(v, "Date")) {
+      # Important: dates (without time) are treated as being at midnight UTC
+		  jTryCatch(dFrame$addDateTimeColumn(cnames[i], .jarray(.jlong(as.numeric(as.POSIXct(v)) * 1000)), .jarray(is.na(v))))
+		} else { # e.g. factor or any other type
 			v <- as.character(v)
 			if(length(v) != nrow(df))
 				stop(sprintf("Conversion to character for column %s failed! Check the class.", cnames[i]))

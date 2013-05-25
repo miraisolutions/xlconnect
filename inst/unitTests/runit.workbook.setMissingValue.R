@@ -99,7 +99,7 @@ test.workbook.setMissingValue <- function() {
 		A = c(NA, -3.2, 3.4, NA, 8, NA),
 		B = c("a", NA, "c", "x", "a", "o"),
 		C = c(TRUE, TRUE, FALSE, NA, FALSE, NA),
-		D = as.POSIXct(c("1981-12-01 00:00:00", "1981-12-02 00:00:00", NA, NA, NA, "1981-12-06 00:00:00"), tz = "UTC"),
+		D = as.POSIXct(c("1981-12-01 00:00:00", "1981-12-02 00:00:00", NA, NA, NA, "1981-12-06 00:00:00")),
 		stringsAsFactors = FALSE
 	)
 	
@@ -117,7 +117,7 @@ test.workbook.setMissingValue <- function() {
 	  A = c(NA, -3.2, NA, NA, 8, NA),
 	  B = c("a", NA, "c", "x", "a", "o"),
 	  C = c(TRUE, NA, FALSE, NA, FALSE, NA),
-	  D = as.POSIXct(c("1981-12-01 00:00:00", "1981-12-02 00:00:00", NA, NA, NA, "1981-12-06 00:00:00"), tz = "UTC"),
+	  D = as.POSIXct(c("1981-12-01 00:00:00", "1981-12-02 00:00:00", NA, NA, NA, "1981-12-06 00:00:00")),
 	  stringsAsFactors = FALSE
 	)
   
