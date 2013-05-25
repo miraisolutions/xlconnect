@@ -57,8 +57,10 @@ dataframeFromJava <- function(df, check.names) {
 				},
 				
 				"DateTime" = {
-					res[[i]] <- as.POSIXct(as.vector(jTryCatch(df$getDateTimeColumn(jIndex))) / 1000, 
-							origin = "1970-01-01", tz = "")
+				  d <- as.POSIXct(as.vector(jTryCatch(df$getDateTimeColumn(jIndex))) / 1000, 
+				             origin = "1970-01-01", tz = "")
+          attributes(d)$tzone <- "" # some versions of R would not set the tzone attribute which would break unit tests
+					res[[i]] <- d
 				},
 				
 				stop("Unsupported column type detected!")
