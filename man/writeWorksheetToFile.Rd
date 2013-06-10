@@ -5,7 +5,7 @@
 Writes data to worksheets in an Excel file.
 }
 \usage{
-writeWorksheetToFile(file, data, sheet, ..., styleAction = XLC$STYLE_ACTION.XLCONNECT)
+writeWorksheetToFile(file, data, sheet, ..., styleAction = XLC$STYLE_ACTION.XLCONNECT, clearSheets = FALSE)
 }
 \arguments{
 \item{file}{The path name of the file to write to.}
@@ -15,6 +15,7 @@ writeWorksheetToFile(file, data, sheet, ..., styleAction = XLC$STYLE_ACTION.XLCO
 \item{styleAction}{Style action to be used when writing the data - not vectorized! 
 The default is \code{XLC$STYLE_ACTION.XLCONNECT}. 
 See \code{\link[=setStyleAction-methods]{setStyleAction}} for more information.}
+\item{clearSheets}{TRUE to clear sheets before writing data.}
 }
 
 \author{

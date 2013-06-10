@@ -28,14 +28,20 @@
 #############################################################################
 
 
-writeWorksheetToFile <- function(file, data, sheet, ..., styleAction = XLC$STYLE_ACTION.XLCONNECT) {
+writeWorksheetToFile <- function(file, data, sheet, ..., styleAction = XLC$STYLE_ACTION.XLCONNECT, clearSheets=FALSE) {
   args <- list(data = data, sheet = sheet, ...)
 
   wb <- loadWorkbook(file, create = !file.exists(file))  
   setStyleAction(wb, styleAction)
 
+  # find existing sheets
+  existingSheets <- getSheets(wb) 
+
   # create missing sheets 
-  createSheet(wb, setdiff(sheet, getSheets(wb)))
+  createSheet(wb, setdiff(sheet, existingSheets))
+  
+  # clear pre-existing sheets marked for clearing
+  clearSheet(wb, intersect(sheet[clearSheets], existingSheets))
 
   args$object <- wb
   do.call(writeWorksheet, args)

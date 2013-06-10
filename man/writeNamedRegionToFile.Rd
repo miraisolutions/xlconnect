@@ -6,7 +6,7 @@ Writes named regions to an Excel file.
 }
 \usage{
 writeNamedRegionToFile(file, data, name, formula=NA, ...,
-styleAction = XLC$STYLE_ACTION.XLCONNECT)
+styleAction = XLC$STYLE_ACTION.XLCONNECT, clearNamedRegions=FALSE)
 }
 \arguments{
 \item{file}{The path name of the file to write to}
@@ -20,6 +20,7 @@ instead of writing to a template!}
 \item{styleAction}{Style action to be used when writing the data.\cr
 The default is \code{XLC$STYLE_ACTION.XLCONNECT}. 
 See \code{\link[=setStyleAction-methods]{setStyleAction}} for more information.}
+\item{clearNamedRegions}{TRUE to clear content of existing named regions before writing data}
 }
 
 \author{

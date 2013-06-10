@@ -131,4 +131,29 @@ test.writeNamedRegionToFile <- function() {
 	checkNoException(writeNamedRegionToFile("wnrtf1.xlsx", data = mtcars, name = "mtcars",
 					formula = "'My Cars'!$A$1", header = TRUE))
 	checkTrue(file.exists("wnrtf1.xlsx"))
+
+
+        # test clearNamedRegions
+        testClearNamedRegions <- function(file, df) {
+                df.short <- df[1,]
+
+                # overwrite named region with shorter version
+                writeNamedRegionToFile(file, data=df.short, name="cdfRegion")
+                # default behaviour: not cleared, only named region is shortened
+                checkEquals(nrow(readNamedRegionFromFile(file, name="cdfRegion")), 1)
+                checkEquals(nrow(readWorksheetFromFile(file, sheet="cdf")), nrow(df))
+
+                # rewrite longer version 
+                writeNamedRegionToFile(file, data=df, name="cdfRegion")
+                # overwrite name with shorter version & clearing
+                writeNamedRegionToFile(file, data=df.short, name="cdfRegion", clearNamedRegions=TRUE)
+                # should be cleared
+                #checkEquals(nrow(readNamedRegionFromFile(file, name="cdfRegion")), 1)
+                #checkEquals(nrow(readWorksheetFromFile(file, sheet="cdf")), 1)
+        }
+
+        testClearNamedRegions(file.xls, cdf)
+        testClearNamedRegions(file.xlsx, cdf)
+ 
+
 }
