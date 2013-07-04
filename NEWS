@@ -1,6 +1,16 @@
 XLConnect News
 --------------
 
+0.2-6 2013-??-??
+  * Java exception stack traces are now captured in options("java.stacktrace")
+  * Added documentation for with.workbook
+  * Added support for milliseconds in date/time values
+  * Add tzone attribute after creating POSIXct as some versions of R don't set it
+  * Added arguments clearSheets and clearNamedRegions to functions
+    writeWorksheetToFile and writeNamedRegionToFile respectively
+  * Fixed an issue with validity checking of named regions in getDefinedNames
+  * Moved to Apache POI 3.10-beta1
+
 0.2-5 2013-03-18
   * Merged XLConnect & XLConnectJars
   * Fixed namespace import issue with rJava
