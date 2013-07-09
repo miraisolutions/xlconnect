@@ -10,6 +10,9 @@ XLConnect News
     writeWorksheetToFile and writeNamedRegionToFile respectively
   * Fixed an issue with validity checking of named regions in getDefinedNames
   * Moved to Apache POI 3.10-beta1
+  * XLConnect now "Imports" rJava and utils rather than "Depends" on them
+  * XLConnect settings are now applied in .onLoad rather than .onAttach
+    (this allows XLConnect to be imported using "Imports")
 
 0.2-5 2013-03-18
   * Merged XLConnect & XLConnectJars

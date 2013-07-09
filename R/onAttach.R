@@ -27,9 +27,6 @@
 #############################################################################
 
 .onAttach <- function(libname, pkgname) {
-  # Perform general XLConnect settings - pass package description
-  XLConnectSettings(packageDescription(pkgname))
-  
   # Print package information
   pdesc <- packageDescription(pkgname)
   packageStartupMessage(pdesc$Package, " ", pdesc$Version, " by ", pdesc$Author)

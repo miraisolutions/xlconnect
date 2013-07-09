@@ -29,5 +29,8 @@
 #############################################################################
 
 loadWorkbook <- function(filename, create = FALSE) {
+  # Run Java AWT in headless mode
+  .jcall("java.lang.System", "S", "setProperty", "java.awt.headless", "true")
+  
 	jTryCatch(new("workbook", filename = path.expand(filename), create = create))
 }
