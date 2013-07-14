@@ -31,14 +31,15 @@
 setGeneric("readNamedRegion",
 	function(object, name, header = TRUE, rownames = NULL, colTypes = character(0),
 			forceConversion = FALSE, dateTimeFormat = getOption("XLConnect.dateTimeFormat"),
-			check.names = TRUE, useCachedValues = FALSE, keep=NULL, drop=NULL) standardGeneric("readNamedRegion"))
+			check.names = TRUE, useCachedValues = FALSE, keep=NULL, drop=NULL, simplify = FALSE) 
+    standardGeneric("readNamedRegion"))
 
 
 setMethod("readNamedRegion", 
 	signature(object = "workbook"), 
 	function(object, name, header = TRUE, rownames = NULL, colTypes = character(0),
 			forceConversion = FALSE, dateTimeFormat = getOption("XLConnect.dateTimeFormat"),
-			check.names = TRUE, useCachedValues = FALSE, keep=NULL, drop=NULL) {
+			check.names = TRUE, useCachedValues = FALSE, keep=NULL, drop=NULL, simplify = FALSE) {
 
 		# returns a list of RDataFrameWrapper Java object references
 		sheet = as.vector(extractSheetName(getReferenceFormula(object, name)))
@@ -59,6 +60,15 @@ setMethod("readNamedRegion",
 		# extract rownames
     dataFrame = extractRownames(dataFrame, rownames)
 		names(dataFrame) <- name
+    
+    # simplify
+    dataFrame =
+    mapply(df = dataFrame, simplify = rep(simplify, length.out = length(dataFrame)), 
+           FUN = function(df, simplify) {
+             if(simplify) unlist(df, use.names = FALSE)
+             else df
+          }, SIMPLIFY = FALSE
+    )
 		
 		# Return data.frame directly in case only one data.frame is read
 		if(length(dataFrame) == 1) dataFrame[[1]]

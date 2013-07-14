@@ -9,8 +9,8 @@
 Reads data from worksheets of a \code{\linkS4class{workbook}}.
 }
 \usage{
-\S4method{readWorksheet}{workbook,numeric}(object,sheet,startRow,startCol,endRow,endCol,autofitRow,autofitCol,region,header,rownames,colTypes,forceConversion,dateTimeFormat,check.names,useCachedValues,keep,drop)
-\S4method{readWorksheet}{workbook,character}(object,sheet,startRow,startCol,endRow,endCol,autofitRow,autofitCol,region,header,rownames,colTypes,forceConversion,dateTimeFormat,check.names,useCachedValues,keep,drop)
+\S4method{readWorksheet}{workbook,numeric}(object,sheet,startRow,startCol,endRow,endCol,autofitRow,autofitCol,region,header,rownames,colTypes,forceConversion,dateTimeFormat,check.names,useCachedValues,keep,drop, simplify)
+\S4method{readWorksheet}{workbook,character}(object,sheet,startRow,startCol,endRow,endCol,autofitRow,autofitCol,region,header,rownames,colTypes,forceConversion,dateTimeFormat,check.names,useCachedValues,keep,drop, simplify)
 }
 
 \arguments{
@@ -78,6 +78,9 @@ Reads data from worksheets of a \code{\linkS4class{workbook}}.
   are dropped. If \code{drop = list(1,2)} is specified, it will be replicated as \code{list(1,2,1)}, i.e. respectively
   the first, second and first column of the sheets "Sheet1", "Sheet2", "Sheet3"
   will be dropped.}
+  \item{simplify}{\code{logical} specifying if the result should be simplified, e.g. in case the \code{data.frame}
+  would only have one row or one column (and data types match). Simplifying here is identical to calling \code{unlist}
+  on the otherwise resulting \code{data.frame} (using \code{use.names = FALSE}). The default is \code{FALSE}.}
 }
 
 \details{

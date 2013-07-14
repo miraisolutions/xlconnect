@@ -32,7 +32,8 @@ setGeneric("readWorksheet",
 	function(object, sheet, startRow = 0, startCol = 0, endRow = 0, endCol = 0,
            autofitRow = TRUE, autofitCol = TRUE, region = NULL,
            header = TRUE, rownames = NULL, colTypes = character(0), forceConversion = FALSE, 
-           dateTimeFormat = getOption("XLConnect.dateTimeFormat"), check.names = TRUE, useCachedValues = FALSE, keep = NULL, drop = NULL) 
+           dateTimeFormat = getOption("XLConnect.dateTimeFormat"), check.names = TRUE, 
+           useCachedValues = FALSE, keep = NULL, drop = NULL, simplify = FALSE) 
     
     standardGeneric("readWorksheet"))
 
@@ -42,7 +43,7 @@ setMethod("readWorksheet",
              autofitRow = TRUE, autofitCol = TRUE, region = NULL, header = TRUE, 
              rownames = NULL, colTypes = character(0), forceConversion = FALSE, 
              dateTimeFormat = getOption("XLConnect.dateTimeFormat"), check.names = TRUE, 
-             useCachedValues = FALSE, keep = NULL, drop = NULL) {
+             useCachedValues = FALSE, keep = NULL, drop = NULL, simplify = FALSE) {
 			 
 			if(!is.null(region)) {
 				# Convert region to indices
@@ -74,6 +75,15 @@ setMethod("readWorksheet",
 			dataFrame = lapply(dataFrame, dataframeFromJava, check.names = check.names)
 			# extract rownames
 			dataFrame = extractRownames(dataFrame, rownames)
+      
+      # simplify
+      dataFrame =
+			mapply(df = dataFrame, simplify = rep(simplify, length.out = length(dataFrame)), 
+			       FUN = function(df, simplify) {
+			         if(simplify) unlist(df, use.names = FALSE)
+			         else df
+			       }, SIMPLIFY = FALSE
+			)
 			
 			# Return data.frame directly in case only one data.frame is read
 			if(length(dataFrame) == 1) dataFrame[[1]]
@@ -87,7 +97,7 @@ setMethod("readWorksheet",
              autofitRow = TRUE, autofitCol = TRUE, region = NULL, header = TRUE, 
              rownames = NULL, colTypes = character(0), forceConversion = FALSE, 
              dateTimeFormat = getOption("XLConnect.dateTimeFormat"), check.names = TRUE, 
-             useCachedValues = TRUE, keep = NULL, drop = NULL) {
+             useCachedValues = TRUE, keep = NULL, drop = NULL, simplify = FALSE) {
 			
 			# Remember sheet names
 			sheetNames = sheet

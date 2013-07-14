@@ -8,7 +8,7 @@
 Reads named regions from a \code{\linkS4class{workbook}}.
 }
 \usage{
-\S4method{readNamedRegion}{workbook}(object, name, header, rownames, colTypes, forceConversion, dateTimeFormat, check.names, useCachedValues, keep, drop)
+\S4method{readNamedRegion}{workbook}(object, name, header, rownames, colTypes, forceConversion, dateTimeFormat, check.names, useCachedValues, keep, drop, simplify)
 }
 
 \arguments{
@@ -66,6 +66,9 @@ Reads named regions from a \code{\linkS4class{workbook}}.
   are dropped. If \code{drop = list(1,2)} is specified, it will be replicated as \code{list(1,2,1)}, i.e. respectively
   the first, second and first column of the named regions "NamedRegion1", "NamedRegion2", "NamedRegion3"
   will be dropped.}
+  \item{simplify}{\code{logical} specifying if the result should be simplified, e.g. in case the \code{data.frame}
+  would only have one row or one column (and data types match). Simplifying here is identical to calling \code{unlist}
+  on the otherwise resulting \code{data.frame} (using \code{use.names = FALSE}). The default is \code{FALSE}.}
 }
 
 \details{
