@@ -13,6 +13,7 @@ XLConnect News
   * XLConnect now "Imports" rJava and utils rather than "Depends" on them
   * XLConnect settings are now applied in .onLoad rather than .onAttach
     (this allows XLConnect to be imported using "Imports")
+  * Added support for Excel tables (Office 2007+); see method readTable
 
 0.2-5 2013-03-18
   * Merged XLConnect & XLConnectJars

@@ -1,19 +1,22 @@
-\name{readNamedRegion}
+\name{readTable}
 \docType{methods}
-\alias{readNamedRegion}
-\alias{readNamedRegion-methods}
-\alias{readNamedRegion,workbook-method}
-\title{Reading named regions from a workbook}
+\alias{readTable}
+\alias{readTable-methods}
+\alias{readTable,workbook,numeric-method}
+\alias{readTable,workbook,character-method}
+\title{Reading Excel tables from a workbook}
 \description{
-Reads named regions from a \code{\linkS4class{workbook}}.
+Reads Excel tables (Office 2007+) from a \code{\linkS4class{workbook}}.
 }
 \usage{
-\S4method{readNamedRegion}{workbook}(object, name, header, rownames, colTypes, forceConversion, dateTimeFormat, check.names, useCachedValues, keep, drop, simplify)
+\S4method{readTable}{workbook,numeric}(object, sheet, table, header, rownames, colTypes, forceConversion, dateTimeFormat, check.names, useCachedValues, keep, drop, simplify)
+\S4method{readTable}{workbook,character}(object, sheet, table, header, rownames, colTypes, forceConversion, dateTimeFormat, check.names, useCachedValues, keep, drop, simplify)
 }
 
 \arguments{
   \item{object}{The \code{\linkS4class{workbook}} to use}
-  \item{name}{The name of the named region to read}
+  \item{sheet}{The index or name of the worksheet on which to look for the specified \code{table}}
+  \item{table}{The name of the table to read}
   \item{header}{The argument \code{header} specifies if the first row
     should be interpreted as column names. The default value is \code{TRUE}.}
   \item{rownames}{Index (\code{numeric}) or name (\code{character}) of column that
@@ -49,46 +52,21 @@ Reads named regions from a \code{\linkS4class{workbook}}.
   \item{keep}{List of column names or indices to be kept in the output data frame.
   It is possible to specify either \code{keep} or \code{drop}, but not both at the same time. 
   Defaults to \code{NULL}. If a vector is passed as argument, it will be wrapped into a list.
-  This list gets replicated to match the length of the other arguments.
-  Example: if \code{name = c("NamedRegion1", "NamedRegion2", "NamedRegion3")} and \code{keep = c(1,2)}, \code{keep} will be
-  internally converted into \code{list(c(1,2))} and then replicated to match the number of named regions, i.e.
-  \code{keep = list(c(1,2), c(1,2), c(1,2))}. The result is that the first two columns of each named region
-  are kept. If \code{keep = list(1,2)} is specified, it will be replicated as \code{list(1,2,1)}, i.e. respectively
-  the first, second and first column of the named regions "NamedRegion1", "NamedRegion2", "NamedRegion3"
-  will be kept.}
+  This list gets replicated to match the length of the other arguments.}
   \item{drop}{List of column names or indices to be dropped in the output data frame.
   It is possible to specify either \code{keep} or \code{drop}, but not both at the same time.
   Defaults to \code{NULL}. If a vector is passed as argument, it will be wrapped into a list.
-  This list gets replicated to match the length of the other arguments.
-  Example: if \code{name = c("NamedRegion1", "NamedRegion2", "NamedRegion3")} and \code{drop = c(1,2)}, \code{drop} will be
-  internally converted into \code{list(c(1,2))} and then replicated to match the number of named regions, i.e.
-  \code{drop = list(c(1,2), c(1,2), c(1,2))}. The result is that the first two columns of each named region
-  are dropped. If \code{drop = list(1,2)} is specified, it will be replicated as \code{list(1,2,1)}, i.e. respectively
-  the first, second and first column of the named regions "NamedRegion1", "NamedRegion2", "NamedRegion3"
-  will be dropped.}
+  This list gets replicated to match the length of the other arguments.}
   \item{simplify}{\code{logical} specifying if the result should be simplified, e.g. in case the \code{data.frame}
   would only have one row or one column (and data types match). Simplifying here is identical to calling \code{unlist}
   on the otherwise resulting \code{data.frame} (using \code{use.names = FALSE}). The default is \code{FALSE}.}
 }
-
-\details{
-The arguments \code{name} and \code{header} are vectorized. As such,
-multiple named regions can be read with one method call. If only one
-single named region is read, the return value is a \code{data.frame}.If
-multiple named regions are specified, the return value is a (named)
-\code{list} of \code{data.frame}'s returned in the order they have been
-specified with the argument \code{name}.
-}
 \references{
-What are named regions/ranges?\cr
-\url{http://www.officearticles.com/excel/named_ranges_in_microsoft_excel.htm}\cr
-How to create named regions/ranges?\cr
-\url{http://www.youtube.com/watch?v=iAE9a0uRtpM}
+Overview of Excel tables\cr
+\url{http://office.microsoft.com/en-001/excel-help/overview-of-excel-tables-HA010048546.aspx}
 }
 \author{
 Martin Studer\cr
-Thomas Themel\cr
-Nicola Lambiase\cr
 Mirai Solutions GmbH \url{http://www.mirai-solutions.com}
 }
 \note{
@@ -117,11 +95,11 @@ and seconds.
 }
 \seealso{
   \code{\linkS4class{workbook}},
+  \code{\link[=readNamedRegion-methods]{readNamedRegion}},
   \code{\link[=readWorksheet-methods]{readWorksheet}},
   \code{\link[=writeNamedRegion-methods]{writeNamedRegion}},\cr
   \code{\link[=writeWorksheet-methods]{writeWorksheet}},
   \code{\link{readNamedRegionFromFile}},
-  \code{\link[=readTable-methods]{readTable}},
   \code{\link[=onErrorCell-methods]{onErrorCell}}
 }
 \examples{

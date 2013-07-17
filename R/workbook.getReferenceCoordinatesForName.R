@@ -26,10 +26,10 @@
 #
 #############################################################################
 
-setGeneric("getReferenceCoordinates",
-		function(object, name) standardGeneric("getReferenceCoordinates"))
+setGeneric("getReferenceCoordinatesForName",
+		function(object, name) standardGeneric("getReferenceCoordinatesForName"))
 
-setMethod("getReferenceCoordinates", 
+setMethod("getReferenceCoordinatesForName", 
 		signature(object = "workbook"), 
 		function(object, name) {
 			res <- xlcCall(object, "getReferenceCoordinatesForName", name)

@@ -20,38 +20,35 @@
 
 #############################################################################
 #
-# Reading named regions from an Excel file
+# Reading tables from an Excel file
 # 
 # Authors:  Martin Studer, Mirai Solutions GmbH
-#           Thomas Themel, Mirai Solutions GmbH
-#           Nicola Lambiase, Mirai Solutions GmbH
 #
 #############################################################################
 
-setGeneric("readNamedRegion",
-	function(object, name, header = TRUE, rownames = NULL, colTypes = character(0),
+setGeneric("readTable",
+	function(object, sheet, table, header = TRUE, rownames = NULL, colTypes = character(0),
 			forceConversion = FALSE, dateTimeFormat = getOption("XLConnect.dateTimeFormat"),
 			check.names = TRUE, useCachedValues = FALSE, keep = NULL, drop = NULL, simplify = FALSE) 
-    standardGeneric("readNamedRegion"))
+    standardGeneric("readTable"))
 
 
-setMethod("readNamedRegion", 
-	signature(object = "workbook"), 
-	function(object, name, header = TRUE, rownames = NULL, colTypes = character(0),
+setMethod("readTable", 
+	signature(object = "workbook", sheet = "numeric"), 
+	function(object, sheet, table, header = TRUE, rownames = NULL, colTypes = character(0),
 			forceConversion = FALSE, dateTimeFormat = getOption("XLConnect.dateTimeFormat"),
 			check.names = TRUE, useCachedValues = FALSE, keep = NULL, drop = NULL, simplify = FALSE) {
 
 		# returns a list of RDataFrameWrapper Java object references
-		sheet = as.vector(extractSheetName(getReferenceFormula(object, name)))
-		namedim = matrix(as.vector(t(getReferenceCoordinatesForName(object, name))), nrow=4, byrow=FALSE)
+		namedim = matrix(as.vector(t(getReferenceCoordinatesForTable(object, sheet, table))), nrow = 4, byrow = FALSE)
 		startRow = namedim[1,]
 		startCol = namedim[2,]
 		endRow = namedim[3,]
 		endCol = namedim[4,]
-		numcols = endCol-startCol+1
+		numcols = endCol - startCol + 1
 
 		subset <- getColSubset(object, sheet, startRow, endRow, startCol, endCol, header, numcols, keep, drop)
-		dataFrame <- xlcCall(object, "readNamedRegion", name, header, .jarray(classToXlcType(colTypes)), 
+		dataFrame <- xlcCall(object, "readTable", as.integer(sheet - 1), table, header, .jarray(classToXlcType(colTypes)), 
 				forceConversion, dateTimeFormat, useCachedValues, subset, SIMPLIFY = FALSE)
 		
 
@@ -59,7 +56,7 @@ setMethod("readNamedRegion",
     dataFrame = lapply(dataFrame, dataframeFromJava, check.names = check.names)
 		# extract rownames
     dataFrame = extractRownames(dataFrame, rownames)
-		names(dataFrame) <- name
+		names(dataFrame) <- table
     
     # simplify
     dataFrame =
@@ -74,4 +71,23 @@ setMethod("readNamedRegion",
 		if(length(dataFrame) == 1) dataFrame[[1]]
 		else dataFrame
 	}
+)
+
+setMethod("readTable", 
+  signature(object = "workbook", sheet = "character"), 
+  function(object, sheet, table, header = TRUE, rownames = NULL, colTypes = character(0),
+           forceConversion = FALSE, dateTimeFormat = getOption("XLConnect.dateTimeFormat"),
+           check.names = TRUE, useCachedValues = FALSE, keep = NULL, drop = NULL, simplify = FALSE) {
+    
+    # Remember sheet names
+    sheet = getSheetPos(object, sheet)
+    # Get result from calling generic with sheet positions
+    dataFrame = callGeneric()
+    # If more than one worksheet is read the results will be a list
+    # --> assign names of sheets to list
+    if(length(table) > 1)
+      names(dataFrame) = table
+    
+    dataFrame    
+  }
 )

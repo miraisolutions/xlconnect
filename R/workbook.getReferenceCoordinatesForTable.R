@@ -20,19 +20,27 @@
 
 #############################################################################
 #
-# Querying coordinates of Excel names
+# Querying coordinates of Excel tables (Office 2007+)
 # 
-# Author: Thomas Themel, Mirai Solutions GmbH
+# Author: Martin Studer, Mirai Solutions GmbH
 #
 #############################################################################
 
-setGeneric("getReferenceCoordinates",
-		function(object, name) standardGeneric("getReferenceCoordinates"))
+setGeneric("getReferenceCoordinatesForTable",
+		function(object, sheet, table) standardGeneric("getReferenceCoordinatesForTable"))
 
-setMethod("getReferenceCoordinates", 
-		signature(object = "workbook"), 
-		function(object, name) {
-			res <- xlcCall(object, "getReferenceCoordinatesForName", name)
+setMethod("getReferenceCoordinatesForTable", 
+		signature(object = "workbook", sheet = "numeric"), 
+		function(object, sheet, table) {
+			res <- xlcCall(object, "getReferenceCoordinatesForTable", as.integer(sheet - 1), table)
       if(is.numeric(res)) { matrix(res, nrow = 2, byrow = TRUE) + 1 } else { res } 
 		}
+)
+
+setMethod("getReferenceCoordinatesForTable", 
+          signature(object = "workbook", sheet = "character"), 
+          function(object, sheet, table) {
+            res <- xlcCall(object, "getReferenceCoordinatesForTable", sheet, table)
+            if(is.numeric(res)) { matrix(res, nrow = 2, byrow = TRUE) + 1 } else { res } 
+          }
 )

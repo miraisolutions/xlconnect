@@ -140,6 +140,7 @@ and seconds.
   \code{\link[=readNamedRegion-methods]{readNamedRegion}},
   \code{\link[=writeNamedRegion-methods]{writeNamedRegion}},\cr
   \code{\link{readWorksheetFromFile}},
+  \code{\link[=readTable-methods]{readTable}},
   \code{\link[=onErrorCell-methods]{onErrorCell}}
 }
 \examples{
