@@ -30,7 +30,8 @@ Reads data from worksheets of a \code{\linkS4class{workbook}}.
     headers. The default is \code{TRUE}.}
   \item{rownames}{Index (\code{numeric}) or name (\code{character}) of column that
   should be used as row names. The corresponding column will be removed from the data
-  set. Defaults to \code{NULL} which means that no row names are applied.}
+  set. Defaults to \code{NULL} which means that no row names are applied. Row names must be either
+  \code{integer} or \code{character}. Non-numeric columns will be coerced to \code{character}.}
   \item{colTypes}{Column types to use when reading in the data. Specified as a \code{character}
   vector of the corresponding type names (see \code{\link{XLC}}; \code{XLC$DATA_TYPE.<?>}). You
   may also use R class names such as \code{numeric}, \code{character}, \code{logical} and \code{POSIXt}.

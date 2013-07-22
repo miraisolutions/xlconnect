@@ -14,6 +14,7 @@ XLConnect News
   * XLConnect settings are now applied in .onLoad rather than .onAttach
     (this allows XLConnect to be imported using "Imports")
   * Added support for Excel tables (Office 2007+); see method readTable
+  * Coerce non-numeric columns to character when used as rownames
 
 0.2-5 2013-03-18
   * Merged XLConnect & XLConnectJars
