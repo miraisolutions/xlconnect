@@ -28,7 +28,8 @@
 #############################################################################
 
 
-readNamedRegionFromFile <- function(file, name, header = TRUE) {
-  wb <- loadWorkbook(file,create=FALSE)  
-  readNamedRegion(wb, name, header);
+readNamedRegionFromFile <- function(file, ...) {
+  args <- list(...)
+  args$object <- loadWorkbook(file, create = FALSE)
+  do.call("readNamedRegion", args)
 }

@@ -29,6 +29,6 @@
 
 readWorksheetFromFile <- function(file, ...) { 
   args <- list(...)
-  args$object <- loadWorkbook(file,create=FALSE)  
+  args$object <- loadWorkbook(file, create = FALSE)  
   do.call("readWorksheet", args)
 }

@@ -29,51 +29,53 @@
 #############################################################################
 
 dataframeFromJava <- function(df, check.names) {
-	
-	if(!is(df, "jobjRef"))
-		stop("Invalid object - object of class 'jobjRef' required!")
-	
-	columnTypes <- jTryCatch(df$getColumnTypes())
-	columnNames <- jTryCatch(df$getColumnNames())
-	
-	# Init result list to contain column vectors
-	res <- list()
-	for(i in seq(along = columnTypes)) {
-		# Note, Java indices are 0-based while R's are 1-based ...
-		jIndex <- as.integer(i - 1)
-		
-		switch(columnTypes[i],
-				
-				"Numeric" = {
-					res[[i]] <- as.vector(jTryCatch(df$getNumericColumn(jIndex)))
-				},
-				
-				"String" = {
-					res[[i]] <- as.vector(jTryCatch(df$getStringColumn(jIndex)))
-				},
-				
-				"Boolean" = {
-					res[[i]] <- as.vector(jTryCatch(df$getBooleanColumn(jIndex)))
-				},
-				
-				"DateTime" = {
-				  d <- as.POSIXct(as.vector(jTryCatch(df$getDateTimeColumn(jIndex))) / 1000, 
-				             origin = "1970-01-01", tz = "")
-          attributes(d)$tzone <- "" # some versions of R would not set the tzone attribute which would break unit tests
-					res[[i]] <- d
-				},
-				
-				stop("Unsupported column type detected!")
-		)
-		
-		# Put missings back in place;
-		# note that Java primitives are communicated back which 
-		# don't support any missings - therefore this step
-		res[[i]][jTryCatch(df$isMissing(jIndex))] <- NA
-	}
-	
-	# Apply names
-	names(res) <- columnNames
-	
-	data.frame(res, check.names = check.names, stringsAsFactors = FALSE)
+	jTryCatch({
+  	if(!is(df, "jobjRef"))
+  		stop("Invalid object - object of class 'jobjRef' required!")
+  	
+  	columnTypes = .jcall(df, "[S", "getColumnTypes")
+  	columnNames = .jcall(df, "[S", "getColumnNames")
+  	
+  	# Init result list to contain column vectors
+  	res = list()
+  	for(i in seq(along = columnTypes)) {
+  		# Note, Java indices are 0-based while R's are 1-based ...
+  		jIndex = as.integer(i - 1)
+  		
+  		v = switch(columnTypes[i],
+  				
+  				"Numeric" = {
+  					as.vector(.jcall(df, "[D", "getNumericColumn", jIndex))
+  				},
+  				
+  				"String" = {
+  					as.vector(.jcall(df, "[S", "getStringColumn", jIndex))
+  				},
+  				
+  				"Boolean" = {
+  					as.vector(.jcall(df, "[Z", "getBooleanColumn", jIndex))
+  				},
+  				
+  				"DateTime" = {
+  				  d = as.POSIXct(as.vector(.jcall(df, "[J", "getDateTimeColumn", jIndex)) / 1000, 
+  				             origin = "1970-01-01", tz = "")
+            attributes(d)$tzone = "" # some versions of R would not set the tzone attribute which would break unit tests
+  					d
+  				},
+  				
+  				stop("Unsupported column type detected!")
+  		)
+  		
+  		# Put missings back in place;
+  		# note that Java primitives are communicated back which 
+  		# don't support any missings - therefore this step
+  		v[.jcall(df, "[Z", "isMissing", jIndex)] = NA
+      res[[i]] = v
+  	}
+  	
+  	# Apply names
+  	names(res) = columnNames
+  	
+  	data.frame(res, check.names = check.names, stringsAsFactors = FALSE)
+	})
 }

@@ -2,6 +2,7 @@ XLConnect News
 --------------
 
 0.2-6 2013-??-??
+  * General performance improvements
   * Java exception stack traces are now captured in options("java.stacktrace")
   * Added documentation for with.workbook
   * Added support for milliseconds in date/time values
@@ -15,6 +16,11 @@ XLConnect News
     (this allows XLConnect to be imported using "Imports")
   * Added support for Excel tables (Office 2007+); see method readTable
   * Coerce non-numeric columns to character when used as rownames
+  * Introduction of a new argument 'readStrategy' in methods readWorksheet,
+    readNamedRegion, readTable to support improved read performance (see the
+    help for more information)
+  * readNamedRegionFromFile now exposes all argument from readNamedRegion via 
+    '...'
 
 0.2-5 2013-03-18
   * Merged XLConnect & XLConnectJars

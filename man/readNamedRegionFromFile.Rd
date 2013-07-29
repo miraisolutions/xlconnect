@@ -5,13 +5,11 @@
 Reads named regions from an Excel file.
 }
 \usage{
-readNamedRegionFromFile(file, name, header = "TRUE")
+readNamedRegionFromFile(file, ...)
 }
 \arguments{
   \item{file}{The file name of the workbook to read}
-  \item{name}{The name of the named region to read from}
-  \item{header}{The argument \code{header} specifies if the first row
-    should be interpreted as column names. The default value is \code{TRUE}.}
+  \item{...}{Arguments passed to \link[=readNamedRegion-methods]{readNamedRegion}}
 }
 
 \details{This is a convenience wrapper to read named regions from a file

@@ -33,7 +33,8 @@ setGeneric("readWorksheet",
            autofitRow = TRUE, autofitCol = TRUE, region = NULL,
            header = TRUE, rownames = NULL, colTypes = character(0), forceConversion = FALSE, 
            dateTimeFormat = getOption("XLConnect.dateTimeFormat"), check.names = TRUE, 
-           useCachedValues = FALSE, keep = NULL, drop = NULL, simplify = FALSE) 
+           useCachedValues = FALSE, keep = NULL, drop = NULL, simplify = FALSE,
+           readStrategy = "default") 
     
     standardGeneric("readWorksheet"))
 
@@ -43,7 +44,8 @@ setMethod("readWorksheet",
              autofitRow = TRUE, autofitCol = TRUE, region = NULL, header = TRUE, 
              rownames = NULL, colTypes = character(0), forceConversion = FALSE, 
              dateTimeFormat = getOption("XLConnect.dateTimeFormat"), check.names = TRUE, 
-             useCachedValues = FALSE, keep = NULL, drop = NULL, simplify = FALSE) {
+             useCachedValues = FALSE, keep = NULL, drop = NULL, simplify = FALSE,
+             readStrategy = "default") {
 			 
 			if(!is.null(region)) {
 				# Convert region to indices
@@ -53,23 +55,21 @@ setMethod("readWorksheet",
 				endRow = idx[,3]
 				endCol = idx[,4]
 			}
-			
-			# returns a list of RDataFrameWrapper Java object references)
-
 
 			boundingBoxDim = getBoundingBox(object, sheet, startRow = startRow, startCol = startCol, endRow = endRow, endCol = endCol,
 		                                  autofitRow = autofitRow, autofitCol = autofitCol)
 			startRow = boundingBoxDim[1, ]
-		  	startCol = boundingBoxDim[2, ]
+		  startCol = boundingBoxDim[2, ]
 		 	endRow = boundingBoxDim[3, ]
-		  	endCol = boundingBoxDim[4, ]
-		  	numcols = ifelse(endCol == 0, 0, endCol - startCol + 1)
+		  endCol = boundingBoxDim[4, ]
+		  numcols = ifelse(endCol == 0, 0, endCol - startCol + 1)
 			
 			subset <- getColSubset(object, sheet, startRow, endRow, startCol, endCol, header, numcols, keep, drop)
+			# returns a list of RDataFrameWrapper Java object references)
 			dataFrame <- xlcCall(object, "readWorksheet", as.integer(sheet - 1), as.integer(startRow - 1), 
 					as.integer(startCol - 1), as.integer(endRow - 1), as.integer(endCol - 1), header, 
-					.jarray(classToXlcType(colTypes)), forceConversion, dateTimeFormat, useCachedValues, subset,
-        			autofitRow, autofitCol, SIMPLIFY = FALSE)
+					.jarray(classToXlcType(colTypes)), forceConversion, dateTimeFormat, useCachedValues, subset, 
+          readStrategy, SIMPLIFY = FALSE)
 	
 			# get data.frames from Java
 			dataFrame = lapply(dataFrame, dataframeFromJava, check.names = check.names)
@@ -97,7 +97,8 @@ setMethod("readWorksheet",
              autofitRow = TRUE, autofitCol = TRUE, region = NULL, header = TRUE, 
              rownames = NULL, colTypes = character(0), forceConversion = FALSE, 
              dateTimeFormat = getOption("XLConnect.dateTimeFormat"), check.names = TRUE, 
-             useCachedValues = TRUE, keep = NULL, drop = NULL, simplify = FALSE) {
+             useCachedValues = TRUE, keep = NULL, drop = NULL, simplify = FALSE,
+             readStrategy = "default") {
 			
 			# Remember sheet names
 			sheetNames = sheet

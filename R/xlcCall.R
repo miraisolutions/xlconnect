@@ -38,7 +38,7 @@ xlcCall <- function(obj, fun, ..., SIMPLIFY = TRUE) {
 				else wrapList(x)
 			})
 	res = jTryCatch(do.call("mapply", args = c(FUN = f, args, SIMPLIFY = SIMPLIFY)))
-	warnings = obj@jobj$retrieveWarnings()
+	warnings = .jcall(obj@jobj, "[S", "retrieveWarnings")
 	for(w in warnings) warning(w, call. = FALSE)
 	
 	res

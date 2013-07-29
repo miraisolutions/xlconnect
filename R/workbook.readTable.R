@@ -29,7 +29,8 @@
 setGeneric("readTable",
 	function(object, sheet, table, header = TRUE, rownames = NULL, colTypes = character(0),
 			forceConversion = FALSE, dateTimeFormat = getOption("XLConnect.dateTimeFormat"),
-			check.names = TRUE, useCachedValues = FALSE, keep = NULL, drop = NULL, simplify = FALSE) 
+			check.names = TRUE, useCachedValues = FALSE, keep = NULL, drop = NULL, simplify = FALSE,
+      readStrategy = "default") 
     standardGeneric("readTable"))
 
 
@@ -37,7 +38,8 @@ setMethod("readTable",
 	signature(object = "workbook", sheet = "numeric"), 
 	function(object, sheet, table, header = TRUE, rownames = NULL, colTypes = character(0),
 			forceConversion = FALSE, dateTimeFormat = getOption("XLConnect.dateTimeFormat"),
-			check.names = TRUE, useCachedValues = FALSE, keep = NULL, drop = NULL, simplify = FALSE) {
+			check.names = TRUE, useCachedValues = FALSE, keep = NULL, drop = NULL, simplify = FALSE,
+      readStrategy = "default") {
 
 		# returns a list of RDataFrameWrapper Java object references
 		namedim = matrix(as.vector(t(getReferenceCoordinatesForTable(object, sheet, table))), nrow = 4, byrow = FALSE)
@@ -49,7 +51,7 @@ setMethod("readTable",
 
 		subset <- getColSubset(object, sheet, startRow, endRow, startCol, endCol, header, numcols, keep, drop)
 		dataFrame <- xlcCall(object, "readTable", as.integer(sheet - 1), table, header, .jarray(classToXlcType(colTypes)), 
-				forceConversion, dateTimeFormat, useCachedValues, subset, SIMPLIFY = FALSE)
+				forceConversion, dateTimeFormat, useCachedValues, subset, readStrategy, SIMPLIFY = FALSE)
 		
 
     # get data.frames from Java
@@ -77,7 +79,8 @@ setMethod("readTable",
   signature(object = "workbook", sheet = "character"), 
   function(object, sheet, table, header = TRUE, rownames = NULL, colTypes = character(0),
            forceConversion = FALSE, dateTimeFormat = getOption("XLConnect.dateTimeFormat"),
-           check.names = TRUE, useCachedValues = FALSE, keep = NULL, drop = NULL, simplify = FALSE) {
+           check.names = TRUE, useCachedValues = FALSE, keep = NULL, drop = NULL, simplify = FALSE,
+           readStrategy = "default") {
     
     # Remember sheet names
     sheet = getSheetPos(object, sheet)

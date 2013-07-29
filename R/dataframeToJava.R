@@ -31,36 +31,38 @@
 #############################################################################
 
 dataframeToJava <- function(df) {
-	# Force data.frame
-	if(!is.data.frame(df))
-		df <- as.data.frame(df)
-	
-	dFrame <- jTryCatch(new(J("com.miraisolutions.xlconnect.integration.r.RDataFrameWrapper")))
-	cnames <- colnames(df)
-	for(i in seq(along = df)) {
-		v <- df[, i]
-		
-		if(is(v, "numeric")) {
-			jTryCatch(dFrame$addNumericColumn(cnames[i], .jarray(as.double(v)), .jarray(is.na(v))))
-		}
-		else if(is(v, "logical")) {
-			jTryCatch(dFrame$addBooleanColumn(cnames[i], .jarray(v), .jarray(is.na(v))))
-		}
-		else if(is(v, "character")) {
-			jTryCatch(dFrame$addStringColumn(cnames[i], .jarray(v), .jarray(is.na(v))))
-		}
-		else if(is(v, "POSIXt")) {
-			jTryCatch(dFrame$addDateTimeColumn(cnames[i], .jarray(.jlong(as.numeric(v) * 1000)), .jarray(is.na(v))))
-		} else if(is(v, "Date")) {
-      # Important: dates (without time) are treated as being at midnight UTC
-		  jTryCatch(dFrame$addDateTimeColumn(cnames[i], .jarray(.jlong(as.numeric(as.POSIXct(v)) * 1000)), .jarray(is.na(v))))
-		} else { # e.g. factor or any other type
-			v <- as.character(v)
-			if(length(v) != nrow(df))
-				stop(sprintf("Conversion to character for column %s failed! Check the class.", cnames[i]))
-			jTryCatch(dFrame$addStringColumn(cnames[i], .jarray(v), .jarray(is.na(v))))
-		}
-	}
-	
-	dFrame
+  jTryCatch({
+  	# Force data.frame
+  	if(!is.data.frame(df))
+  		df = as.data.frame(df)
+  	
+  	dFrame = new(J("com.miraisolutions.xlconnect.integration.r.RDataFrameWrapper"))
+  	cnames = colnames(df)
+  	for(i in seq(along = df)) {
+  		v = df[, i]
+  		
+  		if(is(v, "numeric")) {
+  			.jcall(dFrame, "V", "addNumericColumn", cnames[i], .jarray(as.double(v)), .jarray(is.na(v)))
+  		}
+  		else if(is(v, "logical")) {
+  			.jcall(dFrame, "V", "addBooleanColumn", cnames[i], .jarray(v), .jarray(is.na(v)))
+  		}
+  		else if(is(v, "character")) {
+  			.jcall(dFrame, "V", "addStringColumn", cnames[i], .jarray(v), .jarray(is.na(v)))
+  		}
+  		else if(is(v, "POSIXt")) {
+  			.jcall(dFrame, "V", "addDateTimeColumn", cnames[i], .jarray(.jlong(as.numeric(v) * 1000)), .jarray(is.na(v)))
+  		} else if(is(v, "Date")) {
+        # Important: dates (without time) are treated as being at midnight UTC
+  		  .jcall(dFrame, "V", "addDateTimeColumn", cnames[i], .jarray(.jlong(as.numeric(as.POSIXct(v)) * 1000)), .jarray(is.na(v)))
+  		} else { # e.g. factor or any other type
+  			v = as.character(v)
+  			if(length(v) != nrow(df))
+  				stop(sprintf("Conversion to character for column %s failed! Check the class.", cnames[i]))
+  			.jcall(dFrame, "V", "addStringColumn", cnames[i], .jarray(v), .jarray(is.na(v)))
+  		}
+  	}
+  	
+  	dFrame
+  })
 }

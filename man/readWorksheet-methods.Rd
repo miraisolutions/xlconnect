@@ -9,8 +9,8 @@
 Reads data from worksheets of a \code{\linkS4class{workbook}}.
 }
 \usage{
-\S4method{readWorksheet}{workbook,numeric}(object,sheet,startRow,startCol,endRow,endCol,autofitRow,autofitCol,region,header,rownames,colTypes,forceConversion,dateTimeFormat,check.names,useCachedValues,keep,drop, simplify)
-\S4method{readWorksheet}{workbook,character}(object,sheet,startRow,startCol,endRow,endCol,autofitRow,autofitCol,region,header,rownames,colTypes,forceConversion,dateTimeFormat,check.names,useCachedValues,keep,drop, simplify)
+\S4method{readWorksheet}{workbook,numeric}(object,sheet,startRow,startCol,endRow,endCol,autofitRow,autofitCol,region,header,rownames,colTypes,forceConversion,dateTimeFormat,check.names,useCachedValues,keep,drop, simplify, readStrategy)
+\S4method{readWorksheet}{workbook,character}(object,sheet,startRow,startCol,endRow,endCol,autofitRow,autofitCol,region,header,rownames,colTypes,forceConversion,dateTimeFormat,check.names,useCachedValues,keep,drop, simplify, readStrategy)
 }
 
 \arguments{
@@ -82,6 +82,14 @@ Reads data from worksheets of a \code{\linkS4class{workbook}}.
   \item{simplify}{\code{logical} specifying if the result should be simplified, e.g. in case the \code{data.frame}
   would only have one row or one column (and data types match). Simplifying here is identical to calling \code{unlist}
   on the otherwise resulting \code{data.frame} (using \code{use.names = FALSE}). The default is \code{FALSE}.}
+  \item{readStrategy}{\code{character} specifying the reading strategy to use. Currently supported strategies are:
+  \itemize{
+  \item \code{"default"} (default): Can handle all supported data types incl. date/time values and can deal 
+  directly with missing value identifiers (see \code{\link[=setMissingValue-methods]{setMissingValue}})
+  \item \code{"fast"}: Increased read performance. Date/time values are read as numeric (number of days since 1900-01-01; 
+  fractional days represent hours, minutes, and seconds) and only blank cells are recognized as missing (missing value 
+  identifiers as set in \code{\link[=setMissingValue-methods]{setMissingValue}} are ignored)
+  }}
 }
 
 \details{

@@ -31,7 +31,8 @@
 setGeneric("readNamedRegion",
 	function(object, name, header = TRUE, rownames = NULL, colTypes = character(0),
 			forceConversion = FALSE, dateTimeFormat = getOption("XLConnect.dateTimeFormat"),
-			check.names = TRUE, useCachedValues = FALSE, keep = NULL, drop = NULL, simplify = FALSE) 
+			check.names = TRUE, useCachedValues = FALSE, keep = NULL, drop = NULL, simplify = FALSE,
+      readStrategy = "default") 
     standardGeneric("readNamedRegion"))
 
 
@@ -39,7 +40,8 @@ setMethod("readNamedRegion",
 	signature(object = "workbook"), 
 	function(object, name, header = TRUE, rownames = NULL, colTypes = character(0),
 			forceConversion = FALSE, dateTimeFormat = getOption("XLConnect.dateTimeFormat"),
-			check.names = TRUE, useCachedValues = FALSE, keep = NULL, drop = NULL, simplify = FALSE) {
+			check.names = TRUE, useCachedValues = FALSE, keep = NULL, drop = NULL, simplify = FALSE,
+      readStrategy = "default") {
 
 		# returns a list of RDataFrameWrapper Java object references
 		sheet = as.vector(extractSheetName(getReferenceFormula(object, name)))
@@ -52,7 +54,7 @@ setMethod("readNamedRegion",
 
 		subset <- getColSubset(object, sheet, startRow, endRow, startCol, endCol, header, numcols, keep, drop)
 		dataFrame <- xlcCall(object, "readNamedRegion", name, header, .jarray(classToXlcType(colTypes)), 
-				forceConversion, dateTimeFormat, useCachedValues, subset, SIMPLIFY = FALSE)
+				forceConversion, dateTimeFormat, useCachedValues, subset, readStrategy, SIMPLIFY = FALSE)
 		
 
     # get data.frames from Java
