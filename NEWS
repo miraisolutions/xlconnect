@@ -10,7 +10,8 @@ XLConnect News
   * Added arguments clearSheets and clearNamedRegions to functions
     writeWorksheetToFile and writeNamedRegionToFile respectively
   * Fixed an issue with validity checking of named regions in getDefinedNames
-  * Moved to Apache POI 3.10-beta1
+  * Moved to Apache POI 3.10-beta2
+  * Moved to Joda-Time 2.3
   * XLConnect now "Imports" rJava and utils rather than "Depends" on them
   * XLConnect settings are now applied in .onLoad rather than .onAttach
     (this allows XLConnect to be imported using "Imports")
@@ -21,6 +22,10 @@ XLConnect News
     help for more information)
   * readNamedRegionFromFile now exposes all argument from readNamedRegion via 
     '...'
+  * New style action DATATYPE that allows to define a cell style to be used for
+    a given data type. With this there are new methods setCellStyleForType and
+    getCellStyleForType.
+  * Fixed issues reported by R CMD check
 
 0.2-5 2013-03-18
   * Merged XLConnect & XLConnectJars

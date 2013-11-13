@@ -9,8 +9,12 @@
 Reads data from worksheets of a \code{\linkS4class{workbook}}.
 }
 \usage{
-\S4method{readWorksheet}{workbook,numeric}(object,sheet,startRow,startCol,endRow,endCol,autofitRow,autofitCol,region,header,rownames,colTypes,forceConversion,dateTimeFormat,check.names,useCachedValues,keep,drop, simplify, readStrategy)
-\S4method{readWorksheet}{workbook,character}(object,sheet,startRow,startCol,endRow,endCol,autofitRow,autofitCol,region,header,rownames,colTypes,forceConversion,dateTimeFormat,check.names,useCachedValues,keep,drop, simplify, readStrategy)
+\S4method{readWorksheet}{workbook,numeric}(object,sheet,startRow,startCol,endRow,endCol,autofitRow,autofitCol,
+region,header,rownames,colTypes,forceConversion,dateTimeFormat,check.names,
+useCachedValues,keep,drop, simplify, readStrategy)
+\S4method{readWorksheet}{workbook,character}(object,sheet,startRow,startCol,endRow,endCol,autofitRow,autofitCol,
+region,header,rownames,colTypes,forceConversion,dateTimeFormat,check.names,
+useCachedValues,keep,drop, simplify, readStrategy)
 }
 
 \arguments{

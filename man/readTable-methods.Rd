@@ -9,8 +9,10 @@
 Reads Excel tables (Office 2007+) from a \code{\linkS4class{workbook}}.
 }
 \usage{
-\S4method{readTable}{workbook,numeric}(object, sheet, table, header, rownames, colTypes, forceConversion, dateTimeFormat, check.names, useCachedValues, keep, drop, simplify, readStrategy)
-\S4method{readTable}{workbook,character}(object, sheet, table, header, rownames, colTypes, forceConversion, dateTimeFormat, check.names, useCachedValues, keep, drop, simplify, readStrategy)
+\S4method{readTable}{workbook,numeric}(object, sheet, table, header, rownames, colTypes, forceConversion, 
+dateTimeFormat, check.names, useCachedValues, keep, drop, simplify, readStrategy)
+\S4method{readTable}{workbook,character}(object, sheet, table, header, rownames, colTypes, forceConversion, 
+dateTimeFormat, check.names, useCachedValues, keep, drop, simplify, readStrategy)
 }
 
 \arguments{

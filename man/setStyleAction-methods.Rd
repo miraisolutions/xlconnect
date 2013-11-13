@@ -29,8 +29,15 @@ Controls the application of \code{\linkS4class{cellstyle}}s when writing data to
  format. Time/date vectors e.g. \code{Date} or \code{POSIXt}) are
  written with the "mm/dd/yyyy hh:mm:ss" data format. All cells are
  specified to wrap the text if necessary. The corresponding custom cell
- styles are called \emph{XLConnect.Header}, \emph{XLConnect.General} and
- \emph{XLConnect.Date}. 
+ styles are called \emph{XLConnect.Header}, \emph{XLConnect.String},
+ \emph{XLConnect.Numeric}, \emph{XLConnect.Boolean} and \emph{XLConnect.Date}.
+ 
+ \item \code{XLC$"STYLE_ACTION.DATATYPE"}: This style action instructs
+ \pkg{XLConnect} to apply \code{\linkS4class{cellstyle}}s per data type as
+ set by the \code{\link[=setCellStyleForType-methods]{setCellStyleForType}}
+ methods. In contrast to the \code{XLC$"STYLE_ACTION.DATA_FORMAT_ONLY"}
+ style action (see below) which only sets a data format to an existing
+ cell style, this action actually sets a new \code{\linkS4class{cellstyle}}.
 
  \item \code{XLC$"STYLE_ACTION.NONE"}: This style action instructs
  \pkg{XLConnect} to apply no cell styles when writing data. Cell styles
@@ -94,6 +101,7 @@ Mirai Solutions GmbH \url{http://www.mirai-solutions.com}
 \seealso{
 \code{\linkS4class{workbook}}, \code{\linkS4class{cellstyle}}, \code{\link[=createCellStyle-methods]{createCellStyle}},
 \code{\link[=writeNamedRegion-methods]{writeNamedRegion}}, \code{\link[=writeWorksheet-methods]{writeWorksheet}}, \code{\link[=setStyleNamePrefix-methods]{setStyleNamePrefix}},
+\code{\link[=setCellStyleForType-methods]{setCellStyleForType}},
 \code{\link[=setDataFormatForType-methods]{setDataFormatForType}}
 }
 \examples{

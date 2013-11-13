@@ -1,4 +1,5 @@
 # XLConnect requires rJava & XLConnectJars
+import(methods)
 import(rJava)
 importFrom(utils, packageDescription)
 
@@ -24,6 +25,7 @@ exportMethods(
 	getActiveSheetName,
 	getBoundingBox,
 	getCellStyle,
+  getCellStyleForType,
 	getCellFormula,
 	getDefinedNames,
 	getForceFormulaRecalculation,
@@ -54,6 +56,7 @@ exportMethods(
 	setAutoFilter,
 	setBorder,
 	setCellStyle,
+  setCellStyleForType,
 	setCellFormula,
 	setColumnWidth,
 	setDataFormat,

@@ -8,7 +8,8 @@
 Reads named regions from a \code{\linkS4class{workbook}}.
 }
 \usage{
-\S4method{readNamedRegion}{workbook}(object, name, header, rownames, colTypes, forceConversion, dateTimeFormat, check.names, useCachedValues, keep, drop, simplify, readStrategy)
+\S4method{readNamedRegion}{workbook}(object, name, header, rownames, colTypes, forceConversion, 
+dateTimeFormat, check.names, useCachedValues, keep, drop, simplify, readStrategy)
 }
 
 \arguments{
