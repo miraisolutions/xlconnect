@@ -317,6 +317,27 @@ test.workbook.readNamedRegion <- function() {
 			forceConversion = FALSE,
 			dateTimeFormat = "%d.%m.%Y %H:%M:%S", drop=c(1,3))
 	checkEquals(res, targetNoForceSubset)
+  
+	# Check that simplification works as expected (*.xls)
+  res <- readNamedRegion(wb.xls, name = "Simplify1", header = TRUE, simplify = TRUE)
+  checkEquals(res, 1:10)
+  res <- readNamedRegion(wb.xls, name = "Simplify2", header = TRUE, simplify = TRUE)
+  checkEquals(res, 1:4)
+  res <- readNamedRegion(wb.xls, name = "Simplify3", header = TRUE, simplify = TRUE)
+  checkEquals(res, c(TRUE, FALSE, FALSE, TRUE))
+  res <- readNamedRegion(wb.xls, name = "Simplify4", header = TRUE, simplify = TRUE)
+  checkEquals(res, c("one", "two", "three", "four", "five"))
+  
+	# Check that simplification works as expected (*.xlsx)
+	res <- readNamedRegion(wb.xlsx, name = "Simplify1", header = TRUE, simplify = TRUE)
+	checkEquals(res, 1:10)
+	res <- readNamedRegion(wb.xlsx, name = "Simplify2", header = TRUE, simplify = TRUE)
+	checkEquals(res, 1:4)
+	res <- readNamedRegion(wb.xlsx, name = "Simplify3", header = TRUE, simplify = TRUE)
+	checkEquals(res, c(TRUE, FALSE, FALSE, TRUE))
+	res <- readNamedRegion(wb.xlsx, name = "Simplify4", header = TRUE, simplify = TRUE)
+	checkEquals(res, c("one", "two", "three", "four", "five"))
+  
 
 	# Cached value tests: Create workbook
 	wb.xls <- loadWorkbook(rsrc("resources/testCachedValues.xls"), create = FALSE)

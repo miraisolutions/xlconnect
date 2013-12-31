@@ -9,14 +9,21 @@
 Queries the available Excel tables on the specified worksheet.
 }
 \usage{
-\S4method{getTables}{workbook,numeric}(object,sheet)
-\S4method{getTables}{workbook,character}(object,sheet)
+\S4method{getTables}{workbook,numeric}(object,sheet,simplify)
+\S4method{getTables}{workbook,character}(object,sheet,simplify)
 }
 \arguments{
   \item{object}{The \code{\linkS4class{workbook}} to use}
   \item{sheet}{Index (\code{integer}) or name (\code{character}) of worksheet to query}
+  \item{simplify}{\code{logical} specifying if the result should be simplified (defaults
+  to \code{TRUE}). See details.}
 }
-
+\details{
+Since this is a vectorized function (multiple sheets can be specified) the result is a
+named list (one component per sheet) if no simplification is applied. In cases where only 
+one sheet is queried and \code{simplify = TRUE} (default) the result is simplified to a
+vector.
+}
 \author{
 Martin Studer\cr
 Mirai Solutions GmbH \url{http://www.mirai-solutions.com}
@@ -32,8 +39,11 @@ demoExcelFile <- system.file("demoFiles/mtcars.xlsx", package = "XLConnect")
 # Load workbook
 wb <- loadWorkbook(demoExcelFile)
 
-# Query available worksheets
-sheets <- getSheets(wb)
+# Query available tables (table names) on sheet 'mtcars_table'
+tables <- getTables(wb, sheet = "mtcars_table")
+
+# ... or via sheet index
+tables <- getTables(wb, sheet = 4)
 }
 \keyword{methods}
 \keyword{utilities}

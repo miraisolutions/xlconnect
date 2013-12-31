@@ -1,7 +1,7 @@
 #############################################################################
 #
 # XLConnect
-# Copyright (C) 2010-2013 Mirai Solutions GmbH
+# Copyright (C) 2010-2012 Mirai Solutions GmbH
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -20,35 +20,26 @@
 
 #############################################################################
 #
-# Querying available Excel tables in a workbook
+# Tests around reading Excel tables from an Excel workbook
 # 
 # Author: Martin Studer, Mirai Solutions GmbH
 #
 #############################################################################
 
-setGeneric("getTables",
-	function(object, sheet, simplify = TRUE) standardGeneric("getTables"))
-
-setMethod("getTables", 
-	signature(object = "workbook", sheet = "numeric"), 
-	function(object, sheet, simplify = TRUE) {
-	  res <- xlcCall(object, "getTables", as.integer(sheet - 1), SIMPLIFY = FALSE)
-    if(simplify && (length(res) == 1)) {
-      res[[1]]
-    } else {
-      res
-    }
-	}
-)
-
-setMethod("getTables", 
-  signature(object = "workbook", sheet = "character"), 
-  function(object, sheet, simplify = TRUE) {
-    res <- xlcCall(object, "getTables", sheet, SIMPLIFY = FALSE)
-    if(simplify && (length(res) == 1)) {
-      res[[1]]
-    } else {
-      res
-    }
-  }
-)
+test.workbook.readTable <- function() {
+	
+	# Create workbooks
+	wb.xlsx <- loadWorkbook(rsrc("resources/testWorkbookReadTable.xlsx"), create = FALSE)
+	
+	checkDf <- data.frame(
+	  "NumericColumn" = c(-23.63, NA, NA, 5.8, 3),
+	  "StringColumn" = c("Hello", NA, NA, NA, "World"),
+	  "BooleanColumn" = c(TRUE, FALSE, FALSE, NA, NA),
+	  "DateTimeColumn" = as.POSIXct(c(NA, NA, "2010-09-09 21:03:07", "2010-09-10 21:03:07", "2010-09-11 21:03:07")),
+	  stringsAsFactors = F
+	)
+  
+	# Check that reading an Excel table works as expected (*.xlsx)
+	res <- readTable(wb.xlsx, sheet = "Test", table = "TestTable1")
+	checkEquals(res, checkDf)
+}

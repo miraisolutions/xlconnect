@@ -36,8 +36,10 @@ demoExcelFile <- system.file("demoFiles/mtcars.xlsx", package = "XLConnect")
 # Load workbook
 wb <- loadWorkbook(demoExcelFile)
 
-# Query reference coordinate for name 'mtcars'
-print(getReferenceCoordinatesForName(wb, name = "mtcars"))
+# Query reference coordinates for table 'MtcarsTable' on sheet
+# 'mtcars_table'
+print(getReferenceCoordinatesForTable(wb, sheet = "mtcars_table", 
+                                      table = "MtcarsTable"))
 }
 \keyword{methods}
 \keyword{utilities}

@@ -13,11 +13,12 @@ Manipulate Excel files from R
 Package: \tab XLConnect\cr
 Type: \tab Package\cr
 Version: \tab 0.2-6\cr
-Date: \tab 2013-03-18\cr
+Date: \tab 2013-12-31\cr
 URL: \tab \url{http://www.mirai-solutions.com}\cr
 \tab \url{http://miraisolutions.wordpress.com}\cr
 SystemRequirements: \tab java (>= 6.0)\cr
-Depends: \tab R (>= 2.10.0), rJava, utils, methods\cr
+Depends: \tab R (>= 2.10.0)\cr
+Imports: \tab methods, rJava, utils\cr
 Suggests: \tab RUnit, lattice, ggplot2 (>= 0.9.3), fImport, forecast, zoo, scales\cr
 License: \tab GPL-3\cr
 LazyLoad: \tab yes\cr

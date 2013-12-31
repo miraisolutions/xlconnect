@@ -1,7 +1,7 @@
 #############################################################################
 #
 # XLConnect
-# Copyright (C) 2010-2013 Mirai Solutions GmbH
+# Copyright (C) 2010-2012 Mirai Solutions GmbH
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -20,35 +20,27 @@
 
 #############################################################################
 #
-# Querying available Excel tables in a workbook
+# Tests around querying Excel tables on a worksheet
 # 
 # Author: Martin Studer, Mirai Solutions GmbH
 #
 #############################################################################
 
-setGeneric("getTables",
-	function(object, sheet, simplify = TRUE) standardGeneric("getTables"))
-
-setMethod("getTables", 
-	signature(object = "workbook", sheet = "numeric"), 
-	function(object, sheet, simplify = TRUE) {
-	  res <- xlcCall(object, "getTables", as.integer(sheet - 1), SIMPLIFY = FALSE)
-    if(simplify && (length(res) == 1)) {
-      res[[1]]
-    } else {
-      res
-    }
-	}
-)
-
-setMethod("getTables", 
-  signature(object = "workbook", sheet = "character"), 
-  function(object, sheet, simplify = TRUE) {
-    res <- xlcCall(object, "getTables", sheet, SIMPLIFY = FALSE)
-    if(simplify && (length(res) == 1)) {
-      res[[1]]
-    } else {
-      res
-    }
-  }
-)
+test.workbook.getTables <- function() {
+	
+	# Create workbooks
+	wb.xlsx <- loadWorkbook(rsrc("resources/testWorkbookReadTable.xlsx"), create = FALSE)
+  
+	# Check that querying Excel table works as expected (*.xlsx)
+	res <- getTables(wb.xlsx, sheet = "Test", simplify = TRUE)
+	checkEquals(res, "TestTable1")
+  
+  res <- getTables(wb.xlsx, sheet = "Test", simplify = FALSE)
+  checkEquals(res, list(Test = "TestTable1"))
+  
+  res <- getTables(wb.xlsx, sheet = "NoTableHere", simplify = TRUE)
+  checkEquals(res, character(0))
+  
+  # Check that trying to query tables from an non-existent sheet throws an exception (*.xlsx)
+  checkException(getTables(wb.xlsx, sheet = "DoesNotExist"))
+}

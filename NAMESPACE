@@ -37,6 +37,7 @@ exportMethods(
   getReferenceCoordinatesForTable,
 	getSheetPos,
 	getSheets,
+	getTables,
 	hideSheet,
 	isSheetHidden,
 	isSheetVeryHidden,

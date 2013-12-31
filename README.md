@@ -6,7 +6,7 @@ XLConnect is a comprehensive and cross-platform R package for manipulating Micro
 
 The package can easily be installed from <a href="http://cran.r-project.org/web/packages/XLConnect">CRAN</a> via `install.packages("XLConnect")`. In order to get started have a look at the <a href="http://cran.r-project.org/web/packages/XLConnect/vignettes/XLConnect.pdf">XLConnect</a> and <a href="http://cran.r-project.org/web/packages/XLConnect/vignettes/XLConnectImpatient.pdf">XLConnect for the Impatient</a> package vignettes, the numerous demos available via `demo(package = "XLConnect")` or browse through the comprehensive <a href="http://cran.r-project.org/web/packages/XLConnect/XLConnect.pdf">reference manual</a>.
 
-Alternatively, you may install XLConnect directly from github using the excellent <a href="https://github.com/hadley/devtools">devtools</a> package:
+Alternatively, you may install XLConnect directly from our <a href="https://github.com/miraisolutions/xlconnect">github repository</a> using the excellent <a href="https://github.com/hadley/devtools">devtools</a> package:
 
 ```
 require(devtools)
@@ -14,8 +14,11 @@ require(devtools)
 # Installs the master branch of XLConnect (= current development version)
 install_github("xlconnect", username = "miraisolutions", ref = "master")
 
-# Installs XLConnect 0.2-5
-install_github("xlconnect", username = "miraisolutions", ref = "0.2-5")
+# Installs XLConnect 0.2-6
+install_github("xlconnect", username = "miraisolutions", ref = "0.2-6")
 ```
 
 For more examples and news see also our <a href="http://miraisolutions.wordpress.com/">wordpress</a> site.
+
+Please send any enhancement requests or bug reports with a simple and self-contained reproducible example to <a href="xlconnect@mirai-solutions.com"> or log a corresponding issue on our <a href="https://github.com/miraisolutions/xlconnect">github repository</a>.
+For other questions you may also use <a href="http://stackoverflow.com/questions/tagged/xlconnect">Stackoverflow</a>.
