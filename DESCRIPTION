@@ -6,6 +6,7 @@ Date: 2013-12-31
 Author: Mirai Solutions GmbH
 Maintainer: Martin Studer <martin.studer@mirai-solutions.com>
 URL: http://www.mirai-solutions.com , http://miraisolutions.wordpress.com
+BugReports: https://github.com/miraisolutions/xlconnect/issues
 SystemRequirements: java (>= 1.6)
 Depends: R (>= 2.10.0)
 Imports: methods, rJava, utils
