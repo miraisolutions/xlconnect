@@ -50,7 +50,7 @@ writeNamedRegion(wb, mtcars, name = "mtcars")
 
 # Now, let us get Excel to calculate average weights.
 # Where did we write the dataset?
-corners <- getReferenceCoordinates(wb, "mtcars")
+corners <- getReferenceCoordinatesForName(wb, "mtcars")
 # Put the average under the wt column
 colIndex <- which(names(mtcars) == "wt") 
 rowIndex <- corners[2,1] + 1

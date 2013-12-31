@@ -46,7 +46,7 @@ Nicola Lambiase\cr
 Mirai Solutions GmbH \url{http://www.mirai-solutions.com}
 }
 \seealso{
-\code{\linkS4class{workbook}}, \code{\link[=getReferenceCoordinates-methods]{getReferenceCoordinates}}
+\code{\linkS4class{workbook}}
 }
 \examples{
 # multiregion xlsx file from demoFiles subfolder of package XLConnect

@@ -20,12 +20,19 @@ XLConnect News
   * Introduction of a new argument 'readStrategy' in methods readWorksheet,
     readNamedRegion, readTable to support improved read performance (see the
     help for more information)
-  * readNamedRegionFromFile now exposes all argument from readNamedRegion via 
+  * readNamedRegionFromFile now exposes all arguments from readNamedRegion via 
     '...'
   * New style action DATATYPE that allows to define a cell style to be used for
     a given data type. With this there are new methods setCellStyleForType and
     getCellStyleForType.
   * Fixed issues reported by R CMD check
+  * Added a new argument 'simplify' to the methods readWorksheet and
+    readNamedRegion that specifies whether the result should be simplified e.g.
+    in case the resulting data.frame only has one row or one column
+  * Fixed an issue where Inf values resulted in a corrupted workbook; Inf
+    values are now handled by setting corresponding cells as error cells with 
+    the error code NA (according to Excel's NA() function)
+  * Deprecated getReferenceCoordinates in favor of getReferenceCoordinatesForName
 
 0.2-5 2013-03-18
   * Merged XLConnect & XLConnectJars

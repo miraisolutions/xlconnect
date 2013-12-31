@@ -5,7 +5,7 @@
 \alias{getReferenceCoordinates,workbook-method}
 \title{Querying the coordinates of the range reference by an Excel name}
 \description{
-Queries the coordinates of an Excel name in a \code{\linkS4class{workbook}}.
+(DEPRECATED) Queries the coordinates of an Excel name in a \code{\linkS4class{workbook}}.
 }
 \usage{
 \S4method{getReferenceCoordinates}{workbook}(object,name)
@@ -16,7 +16,10 @@ Queries the coordinates of an Excel name in a \code{\linkS4class{workbook}}.
   \item{name}{The name to query. This argument is vectorized such that
   multiple names can be queried with one method call.}
 }
-
+\note{
+This function is deprecated. Use \code{\link[=getReferenceCoordinatesForName-methods]{getReferenceCoordinatesForName}}
+instead.
+}
 \author{
 Thomas Themel\cr
 Mirai Solutions GmbH \url{http://www.mirai-solutions.com}
@@ -33,7 +36,7 @@ demoExcelFile <- system.file("demoFiles/mtcars.xlsx", package = "XLConnect")
 wb <- loadWorkbook(demoExcelFile)
 
 # Query reference coordinate for name 'mtcars'
-print(getReferenceCoordinates(wb, name = "mtcars"))
+print(getReferenceCoordinatesForName(wb, name = "mtcars"))
 }
 \keyword{methods}
 \keyword{utilities}

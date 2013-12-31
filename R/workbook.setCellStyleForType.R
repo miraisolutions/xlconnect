@@ -32,7 +32,7 @@ setGeneric("setCellStyleForType",
 setMethod("setCellStyleForType", 
           signature(object = "workbook"), 
           function(object, type, style) {
-            xlcCall(object, "setCellStyleForDataType", type, style)
+            xlcCall(object, "setCellStyleForDataType", classToXlcType(type), style)
             invisible()
           }
 )

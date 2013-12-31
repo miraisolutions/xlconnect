@@ -8,10 +8,12 @@ Normalizes a data.frame with respect to column types. This is necessary for comp
 in fact are written to Excel as ordinary strings. Therefore, when read back in to R, they are treated as character variables.
 }
 \usage{
-normalizeDataframe(df)
+normalizeDataframe(df, replaceInf)
 }
 \arguments{
   \item{df}{\code{data.frame} to normalize}
+  \item{replaceInf}{\code{logical} specifying if infinites should be replaced with \code{NA}; this is used
+  because Excel does not support infinites}
 }
 \value{
 Returns a normalized \code{data.frame}

@@ -39,7 +39,7 @@ test.writeAndReadNamedRegion <- function() {
 		createName(wb, name = namedRegion, formula = paste(namedRegion, lref, sep = "!"))
 		writeNamedRegion(wb, df, name = namedRegion, header = TRUE)
 		res <- readNamedRegion(wb, namedRegion)
-		checkEquals(normalizeDataframe(df), res, check.attributes = FALSE, check.names = TRUE)
+		checkEquals(normalizeDataframe(df, replaceInf = TRUE), res, check.attributes = FALSE, check.names = TRUE)
 	}
 	
 	if(getOption("FULL.TEST.SUITE")) {
@@ -91,8 +91,8 @@ test.writeAndReadNamedRegion <- function() {
 	
 	# custom test dataset
 	cdf <- data.frame(
-			"Column.A" = c(1, 2, 3, NA, 5, 6, 7, 8, NA, 10),
-			"Column.B" = c(-4, -3, NA, -1, 0, NA, NA, 3, 4, 5),
+			"Column.A" = c(1, 2, 3, NA, 5, Inf, 7, 8, NA, 10),
+			"Column.B" = c(-4, -3, NA, -Inf, 0, NA, NA, 3, 4, 5),
 			"Column.C" = c("Anna", "???", NA, "", NA, "$!?&%", "(?2@?~?'^*#|)", "{}[]:,;-_<>", "\\sadf\n\nv", "a b c"),
 			"Column.D" = c(pi, -pi, NA, sqrt(2), sqrt(0.3), -sqrt(pi), exp(1), log(2), sin(2), -tan(2)),
 			"Column.E" = c(TRUE, TRUE, NA, NA, FALSE, FALSE, TRUE, NA, FALSE, TRUE),

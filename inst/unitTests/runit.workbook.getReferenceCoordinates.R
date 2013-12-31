@@ -33,10 +33,10 @@ test.workbook.getReferenceCoordinates <- function() {
 	wb.xlsx <- loadWorkbook(rsrc("resources/testWorkbookReferenceFormula.xlsx"), create = FALSE)
 	
 	# Check if reference formulas match (*.xls)
-	checkTrue(all(getReferenceCoordinates(wb.xls, "FirstName") == matrix(c(1,1,1,1), nrow = 2, byrow=TRUE)))
-	checkException(getReferenceCoordinates(wb.xls, "NonExistentName"))
+	checkTrue(all(getReferenceCoordinatesForName(wb.xls, "FirstName") == matrix(c(1,1,1,1), nrow = 2, byrow=TRUE)))
+	checkException(getReferenceCoordinatesForName(wb.xls, "NonExistentName"))
 
 	# Check if reference positions match (*.xlsx)
-	checkTrue(all(getReferenceCoordinates(wb.xlsx, "FirstName") == matrix(c(1,1,1,1), nrow = 2, byrow=TRUE)))
-	checkException(getReferenceCoordinates(wb.xlsx, "NonExistentName"))
+	checkTrue(all(getReferenceCoordinatesForName(wb.xlsx, "FirstName") == matrix(c(1,1,1,1), nrow = 2, byrow=TRUE)))
+	checkException(getReferenceCoordinatesForName(wb.xlsx, "NonExistentName"))
 }
