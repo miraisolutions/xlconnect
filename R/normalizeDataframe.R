@@ -50,7 +50,9 @@ normalizeDataframe <- function(df, replaceInf = FALSE) {
         col
 			} else if(is(col, "Date") || is(col, "POSIXt")) {
         ms = round(as.numeric(as.POSIXct(col)), 3) # only consider up to milliseconds
-        as.POSIXct(ms, origin = "1970-01-01", tz = "")
+        d = as.POSIXct("1970-01-01", tz = "UTC") + ms
+        attr(d, "tzone") = ""
+        d
 			} else
 				as.character(col)
 		}

@@ -1,7 +1,10 @@
 XLConnect News
 --------------
 
-0.2-6 2013-??-??
+0.2-7 2014-01-03
+  * Fixed date/time conversion issues
+  
+0.2-6 2013-12-31
   * General performance improvements
   * Java exception stack traces are now captured in options("java.stacktrace")
   * Added documentation for with.workbook
