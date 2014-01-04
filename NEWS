@@ -3,6 +3,7 @@ XLConnect News
 
 0.2-7 2014-01-03
   * Fixed date/time conversion issues
+  * Set timezone for tests to UTC and align R-JVM timezones
   
 0.2-6 2013-12-31
   * General performance improvements
