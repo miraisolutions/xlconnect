@@ -143,8 +143,9 @@ Any other string will return \code{FALSE}.
 \item Forcing conversion from Numeric to DateTime: since Excel understands
 Dates/Times as Numerics with some additional formatting, a conversion from
 a Numeric to a DateTime is actually possible. Numerics in this case represent
-the number of days since 1900-01-01. Fractional days represent hours, minutes, 
-and seconds.
+the number of days since 1900-01-00 (yes, day 00! - see \url{http://www.cpearson.com/excel/datetime.htm}).
+Note that in R 0 is represented as 1899-12-31 since there is no 1900-01-00.
+Fractional days represent hours, minutes, and seconds.
 }
 }
 \seealso{

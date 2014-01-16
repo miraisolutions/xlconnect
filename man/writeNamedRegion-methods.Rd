@@ -20,7 +20,8 @@ Writes named regions to a \code{\linkS4class{workbook}}.
   \item{rownames}{Name (\code{character}) of column to use for the row names of the provided
   \code{data} object. If specified, the row names of the data object (\code{data.frame}) will be
   included as an additional column with the specified name. If \code{rownames = NULL} (default),
-  no row names will be included.}
+  no row names will be included. May also be a \code{list} in case multiple data objects are
+  written in one call (see below).}
 }
 
 \details{

@@ -1,6 +1,11 @@
 XLConnect News
 --------------
 
+0.2-8 2014-??-??
+  * Fix documentation with respect to conversion of numbers to dates
+  * Fixed a bug that prevented rownames to be specified as a list
+    in writeWorksheet
+
 0.2-7 2014-01-03
   * Fixed date/time conversion issues
   * Set timezone for tests to UTC and align R-JVM timezones

@@ -44,8 +44,7 @@ setMethod("writeWorksheet",
 setMethod("writeWorksheet", 
 	signature(object = "workbook", data = "ANY", sheet = "character"), 
 	function(object, data, sheet, startRow = 1, startCol = 1, header = TRUE, rownames = NULL) {
-		if(is.character(rownames))
-			data <- includeRownames(data, rownames)
+	  data <- includeRownames(data, rownames)
 		# pass data.frame's to Java - construct RDataFrameWrapper Java object references
 		data <- lapply(wrapList(data), dataframeToJava)
 		xlcCall(object, "writeWorksheet", data, sheet, as.integer(startRow - 1), 
