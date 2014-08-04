@@ -1,11 +1,15 @@
 XLConnect News
 --------------
 
-0.2-8 2014-??-??
+0.2-8 2014-08-04
   * Fix documentation with respect to conversion of numbers to dates
   * Fixed a bug that prevented rownames to be specified as a list
     in writeWorksheet
   * Automatically adjust for 1904 windowing (thanks to Jennifer Rogers!)
+  * Moved to Apache POI 3.11-beta1
+  * Added inst/COPYRIGHTS file
+  * Added java/README providing information on where XLConnect sources can be
+    obtained
 
 0.2-7 2014-01-03
   * Fixed date/time conversion issues

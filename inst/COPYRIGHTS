@@ -1,0 +1,13 @@
+The package XLConnect includes other open source software components. The following is a list of these components:
+
+- Apache POI (Project: http://poi.apache.org/, License: http://www.apache.org/licenses/LICENSE-2.0)
+- Apache XMLBeans (Project: http://xmlbeans.apache.org/, License: http://www.apache.org/licenses/LICENSE-2.0)
+- Joda-Time (Project: http://www.joda.org/joda-time/, License: http://www.joda.org/joda-time/license.html)
+
+Transitive dependencies include:
+
+- Apache Commons Codec (Project: http://commons.apache.org/proper/commons-codec/, License: http://www.apache.org/licenses/LICENSE-2.0)
+- dom4j (Project: http://dom4j.sourceforge.net/, License: http://dom4j.sourceforge.net/dom4j-1.6.1/license.html)
+- StAX (Project: http://stax.codehaus.org/, License: http://www.apache.org/licenses/LICENSE-2.0)
+- XML Commons External Components XML APIs (Project: http://xml.apache.org/commons/#external, License: http://www.apache.org/licenses/LICENSE-2.0)
+
