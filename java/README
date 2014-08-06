@@ -1,5 +1,33 @@
 XLConnect sources can be obtained from GitHub:
 
 - XLConnect R Package: https://github.com/miraisolutions/xlconnect
+- XLConnectJars R Package: https://github.com/miraisolutions/xlconnectjars
 - XLConnect Java Sources: https://github.com/miraisolutions/xlconnect-java
 
+
+Sources for other open source software components can be obtained from the corresponding project websites:
+(NOTE: some of the dependencies are provided by the XLConnectJars package dependency)
+
+- Apache POI: http://poi.apache.org/
+  Related JARs: poi-*.jar, poi-ooxml-*.jar, ooxml-schemas-*.jar
+
+- Apache XMLBeans: http://xmlbeans.apache.org/
+  Related JARs: xmlbeans-*.jar
+
+- Joda-Time: http://www.joda.org/joda-time/
+  Related JARs: joda-time-*.jar
+
+- Apache Commons Codec: http://commons.apache.org/proper/commons-codec/
+  Related JARs: commons-codec-*.jar
+
+- dom4j: http://dom4j.sourceforge.net/
+  Related JARs: dom4j-*.jar
+
+- StAX: http://stax.codehaus.org/
+  Related JARs: stax-api-*.jar
+
+- XML Commons External Components XML APIs: http://xml.apache.org/commons/#external
+  Related JARs: xml-apis-*.jar
+
+
+See also associated copyright information in inst/COPYRIGHTS. 

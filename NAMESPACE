@@ -1,6 +1,7 @@
 # XLConnect requires rJava & XLConnectJars
 import(methods)
 import(rJava)
+import(XLConnectJars)
 importFrom(utils, packageDescription)
 
 # XLConnect exports the following S4 classes & methods

@@ -845,6 +845,7 @@ We have introduced the following updates in version \Sexpr{getOption("XLConnect.
   \item{Added inst/COPYRIGHTS file}
   \item{Added java/README providing information on where XLConnect sources can be
     obtained}
+  \item{Split package again into XLConnect and XLConnectJars as requested by CRAN}
 \end{itemize}
 
 A summary of news in \pkg{XLConnect} \Sexpr{getOption("XLConnect.Version")} can be found in the 

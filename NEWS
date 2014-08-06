@@ -1,7 +1,7 @@
 XLConnect News
 --------------
 
-0.2-8 2014-08-04
+0.2-8 2014-08-05
   * Fix documentation with respect to conversion of numbers to dates
   * Fixed a bug that prevented rownames to be specified as a list
     in writeWorksheet
@@ -10,6 +10,7 @@ XLConnect News
   * Added inst/COPYRIGHTS file
   * Added java/README providing information on where XLConnect sources can be
     obtained
+  * Split package again into XLConnect and XLConnectJars as requested by CRAN
 
 0.2-7 2014-01-03
   * Fixed date/time conversion issues

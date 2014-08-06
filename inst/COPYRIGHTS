@@ -1,13 +1,73 @@
 The package XLConnect includes other open source software components. The following is a list of these components:
+(NOTE: some of the dependencies are provided by the XLConnectJars package)
 
-- Apache POI (Project: http://poi.apache.org/, License: http://www.apache.org/licenses/LICENSE-2.0)
-- Apache XMLBeans (Project: http://xmlbeans.apache.org/, License: http://www.apache.org/licenses/LICENSE-2.0)
-- Joda-Time (Project: http://www.joda.org/joda-time/, License: http://www.joda.org/joda-time/license.html)
+** Apache POI
+
+   Copyright © 2002-2014, The Apache Software Foundation
+
+   Apache POI, POI, Apache, the Apache feather logo, and the Apache POI project logo are trademarks of The Apache Software Foundation.
+
+   Project Website: http://poi.apache.org/
+   License Information: http://www.apache.org/licenses/LICENSE-2.0
+
+   Related JARs: poi-*.jar, poi-ooxml-*.jar, ooxml-schemas-*.jar
+
+** Apache XMLBeans
+
+   Copyright © 2004-2012, The Apache Software Foundation
+
+   Project Website: http://xmlbeans.apache.org/
+   License Information: http://www.apache.org/licenses/LICENSE-2.0
+
+   Related JARs: xmlbeans-*.jar
+
+** Joda-Time
+
+   Copyright © 2002-2014 Joda.org
+
+   Project Website: http://www.joda.org/joda-time/
+   License Information: http://www.joda.org/joda-time/license.html
+
+   Related JARs: joda-time-*.jar
+
 
 Transitive dependencies include:
 
-- Apache Commons Codec (Project: http://commons.apache.org/proper/commons-codec/, License: http://www.apache.org/licenses/LICENSE-2.0)
-- dom4j (Project: http://dom4j.sourceforge.net/, License: http://dom4j.sourceforge.net/dom4j-1.6.1/license.html)
-- StAX (Project: http://stax.codehaus.org/, License: http://www.apache.org/licenses/LICENSE-2.0)
-- XML Commons External Components XML APIs (Project: http://xml.apache.org/commons/#external, License: http://www.apache.org/licenses/LICENSE-2.0)
+** Apache Commons Codec 
+ 
+   Copyright © 2002-2014, The Apache Software Foundation
+
+   Apache Commons, Apache Commons Codec, Apache, the Apache feather logo, and the Apache Commons project logos are trademarks of The Apache Software Foundation.
+
+   Project Website: http://commons.apache.org/proper/commons-codec/
+   License Information: http://www.apache.org/licenses/LICENSE-2.0
+
+   Related JARs: commons-codec-*.jar
+
+** dom4j 
+
+   Copyright 2001-2005 (C) MetaStuff, Ltd
+
+   Project Website: http://dom4j.sourceforge.net/
+   License Information: http://dom4j.sourceforge.net/dom4j-1.6.1/license.html
+
+   Related JARs: dom4j-*.jar
+
+** StAX 
+
+   Copyright 2003-2006 - The Codehaus
+
+   Project Website: http://stax.codehaus.org/
+   License Information: http://www.apache.org/licenses/LICENSE-2.0
+
+   Related JARs: stax-api-*.jar
+
+** XML Commons External Components XML APIs 
+
+   Copyright © 2001-2009 The Apache Software Foundation.
+
+   Project Website: http://xml.apache.org/commons/#external
+   License Information: http://www.apache.org/licenses/LICENSE-2.0
+
+   Related JARs: xml-apis-*.jar
 
