@@ -1,5 +1,4 @@
 The package XLConnect includes other open source software components. The following is a list of these components:
-(NOTE: some of the dependencies are provided by the XLConnectJars package)
 
 ** Apache POI
 
@@ -10,20 +9,11 @@ The package XLConnect includes other open source software components. The follow
    Project Website: http://poi.apache.org/
    License Information: http://www.apache.org/licenses/LICENSE-2.0
 
-   Related JARs: poi-*.jar, poi-ooxml-*.jar, ooxml-schemas-*.jar
-
-** Apache XMLBeans
-
-   Copyright © 2004-2012, The Apache Software Foundation
-
-   Project Website: http://xmlbeans.apache.org/
-   License Information: http://www.apache.org/licenses/LICENSE-2.0
-
-   Related JARs: xmlbeans-*.jar
+   Related JARs: poi-*.jar, poi-ooxml-*.jar
 
 ** Joda-Time
 
-   Copyright © 2002-2014 Joda.org
+   Copyright © 2002-2014 Stephen Colebourne
 
    Project Website: http://www.joda.org/joda-time/
    License Information: http://www.joda.org/joda-time/license.html
@@ -52,15 +42,6 @@ Transitive dependencies include:
    License Information: http://dom4j.sourceforge.net/dom4j-1.6.1/license.html
 
    Related JARs: dom4j-*.jar
-
-** StAX 
-
-   Copyright 2003-2006 - The Codehaus
-
-   Project Website: http://stax.codehaus.org/
-   License Information: http://www.apache.org/licenses/LICENSE-2.0
-
-   Related JARs: stax-api-*.jar
 
 ** XML Commons External Components XML APIs 
 

@@ -837,15 +837,8 @@ you will be running the code at a different time.
 
 We have introduced the following updates in version \Sexpr{getOption("XLConnect.Version")} of \pkg{XLConnect}:
 \begin{itemize}
-  \item{Fix documentation with respect to conversion of numbers to dates}
-  \item{Fixed a bug that prevented rownames to be specified as a list
-    in writeWorksheet}
-  \item{Automatically adjust for 1904 windowing (thanks to Jennifer Rogers!)}
-  \item{Moved to Apache POI 3.11-beta1}
-  \item{Added inst/COPYRIGHTS file}
-  \item{Added java/README providing information on where XLConnect sources can be
-    obtained}
-  \item{Split package again into XLConnect and XLConnectJars as requested by CRAN}
+  \item{Fixing authors declaration in DESCRIPTION file to match CRAN policy}
+  \item{Fix java/README to only mention relevant JAR files}
 \end{itemize}
 
 A summary of news in \pkg{XLConnect} \Sexpr{getOption("XLConnect.Version")} can be found in the 

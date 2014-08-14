@@ -1,6 +1,11 @@
 XLConnect News
 --------------
 
+0.2-9 2014-08-13
+  * Fixing authors declaration in DESCRIPTION file
+    to match CRAN policy
+  * Fix java/README to only mention relevant JAR files
+
 0.2-8 2014-08-05
   * Fix documentation with respect to conversion of numbers to dates
   * Fixed a bug that prevented rownames to be specified as a list
