@@ -32,6 +32,7 @@ setGeneric("createSheet",
 setMethod("createSheet", 
 	signature(object = "workbook"), 
 	function(object, name) {
+    if(!is.character(name)) stop("Sheet name must be a string")
 		xlcCall(object, "createSheet", name)
 		invisible()
 	}
