@@ -55,7 +55,10 @@ useCachedValues,keep,drop, simplify, readStrategy)
   \item{dateTimeFormat}{Date/time format used when doing date/time conversions. Defaults to\cr
   \code{getOption("XLConnect.dateTimeFormat")}. This should be a POSIX format specifier according
   to \code{\link{strptime}} although not all specifications have been implemented yet - the most
-  important ones however are available.}
+  important ones however are available. When using the '\%OS' specification for fractional seconds
+  (without an additional integer) 3 digits will be used by default (\code{getOption("digits.secs")} 
+  is not considered).
+  }
   \item{check.names}{\code{logical} specifying if column names of the resulting \code{data.frame}
   should be checked to ensure that they are syntactically valid variable names and are not
   duplicated. See the \code{check.names} argument of \code{\link{data.frame}}. Defaults to \code{TRUE}.}

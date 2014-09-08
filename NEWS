@@ -3,6 +3,8 @@ XLConnect News
 
 0.2-10 2014-09-08
   * Moved to Apache POI 3.11-beta2
+  * Fixed issue where milliseconds are getting lost when converting date/time
+    values to string (#28)
 
 0.2-9 2014-08-13
   * Fixing authors declaration in DESCRIPTION file
