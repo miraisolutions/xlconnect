@@ -1,18 +1,16 @@
 Package: XLConnect
 Type: Package
 Title: Excel Connector for R
-Version: 0.2-9
-Date: 2014-08-13
+Version: 0.2-10
+Date: 2014-09-08
 Authors@R: c(person("Mirai Solutions GmbH", role = "aut",
                     email = "xlconnect@mirai-solutions.com"),
              person("Martin", "Studer", role = "cre",
                     email = "martin.studer@mirai-solutions.com"),
              person("The Apache Software Foundation", role = c("ctb", "cph"),
-                    comment = "Apache POI, Apache Commons Codec, XML Commons External Components XML APIs"),
+                    comment = "Apache POI, Apache Commons Codec"),
              person("Stephen", "Colebourne", role = c("ctb", "cph"),
-                    comment = "Joda-Time Java library"),
-             person("Metastuff, Ltd.", role = c("ctb", "cph"),
-                    comment = "dom4j"))
+                    comment = "Joda-Time Java library"))
 URL: http://www.mirai-solutions.com , http://miraisolutions.wordpress.com
 BugReports: https://github.com/miraisolutions/xlconnect/issues
 SystemRequirements: java (>= 1.6)

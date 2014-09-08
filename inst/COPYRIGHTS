@@ -34,21 +34,3 @@ Transitive dependencies include:
 
    Related JARs: commons-codec-*.jar
 
-** dom4j 
-
-   Copyright 2001-2005 (C) MetaStuff, Ltd
-
-   Project Website: http://dom4j.sourceforge.net/
-   License Information: http://dom4j.sourceforge.net/dom4j-1.6.1/license.html
-
-   Related JARs: dom4j-*.jar
-
-** XML Commons External Components XML APIs 
-
-   Copyright © 2001-2009 The Apache Software Foundation.
-
-   Project Website: http://xml.apache.org/commons/#external
-   License Information: http://www.apache.org/licenses/LICENSE-2.0
-
-   Related JARs: xml-apis-*.jar
-

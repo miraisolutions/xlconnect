@@ -9,8 +9,8 @@ Sources for other open source software components can be obtained from the corre
 
 - Apache POI: http://poi.apache.org/
   Source Code: 
-  poi-3.11-beta1.jar: http://repo1.maven.apache.org/maven2/org/apache/poi/poi/3.11-beta1/poi-3.11-beta1-sources.jar
-  poi-ooxml-3.11-beta1.jar: http://repo1.maven.apache.org/maven2/org/apache/poi/poi-ooxml/3.11-beta1/poi-ooxml-3.11-beta1-sources.jar
+  poi-3.11-beta2.jar: http://repo1.maven.apache.org/maven2/org/apache/poi/poi/3.11-beta2/poi-3.11-beta2-sources.jar
+  poi-ooxml-3.11-beta2.jar: http://repo1.maven.apache.org/maven2/org/apache/poi/poi-ooxml/3.11-beta2/poi-ooxml-3.11-beta2-sources.jar
 
 - Joda-Time: http://www.joda.org/joda-time/
   Source Code:
@@ -19,14 +19,5 @@ Sources for other open source software components can be obtained from the corre
 - Apache Commons Codec: http://commons.apache.org/proper/commons-codec/
   Source Code:
   commons-codec-1.9.jar: http://repo1.maven.org/maven2/commons-codec/commons-codec/1.9/commons-codec-1.9-sources.jar
-
-- dom4j: http://dom4j.sourceforge.net/
-  Source Code:
-  dom4j-1.6.1.jar: http://repo1.maven.org/maven2/dom4j/dom4j/1.6.1/dom4j-1.6.1-sources.jar 
-
-- XML Commons External Components XML APIs: http://xml.apache.org/commons/#external
-  Source Code:
-  xml-apis-1.0.b2.jar: http://repo1.maven.org/maven2/xml-apis/xml-apis/1.0.b2/xml-apis-1.0.b2-sources.jar
-
 
 See also associated copyright information in inst/COPYRIGHTS. 
