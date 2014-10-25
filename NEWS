@@ -5,6 +5,7 @@ XLConnect News
   * Moved to Apache POI 3.11-beta2
   * Fixed issue where milliseconds are getting lost when converting date/time
     values to string (#28)
+  * Fixed problem with non-character column headers
 
 0.2-9 2014-08-13
   * Fixing authors declaration in DESCRIPTION file
