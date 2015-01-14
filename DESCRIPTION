@@ -2,7 +2,7 @@ Package: XLConnect
 Type: Package
 Title: Excel Connector for R
 Version: 0.2-10
-Date: 2014-09-08
+Date: 2015-01-14
 Authors@R: c(person("Mirai Solutions GmbH", role = "aut",
                     email = "xlconnect@mirai-solutions.com"),
              person("Martin", "Studer", role = "cre",

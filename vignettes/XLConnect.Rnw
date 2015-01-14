@@ -10,7 +10,7 @@
 %\VignetteDepends{scales}
 %\VignetteDepends{zoo}
 % \usepackage{Sweave}
-\usepackage[latin1]{inputenc}
+\usepackage[utf8]{inputenc}
 \usepackage[scaled=.9]{couriers}
 \usepackage[colorlinks]{hyperref}
 \usepackage{datetime}
@@ -837,8 +837,12 @@ you will be running the code at a different time.
 
 We have introduced the following updates in version \Sexpr{getOption("XLConnect.Version")} of \pkg{XLConnect}:
 \begin{itemize}
-  \item{Fixing authors declaration in DESCRIPTION file to match CRAN policy}
-  \item{Fix java/README to only mention relevant JAR files}
+  \item{Moved to Apache POI 3.11}
+  \item{Fixed issue where milliseconds are getting lost when converting date/time
+    values to string (\#28)}
+  \item{Fixed problem with non-character column headers}
+  \item{Fixed declaration of encoding in vignette}
+  \item{Unit test functionality is not part of the public API anymore}
 \end{itemize}
 
 A summary of news in \pkg{XLConnect} \Sexpr{getOption("XLConnect.Version")} can be found in the 
@@ -1031,7 +1035,7 @@ We will do our best to reply to your enquires as quickly as possible!
 			\\\urlwofont{http://www.dummies.com/how-to/content/how-to-read-data-from-excel-into-r.html} 		
 	\item 	"R for Dummies", book by Joris Meys and Andrie de Vries, page 211:
 			\\\urlwofont{http://tinyurl.com/c54e35m}
-	\item 	"Grundlagen der Datenanalyse mit R: Eine anwendungsorientierte Einfuhrung", book by Daniel Wollschläger:
+	\item 	"Grundlagen der Datenanalyse mit R: Eine anwendungsorientierte Einführung", book by Daniel Wollschläger:
 			\\\urlwofont{http://books.google.ch/books?id=tlmcPQ9YZP4C&printsec=frontcover&source=gbs_ge_summary_r&cad=0\#v=onepage&q&f=false}
 	
 \end{enumerate}
