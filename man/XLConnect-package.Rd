@@ -6,7 +6,7 @@
 Excel Connector for R
 }
 \description{
-Manipulate Excel files from R
+Provides comprehensive functionality to read, write and format Excel data.
 }
 \details{
 \tabular{ll}{
