@@ -19,9 +19,7 @@ Cell styles are created by calling the \code{\link[=createCellStyle-methods]{cre
   }
 }
 \references{
-Cell styles in Excel 2003:\cr
-\url{http://bit.ly/c1VUZ6}\cr
-Cell styles in Excel 2007:\cr
+Apply, create, or remove a cell style:\cr
 \url{http://bit.ly/gj1KRx} 
 }
 \author{
