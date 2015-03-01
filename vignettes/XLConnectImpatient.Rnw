@@ -86,7 +86,7 @@
 
 \begin{tabbing}
 \hspace*{5cm}\= \kill
-\textbf{Installation:} \> \code{install.packages("XLConnect")}, Mac: \code{install.packages("XLConnect", type = "source")} \\
+\textbf{Installation:} \> \code{install.packages("XLConnect")} \\
 \textbf{Loading library:} \> \code{library(XLConnect)} \\
 \textbf{Help on any function:} \> \code{help(functionName)} \\
 \end{tabbing}

@@ -12,17 +12,17 @@ Provides comprehensive functionality to read, write and format Excel data.
 \tabular{ll}{
 Package: \tab XLConnect\cr
 Type: \tab Package\cr
-Version: \tab 0.2-10\cr
-Date: \tab 2015-01-14\cr
+Version: \tab 0.2-11\cr
+Date: \tab 2015-03-01\cr
 URL: \tab \url{http://www.mirai-solutions.com}\cr
 \tab \url{http://miraisolutions.wordpress.com}\cr
 SystemRequirements: \tab java (>= 1.6)\cr
 Depends: \tab R (>= 2.10.0), XLConnectJars (== 0.2-9)\cr
 Imports: \tab methods, rJava, utils\cr
-Suggests: \tab RUnit, lattice, ggplot2 (>= 0.9.3), fImport, forecast, zoo, scales\cr
+Suggests: \tab RUnit, lattice, ggplot2 (>= 0.9.3), zoo\cr
 License: \tab GPL-3\cr
 Copyright: \tab See file COPYRIGHTS\cr
-LazyLoad: \tab yes\cr
+LazyData: \tab yes\cr
 }
 For an overview over the package please refer to the available demos:\cr
 \code{demo(package = "XLConnect")}

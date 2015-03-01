@@ -4,10 +4,7 @@
 
 %\VignetteIndexEntry{The XLConnect Package}
 %\VignetteDepends{XLConnect}
-%\VignetteDepends{fImport}
-%\VignetteDepends{forecast}
 %\VignetteDepends{ggplot2}
-%\VignetteDepends{scales}
 %\VignetteDepends{zoo}
 % \usepackage{Sweave}
 \usepackage[utf8]{inputenc}
@@ -589,83 +586,49 @@ data = readNamedRegionFromFile("XLConnectExample3.xlsx", "womenName")
 @
 
 \section{Advanced Usage and Examples}
-\subsection{Generating an Excel report of currency exchange rates development}
+\subsection{Generating an Excel Report of Swiss Franc (CHF) Exchange Rates}
 In this example, we will show an example use case of \pkg{XLConnect}: generation of 
-a simple Excel report, showing the recent development of currency exchange rates 
-(EUR, USD, GBP, JPY vs Swiss Franc (CHF)).
+a simple Excel report, showing the development of exchange rates
+(CHF vs EUR, USD and GBP).
 
-For this example we are going to also use some other packages:
+For this example we will be using additional packages:
 \begin{itemize}
-	\item \pkg{fImport}: Rmetrics - Economical and Financial Data Import
-	\item \pkg{forecast}: Forecasting functions for time series
 	\item \pkg{zoo}: S3 Infrastructure for Regular and Irregular Time Series
 	\item \pkg{ggplot2}: An implementation of the Grammar of Graphics
-	\item \pkg{scales}: Provides methods for automatically determining breaks and labels for axes and legends
 \end{itemize}
 
 \begin{tikzCodeBlock}
-	install.packages(c("XLConnect", "fImport", "forecast", "zoo", "ggplot2", 
-					   "scales"))
+	install.packages(c("XLConnect", "zoo", "ggplot2"))
 \end{tikzCodeBlock}
 
 Loading the required packages:
 <<AdvancedExampleP1,echo=T,results=hide>>=
-	require(XLConnect)
-	require(fImport)
-	require(forecast)
-	require(zoo)
-	require(ggplot2) # >= 0.9.3
-  require(scales)
+require(XLConnect)
+require(zoo)
+require(ggplot2) # >= 0.9.3
 @ 
 
 Preparing the data to be reported:
 
 <<AdvancedExampleP2,echo=T,results=hide,keep.source=T>>=
-# Currencies we're interested in compared to CHF
-currencies = c("EUR", "USD", "GBP", "JPY")
-
-# Fetch currency exchange rates (currency to CHF) 
-# from OANDA (last 366 days)
-curr = do.call("cbind", args = lapply(currencies,
-               function(cur) oandaSeries(paste(cur, "CHF", sep = "/"))))
-# Make a copy for later use
-curr.orig = curr
-# Scale currencies to exchange rate on first day in the series (baseline)
-curr = curr * matrix(1/curr[1,], nrow = nrow(curr),
-                     ncol = ncol(curr), byrow = TRUE) - 1
-# Some data transformations to bring the data into a simple data.frame
-curr = transform(curr, Time = time(curr)@Data)
-names(curr) = c(currencies, "Time")
-# Cyclic shift to bring the Time column to the front
-curr = curr[(seq(along = curr) - 2) %% ncol(curr) + 1]
-
-# Number of days to predict
-predictDays = 20
-# For each currency ...
-currFit = sapply(curr[, -1], function(cur) {
-  as.numeric(forecast(cur, h = predictDays)$mean)
-})
-# Add Time column to predictions
-currFit = cbind(
-  Time = seq(from = curr[nrow(curr), "Time"],
-             length.out = predictDays + 1, by = "days")[-1],
-  as.data.frame(currFit))
-
-# Bind actual data with predictions
-curr = rbind(curr, currFit)
+# Read in (historical) currency data
+# For this example take sample data set 'swissfranc' from XLConnect
+curr = XLConnect::swissfranc
+curr = curr[order(curr$Date),]
 @ 
 
 Now, let's write the data to Excel:
 
 <<removeFile2,echo=F,results=hide>>=
-	if(file.exists("swiss_franc.xlsx"))
-		file.remove("swiss_franc.xlsx")
+if(file.exists("swiss_franc.xlsx"))
+  file.remove("swiss_franc.xlsx")
 @
 
 <<AdvancedExampleP3,echo=T,results=hide,keep.source=T>>=
 
 # Workbook filename
 wbFilename = "swiss_franc.xlsx"
+
 # Create a new workbook
 wb = loadWorkbook(wbFilename, create = TRUE)
 
@@ -680,85 +643,76 @@ dataName = "currency"
 nameLocation = paste(sheet, "$A$1", sep = "!")
 createName(wb, name = dataName, formula = nameLocation)
 
+# Instruct XLConnect to only apply a data format for a cell
+# but not to apply any other cell styling
+setStyleAction(wb, XLC$"STYLE_ACTION.DATA_FORMAT_ONLY")
+
+# Set the default format for numeric data to display
+# four digits after the decimal point
+setDataFormatForType(wb, type = XLC$"DATA_TYPE.NUMERIC", format = "0.0000")
+
 # Write the currency data to the named region created above
 # Note: the named region will be automatically redefined to encompass all
 # written data
 writeNamedRegion(wb, data = curr, name = dataName, header = TRUE)
+
 # Save the workbook (this actually writes the file to disk)
 saveWorkbook(wb)
-
 @
 
-The figure below illustrates the first few rows of the named region we have 
-written to the Excel file. Please note, the data in your file will look different,
-since you will be running the example at a different time.
-
-\begin{figure}[htb]
-\begin{center}
-\caption{currency named region we have written}
-\includegraphics[width=12cm]{img/AdvancedExample1a.png}
-\end{center}
-\end{figure}
-
-\newpage Now, we are going to work on the report further, to make it {\bf look} nicer.
-Let's say that for each currency, we want to highlight the points in time when 
-there was a change of more than 2\% compared to the previous day.
+Now, we are going to enhance the report further. Let's say that for each currency 
+we want to highlight the points in time when there was a change of more than 2\% 
+compared to the previous day.
 
 <<AdvancedExampleP4,echo=T,results=hide,keep.source=T>>=
 
 # Load the workbook created above
 wb = loadWorkbook(wbFilename)
 
-# Create a date cell style with a custom format for the Time column
-# (only show year, month and day without any time fields)
+# Create a cell style for the header row
+csHeader = createCellStyle(wb, name = "header")
+setFillPattern(csHeader, fill = XLC$FILL.SOLID_FOREGROUND)
+setFillForegroundColor(csHeader, color = XLC$COLOR.GREY_25_PERCENT)
+
+# Create a date cell style with a custom format for the Date column
 csDate = createCellStyle(wb, name = "date")
 setDataFormat(csDate, format = "yyyy-mm-dd")
-# Create a time/date cell style for the prediction records
-csPrediction = createCellStyle(wb, name = "prediction")
-setDataFormat(csPrediction, format = "yyyy-mm-dd")
-setFillPattern(csPrediction, fill = XLC$FILL.SOLID_FOREGROUND)
-setFillForegroundColor(csPrediction, color = XLC$COLOR.GREY_25_PERCENT)
-# Create a percentage cell style
-# Number format: 2 digits after decimal point
-csPercentage = createCellStyle(wb, name = "currency")
-setDataFormat(csPercentage, format = "0.00%")
+
 # Create a highlighting cell style
 csHlight = createCellStyle(wb, name = "highlight")
 setFillPattern(csHlight, fill = XLC$FILL.SOLID_FOREGROUND)
 setFillForegroundColor(csHlight, color = XLC$COLOR.CORNFLOWER_BLUE)
-setDataFormat(csHlight, format = "0.00%")
+
+# Apply header cell style to the header row
+setCellStyle(wb, sheet = sheet, row = 1,  
+             col = seq(length.out = ncol(curr)),
+             cellstyle = csHeader)
 
 # Index for all rows except header row
 allRows = seq(length = nrow(curr)) + 1
 
-# Apply date cell style to the Time column
+# Apply date cell style to the Date column
 setCellStyle(wb, sheet = sheet, row = allRows, col = 1, 
-		cellstyle = csDate)
+             cellstyle = csDate)
+
 # Set column width such that the full date column is visible
 setColumnWidth(wb, sheet = sheet, column = 1, width = 2800)
-# Apply prediction cell style
-setCellStyle(wb, sheet = sheet, row = tail(allRows, n = predictDays), 
-		col = 1, cellstyle = csPrediction)
-# Apply number format to the currency columns
-currencyColumns = seq(along = currencies) + 1
-for(col in currencyColumns) {
-	setCellStyle(wb, sheet = sheet, row = allRows, col = col,
-	cellstyle = csPercentage)
-}
 
 # Check if there was a change of more than 2% compared 
 # to the previous day (per currency)
-idx = rollapply(curr.orig, width = 2, 
-		FUN = function(x) abs(x[2] / x[1] - 1),
-by.column = TRUE) > 0.02
+idx = rollapply(curr[, -1], width = 2, 
+                FUN = function(x) abs(x[2] / x[1] - 1),
+                by.column = TRUE) > 0.02
+
 idx = rbind(rep(FALSE, ncol(idx)), idx)
 widx = lapply(as.data.frame(idx), which)
 # Apply highlighting cell style
-for(i in seq(along = currencies)) {
-	if(length(widx[[i]]) > 0) {
-		setCellStyle(wb, sheet = sheet, row = widx[[i]] + 1, col = i + 1,
-			cellstyle = csHlight)
-	}
+for(i in seq(along = widx)) {
+  if(length(widx[[i]]) > 0) {
+    setCellStyle(wb, sheet = sheet, row = widx[[i]] + 1, col = i + 1,
+                 cellstyle = csHlight)
+  }
+
 # Note:
 # +1 for row since there is a header row
 # +1 for column since the first column is the time column
@@ -767,38 +721,24 @@ for(i in seq(along = currencies)) {
 saveWorkbook(wb)
 @
 
-The illustration below shows the updated swiss\_franc.xlsx file, with highlighted cells,
-where day-to-day change was bigger than 2\%. Please note, the data in your file will look different,
-since you will be running the example at a different time.
-
-\begin{figure}[htb]
-\begin{center}
-\caption{Highlighted cells, where day-to-day change bigger than 2\%}
-\includegraphics[width=12cm]{img/AdvancedExample1b.png}
-\end{center}
-\end{figure}
-
-\newpage Further, we will add a graph to our report.
+As a next step, let's add a graph to our report.
 
 <<AdvancedExampleP5,echo=T,results=hide,keep.source=T>>=
 wb = loadWorkbook(wbFilename)
 
 # Stack currencies into a currency variable (for use with ggplot2 below)
+currencies = names(curr)[-1]
 gcurr = reshape(curr, varying = currencies, direction = "long",
 v.names = "Value", times = currencies, timevar = "Currency")
-
-# Also add a discriminator column to differentiate between actual and
-# prediction values
-gcurr[["Type"]] = ifelse(gcurr$Time %in% currFit$Time, 
-		"prediction", "actual")
 
 # Create a png graph showing the currencies in the context 
 # of the Swiss Franc
 png(filename = "swiss_franc.png", width = 800, height = 600)
-p = ggplot(gcurr, aes(Time, Value, colour = Currency, linetype = Type)) +
+p = ggplot(gcurr, aes(Date, Value, colour = Currency)) +
   geom_line() + stat_smooth(method = "loess") +
-  scale_y_continuous("Change to baseline", labels = percent) +
-  labs(title = "Currencies vs Swiss Franc", x = "") +
+  scale_y_continuous("Exchange Rate CHF/CUR") +
+  labs(title = paste0("CHF vs ", paste(currencies, collapse = ", ")), 
+       x = "") +
   theme(axis.title.y = element_text(size = 10, angle = 90, vjust = 0.3))
 print(p)
 dev.off()
@@ -812,37 +752,29 @@ formula = paste(sheet, idx2cref(c(5, ncol(curr) + 2)), sep = "!"))
 
 # Put the image created above at the corresponding location
 addImage(wb, filename = "swiss_franc.png", name = "graph",
-originalSize = TRUE)
+         originalSize = TRUE)
 
 saveWorkbook(wb)
 @
 
-As a result, we obtain the following graph, written into Excel file as 
-"graph" named region. Please note, your graph will look different, since
-you will be running the code at a different time.
-
-\begin{figure}[htb]
+As a result, we obtain the following graph:
 \begin{center}
-\caption{Graph showing the currency trends}
-\includegraphics[width=15cm]{img/AdvancedExample1c.png}
+<<fig=TRUE,figs.only=TRUE,height=4>>=
+p
+@
 \end{center}
-\end{figure}
 
-% As the final step to producing our report, let's enrich it with some formulae!
-% We will add the maximum downturn (= minimum) for the currencies at the bottom
-% of the data (offset by three rows).
+Check out the Excel file to see how the data and the graph have been exported!
 
 \pagebreak
 \section{What's new in XLConnect version \Sexpr{getOption("XLConnect.Version")}}
 
 We have introduced the following updates in version \Sexpr{getOption("XLConnect.Version")} of \pkg{XLConnect}:
 \begin{itemize}
-  \item{Moved to Apache POI 3.11}
-  \item{Fixed issue where milliseconds are getting lost when converting date/time
-    values to string (\#28)}
-  \item{Fixed problem with non-character column headers}
-  \item{Fixed declaration of encoding in vignette}
-  \item{Unit test functionality is not part of the public API anymore}
+  \item{Moved to Apache POI 3.12-beta1}
+  \item{Fixed issue where formula cells would not be evaluated}
+  \item{Simplified advanced example in package vignette and removed the
+        dependency on fImport, forecast and scales}
 \end{itemize}
 
 A summary of news in \pkg{XLConnect} \Sexpr{getOption("XLConnect.Version")} can be found in the 
@@ -1035,9 +967,10 @@ We will do our best to reply to your enquires as quickly as possible!
 			\\\urlwofont{http://www.dummies.com/how-to/content/how-to-read-data-from-excel-into-r.html} 		
 	\item 	"R for Dummies", book by Joris Meys and Andrie de Vries, page 211:
 			\\\urlwofont{http://tinyurl.com/c54e35m}
+	\item	Quick Intro to XLConnect
+			\\\urlwofont{http://altons.github.io/r/2015/02/13/quick-intro-to-xlconnect/}
 	\item 	"Grundlagen der Datenanalyse mit R: Eine anwendungsorientierte Einführung", book by Daniel Wollschläger:
-			\\\urlwofont{http://books.google.ch/books?id=tlmcPQ9YZP4C&printsec=frontcover&source=gbs_ge_summary_r&cad=0\#v=onepage&q&f=false}
-	
+			\\\urlwofont{http://books.google.ch/books?id=tlmcPQ9YZP4C&printsec=frontcover&source=gbs_ge_summary_r&cad=0\#v=onepage&q&f=false}	
 \end{enumerate}
 
 \newpage

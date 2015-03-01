@@ -1,6 +1,12 @@
 XLConnect News
 --------------
 
+0.2-11 2015-03-01
+  * Moved to Apache POI 3.12-beta1
+  * Fixed issue where formula cells would not be evaluated
+  * Simplified advanced example in package vignette and removed
+    the dependency on fImport, forecast and scales
+
 0.2-10 2015-01-14
   * Moved to Apache POI 3.11
   * Fixed issue where milliseconds are getting lost when converting date/time

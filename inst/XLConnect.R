@@ -1,4 +1,4 @@
-### R code from vignette source 'XLConnect.Rnw'
+### R code from vignette source '~/Documents/Projects/R/XLConnect/xlconnect/vignettes/XLConnect.Rnw'
 ### Encoding: UTF-8
 
 ###################################################
@@ -119,56 +119,25 @@ data = readNamedRegionFromFile("XLConnectExample3.xlsx", "womenName")
 ###################################################
 ### code chunk number 15: AdvancedExampleP1
 ###################################################
-	require(XLConnect)
-	require(fImport)
-	require(forecast)
-	require(zoo)
-	require(ggplot2) # >= 0.9.3
-  require(scales)
+require(XLConnect)
+require(zoo)
+require(ggplot2) # >= 0.9.3
 
 
 ###################################################
 ### code chunk number 16: AdvancedExampleP2
 ###################################################
-# Currencies we're interested in compared to CHF
-currencies = c("EUR", "USD", "GBP", "JPY")
-
-# Fetch currency exchange rates (currency to CHF) 
-# from OANDA (last 366 days)
-curr = do.call("cbind", args = lapply(currencies,
-               function(cur) oandaSeries(paste(cur, "CHF", sep = "/"))))
-# Make a copy for later use
-curr.orig = curr
-# Scale currencies to exchange rate on first day in the series (baseline)
-curr = curr * matrix(1/curr[1,], nrow = nrow(curr),
-                     ncol = ncol(curr), byrow = TRUE) - 1
-# Some data transformations to bring the data into a simple data.frame
-curr = transform(curr, Time = time(curr)@Data)
-names(curr) = c(currencies, "Time")
-# Cyclic shift to bring the Time column to the front
-curr = curr[(seq(along = curr) - 2) %% ncol(curr) + 1]
-
-# Number of days to predict
-predictDays = 20
-# For each currency ...
-currFit = sapply(curr[, -1], function(cur) {
-  as.numeric(forecast(cur, h = predictDays)$mean)
-})
-# Add Time column to predictions
-currFit = cbind(
-  Time = seq(from = curr[nrow(curr), "Time"],
-             length.out = predictDays + 1, by = "days")[-1],
-  as.data.frame(currFit))
-
-# Bind actual data with predictions
-curr = rbind(curr, currFit)
+# Read in (historical) currency data
+# For this example take sample data set 'swissfranc' from XLConnect
+curr = XLConnect::swissfranc
+curr = curr[order(curr$Date),]
 
 
 ###################################################
 ### code chunk number 17: removeFile2
 ###################################################
-	if(file.exists("swiss_franc.xlsx"))
-		file.remove("swiss_franc.xlsx")
+if(file.exists("swiss_franc.xlsx"))
+  file.remove("swiss_franc.xlsx")
 
 
 ###################################################
@@ -177,6 +146,7 @@ curr = rbind(curr, currFit)
 
 # Workbook filename
 wbFilename = "swiss_franc.xlsx"
+
 # Create a new workbook
 wb = loadWorkbook(wbFilename, create = TRUE)
 
@@ -191,13 +161,21 @@ dataName = "currency"
 nameLocation = paste(sheet, "$A$1", sep = "!")
 createName(wb, name = dataName, formula = nameLocation)
 
+# Instruct XLConnect to only apply a data format for a cell
+# but not to apply any other cell styling
+setStyleAction(wb, XLC$"STYLE_ACTION.DATA_FORMAT_ONLY")
+
+# Set the default format for numeric data to display
+# four digits after the decimal point
+setDataFormatForType(wb, type = XLC$"DATA_TYPE.NUMERIC", format = "0.0000")
+
 # Write the currency data to the named region created above
 # Note: the named region will be automatically redefined to encompass all
 # written data
 writeNamedRegion(wb, data = curr, name = dataName, header = TRUE)
+
 # Save the workbook (this actually writes the file to disk)
 saveWorkbook(wb)
-
 
 
 ###################################################
@@ -207,56 +185,50 @@ saveWorkbook(wb)
 # Load the workbook created above
 wb = loadWorkbook(wbFilename)
 
-# Create a date cell style with a custom format for the Time column
-# (only show year, month and day without any time fields)
+# Create a cell style for the header row
+csHeader = createCellStyle(wb, name = "header")
+setFillPattern(csHeader, fill = XLC$FILL.SOLID_FOREGROUND)
+setFillForegroundColor(csHeader, color = XLC$COLOR.GREY_25_PERCENT)
+
+# Create a date cell style with a custom format for the Date column
 csDate = createCellStyle(wb, name = "date")
 setDataFormat(csDate, format = "yyyy-mm-dd")
-# Create a time/date cell style for the prediction records
-csPrediction = createCellStyle(wb, name = "prediction")
-setDataFormat(csPrediction, format = "yyyy-mm-dd")
-setFillPattern(csPrediction, fill = XLC$FILL.SOLID_FOREGROUND)
-setFillForegroundColor(csPrediction, color = XLC$COLOR.GREY_25_PERCENT)
-# Create a percentage cell style
-# Number format: 2 digits after decimal point
-csPercentage = createCellStyle(wb, name = "currency")
-setDataFormat(csPercentage, format = "0.00%")
+
 # Create a highlighting cell style
 csHlight = createCellStyle(wb, name = "highlight")
 setFillPattern(csHlight, fill = XLC$FILL.SOLID_FOREGROUND)
 setFillForegroundColor(csHlight, color = XLC$COLOR.CORNFLOWER_BLUE)
-setDataFormat(csHlight, format = "0.00%")
+
+# Apply header cell style to the header row
+setCellStyle(wb, sheet = sheet, row = 1,  
+             col = seq(length.out = ncol(curr)),
+             cellstyle = csHeader)
 
 # Index for all rows except header row
 allRows = seq(length = nrow(curr)) + 1
 
-# Apply date cell style to the Time column
+# Apply date cell style to the Date column
 setCellStyle(wb, sheet = sheet, row = allRows, col = 1, 
-		cellstyle = csDate)
+             cellstyle = csDate)
+
 # Set column width such that the full date column is visible
 setColumnWidth(wb, sheet = sheet, column = 1, width = 2800)
-# Apply prediction cell style
-setCellStyle(wb, sheet = sheet, row = tail(allRows, n = predictDays), 
-		col = 1, cellstyle = csPrediction)
-# Apply number format to the currency columns
-currencyColumns = seq(along = currencies) + 1
-for(col in currencyColumns) {
-	setCellStyle(wb, sheet = sheet, row = allRows, col = col,
-	cellstyle = csPercentage)
-}
 
 # Check if there was a change of more than 2% compared 
 # to the previous day (per currency)
-idx = rollapply(curr.orig, width = 2, 
-		FUN = function(x) abs(x[2] / x[1] - 1),
-by.column = TRUE) > 0.02
+idx = rollapply(curr[, -1], width = 2, 
+                FUN = function(x) abs(x[2] / x[1] - 1),
+                by.column = TRUE) > 0.02
+
 idx = rbind(rep(FALSE, ncol(idx)), idx)
 widx = lapply(as.data.frame(idx), which)
 # Apply highlighting cell style
-for(i in seq(along = currencies)) {
-	if(length(widx[[i]]) > 0) {
-		setCellStyle(wb, sheet = sheet, row = widx[[i]] + 1, col = i + 1,
-			cellstyle = csHlight)
-	}
+for(i in seq(along = widx)) {
+  if(length(widx[[i]]) > 0) {
+    setCellStyle(wb, sheet = sheet, row = widx[[i]] + 1, col = i + 1,
+                 cellstyle = csHlight)
+  }
+
 # Note:
 # +1 for row since there is a header row
 # +1 for column since the first column is the time column
@@ -271,21 +243,18 @@ saveWorkbook(wb)
 wb = loadWorkbook(wbFilename)
 
 # Stack currencies into a currency variable (for use with ggplot2 below)
+currencies = names(curr)[-1]
 gcurr = reshape(curr, varying = currencies, direction = "long",
 v.names = "Value", times = currencies, timevar = "Currency")
-
-# Also add a discriminator column to differentiate between actual and
-# prediction values
-gcurr[["Type"]] = ifelse(gcurr$Time %in% currFit$Time, 
-		"prediction", "actual")
 
 # Create a png graph showing the currencies in the context 
 # of the Swiss Franc
 png(filename = "swiss_franc.png", width = 800, height = 600)
-p = ggplot(gcurr, aes(Time, Value, colour = Currency, linetype = Type)) +
+p = ggplot(gcurr, aes(Date, Value, colour = Currency)) +
   geom_line() + stat_smooth(method = "loess") +
-  scale_y_continuous("Change to baseline", labels = percent) +
-  labs(title = "Currencies vs Swiss Franc", x = "") +
+  scale_y_continuous("Exchange Rate CHF/CUR") +
+  labs(title = paste0("CHF vs ", paste(currencies, collapse = ", ")), 
+       x = "") +
   theme(axis.title.y = element_text(size = 10, angle = 90, vjust = 0.3))
 print(p)
 dev.off()
@@ -299,8 +268,14 @@ formula = paste(sheet, idx2cref(c(5, ncol(curr) + 2)), sep = "!"))
 
 # Put the image created above at the corresponding location
 addImage(wb, filename = "swiss_franc.png", name = "graph",
-originalSize = TRUE)
+         originalSize = TRUE)
 
 saveWorkbook(wb)
+
+
+###################################################
+### code chunk number 21: XLConnect.Rnw:762-763
+###################################################
+p
 
 
