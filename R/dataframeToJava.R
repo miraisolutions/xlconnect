@@ -33,8 +33,7 @@
 dataframeToJava <- function(df) {
   jTryCatch({
   	# Force data.frame
-  	if(!is.data.frame(df))
-  		df = as.data.frame(df)
+  	df = as.data.frame(df)
   	
   	dFrame = new(J("com.miraisolutions.xlconnect.integration.r.RDataFrameWrapper"))
   	cnames = colnames(df)
