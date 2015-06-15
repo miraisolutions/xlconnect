@@ -7,7 +7,7 @@ Loading Microsoft Excel workbooks
 Loads or creates a Microsoft Excel \code{\linkS4class{workbook}} for further manipulation.
 }
 \usage{
-loadWorkbook(filename, create = FALSE)
+loadWorkbook(filename, create = FALSE, password = NULL)
 }
 \arguments{
   \item{filename}{
@@ -18,6 +18,10 @@ loadWorkbook(filename, create = FALSE)
   Specifies if the file should be created if it does not already exist (default is \code{FALSE}). Note that
   \code{create = TRUE} has no effect if the specified file exists, i.e. an existing file is loaded and not
   being recreated if \code{create = TRUE}.
+}
+  \item{password}{
+  Password to use when opening password protected files. The default \code{NULL} means no password is
+  being used. This argument is ignored when creating new files using \code{create = TRUE}.
 }
 }
 \value{

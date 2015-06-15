@@ -1,6 +1,11 @@
 XLConnect News
 --------------
 
+0.2-12 2015-??-??
+  * Moved to Apache POI 3.12
+  * Fixed an issue with formula cell evaluation
+  * New feature: ability to read password protected files
+
 0.2-11 2015-03-01
   * Moved to Apache POI 3.12-beta1
   * Fixed issue where formula cells would not be evaluated

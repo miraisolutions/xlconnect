@@ -12,7 +12,7 @@ Provides comprehensive functionality to read, write and format Excel data.
 \tabular{ll}{
 Package: \tab XLConnect\cr
 Type: \tab Package\cr
-Version: \tab 0.2-11\cr
+Version: \tab 0.2-12\cr
 Date: \tab 2015-03-01\cr
 URL: \tab \url{http://www.mirai-solutions.com}\cr
 \tab \url{http://miraisolutions.wordpress.com}\cr

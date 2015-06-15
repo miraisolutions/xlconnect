@@ -31,9 +31,15 @@ setClass("workbook", representation(filename = "character", jobj = "jobjRef"))
 
 setMethod("initialize", 
 		"workbook", 
-		function(.Object, filename, create) {
+		function(.Object, filename, password, create) {
 			.Object@filename <- filename
-			.Object@jobj <- jTryCatch(new(J("com.miraisolutions.xlconnect.integration.r.RWorkbookWrapper"), filename, create))
+			.Object@jobj <- 
+        if(is.null(password)) {
+          jTryCatch(new(J("com.miraisolutions.xlconnect.integration.r.RWorkbookWrapper"), filename, create))
+        } else {
+          jTryCatch(new(J("com.miraisolutions.xlconnect.integration.r.RWorkbookWrapper"), filename, password, create))
+        }
+        
 			if(is.jnull(.Object@jobj))
 				stop("Could not create workbook instance! Got null reference from Java.")
 			.Object
