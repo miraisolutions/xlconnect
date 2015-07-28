@@ -604,5 +604,17 @@ test.workbook.readWorksheet <- function() {
 	res <- readWorksheet(wb.xlsx, "BodyRemote", useCachedValues = TRUE)
 	checkEquals(ref.xls.uncached, res)
 	res <- readWorksheet(wb.xlsx, "BothRemote", useCachedValues = TRUE)
-	checkEquals(ref.xls.uncached, res)	
+	checkEquals(ref.xls.uncached, res)
+  
+  # Check that reading cached cell values in conjunction with converting cell values to string
+  # does not lead to cell formulas being returned (see github issue #52)
+  res <- readWorksheetFromFile(rsrc("resources/testBug52.xlsx"), sheet = 1, useCachedValues = TRUE)
+  expected <- data.frame(
+    Var1 = c(2, 4, 6),
+    Var2 = c("2", "nope", "6"),
+    Var3 = c(NA, 4, 6),
+    Var4 = c(2, 4, 6),
+    stringsAsFactors = FALSE
+  )
+  checkEquals(expected, res)
 }
