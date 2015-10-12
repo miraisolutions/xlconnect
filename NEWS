@@ -2,7 +2,7 @@ XLConnect News
 --------------
 
 0.2-12 2015-??-??
-  * Moved to Apache POI 3.13-beta1
+  * Moved to Apache POI 3.13
   * Fixed an issue with formula cell evaluation
   * New feature: ability to read password protected files
   * Add additional imports to NAMESPACE as future versions of R will

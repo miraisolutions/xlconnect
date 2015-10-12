@@ -18,7 +18,7 @@ a shortcut form of \code{new("workbook", filename, create)} with some additional
     \item{\code{jobj}:}{Object of class \code{jobjRef} (see package \pkg{rJava}) which represents a Java object reference that is used
     in the back-end to manipulate the underlying Excel workbook instance.}
   }
-  These slots should not be accessed directly in user code. \code{workbook} objects should only be manipulated
+  Note: The \code{jobj} slot should not be accessed directly. \code{workbook} objects should only be manipulated
   via the corresponding methods.
 }
 \references{
