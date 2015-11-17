@@ -40,9 +40,9 @@ extractRownames <- function(x, col) {
   
   		attr(x, "row.names") <- if(is.numeric(x[[col]])) as.integer(x[[col]]) else as.character(x[[col]])
   		if(is.numeric(col))
-  			x[,-col]
+  			x[,-col, drop = FALSE]
   		else
-  			x[, names(x) != col]
+  			x[, names(x) != col, drop = FALSE]
   	} else
   		x
   }

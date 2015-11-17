@@ -381,4 +381,10 @@ test.workbook.readNamedRegion <- function() {
 	checkEquals(ref.xls.uncached, res)
 	res <- readNamedRegion(wb.xlsx, "BothRemote", useCachedValues = TRUE)
 	checkEquals(ref.xls.uncached, res)
+  
+	# Check that dimensionality is not dropped when reading in a named region with rownames = x 
+	# (see github issue #49)
+	expected = data.frame(B = 1:5, row.names = letters[1:5])
+	res <- readNamedRegionFromFile(rsrc("resources/testBug49.xlsx"), name = "test", rownames = "A")
+	checkEquals(expected, res)
 }

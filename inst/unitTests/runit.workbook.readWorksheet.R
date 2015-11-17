@@ -617,4 +617,10 @@ test.workbook.readWorksheet <- function() {
     stringsAsFactors = FALSE
   )
   checkEquals(expected, res)
+  
+  # Check that dimensionality is not dropped when reading in a worksheet with rownames = x 
+  # (see github issue #49)
+  expected = data.frame(B = 1:5, row.names = letters[1:5])
+	res <- readWorksheetFromFile(rsrc("resources/testBug49.xlsx"), sheet = 1, rownames = 1)
+  checkEquals(expected, res)
 }
