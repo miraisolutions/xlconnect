@@ -623,4 +623,18 @@ test.workbook.readWorksheet <- function() {
   expected = data.frame(B = 1:5, row.names = letters[1:5])
 	res <- readWorksheetFromFile(rsrc("resources/testBug49.xlsx"), sheet = 1, rownames = 1)
   checkEquals(expected, res)
+  
+  # Check that dates are correctly converted to string in 1904-windowing based Excel files
+  # (see github issue #53)
+  expected = data.frame(
+    A = c("2003-04-06", "2014-10-30", "abc"),
+    stringsAsFactors = FALSE
+  )
+  res <- readWorksheetFromFile(rsrc("resources/testBug53.xlsx"), sheet = 1, dateTimeFormat = "%Y-%m-%d")
+  checkEquals(expected, res)
+  
+  # Check that numbers are correctly converted to string 1904-windowing based Excel files
+	expected = data.frame(A = as.POSIXct(c("2015-12-01", "2015-11-17", "1984-01-11")))
+	res <- readWorksheetFromFile(rsrc("resources/testBug53.xlsx"), sheet = 2, colTypes = "POSIXt", forceConversion = TRUE)
+  checkEquals(expected, res)
 }

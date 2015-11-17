@@ -9,7 +9,8 @@ XLConnect News
     only have the base package attached when performing 'R CMD check'
   * Fixed github issue #52: useCachedValues=TRUE shows formulas instead of values
   * Fixed github issue #49: if region has only 2 columns then can't set first
-    column as rownames
+    column as rownames (thanks to EldarAgalarov and Deleetdk)
+  * Fixed github issue #53: 1904 date system in mixed columns (thanks to waternova)
 
 0.2-11 2015-03-01
   * Moved to Apache POI 3.12-beta1
