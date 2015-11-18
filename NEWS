@@ -11,6 +11,8 @@ XLConnect News
   * Fixed github issue #49: if region has only 2 columns then can't set first
     column as rownames (thanks to EldarAgalarov and Deleetdk)
   * Fixed github issue #53: 1904 date system in mixed columns (thanks to waternova)
+  * Fixed an issue with writeNamedRegion where named regions for 0-row
+    data.frames have been defined with an extended empty row
 
 0.2-11 2015-03-01
   * Moved to Apache POI 3.12-beta1
