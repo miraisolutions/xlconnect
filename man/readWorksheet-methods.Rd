@@ -106,10 +106,16 @@ starting at the top left corner specified by \code{startRow} and
 \code{endRow} and \code{endCol}. If \code{header = TRUE}, the first row
 is interpreted as column names of the resulting \code{data.frame}.\cr If
 \code{startRow <= 0} then the first available row in the sheet is assumed. 
-If \code{endRow <= 0} then the last available row in the sheet is assumed.
+If \code{endRow = 0} then the last available row in the sheet is assumed.
+For \code{endRow = -n} with n > 0, the 'last row' - n rows is assumed. This
+is useful in cases where you want to skip the last n rows.
 If \code{startCol <= 0} then the minimum column between \code{startRow} and
-\code{endRow} is assumed. If \code{endCol <= 0} then the maximum column between
-\code{startRow} and \code{endRow} is assumed. In other words, if no boundaries are specified \code{readWorksheet} assumes the "bounding box" of the data as the corresponding boundaries.\cr
+\code{endRow} is assumed. If \code{endCol = 0} then the maximum column between
+\code{startRow} and \code{endRow} is assumed. If \code{endCol = -n} with n > 0,
+the maximum column between \code{startRow} and \code{endRow} except for the last n
+columns is assumed.
+
+In other words, if no boundaries are specified \code{readWorksheet} assumes the "bounding box" of the data as the corresponding boundaries.\cr
 The arguments \code{autofitRow} and \code{autofitCol} (both defaulting to \code{TRUE}) can be used to skip leading and trailing empty rows even in case \code{startRow}, \code{endRow}, \code{startCol} and \code{endCol} are specified to values \code{> 0}. This can be useful if data is expected within certain given boundaries but the exact location is not available.\cr\cr
 
 If all four coordinate arguments are missing this behaves as above with
