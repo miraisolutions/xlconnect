@@ -2,7 +2,9 @@ XLConnect News
 --------------
 
 0.2-12 2015-??-??
-  * Moved to Apache POI 3.13
+  * Moved to Apache POI 3.14-beta1
+  * Upgraded to Apache Commons Codec 1.10
+  * Upgraded XLConnectJars dependency to version 0.2-12
   * Fixed an issue with formula cell evaluation
   * New feature: ability to read password protected files
   * Add additional imports to NAMESPACE as future versions of R will

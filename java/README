@@ -9,8 +9,8 @@ Sources for other open source software components can be obtained from the corre
 
 - Apache POI: http://poi.apache.org/
   Source Code: 
-  poi-3.13.jar: http://repo1.maven.apache.org/maven2/org/apache/poi/poi/3.13/poi-3.13-sources.jar
-  poi-ooxml-3.13.jar: http://repo1.maven.apache.org/maven2/org/apache/poi/poi-ooxml/3.13/poi-ooxml-3.13-sources.jar
+  poi-3.14-beta1.jar: http://repo1.maven.apache.org/maven2/org/apache/poi/poi/3.14-beta1/poi-3.14-beta1-sources.jar
+  poi-ooxml-3.14-beta1.jar: http://repo1.maven.apache.org/maven2/org/apache/poi/poi-ooxml/3.14-beta1/poi-ooxml-3.14-beta1-sources.jar
 
 - Joda-Time: http://www.joda.org/joda-time/
   Source Code:
@@ -18,6 +18,6 @@ Sources for other open source software components can be obtained from the corre
 
 - Apache Commons Codec: http://commons.apache.org/proper/commons-codec/
   Source Code:
-  commons-codec-1.9.jar: http://repo1.maven.org/maven2/commons-codec/commons-codec/1.9/commons-codec-1.9-sources.jar
+  commons-codec-1.10.jar: http://repo1.maven.org/maven2/commons-codec/commons-codec/1.10/commons-codec-1.10-sources.jar
 
 See also associated copyright information in inst/COPYRIGHTS. 
