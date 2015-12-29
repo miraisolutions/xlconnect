@@ -60,6 +60,9 @@ test.workbook.readWorksheet <- function() {
 	checkEquals(res.index, checkDf)
 	res.name <- readWorksheet(wb.xls, "Test2", startRow = 17, startCol = 6, endRow = 22, endCol = 9, header = TRUE)
 	checkEquals(res.name, checkDf)
+  # Test using a negative endRow/endCol
+  res.name <- readWorksheet(wb.xls, "Test2", startRow = 17, startCol = 6, endRow = -2, endCol = -1, header = TRUE)
+  checkEquals(res.name, checkDf[-nrow(checkDf) + 0:1, -ncol(checkDf)])
 	
 	# Read worksheet by specifying a range
 	# Check that the read data region equals the defined data.frame (*.xlsx)
@@ -67,6 +70,9 @@ test.workbook.readWorksheet <- function() {
 	checkEquals(res.index, checkDf)
 	res.name <- readWorksheet(wb.xlsx, "Test2", startRow = 17, startCol = 6, endRow = 22, endCol = 9, header = TRUE)
 	checkEquals(res.name, checkDf)
+	# Test using a negative endRow/endCol
+	res.name <- readWorksheet(wb.xlsx, "Test2", startRow = 17, startCol = 6, endRow = -2, endCol = -1, header = TRUE)
+	checkEquals(res.name, checkDf[-nrow(checkDf) + 0:1, -ncol(checkDf)])
 	
 	# Read worksheet by specifying a range via the region argument
 	# Check that the read data region equals the defined data.frame (*.xls)
@@ -134,6 +140,11 @@ test.workbook.readWorksheet <- function() {
 	checkEquals(res, checkDf1)
 	res <- readWorksheet(wb.xls, "Test5")
 	checkEquals(res, checkDf2)
+  # Test with negative endRow/endCol
+  res <- readWorksheet(wb.xls, "Test4", endRow = -4, endCol = -2)
+  checkEquals(res, checkDf1[-nrow(checkDf1) + 0:3, -ncol(checkDf) + 0:1])
+  res <- readWorksheet(wb.xls, "Test5", endRow = -3, endCol = -1)
+  checkEquals(res, checkDf2[-nrow(checkDf2) + 0:2, -ncol(checkDf)])
 
 	# Check that the data bounding box is correctly inferred even if there are blank cells
 	# in the last row (*.xlsx)
@@ -141,6 +152,10 @@ test.workbook.readWorksheet <- function() {
 	checkEquals(res, checkDf1)
 	res <- readWorksheet(wb.xlsx, "Test5")
 	checkEquals(res, checkDf2)
+	res <- readWorksheet(wb.xlsx, "Test4", endRow = -4, endCol = -2)
+	checkEquals(res, checkDf1[-nrow(checkDf1) + 0:3, -ncol(checkDf) + 0:1])
+	res <- readWorksheet(wb.xlsx, "Test5", endRow = -3, endCol = -1)
+	checkEquals(res, checkDf2[-nrow(checkDf2) + 0:2, -ncol(checkDf)])
 	
 	targetNoForce <- data.frame(
 			AAA = c(NA, NA, NA, 780.9, NA),

@@ -38,7 +38,7 @@ test.workbook.writeAndReadWorksheet <- function() {
 		createSheet(wb, worksheet)
 		writeWorksheet(wb, df, worksheet, startRow = startRow, startCol = startCol)
 		res <- readWorksheet(wb, worksheet, startRow = startRow, startCol = startCol,
-				endRow = -1, endCol = -1)	
+				endRow = 0, endCol = 0)	
 		checkEquals(normalizeDataframe(df), res, check.attributes = FALSE, check.names = TRUE)
 	}
 	

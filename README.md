@@ -1,6 +1,6 @@
 XLConnect: Excel Connector for R
 ================================
-[![Build Status](https://travis-ci.org/miraisolutions/xlconnect.png?branch=master)](https://travis-ci.org/miraisolutions/xlconnect)
+[![Build Status](https://travis-ci.org/miraisolutions/xlconnect.png?branch=master)](https://travis-ci.org/miraisolutions/xlconnect) [![Research software impact](http://depsy.org/api/package/cran/XLConnect/badge.svg)](http://depsy.org/package/r/XLConnect)
 
 XLConnect is a comprehensive and cross-platform R package for manipulating Microsoft Excel files from within R. XLConnect differs from other related R packages in that it is completely cross-platform and as such runs under Windows, Unix/Linux and Mac (32- and 64-bit). Moreover, it does not require any installation of Microsoft Excel or any other special drivers to be able to read & write Excel files. The only requirement is a recent version of a Java Runtime Environment (JRE).
 
