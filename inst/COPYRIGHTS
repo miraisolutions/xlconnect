@@ -34,3 +34,10 @@ Transitive dependencies include:
 
    Related JARs: commons-codec-*.jar
 
+** Curvesapi
+
+   Copyright © 2005, Graph Builder
+
+   Project Website: https://github.com/virtuald/curvesapi
+   License Information: https://github.com/virtuald/curvesapi, https://github.com/virtuald/curvesapi/blob/master/license.txt
+   Related JARs: curvesapi-*.jar

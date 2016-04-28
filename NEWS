@@ -1,8 +1,8 @@
 XLConnect News
 --------------
 
-0.2-12 2015-??-??
-  * Moved to Apache POI 3.14-beta1
+0.2-12 2016-??-??
+  * Moved to Apache POI 3.15-beta1
   * Upgraded to Apache Commons Codec 1.10
   * Upgraded XLConnectJars dependency to version 0.2-12
   * Fixed an issue with formula cell evaluation

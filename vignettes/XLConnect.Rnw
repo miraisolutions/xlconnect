@@ -771,7 +771,7 @@ Check out the Excel file to see how the data and the graph have been exported!
 
 We have introduced the following updates in version \Sexpr{getOption("XLConnect.Version")} of \pkg{XLConnect}:
 \begin{itemize}
-  \item{Moved to Apache POI 3.14-beta1}
+  \item{Moved to Apache POI 3.15-beta1}
   \item{Upgraded to Apache Commons Codec 1.10}
   \item{Upgraded XLConnectJars dependency to version 0.2-12}
   \item{Fixed an issue with formula cell evaluation}

@@ -9,8 +9,8 @@ Sources for other open source software components can be obtained from the corre
 
 - Apache POI: http://poi.apache.org/
   Source Code: 
-  poi-3.14-beta1.jar: http://repo1.maven.apache.org/maven2/org/apache/poi/poi/3.14-beta1/poi-3.14-beta1-sources.jar
-  poi-ooxml-3.14-beta1.jar: http://repo1.maven.apache.org/maven2/org/apache/poi/poi-ooxml/3.14-beta1/poi-ooxml-3.14-beta1-sources.jar
+  poi-3.15-beta1.jar: http://repo1.maven.apache.org/maven2/org/apache/poi/poi/3.15-beta1/poi-3.15-beta1-sources.jar
+  poi-ooxml-3.15-beta1.jar: http://repo1.maven.apache.org/maven2/org/apache/poi/poi-ooxml/3.15-beta1/poi-ooxml-3.15-beta1-sources.jar
 
 - Joda-Time: http://www.joda.org/joda-time/
   Source Code:
@@ -19,5 +19,9 @@ Sources for other open source software components can be obtained from the corre
 - Apache Commons Codec: http://commons.apache.org/proper/commons-codec/
   Source Code:
   commons-codec-1.10.jar: http://repo1.maven.org/maven2/commons-codec/commons-codec/1.10/commons-codec-1.10-sources.jar
+
+- Curvesapi: https://github.com/virtuald/curvesapi
+  Source Code:
+  curvesapi-1.03.jar: http://central.maven.org/maven2/com/github/virtuald/curvesapi/1.03/curvesapi-1.03-sources.jar
 
 See also associated copyright information in inst/COPYRIGHTS. 

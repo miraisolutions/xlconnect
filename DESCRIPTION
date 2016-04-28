@@ -10,7 +10,9 @@ Authors@R: c(person("Mirai Solutions GmbH", role = "aut",
              person("The Apache Software Foundation", role = c("ctb", "cph"),
                     comment = "Apache POI, Apache Commons Codec"),
              person("Stephen", "Colebourne", role = c("ctb", "cph"),
-                    comment = "Joda-Time Java library"))
+                    comment = "Joda-Time Java library"),
+             person("Graph Builder", role = c("ctb", "cph"),
+                   comment = "Curvesapi Java library"))
 URL: http://www.mirai-solutions.com , http://miraisolutions.wordpress.com
 BugReports: https://github.com/miraisolutions/xlconnect/issues
 SystemRequirements: java (>= 1.6)
