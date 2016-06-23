@@ -1,7 +1,7 @@
 XLConnect News
 --------------
 
-0.2-12 2016-??-??
+0.2-12 2016-06-23
   * Moved to Apache POI 3.15-beta1
   * Upgraded to Apache Commons Codec 1.10
   * Upgraded XLConnectJars dependency to version 0.2-12
