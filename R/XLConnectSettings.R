@@ -45,9 +45,5 @@ XLConnectSettings <- function(pdesc) {
 	# Rowname column (used by xlcDump, xlcRestore)
 	options(XLConnect.RownameCol = ".rownames")
   
-  # Lower ratio between de- and inflated bytes in zip bomb detection
-  # See https://bz.apache.org/bugzilla/show_bug.cgi?id=50090
-	J("org.apache.poi.openxml4j.util.ZipSecureFile")$setMinInflateRatio(0.001)
-	
 	invisible()
 }

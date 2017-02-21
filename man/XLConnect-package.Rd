@@ -12,8 +12,8 @@ Provides comprehensive functionality to read, write and format Excel data.
 \tabular{ll}{
 Package: \tab XLConnect\cr
 Type: \tab Package\cr
-Version: \tab 0.2-12\cr
-Date: \tab 2016-06-23\cr
+Version: \tab 0.2-13\cr
+Date: \tab 2017-01-01\cr
 URL: \tab \url{http://www.mirai-solutions.com}\cr
 \tab \url{http://miraisolutions.wordpress.com}\cr
 SystemRequirements: \tab java (>= 1.6)\cr
