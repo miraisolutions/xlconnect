@@ -33,6 +33,17 @@ Transitive dependencies include:
    License Information: http://www.apache.org/licenses/LICENSE-2.0
 
    Related JARs: commons-codec-*.jar
+   
+** Apache Commons Collections
+
+   Copyright © 2001-2015, The Apache Software Foundation
+   
+   Apache Commons, Apache Commons Collections, Apache, the Apache feather logo, and the Apache Commons project logos are trademarks of The Apache Software Foundation.
+   
+   Project Website: http://commons.apache.org/proper/commons-collections/
+   License Information: http://www.apache.org/licenses/LICENSE-2.0
+   
+   Related JARs: commons-collections4-*.jar
 
 ** Curvesapi
 
