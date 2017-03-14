@@ -64,9 +64,10 @@ test.writeAndReadNamedRegion <- function() {
 		testDataFrame(wb.xlsx, ChickWeight, "$BQ$7")
 		
 		# built-in dataset CO2 (*.xls)
-		testDataFrame(wb.xls, CO2, "$L$1")
+		CO = CO2 # CO2 seems to be an illegal name
+		testDataFrame(wb.xls, CO, "$L$1")
 		# built-in dataset CO2 (*.xlsx)
-		testDataFrame(wb.xlsx, CO2, "$L$1")
+		testDataFrame(wb.xlsx, CO, "$L$1")
 		
 		# built-in dataset iris (*.xls)
 		testDataFrame(wb.xls, iris, "$BB$5")

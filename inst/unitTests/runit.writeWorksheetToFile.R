@@ -72,6 +72,7 @@ test.writeWorksheetToFile <- function() {
 		# built-in dataset ChickWeight (*.xlsx)
 		testDataFrame(file.xlsx, ChickWeight)
 		
+		CO = CO2 # CO2 seems to be an illegal name
 		# built-in dataset CO2 (*.xls)
 		testDataFrame(file.xls, CO2)
 		# built-in dataset CO2 (*.xlsx)

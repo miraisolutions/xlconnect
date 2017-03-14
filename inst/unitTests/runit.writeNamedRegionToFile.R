@@ -30,25 +30,25 @@
 test.writeNamedRegionToFile <- function() {
 	
 	# Create workbooks
-        file.xls <- "testWriteNamedRegionToFileWorkbook.xls"
-        file.xlsx <- "testWriteNamedRegionToFileWorkbook.xlsx"
+  file.xls <- "testWriteNamedRegionToFileWorkbook.xls"
+  file.xlsx <- "testWriteNamedRegionToFileWorkbook.xlsx"
 
-        if(file.exists(file.xls)) {
-          file.remove(file.xls)
-        }
+  if(file.exists(file.xls)) {
+    file.remove(file.xls)
+  }
 
-        if(file.exists(file.xlsx)) {
-          file.remove(file.xlsx)
-        }
+  if(file.exists(file.xlsx)) {
+    file.remove(file.xlsx)
+  }
 	
 	testDataFrame <- function(file, df) {
 		worksheet <- deparse(substitute(df))
-                print(paste("Writing dataset ", worksheet, "to file", file))
-                name <- paste(worksheet, "Region", sep="") 
+    print(paste("Writing dataset ", worksheet, "to file", file))
+    name <- paste(worksheet, "Region", sep="") 
 		writeNamedRegionToFile(file, df, name, formula=paste(worksheet, "A1", sep="!"))
 		res <- readNamedRegionFromFile(file, name)                
-                checkEquals(normalizeDataframe(df), res, check.attributes = FALSE, check.names = TRUE)
-        }
+            checkEquals(normalizeDataframe(df), res, check.attributes = FALSE, check.names = TRUE)
+    }
 	
 	if(getOption("FULL.TEST.SUITE")) {
 		# built-in dataset mtcars (*.xls)
@@ -71,10 +71,11 @@ test.writeNamedRegionToFile <- function() {
 		# built-in dataset ChickWeight (*.xlsx)
 		testDataFrame(file.xlsx, ChickWeight)
 		
+		CO = CO2 # CO2 seems to be an illegal name
 		# built-in dataset CO2 (*.xls)
-		testDataFrame(file.xls, CO2)
+		testDataFrame(file.xls, CO)
 		# built-in dataset CO2 (*.xlsx)
-		testDataFrame(file.xlsx, CO2)
+		testDataFrame(file.xlsx, CO)
 		
 		# built-in dataset iris (*.xls)
 		testDataFrame(file.xls, iris)
@@ -133,27 +134,25 @@ test.writeNamedRegionToFile <- function() {
 	checkTrue(file.exists("wnrtf1.xlsx"))
 
 
-        # test clearNamedRegions
-        testClearNamedRegions <- function(file, df) {
-                df.short <- df[1,]
+  # test clearNamedRegions
+  testClearNamedRegions <- function(file, df) {
+    df.short <- df[1,]
 
-                # overwrite named region with shorter version
-                writeNamedRegionToFile(file, data=df.short, name="cdfRegion")
-                # default behaviour: not cleared, only named region is shortened
-                checkEquals(nrow(readNamedRegionFromFile(file, name="cdfRegion")), 1)
-                checkEquals(nrow(readWorksheetFromFile(file, sheet="cdf")), nrow(df))
+    # overwrite named region with shorter version
+    writeNamedRegionToFile(file, data=df.short, name="cdfRegion")
+    # default behaviour: not cleared, only named region is shortened
+    checkEquals(nrow(readNamedRegionFromFile(file, name="cdfRegion")), 1)
+    checkEquals(nrow(readWorksheetFromFile(file, sheet="cdf")), nrow(df))
 
-                # rewrite longer version 
-                writeNamedRegionToFile(file, data=df, name="cdfRegion")
-                # overwrite name with shorter version & clearing
-                writeNamedRegionToFile(file, data=df.short, name="cdfRegion", clearNamedRegions=TRUE)
-                # should be cleared
-                #checkEquals(nrow(readNamedRegionFromFile(file, name="cdfRegion")), 1)
-                #checkEquals(nrow(readWorksheetFromFile(file, sheet="cdf")), 1)
-        }
+    # rewrite longer version 
+    writeNamedRegionToFile(file, data=df, name="cdfRegion")
+    # overwrite name with shorter version & clearing
+    writeNamedRegionToFile(file, data=df.short, name="cdfRegion", clearNamedRegions=TRUE)
+    # should be cleared
+    #checkEquals(nrow(readNamedRegionFromFile(file, name="cdfRegion")), 1)
+    #checkEquals(nrow(readWorksheetFromFile(file, sheet="cdf")), 1)
+  }
 
-        testClearNamedRegions(file.xls, cdf)
-        testClearNamedRegions(file.xlsx, cdf)
- 
-
+  testClearNamedRegions(file.xls, cdf)
+  testClearNamedRegions(file.xlsx, cdf)
 }
