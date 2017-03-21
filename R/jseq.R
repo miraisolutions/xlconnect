@@ -20,37 +20,19 @@
 
 #############################################################################
 #
-# Setting cell styles
+# Creates a Java sequence length encoding object for efficient encoding
+# of sequences
 # 
 # Author: Martin Studer, Mirai Solutions GmbH
 #
 #############################################################################
 
-setGeneric("setCellStyle",
-		function(object, formula, sheet, row, col, cellstyle) standardGeneric("setCellStyle"))
-
-setMethod("setCellStyle", 
-		signature(object = "workbook", formula = "missing", sheet = "numeric"), 
-		function(object, formula, sheet, row, col, cellstyle) {
-		  xlcCall(object, "setCellStyle", as.integer(sheet - 1), .jseq(row - 1),
-		    .jseq(col - 1), cellstyle)
-			invisible()
-		}
-)
-
-setMethod("setCellStyle", 
-		signature(object = "workbook", formula = "missing", sheet = "character"), 
-		function(object, formula, sheet, row, col, cellstyle) {
-		  xlcCall(object, "setCellStyle", sheet, .jseq(row - 1),
-		    .jseq(col - 1), cellstyle)
-			invisible()
-		}
-)
-
-setMethod("setCellStyle",
-    signature(object = "workbook", formula = "character", sheet = "missing"),
-    function(object, formula, sheet, row, col, cellstyle) {
-      xlcCall(object, "setCellStyle", formula, cellstyle)
-      invisible()
-    }
-)
+.jseq <- function(x) {
+  sle <- seqle(as.integer(x))
+  new(
+    J("com.miraisolutions.xlconnect.utils.SequenceLengthEncoding"), 
+    .jarray(sle$values),
+    .jarray(sle$lengths),
+    as.integer(sle$increment)
+  )
+}

@@ -20,37 +20,21 @@
 
 #############################################################################
 #
-# Setting cell styles
+# Sequence length encoding (based on base::rle)
 # 
 # Author: Martin Studer, Mirai Solutions GmbH
 #
 #############################################################################
 
-setGeneric("setCellStyle",
-		function(object, formula, sheet, row, col, cellstyle) standardGeneric("setCellStyle"))
-
-setMethod("setCellStyle", 
-		signature(object = "workbook", formula = "missing", sheet = "numeric"), 
-		function(object, formula, sheet, row, col, cellstyle) {
-		  xlcCall(object, "setCellStyle", as.integer(sheet - 1), .jseq(row - 1),
-		    .jseq(col - 1), cellstyle)
-			invisible()
-		}
-)
-
-setMethod("setCellStyle", 
-		signature(object = "workbook", formula = "missing", sheet = "character"), 
-		function(object, formula, sheet, row, col, cellstyle) {
-		  xlcCall(object, "setCellStyle", sheet, .jseq(row - 1),
-		    .jseq(col - 1), cellstyle)
-			invisible()
-		}
-)
-
-setMethod("setCellStyle",
-    signature(object = "workbook", formula = "character", sheet = "missing"),
-    function(object, formula, sheet, row, col, cellstyle) {
-      xlcCall(object, "setCellStyle", formula, cellstyle)
-      invisible()
-    }
-)
+seqle <- function(x) {
+  n <- length(x)
+  
+  # Determine reasonable sequence increment
+  d <- rle(sort(diff(x)))
+  inc <- d$values[which.max(d$lengths)[1]]
+  inc <- ifelse(is.na(inc), 1, inc)
+  
+  y <- x[-1L] != x[-n] + inc
+  i <- c(which(y | is.na(y)), n)
+  list(lengths = diff(c(0L, i)), values = x[head(c(0L, i) + 1L, -1L)], increment = inc)
+}
