@@ -12,18 +12,6 @@ Sources for other open source software components can be obtained from the corre
   poi-3.16-beta2.jar: http://repo1.maven.apache.org/maven2/org/apache/poi/poi/3.16-beta2/poi-3.16-beta2-sources.jar
   poi-ooxml-3.16-beta2.jar: http://repo1.maven.apache.org/maven2/org/apache/poi/poi-ooxml/3.16-beta2/poi-ooxml-3.16-beta2-sources.jar
 
-- Joda-Time: http://www.joda.org/joda-time/
-  Source Code:
-  joda-time-2.3.jar: http://repo1.maven.org/maven2/joda-time/joda-time/2.3/joda-time-2.3-sources.jar
-
-- Apache Commons Codec: http://commons.apache.org/proper/commons-codec/
-  Source Code:
-  commons-codec-1.10.jar: http://repo1.maven.org/maven2/commons-codec/commons-codec/1.10/commons-codec-1.10-sources.jar
-  
-- Apache Commons Collections: http://commons.apache.org/proper/commons-collections/
-  Source Code:
-  commons-collections4-4.1.jar: http://central.maven.org/maven2/org/apache/commons/commons-collections4/4.1/commons-collections4-4.1-sources.jar
-
 - Curvesapi: https://github.com/virtuald/curvesapi
   Source Code:
   curvesapi-1.04.jar: http://central.maven.org/maven2/com/github/virtuald/curvesapi/1.04/curvesapi-1.04-sources.jar

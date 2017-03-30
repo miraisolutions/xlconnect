@@ -809,7 +809,7 @@ I'm running out of memory when processing large data sets:
  
 This is caused by the fact that \pkg{XLConnect} needs to copy your entire data object over 
 to the JVM in order to write it to a file and the JVM has to be initialized with a fixed 
-upper limit on its memory size. To change this amount, you can pass parameters to the R's 
+upper limit on its memory size. To change this amount, you can pass parameters to R's 
 JVM just like you can to a command line Java process via rJava's options support:
  
 \begin{tikzCodeBlock}[listing style=bashsource, code body/.append style={codebody color=white}]
@@ -820,18 +820,6 @@ JVM just like you can to a command line Java process via rJava's options support
 Note, however, that these parameters are evaluated exactly once per R session when the JVM is 
 initialized - this is usually once you load the first package that uses Java support, so you 
 should do this as early as possible.
-
-If you're using R from within Eclipse/StatET, the JVM is initialized as soon as the R process is 
-started due to the required communication between Eclipse and R (the rj/rj-server components). 
-Therefore, you need to set the Java heap size in Eclipse's "Run Configurations" (Run > Run 
-Configurations on top menu) for the R engine:\\
-
-\begin{figure}[htb]
-	\begin{center}
-		\caption{Setting the Java heap size in Eclipse: }
-		\includegraphics[width=16.1cm]{img/RunConfigurations.png}
-	\end{center}
-\end{figure}
 
 \newpage Some general Java advice: The upper limit of the Xmx parameter is system dependent - most prominently, 
 32bit Windows will fail to work with anything much larger than 1500m, and it is usually a bad idea to 
@@ -863,11 +851,7 @@ named cell styles to cells, so the preferred workflow would be to:
 	writeWorksheet(w, data=df, sheet=1,startRow=1,startCol=1,header=TRUE)
 	setCellStyle(w, sheet=1,row=1,col=1,cellstyle=c)
 	saveWorkbook(w)
-\end{tikzCodeBlock}	
-	
-(Unfortunately, this does not work with the \pkg{XLConnect} 0.1-3 due to a bug (\#50912) 
-in the version of Apache POI that it uses. \pkg{XLConnect} 0.1-4 comes with a fixed POI 
-and should no longer suffer from this issue.)
+\end{tikzCodeBlock}
 
 % Yet another Question for FAQ
 \subsection{I'm getting errors trying to import Excel data}
@@ -891,7 +875,7 @@ Excel formulae. A particular problem are array formulas and array functions such
 
 There is no direct solution for accessing the values of fields that Apache POI doesn't know how to compute. 
 However, if you can live without the cell values and just want to ignore uncomputable cells, have a look 
-at the \code{onErrorCell} function (new in \pkg{XLConnect} 0.1-4) to tell \pkg{XLConnect} that you want to 
+at the \code{onErrorCell} function to tell \pkg{XLConnect} that you want to 
 ignore errors.
 
 If you have Excel and are willing to invest some manual effort, you can manually create a static copy, 
@@ -932,14 +916,6 @@ For any other feedback you may have, please contact us at: \\
 \begin{minipage}[c]{0.9\textwidth}
 You can also follow and contact us on {\bf LinkedIn}: \\
 \urlwofont{http://www.linkedin.com/company/mirai-solutions-gmbh}
-\end{minipage}
-
-\begin{minipage}[c]{0.08\textwidth}
-\includegraphics[width=10mm, height=10mm]{img/TwitterLogo.png}
-\end{minipage}
-\begin{minipage}[c]{0.9\textwidth}
-We encourage you to also follow us on {\bf Twitter}: \\
-\href{http://twitter.com/miraisolutions}{@miraisolutions}
 \end{minipage}
 
 \vspace{3mm}
@@ -1009,48 +985,5 @@ review, on \href{http://crantastic.org/packages/XLConnect}{crantastic!}
 \vskip\baselineskip
 
 }
-
-
-% \subsection{More advances examples}
-
-% \subsubsection{How to do this...}
-% \subsubsection{How to do that...}
-
-
-% Extend the Usage and Examples Section
-% 1. Section for writing into Excel files
-
-% * writing SHEETS
-
-% wb <- loadWorkbook(...)
-% createSheet(...)
-% writeWorksheet(...)
-% save()
-
-% Same in one call:
-% writeWorksheetToFile(...)
-% use when only one sheet to write, since it opens, writes the file and then closes with each call,
-% whereas with the above calls you can open, do multiple operations and then close
-
-% * Writing named regions
-% Example that's already there
-
-% 2. Similar structure to above, but with READING
-
-% 3. Advanced Usage
-% Take the example from Zurich R
-% "For this example we are going to usage some further dependecies"
-% list the packages used, with versions
-
-% 4. What's new in XLConnect version (insert version dynamically)
-% xlcEdit()
-% write a data frame into Excel, edit in Excel, get data back - get Martin's help to write this part
-% also see news file on CRAN
-
-% GLOSSARY?
-% workbook
-% worksheet
-% named region
-
 
 \end{document}\n

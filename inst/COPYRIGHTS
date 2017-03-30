@@ -11,39 +11,8 @@ The package XLConnect includes other open source software components. The follow
 
    Related JARs: poi-*.jar, poi-ooxml-*.jar
 
-** Joda-Time
-
-   Copyright © 2002-2014 Stephen Colebourne
-
-   Project Website: http://www.joda.org/joda-time/
-   License Information: http://www.joda.org/joda-time/license.html
-
-   Related JARs: joda-time-*.jar
-
 
 Transitive dependencies include:
-
-** Apache Commons Codec 
- 
-   Copyright © 2002-2014, The Apache Software Foundation
-
-   Apache Commons, Apache Commons Codec, Apache, the Apache feather logo, and the Apache Commons project logos are trademarks of The Apache Software Foundation.
-
-   Project Website: http://commons.apache.org/proper/commons-codec/
-   License Information: http://www.apache.org/licenses/LICENSE-2.0
-
-   Related JARs: commons-codec-*.jar
-   
-** Apache Commons Collections
-
-   Copyright © 2001-2015, The Apache Software Foundation
-   
-   Apache Commons, Apache Commons Collections, Apache, the Apache feather logo, and the Apache Commons project logos are trademarks of The Apache Software Foundation.
-   
-   Project Website: http://commons.apache.org/proper/commons-collections/
-   License Information: http://www.apache.org/licenses/LICENSE-2.0
-   
-   Related JARs: commons-collections4-*.jar
 
 ** Curvesapi
 
