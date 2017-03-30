@@ -30,14 +30,18 @@
 #
 #############################################################################
 
-xlcCall <- function(obj, fun, ..., SIMPLIFY = TRUE) {
+xlcCall <- function(obj, fun, ..., SIMPLIFY = TRUE, .recycle = TRUE) {
 	f = eval(parse(text = paste("obj@jobj$", fun, sep = "")))
 	args <- list(...)
-	args <- lapply(args, function(x) {
-				if(is.atomic(x)) x
-				else wrapList(x)
-			})
-	res = jTryCatch(do.call("mapply", args = c(FUN = f, args, SIMPLIFY = SIMPLIFY)))
+	if(.recycle) {
+  	args <- lapply(args, function(x) {
+  				if(is.atomic(x)) x
+  				else wrapList(x)
+  			})
+  	res = jTryCatch(do.call("mapply", args = c(FUN = f, args, SIMPLIFY = SIMPLIFY)))
+	} else {
+	  res = jTryCatch(do.call(f, args))
+	}
 	warnings = .jcall(obj@jobj, "[S", "retrieveWarnings")
 	for(w in warnings) warning(w, call. = FALSE)
 	

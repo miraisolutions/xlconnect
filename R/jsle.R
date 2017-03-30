@@ -20,16 +20,19 @@
 
 #############################################################################
 #
-# Creates a Java simple sequence
+# Creates a Java sequence length encoding object for efficient encoding
+# of sequences
 # 
 # Author: Martin Studer, Mirai Solutions GmbH
 #
 #############################################################################
 
-.jseq <- function(x) {
-  if(is.atomic(x)) {
-    J("com.miraisolutions.xlconnect.utils.SimpleSequence")$create(.jarray(x))
-  } else {
-    new(J("com.miraisolutions.xlconnect.utils.SimpleSequence"), .jarray(wrapList(x)))
-  }
+.jsle <- function(x) {
+  sle <- seqle(as.integer(x))
+  new(
+    J("com.miraisolutions.xlconnect.utils.SequenceLengthEncoding"), 
+    .jarray(sle$values),
+    .jarray(sle$lengths),
+    as.integer(sle$increment)
+  )
 }

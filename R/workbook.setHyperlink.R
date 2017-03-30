@@ -32,8 +32,8 @@ setGeneric("setHyperlink",
 setMethod("setHyperlink", 
           signature(object = "workbook", formula = "missing", sheet = "numeric"), 
           function(object, formula, sheet, row, col, type, address) {
-            xlcCall(object, "setHyperlink", as.integer(sheet - 1), .jseq(row - 1),
-                    .jseq(col - 1), type, address)
+            xlcCall(object, "setHyperlinkSheetIndex", .jseq(as.integer(sheet - 1)), 
+                    .jsle(row - 1), .jsle(col - 1), .jseq(type), .jseq(address), .recycle = FALSE)
             invisible()
           }
 )
@@ -41,8 +41,8 @@ setMethod("setHyperlink",
 setMethod("setHyperlink", 
           signature(object = "workbook", formula = "missing", sheet = "character"), 
           function(object, formula, sheet, row, col, type, address) {
-            xlcCall(object, "setHyperlink", sheet, .jseq(row - 1),
-                    .jseq(col - 1), type, address)
+            xlcCall(object, "setHyperlinkSheetName", .jseq(sheet), .jsle(row - 1),
+                    .jsle(col - 1), .jseq(type), .jseq(address), .recycle = FALSE)
             invisible()
           }
 )
@@ -50,7 +50,7 @@ setMethod("setHyperlink",
 setMethod("setHyperlink",
           signature(object = "workbook", formula = "character", sheet = "missing"),
           function(object, formula, sheet, row, col, type, address) {
-            xlcCall(object, "setHyperlink", formula, type, address)
+            xlcCall(object, "setHyperlinkFormula", formula, type, address)
             invisible()
           }
 )
