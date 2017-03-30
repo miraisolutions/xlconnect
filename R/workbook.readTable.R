@@ -51,7 +51,7 @@ setMethod("readTable",
 
 		subset <- getColSubset(object, sheet, startRow, endRow, startCol, endCol, header, numcols, keep, drop)
 		dataFrame <- xlcCall(object, "readTable", as.integer(sheet - 1), table, header, .jarray(classToXlcType(colTypes)), 
-				forceConversion, dateTimeFormat, useCachedValues, subset, readStrategy, SIMPLIFY = FALSE)
+				forceConversion, dateTimeFormat, useCachedValues, subset, readStrategy, .simplify = FALSE)
 		
 
     # get data.frames from Java

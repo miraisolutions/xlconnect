@@ -8,7 +8,7 @@ Performs automatic argument vectorization, provides default Java
 exception and warnings handling for \pkg{XLConnect}.
 }
 \usage{
-xlcCall(obj, fun, ..., SIMPLIFY = TRUE)
+xlcCall(obj, fun, ..., .recycle = TRUE, .simplify = TRUE)
 }
 \arguments{
   \item{obj}{
@@ -17,13 +17,20 @@ xlcCall(obj, fun, ..., SIMPLIFY = TRUE)
   by the argument \code{fun} should be called.
 }
   \item{fun}{
-  Name of function to be called.
+  Name of Java method to be called.
 }
   \item{\dots}{
-  Arguments to the function to be called. These arguments will be automatically vectorized using \code{\link{mapply}}.
+  Arguments to the Java method to be called.
 }
-  \item{SIMPLIFY}{
-  Argument to \code{\link{mapply}}. Attempt to reduce result of function call to a vector or matrix?
+  \item{.recycle}{
+  If \code{TRUE} (default), arguments passed through \dots will be automatically vectorized using \code{\link{mapply}} and
+  \code{fun} will be called the appropriate amount of times.
+  If \code{FALSE}, no vectorization will take place in R and \code{fun} will be called once only. This may be used to implement
+  vectorization on the Java side.
+  }
+  \item{.simplify}{
+  Only relevant if \code{.recycle = TRUE}. Argument to internal \code{\link{mapply}} to set if there should be an attempt to 
+  reduce the result to a vector or matrix.
 }
 }
 \details{

@@ -32,7 +32,7 @@ setGeneric("getTables",
 setMethod("getTables", 
 	signature(object = "workbook", sheet = "numeric"), 
 	function(object, sheet, simplify = TRUE) {
-	  res <- xlcCall(object, "getTables", as.integer(sheet - 1), SIMPLIFY = FALSE)
+	  res <- xlcCall(object, "getTables", as.integer(sheet - 1), .simplify = FALSE)
     if(simplify && (length(res) == 1)) {
       res[[1]]
     } else {
@@ -44,7 +44,7 @@ setMethod("getTables",
 setMethod("getTables", 
   signature(object = "workbook", sheet = "character"), 
   function(object, sheet, simplify = TRUE) {
-    res <- xlcCall(object, "getTables", sheet, SIMPLIFY = FALSE)
+    res <- xlcCall(object, "getTables", sheet, .simplify = FALSE)
     if(simplify && (length(res) == 1)) {
       res[[1]]
     } else {

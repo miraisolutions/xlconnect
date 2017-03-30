@@ -30,7 +30,7 @@
 #
 #############################################################################
 
-xlcCall <- function(obj, fun, ..., SIMPLIFY = TRUE, .recycle = TRUE) {
+xlcCall <- function(obj, fun, ..., .recycle = TRUE, .simplify = TRUE) {
 	f = eval(parse(text = paste("obj@jobj$", fun, sep = "")))
 	args <- list(...)
 	if(.recycle) {
@@ -38,7 +38,7 @@ xlcCall <- function(obj, fun, ..., SIMPLIFY = TRUE, .recycle = TRUE) {
   				if(is.atomic(x)) x
   				else wrapList(x)
   			})
-  	res = jTryCatch(do.call("mapply", args = c(FUN = f, args, SIMPLIFY = SIMPLIFY)))
+  	res = jTryCatch(do.call("mapply", args = c(FUN = f, args, SIMPLIFY = .simplify)))
 	} else {
 	  res = jTryCatch(do.call(f, args))
 	}

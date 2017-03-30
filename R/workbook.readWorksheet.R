@@ -69,7 +69,7 @@ setMethod("readWorksheet",
 			dataFrame <- xlcCall(object, "readWorksheet", as.integer(sheet - 1), as.integer(startRow - 1), 
 					as.integer(startCol - 1), as.integer(endRow - 1), as.integer(endCol - 1), header, 
 					.jarray(classToXlcType(colTypes)), forceConversion, dateTimeFormat, useCachedValues, subset, 
-          readStrategy, SIMPLIFY = FALSE)
+          readStrategy, .simplify = FALSE)
 	
 			# get data.frames from Java
 			dataFrame = lapply(dataFrame, dataframeFromJava, check.names = check.names)

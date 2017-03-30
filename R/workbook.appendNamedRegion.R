@@ -36,7 +36,7 @@ setMethod("appendNamedRegion",
 			data <- includeRownames(data, rownames)
 		# pass data.frame's to Java - construct RDataFrameWrapper Java object references
 		data <- lapply(wrapList(data), dataframeToJava)
-		xlcCall(object, "appendNamedRegion", data, name, header, SIMPLIFY = FALSE)
+		xlcCall(object, "appendNamedRegion", data, name, header, .simplify = FALSE)
 		invisible()
 	}
 )
