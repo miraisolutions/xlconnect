@@ -109,8 +109,8 @@
     
     \matrix (xA)[right = 0.2cm of xAB,draw,rounded corners,fill=green!20]
     {
-        \node[codeEx](codeEx1) {\code{data = readWorksheetFromFile(file,...)}};\\[1ex]
-        \node[codeEx](codeEx2) {\code{writeWorksheetToFile(file, data, sheet,...)}};\\
+        \node[codeEx](codeEx1) {\code{data = readWorksheetFromFile(file, ...)}};\\[1ex]
+        \node[codeEx](codeEx2) {\code{writeWorksheetToFile(file, data, sheet, ...)}};\\
     };
     
     \matrix (xAC)[above = 0.2cm of xA, draw,rounded corners,fill=blue!20]
@@ -136,21 +136,21 @@
     
     \matrix (xC)[below = 0.2cm of xA,draw,rounded corners,fill=green!20]
     {
-        \node[codeEx](codeEx5) {\code{wb = loadWorkbook(filename)} \\ \code{data1 = readWorksheet(wb,sheet1,...)} \\ \code{data2 = readWorksheet(wb,sheet2,...)} \\ ...}; \\[1ex]
-        \node[codeEx](codeEx6) {\code{wb = loadWorkbook(filename)} \\ \code{createSheet(wb, sheet1)} \\ \code{writeWorksheet(wb, data1, sheet1, ...)} \\ \code{saveWorkbook(wb)}};\\
+        \node[codeEx](codeEx5) {\code{wb = loadWorkbook(file)} \\ \code{data1 = readWorksheet(wb, sheet1, ...)} \\ \code{data2 = readWorksheet(wb, sheet2, ...)} \\ ...}; \\[1ex]
+        \node[codeEx](codeEx6) {\code{wb = loadWorkbook(file)} \\ \code{createSheet(wb, sheet1)} \\ \code{writeWorksheet(wb, data1, sheet1, ...)} \\ \code{saveWorkbook(wb)}};\\
     };
 
     \matrix (xD)[below = 0.2cm of xB,draw,rounded corners,fill=green!20]
     {
-        \node[codeEx](codeEx7) {\code{wb = loadWorkbook(filename)} \\ \code{data1 = readNamedRegion(wb, name1,...)} \\ \code{data2 = readNamedRegion(wb, name2,...)} \\ ...}; \\[1ex]
-        \node[codeEx](codeEx8) {\code{wb = loadWorkbook(filename)} \\ \code{createName(wb, name1,...)} \\ \code{writeNamedRegion(wb, data1, name1, ...)} \\ \code{saveWorkbook(wb)}};\\
+        \node[codeEx](codeEx7) {\code{wb = loadWorkbook(file)} \\ \code{data1 = readNamedRegion(wb, name1, ...)} \\ \code{data2 = readNamedRegion(wb, name2, ...)} \\ ...}; \\[1ex]
+        \node[codeEx](codeEx8) {\code{wb = loadWorkbook(file)} \\ \code{createName(wb, name1, ...)} \\ \code{writeNamedRegion(wb, data1, name1, ...)} \\ \code{saveWorkbook(wb)}};\\
     };
     
 \end{tikzpicture}
 
 \vspace{0.5cm}
 \begin{center}
-\url{http://www.mirai-solutions.com}, \url{http://miraisolutions.wordpress.com}
+\url{http://www.mirai-solutions.com}, \url{https://github.com/miraisolutions}
 \end{center}
 
 \end{document}

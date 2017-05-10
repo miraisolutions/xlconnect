@@ -2,7 +2,7 @@ XLConnect News
 --------------
 
 0.2-13 ???
-  * Moved to Apache POI 3.16-beta2
+  * Moved to Apache POI 3.16
   * Performance improvements to setCellStyle for large row/col vectors
   * Added support for setting hyperlinks
 
