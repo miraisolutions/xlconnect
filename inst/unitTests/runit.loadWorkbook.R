@@ -55,5 +55,18 @@ test.loadWorkbook <- function() {
 	# for a file created on-the-fly (*.xlsx)
 	wb <- loadWorkbook(rsrc("resources/fileCreatedOnTheFly.xlsx"), create = TRUE)
 	checkTrue(is(wb, "workbook"))
+	
+	pwdProtectedFile <- rsrc("resources/testBug61.xlsx")
+	
+	# Check that openening a password protected file throws an error
+	# if no password is specified
+	wb <- checkException(loadWorkbook(pwdProtectedFile))
+	
+	# Check that opening a password protected file throws an error
+	# if a wrong password is specified
+	b <- checkException(loadWorkbook(pwdProtectedFile, password = "wrong"))
+	
+	# Check that a password protected file can be openend if the
+	# correct password is specified
+	wb <- loadWorkbook(pwdProtectedFile, password = "mirai")
 }
-
