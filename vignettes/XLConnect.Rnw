@@ -771,22 +771,10 @@ Check out the Excel file to see how the data and the graph have been exported!
 
 We have introduced the following updates in version \Sexpr{getOption("XLConnect.Version")} of \pkg{XLConnect}:
 \begin{itemize}
-  \item{Moved to Apache POI 3.15-beta1}
-  \item{Upgraded to Apache Commons Codec 1.10}
-  \item{Upgraded XLConnectJars dependency to version 0.2-12}
-  \item{Fixed an issue with formula cell evaluation}
-  \item{New feature: ability to read password protected files}
-  \item{Add additional imports to NAMESPACE as future versions of R will
-    only have the base package attached when performing 'R CMD check'}
-  \item{Fixed github issue \#52: useCachedValues=TRUE shows formulas instead of values}
-  \item{Fixed github issue \#49: if region has only 2 columns then can't set first
-    column as rownames (thanks to EldarAgalarov and Deleetdk)}
-  \item{Fixed github issue \#53: 1904 date system in mixed columns (thanks to waternova)}
-  \item{Fixed an issue with writeNamedRegion where named regions for 0-row
-    data.frames have been defined with an extended empty row}
-  \item{Fixed issue where formula cells would not be evaluated}
-  \item{Simplified advanced example in package vignette and removed the
-        dependency on fImport, forecast and scales}
+  \item{Moved to Apache POI 3.16}
+  \item{Performance improvements to setCellStyle for large row/col vectors}
+  \item{Added support for setting hyperlinks}
+  \item{Fixed issue with missing classes when opening password protected files (\#61)}
 \end{itemize}
 
 A summary of news in \pkg{XLConnect} \Sexpr{getOption("XLConnect.Version")} can be found in the 
