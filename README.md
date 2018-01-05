@@ -8,7 +8,7 @@ The package can easily be installed from <a href="https://cran.r-project.org/pac
 
 Alternatively, you may install XLConnect directly from our <a href="https://github.com/miraisolutions/xlconnect">github repository</a> using the excellent <a href="https://github.com/hadley/devtools">devtools</a> package:
 
-```
+```r
 require(devtools)
 
 # Installs the master branch of XLConnect (= current development version)
