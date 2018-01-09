@@ -12,7 +12,7 @@ jdk:
 r_packages:
   - covr
   
-r_github_packages
+r_github_packages:
   - miraisolutions/xlconnectjars
   
 script:
