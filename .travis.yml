@@ -6,9 +6,6 @@ r:
   - release
   - devel
   
-before_install:
-  - tlmgr install couriers
-  
 jdk:
   - oraclejdk8
   
