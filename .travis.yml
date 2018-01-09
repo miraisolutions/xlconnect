@@ -1,0 +1,17 @@
+language: r
+sudo: false
+cache: packages
+r:
+  - oldrel
+  - release
+  - devel
+jdk:
+  - oraclejdk8
+r_packages:
+  - covr
+script:
+  - |
+    R CMD build --compact-vignettes=both --md5 .
+    export FULL_TEST_SUITE=1
+    R CMD check XLConnect*tar.gz
+    travis_wait 30 Rscript -e 'covr::codecov()'
