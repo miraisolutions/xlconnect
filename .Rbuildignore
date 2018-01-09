@@ -5,6 +5,7 @@
 [.]Rproj$
 ^.*\.Rproj$
 ^\.travis\.yml$
+^\.codecov\.yml$
 Makefile
 
 ^inst/unitTests/runit.workbook.getLastColumn.R$
