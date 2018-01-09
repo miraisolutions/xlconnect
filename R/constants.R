@@ -156,6 +156,8 @@ XLC$"FILL.THIN_BACKWARD_DIAG" <- 13
 XLC$"FILL.THIN_FORWARD_DIAG" <- 14
 XLC$"FILL.SQUARES" <- 15
 XLC$"FILL.DIAMONDS" <- 16
+XLC$"FILL.LESS_DOTS" <- 17
+XLC$"FILL.LEAST_DOTS" <- 18
 
 # Hyperlink constants (for method workbook.setHyperlink)
 XLC$"HYPERLINK.NONE" <- "NONE"

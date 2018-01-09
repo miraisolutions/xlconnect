@@ -5,7 +5,6 @@
 %\VignetteIndexEntry{XLConnect for the Impatient}
 
 \usepackage[latin1]{inputenc}
-\usepackage[scaled=.9]{couriers}
 \usepackage[colorlinks]{hyperref}
 \usepackage{datetime}
 
