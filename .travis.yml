@@ -1,14 +1,23 @@
 language: r
-sudo: false
 cache: packages
+
 r:
   - oldrel
   - release
   - devel
+  
+before_install:
+  - tlmgr install couriers
+  
 jdk:
   - oraclejdk8
+  
 r_packages:
   - covr
+  
+r_github_packages
+  - miraisolutions/xlconnectjars
+  
 script:
   - |
     R CMD build --compact-vignettes=both --md5 .
