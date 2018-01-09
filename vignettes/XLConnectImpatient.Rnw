@@ -45,7 +45,6 @@
 % Page layout
 \usepackage[parfill]{parskip}
 \usepackage[letterpaper,margin=2cm]{geometry}
-\usepackage{epigraph}
 \usepackage{multicol}
 \usepackage{pdflscape}
 
