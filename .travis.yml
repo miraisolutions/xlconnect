@@ -1,23 +1,23 @@
-# Travis-CI integration
-# it is not really python, but there is no R support on Travis CI yet
-language: python
+language: r
+cache: packages
 
-# environment variables
-env:
-  - R_LIBS_USER=~/R FULL_TEST_SUITE=1
-
-# install dependencies
-install:
-  - sudo apt-add-repository -y ppa:marutter/rdev
-  - sudo apt-get update
-  - sudo apt-get install r-base-dev qpdf texinfo texlive-latex-extra texlive-fonts-recommended texlive-fonts-extra openjdk-7-jdk
-  - "[ ! -d ~/R ] && mkdir ~/R"
-  - R --version
-  - sudo R CMD javareconf
-  - R -e '.libPaths(); sessionInfo()'
-  - Rscript -e 'options(repos="http://cran.rstudio.com"); install.packages(c("devtools", "XLConnect"), dep = TRUE); require(methods); require(devtools); install_github("xlconnect", username = "miraisolutions", ref = "master")'
-
-# run tests
+r:
+  - oldrel
+  - release
+  - devel
+  
+jdk:
+  - oraclejdk8
+  
+r_packages:
+  - covr
+  
+r_github_packages:
+  - miraisolutions/xlconnectjars
+  
 script:
-  - make install
-  - make check
+  - |
+    R CMD build --compact-vignettes=both --md5 .
+    export FULL_TEST_SUITE=1
+    R CMD check XLConnect*tar.gz
+    travis_wait 30 Rscript -e 'covr::codecov()'
