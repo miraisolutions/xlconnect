@@ -27,37 +27,39 @@
 #############################################################################
 
 test.workbook.saveWorkbook <- function() {
-	
-	# Create workbooks
-	file.xls <- rsrc("resources/testWorkbookSaveWorkbook.xls")
-	file.xlsx <- rsrc("resources/testWorkbookSaveWorkbook.xlsx")
-	file.remove(file.xls)
-	file.remove(file.xlsx)
-	wb.xls <- loadWorkbook(file.xls, create = TRUE)
-	wb.xlsx <- loadWorkbook(file.xlsx, create = TRUE)
-	
-	# Files don't exist yet
-	checkTrue(!file.exists(file.xls))
-	checkTrue(!file.exists(file.xlsx))
-	
-	saveWorkbook(wb.xls)
-	saveWorkbook(wb.xlsx)
-	
-	# Check that file exists after saving (*.xls)
-	checkTrue(file.exists(file.xls))
-	
-	# Check that file exists after saving (*.xlsx)
-	checkTrue(file.exists(file.xlsx))
-	
-	# Check save as (*.xls)
-	newFile.xls <- "saveAsWorkbook.xls"
-	if(file.exists(newFile.xls)) file.remove(newFile.xls)
-	saveWorkbook(wb.xls, file = newFile.xls)
-	checkTrue(file.exists(newFile.xls))
-	
-	# Check save as (*.xlsx)
-	newFile.xlsx <- "saveAsWorkbook.xlsx"
-	if(file.exists(newFile.xlsx)) file.remove(newFile.xlsx)
-	saveWorkbook(wb.xlsx, file = newFile.xlsx)
-	checkTrue(file.exists(newFile.xlsx))
+  # Do not execute on CRAN since filesystems may be read-only
+  if(getOption("FULL.TEST.SUITE")) {
+  	# Create workbooks
+  	file.xls <- rsrc("resources/testWorkbookSaveWorkbook.xls")
+  	file.xlsx <- rsrc("resources/testWorkbookSaveWorkbook.xlsx")
+  	file.remove(file.xls)
+  	file.remove(file.xlsx)
+  	wb.xls <- loadWorkbook(file.xls, create = TRUE)
+  	wb.xlsx <- loadWorkbook(file.xlsx, create = TRUE)
+  	
+  	# Files don't exist yet
+  	checkTrue(!file.exists(file.xls))
+  	checkTrue(!file.exists(file.xlsx))
+  	
+  	saveWorkbook(wb.xls)
+  	saveWorkbook(wb.xlsx)
+  	
+  	# Check that file exists after saving (*.xls)
+  	checkTrue(file.exists(file.xls))
+  	
+  	# Check that file exists after saving (*.xlsx)
+  	checkTrue(file.exists(file.xlsx))
+  	
+  	# Check save as (*.xls)
+  	newFile.xls <- "saveAsWorkbook.xls"
+  	if(file.exists(newFile.xls)) file.remove(newFile.xls)
+  	saveWorkbook(wb.xls, file = newFile.xls)
+  	checkTrue(file.exists(newFile.xls))
+  	
+  	# Check save as (*.xlsx)
+  	newFile.xlsx <- "saveAsWorkbook.xlsx"
+  	if(file.exists(newFile.xlsx)) file.remove(newFile.xlsx)
+  	saveWorkbook(wb.xlsx, file = newFile.xlsx)
+  	checkTrue(file.exists(newFile.xlsx))
+  }
 }
