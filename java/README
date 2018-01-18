@@ -8,9 +8,11 @@ XLConnect sources can be obtained from GitHub:
 Sources for other open source software components can be obtained from the corresponding project websites or source code repositories:
 
 - Apache POI: http://poi.apache.org/
-  Source Code: 
-  poi-3.16.jar: http://repo1.maven.apache.org/maven2/org/apache/poi/poi/3.16/poi-3.16-sources.jar
-  poi-ooxml-3.16.jar: http://repo1.maven.apache.org/maven2/org/apache/poi/poi-ooxml/3.16/poi-ooxml-3.16-sources.jar
+  Full Source Distribution: https://www.apache.org/dyn/closer.lua/poi/release/src/poi-src-3.17-20170915.tar.gz
+  Source Code by JAR: 
+  poi-3.17.jar: http://repo1.maven.apache.org/maven2/org/apache/poi/poi/3.17/poi-3.17-sources.jar
+  poi-ooxml-3.17.jar: http://repo1.maven.apache.org/maven2/org/apache/poi/poi-ooxml/3.17/poi-ooxml-3.17-sources.jar
+  poi-ooxml-schemas-3.17.jar: Source code auto-generated from OOXML schemas by POI ant task "compile-ooxml-xsds" (see https://poi.apache.org/faq.html#faq-N10025 for more information)
 
 - Curvesapi: https://github.com/virtuald/curvesapi
   Source Code:
