@@ -6,6 +6,7 @@ XLConnect News
   * Upgraded XLConnectJars dependency to version 0.2-14
   * Fixed Java version specification in system requirements
   * Checking Java version at runtime according to CRAN requirements
+  * Updates to vignettes
   
 0.2-13 2017-05-10
   * Moved to Apache POI 3.16

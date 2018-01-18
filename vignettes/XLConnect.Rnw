@@ -68,10 +68,7 @@
 \usepackage{Sweave}
 
 <<setup,echo=F,results=hide>>=
-
-	if( !file.exists( 'figs' ) ) dir.create( 'figs' )
-	# require(tikzDevice)
-	
+	if(!file.exists('figs')) dir.create('figs')
 @
 
 <<setup,echo=F,results=hide>>=
@@ -79,13 +76,13 @@
 @
 
 \title{The \pkg{XLConnect} Package\\
-{\small\urlwofont{http://mirai-solutions.com}}\\[-0.3cm]
-{\small\urlwofont{http://cran.r-project.org/web/packages/XLConnect/index.html}}
+{\small\urlwofont{http://www.mirai-solutions.com}}\\[-0.3cm]
+{\small\urlwofont{https://cran.r-project.org/package=XLConnect}}
 }
 
 
 % \author{\small{Author of the \pkg{XLConnect} package:} \\\textcolor{Fuchsia}{\bf{Martin Studer}}, \\\small{Mirai Solutions GmbH}
-\author{\small{Author of this Vignette:}	\\\textcolor{Fuchsia}{\bf{Anna Maria Ksiezopolska}}, \\\small{\href{http://mirai-solutions.com}{\textcolor{Black}{Mirai Solutions GmbH}}}}
+\author{\small{Author of this Vignette:}	\\\textcolor{Fuchsia}{\bf{Anna Maria Ksiezopolska}}, \\\small{\href{http://www.mirai-solutions.com}{\textcolor{Black}{Mirai Solutions GmbH}}}}
 
 \date{\pkg{XLConnect} Version \Sexpr{getOption("XLConnect.Version")}\qquad \monthname, \the\year}
 
@@ -183,7 +180,7 @@
 \subsection{Scope and purpose of this document}
 This document is a user manual for the \pkg{XLConnect} R package. It is meant to be a top-level introduction and some of the 
 more advanced features of \pkg{XLConnect} are not presented here. For such details, please refer to the
-\href{http://cran.r-project.org/web/packages/XLConnect/XLConnect.pdf}{Reference Manual}.
+\href{https://CRAN.R-project.org/package=XLConnect/XLConnect.pdf}{Reference Manual}.
 
 \vspace{0.5cm}
 
@@ -255,7 +252,7 @@ All you need to use \pkg{XLConnect} are the following:
 
 \begin{itemize}
 \item{R, version 2.10.0 or higher}
-\item{Java Runtime Environment (JRE), version 6.0 or higher}
+\item{Java Runtime Environment (JRE), version 6 or higher}
 \end{itemize}
 
 \vspace{0.5cm}
@@ -318,8 +315,8 @@ of an Excel workbook (\code{object}). The \code{startRow} and \code{startCol} ar
 not explicitly specified, the data will start being filled into the A1 cell of the worksheet.
 
 \begin{tikzCodeBlock}[title={Write into a worksheet},listing style=sweavechunk]
-writeWorksheet(object, data, sheet, startRow = 1, startCol = 1, 
-header = TRUE)
+writeWorksheet(object, data, sheet, startRow = 1, startCol = 1,
+               header = TRUE)
 \end{tikzCodeBlock}
 
 \subsubsection{createName() - creating names within an Excel workbook}
@@ -376,7 +373,7 @@ see the supported styles).
 
 \begin{tikzCodeBlock}[title={Write data into an Excel named region},listing style=sweavechunk]
 writeNamedRegionToFile(file, data, name, formula = NA, header = TRUE,
-styleAction = XLC$STYLE_ACTION.XLCONNECT)
+                       styleAction = XLC$STYLE_ACTION.XLCONNECT)
 \end{tikzCodeBlock}
 
 \subsection{Example: writing a sheet}\label{Example1}
@@ -392,8 +389,8 @@ We then use \code{writeWorksheet()} to write the {\bf ChickWeight} data frame in
 At the end, we use \code{saveWorkbook()} to save the XLConnectExample1.xlsx file.
 
 <<removeFile1,echo=F,results=hide>>=
-	if(file.exists("XLConnectExample1.xlsx"))
-		file.remove("XLConnectExample1.xlsx")
+if (file.exists("XLConnectExample1.xlsx"))
+  file.remove("XLConnectExample1.xlsx")
 @
 
 <<simpleEx,echo=T,results=hide>>=
@@ -410,7 +407,7 @@ All the previous operations are performed in-memory, which has great performance
 \begin{figure}[htb]
 \begin{center}
 \caption{ChickWeight data frame written into the XLConnectExample1.xlsx file}
-\includegraphics[width=11cm]{img/XLConnectExample1.png}
+\includegraphics[width=9cm,keepaspectratio]{img/XLConnectExample1.png}
 \end{center}
 \end{figure}
 
@@ -419,14 +416,14 @@ The four lines of code presented in the previous example can be replaced with a 
 the \\\code{writeWorksheetToFile()} function:
 
 <<removeFile1,echo=F,results=hide>>=
-	if(file.exists("XLConnectExample2.xlsx"))
-		file.remove("XLConnectExample2.xlsx")
+if (file.exists("XLConnectExample2.xlsx"))
+  file.remove("XLConnectExample2.xlsx")
 @
 
 <<simpleEx,echo=T,results=hide>>=
 require(XLConnect)
-writeWorksheetToFile("XLConnectExample2.xlsx", data = ChickWeight, 
-sheet = "chickSheet", startRow = 3, startCol = 4)
+writeWorksheetToFile("XLConnectExample2.xlsx", data = ChickWeight,
+                     sheet = "chickSheet", startRow = 3, startCol = 4)
 @
 
 \code{writeWorksheetToFile()} loads the workbook, creates the sheet and finally saves the workbook. When you only need 
@@ -447,13 +444,13 @@ Calling \code{writeNamedRegion()} writes the name into the workbook. At the end,
 the Excel file to disk.
 
 <<removeFile3,echo=F,results=hide>>=
-	if(file.exists("XLConnectExample3.xlsx"))
-		file.remove("XLConnectExample3.xlsx")
+if (file.exists("XLConnectExample3.xlsx"))
+  file.remove("XLConnectExample3.xlsx")
 @
 
 <<simpleEx,echo=T,results=hide>>=
 require(XLConnect)
-wb = loadWorkbook("XLConnectExample3.xlsx", create = TRUE)
+wb <- loadWorkbook("XLConnectExample3.xlsx", create = TRUE)
 createSheet(wb, name = "womenData")
 createName(wb, name = "womenName", formula = "womenData!$C$5", overwrite = TRUE)
 writeNamedRegion(wb, women, name = "womenName")
@@ -463,7 +460,7 @@ saveWorkbook(wb)
 \begin{figure}[htb]
 \begin{center}
 \caption{women dataset written into womenName named region in the XLConnectExample3.xlsx file}
-\includegraphics[width=10cm]{img/XLConnectExample3.png}
+\includegraphics[height=9cm,keepaspectratio]{img/XLConnectExample3.png}
 \end{center}
 \end{figure}
 
@@ -472,14 +469,14 @@ The \code{writeNamedRegionToFile()} function can be used to produce the same res
 the previous example, with only one function call:
 
 <<removeFile4,echo=F,results=hide>>=
-	if(file.exists("XLConnectExample4.xlsx"))
-		file.remove("XLConnectExample4.xlsx")
+if (file.exists("XLConnectExample4.xlsx"))
+  file.remove("XLConnectExample4.xlsx")
 @
 
 <<simpleEx,echo=T,results=hide>>=
 require(XLConnect)
-writeNamedRegionToFile("XLConnectExample4.xlsx", women, 
-		name = "womenName", formula = "womenData!$C$5")
+writeNamedRegionToFile("XLConnectExample4.xlsx", women, name = "womenName",
+                       formula = "womenData!$C$5")
 @
 
 \subsection{Reading Excel files: basic functions}
@@ -499,8 +496,8 @@ All arguments (except \code{object}) are vectorized, which allows for reading of
 with one call.
 
 \begin{tikzCodeBlock}[title={Read data from a worksheet of an Excel workbook},listing style=sweavechunk]
-readWorksheet(object, sheet, startRow, startCol, endRow, endCol, 
-header = TRUE)
+readWorksheet(object, sheet, startRow, startCol, endRow, endCol,
+              header = TRUE)
 \end{tikzCodeBlock}
 
 \subsubsection{readWorksheetFromFile() - reading worksheets of an Excel file}
@@ -546,9 +543,9 @@ Please note, that alternatively to setting the \code{sheet} argument to the name
 
 <<latexEx,echo=T,keep.source=T>>=
 require(XLConnect)
-wb = loadWorkbook("XLConnectExample1.xlsx", create = TRUE)
-data = readWorksheet(wb, sheet = "chickSheet", startRow = 0, endRow = 10, 
-		startCol = 0, endCol = 0)
+wb <- loadWorkbook("XLConnectExample1.xlsx", create = TRUE)
+data <- readWorksheet(wb, sheet = "chickSheet", startRow = 0, endRow = 10,
+                      startCol = 0, endCol = 0)
 data
 @
 
@@ -558,9 +555,8 @@ as was shown in the previous example:
 
 <<simpleEx,echo=T,results=hide>>=
 require(XLConnect)
-data = readWorksheetFromFile("XLConnectExample1.xlsx", 
-		sheet = "chickSheet", startRow = 0, endRow = 10, 
-		startCol = 0, endCol = 0)
+data <- readWorksheetFromFile("XLConnectExample1.xlsx", sheet = "chickSheet",
+                              startRow = 0, endRow = 10, startCol = 0, endCol = 0)
 @
 
 \subsection{Example: reading from an Excel named region}
@@ -569,8 +565,8 @@ in an Excel file. We will use the file created in the example in section \ref{Ex
 
 <<latexEx,echo=T,keep.source=T>>=
 require(XLConnect)
-wb = loadWorkbook("XLConnectExample3.xlsx", create = TRUE)
-data = readNamedRegion(wb, name = "womenName")
+wb <- loadWorkbook("XLConnectExample3.xlsx", create = TRUE)
+data <- readNamedRegion(wb, name = "womenName")
 data
 @
 
@@ -580,7 +576,7 @@ The result obtained in the previous example can be reproduced by calling the wra
 
 <<simpleEx,echo=T,results=hide>>=
 require(XLConnect)
-data = readNamedRegionFromFile("XLConnectExample3.xlsx", "womenName")
+data <- readNamedRegionFromFile("XLConnectExample3.xlsx", "womenName")
 @
 
 \section{Advanced Usage and Examples}
@@ -611,34 +607,34 @@ Preparing the data to be reported:
 <<AdvancedExampleP2,echo=T,results=hide,keep.source=T>>=
 # Read in (historical) currency data
 # For this example take sample data set 'swissfranc' from XLConnect
-curr = XLConnect::swissfranc
-curr = curr[order(curr$Date),]
+curr <- XLConnect::swissfranc
+curr <- curr[order(curr$Date),]
 @ 
 
 Now, let's write the data to Excel:
 
 <<removeFile2,echo=F,results=hide>>=
-if(file.exists("swiss_franc.xlsx"))
+if (file.exists("swiss_franc.xlsx"))
   file.remove("swiss_franc.xlsx")
 @
 
 <<AdvancedExampleP3,echo=T,results=hide,keep.source=T>>=
 
 # Workbook filename
-wbFilename = "swiss_franc.xlsx"
+wbFilename <- "swiss_franc.xlsx"
 
 # Create a new workbook
-wb = loadWorkbook(wbFilename, create = TRUE)
+wb <- loadWorkbook(wbFilename, create = TRUE)
 
 # Create a new sheet named 'Swiss_Franc'
-sheet = "Swiss_Franc"
+sheet <- "Swiss_Franc"
 createSheet(wb, name = sheet)
 
 # Create a new Excel name referring to the top left corner
 # of the sheet 'Swiss_Franc' - this name is going to hold
 # our currency data
-dataName = "currency"
-nameLocation = paste(sheet, "$A$1", sep = "!")
+dataName <- "currency"
+nameLocation <- paste(sheet, "$A$1", sep = "!")
 createName(wb, name = dataName, formula = nameLocation)
 
 # Instruct XLConnect to only apply a data format for a cell
@@ -665,19 +661,19 @@ compared to the previous day.
 <<AdvancedExampleP4,echo=T,results=hide,keep.source=T>>=
 
 # Load the workbook created above
-wb = loadWorkbook(wbFilename)
+wb <- loadWorkbook(wbFilename)
 
 # Create a cell style for the header row
-csHeader = createCellStyle(wb, name = "header")
+csHeader <- createCellStyle(wb, name = "header")
 setFillPattern(csHeader, fill = XLC$FILL.SOLID_FOREGROUND)
 setFillForegroundColor(csHeader, color = XLC$COLOR.GREY_25_PERCENT)
 
 # Create a date cell style with a custom format for the Date column
-csDate = createCellStyle(wb, name = "date")
+csDate <- createCellStyle(wb, name = "date")
 setDataFormat(csDate, format = "yyyy-mm-dd")
 
 # Create a highlighting cell style
-csHlight = createCellStyle(wb, name = "highlight")
+csHlight <- createCellStyle(wb, name = "highlight")
 setFillPattern(csHlight, fill = XLC$FILL.SOLID_FOREGROUND)
 setFillForegroundColor(csHlight, color = XLC$COLOR.CORNFLOWER_BLUE)
 
@@ -687,7 +683,7 @@ setCellStyle(wb, sheet = sheet, row = 1,
              cellstyle = csHeader)
 
 # Index for all rows except header row
-allRows = seq(length = nrow(curr)) + 1
+allRows <- seq(length = nrow(curr)) + 1
 
 # Apply date cell style to the Date column
 setCellStyle(wb, sheet = sheet, row = allRows, col = 1, 
@@ -698,22 +694,22 @@ setColumnWidth(wb, sheet = sheet, column = 1, width = 2800)
 
 # Check if there was a change of more than 2% compared 
 # to the previous day (per currency)
-idx = rollapply(curr[, -1], width = 2, 
-                FUN = function(x) abs(x[2] / x[1] - 1),
-                by.column = TRUE) > 0.02
+idx <- rollapply(curr[, -1], width = 2,
+                 FUN = function(x) abs(x[2] / x[1] - 1),
+                 by.column = TRUE) > 0.02
 
-idx = rbind(rep(FALSE, ncol(idx)), idx)
-widx = lapply(as.data.frame(idx), which)
+idx <- rbind(rep(FALSE, ncol(idx)), idx)
+widx <- lapply(as.data.frame(idx), which)
 # Apply highlighting cell style
-for(i in seq(along = widx)) {
-  if(length(widx[[i]]) > 0) {
+for (i in seq(along = widx)) {
+  if (length(widx[[i]]) > 0) {
     setCellStyle(wb, sheet = sheet, row = widx[[i]] + 1, col = i + 1,
                  cellstyle = csHlight)
   }
 
-# Note:
-# +1 for row since there is a header row
-# +1 for column since the first column is the time column
+  # Note:
+  # +1 for row since there is a header row
+  # +1 for column since the first column is the time column
 }
 
 saveWorkbook(wb)
@@ -722,17 +718,17 @@ saveWorkbook(wb)
 As a next step, let's add a graph to our report.
 
 <<AdvancedExampleP5,echo=T,results=hide,keep.source=T>>=
-wb = loadWorkbook(wbFilename)
+wb <- loadWorkbook(wbFilename)
 
 # Stack currencies into a currency variable (for use with ggplot2 below)
-currencies = names(curr)[-1]
-gcurr = reshape(curr, varying = currencies, direction = "long",
-v.names = "Value", times = currencies, timevar = "Currency")
+currencies <- names(curr)[-1]
+gcurr <- reshape(curr, varying = currencies, direction = "long", v.names = "Value",
+                 times = currencies, timevar = "Currency")
 
 # Create a png graph showing the currencies in the context 
 # of the Swiss Franc
 png(filename = "swiss_franc.png", width = 800, height = 600)
-p = ggplot(gcurr, aes(Date, Value, colour = Currency)) +
+p <- ggplot(gcurr, aes(Date, Value, colour = Currency)) +
   geom_line() + stat_smooth(method = "loess") +
   scale_y_continuous("Exchange Rate CHF/CUR") +
   labs(title = paste0("CHF vs ", paste(currencies, collapse = ", ")), 
@@ -745,7 +741,7 @@ dev.off()
 # let's put the image two columns left to the data starting 
 # in the 5th row
 createName(wb, name = "graph",
-formula = paste(sheet, idx2cref(c(5, ncol(curr) + 2)), sep = "!"))
+formula <- paste(sheet, idx2cref(c(5, ncol(curr) + 2)), sep = "!"))
 # Note: idx2cref converts indices (row, col) to Excel cell references
 
 # Put the image created above at the corresponding location
@@ -769,14 +765,15 @@ Check out the Excel file to see how the data and the graph have been exported!
 
 We have introduced the following updates in version \Sexpr{getOption("XLConnect.Version")} of \pkg{XLConnect}:
 \begin{itemize}
-  \item{Moved to Apache POI 3.16}
-  \item{Performance improvements to setCellStyle for large row/col vectors}
-  \item{Added support for setting hyperlinks}
-  \item{Fixed issue with missing classes when opening password protected files (\#61)}
+  \item{Moved to Apache POI 3.17}
+  \item{Upgraded XLConnectJars dependency to version 0.2-14}
+  \item{Fixed Java version specification in system requirements}
+  \item{Checking Java version at runtime according to CRAN requirements}
+  \item{Updates to vignette}
 \end{itemize}
 
 A summary of news in \pkg{XLConnect} \Sexpr{getOption("XLConnect.Version")} can be found in the 
-\href{http://cran.r-project.org/web/packages/XLConnect/NEWS}{NEWS} file on CRAN.
+\href{https://cran.r-project.org/package=XLConnect/NEWS}{NEWS} file on CRAN.
 
 \section{Frequently Asked Questions}
 
@@ -834,8 +831,9 @@ named cell styles to cells, so the preferred workflow would be to:
 	df <- data.frame("foo")
 	c <- getCellStyle(w, "FatFont")
 
-	writeWorksheet(w, data=df, sheet=1,startRow=1,startCol=1,header=TRUE)
-	setCellStyle(w, sheet=1,row=1,col=1,cellstyle=c)
+	writeWorksheet(w, data = df, sheet = 1, startRow = 1, startCol = 1,
+	               header = TRUE)
+	setCellStyle(w, sheet = 1, row = 1, col = 1, cellstyle = c)
 	saveWorkbook(w)
 \end{tikzCodeBlock}
 
@@ -857,7 +855,7 @@ Error: NotImplementedException (Java): Error evaluating cell Sheet1!A1
 {\bf \large Answer}: \\\\
 This type of error is triggered when \pkg{XLConnect} can not determine the value of a cell in the 
 region you're trying to import. Usually, this happens because Apache POI does not support all possible 
-Excel formulae. A particular problem are array formulas and array functions such as \code{TRANSPOSE}.
+Excel formulae.
 
 There is no direct solution for accessing the values of fields that Apache POI doesn't know how to compute. 
 However, if you can live without the cell values and just want to ignore uncomputable cells, have a look 
@@ -884,8 +882,8 @@ We are very glad that you are using \pkg{XLConnect} and we would be happy to hea
 \includegraphics[width=10mm, height=10mm]{img/BrownBug.png}
 \end{minipage}
 \begin{minipage}[c]{0.9\textwidth}
-Please send any bug reports, feature requests or technical inquiries to: \\
-\href{mailto:xlconnect-bugs@mirai-solutions.com}{xlconnect-bugs@mirai-solutions.com}
+Please log any bug reports, feature requests or technical inquiries at: \\
+\urlwofont{https://github.com/miraisolutions/xlconnect/issues}
 \end{minipage}
 
 \begin{minipage}[c]{0.08\textwidth}
@@ -901,75 +899,36 @@ For any other feedback you may have, please contact us at: \\
 \end{minipage}
 \begin{minipage}[c]{0.9\textwidth}
 You can also follow and contact us on {\bf LinkedIn}: \\
-\urlwofont{http://www.linkedin.com/company/mirai-solutions-gmbh}
+\urlwofont{https://www.linkedin.com/company/mirai-solutions-gmbh/}
 \end{minipage}
 
 \vspace{3mm}
 We will do our best to reply to your enquires as quickly as possible!
-
-% \section{Glossary}
-
-
 
 \section{Further Resources and References}
 
 \begin{enumerate}
 	\item	Mirai Solutions website: 
 			\\\urlwofont{http://www.mirai-solutions.com}
-	\item 	Mirai Solutions blog on Wordpress: 
-			\\\urlwofont{http://miraisolutions.wordpress.com/}
-	\item 	Mirai Solutions LinkedIn Page: 
-			\\\urlwofont{http://www.linkedin.com/company/mirai-solutions-gmbh}
-	\item 	\pkg{XLConnect} on cran: 
-			\\\urlwofont{http://cran.r-project.org/web/packages/XLConnect/index.html}
-	\item 	\pkg{XLConnect} on crantastic!: 
-			\\\urlwofont{http://crantastic.org/packages/XLConnect}
-	\item 	\pkg{XLConnect} on inside-R!: 
-			\\\urlwofont{http://www.inside-r.org/packages/xlconnect}
-	\item	The R-Podcast Episode 6: Importing Data from External Sources:
-			\\\urlwofont{http://www.r-podcast.org/the-r-podcast-episode-6-importing-data-from-external-sources/}
-	\item 	R Base course by Dr. Roberto Dantas de Pinho, referring to \pkg{XLConnect} (Portuguese):
-			\\\urlwofont{http://www.slideshare.net/RobertodePinho/curso-bsico-de-r}
-	\item 	YouTube tutorial by bebilda, on importing and exporting data using \pkg{XLConnect} (Spanish): 
-			\\\urlwofont{http://www.youtube.com/watch?v=84ShWUiq5Mg}	
-	\item 	YouTube tutorial by MrIanfellows, on importing data into R using JGR and \pkg{XLConnect}:
-			\\\urlwofont{http://www.youtube.com/watch?v=1QA_7ks1pnc} 
-	\item 	\pkg{XLConnect} usage described in the R Programming/Data Management section in Wikibooks 
-			\\(Reading and saving data > Importing and exporting data > Excel (xls,xlsx)):
-			\\\urlwofont{http://en.wikibooks.org/wiki/R_Programming/Data_Management}		
-	\item 	"How to Read Data from Excel into R", article by Joris Meys and Andrie de Vries:
-			\\\urlwofont{http://www.dummies.com/how-to/content/how-to-read-data-from-excel-into-r.html} 		
-	\item 	"R for Dummies", book by Joris Meys and Andrie de Vries, page 211:
-			\\\urlwofont{http://tinyurl.com/c54e35m}
-	\item	Quick Intro to XLConnect
-			\\\urlwofont{http://altons.github.io/r/2015/02/13/quick-intro-to-xlconnect/}
-	\item 	"Grundlagen der Datenanalyse mit R: Eine anwendungsorientierte Einführung", book by Daniel Wollschläger:
-			\\\urlwofont{http://books.google.ch/books?id=tlmcPQ9YZP4C&printsec=frontcover&source=gbs_ge_summary_r&cad=0\#v=onepage&q&f=false}	
+	\item Mirai Solutions on LinkedIn: 
+			\\\urlwofont{https://www.linkedin.com/company/mirai-solutions-gmbh/}
+	\item \pkg{XLConnect} on CRAN: 
+			\\\urlwofont{https://CRAN.R-project.org/package=XLConnect}
+	\item \pkg{XLConnect} on RDocumentation:
+	    \\\urlwofont{https://www.rdocumentation.org/packages/XLConnect}
+	\item \pkg{XLConnect} on METACRAN:
+	    \\\urlwofont{https://www.r-pkg.org/pkg/XLConnect}
+	\item \pkg{XLConnect} on crantastic!: 
+			\\\urlwofont{https://crantastic.org/packages/XLConnect}
+	\item \pkg{XLConnect} in the R Programming section on Wikibooks:
+			\\\urlwofont{https://en.wikibooks.org/wiki/R_Programming/Importing_and_exporting_data}
+	\item Quick Intro to \pkg{XLConnect}:
+	    \\\urlwofont{http://altons.github.io/rstats/2015/02/13/quick-intro-to-xlconnect/}
+	\item "How to Read Data from Excel into R", article by Joris Meys and Andrie de Vries:
+			\\\urlwofont{http://www.dummies.com/how-to/content/how-to-read-data-from-excel-into-r.html}
+  \item R and Excel: Making Your Data Dumps Pretty with XLConnect:
+      \\\urlwofont{https://www.youtube.com/watch?v=G3mOUbZr4HI}
+      \\\urlwofont{http://amunategui.github.io/excel-data-dumps/}
 \end{enumerate}
 
-\newpage
-
-% Bye bye box
-\tikzDocDisclaim{Thanks for giving XLConnect a try!\vspace{2mm}}
-{
-\vskip\baselineskip
-
-We hope that you enjoy using \pkg{XLConnect}. We would be very happy to hear your feedback about
-the package and about this Vignette.
-
-\vspace{3mm}
-
-Also, we would be very grateful if you were willing to spare a few minutes and rate the package, or write a 
-review, on \href{http://crantastic.org/packages/XLConnect}{crantastic!}
-
-\vspace{3mm}
-
-\textit{- Mirai Solutions -} 
-
-\vspace{0.5cm}
-  
-\vskip\baselineskip
-
-}
-
-\end{document}\n
+\end{document}

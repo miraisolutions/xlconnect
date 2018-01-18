@@ -62,17 +62,6 @@
 % LaTeX will smite you!
 \usepackage{Sweave}
 
-<<setup,echo=F,results=hide>>=
-
-	if( !file.exists( 'figs' ) ) dir.create( 'figs' )
-	# require(tikzDevice)
-	
-@
-
-<<setup,echo=F,results=hide>>=
-	require(XLConnect)
-@
-
 \begin{document}
 \SweaveOpts{concordance=TRUE}
 \SweaveOpts{echo=F,prefix.string=figs/fig}
@@ -102,53 +91,53 @@
 
     \matrix (xAB)[draw,rounded corners,fill=blue!20]
     {
-        \node[phase](phase1) {\textbf{Reading / writing} \\ \textbf{a single data region}};\\
+        \node[phase](phase1) {Reading/writing workbooks \\ \textbf{once}};\\
     };
     
     \matrix (xA)[right = 0.2cm of xAB,draw,rounded corners,fill=green!20]
     {
-        \node[codeEx](codeEx1) {\code{data = readWorksheetFromFile(file, ...)}};\\[1ex]
+        \node[codeEx](codeEx1) {\code{data <- readWorksheetFromFile(file, sheet, ...)}};\\[1ex]
         \node[codeEx](codeEx2) {\code{writeWorksheetToFile(file, data, sheet, ...)}};\\
     };
     
     \matrix (xAC)[above = 0.2cm of xA, draw,rounded corners,fill=blue!20]
     {
-        \node[title](title1) {\textbf{Reading / writing} \\ \textbf{worksheets}};\\
+        \node[title](title1) {Reading/writing \textbf{worksheets}};\\
     };
 
     \matrix (xB)[right = 0.2cm of xA,draw,rounded corners,fill=green!20]
     {
-        \node[codeEx](codeEx3) {\code{data = readNamedRegionFromFile(file, name)}}; \\[1ex]
+        \node[codeEx](codeEx3) {\code{data <- readNamedRegionFromFile(file, name, ...)}}; \\[1ex]
         \node[codeEx](codeEx4) {\code{writeNamedRegionToFile(file, data, name, ...)}};\\
     };
     
     \matrix (xBD)[above = 0.2cm of xB, draw,rounded corners,fill=blue!20]
     {
-        \node[title](title2) {\textbf{Reading / writing} \\ \textbf{named regions}};\\
+        \node[title](title2) {Reading/writing \textbf{named regions}};\\
     };
     
     \matrix (xCD)[below = 0.2cm of xAB,draw,rounded corners,fill=blue!20]
     {
-        \node[phase](phase1) {\textbf{Reading / writing} \\ \textbf{multiple data regions}};\\
+        \node[phase](phase1) {Reading/writing workbooks \\ \textbf{multiple times}};\\
     };
     
     \matrix (xC)[below = 0.2cm of xA,draw,rounded corners,fill=green!20]
     {
-        \node[codeEx](codeEx5) {\code{wb = loadWorkbook(file)} \\ \code{data1 = readWorksheet(wb, sheet1, ...)} \\ \code{data2 = readWorksheet(wb, sheet2, ...)} \\ ...}; \\[1ex]
-        \node[codeEx](codeEx6) {\code{wb = loadWorkbook(file)} \\ \code{createSheet(wb, sheet1)} \\ \code{writeWorksheet(wb, data1, sheet1, ...)} \\ \code{saveWorkbook(wb)}};\\
+        \node[codeEx](codeEx5) {\code{wb <- loadWorkbook(file)} \\ \code{data1 <- readWorksheet(wb, sheet1, ...)} \\ \code{data2 <- readWorksheet(wb, sheet2, ...)} \\ ...}; \\[1ex]
+        \node[codeEx](codeEx6) {\code{wb <- loadWorkbook(file)} \\ \code{createSheet(wb, sheet1)} \\ \code{writeWorksheet(wb, data1, sheet1, ...)} \\ ... \\ \code{saveWorkbook(wb)}};\\
     };
 
     \matrix (xD)[below = 0.2cm of xB,draw,rounded corners,fill=green!20]
     {
-        \node[codeEx](codeEx7) {\code{wb = loadWorkbook(file)} \\ \code{data1 = readNamedRegion(wb, name1, ...)} \\ \code{data2 = readNamedRegion(wb, name2, ...)} \\ ...}; \\[1ex]
-        \node[codeEx](codeEx8) {\code{wb = loadWorkbook(file)} \\ \code{createName(wb, name1, ...)} \\ \code{writeNamedRegion(wb, data1, name1, ...)} \\ \code{saveWorkbook(wb)}};\\
+        \node[codeEx](codeEx7) {\code{wb <- loadWorkbook(file)} \\ \code{data1 <- readNamedRegion(wb, name1, ...)} \\ \code{data2 <- readNamedRegion(wb, name2, ...)} \\ ...}; \\[1ex]
+        \node[codeEx](codeEx8) {\code{wb <- loadWorkbook(file)} \\ \code{createName(wb, name1, ...)} \\ \code{writeNamedRegion(wb, data1, name1, ...)} \\ ... \\ \code{saveWorkbook(wb)}};\\
     };
     
 \end{tikzpicture}
 
 \vspace{0.5cm}
 \begin{center}
-\url{http://www.mirai-solutions.com}, \url{https://github.com/miraisolutions}
+\url{http://www.mirai-solutions.com}, \url{https://github.com/miraisolutions/xlconnect}
 \end{center}
 
 \end{document}
