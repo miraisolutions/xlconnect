@@ -11,7 +11,7 @@ Authors@R: c(person("Mirai Solutions GmbH", role = "aut",
                     comment = "Apache POI"),
              person("Graph Builder", role = c("ctb", "cph"),
                    comment = "Curvesapi Java library"))
-URL: http://www.mirai-solutions.com , http://miraisolutions.wordpress.com
+URL: http://www.mirai-solutions.com
 BugReports: https://github.com/miraisolutions/xlconnect/issues
 SystemRequirements: Java (>= 6)
 Depends: R (>= 2.10.0), XLConnectJars (== 0.2-14)
