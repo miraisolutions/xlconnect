@@ -1,7 +1,7 @@
 #############################################################################
 #
 # XLConnect
-# Copyright (C) 2010-2017 Mirai Solutions GmbH
+# Copyright (C) 2010-2018 Mirai Solutions GmbH
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -27,7 +27,6 @@
 #############################################################################
 
 test.workbook.saveWorkbook <- function() {
-  # Do not execute on CRAN since filesystems may be read-only
   if(getOption("FULL.TEST.SUITE")) {
   	# Create workbooks
   	file.xls <- rsrc("resources/testWorkbookSaveWorkbook.xls")

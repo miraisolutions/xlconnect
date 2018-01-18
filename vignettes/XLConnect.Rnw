@@ -393,7 +393,7 @@ if (file.exists("XLConnectExample1.xlsx"))
   file.remove("XLConnectExample1.xlsx")
 @
 
-<<simpleEx,echo=T,results=hide>>=
+<<simpleEx1,echo=T,results=hide>>=
 require(XLConnect)
 wb <- loadWorkbook("XLConnectExample1.xlsx", create = TRUE)
 createSheet(wb, name = "chickSheet")
@@ -415,12 +415,12 @@ All the previous operations are performed in-memory, which has great performance
 The four lines of code presented in the previous example can be replaced with a single call of
 the \\\code{writeWorksheetToFile()} function:
 
-<<removeFile1,echo=F,results=hide>>=
+<<removeFile2,echo=F,results=hide>>=
 if (file.exists("XLConnectExample2.xlsx"))
   file.remove("XLConnectExample2.xlsx")
 @
 
-<<simpleEx,echo=T,results=hide>>=
+<<simpleEx2,echo=T,results=hide>>=
 require(XLConnect)
 writeWorksheetToFile("XLConnectExample2.xlsx", data = ChickWeight,
                      sheet = "chickSheet", startRow = 3, startCol = 4)
@@ -448,7 +448,7 @@ if (file.exists("XLConnectExample3.xlsx"))
   file.remove("XLConnectExample3.xlsx")
 @
 
-<<simpleEx,echo=T,results=hide>>=
+<<simpleEx3,echo=T,results=hide>>=
 require(XLConnect)
 wb <- loadWorkbook("XLConnectExample3.xlsx", create = TRUE)
 createSheet(wb, name = "womenData")
@@ -473,7 +473,7 @@ if (file.exists("XLConnectExample4.xlsx"))
   file.remove("XLConnectExample4.xlsx")
 @
 
-<<simpleEx,echo=T,results=hide>>=
+<<simpleEx4,echo=T,results=hide>>=
 require(XLConnect)
 writeNamedRegionToFile("XLConnectExample4.xlsx", women, name = "womenName",
                        formula = "womenData!$C$5")
@@ -541,7 +541,7 @@ are automatically determined.
 Please note, that alternatively to setting the \code{sheet} argument to the name of the sheet we want to read from,
 \code{"chickSheet"}, we could also specify it with the sheet index, as \code{sheet = 1}.
 
-<<latexEx,echo=T,keep.source=T>>=
+<<latexEx1,echo=T,keep.source=T>>=
 require(XLConnect)
 wb <- loadWorkbook("XLConnectExample1.xlsx", create = TRUE)
 data <- readWorksheet(wb, sheet = "chickSheet", startRow = 0, endRow = 10,
@@ -553,7 +553,7 @@ data
 The \code{readWorksheetFromFile()} function can be used to, with only one call, obtain the same result
 as was shown in the previous example:
 
-<<simpleEx,echo=T,results=hide>>=
+<<simpleEx5,echo=T,results=hide>>=
 require(XLConnect)
 data <- readWorksheetFromFile("XLConnectExample1.xlsx", sheet = "chickSheet",
                               startRow = 0, endRow = 10, startCol = 0, endCol = 0)
@@ -563,7 +563,7 @@ data <- readWorksheetFromFile("XLConnectExample1.xlsx", sheet = "chickSheet",
 In this example, we will show how to use \pkg{XLConnect}'s functions to read from a named region
 in an Excel file. We will use the file created in the example in section \ref{Example3}.
 
-<<latexEx,echo=T,keep.source=T>>=
+<<latexEx2,echo=T,keep.source=T>>=
 require(XLConnect)
 wb <- loadWorkbook("XLConnectExample3.xlsx", create = TRUE)
 data <- readNamedRegion(wb, name = "womenName")
@@ -574,7 +574,7 @@ data
 The result obtained in the previous example can be reproduced by calling the wrapper function:
 \\\code{readNamedRegionFromFile()}, witout the necessity of loading the workbook first:
 
-<<simpleEx,echo=T,results=hide>>=
+<<simpleEx6,echo=T,results=hide>>=
 require(XLConnect)
 data <- readNamedRegionFromFile("XLConnectExample3.xlsx", "womenName")
 @
@@ -769,7 +769,9 @@ We have introduced the following updates in version \Sexpr{getOption("XLConnect.
   \item{Upgraded XLConnectJars dependency to version 0.2-14}
   \item{Fixed Java version specification in system requirements}
   \item{Checking Java version at runtime according to CRAN requirements}
-  \item{Updates to vignette}
+  \item{Added existsCellStyle to check for existence of cell styles (\#71)}
+  \item{Added getOrCreateCellStyle combinator (\#14, \#71)}
+  \item{Updates to vignettes}
 \end{itemize}
 
 A summary of news in \pkg{XLConnect} \Sexpr{getOption("XLConnect.Version")} can be found in the 

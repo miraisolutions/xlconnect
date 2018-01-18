@@ -36,7 +36,8 @@ Martin Studer\cr
 Mirai Solutions GmbH \url{http://www.mirai-solutions.com}
 }
 \seealso{
-\code{\linkS4class{workbook}}, \code{\linkS4class{cellstyle}}, \code{\link[=setStyleAction-methods]{setStyleAction}}, 
+\code{\linkS4class{workbook}}, \code{\linkS4class{cellstyle}}, \code{\link[=getOrCreateCellStyle-methods]{getOrCreateCellStyle}},
+\code{\link[=existsCellStyle-methods]{existsCellStyle}}, \code{\link[=setStyleAction-methods]{setStyleAction}},
 \code{\link[=setStyleNamePrefix-methods]{setStyleNamePrefix}}, \code{\link[=setCellStyle-methods]{setCellStyle}},
 \code{\link[=setDataFormat-methods]{setDataFormat}}, \code{\link[=setBorder-methods]{setBorder}},
 \code{\link[=setFillBackgroundColor-methods]{setFillBackgroundColor}}, \code{\link[=setFillForegroundColor-methods]{setFillForegroundColor}},

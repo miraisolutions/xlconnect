@@ -1,7 +1,7 @@
 #############################################################################
 #
 # XLConnect
-# Copyright (C) 2010-2017 Mirai Solutions GmbH
+# Copyright (C) 2010-2018 Mirai Solutions GmbH
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -32,7 +32,7 @@ setGeneric("createCellStyle",
 setMethod("createCellStyle", 
 		signature(object = "workbook", name = "character"), 
 		function(object, name) {
-			jobj <- jTryCatch(object@jobj$createCellStyle(name))
+			jobj <- xlcCall(object, "createCellStyle", name, .recycle = FALSE)
 			new("cellstyle", jobj = jobj)
 		}
 )
@@ -40,7 +40,7 @@ setMethod("createCellStyle",
 setMethod("createCellStyle", 
 		signature(object = "workbook", name = "missing"), 
 		function(object, name) {
-			jobj <- jTryCatch(object@jobj$createCellStyle())
+			jobj <- xlcCall(object, "createCellStyle", .recycle = FALSE)
 			new("cellstyle", jobj = jobj)
 		}
 )

@@ -1,7 +1,7 @@
 #############################################################################
 #
 # XLConnect
-# Copyright (C) 2010-2017 Mirai Solutions GmbH
+# Copyright (C) 2010-2018 Mirai Solutions GmbH
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -32,6 +32,7 @@ setGeneric("setFillForegroundColor",
 setMethod("setFillForegroundColor", 
 		signature(object = "cellstyle", color = "numeric"), 
 		function(object, color) {
-			jTryCatch(object@jobj$setFillForegroundColor(as.integer(color)))
+		  xlcCall(object, "setFillForegroundColor", as.integer(color), .recycle = FALSE)
+		  invisible()
 		}
 )

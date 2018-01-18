@@ -20,19 +20,22 @@
 
 #############################################################################
 #
-# Queries the cell style per data type as used by the DATATYPE style action
+# Get an existing cell style or create a new one if it does not exist yet.
 # 
 # Author: Martin Studer, Mirai Solutions GmbH
 #
 #############################################################################
 
-setGeneric("getCellStyleForType",
-           function(object, type) standardGeneric("getCellStyleForType"))
+setGeneric("getOrCreateCellStyle",
+           function(object, name) standardGeneric("getOrCreateCellStyle"))
 
-setMethod("getCellStyleForType", 
-          signature(object = "workbook"), 
-          function(object, type) {
-            jobj <- xlcCall(object, "getCellStyleForDataType", classToXlcType(type), .recycle = FALSE)
-            new("cellstyle", jobj = jobj)
+setMethod("getOrCreateCellStyle", 
+          signature(object = "workbook", name = "character"), 
+          function(object, name) {
+            if(existsCellStyle(object, name)) {
+              getCellStyle(object, name)
+            } else {
+              createCellStyle(object, name)
+            }
           }
 )

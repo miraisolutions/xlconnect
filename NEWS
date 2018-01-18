@@ -6,6 +6,8 @@ XLConnect News
   * Upgraded XLConnectJars dependency to version 0.2-14
   * Fixed Java version specification in system requirements
   * Checking Java version at runtime according to CRAN requirements
+  * Added existsCellStyle to check for existence of cell styles (#71)
+  * Added getOrCreateCellStyle combinator (#14, #71)
   * Updates to vignettes
   
 0.2-13 2017-05-10
