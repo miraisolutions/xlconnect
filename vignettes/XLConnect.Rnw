@@ -68,11 +68,11 @@
 \usepackage{Sweave}
 
 <<setup,echo=F,results=hide>>=
-	if(!file.exists('figs')) dir.create('figs')
+if (!file.exists('figs')) dir.create('figs')
 @
 
-<<setup,echo=F,results=hide>>=
-	require(XLConnect)
+<<load,echo=F,results=hide>>=
+require(XLConnect)
 @
 
 \title{The \pkg{XLConnect} Package\\

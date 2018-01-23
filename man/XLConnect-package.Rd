@@ -13,12 +13,13 @@ Provides comprehensive functionality to read, write and format Excel data.
 Package: \tab XLConnect\cr
 Type: \tab Package\cr
 Version: \tab 0.2-13\cr
-Date: \tab 2017-05-10\cr
+Date: \tab 2018-01-23\cr
 URL: \tab \url{http://www.mirai-solutions.com}\cr
-\tab \url{http://miraisolutions.wordpress.com}\cr
-SystemRequirements: \tab java (>= 1.6)\cr
-Depends: \tab R (>= 2.10.0), XLConnectJars (== 0.2-12)\cr
-Imports: \tab methods, rJava, utils\cr
+\tab \url{https://github.com/miraisolutions/xlconnect}\cr
+BugReports: \tab \url{https://github.com/miraisolutions/xlconnect/issues}\cr
+SystemRequirements: \tab Java (>= 6)\cr
+Depends: \tab R (>= 2.10.0), XLConnectJars (== 0.2-14)\cr
+Imports: \tab methods, rJava\cr
 Suggests: \tab RUnit, lattice, ggplot2 (>= 0.9.3), zoo\cr
 License: \tab GPL-3\cr
 Copyright: \tab See file COPYRIGHTS\cr
@@ -32,8 +33,8 @@ Mirai Solutions GmbH, \email{xlconnect@mirai-solutions.com}
 }
 \references{
 Mirai Solutions GmbH: \url{http://www.mirai-solutions.com}\cr
+XLConnect on GitHub: \url{https://github.com/miraisolutions/xlconnect}
 Mirai Solutions on GitHub: \url{https://github.com/miraisolutions}\cr
-Mirai Solutions Blog: \url{http://miraisolutions.wordpress.com}\cr
 Apache POI: \url{http://poi.apache.org}
 }
 \keyword{ package }

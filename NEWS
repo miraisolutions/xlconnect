@@ -1,7 +1,7 @@
 XLConnect News
 --------------
 
-0.2-14 ????-??-??
+0.2-14 2018-01-23
   * Moved to Apache POI 3.17
   * Upgraded XLConnectJars dependency to version 0.2-14
   * Fixed Java version specification in system requirements
