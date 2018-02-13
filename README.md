@@ -18,7 +18,7 @@ install_github("xlconnect", username = "miraisolutions", ref = "master")
 install_github("xlconnect", username = "miraisolutions", ref = "0.2-14")
 ```
 
-For more examples and news see also our <a href="http://miraisolutions.wordpress.com/">wordpress</a> site.
+For more examples see also our <a href="http://miraisolutions.wordpress.com/">wordpress</a> site.
 
 Please send any enhancement requests or bug reports with a simple and self-contained reproducible example to <a href="xlconnect@mirai-solutions.com">xlconnect@mirai-solutions.com</a> or log a corresponding issue on our <a href="https://github.com/miraisolutions/xlconnect">github repository</a>.
 For other questions you may also use <a href="http://stackoverflow.com/questions/tagged/xlconnect">Stackoverflow</a>.
