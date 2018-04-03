@@ -46,6 +46,7 @@ matrix:
   
 script:
   - |
+    java -version
     R CMD build --compact-vignettes=both --md5 .
     export FULL_TEST_SUITE=1
     R CMD check XLConnect*tar.gz
