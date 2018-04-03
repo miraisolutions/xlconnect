@@ -10,39 +10,50 @@ r_github_packages:
 matrix:
   include:
     - r: release
-      jdk: openjdk6
+      addons:
+        apt:
+          packages:
+            - openjdk-6-jdk
     - r: release
-      jdk: openjdk7
+      addons:
+        apt:
+          packages:
+            - openjdk-7-jdk
     - r: release
-      jdk: openjdk8
+      addons:
+        apt:
+          packages:
+            - openjdk-8-jdk
     - r: release
-      jdk: openjdk9
-    - r: release
-      jdk: oraclejdk6
-    - r: release
-      jdk: oraclejdk7
-    - r: release
-      jdk: oraclejdk8
-    - r: release
-      jdk: oraclejdk9
+      addons:
+        apt:
+          packages:
+            - openjdk-9-jdk
     - r: devel
-      jdk: openjdk6
+      addons:
+        apt:
+          packages:
+            - openjdk-6-jdk
     - r: devel
-      jdk: openjdk7
+      addons:
+        apt:
+          packages:
+            - openjdk-7-jdk
     - r: devel
-      jdk: openjdk8
+      addons:
+        apt:
+          packages:
+            - openjdk-8-jdk
     - r: devel
-      jdk: openjdk9
-    - r: devel
-      jdk: oraclejdk6
-    - r: devel
-      jdk: oraclejdk7
-    - r: devel
-      jdk: oraclejdk8
-    - r: devel
-      jdk: oraclejdk9
+      addons:
+        apt:
+          packages:
+            - openjdk-9-jdk
     - r: oldrel
-      jdk: openjdk8
+      addons:
+        apt:
+          packages:
+            - openjdk-8-jdk
   
 script:
   - |
