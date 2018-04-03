@@ -1,26 +1,48 @@
 language: r
 cache: packages
-
-r:
-  - oldrel
-  - release
-  - devel
-  
-jdk:
-  - oraclejdk6
-  - oraclejdk7
-  - oraclejdk8
-  - oraclejdk9
-  - openjdk6
-  - openjdk7
-  - openjdk8
-  - openjdk9
   
 r_packages:
   - covr
   
 r_github_packages:
   - miraisolutions/xlconnectjars
+  
+matrix:
+  include:
+    - r: release
+      jdk: openjdk6
+    - r: release
+      jdk: openjdk7
+    - r: release
+      jdk: openjdk8
+    - r: release
+      jdk: openjdk9
+    - r: release
+      jdk: oraclejdk6
+    - r: release
+      jdk: oraclejdk7
+    - r: release
+      jdk: oraclejdk8
+    - r: release
+      jdk: oraclejdk9
+    - r: devel
+      jdk: openjdk6
+    - r: devel
+      jdk: openjdk7
+    - r: devel
+      jdk: openjdk8
+    - r: devel
+      jdk: openjdk9
+    - r: devel
+      jdk: oraclejdk6
+    - r: devel
+      jdk: oraclejdk7
+    - r: devel
+      jdk: oraclejdk8
+    - r: devel
+      jdk: oraclejdk9
+    - r: oldrel
+      jdk: openjdk8
   
 script:
   - |
