@@ -1,5 +1,9 @@
 language: r
 cache: packages
+
+before_install:
+  - sudo add-apt-repository ppa:webupd8team/java -y
+  - sudo apt-get update -q
   
 r_packages:
   - covr
@@ -13,47 +17,38 @@ matrix:
       addons:
         apt:
           packages:
-            - openjdk-6-jdk
+            - oracle-java8-installer
+            - oracle-java8-set-default
     - r: release
       addons:
         apt:
           packages:
-            - openjdk-7-jdk
-    - r: release
-      addons:
-        apt:
-          packages:
-            - openjdk-8-jdk
-    - r: release
-      addons:
-        apt:
-          packages:
-            - openjdk-9-jdk
+            - oracle-java9-installer
+            - oracle-java9-set-default
     - r: devel
       addons:
         apt:
           packages:
-            - openjdk-6-jdk
+            - oracle-java8-installer
+            - oracle-java8-set-default
     - r: devel
       addons:
         apt:
           packages:
-            - openjdk-7-jdk
-    - r: devel
-      addons:
-        apt:
-          packages:
-            - openjdk-8-jdk
-    - r: devel
-      addons:
-        apt:
-          packages:
-            - openjdk-9-jdk
+            - oracle-java9-installer
+            - oracle-java9-set-default
     - r: oldrel
       addons:
         apt:
           packages:
-            - openjdk-8-jdk
+            - oracle-java8-installer
+            - oracle-java8-set-default
+    - r: oldrel
+      addons:
+        apt:
+          packages:
+            - oracle-java9-installer
+            - oracle-java9-set-default
   
 script:
   - |
