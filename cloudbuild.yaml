@@ -1,13 +1,11 @@
 steps:
-- name: 'ubuntu'
-  args: ['cp', './cloudcheck.sh', '/tmp/cloudcheck.sh']
 - name: 'gcr.io/cloud-builders/docker'
   args: [
     'run',
     '-i',
     '--rm',
     '-v',
-    '/tmp:/exchange',
+    '/workspace:/exchange',
     'gcr.io/mirai-sbb/r-base:3.4.4-openjdk-8',
     'bash',
     '/exchange/cloudcheck.sh'
