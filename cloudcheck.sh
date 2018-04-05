@@ -17,7 +17,7 @@ R CMD INSTALL XLConnectJars_*.tar.gz
 cp xlconnect/.Rbuildignore .Rbuildignore.bak
 sed -i "/unitTests/d" xlconnect/.Rbuildignore
 
-R CMD build --compact-vignettes --md5 xlconnect
+R CMD build --compact-vignettes=both --md5 xlconnect
 FULL_TEST_SUITE=1 R CMD check --as-cran XLConnect_*.tar.gz
 R CMD INSTALL XLConnect_*.tar.gz
 
