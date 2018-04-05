@@ -8,7 +8,7 @@
 ^\.codecov\.yml$
 Makefile
 ^cloudcheck\.sh$
-^cloudbuild\.sh$
+^cloudbuild\.yaml$
 
 ^inst/unitTests/runit.workbook.getLastColumn.R$
 ^inst/unitTests/runit.workbook.getLastRow.R$

@@ -9,13 +9,20 @@ cd /tmp/results
 git clone --depth=1 git://github.com/miraisolutions/xlconnectjars.git
 git clone --depth=1 git://github.com/miraisolutions/xlconnect.git
 
-R CMD check --as-cran xlconnectjars
 R CMD build --md5 xlconnectjars
+R CMD check --as-cran XLConnectJars_*.tar.gz
 R CMD INSTALL XLConnectJars_*.tar.gz
-		
-R CMD check --as-cran xlconnect
+
+# Do not drop unit tests to run full test suite
+cp xlconnect/.Rbuildignore .Rbuildignore.bak
+sed -i "/unitTests/d" xlconnect/.Rbuildignore
+
 R CMD build --compact-vignettes --md5 xlconnect
+FULL_TEST_SUITE=1 R CMD check --as-cran XLConnect_*.tar.gz
 R CMD INSTALL XLConnect_*.tar.gz
+
+mv .Rbuildignore.bak xlconnect/.Rbuildignore
+R CMD build --compact-vignettes --md5 xlconnect
 		
 cd /tmp
 tar -zcvf /exchange/results.tar.gz results
