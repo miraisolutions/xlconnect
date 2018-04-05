@@ -1,0 +1,15 @@
+steps:
+- name: 'gcr.io/cloud-builders/docker'
+  args: [
+    'run',
+    '-i',
+    '--rm',
+    '-v',
+    '$(pwd):/out',
+    'gcr.io/mirai-sbb/r-base:3.4.4-openjdk-8',
+    'bash',
+    './cloudcheck.sh'
+  ]
+- name: 'gcr.io/cloud-builders/gsutil'
+  args: ['cp', 'results.tar.gz',  'gs://miraisolutions/R/XLConnect/results-3.4.4-openjdk-8.tar.gz']
+
