@@ -1,5 +1,5 @@
 apt-get update
-apt install -y --no-install-recommends xzdec pandoc qpdf
+apt install -y --no-install-recommends xzdec pandoc qpdf ghostscript
 tlmgr init-usertree
 tlmgr install datetime etoolbox fmtcount ulem pgf
 install2.r rJava RUnit ggplot2 zoo
