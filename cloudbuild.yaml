@@ -5,7 +5,7 @@ steps:
     '-i',
     '--rm',
     '-v',
-    '$(pwd):/out',
+    '$PWD:/out',
     'gcr.io/mirai-sbb/r-base:3.4.4-openjdk-8',
     'bash',
     './cloudcheck.sh'
