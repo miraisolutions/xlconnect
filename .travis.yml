@@ -1,13 +1,9 @@
 language: r
 cache: packages
 
-r:
-  - oldrel
-  - release
-  - devel
-  
-jdk:
-  - oraclejdk8
+before_install:
+  - sudo add-apt-repository ppa:webupd8team/java -y
+  - sudo apt-get update -q
   
 r_packages:
   - covr
@@ -15,8 +11,48 @@ r_packages:
 r_github_packages:
   - miraisolutions/xlconnectjars
   
+matrix:
+  include:
+    - r: release
+      addons:
+        apt:
+          packages:
+            - oracle-java8-installer
+            - oracle-java8-set-default
+    - r: release
+      addons:
+        apt:
+          packages:
+            - oracle-java9-installer
+            - oracle-java9-set-default
+    - r: devel
+      addons:
+        apt:
+          packages:
+            - oracle-java8-installer
+            - oracle-java8-set-default
+    - r: devel
+      addons:
+        apt:
+          packages:
+            - oracle-java9-installer
+            - oracle-java9-set-default
+    - r: oldrel
+      addons:
+        apt:
+          packages:
+            - oracle-java8-installer
+            - oracle-java8-set-default
+    - r: oldrel
+      addons:
+        apt:
+          packages:
+            - oracle-java9-installer
+            - oracle-java9-set-default
+  
 script:
   - |
+    java -version
     R CMD build --compact-vignettes=both --md5 .
     export FULL_TEST_SUITE=1
     R CMD check XLConnect*tar.gz
