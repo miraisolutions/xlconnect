@@ -8,7 +8,8 @@ steps:
     '/tmp:/out',
     'gcr.io/mirai-sbb/r-base:3.4.4-openjdk-8',
     'bash',
-    './cloudcheck.sh'
+    '<',
+    'cloudcheck.sh'
   ]
 - name: 'gcr.io/cloud-builders/gsutil'
   args: ['cp', '/tmp/results.tar.gz',  'gs://miraisolutions/R/XLConnect/results-3.4.4-openjdk-8.tar.gz']
