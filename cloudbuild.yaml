@@ -12,4 +12,4 @@ steps:
   ]
 - name: 'gcr.io/cloud-builders/gsutil'
   args: ['cp', '/workspace/results.tar.gz',  'gs://miraisolutions/R/XLConnect/results-3.4.4-openjdk-8.tar.gz']
-
+timeout: 20m
