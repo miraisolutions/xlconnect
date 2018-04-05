@@ -18,4 +18,4 @@ R CMD build --compact-vignettes --md5 xlconnect
 R CMD INSTALL XLConnect_*.tar.gz
 		
 cd /tmp
-tar -zcvf /out/results.tar.gz results
+tar -zcvf /exchange/results.tar.gz results
