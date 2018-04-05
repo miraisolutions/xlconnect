@@ -25,4 +25,4 @@ mv .Rbuildignore.bak xlconnect/.Rbuildignore
 R CMD build --compact-vignettes --md5 xlconnect
 		
 cd /tmp
-tar -zcvf /exchange/results.tar.gz results
+tar -zcvf /exchange/results-$1.tar.gz results

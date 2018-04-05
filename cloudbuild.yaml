@@ -8,8 +8,40 @@ steps:
     '/workspace:/exchange',
     'gcr.io/mirai-sbb/r-base:3.4.4-openjdk-8',
     'bash',
-    '/exchange/cloudcheck.sh'
+    '/exchange/cloudcheck.sh',
+    '3.4.4-openjdk-8'
   ]
+  waitFor: ['-']
+  id: '3.4.4-openjdk-8'
+- name: 'gcr.io/cloud-builders/docker'
+  args: [
+    'run',
+    '-i',
+    '--rm',
+    '-v',
+    '/workspace:/exchange',
+    'gcr.io/mirai-sbb/r-base:3.4.4-openjdk-9',
+    'bash',
+    '/exchange/cloudcheck.sh',
+    '3.4.4-openjdk-9'
+  ]
+  waitFor: ['-']
+  id: '3.4.4-openjdk-9'
+- name: 'gcr.io/cloud-builders/docker'
+  args: [
+    'run',
+    '-i',
+    '--rm',
+    '-v',
+    '/workspace:/exchange',
+    'gcr.io/mirai-sbb/r-base:3.4.4-openjdk-10',
+    'bash',
+    '/exchange/cloudcheck.sh',
+    '3.4.4-openjdk-10'
+  ]
+  waitFor: ['-']
+  id: '3.4.4-openjdk-10'
 - name: 'gcr.io/cloud-builders/gsutil'
-  args: ['cp', '/workspace/results.tar.gz',  'gs://miraisolutions/R/XLConnect/results-3.4.4-openjdk-8.tar.gz']
-
+  args: ['cp', '/workspace/results*.tar.gz',  'gs://miraisolutions/R/XLConnect']
+  waitFor: ['3.4.4-openjdk-8', '3.4.4-openjdk-9', '3.4.4-openjdk-10']
+timeout: 30m
