@@ -765,13 +765,8 @@ Check out the Excel file to see how the data and the graph have been exported!
 
 We have introduced the following updates in version \Sexpr{getOption("XLConnect.Version")} of \pkg{XLConnect}:
 \begin{itemize}
-  \item{Moved to Apache POI 3.17}
-  \item{Upgraded XLConnectJars dependency to version 0.2-14}
-  \item{Fixed Java version specification in system requirements}
-  \item{Checking Java version at runtime according to CRAN requirements}
-  \item{Added existsCellStyle to check for existence of cell styles (\#71)}
-  \item{Added getOrCreateCellStyle combinator (\#14, \#71)}
-  \item{Updates to vignettes}
+  \item{Upgraded XLConnectJars dependency to version 0.2-15}
+  \item{Rely on Java version check from XLConnectJars which now supports Java 10}
 \end{itemize}
 
 A summary of news in \pkg{XLConnect} \Sexpr{getOption("XLConnect.Version")} can be found in the 

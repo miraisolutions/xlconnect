@@ -12,13 +12,13 @@ Provides comprehensive functionality to read, write and format Excel data.
 \tabular{ll}{
 Package: \tab XLConnect\cr
 Type: \tab Package\cr
-Version: \tab 0.2-13\cr
-Date: \tab 2018-01-23\cr
+Version: \tab 0.2-15\cr
+Date: \tab 2018-04-05\cr
 URL: \tab \url{http://www.mirai-solutions.com}\cr
 \tab \url{https://github.com/miraisolutions/xlconnect}\cr
 BugReports: \tab \url{https://github.com/miraisolutions/xlconnect/issues}\cr
 SystemRequirements: \tab Java (>= 6)\cr
-Depends: \tab R (>= 2.10.0), XLConnectJars (== 0.2-14)\cr
+Depends: \tab R (>= 2.10.0), XLConnectJars (== 0.2-15)\cr
 Imports: \tab methods, rJava\cr
 Suggests: \tab RUnit, lattice, ggplot2 (>= 0.9.3), zoo\cr
 License: \tab GPL-3\cr
