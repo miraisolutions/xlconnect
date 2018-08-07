@@ -1,3 +1,5 @@
+<img src="man/figures/logo.png" align="right" width="15%" height="15%"/>
+
 XLConnect: Excel Connector for R
 ================================
 [![CRAN\_Status\_Badge](https://www.r-pkg.org/badges/version/XLConnect)](https://cran.r-project.org/package=XLConnect) [![Rdoc](http://www.rdocumentation.org/badges/version/XLConnect)](http://www.rdocumentation.org/packages/XLConnect) [![Research software impact](http://depsy.org/api/package/cran/XLConnect/badge.svg)](http://depsy.org/package/r/XLConnect) [![Build Status](https://travis-ci.org/miraisolutions/xlconnect.png?branch=master)](https://travis-ci.org/miraisolutions/xlconnect) [![codecov](https://codecov.io/gh/miraisolutions/xlconnect/branch/master/graph/badge.svg)](https://codecov.io/gh/miraisolutions/xlconnect)
