@@ -14,10 +14,10 @@ Alternatively, you may install XLConnect directly from our <a href="https://gith
 require(devtools)
 
 # Installs the master branch of XLConnect (= current development version)
-install_github("xlconnect", username = "miraisolutions", ref = "master")
+install_github("miraisolutions/xlconnect")
 
 # Installs XLConnect 0.2-14
-install_github("xlconnect", username = "miraisolutions", ref = "0.2-14")
+install_github("miraisolutions/xlconnect", ref = "0.2-14")
 ```
 
 For more examples see also our <a href="http://miraisolutions.wordpress.com/">wordpress</a> site.
