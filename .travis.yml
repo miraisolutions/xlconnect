@@ -3,6 +3,7 @@ cache: packages
 
 before_install:
   - sudo add-apt-repository ppa:webupd8team/java -y
+  - sudo add-apt-repository ppa:linuxuprising/java -y # java10 & java11
   - sudo apt-get update -q
   
 r_packages:
@@ -23,8 +24,8 @@ matrix:
       addons:
         apt:
           packages:
-            - oracle-java9-installer
-            - oracle-java9-set-default
+            - oracle-java10-installer # java9 is not available through webupd8team ppa anymore
+            - oracle-java10-set-default
     - r: devel
       addons:
         apt:
@@ -35,8 +36,8 @@ matrix:
       addons:
         apt:
           packages:
-            - oracle-java9-installer
-            - oracle-java9-set-default
+            - oracle-java10-installer
+            - oracle-java10-set-default
     - r: oldrel
       addons:
         apt:
@@ -47,8 +48,8 @@ matrix:
       addons:
         apt:
           packages:
-            - oracle-java9-installer
-            - oracle-java9-set-default
+            - oracle-java10-installer
+            - oracle-java10-set-default
   
 script:
   - |
