@@ -24,8 +24,8 @@ matrix:
       addons:
         apt:
           packages:
-            - oracle-java10-installer # java9 is not available through webupd8team ppa anymore
-            - oracle-java10-set-default
+            - oracle-java11-installer # java9 is not available through webupd8team ppa anymore
+            - oracle-java11-set-default
     - r: devel
       addons:
         apt:
@@ -36,8 +36,8 @@ matrix:
       addons:
         apt:
           packages:
-            - oracle-java10-installer
-            - oracle-java10-set-default
+            - oracle-java11-installer
+            - oracle-java11-set-default
     - r: oldrel
       addons:
         apt:
@@ -48,8 +48,8 @@ matrix:
       addons:
         apt:
           packages:
-            - oracle-java10-installer
-            - oracle-java10-set-default
+            - oracle-java11-installer
+            - oracle-java11-set-default
   
 script:
   - |
