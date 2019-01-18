@@ -3,6 +3,7 @@ cache: packages
 
 before_install:
   - sudo add-apt-repository ppa:webupd8team/java -y
+  - sudo add-apt-repository ppa:linuxuprising/java -y # note that java10 is not available through this anymore
   - sudo apt-get update -q
   
 r_packages:
@@ -24,11 +25,9 @@ matrix:
       dist: xenial # https://docs.travis-ci.com/user/reference/xenial/
       addons:
         apt:
-          sources:
-            - sourceline: 'ppa:linuxuprising/java' # java10 & java11
           packages:
-            - oracle-java10-installer
-            - oracle-java10-set-default
+            - oracle-java11-installer
+            - oracle-java11-set-default
     - r: devel
       dist: trusty
       addons:
@@ -41,7 +40,7 @@ matrix:
       addons:
         apt:
           sources:
-            - sourceline: 'ppa:linuxuprising/java'
+            - sourceline: 'ppa:linuxuprising/java -y'
           packages:
             - oracle-java11-installer
             - oracle-java11-set-default
@@ -59,8 +58,8 @@ matrix:
           sources:
             - sourceline: 'ppa:linuxuprising/java'
           packages:
-            - oracle-java10-installer
-            - oracle-java10-set-default
+            - oracle-java11-installer
+            - oracle-java11-set-default
   
 script:
   - |
