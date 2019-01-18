@@ -3,7 +3,6 @@ cache: packages
 
 before_install:
   - sudo add-apt-repository ppa:webupd8team/java -y
-  - sudo add-apt-repository ppa:linuxuprising/java -y # java10 & java11
   - sudo apt-get update -q
   
 r_packages:
@@ -15,38 +14,50 @@ r_github_packages:
 matrix:
   include:
     - r: release
+      dist: trusty
       addons:
         apt:
           packages:
-            - oracle-java8-installer
+            - oracle-java8-installer # note that java9 is not available through webupd8team ppa anymore
             - oracle-java8-set-default
     - r: release
+      dist: xenial # https://docs.travis-ci.com/user/reference/xenial/
       addons:
         apt:
+          sources:
+            - ppa:linuxuprising/java # java10 & java11
           packages:
-            - oracle-java11-installer # java9 is not available through webupd8team ppa anymore
+            - oracle-java11-installer
             - oracle-java11-set-default
     - r: devel
+      dist: trusty
       addons:
         apt:
           packages:
             - oracle-java8-installer
             - oracle-java8-set-default
     - r: devel
+      dist: xenial
       addons:
         apt:
+          sources:
+            - ppa:linuxuprising/java
           packages:
             - oracle-java11-installer
             - oracle-java11-set-default
     - r: oldrel
+      dist: trusty
       addons:
         apt:
           packages:
             - oracle-java8-installer
             - oracle-java8-set-default
     - r: oldrel
+      dist: xenial
       addons:
         apt:
+          sources:
+            - ppa:linuxuprising/java
           packages:
             - oracle-java11-installer
             - oracle-java11-set-default
