@@ -25,10 +25,10 @@ matrix:
       addons:
         apt:
           sources:
-            - ppa:linuxuprising/java # java10 & java11
+            - sourceline: 'ppa:linuxuprising/java' # java10 & java11
           packages:
-            - oracle-java11-installer
-            - oracle-java11-set-default
+            - oracle-java10-installer
+            - oracle-java10-set-default
     - r: devel
       dist: trusty
       addons:
@@ -41,7 +41,7 @@ matrix:
       addons:
         apt:
           sources:
-            - ppa:linuxuprising/java
+            - sourceline: 'ppa:linuxuprising/java'
           packages:
             - oracle-java11-installer
             - oracle-java11-set-default
@@ -57,10 +57,10 @@ matrix:
       addons:
         apt:
           sources:
-            - ppa:linuxuprising/java
+            - sourceline: 'ppa:linuxuprising/java'
           packages:
-            - oracle-java11-installer
-            - oracle-java11-set-default
+            - oracle-java10-installer
+            - oracle-java10-set-default
   
 script:
   - |
