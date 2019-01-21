@@ -9,6 +9,7 @@
 Makefile
 ^cloudcheck\.sh$
 ^cloudbuild\.yaml$
+^travissetup\.sh$
 
 ^inst/unitTests/runit.workbook.getLastColumn.R$
 ^inst/unitTests/runit.workbook.getLastRow.R$

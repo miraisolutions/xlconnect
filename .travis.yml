@@ -1,20 +1,21 @@
 language: r
 cache: packages
 
-before_script:
-  - echo oracle-java11-installer shared/accepted-oracle-licence-v1-2 boolean true | sudo /usr/bin/debconf-set-selections
-  # -echo oracle-java11-installer shared/accepted-oracle-license-v1-2 select true | sudo /usr/bin/debconf-set-selections
-  
+before_install:
+  - if $RUN_SETUP; then ./travissetup.sh;
+    else echo hi there; fi
+
 r_packages:
   - covr
-  
+
 r_github_packages:
   - miraisolutions/xlconnectjars
-  
+
 matrix:
   include:
     - r: release
       dist: trusty
+      env: RUN_SETUP=false
       addons:
         apt:
           sources:
@@ -24,15 +25,10 @@ matrix:
             - oracle-java8-set-default
     - r: release
       dist: xenial # https://docs.travis-ci.com/user/reference/xenial/
-      addons:
-        apt:
-          sources:
-            - sourceline: 'ppa:linuxuprising/java' # note that java10 is not available through this anymore
-          packages:
-            - oracle-java11-installer
-            - oracle-java11-set-default
+      env: RUN_SETUP=true
     - r: devel
       dist: trusty
+      env: RUN_SETUP=false
       addons:
         apt:
           sources:
@@ -42,6 +38,7 @@ matrix:
             - oracle-java8-set-default
     - r: devel
       dist: xenial
+      env: RUN_SETUP=false
       addons:
         apt:
           sources:
@@ -51,6 +48,7 @@ matrix:
             - oracle-java11-set-default
     - r: oldrel
       dist: trusty
+      env: RUN_SETUP=false
       addons:
         apt:
           sources:
@@ -60,6 +58,7 @@ matrix:
             - oracle-java8-set-default
     - r: oldrel
       dist: xenial
+      env: RUN_SETUP=false
       addons:
         apt:
           sources:
@@ -67,7 +66,7 @@ matrix:
           packages:
             - oracle-java11-installer
             - oracle-java11-set-default
-  
+
 script:
   - |
     java -version
