@@ -2,7 +2,7 @@ language: r
 cache: packages
 
 before_install:
-  - if $RUN_SETUP; then ./travissetup.sh;
+  - if $RUN_SETUP; then sudo bash travissetup.sh;
     else echo hi there; fi
 
 r_packages:
