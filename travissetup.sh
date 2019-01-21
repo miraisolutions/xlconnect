@@ -6,4 +6,4 @@ echo oracle-java11-installer shared/accepted-oracle-license-v1-2 select true | s
 sudo add-apt-repository ppa:linuxuprising/java -y
 sudo apt update -q
 # below triggers oracle-java11-set-default through 'Recommends'
-sudo apt install oracle-java11-installer
+sudo apt --install-recommends install oracle-java11-installer

@@ -39,13 +39,6 @@ matrix:
     - r: devel
       dist: xenial
       env: RUN_SETUP=false
-      addons:
-        apt:
-          sources:
-            - sourceline: 'ppa:linuxuprising/java'
-          packages:
-            - oracle-java11-installer
-            - oracle-java11-set-default
     - r: oldrel
       dist: trusty
       env: RUN_SETUP=false
@@ -59,13 +52,6 @@ matrix:
     - r: oldrel
       dist: xenial
       env: RUN_SETUP=false
-      addons:
-        apt:
-          sources:
-            - sourceline: 'ppa:linuxuprising/java'
-          packages:
-            - oracle-java11-installer
-            - oracle-java11-set-default
 
 script:
   - |
