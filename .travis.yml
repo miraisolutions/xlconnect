@@ -31,7 +31,7 @@ matrix:
     - r: release
       os: osx
       osx_image: xcode10.1 # https://docs.travis-ci.com/user/reference/osx/
-      env: RUN_SETUP=false
+      env: RUN_SETUP=true
     - r: devel
       os: linux
       dist: trusty
