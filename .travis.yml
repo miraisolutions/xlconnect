@@ -47,9 +47,9 @@ matrix:
       os: linux
       dist: xenial
       env: RUN_SETUP=false
-    - r: devel
+    - r: oldrel
       os: osx
-      osx_image: xcode10.1 # https://docs.travis-ci.com/user/reference/osx/
+      osx_image: xcode10.1
       env: RUN_SETUP=true
     - r: oldrel
       os: linux
