@@ -2,7 +2,7 @@ language: r
 cache: packages
 
 before_install:
-  - if $RUN_SETUP; then sudo bash travissetup.sh;
+  - if $RUN_SETUP; then chmod +x travissetup.sh; ./travissetup.sh;
     else echo hi there; fi
 
 r_packages:
@@ -14,6 +14,7 @@ r_github_packages:
 matrix:
   include:
     - r: release
+      os: linux
       dist: trusty
       env: RUN_SETUP=false
       addons:
@@ -24,9 +25,15 @@ matrix:
             - oracle-java8-installer # note that java9 is not available through webupd8team ppa anymore
             - oracle-java8-set-default
     - r: release
+      os: linux
       dist: xenial # https://docs.travis-ci.com/user/reference/xenial/
       env: RUN_SETUP=true
+    - r: release
+      os: osx
+      osx_image: xcode10.1 # https://docs.travis-ci.com/user/reference/osx/
+      env: RUN_SETUP=false
     - r: devel
+      os: linux
       dist: trusty
       env: RUN_SETUP=false
       addons:
@@ -37,9 +44,11 @@ matrix:
             - oracle-java8-installer
             - oracle-java8-set-default
     - r: devel
+      os: linux
       dist: xenial
       env: RUN_SETUP=false
     - r: oldrel
+      os: linux
       dist: trusty
       env: RUN_SETUP=false
       addons:
@@ -50,6 +59,7 @@ matrix:
             - oracle-java8-installer
             - oracle-java8-set-default
     - r: oldrel
+      os: linux
       dist: xenial
       env: RUN_SETUP=false
 
