@@ -32,36 +32,36 @@ matrix:
       os: osx
       osx_image: xcode10.1 # https://docs.travis-ci.com/user/reference/osx/
       env: RUN_SETUP=true
-    - r: devel
-      os: linux
-      dist: trusty
-      env: RUN_SETUP=false
-      addons:
-        apt:
-          sources:
-            - sourceline: 'ppa:webupd8team/java'
-          packages:
-            - oracle-java8-installer
-            - oracle-java8-set-default
-    - r: devel
-      os: linux
-      dist: xenial
-      env: RUN_SETUP=false
-    - r: oldrel
-      os: linux
-      dist: trusty
-      env: RUN_SETUP=false
-      addons:
-        apt:
-          sources:
-            - sourceline: 'ppa:webupd8team/java'
-          packages:
-            - oracle-java8-installer
-            - oracle-java8-set-default
-    - r: oldrel
-      os: linux
-      dist: xenial
-      env: RUN_SETUP=false
+#    - r: devel
+#      os: linux
+#      dist: trusty
+#      env: RUN_SETUP=false
+#      addons:
+#        apt:
+#          sources:
+#            - sourceline: 'ppa:webupd8team/java'
+#          packages:
+#            - oracle-java8-installer
+#            - oracle-java8-set-default
+#    - r: devel
+#      os: linux
+#      dist: xenial
+#      env: RUN_SETUP=false
+#    - r: oldrel
+#      os: linux
+#      dist: trusty
+#      env: RUN_SETUP=false
+#      addons:
+#        apt:
+#          sources:
+#            - sourceline: 'ppa:webupd8team/java'
+#          packages:
+#            - oracle-java8-installer
+#            - oracle-java8-set-default
+#    - r: oldrel
+#      os: linux
+#      dist: xenial
+#      env: RUN_SETUP=false
 
 script:
   - |

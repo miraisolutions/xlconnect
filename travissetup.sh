@@ -1,6 +1,9 @@
 if [[ $TRAVIS_OS_NAME == 'osx' ]]; then
   R CMD javareconf
   echo hello osx
+  tlmgr init-usertree
+  tlmgr install datetime etoolbox fmtcount ulem pgf
+  echo bye osx
 else
   # https://www.linuxuprising.com/2018/10/how-to-install-oracle-java-11-in-ubuntu.html
 
