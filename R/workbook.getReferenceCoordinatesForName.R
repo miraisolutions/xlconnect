@@ -27,12 +27,12 @@
 #############################################################################
 
 setGeneric("getReferenceCoordinatesForName",
-		function(object, name) standardGeneric("getReferenceCoordinatesForName"))
+		function(object, name, worksheetName = .jnull(class = "java/lang/String")) standardGeneric("getReferenceCoordinatesForName"))
 
 setMethod("getReferenceCoordinatesForName", 
 		signature(object = "workbook"), 
-		function(object, name) {
-			res <- xlcCall(object, "getReferenceCoordinatesForName", name)
+		function(object, name, worksheetName = .jnull(class = "java/lang/String")) {
+			res <- xlcCall(object, "getReferenceCoordinatesForName", name, worksheetName)
       if(is.numeric(res)) { matrix(res, nrow = 2, byrow = TRUE) + 1 } else { res } 
 		}
 )
