@@ -13,7 +13,7 @@ Authors@R: c(person("Mirai Solutions GmbH", role = "aut",
                    comment = "Curvesapi Java library"))
 URL: http://www.mirai-solutions.com https://github.com/miraisolutions/xlconnect
 BugReports: https://github.com/miraisolutions/xlconnect/issues
-SystemRequirements: Java (>= 6)
+SystemRequirements: Java (>= 1.8)
 Depends: R (>= 2.10.0), XLConnectJars (== 0.2-15)
 Imports: methods, rJava
 Suggests: RUnit, lattice, ggplot2 (>= 0.9.3), zoo
