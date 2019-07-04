@@ -8,9 +8,6 @@ before_install:
 r_packages:
   - covr
 
-r_github_packages:
-  - paste("miraisolutions/xlconnectjars/tree/", Sys.getenv("TRAVIS_BRANCH"))
-
 matrix:
   include:
     - r: release
@@ -69,6 +66,10 @@ matrix:
 
 script:
   - |
+    evt <- Sys.getenv("TRAVIS_EVENT_TYPE")
+    if(evt == "pull_request") { branch <- Sys.getenv("TRAVIS_PULL_REQUEST_BRANCH") } else { branch <- Sys.getenv("TRAVIS_BRANCH")}
+    pkg <- paste("miraisolutions/xlconnectjars/tree/", branch )
+    remotes::install_github(pkg)
     java -version
     R CMD build --compact-vignettes=both --md5 .
     export FULL_TEST_SUITE=1
