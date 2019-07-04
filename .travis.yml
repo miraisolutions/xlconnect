@@ -9,7 +9,7 @@ r_packages:
   - covr
 
 r_github_packages:
-  - miraisolutions/xlconnectjars/tree/$TRAVIS_BRANCH
+  - paste("miraisolutions/xlconnectjars/tree/", Sys.getenv("TRAVIS_BRANCH"))
 
 matrix:
   include:
