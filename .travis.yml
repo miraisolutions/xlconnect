@@ -67,7 +67,7 @@ matrix:
 script:
   - |
     if [ $TRAVIS_EVENT_TYPE = "pull_request" ]; then export BRANCH=$TRAVIS_PULL_REQUEST_BRANCH; else export BRANCH=$TRAVIS_BRANCH; fi
-    export PKG="miraisolutions/xlconnectjars/tree/"$BRANCH
+    export PKG="miraisolutions/xlconnectjars@"$BRANCH
     echo "get xlconnectjars from: "$PKG
     Rscript -e 'remotes::install_github(Sys.getenv("PKG"))'
     java -version
