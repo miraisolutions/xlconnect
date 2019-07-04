@@ -68,7 +68,8 @@ script:
   - |
     evt <- Sys.getenv("TRAVIS_EVENT_TYPE")
     if(evt == "pull_request") { branch <- Sys.getenv("TRAVIS_PULL_REQUEST_BRANCH") } else { branch <- Sys.getenv("TRAVIS_BRANCH")}
-    pkg <- paste("miraisolutions/xlconnectjars/tree/", branch )
+    pkg <- paste("miraisolutions/xlconnectjars/tree/", branch, sep="")
+    print(paste("get xlconnectjars from: ", pkg))
     remotes::install_github(pkg)
     java -version
     R CMD build --compact-vignettes=both --md5 .
