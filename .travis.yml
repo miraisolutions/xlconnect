@@ -68,7 +68,7 @@ script:
   - |
     if [ $TRAVIS_EVENT_TYPE = "pull_request" ]; then export BRANCH=$TRAVIS_PULL_REQUEST_BRANCH; else export BRANCH=$TRAVIS_BRANCH; fi
     RETCODE=$(curl -s -o /dev/null -w "%{http_code}" https://github.com/miraisolutions/xlconnectjars/tree/$BRANCH)
-    if [ RETCODE < 200 ] || [ RETCODE >= 400 ]; then export BRANCH=master
+    if [ RETCODE < 200 ] || [ RETCODE >= 400 ]; then export BRANCH=master; fi
     export PKG="miraisolutions/xlconnectjars@"$BRANCH
     echo "get xlconnectjars from: "$PKG
     Rscript -e 'remotes::install_github(Sys.getenv("PKG"))'
