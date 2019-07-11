@@ -37,7 +37,7 @@ matrix:
       env: 
         - RUN_SETUP=true
         - TZ="Canada/Newfoundland"
-      - r: release
+    - r: release
       os: linux
       dist: xenial # https://docs.travis-ci.com/user/reference/xenial/
       env: 
