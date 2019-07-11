@@ -26,6 +26,24 @@ matrix:
       dist: xenial # https://docs.travis-ci.com/user/reference/xenial/
       env: RUN_SETUP=true
     - r: release
+      os: linux
+      dist: xenial # https://docs.travis-ci.com/user/reference/xenial/
+      env: 
+        - RUN_SETUP=true
+        - TZ="Asia/Kathmandu"
+    - r: release
+      os: linux
+      dist: xenial # https://docs.travis-ci.com/user/reference/xenial/
+      env: 
+        - RUN_SETUP=true
+        - TZ="Canada/Newfoundland"
+      - r: release
+      os: linux
+      dist: xenial # https://docs.travis-ci.com/user/reference/xenial/
+      env: 
+        - RUN_SETUP=true
+        - TZ="Pacific/Marquesas"
+    - r: release
       os: osx
       osx_image: xcode10.1 # https://docs.travis-ci.com/user/reference/osx/
       env: RUN_SETUP=true
@@ -66,6 +84,7 @@ matrix:
 
 script:
   - |
+    date
     if [ $TRAVIS_EVENT_TYPE = "pull_request" ]; then export BRANCH=$TRAVIS_PULL_REQUEST_BRANCH; else export BRANCH=$TRAVIS_BRANCH; fi
     RETCODE=$(curl -s -o /dev/null -w "%{http_code}" https://github.com/miraisolutions/xlconnectjars/tree/$BRANCH)
     if [ RETCODE < 200 ] || [ RETCODE >= 400 ]; then export BRANCH=master; fi
