@@ -10,9 +10,9 @@ Sources for other open source software components can be obtained from the corre
 - Apache POI: http://poi.apache.org/
   Full Source Distribution: https://www.apache.org/dyn/closer.lua/poi/release/src/poi-src-3.17-20170915.tar.gz
   Source Code by JAR: 
-  poi-3.17.jar: http://repo1.maven.apache.org/maven2/org/apache/poi/poi/3.17/poi-3.17-sources.jar
-  poi-ooxml-3.17.jar: http://repo1.maven.apache.org/maven2/org/apache/poi/poi-ooxml/3.17/poi-ooxml-3.17-sources.jar
-  poi-ooxml-schemas-3.17.jar: Source code auto-generated from OOXML schemas by POI ant task "compile-ooxml-xsds" (see https://poi.apache.org/faq.html#faq-N10025 for more information)
+  poi-4.1.0.jar: https://www.apache.org/dyn/closer.lua/poi/release/src/poi-src-4.1.0-20190412.tar.gz
+  poi-ooxml-4.1.0.jar: https://repo1.maven.org/maven2/org/apache/poi/poi-ooxml/4.1.0/poi-ooxml-4.1.0-sources.jar
+  poi-ooxml-schemas-4.1.0.jar: Source code auto-generated from OOXML schemas by POI ant task "compile-ooxml-xsds" (see https://poi.apache.org/faq.html#faq-N10025 for more information)
 
 - Curvesapi: https://github.com/virtuald/curvesapi
   Source Code:

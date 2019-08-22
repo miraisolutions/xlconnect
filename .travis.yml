@@ -8,9 +8,6 @@ before_install:
 r_packages:
   - covr
 
-r_github_packages:
-  - miraisolutions/xlconnectjars
-
 matrix:
   include:
     - r: release
@@ -28,6 +25,24 @@ matrix:
       os: linux
       dist: xenial # https://docs.travis-ci.com/user/reference/xenial/
       env: RUN_SETUP=true
+    - r: release
+      os: linux
+      dist: xenial # https://docs.travis-ci.com/user/reference/xenial/
+      env: 
+        - RUN_SETUP=true
+        - TZ="Asia/Kathmandu"
+    - r: release
+      os: linux
+      dist: xenial # https://docs.travis-ci.com/user/reference/xenial/
+      env: 
+        - RUN_SETUP=true
+        - TZ="Canada/Newfoundland"
+    - r: release
+      os: linux
+      dist: xenial # https://docs.travis-ci.com/user/reference/xenial/
+      env: 
+        - RUN_SETUP=true
+        - TZ="Pacific/Marquesas"
     - r: release
       os: osx
       osx_image: xcode10.1 # https://docs.travis-ci.com/user/reference/osx/
@@ -69,6 +84,13 @@ matrix:
 
 script:
   - |
+    date
+    if [ $TRAVIS_EVENT_TYPE = "pull_request" ]; then export BRANCH=$TRAVIS_PULL_REQUEST_BRANCH; else export BRANCH=$TRAVIS_BRANCH; fi
+    RESCODE=$(curl -s -o /dev/null -w "%{http_code}" https://github.com/miraisolutions/xlconnectjars/tree/$BRANCH)
+    if [ $RESCODE < 200 ] || [ $RESCODE >= 400 ]; then export BRANCH=master; fi
+    export PKG="miraisolutions/xlconnectjars@"$BRANCH
+    echo "get xlconnectjars from: "$PKG
+    Rscript -e 'remotes::install_github(Sys.getenv("PKG"))'
     java -version
     R CMD build --compact-vignettes=both --md5 .
     export FULL_TEST_SUITE=1
