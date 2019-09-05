@@ -32,9 +32,9 @@ setGeneric("getReferenceCoordinatesForName",
 setMethod("getReferenceCoordinatesForName", 
 		signature(object = "workbook"), 
 		function(object, name, worksheetName = .jnull(class = "java/lang/String")) {
-		  print(paste("about to xlc call get reference coordinates for name", worksheetName))
+		  # print(paste("about to xlc call get reference coordinates for name", worksheetName))
 			res <- xlcCall(object, "getReferenceCoordinatesForName", name, worksheetName)
-			print(paste("called get reference coordinates for name" , worksheetName))
+			# print(paste("called get reference coordinates for name" , worksheetName))
       if(is.numeric(res)) { matrix(res, nrow = 2, byrow = TRUE) + 1 } else { res } 
 		}
 )
