@@ -43,16 +43,14 @@ setMethod("readNamedRegion",
 			check.names = TRUE, useCachedValues = FALSE, keep = NULL, drop = NULL, simplify = FALSE,
       readStrategy = "default", worksheetName = .jnull(class = "java/lang/String")) {
 
-	  print("called read named region!")
 		# returns a list of RDataFrameWrapper Java object references
 	  if(identical(dim(worksheetName),NULL)) {
-	    print("calling reference formula")
 		  sheet = as.vector(extractSheetName(getReferenceFormula(object, name)))
 	  }
 	  else {
 	    sheet = as.vector(worksheetName)
 	  }
-	  print("calling reference coordinates for name")
+	  
 		namedim = matrix(as.vector(t(getReferenceCoordinatesForName(object, name, worksheetName))), nrow=4, byrow=FALSE)
 		startRow = namedim[1,]
 		startCol = namedim[2,]
@@ -61,7 +59,7 @@ setMethod("readNamedRegion",
 		numcols = endCol-startCol+1
 
 		subset <- getColSubset(object, sheet, startRow, endRow, startCol, endCol, header, numcols, keep, drop)
-		print("about to do XLC call !")
+		
 		dataFrame <- xlcCall(object, "readNamedRegion", name, header, .jarray(classToXlcType(colTypes)), 
 				forceConversion, dateTimeFormat, useCachedValues, subset, readStrategy, worksheetName, .simplify = FALSE)
 		
