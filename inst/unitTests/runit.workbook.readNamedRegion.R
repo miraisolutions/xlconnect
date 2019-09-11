@@ -387,4 +387,13 @@ test.workbook.readNamedRegion <- function() {
 	expected = data.frame(B = 1:5, row.names = letters[1:5])
 	res <- readNamedRegionFromFile(rsrc("resources/testBug49.xlsx"), name = "test", rownames = "A")
 	checkEquals(expected, res)
+	
+	# Check that named region can be read within a worksheet scope (see github issue #37)
+	
+	wb37xlsx <- loadWorkbook(rsrc("resources/test37.xlsx"), create = FALSE)
+	read1 <- readNamedRegion(wb37xlsx, 'Bla', worksheetName = 'Sheet1')
+	read2 <- readNamedRegion(wb37xlsx, 'Bla', worksheetName = 'Sheet2')
+  checkEquals(colnames(read1), c("bla1"))
+  checkEquals(colnames(read2), c("bla2"))
 }
+
