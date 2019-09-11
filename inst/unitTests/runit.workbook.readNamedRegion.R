@@ -395,5 +395,7 @@ test.workbook.readNamedRegion <- function() {
 	read2 <- readNamedRegion(wb37xlsx, 'Bla', worksheetName = 'Sheet2')
   checkEquals(colnames(read1), c("bla1"))
   checkEquals(colnames(read2), c("bla2"))
+  
+  checkException(readNamedRegion(wb37xlsx, 'Bla', worksheetName = 'Sheet3'))
 }
 
