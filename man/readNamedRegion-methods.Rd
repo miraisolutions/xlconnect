@@ -9,7 +9,7 @@ Reads named regions from a \code{\linkS4class{workbook}}.
 }
 \usage{
 \S4method{readNamedRegion}{workbook}(object, name, header, rownames, colTypes, forceConversion, 
-dateTimeFormat, check.names, useCachedValues, keep, drop, simplify, readStrategy)
+dateTimeFormat, check.names, useCachedValues, keep, drop, simplify, readStrategy, worksheet)
 }
 
 \arguments{
@@ -79,6 +79,7 @@ dateTimeFormat, check.names, useCachedValues, keep, drop, simplify, readStrategy
   fractional days represent hours, minutes, and seconds) and only blank cells are recognized as missing (missing value 
   identifiers as set in \code{\link[=setMissingValue-methods]{setMissingValue}} are ignored)
   }}
+  \item{worksheetName}{Optional, the name of the worksheet to use for resolving the named region}
 }
 
 \details{
