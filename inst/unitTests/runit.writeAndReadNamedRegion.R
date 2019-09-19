@@ -36,9 +36,9 @@ test.writeAndReadNamedRegion <- function() {
 	testDataFrame <- function(wb, df, lref) {
 		namedRegion <- deparse(substitute(df))
 		createSheet(wb, name = namedRegion)
-		createName(wb, name = namedRegion, formula = paste(namedRegion, lref, sep = "!"))
-		writeNamedRegion(wb, df, name = namedRegion, header = TRUE)
-		res <- readNamedRegion(wb, namedRegion)
+		createName(wb, name = namedRegion, formula = paste(namedRegion, lref, sep = "!"), worksheetName = namedRegion)
+		writeNamedRegion(wb, df, name = namedRegion, worksheetName = namedRegion, header = TRUE)
+		res <- readNamedRegion(wb, namedRegion, worksheetName = namedRegion)
 		checkEquals(normalizeDataframe(df, replaceInf = TRUE), res, check.attributes = FALSE, check.names = TRUE)
 	}
 
