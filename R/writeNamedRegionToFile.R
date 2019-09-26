@@ -36,7 +36,8 @@ writeNamedRegionToFile <- function(file, data, name, formula = NA, ...,
   # clear existing named regions
   existingNames <- getDefinedNames(wb)
   toClear <- intersect(name[clearNamedRegions], existingNames)
-  clearNamedRegion(wb, toClear)
+  try(clearNamedRegion(wb, toClear))
+  
   
   if(!is.na(formula)) {
     sheets = extractSheetName(formula)
