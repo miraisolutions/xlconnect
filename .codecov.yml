@@ -1,14 +1,4 @@
 coverage:
   range: 30...100
-  
-  notify:
-    slack:
-      default:
-        url: "https://hooks.slack.com/services/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"
-        threshold: 1%
-        only_pulls: false
-        branches: null
-        flags: null
-        paths: null
-        
+
 comment: false
