@@ -45,7 +45,7 @@ matrix:
         - TZ="Pacific/Marquesas"
     - r: release
       os: osx
-      osx_image: xcode10.1 # https://docs.travis-ci.com/user/reference/osx/
+      osx_image: xcode9.4 # https://docs.travis-ci.com/user/reference/osx/
       env: RUN_SETUP=true
     - r: devel
       os: linux
@@ -64,7 +64,7 @@ matrix:
       env: RUN_SETUP=false
     - r: oldrel
       os: osx
-      osx_image: xcode10.1
+      osx_image: xcode9.4
       env: RUN_SETUP=true
     - r: oldrel
       os: linux
