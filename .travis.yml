@@ -86,6 +86,7 @@ script:
   - |
     date
     if [ $TRAVIS_EVENT_TYPE = "pull_request" ]; then export BRANCH=$TRAVIS_PULL_REQUEST_BRANCH; else export BRANCH=$TRAVIS_BRANCH; fi
+    export BRANCH=$(echo $BRANCH | sed s/#/%23/g)
     RESCODE=$(curl -s -o /dev/null -w "%{http_code}" https://github.com/miraisolutions/xlconnectjars/tree/$BRANCH)
     if [ $RESCODE -lt 200 ] || [ $RESCODE -gt 399 ]; then export BRANCH=master; fi
     export PKG="miraisolutions/xlconnectjars@"$BRANCH
