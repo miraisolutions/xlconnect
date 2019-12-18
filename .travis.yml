@@ -14,13 +14,6 @@ matrix:
       os: linux
       dist: xenial
       env: RUN_SETUP=false
-      addons:
-        apt:
-          sources:
-            - sourceline: 'ppa:webupd8team/java'
-          packages:
-            - oracle-java8-installer # note that java9 is not available through webupd8team ppa anymore
-            - oracle-java8-set-default
     - r: release
       os: linux
       dist: bionic # https://docs.travis-ci.com/user/reference/bionic/
@@ -51,13 +44,6 @@ matrix:
       os: linux
       dist: xenial
       env: RUN_SETUP=false
-      addons:
-        apt:
-          sources:
-            - sourceline: 'ppa:webupd8team/java'
-          packages:
-            - oracle-java8-installer
-            - oracle-java8-set-default
     - r: devel
       os: linux
       dist: bionic
@@ -70,13 +56,6 @@ matrix:
       os: linux
       dist: xenial
       env: RUN_SETUP=false
-      addons:
-        apt:
-          sources:
-            - sourceline: 'ppa:webupd8team/java'
-          packages:
-            - oracle-java8-installer
-            - oracle-java8-set-default
     - r: oldrel
       os: linux
       dist: bionic
