@@ -12,82 +12,62 @@ matrix:
   include:
     - r: release
       os: linux
-      dist: trusty
+      dist: xenial
       env: RUN_SETUP=false
-      addons:
-        apt:
-          sources:
-            - sourceline: 'ppa:webupd8team/java'
-          packages:
-            - oracle-java8-installer # note that java9 is not available through webupd8team ppa anymore
-            - oracle-java8-set-default
     - r: release
       os: linux
-      dist: xenial # https://docs.travis-ci.com/user/reference/xenial/
+      dist: bionic # https://docs.travis-ci.com/user/reference/bionic/
       env: RUN_SETUP=true
     - r: release
       os: linux
-      dist: xenial # https://docs.travis-ci.com/user/reference/xenial/
+      dist: bionic # https://docs.travis-ci.com/user/reference/bionic/
       env: 
         - RUN_SETUP=true
         - TZ="Asia/Kathmandu"
     - r: release
       os: linux
-      dist: xenial # https://docs.travis-ci.com/user/reference/xenial/
+      dist: bionic # https://docs.travis-ci.com/user/reference/bionic/
       env: 
         - RUN_SETUP=true
         - TZ="Canada/Newfoundland"
     - r: release
       os: linux
-      dist: xenial # https://docs.travis-ci.com/user/reference/xenial/
+      dist: bionic # https://docs.travis-ci.com/user/reference/bionic/
       env: 
         - RUN_SETUP=true
         - TZ="Pacific/Marquesas"
-    - r: release
-      os: osx
-      osx_image: xcode10.1 # https://docs.travis-ci.com/user/reference/osx/
-      env: RUN_SETUP=true
-    - r: devel
-      os: linux
-      dist: trusty
-      env: RUN_SETUP=false
-      addons:
-        apt:
-          sources:
-            - sourceline: 'ppa:webupd8team/java'
-          packages:
-            - oracle-java8-installer
-            - oracle-java8-set-default
+    # - r: release
+    #   os: osx
+    #   osx_image: xcode9.4 # https://docs.travis-ci.com/user/reference/osx/
+    #   env: RUN_SETUP=true
     - r: devel
       os: linux
       dist: xenial
       env: RUN_SETUP=false
-    - r: oldrel
-      os: osx
-      osx_image: xcode10.1
-      env: RUN_SETUP=true
-    - r: oldrel
+    - r: devel
       os: linux
-      dist: trusty
+      dist: bionic
       env: RUN_SETUP=false
-      addons:
-        apt:
-          sources:
-            - sourceline: 'ppa:webupd8team/java'
-          packages:
-            - oracle-java8-installer
-            - oracle-java8-set-default
+    # - r: oldrel
+    #   os: osx
+    #   osx_image: xcode9.4
+    #   env: RUN_SETUP=true
     - r: oldrel
       os: linux
       dist: xenial
+      env: RUN_SETUP=false
+    - r: oldrel
+      os: linux
+      dist: bionic
       env: RUN_SETUP=false
 
 script:
   - |
     date
     if [ $TRAVIS_EVENT_TYPE = "pull_request" ]; then export BRANCH=$TRAVIS_PULL_REQUEST_BRANCH; else export BRANCH=$TRAVIS_BRANCH; fi
+    export BRANCH=$(echo $BRANCH | sed s/#/%23/g)
     RESCODE=$(curl -s -o /dev/null -w "%{http_code}" https://github.com/miraisolutions/xlconnectjars/tree/$BRANCH)
-    if [ $RESCODE < 200 ] || [ $RESCODE >= 400 ]; then export BRANCH=master; fi
+    if [ $RESCODE -lt 200 ] || [ $RESCODE -gt 399 ]; then export BRANCH=master; fi
     export PKG="miraisolutions/xlconnectjars@"$BRANCH
     echo "get xlconnectjars from: "$PKG
     Rscript -e 'remotes::install_github(Sys.getenv("PKG"))'
@@ -95,4 +75,8 @@ script:
     R CMD build --compact-vignettes=both --md5 .
     export FULL_TEST_SUITE=1
     R CMD check XLConnect*tar.gz
-    travis_wait 30 Rscript -e 'covr::codecov()'
+    travis_wait 30 travis_retry Rscript -e 'covr::codecov()'
+
+notifications:
+  slack:
+    secure: THJdpmjCPabFEf6AQT/hLEH1e+7scOwyfPY5D0dRWaJF53fbqrfj/krYdhPeBt/EMFZqOh9ERO61DCl+OMPqsBpisbzPxR/+qv9hJN4A4Dhx6lr67pmmCOq0LcaZ7yV68H0y0yNrvrOkFV8yNiDBGC5VzmE3ywBJTB5x6krBrsg=
