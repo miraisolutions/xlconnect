@@ -1,5 +1,7 @@
 XLConnect News
 --------------
+1.0.0 2019-12-18
+  * Update to apache POI 4.1.1
 
 0.2-15 2018-04-05
   * Upgraded XLConnectJars dependency to version 0.2-15

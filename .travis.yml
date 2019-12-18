@@ -60,6 +60,10 @@ matrix:
       os: linux
       dist: bionic
       env: RUN_SETUP=false
+    - r: 3.2.5
+      os: linux
+      dist: bionic
+      env: RUN_SETUP=false
 
 script:
   - |

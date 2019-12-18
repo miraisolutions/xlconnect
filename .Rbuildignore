@@ -65,3 +65,4 @@ Makefile
 ^inst/unitTests/runit.workbook.getTables.R$
 ^inst/unitTests/runit.workbook.readTable.R$
 ^inst/unitTests/resources/testWorkbookReadTable.xlsx$
+cran-comments.md
