@@ -12,7 +12,7 @@ matrix:
   include:
     - r: release
       os: linux
-      dist: trusty
+      dist: xenial
       env: RUN_SETUP=false
       addons:
         apt:
@@ -23,23 +23,23 @@ matrix:
             - oracle-java8-set-default
     - r: release
       os: linux
-      dist: xenial # https://docs.travis-ci.com/user/reference/xenial/
+      dist: bionic # https://docs.travis-ci.com/user/reference/bionic/
       env: RUN_SETUP=true
     - r: release
       os: linux
-      dist: xenial # https://docs.travis-ci.com/user/reference/xenial/
+      dist: bionic # https://docs.travis-ci.com/user/reference/bionic/
       env: 
         - RUN_SETUP=true
         - TZ="Asia/Kathmandu"
     - r: release
       os: linux
-      dist: xenial # https://docs.travis-ci.com/user/reference/xenial/
+      dist: bionic # https://docs.travis-ci.com/user/reference/bionic/
       env: 
         - RUN_SETUP=true
         - TZ="Canada/Newfoundland"
     - r: release
       os: linux
-      dist: xenial # https://docs.travis-ci.com/user/reference/xenial/
+      dist: bionic # https://docs.travis-ci.com/user/reference/bionic/
       env: 
         - RUN_SETUP=true
         - TZ="Pacific/Marquesas"
@@ -49,7 +49,7 @@ matrix:
       env: RUN_SETUP=true
     - r: devel
       os: linux
-      dist: trusty
+      dist: xenial
       env: RUN_SETUP=false
       addons:
         apt:
@@ -60,7 +60,7 @@ matrix:
             - oracle-java8-set-default
     - r: devel
       os: linux
-      dist: xenial
+      dist: bionic
       env: RUN_SETUP=false
     - r: oldrel
       os: osx
@@ -68,7 +68,7 @@ matrix:
       env: RUN_SETUP=true
     - r: oldrel
       os: linux
-      dist: trusty
+      dist: xenial
       env: RUN_SETUP=false
       addons:
         apt:
@@ -79,7 +79,7 @@ matrix:
             - oracle-java8-set-default
     - r: oldrel
       os: linux
-      dist: xenial
+      dist: bionic
       env: RUN_SETUP=false
 
 script:
