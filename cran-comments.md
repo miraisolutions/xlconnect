@@ -1,4 +1,4 @@
-** This submission should be published only if XLConnectJars 1.0.0 is ready to be published **
+** This submission should be published shortly after XLConnectJars 1.0.0 **
 
 # Test Environments
 * Ubuntu 18.04 on Travis CI
@@ -9,7 +9,8 @@
   recently updated to version 13 of the JDK, which we do not support yet.
 
 # Dependencies
-This package depends on XLConnectJars 1.0.0, which was submitted simultaneously. The new XLConnectJars version is required to install this package - it may be installed e.g. using
+This package depends on XLConnectJars 1.0.0, which was submitted simultaneously. The new XLConnectJars version is
+required to install this package - it may be installed e.g. using
 `remotes::install_github("miraisolutions/xlconnectjars@1.0.0")`
 
 # R CMD check results
@@ -21,7 +22,7 @@ There was 1 NOTE:
   sub-directories of 1Mb or more:
     java   4.7Mb
 
-Justification: XLConnect uses a java component which we maintain in a separate project, as well as Apache POI 4.1.1, 
+Justification: XLConnect uses a java component which we maintain in a separate project, as well as Apache POI 4.1.1,
 present as a JAR file.
 
 # Downstream dependencies
