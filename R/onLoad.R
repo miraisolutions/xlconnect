@@ -47,8 +47,7 @@
       ), 2, dPairJar)
     }
   } else {
-    sharedPaths <- c("/usr/share/java/poi.jar", "/usr/share/java/poi-excelant.jar",
-                     "/usr/share/java/poi-ooxml.jar", "/usr/share/java/poi-ooxml-schemas.jar")
+    sharedPaths <- c("/usr/share/java/poi.jar", "/usr/share/java/poi-ooxml.jar", "/usr/share/java/poi-ooxml-schemas.jar")
   }
 	.jpackage(name = pkgname, jars = "*", morePaths = sharedPaths)
   
