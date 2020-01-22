@@ -27,28 +27,18 @@
 #############################################################################
 
 .onLoad <- function(libname, pkgname) {
-	# Load Java dependencies (all jars inside the java subfolder)
-  if(length(list.files("/usr/share/java/", pattern = "poi-4.[1-9].*")) == 0) {
-    sharedPaths <- c()
-    if ( identical(Sys.getenv("R_INSTALL_PKG"),"") ) {
-      destDir <- file.path(libname, pkgname, "java")
-      
-      # download.file("https://repo1.maven.org/maven2/org/apache/poi/poi/4.1.1/poi-4.1.1.jar", dst)
-      dPairJar <- function (urlAndName) {
-        print(paste0("args: ", urlAndName))
-        dst <- file.path(destDir, urlAndName[2])
-        download.file(urlAndName[1], dst)
-      }
-      
-      apply(cbind(
+  poiPaths <- xlcEnsureDependenciesFor(cbind(
         c("https://repo1.maven.org/maven2/org/apache/poi/poi-ooxml/4.1.1/poi-ooxml-4.1.1.jar", "poi-ooxml.jar"),
         c("https://repo1.maven.org/maven2/org/apache/poi/poi/4.1.1/poi-4.1.1.jar", "poi.jar"),
         c("https://repo1.maven.org/maven2/org/apache/poi/poi-ooxml-schemas/4.1.1/poi-ooxml-schemas-4.1.1.jar", "poi-ooxml-schemas.jar")
-      ), 2, dPairJar)
-    }
-  } else {
-    sharedPaths <- c("/usr/share/java/poi.jar", "/usr/share/java/poi-ooxml.jar", "/usr/share/java/poi-ooxml-schemas.jar")
-  }
+      ), "poi-4.[1-9].*",
+      c("/usr/share/java/poi.jar", "/usr/share/java/poi-ooxml.jar", "/usr/share/java/poi-ooxml-schemas.jar"), libname, pkgname)
+  compressPaths <- xlcEnsureDependenciesFor(cbind(
+    c("https://repo1.maven.org/maven2/org/apache/commons/commons-compress/1.19/commons-compress-1.19.jar", "commons-compress.jar")
+    ), "commons-compress-1.(1[8-9]|[2-9]).*",
+    c("/usr/share/java/commons-compress.jar"), libname, pkgname)
+
+  sharedPaths <- c(poiPaths, compressPaths)
 	.jpackage(name = pkgname, jars = "*", morePaths = sharedPaths)
   
 	# Perform general XLConnect settings - pass package description
