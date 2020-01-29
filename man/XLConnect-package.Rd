@@ -18,7 +18,7 @@ URL: \tab \url{http://www.mirai-solutions.com}\cr
 \tab \url{https://github.com/miraisolutions/xlconnect}\cr
 BugReports: \tab \url{https://github.com/miraisolutions/xlconnect/issues}\cr
 SystemRequirements: \tab Java (>= 6)\cr
-Depends: \tab R (>= 2.10.0)
+Depends: \tab R (>= 2.10.0)\cr
 Imports: \tab methods, rJava\cr
 Suggests: \tab RUnit, lattice, ggplot2 (>= 0.9.3), zoo\cr
 License: \tab GPL-3\cr

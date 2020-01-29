@@ -60,7 +60,6 @@
 
   sharedPaths <- c(poiPaths, compressPaths, xmlPath, collectionsPath, mathPath, codecPath)
 	.jpackage(name = pkgname, jars = "*", morePaths = sharedPaths)
-	print(rJava::.jclassPath())
   
 	# Perform general XLConnect settings - pass package description
 	XLConnectSettings(packageDescription(pkgname))
