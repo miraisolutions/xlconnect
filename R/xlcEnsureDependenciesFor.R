@@ -27,11 +27,12 @@
 #############################################################################
 
 xlcEnsureDependenciesFor <- function (depSet, pattern, ifFoundPaths, libname, pkgname) {
-    numJars = length(list.files("/usr/share/java/", pattern = pattern))
+  numJars = length(list.files("/usr/share/java/", pattern = pattern))
   numDoc = length(list.files("/usr/share/doc/", pattern = pattern))
   if(numJars + numDoc == 0) {
     sharedPaths <- c()
-    if ( identical(Sys.getenv("R_INSTALL_PKG"),"") ) {
+    #if ( identical(Sys.getenv("R_INSTALL_PKG"),"") ) {
+    if (!interactive()) {
       destDir <- file.path(libname, pkgname, "java")
       
       # download.file("https://repo1.maven.org/maven2/org/apache/poi/poi/4.1.1/poi-4.1.1.jar", dst)
