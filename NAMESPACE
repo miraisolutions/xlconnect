@@ -1,7 +1,6 @@
-# XLConnect requires rJava & XLConnectJars
+# XLConnect requires rJava
 import(methods)
 import(rJava)
-import(XLConnectJars)
 importFrom(utils, packageDescription)
 importFrom(utils, browseURL)
 
