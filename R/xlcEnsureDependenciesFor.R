@@ -39,7 +39,7 @@ xlcEnsureDependenciesFor <- function (depSet, pattern, ifFoundPaths, libname, pk
       dPairJar <- function (urlAndName) {
         dst <- file.path(destDir, urlAndName[2])
         if(!file.exists(dst)){
-          download.file(urlAndName[1], dst)
+          download.file(urlAndName[1], dst, mode="wb")
         }
       }
       
