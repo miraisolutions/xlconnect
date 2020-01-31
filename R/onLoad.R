@@ -27,11 +27,12 @@
 #############################################################################
 
 .onLoad <- function(libname, pkgname) {
-  repo <- getOption("xlconnect.java.repo.url")
-  if (is.null(repo)) {
+  repo <- Sys.getenv("XLCONNECT_JAVA_REPO_URL")
+  if (is.null(repo) || repo=="") {
     repo <- "https://repo1.maven.org/maven2"
   }
   apachePrefix <- paste0(repo, "/org/apache")
+  sharedPaths <- tryCatch({
   poiPaths <- xlcEnsureDependenciesFor(cbind(
       c(paste0(apachePrefix, "/poi/poi-ooxml/4.1.1/poi-ooxml-4.1.1.jar"), "poi-ooxml.jar"),
       c(paste0(apachePrefix, "/poi/poi/4.1.1/poi-4.1.1.jar"), "poi.jar"),
@@ -63,7 +64,16 @@
   ), "ooxml-schemas-1\\.([4-9]|[1-9][0-9]).*",
   c("/usr/share/java/ooxml-schemas.jar"), libname, pkgname)
 
-  sharedPaths <- c(poiPaths, compressPaths, xmlPath, collectionsPath, mathPath, codecPath, ooxmlSchemasPath)
+  c(poiPaths, compressPaths, xmlPath, collectionsPath, mathPath, codecPath, ooxmlSchemasPath)
+  },
+  error=function(e) {
+          message(paste0("XLConnect: It seems downloading the JAR dependencies may have failed.\n", 
+                         "If you would like to use a different maven repository,\n",
+                         "please set the environment variable XLCONNECT_JAVA_REPO_URL to a valid URL,\n", 
+                         "e.g. Sys.setenv(XLCONNECT_JAVA_REPO_URL='https://jcenter.bintray.com')"))
+          e
+          }
+  )
 	.jpackage(name = pkgname, jars = "*", morePaths = sharedPaths)
   
 	# Perform general XLConnect settings - pass package description
