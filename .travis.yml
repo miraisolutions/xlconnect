@@ -24,6 +24,7 @@ matrix:
       env: 
         - RUN_SETUP=true
         - TZ="Asia/Kathmandu"
+        - XLCONNECT_JAVA_REPO_URL="https://jcenter.bintray.com"
     - r: release
       os: linux
       dist: bionic # https://docs.travis-ci.com/user/reference/bionic/
@@ -43,7 +44,9 @@ matrix:
     - r: devel
       os: linux
       dist: xenial
-      env: RUN_SETUP=false
+      env: 
+        - RUN_SETUP=false
+        - XLCONNECT_JAVA_REPO_URL="https://jcenter.bintray.com"
     - r: devel
       os: linux
       dist: bionic
@@ -59,7 +62,9 @@ matrix:
     - r: oldrel
       os: linux
       dist: bionic
-      env: RUN_SETUP=false
+      env: 
+        - RUN_SETUP=false
+        - XLCONNECT_JAVA_REPO_URL="https://jcenter.bintray.com"
     - r: 3.2.5
       os: linux
       dist: bionic
