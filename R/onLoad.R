@@ -67,9 +67,9 @@
   c(poiPaths, compressPaths, xmlPath, collectionsPath, mathPath, codecPath, ooxmlSchemasPath)
   },
   error=function(e) {
-          message(paste0("XLConnect: It seems downloading the JAR dependencies may have failed.\n", 
-                         "If you would like to use a different maven repository,\n",
-                         "please set the environment variable XLCONNECT_JAVA_REPO_URL to a valid URL,\n", 
+          packageStartupMessage(paste0("XLConnect: It seems downloading the JAR dependencies may have failed. ", 
+                         "If you would like to use a different maven repository, ",
+                         "please set the environment variable XLCONNECT_JAVA_REPO_URL to a valid URL, ", 
                          "e.g. Sys.setenv(XLCONNECT_JAVA_REPO_URL='https://jcenter.bintray.com')"))
           e
           }
