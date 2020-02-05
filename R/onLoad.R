@@ -35,8 +35,7 @@
   sharedPaths <- tryCatch({
   poiPaths <- xlcEnsureDependenciesFor(cbind(
       c(paste0(apachePrefix, "/poi/poi-ooxml/4.1.1/poi-ooxml-4.1.1.jar"), "poi-ooxml.jar"),
-      c(paste0(apachePrefix, "/poi/poi/4.1.1/poi-4.1.1.jar"), "poi.jar"),
-      c(paste0(apachePrefix, "/poi/poi-ooxml-schemas/4.1.1/poi-ooxml-schemas-4.1.1.jar"), "poi-ooxml-schemas.jar")
+      c(paste0(apachePrefix, "/poi/poi/4.1.1/poi-4.1.1.jar"), "poi.jar")
     ), "poi-4\\.[1-9].*",
     c("/usr/share/java/poi.jar", "/usr/share/java/poi-ooxml.jar", "/usr/share/java/poi-ooxml-schemas.jar"), libname, pkgname)
   compressPaths <- xlcEnsureDependenciesFor(cbind(
@@ -67,10 +66,7 @@
   c(poiPaths, compressPaths, xmlPath, collectionsPath, mathPath, codecPath, ooxmlSchemasPath)
   },
   error=function(e) {
-          packageStartupMessage(paste0("XLConnect: It seems downloading the JAR dependencies may have failed. ", 
-                         "If you would like to use a different maven repository, ",
-                         "please set the environment variable XLCONNECT_JAVA_REPO_URL to a valid URL, ", 
-                         "e.g. Sys.setenv(XLCONNECT_JAVA_REPO_URL='https://jcenter.bintray.com')"))
+          write("downloading JAR dependencies failed!", file.path(libname, pkgname, ".fail"))
           e
           }
   )

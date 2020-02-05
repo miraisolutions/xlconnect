@@ -29,6 +29,13 @@
 .onAttach <- function(libname, pkgname) {
   # Print package information
   pdesc <- packageDescription(pkgname)
+  if(file.exists(file.path(libname, pkgname, ".fail"))){
+    packageStartupMessage(paste0("XLConnect: It seems downloading the JAR dependencies may have failed. ",
+                   "If you would like to use a different maven repository, ",
+                   "please set the environment variable XLCONNECT_JAVA_REPO_URL to a valid URL, ",
+                   "e.g. Sys.setenv(XLCONNECT_JAVA_REPO_URL='https://jcenter.bintray.com') ",
+                   "and reinstall the package."))
+  }
   packageStartupMessage(pdesc$Package, " ", pdesc$Version, " by ", pdesc$Author)
   packageStartupMessage(pdesc$URL)
 }
