@@ -68,7 +68,7 @@
   error=function(e) {
           write("downloading JAR dependencies failed!", file.path(libname, pkgname, ".fail"))
           e
-          }
+        }
   )
 	.jpackage(name = pkgname, jars = "*", morePaths = sharedPaths)
   
