@@ -70,14 +70,13 @@ matrix:
       dist: bionic
       env: RUN_SETUP=false
 
-script:
-  - |
+script: |
     date
     java -version
     R CMD build --compact-vignettes=both --md5 .
     export FULL_TEST_SUITE=1
     R CMD check XLConnect*tar.gz
-    travis_wait 30 travis_retry Rscript -e 'covr::codecov()'
+    travis_wait 30 travis_retry Rscript -e 'covr::codecov(function_exclusions=c("onLoad", "onAttach", "xlcEnsureDependencies"))'
 
 notifications:
   slack:
