@@ -66,3 +66,4 @@ Makefile
 ^inst/unitTests/runit.workbook.readTable.R$
 ^inst/unitTests/resources/testWorkbookReadTable.xlsx$
 cran-comments.md
+revdep/
