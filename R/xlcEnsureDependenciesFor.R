@@ -26,25 +26,19 @@
 #
 #############################################################################
 
-xlcEnsureDependenciesFor <- function (depSet, pattern, ifFoundPaths, libname, pkgname) {
+xlcEnsureDependenciesFor <- function (url, name, pattern, ifFoundPath, libname, pkgname) {
   numJars = length(list.files("/usr/share/java/", pattern = pattern))
-  numDoc = length(list.files("/usr/share/doc/", pattern = pattern))
-  if(numJars + numDoc == 0) {
+  if(numJars == 0) {
     sharedPaths <- c()
     if (!interactive()) {
       destDir <- file.path(libname, pkgname, "java")
-      
-      dPairJar <- function (urlAndName) {
-        dst <- file.path(destDir, urlAndName[2])
-        if(!file.exists(dst)){
-          download.file(urlAndName[1], dst, mode="wb")
-        }
+      dst <- file.path(destDir, name)
+      if(!file.exists(dst)){
+        download.file(url, dst, mode="wb")
       }
-      
-      apply(depSet, 2, dPairJar)
     }
   } else {
-    sharedPaths <- ifFoundPaths
+    sharedPaths <- c(ifFoundPath)
   }
   sharedPaths
 }
