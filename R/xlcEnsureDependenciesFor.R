@@ -20,7 +20,8 @@
 
 #############################################################################
 #
-# XLConnect Package Installation: check and download dependencies if missing
+# XLConnect Package Installation: check and download missing JAR dependencies
+# into the package installation directory
 # 
 # Author: Simon Poltier, Mirai Solutions GmbH
 #
@@ -29,7 +30,6 @@
 xlcEnsureDependenciesFor <- function (url, name, pattern, ifFoundPath, libname, pkgname) {
   numJars = length(list.files("/usr/share/java/", pattern = pattern))
   if(numJars == 0) {
-    sharedPaths <- c()
     if (!interactive()) {
       destDir <- file.path(libname, pkgname, "java")
       dst <- file.path(destDir, name)
@@ -37,8 +37,8 @@ xlcEnsureDependenciesFor <- function (url, name, pattern, ifFoundPath, libname, 
         download.file(url, dst, mode="wb")
       }
     }
+    c()
   } else {
-    sharedPaths <- c(ifFoundPath)
+    c(ifFoundPath)
   }
-  sharedPaths
 }
