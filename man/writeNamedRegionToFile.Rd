@@ -50,5 +50,7 @@ writeNamedRegionToFile(template, name = "Iris", iris)
 writeNamedRegionToFile("iris.xlsx", name = "Iris", data = iris,
                        formula = "IrisData!$C$4", 
                        styleAction = "XLCONNECT")
+# clean up
+file.remove("iris.xlsx")
 }
 \keyword{IO}

@@ -53,6 +53,9 @@ writeNamedRegion(wb, mtcars, name = "mtcars")
 
 # Save workbook
 saveWorkbook(wb)
+
+# clean up
+file.remove("datatype.xlsx")
 }
 \keyword{methods}
 \keyword{utilities}

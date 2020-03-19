@@ -76,6 +76,7 @@ saveWorkbook(wb)
 
 # clean up 
 file.remove("earthquake.xlsx")
+file.remove("earthquake.png")
 }
 \keyword{methods}
 \keyword{utilities}

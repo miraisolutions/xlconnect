@@ -1,7 +1,8 @@
 # Resubmission
 This is a resubmission. In this version I have:
 
-* removed temporary debug code
+* made sure running examples clean up produced files
+* (previously) removed temporary debug code
 * (previously) extended the installation process to check for the presence of required JAR files,
 and to download these if missing.
 
