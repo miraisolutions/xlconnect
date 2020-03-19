@@ -36,28 +36,18 @@ for more information.
     Message: libcurl error code 52:
       Empty reply from server
 
-Justification: this URL is working when accessed in a browser.
+Justification: this URL is working when accessed in a browser and with httr::GET()
 
-In addition, CRAN finds 3 NOTES:
-
-> Found the following (possibly) invalid file URI:
-  URI: xlconnect@mirai-solutions.com
-    From: README.md
-
-Justification: this is an email address, not a file URI
-
-> Found the following files/directories:
-    'XLConnect.xlsx' 'autofilter.xlsx' 'cellstyles.xlsx' [...]
-
-Justification: these are examples part of our documentation and tests.
+In addition, CRAN finds 1 NOTE:
 
 > Check: for detritus in the temp directory, Result: NOTE
   Found the following files/directories:
     'calibre_4.99.4_tmp_47pf1vxy' 'calibre_4.99.4_tmp_ol_3_tqm'
     'runtime-hornik'
 
-Justification: these files do not appear in any other systems where I run devtools check / install.For example, none of
-the local environments I use even have _calibre_ installed. This seems related to the specific machine CRAN runs this on.
+Justification: these files do not appear in any other systems where I run devtools check / install. For example, none of
+the local environments I use even have _calibre_ installed. This seems related to the specific machine that performs
+CRAN checks.
 
 # Downstream dependencies
 
