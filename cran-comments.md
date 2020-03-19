@@ -1,3 +1,8 @@
+# Resubmission
+This is a resubmission. In this version I have:
+
+* extended the installation process to check for the presence of required JAR files, and to download these if missing.
+
 # Test Environments
 
 * Ubuntu 18.04 on Travis CI
@@ -19,7 +24,7 @@ its dependencies. At install time, the presence of these dependencies in the cor
 they are downloaded into XLConnect's installation directory. XLConnect depends on Apache POI 4.1.x, which is not yet
 available from major distributions' package managers at the time of writing. In addition, it requires the full
 ooxml-schemas-1.4.jar, which is not distributed via package managers. See http://poi.apache.org/help/faq.html#faq-N10109
-for more information
+for more information.
 
 # Downstream dependencies
 
