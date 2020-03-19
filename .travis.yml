@@ -24,6 +24,7 @@ matrix:
       env: 
         - RUN_SETUP=true
         - TZ="Asia/Kathmandu"
+        - XLCONNECT_JAVA_REPO_URL="https://jcenter.bintray.com"
     - r: release
       os: linux
       dist: bionic # https://docs.travis-ci.com/user/reference/bionic/
@@ -43,7 +44,9 @@ matrix:
     - r: devel
       os: linux
       dist: xenial
-      env: RUN_SETUP=false
+      env: 
+        - RUN_SETUP=false
+        - XLCONNECT_JAVA_REPO_URL="https://jcenter.bintray.com"
     - r: devel
       os: linux
       dist: bionic
@@ -59,27 +62,21 @@ matrix:
     - r: oldrel
       os: linux
       dist: bionic
-      env: RUN_SETUP=false
+      env: 
+        - RUN_SETUP=false
+        - XLCONNECT_JAVA_REPO_URL="https://jcenter.bintray.com"
     - r: 3.2.5
       os: linux
       dist: bionic
       env: RUN_SETUP=false
 
-script:
-  - |
+script: |
     date
-    if [ $TRAVIS_EVENT_TYPE = "pull_request" ]; then export BRANCH=$TRAVIS_PULL_REQUEST_BRANCH; else export BRANCH=$TRAVIS_BRANCH; fi
-    export BRANCH=$(echo $BRANCH | sed s/#/%23/g)
-    RESCODE=$(curl -s -o /dev/null -w "%{http_code}" https://github.com/miraisolutions/xlconnectjars/tree/$BRANCH)
-    if [ $RESCODE -lt 200 ] || [ $RESCODE -gt 399 ]; then export BRANCH=master; fi
-    export PKG="miraisolutions/xlconnectjars@"$BRANCH
-    echo "get xlconnectjars from: "$PKG
-    Rscript -e 'remotes::install_github(Sys.getenv("PKG"))'
     java -version
     R CMD build --compact-vignettes=both --md5 .
     export FULL_TEST_SUITE=1
     R CMD check XLConnect*tar.gz
-    travis_wait 30 travis_retry Rscript -e 'covr::codecov()'
+    travis_wait 30 travis_retry Rscript -e 'covr::codecov(function_exclusions=c("onLoad", "onAttach", "xlcEnsureDependencies"))'
 
 notifications:
   slack:

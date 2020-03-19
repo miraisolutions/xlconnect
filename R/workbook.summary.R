@@ -39,7 +39,7 @@ setMethod("summary", signature(object = "workbook"), function(object) {
 	cat("> Filename: '", object@filename, "'\n", sep = "")
 	
 	nice <- function(x) {
-		if(length(x) > 0 && !is.na(x)) x
+		if(length(x) > 0 && !all(is.na(x))) x
 		else "<NONE>"
 	}
 	

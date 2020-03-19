@@ -1,7 +1,7 @@
 #############################################################################
 #
 # XLConnect
-# Copyright (C) 2010-2018 Mirai Solutions GmbH
+# Copyright (C) 2010-2020 Mirai Solutions GmbH
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -20,22 +20,26 @@
 
 #############################################################################
 #
-# XLConnect Package Initialization
+# XLConnect Package Installation: check and download missing JAR dependencies
+# into the package installation directory
 # 
-# Author: Martin Studer, Mirai Solutions GmbH
+# Author: Simon Poltier, Mirai Solutions GmbH
 #
 #############################################################################
 
-.onAttach <- function(libname, pkgname) {
-  # Print package information
-  pdesc <- packageDescription(pkgname)
-  if(file.exists(file.path(libname, pkgname, ".fail"))){
-    packageStartupMessage(paste0("XLConnect: It seems downloading the JAR dependencies may have failed. ",
-                   "If you would like to use a different maven repository, ",
-                   "please set the environment variable XLCONNECT_JAVA_REPO_URL to a valid URL, ",
-                   "e.g. Sys.setenv(XLCONNECT_JAVA_REPO_URL='https://jcenter.bintray.com'), ",
-                   "and reinstall the package."))
+xlcEnsureDependenciesFor <- function (url, name, pattern, libname, pkgname) {
+  files <- list.files("/usr/share/java", pattern = pattern, full.names = TRUE)
+  numJars = length(files)
+  if(numJars == 0) {
+    if (!interactive()) {
+      destDir <- file.path(libname, pkgname, "java")
+      dst <- file.path(destDir, name)
+      if(!file.exists(dst)){
+        download.file(url, dst, mode="wb")
+      }
+    }
+    c()
+  } else {
+    files
   }
-  packageStartupMessage(pdesc$Package, " ", pdesc$Version, " by ", pdesc$Author)
-  packageStartupMessage(pdesc$URL)
 }
