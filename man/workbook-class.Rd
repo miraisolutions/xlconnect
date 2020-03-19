@@ -54,5 +54,8 @@ writeWorksheet(wb, mtcars, sheet = "mtcars")
 
 # Save workbook - this actually writes the file 'myWorkbook.xlsx' to disk
 saveWorkbook(wb)
+
+# clean up 
+file.remove("myWorkbook.xlsx")
 }
 \keyword{classes}

@@ -59,6 +59,9 @@ setCellStyle(wb, sheet = "cellstyles", row = 1, col = 1, cellstyle = cs)
 
 # Save the workbook
 saveWorkbook(wb)
+
+# clean up 
+file.remove("setBorder.xlsx")
 }
 \keyword{methods}
 \keyword{utilities}

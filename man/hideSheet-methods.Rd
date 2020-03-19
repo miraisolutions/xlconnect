@@ -66,6 +66,9 @@ hideSheet(wb, sheet = "airquality")
 
 # Save workbook
 saveWorkbook(wb)
+
+# clean up 
+file.remove("hiddenWorksheet.xlsx")
 }
 \keyword{methods}
 \keyword{utilities}

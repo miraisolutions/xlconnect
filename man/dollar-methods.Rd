@@ -37,6 +37,9 @@ wb$writeWorksheet(CO2, sheet = "CO2", startRow = 4, startCol = 2)
 
 # Save workbook
 wb$saveWorkbook()
+
+# clean up 
+file.remove("dollar.xlsx")
 }
 \keyword{methods}
 \keyword{utilities}

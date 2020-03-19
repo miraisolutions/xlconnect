@@ -66,6 +66,9 @@ writeWorksheet(wb, mtcars, sheet = "mtcars")
 
 # Save workbook - this actually writes the file 'saveMe.xlsx' to disk
 saveWorkbook(wb)
+
+# clean up 
+file.remove("saveMe.xlsx")
 }
 \keyword{methods}
 \keyword{file}

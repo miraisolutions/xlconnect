@@ -64,6 +64,9 @@ setColumnWidth(wb, sheet = "cellstyles", column = 1, width = 6000)
 
 # Save the workbook
 saveWorkbook(wb)
+
+# clean up 
+file.remove("setDataFormat.xlsx")
 }
 \keyword{methods}
 \keyword{utilities}

@@ -62,6 +62,9 @@ isSheetVisible(wb, "CO2")
 # this should obviously return FALSE
 isSheetVisible(wb, "airquality")
 
+
+# clean up 
+file.remove("isSheetVisible.xlsx")
 }
 \keyword{methods}
 \keyword{utilities}

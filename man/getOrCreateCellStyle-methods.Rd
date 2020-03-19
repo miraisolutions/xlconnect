@@ -39,6 +39,9 @@ myStyle <- getOrCreateCellStyle(wb, name = "MyStyle")
 
 # The second time, we retrieve the already existing style 
 myStyle <- getOrCreateCellStyle(wb, name = "MyStyle")
+
+# clean up 
+file.remove("getOrCreateCellStyle.xlsx")
 }
 \keyword{methods}
 \keyword{utilities}

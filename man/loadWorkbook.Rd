@@ -53,5 +53,8 @@ wb.new <- loadWorkbook("myNewExcelFile.xlsx", create = TRUE)
 # NOTE: The above statement does not write the file to disk! 
 # saveWorkbook(wb.new) would need to be called in order to write/save 
 # the file to disk!
+
+# clean up 
+file.remove("myNewExcelFile.xlsx")
 }
 \keyword{file}

@@ -56,6 +56,9 @@ writeNamedRegion(wb, airquality, name = "airquality")
 
 # Save workbook
 saveWorkbook(wb)
+
+# clean up 
+file.remove("missingValue.xlsx")
 }
 \keyword{methods}
 \keyword{utilities}

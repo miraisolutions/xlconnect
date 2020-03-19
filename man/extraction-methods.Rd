@@ -82,6 +82,9 @@ wb[["mtcars4", "mtcars4!$D$8", rownames = "Car"]] = mtcars
 # Note: Default values hold for the underlying method readNamedRegion.
 wb[["mtcars3"]]
 wb[["mtcars4"]]
+
+# clean up 
+file.remove("extraction.xlsx")
 }
 \keyword{methods}
 \keyword{utilities}

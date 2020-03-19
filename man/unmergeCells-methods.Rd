@@ -40,6 +40,9 @@ mergeCells(wb, sheet = "merge", reference = "A1:B8")
 
 # Unmerge the cells A1:B8
 unmergeCells(wb, sheet = "merge", reference = "A1:B8")
+
+# clean up 
+file.remove("unmergeCells.xlsx")
 }
 \keyword{methods}
 \keyword{utilities}

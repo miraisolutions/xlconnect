@@ -50,6 +50,9 @@ setFillPattern(cs, fill = XLC$"FILL.SOLID_FOREGROUND")
 # Specify the foreground color to be used
 setFillForegroundColor(cs, color = XLC$"COLOR.RED")
 
+
+# clean up 
+file.remove("getCellstyles.xlsx")
 }
 \keyword{methods}
 \keyword{utilities}

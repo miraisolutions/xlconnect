@@ -45,6 +45,9 @@ setAutoFilter(wb, sheet = "mtcars", reference = aref("A1", dim(mtcars)))
 
 # Save workbook (this actually writes the file to disk)
 saveWorkbook(wb)
+
+# clean up 
+file.remove("autofilter.xlsx")
 }
 \keyword{methods}
 \keyword{utilities}

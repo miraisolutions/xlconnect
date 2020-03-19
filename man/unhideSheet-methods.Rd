@@ -48,6 +48,9 @@ hideSheet(wb, sheet = "airquality")
 
 # Unhide sheet 'airquality'
 unhideSheet(wb, sheet = "airquality")
+
+# clean up 
+file.remove("unhideWorksheet.xlsx")
 }
 \keyword{methods}
 \keyword{utilities}

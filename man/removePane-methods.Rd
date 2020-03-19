@@ -56,6 +56,9 @@ removePane(wb, "Sheet1")
 
 # Save workbook (this actually writes the file to disk). Now the workbook has no split pane.
 saveWorkbook(wb)
+
+# clean up 
+file.remove("removePaneTest.xlsx")
 }
 \keyword{methods}
 \keyword{utilities}

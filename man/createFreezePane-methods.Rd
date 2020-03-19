@@ -58,6 +58,9 @@ createFreezePane(wb, "Sheet1", 5, 5, 10, 10)
 
 # Save workbook (this actually writes the file to disk)
 saveWorkbook(wb)
+
+# clean up 
+file.remove("freezePaneTest.xlsx")
 }
 \keyword{methods}
 \keyword{utilities}

@@ -47,6 +47,9 @@ setCellFormula(wb, "Formula", 1, 1, "SUM($B$1:$B$29)")
 getCellFormula(wb, "Formula", 1, 1)
 # The same with a numeric sheet index
 getCellFormula(wb, 1, 1, 1)
+
+# clean up 
+file.remove("cellFormula.xlsx")
 }
 \keyword{methods}
 \keyword{utilities}

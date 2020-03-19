@@ -44,6 +44,9 @@ createSheet(wb, name = "CO2")
 
 # Save workbook (this actually writes the file to disk)
 saveWorkbook(wb)
+
+# clean up 
+file.remove("createSheet.xlsx")
 }
 \keyword{methods}
 \keyword{utilities}

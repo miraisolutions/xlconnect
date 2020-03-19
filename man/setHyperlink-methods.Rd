@@ -55,6 +55,9 @@ setHyperlink(wb, sheet = "mtcars", row = seq_len(nrow(mtcars)) + 1, col = 1,
 
 # Save workbook (this actually writes the file to disk)
 saveWorkbook(wb)
+
+# clean up 
+file.remove("setHyperlink.xlsx")
 }
 \keyword{methods}
 \keyword{utilities}

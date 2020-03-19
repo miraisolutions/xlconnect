@@ -63,6 +63,9 @@ isSheetVeryHidden(wb, "swiss")
 # is just hidden but not very hidden
 isSheetVeryHidden(wb, "CO2")
 
+
+# clean up 
+file.remove("isSheetVeryHidden.xlsx")
 }
 \keyword{methods}
 \keyword{utilities}

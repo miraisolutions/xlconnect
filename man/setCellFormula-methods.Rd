@@ -64,6 +64,9 @@ setCellFormula(wb, "mtcars", rowIndex, colIndex, formula)
 
 # Save workbook (this actually writes the file to disk)
 saveWorkbook(wb)
+
+# clean up 
+file.remove("setCellFormula.xls")
 }
 \keyword{methods}
 \keyword{utilities}

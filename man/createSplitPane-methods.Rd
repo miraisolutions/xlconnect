@@ -57,6 +57,9 @@ createSplitPane(wb, "Sheet1", 10000, 5000, 10, 10)
 
 # Save workbook (this actually writes the file to disk)
 saveWorkbook(wb)
+
+# clean up 
+file.remove("splitPaneTest.xlsx")
 }
 \keyword{methods}
 \keyword{utilities}

@@ -41,6 +41,9 @@ createCellStyle(wb, "MyStyle")
 
 # And now it is here
 stopifnot(existsCellStyle(wb, "MyStyle"))
+
+# clean up 
+file.remove("existsCellStyle.xlsx")
 }
 \keyword{methods}
 \keyword{utilities}

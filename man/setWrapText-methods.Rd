@@ -53,6 +53,9 @@ setCellStyle(wb, sheet = "cellstyles", row = 1, col = 1,
 
 # Save the workbook
 saveWorkbook(wb)
+
+# clean up 
+file.remove("setWrapText.xlsx")
 }
 \keyword{methods}
 \keyword{utilities}

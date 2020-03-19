@@ -73,6 +73,9 @@ addImage(wb, filename = "earthquake.png", name = "earthquake",
 
 # Save workbook (this actually writes the file to disk)
 saveWorkbook(wb)
+
+# clean up 
+file.remove("earthquake.xlsx")
 }
 \keyword{methods}
 \keyword{utilities}

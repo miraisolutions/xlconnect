@@ -53,4 +53,7 @@ writeNamedRegion(wb, mtcars, name = "mtcars")
 
 # Save workbook
 saveWorkbook(wb)
+
+# clean up 
+file.remove("XLConnect.xlsx")
 }

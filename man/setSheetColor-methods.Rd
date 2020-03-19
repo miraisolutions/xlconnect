@@ -45,6 +45,9 @@ setSheetColor(wb, 2, XLC$COLOR.GREEN)
 
 # Save workbook (this actually writes the file to disk)
 saveWorkbook(wb)
+
+# clean up 
+file.remove("sheetcolor.xlsx")
 }
 \keyword{methods}
 \keyword{utilities}

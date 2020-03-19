@@ -70,6 +70,9 @@ writeWorksheet(wb, CO2, sheet = "CO2", startRow = 4, startCol = 2)
 
 # Save workbook (this actually writes the file to disk)
 saveWorkbook(wb)
+
+# clean up 
+file.remove("writeWorksheet.xlsx")
 }
 \keyword{methods}
 \keyword{IO}

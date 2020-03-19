@@ -54,6 +54,9 @@ isSheetHidden(wb, "airquality")
 # this should obviously return FALSE
 isSheetHidden(wb, "swiss")
 
+
+# clean up 
+file.remove("isSheetHidden.xlsx")
 }
 \keyword{methods}
 \keyword{utilities}

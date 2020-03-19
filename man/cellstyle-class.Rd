@@ -84,6 +84,9 @@ setCellStyle(wb, sheet = "mtcars", row = rowIndex, col = colIndex,
 
 # Save workbook (this actually writes the file to disk)
 saveWorkbook(wb)
+
+# clean up 
+file.remove("cellstyles.xlsx")
 }
 \keyword{classes}
 \keyword{utilities}

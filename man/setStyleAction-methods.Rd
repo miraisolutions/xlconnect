@@ -172,6 +172,9 @@ writeNamedRegion(wb, mtcars, name = "mtcars")
 
 # Save workbook (this actually writes the file to disk)
 saveWorkbook(wb)
+
+# clean up 
+file.remove("styleaction.xlsx")
 }
 \keyword{methods}
 \keyword{utilities}

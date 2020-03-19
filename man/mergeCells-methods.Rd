@@ -39,6 +39,9 @@ mergeCells(wb, sheet = "merge", reference = "A1:B8")
 
 # Save workbook
 saveWorkbook(wb)
+
+# clean up 
+file.remove("mergeCells.xlsx")
 }
 \keyword{methods}
 \keyword{utilities}
