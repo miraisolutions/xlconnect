@@ -34,7 +34,7 @@ Mirai Solutions GmbH \url{http://www.mirai-solutions.com}
 \code{\linkS4class{workbook}}, \code{\linkS4class{cellstyle}}, \code{\link[=setCellStyle-methods]{setCellStyle}}, 
 \code{\link[=setStyleAction-methods]{setStyleAction}}
 }
-\examples{
+\examples{\dontrun{
 # Load workbook (create if not existing)
 wb <- loadWorkbook("setDataFormat.xlsx", create = TRUE)
 
@@ -67,6 +67,7 @@ saveWorkbook(wb)
 
 # clean up 
 file.remove("setDataFormat.xlsx")
+}
 }
 \keyword{methods}
 \keyword{utilities}

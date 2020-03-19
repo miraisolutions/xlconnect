@@ -33,7 +33,7 @@ Mirai Solutions GmbH \url{http://www.mirai-solutions.com}
 \code{\linkS4class{workbook}}, \code{\link[=hideSheet-methods]{hideSheet}}, \code{\link[=unhideSheet-methods]{unhideSheet}},
 \code{\link[=isSheetHidden-methods]{isSheetHidden}}, \code{\link[=isSheetVisible-methods]{isSheetVisible}}
 }
-\examples{
+\examples{\dontrun{
 # Load workbook (create if not existing)
 wb <- loadWorkbook("isSheetVeryHidden.xlsx", create = TRUE)
 
@@ -66,6 +66,7 @@ isSheetVeryHidden(wb, "CO2")
 
 # clean up 
 file.remove("isSheetVeryHidden.xlsx")
+}
 }
 \keyword{methods}
 \keyword{utilities}

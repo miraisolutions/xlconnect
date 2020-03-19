@@ -45,7 +45,7 @@ Mirai Solutions GmbH \url{http://www.mirai-solutions.com}
   \code{\link[=setFillPattern-methods]{setFillPattern}},\cr
   \code{\link[=setWrapText-methods]{setWrapText}}
 }
-\examples{
+\examples{\dontrun{
 # Load workbook (create if not existing)
 wb <- loadWorkbook("setCellStyle.xlsx", create = TRUE)
 
@@ -97,6 +97,7 @@ saveWorkbook(wb)
 
 # clean up 
 file.remove("setCellStyle.xlsx")
+}
 }
 \keyword{methods}
 \keyword{utilities}

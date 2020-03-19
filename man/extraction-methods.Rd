@@ -39,7 +39,7 @@ Mirai Solutions GmbH \url{http://www.mirai-solutions.com}
 \code{\linkS4class{workbook}}, \code{\link[=readWorksheet-methods]{readWorksheet}}, \code{\link[=writeWorksheet-methods]{writeWorksheet}},
 \code{\link[=readNamedRegion-methods]{readNamedRegion}}, \code{\link[=writeNamedRegion-methods]{writeNamedRegion}}
 }
-\examples{
+\examples{\dontrun{
 # Load workbook (create if not existing)
 wb <- loadWorkbook("extraction.xlsx", create = TRUE)
 
@@ -85,6 +85,7 @@ wb[["mtcars4"]]
 
 # clean up 
 file.remove("extraction.xlsx")
+}
 }
 \keyword{methods}
 \keyword{utilities}

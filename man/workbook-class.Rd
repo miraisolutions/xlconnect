@@ -41,7 +41,7 @@ are only written to disk with specifically calling \code{\link[=saveWorkbook-met
 \seealso{
 \code{\link{loadWorkbook}}, \code{\link[=saveWorkbook-methods]{saveWorkbook}}
 }
-\examples{
+\examples{\dontrun{
 # Create a new workbook 'myWorkbook.xlsx' 
 # (assuming the file to not exist already)
 wb <- loadWorkbook("myWorkbook.xlsx", create = TRUE)
@@ -57,5 +57,6 @@ saveWorkbook(wb)
 
 # clean up 
 file.remove("myWorkbook.xlsx")
+}
 }
 \keyword{classes}

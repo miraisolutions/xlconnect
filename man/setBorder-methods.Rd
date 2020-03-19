@@ -39,7 +39,7 @@ Mirai Solutions GmbH \url{http://www.mirai-solutions.com}
 \code{\linkS4class{workbook}}, \code{\linkS4class{cellstyle}}, \code{\link[=setCellStyle-methods]{setCellStyle}}, 
 \code{\link[=setStyleAction-methods]{setStyleAction}}, \code{\link{XLC}}
 }
-\examples{
+\examples{\dontrun{
 # Load workbook (create if not existing)
 wb <- loadWorkbook("setBorder.xlsx", create = TRUE)
 
@@ -62,6 +62,7 @@ saveWorkbook(wb)
 
 # clean up 
 file.remove("setBorder.xlsx")
+}
 }
 \keyword{methods}
 \keyword{utilities}

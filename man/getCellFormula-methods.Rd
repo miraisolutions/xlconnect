@@ -34,7 +34,7 @@ Mirai Solutions GmbH \url{http://www.mirai-solutions.com}
 \seealso{
 \code{\linkS4class{workbook}}, \code{\link[=setCellFormula-methods]{setCellFormula}}
 }
-\examples{
+\examples{\dontrun{
 # Load workbook (create if not existing)
 wb <- loadWorkbook("cellFormula.xlsx", create = TRUE)
 
@@ -50,6 +50,7 @@ getCellFormula(wb, 1, 1, 1)
 
 # clean up 
 file.remove("cellFormula.xlsx")
+}
 }
 \keyword{methods}
 \keyword{utilities}

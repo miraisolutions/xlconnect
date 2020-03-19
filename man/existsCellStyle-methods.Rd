@@ -29,7 +29,7 @@ Mirai Solutions GmbH \url{http://www.mirai-solutions.com}
 \code{\linkS4class{workbook}}, \code{\linkS4class{cellstyle}}, \code{\link[=setCellStyle-methods]{setCellStyle}},
 \code{\link[=createCellStyle-methods]{createCellStyle}}, \code{\link[=getOrCreateCellStyle-methods]{getOrCreateCellStyle}}
 }
-\examples{
+\examples{\dontrun{
 # Load workbook (create if not existing)
 wb <- loadWorkbook("existsCellStyle.xlsx", create = TRUE)
 
@@ -44,6 +44,7 @@ stopifnot(existsCellStyle(wb, "MyStyle"))
 
 # clean up 
 file.remove("existsCellStyle.xlsx")
+}
 }
 \keyword{methods}
 \keyword{utilities}

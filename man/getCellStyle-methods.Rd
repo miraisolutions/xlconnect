@@ -34,7 +34,7 @@ Mirai Solutions GmbH \url{http://www.mirai-solutions.com}
 \code{\link[=setFillBackgroundColor-methods]{setFillBackgroundColor}}, \code{\link[=setFillForegroundColor-methods]{setFillForegroundColor}},
 \code{\link[=setFillPattern-methods]{setFillPattern}}, \code{\link[=setWrapText-methods]{setWrapText}}
 }
-\examples{
+\examples{\dontrun{
 # Load workbook (create if not existing)
 wb <- loadWorkbook("getCellstyles.xlsx", create = TRUE)
 
@@ -53,6 +53,7 @@ setFillForegroundColor(cs, color = XLC$"COLOR.RED")
 
 # clean up 
 file.remove("getCellstyles.xlsx")
+}
 }
 \keyword{methods}
 \keyword{utilities}

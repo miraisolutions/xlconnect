@@ -42,7 +42,7 @@ it is the preferred way of creating \code{\linkS4class{workbook}} instances.
 \seealso{
 \code{\linkS4class{workbook}}, \code{\link[=saveWorkbook-methods]{saveWorkbook}}
 }
-\examples{
+\examples{\dontrun{
 # Load existing demo Excel file 'mtcars.xlsx' from the XLConnect package
 wb.mtcars <- loadWorkbook(system.file("demoFiles/mtcars.xlsx", 
                           package = "XLConnect"))
@@ -56,5 +56,6 @@ wb.new <- loadWorkbook("myNewExcelFile.xlsx", create = TRUE)
 
 # clean up 
 file.remove("myNewExcelFile.xlsx")
+}
 }
 \keyword{file}

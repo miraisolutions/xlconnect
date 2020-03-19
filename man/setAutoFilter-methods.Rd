@@ -26,7 +26,7 @@ Mirai Solutions GmbH \url{http://www.mirai-solutions.com}
 \seealso{
 \code{\linkS4class{workbook}}
 }
-\examples{
+\examples{\dontrun{
 # Load workbook (create if not existing)
 wb <- loadWorkbook("autofilter.xlsx", create = TRUE)
 
@@ -48,6 +48,7 @@ saveWorkbook(wb)
 
 # clean up 
 file.remove("autofilter.xlsx")
+}
 }
 \keyword{methods}
 \keyword{utilities}

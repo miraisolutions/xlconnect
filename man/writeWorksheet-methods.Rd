@@ -57,7 +57,7 @@ styles to the cells as defined by the \code{\linkS4class{workbook}}'s
   \code{\link[=readNamedRegion-methods]{readNamedRegion}},
   \code{\link{writeWorksheetToFile}}
 }
-\examples{
+\examples{\dontrun{
 # Load workbook (create if not existing)
 wb <- loadWorkbook("writeWorksheet.xlsx", create = TRUE)
 
@@ -73,6 +73,7 @@ saveWorkbook(wb)
 
 # clean up 
 file.remove("writeWorksheet.xlsx")
+}
 }
 \keyword{methods}
 \keyword{IO}

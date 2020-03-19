@@ -48,7 +48,7 @@ Mirai Solutions GmbH \url{http://www.mirai-solutions.com}
 \code{\link[=isSheetHidden-methods]{isSheetHidden}}, \code{\link[=isSheetVeryHidden-methods]{isSheetVeryHidden}},
 \code{\link[=isSheetVisible-methods]{isSheetVisible}}
 }
-\examples{
+\examples{\dontrun{
 # Load workbook (create if not existing)
 wb <- loadWorkbook("hiddenWorksheet.xlsx", create = TRUE)
 
@@ -69,6 +69,7 @@ saveWorkbook(wb)
 
 # clean up 
 file.remove("hiddenWorksheet.xlsx")
+}
 }
 \keyword{methods}
 \keyword{utilities}
