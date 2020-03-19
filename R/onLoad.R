@@ -63,8 +63,6 @@
           e
         }
   )
-  print("found libraries:")
-  print(sharedPaths)
 	.jpackage(name = pkgname, jars = "*", morePaths = sharedPaths)
   
 	# Perform general XLConnect settings - pass package description
