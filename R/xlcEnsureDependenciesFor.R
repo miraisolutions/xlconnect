@@ -27,8 +27,9 @@
 #
 #############################################################################
 
-xlcEnsureDependenciesFor <- function (url, name, pattern, ifFoundPath, libname, pkgname) {
-  numJars = length(list.files("/usr/share/java/", pattern = pattern))
+xlcEnsureDependenciesFor <- function (url, name, pattern, libname, pkgname) {
+  files <- list.files("/usr/share/java", pattern = pattern, full.names = TRUE)
+  numJars = length(files)
   if(numJars == 0) {
     if (!interactive()) {
       destDir <- file.path(libname, pkgname, "java")
@@ -39,6 +40,6 @@ xlcEnsureDependenciesFor <- function (url, name, pattern, ifFoundPath, libname, 
     }
     c()
   } else {
-    c(ifFoundPath)
+    files
   }
 }

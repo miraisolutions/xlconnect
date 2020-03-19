@@ -35,34 +35,36 @@
   sharedPaths <- tryCatch({
     c(xlcEnsureDependenciesFor(
       paste0(apachePrefix, "/poi/poi-ooxml/4.1.1/poi-ooxml-4.1.1.jar"), "poi-ooxml.jar", 
-      "poi-ooxml-4\\.[1-9].*", "/usr/share/java/poi-ooxml.jar", libname, pkgname),
+      "poi-ooxml-4\\.[1-9].*",  libname, pkgname),
      xlcEnsureDependenciesFor(
       paste0(apachePrefix, "/poi/poi/4.1.1/poi-4.1.1.jar"), "poi.jar", 
-      "poi-4\\.[1-9].*", "/usr/share/java/poi.jar", libname, pkgname),
+      "poi-4\\.[1-9].*",  libname, pkgname),
     xlcEnsureDependenciesFor(
       paste0(apachePrefix, "/commons/commons-compress/1.19/commons-compress-1.19.jar"), "commons-compress.jar",
-      "commons-compress-1\\.(1[8-9]|[2-9][0-9]).*", "/usr/share/java/commons-compress.jar", libname, pkgname),
+      "commons-compress-1\\.(1[8-9]|[2-9][0-9]).*",  libname, pkgname),
     xlcEnsureDependenciesFor(
       paste0(apachePrefix, "/xmlbeans/xmlbeans/3.1.0/xmlbeans-3.1.0.jar"), "xmlbeans.jar",
-      "xmlbeans-3\\..*", "/usr/share/java/xmlbeans.jar", libname, pkgname),
+      "xmlbeans-3\\..*",  libname, pkgname),
     xlcEnsureDependenciesFor(
         paste0(apachePrefix, "/commons/commons-collections4/4.4/commons-collections4-4.4.jar"), "commons-collections4.jar",
-        "commons-collections4-4\\.([2-9]|1[0-9]).*", "/usr/share/java/commons-collections4.jar", libname, pkgname),
+        "commons-collections4-4\\.([2-9]|1[0-9]).*",  libname, pkgname),
     xlcEnsureDependenciesFor(
       paste0(apachePrefix, "/commons/commons-math3/3.6.1/commons-math3-3.6.1.jar"), "commons-math3.jar",
-      "commons-math3-3\\.([6-9]|1[0-9]).*", "/usr/share/java/commons-math3.jar", libname, pkgname),
+      "commons-math3-3\\.([6-9]|1[0-9]).*",  libname, pkgname),
     xlcEnsureDependenciesFor(
       paste0(repo, "/commons-codec/commons-codec/1.13/commons-codec-1.13.jar"), "commons-math3.jar",
-      "commons-codec-1\\.(1[1-9]|[2-9][0-9]).*", "/usr/share/java/commons-codec.jar", libname, pkgname),
+      "commons-codec-1\\.(1[1-9]|[2-9][0-9]).*",  libname, pkgname),
     xlcEnsureDependenciesFor(
       paste0(apachePrefix, "/poi/ooxml-schemas/1.4/ooxml-schemas-1.4.jar"), "ooxml-schemas.jar",
-      "ooxml-schemas-1\\.([4-9]|[1-9][0-9]).*", "/usr/share/java/ooxml-schemas.jar", libname, pkgname))
+      "ooxml-schemas-1\\.([4-9]|[1-9][0-9]).*",  libname, pkgname))
   },
   error=function(e) {
           write("downloading JAR dependencies failed!", file.path(libname, pkgname, ".fail"))
           e
         }
   )
+  print("found libraries:")
+  print(sharedPaths)
 	.jpackage(name = pkgname, jars = "*", morePaths = sharedPaths)
   
 	# Perform general XLConnect settings - pass package description
