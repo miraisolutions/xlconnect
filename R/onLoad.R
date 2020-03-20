@@ -69,7 +69,7 @@
   if(substr(jv, 1L, 2L) == "1.") {
   	jvn <- as.numeric(substr(jv,3L,3L))
   } else {
-	jvn <- as.numeric(jv)
+	  jvn <- as.numeric(jv)
   }
   if (jvn<8 || jvn>11) stop("Java>=8 and <=11 is needed for this package but not available")
 
