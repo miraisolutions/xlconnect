@@ -1,7 +1,8 @@
 # Resubmission
 This is a resubmission. In this version I have:
 
-* made sure running examples clean up produced files
+* disabled additional example that uses too much CPU
+* (previously) disabled examples that produce files to avoid non standard files in the package directory
 * (previously) removed temporary debug code
 * (previously) extended the installation process to check for the presence of required JAR files,
 and to download these if missing.
