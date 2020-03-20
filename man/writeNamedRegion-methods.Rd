@@ -64,7 +64,7 @@ styles to the cells as defined by the \code{\linkS4class{workbook}}'s
   \code{\link[=readWorksheet-methods]{readWorksheet}},
   \code{\link{writeNamedRegionToFile}}
 }
-\examples{
+\examples{\dontrun{
 # Load workbook (create if not existing)
 wb <- loadWorkbook("writeNamedRegion.xlsx", create = TRUE)
 
@@ -80,6 +80,10 @@ writeNamedRegion(wb, mtcars, name = "mtcars")
 
 # Save workbook (this actually writes the file to disk)
 saveWorkbook(wb)
+
+# clean up 
+file.remove("writeNamedRegion.xlsx")
+}
 }
 \keyword{methods}
 \keyword{IO}

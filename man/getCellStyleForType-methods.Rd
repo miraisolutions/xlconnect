@@ -28,7 +28,7 @@ Mirai Solutions GmbH \url{http://www.mirai-solutions.com}
 \code{\linkS4class{workbook}}, \code{\link[=setCellStyleForType-methods]{setCellStyleForType}},
 \code{\link[=setStyleAction-methods]{setStyleAction}}
 }
-\examples{
+\examples{\dontrun{
 file.copy(system.file("demoFiles/template2.xlsx", 
                       package = "XLConnect"),
           "datatype.xlsx", overwrite = TRUE)
@@ -53,6 +53,10 @@ writeNamedRegion(wb, mtcars, name = "mtcars")
 
 # Save workbook
 saveWorkbook(wb)
+
+# clean up
+file.remove("datatype.xlsx")
+}
 }
 \keyword{methods}
 \keyword{utilities}

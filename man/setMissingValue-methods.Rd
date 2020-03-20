@@ -37,7 +37,7 @@ Mirai Solutions GmbH \url{http://www.mirai-solutions.com}
 \code{\linkS4class{workbook}}, \code{\link[=writeNamedRegion-methods]{writeNamedRegion}},
 \code{\link[=writeWorksheet-methods]{writeWorksheet}}
 }
-\examples{
+\examples{\dontrun{
 # Load workbook (create if not existing)
 wb <- loadWorkbook("missingValue.xlsx", create = TRUE)
 
@@ -56,6 +56,10 @@ writeNamedRegion(wb, airquality, name = "airquality")
 
 # Save workbook
 saveWorkbook(wb)
+
+# clean up 
+file.remove("missingValue.xlsx")
+}
 }
 \keyword{methods}
 \keyword{utilities}

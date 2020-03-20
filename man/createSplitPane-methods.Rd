@@ -44,7 +44,7 @@ while rows or columns in the non-scrolled area remain visible.
 \code{\link[=createFreezePane-methods]{createFreezePane}}
 \code{\link[=removePane-methods]{removePane}}
 }
-\examples{
+\examples{\dontrun{
 # Load workbook (create if not existing)
 wb <- loadWorkbook("splitPaneTest.xlsx", create = TRUE)
 
@@ -57,6 +57,10 @@ createSplitPane(wb, "Sheet1", 10000, 5000, 10, 10)
 
 # Save workbook (this actually writes the file to disk)
 saveWorkbook(wb)
+
+# clean up 
+file.remove("splitPaneTest.xlsx")
+}
 }
 \keyword{methods}
 \keyword{utilities}

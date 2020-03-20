@@ -38,7 +38,7 @@ Mirai Solutions on GitHub: \url{https://github.com/miraisolutions}\cr
 Apache POI: \url{http://poi.apache.org}
 }
 \keyword{ package }
-\examples{
+\examples{\dontrun{
 # Load workbook; create if not existing
 wb <- loadWorkbook("XLConnect.xlsx", create = TRUE)
 
@@ -53,4 +53,8 @@ writeNamedRegion(wb, mtcars, name = "mtcars")
 
 # Save workbook
 saveWorkbook(wb)
+
+# clean up 
+file.remove("XLConnect.xlsx")
+}
 }

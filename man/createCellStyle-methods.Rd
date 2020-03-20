@@ -43,7 +43,7 @@ Mirai Solutions GmbH \url{http://www.mirai-solutions.com}
 \code{\link[=setFillBackgroundColor-methods]{setFillBackgroundColor}}, \code{\link[=setFillForegroundColor-methods]{setFillForegroundColor}},
 \code{\link[=setFillPattern-methods]{setFillPattern}}, \code{\link[=setWrapText-methods]{setWrapText}}
 }
-\examples{
+\examples{\dontrun{
 # Load workbook (create if not existing)
 wb <- loadWorkbook("createCellstyles.xlsx", create = TRUE)
 
@@ -92,6 +92,10 @@ setCellStyle(wb, sheet = "mtcars", row = rowIndex, col = colIndex,
 
 # Save workbook (this actually writes the file to disk)
 saveWorkbook(wb)
+
+# clean up 
+file.remove("createCellstyles.xlsx")
+}
 }
 \keyword{methods}
 \keyword{utilities}

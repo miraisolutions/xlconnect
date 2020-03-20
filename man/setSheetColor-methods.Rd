@@ -27,7 +27,7 @@ Mirai Solutions GmbH \url{http://www.mirai-solutions.com}
 \seealso{
 \code{\linkS4class{workbook}}, \code{\link[=XLC]{XLC}}
 }
-\examples{
+\examples{\dontrun{
 # Load workbook (create if not existing)
 wb <- loadWorkbook("sheetcolor.xlsx", create = TRUE)
 
@@ -45,6 +45,10 @@ setSheetColor(wb, 2, XLC$COLOR.GREEN)
 
 # Save workbook (this actually writes the file to disk)
 saveWorkbook(wb)
+
+# clean up 
+file.remove("sheetcolor.xlsx")
+}
 }
 \keyword{methods}
 \keyword{utilities}

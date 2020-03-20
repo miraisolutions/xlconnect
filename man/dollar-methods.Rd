@@ -25,7 +25,7 @@ This form might be considered more convenient or readable for programmers coming
 \seealso{
 \code{\linkS4class{workbook}}
 }
-\examples{
+\examples{\dontrun{
 # Load workbook (create if not existing)
 wb <- loadWorkbook("dollar.xlsx", create = TRUE)
 
@@ -37,6 +37,10 @@ wb$writeWorksheet(CO2, sheet = "CO2", startRow = 4, startCol = 2)
 
 # Save workbook
 wb$saveWorkbook()
+
+# clean up 
+file.remove("dollar.xlsx")
+}
 }
 \keyword{methods}
 \keyword{utilities}

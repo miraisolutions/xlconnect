@@ -28,7 +28,7 @@ Mirai Solutions GmbH \url{http://www.mirai-solutions.com}
 \code{\linkS4class{workbook}}, \code{\link[=mergeCells-methods]{mergeCells}},
 \code{\link{idx2cref}}
 }
-\examples{
+\examples{\dontrun{
 # Load workbook (create if not existing)
 wb <- loadWorkbook("unmergeCells.xlsx", create = TRUE)
 
@@ -40,6 +40,10 @@ mergeCells(wb, sheet = "merge", reference = "A1:B8")
 
 # Unmerge the cells A1:B8
 unmergeCells(wb, sheet = "merge", reference = "A1:B8")
+
+# clean up 
+file.remove("unmergeCells.xlsx")
+}
 }
 \keyword{methods}
 \keyword{utilities}

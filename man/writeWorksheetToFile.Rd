@@ -30,7 +30,7 @@ Mirai Solutions GmbH \url{http://www.mirai-solutions.com}
   \code{\link{readWorksheetFromFile}},\cr
   \code{\link{readNamedRegionFromFile}} 
 }
-\examples{
+\examples{\dontrun{
 # multiregion xlsx file from demoFiles subfolder of package XLConnect
 demoExcelFile <- system.file("demoFiles/multiregion.xlsx",
                              package = "XLConnect")
@@ -51,5 +51,9 @@ writeWorksheetToFile(template, data = list(i1 = iris, i2 = iris, i3 = iris),
                      sheet = c("FirstSheet", "SecondSheet", "FirstSheet"),
                      startRow = c(1,101,201), startCol = c(1,11,21))
 
+# clean up
+file.remove("template-multi-ws.xlsx")
+file.remove("template-ws.xlsx")
+}
 }
 \keyword{IO}

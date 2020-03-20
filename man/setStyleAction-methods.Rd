@@ -104,7 +104,7 @@ Mirai Solutions GmbH \url{http://www.mirai-solutions.com}
 \code{\link[=setCellStyleForType-methods]{setCellStyleForType}},
 \code{\link[=setDataFormatForType-methods]{setDataFormatForType}}
 }
-\examples{
+\examples{\dontrun{
 # Load workbook (create if not existing)
 wb <- loadWorkbook("styleaction.xlsx", create = TRUE)
 
@@ -172,6 +172,10 @@ writeNamedRegion(wb, mtcars, name = "mtcars")
 
 # Save workbook (this actually writes the file to disk)
 saveWorkbook(wb)
+
+# clean up 
+file.remove("styleaction.xlsx")
+}
 }
 \keyword{methods}
 \keyword{utilities}

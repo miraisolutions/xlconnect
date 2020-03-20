@@ -37,7 +37,7 @@ Mirai Solutions GmbH \url{http://www.mirai-solutions.com}
 \seealso{
   \code{\linkS4class{workbook}}, \code{\link[=setCellStyle-methods]{setCellStyle}}
 }
-\examples{
+\examples{\dontrun{
 # Load workbook (create if not existing)
 wb <- loadWorkbook("setHyperlink.xlsx", create = TRUE)
 
@@ -55,6 +55,10 @@ setHyperlink(wb, sheet = "mtcars", row = seq_len(nrow(mtcars)) + 1, col = 1,
 
 # Save workbook (this actually writes the file to disk)
 saveWorkbook(wb)
+
+# clean up 
+file.remove("setHyperlink.xlsx")
+}
 }
 \keyword{methods}
 \keyword{utilities}

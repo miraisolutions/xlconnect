@@ -48,6 +48,7 @@ same shape/structure as the previous data.
   \code{\link[=readWorksheet-methods]{readWorksheet}}
 }
 \examples{
+\dontrun{
 # mtcars xlsx file from demoFiles subfolder of package XLConnect
 demoExcelFile <- system.file("demoFiles/mtcars.xlsx", package = "XLConnect")
 
@@ -56,6 +57,7 @@ wb <- loadWorkbook(demoExcelFile)
 
 # Append mtcars data set to named region named 'mtcars'
 appendNamedRegion(wb, mtcars, name = "mtcars")
+}
 }
 \keyword{methods}
 \keyword{IO}

@@ -33,7 +33,7 @@ Mirai Solutions GmbH \url{http://www.mirai-solutions.com}
 \seealso{
 \code{\linkS4class{workbook}}, \code{\link[=setStyleAction-methods]{setStyleAction}}
 }
-\examples{
+\examples{\dontrun{
 # Copy existing Excel template to working directory
 file.copy(system.file("demoFiles/template2.xlsx", 
                       package = "XLConnect"),
@@ -56,6 +56,10 @@ writeNamedRegion(wb, mtcars, name = "mtcars")
 
 # Save workbook
 saveWorkbook(wb)
+
+# clean up
+file.remove("dataformat.xlsx")
+}
 }
 \keyword{methods}
 \keyword{utilities}

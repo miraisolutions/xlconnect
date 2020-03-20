@@ -35,7 +35,7 @@ Mirai Solutions GmbH \url{http://www.mirai-solutions.com}
 \code{\link[=existsSheet-methods]{existsSheet}}, \code{\link[=getSheets-methods]{getSheets}},
 \code{\link[=cloneSheet-methods]{cloneSheet}}
 }
-\examples{
+\examples{\dontrun{
 # Load workbook (create if not existing)
 wb <- loadWorkbook("createSheet.xlsx", create = TRUE)
 
@@ -44,6 +44,10 @@ createSheet(wb, name = "CO2")
 
 # Save workbook (this actually writes the file to disk)
 saveWorkbook(wb)
+
+# clean up 
+file.remove("createSheet.xlsx")
+}
 }
 \keyword{methods}
 \keyword{utilities}

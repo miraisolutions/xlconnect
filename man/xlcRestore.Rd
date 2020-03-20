@@ -38,11 +38,14 @@ Mirai Solutions GmbH \url{http://www.mirai-solutions.com}
 \code{\link[=readWorksheet-methods]{readWorksheet}}, \code{\link{readNamedRegionFromFile}},\cr
 \code{\link{readWorksheetFromFile}}, \code{\link{xlcEdit}}
 }
-\examples{
+\examples{\dontrun{
 require(datasets)
 xlcDump(c("airquality", "CO2", "iris", "PlantGrowth", "swiss"),
         file = "myDump.xlsx", pos = "package:datasets")
 xlcRestore(file = "myDump.xlsx", overwrite = TRUE)
+# clean up
+file.remove("myDump.xlsx")
+}
 }
 \keyword{utilities}
 \keyword{file}

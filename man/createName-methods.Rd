@@ -51,7 +51,7 @@ Mirai Solutions GmbH \url{http://www.mirai-solutions.com}
 \code{\link[=readNamedRegion-methods]{readNamedRegion}},
 \code{\link[=writeNamedRegion-methods]{writeNamedRegion}}
 }
-\examples{
+\examples{\dontrun{
 # Load workbook (create if not existing)
 wb <- loadWorkbook("createName.xlsx", create = TRUE)
 
@@ -66,6 +66,10 @@ writeNamedRegion(wb, mtcars, name = "mtcars")
 
 # Save workbook
 saveWorkbook(wb)
+
+# clean up 
+file.remove("createName.xlsx")
+}
 }
 \keyword{methods}
 \keyword{utilities}

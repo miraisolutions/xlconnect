@@ -34,7 +34,7 @@ Mirai Solutions GmbH \url{http://www.mirai-solutions.com}
   \code{\linkS4class{workbook}},
   \code{\link[=getCellFormula-methods]{getCellFormula}},
 }
-\examples{
+\examples{\dontrun{
 # Load workbook (create if not existing)
 wb <- loadWorkbook("setCellFormula.xls", create = TRUE)
 
@@ -64,6 +64,10 @@ setCellFormula(wb, "mtcars", rowIndex, colIndex, formula)
 
 # Save workbook (this actually writes the file to disk)
 saveWorkbook(wb)
+
+# clean up 
+file.remove("setCellFormula.xls")
+}
 }
 \keyword{methods}
 \keyword{utilities}

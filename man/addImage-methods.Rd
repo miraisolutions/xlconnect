@@ -37,7 +37,7 @@ be no issues with xlsx workbooks.
 \seealso{
 \code{\linkS4class{workbook}}, \code{\link[=createName-methods]{createName}}
 }
-\examples{
+\examples{\dontrun{
 ## Write an R plot to a specified named region
 ## This example makes use of the 'Tonga Trench Earthquakes' example
 
@@ -73,6 +73,11 @@ addImage(wb, filename = "earthquake.png", name = "earthquake",
 
 # Save workbook (this actually writes the file to disk)
 saveWorkbook(wb)
+
+# clean up 
+file.remove("earthquake.xlsx")
+file.remove("earthquake.png")
+}
 }
 \keyword{methods}
 \keyword{utilities}

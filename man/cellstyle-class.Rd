@@ -35,7 +35,7 @@ styling with a few clicks in Excel's cell style menu across all tables.
 \code{\linkS4class{workbook}}, \code{\link[=createCellStyle-methods]{createCellStyle}}, \code{\link[=setStyleAction-methods]{setStyleAction}},
 \code{\link[=setCellStyle-methods]{setCellStyle}}
 }
-\examples{
+\examples{\dontrun{
 # Load workbook (create if not existing)
 wb <- loadWorkbook("cellstyles.xlsx", create = TRUE)
 
@@ -84,6 +84,10 @@ setCellStyle(wb, sheet = "mtcars", row = rowIndex, col = colIndex,
 
 # Save workbook (this actually writes the file to disk)
 saveWorkbook(wb)
+
+# clean up 
+file.remove("cellstyles.xlsx")
+}
 }
 \keyword{classes}
 \keyword{utilities}

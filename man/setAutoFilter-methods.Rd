@@ -26,7 +26,7 @@ Mirai Solutions GmbH \url{http://www.mirai-solutions.com}
 \seealso{
 \code{\linkS4class{workbook}}
 }
-\examples{
+\examples{\dontrun{
 # Load workbook (create if not existing)
 wb <- loadWorkbook("autofilter.xlsx", create = TRUE)
 
@@ -45,6 +45,10 @@ setAutoFilter(wb, sheet = "mtcars", reference = aref("A1", dim(mtcars)))
 
 # Save workbook (this actually writes the file to disk)
 saveWorkbook(wb)
+
+# clean up 
+file.remove("autofilter.xlsx")
+}
 }
 \keyword{methods}
 \keyword{utilities}

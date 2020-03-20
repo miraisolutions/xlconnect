@@ -53,7 +53,7 @@ more than once so virtually this is no issue.
 \seealso{
 \code{\linkS4class{workbook}}, \code{\link{loadWorkbook}}
 }
-\examples{
+\examples{\dontrun{
 # Create a new workbook 'saveMe.xlsx'
 # (assuming the file to not exist already)
 wb <- loadWorkbook("saveMe.xlsx", create = TRUE)
@@ -66,6 +66,10 @@ writeWorksheet(wb, mtcars, sheet = "mtcars")
 
 # Save workbook - this actually writes the file 'saveMe.xlsx' to disk
 saveWorkbook(wb)
+
+# clean up 
+file.remove("saveMe.xlsx")
+}
 }
 \keyword{methods}
 \keyword{file}
