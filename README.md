@@ -29,6 +29,6 @@ For other questions you may also use <a href="http://stackoverflow.com/questions
 Build for release on CRAN
 -------------------------
 
-```bash
+```r
 devtools::build(args=c("--compact-vignettes=gs+qpdf"))
 ```

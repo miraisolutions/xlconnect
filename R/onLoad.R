@@ -63,8 +63,17 @@
           e
         }
   )
-	.jpackage(name = pkgname, jars = "*", morePaths = sharedPaths)
-  
-	# Perform general XLConnect settings - pass package description
-	XLConnectSettings(packageDescription(pkgname))
+  .jpackage(name = pkgname, jars = "*", morePaths = sharedPaths)
+  # Java version check
+  jv <- .jcall("java/lang/System", "S", "getProperty", "java.runtime.version")
+  twoFirst <- substr(jv, 1L, 2L)
+  if(twoFirst == "1.") {
+  	jvn <- as.numeric(substr(jv,3L,3L))
+  } else {
+	  jvn <- as.numeric(twoFirst)
+  }
+  if (jvn<8 || jvn>11) stop(paste0("Installed java version ",jv ," is not between Java>=8 and <=11! This is needed for this package"))
+
+  # Perform general XLConnect settings - pass package description
+  XLConnectSettings(packageDescription(pkgname))
 }
