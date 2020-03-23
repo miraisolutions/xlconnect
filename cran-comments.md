@@ -1,5 +1,8 @@
-# Patch
+# Patch / Resubmission
 This is a patch to add a java version check as required by the CRAN team (mail from Brian Ripley).
+in this resubmission I have
+
+* skipped an example that uses excessive CPU
 
 # Test Environments
 
