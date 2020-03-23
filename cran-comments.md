@@ -28,9 +28,7 @@ available from major distributions' package managers at the time of writing. In 
 ooxml-schemas-1.4.jar, which is not distributed via package managers. See http://poi.apache.org/help/faq.html#faq-N10109
 for more information.
 
-Justification: this URL is working when accessed in a browser and with httr::GET()
-
-In addition, CRAN found 1 NOTE in the submission presently being patched:
+In addition, CRAN found 2 NOTEs:
 
 > Check: for detritus in the temp directory, Result: NOTE
   Found the following files/directories:
@@ -38,6 +36,12 @@ In addition, CRAN found 1 NOTE in the submission presently being patched:
     'runtime-hornik'
 
 Justification: this was tolerated on the previous version that this is patching (mail by Uwe Ligges).
+
+> checking CRAN incoming feasibility ... NOTE
+  [...]
+  Days since last update: 3
+  
+Justification: this is a patch submitted at the request of the CRAN team.
 
 # Downstream dependencies
 
