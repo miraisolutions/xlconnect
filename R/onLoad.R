@@ -52,7 +52,7 @@
       paste0(apachePrefix, "/commons/commons-math3/3.6.1/commons-math3-3.6.1.jar"), "commons-math3.jar",
       "commons-math3-3\\.([6-9]|1[0-9]).*",  libname, pkgname),
     xlcEnsureDependenciesFor(
-      paste0(repo, "/commons-codec/commons-codec/1.13/commons-codec-1.13.jar"), "commons-math3.jar",
+      paste0(repo, "/commons-codec/commons-codec/1.13/commons-codec-1.13.jar"), "commons-codec-1.13.jar",
       "commons-codec-1\\.(1[1-9]|[2-9][0-9]).*",  libname, pkgname),
     xlcEnsureDependenciesFor(
       paste0(apachePrefix, "/poi/ooxml-schemas/1.4/ooxml-schemas-1.4.jar"), "ooxml-schemas.jar",
