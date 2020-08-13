@@ -34,9 +34,12 @@
   apachePrefix <- paste0(repo, "/org/apache")
   sharedPaths <- tryCatch({
     c(xlcEnsureDependenciesFor(
-      paste0(apachePrefix, "/poi/poi-ooxml/4.1.1/poi-ooxml-4.1.1.jar"), "poi-ooxml.jar", 
-      "poi-ooxml-4\\.[1-9].*",  libname, pkgname),
-     xlcEnsureDependenciesFor(
+      paste0(apachePrefix, "/poi/poi-ooxml-schemas/4.1.1/poi-ooxml-schemas-4.1.1.jar"), "poi-ooxml-schemas.jar", 
+      "poi-ooxml-schemas-4\\.[1-9].*",  libname, pkgname),
+    xlcEnsureDependenciesFor(
+        paste0(apachePrefix, "/poi/poi-ooxml/4.1.1/poi-ooxml-4.1.1.jar"), "poi-ooxml.jar", 
+        "poi-ooxml-4\\.[1-9].*",  libname, pkgname),
+    xlcEnsureDependenciesFor(
       paste0(apachePrefix, "/poi/poi/4.1.1/poi-4.1.1.jar"), "poi.jar", 
       "poi-4\\.[1-9].*",  libname, pkgname),
     xlcEnsureDependenciesFor(
