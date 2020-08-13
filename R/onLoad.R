@@ -35,31 +35,31 @@
   sharedPaths <- tryCatch({
     c(xlcEnsureDependenciesFor(
       paste0(apachePrefix, "/poi/poi-ooxml-schemas/4.1.1/poi-ooxml-schemas-4.1.1.jar"), "poi-ooxml-schemas.jar", 
-      "poi-ooxml-schemas-4\\.[1-9].*",  libname, pkgname),
+      "4\\.[1-9].*",  libname, pkgname, debianpkg = "libapache-poi-java"),
     xlcEnsureDependenciesFor(
-        paste0(apachePrefix, "/poi/poi-ooxml/4.1.1/poi-ooxml-4.1.1.jar"), "poi-ooxml.jar", 
-        "poi-ooxml-4\\.[1-9].*",  libname, pkgname),
+      paste0(apachePrefix, "/poi/poi-ooxml/4.1.1/poi-ooxml-4.1.1.jar"), "poi-ooxml.jar", 
+      "4\\.[1-9].*",  libname, pkgname, debianpkg = "libapache-poi-java"),
     xlcEnsureDependenciesFor(
       paste0(apachePrefix, "/poi/poi/4.1.1/poi-4.1.1.jar"), "poi.jar", 
-      "poi-4\\.[1-9].*",  libname, pkgname),
+      "4\\.[1-9].*",  libname, pkgname, debianpkg = "libapache-poi-java"),
     xlcEnsureDependenciesFor(
       paste0(apachePrefix, "/commons/commons-compress/1.19/commons-compress-1.19.jar"), "commons-compress.jar",
-      "commons-compress-1\\.(1[8-9]|[2-9][0-9]).*",  libname, pkgname),
+      "1\\.(1[8-9]|[2-9][0-9]).*",  libname, pkgname, debianpkg = "libcommons-compress-java"),
     xlcEnsureDependenciesFor(
       paste0(apachePrefix, "/xmlbeans/xmlbeans/3.1.0/xmlbeans-3.1.0.jar"), "xmlbeans.jar",
-      "xmlbeans-3\\..*",  libname, pkgname),
+      "3\\..*",  libname, pkgname, debianpkg="libxmlbeans-java"),
     xlcEnsureDependenciesFor(
-        paste0(apachePrefix, "/commons/commons-collections4/4.4/commons-collections4-4.4.jar"), "commons-collections4.jar",
-        "commons-collections4-4\\.([2-9]|1[0-9]).*",  libname, pkgname),
+      paste0(apachePrefix, "/commons/commons-collections4/4.4/commons-collections4-4.4.jar"), "commons-collections4.jar",
+      "4-4\\.([2-9]|1[0-9]).*",  libname, pkgname, debianpkg="libcommons-collections4-java"),
     xlcEnsureDependenciesFor(
       paste0(apachePrefix, "/commons/commons-math3/3.6.1/commons-math3-3.6.1.jar"), "commons-math3.jar",
-      "commons-math3-3\\.([6-9]|1[0-9]).*",  libname, pkgname),
+      "3\\.([6-9]|1[0-9]).*",  libname, pkgname, debianpkg="libcommons-math3-java"),
     xlcEnsureDependenciesFor(
       paste0(repo, "/commons-codec/commons-codec/1.13/commons-codec-1.13.jar"), "commons-codec-1.13.jar",
-      "commons-codec-1\\.(1[1-9]|[2-9][0-9]).*",  libname, pkgname),
+      "1\\.(1[1-9]|[2-9][0-9]).*",  libname, pkgname, debianpkg="libcommons-codec-java"),
     xlcEnsureDependenciesFor(
       paste0(apachePrefix, "/poi/ooxml-schemas/1.4/ooxml-schemas-1.4.jar"), "ooxml-schemas.jar",
-      "ooxml-schemas-1\\.([4-9]|[1-9][0-9]).*",  libname, pkgname))
+      "1\\.([4-9]|[1-9][0-9]).*",  libname, pkgname))
   },
   error=function(e) {
           write("downloading JAR dependencies failed!", file.path(libname, pkgname, ".fail"))

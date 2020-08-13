@@ -27,8 +27,8 @@
 #
 #############################################################################
 
-xlcEnsureDependenciesFor <- function (url, name, pattern, libname, pkgname) {
-  files <- list.files("/usr/share/java", pattern = pattern, full.names = TRUE)
+xlcEnsureDependenciesFor <- function (url, name, versionpattern, libname, pkgname, debianpkg = NULL, rpmpkg = NULL) {
+  files <- checkSystemPackage(debianpkg, rpmpkg, versionpattern)
   numJars = length(files)
   if(numJars == 0) {
     if (!interactive()) {
