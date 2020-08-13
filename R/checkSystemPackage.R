@@ -42,7 +42,7 @@
     foundVersion <- strsplit(pkgLine, " +")[[1]][3]
     if(grepl(versionpattern, foundVersion)) {
       allFiles <- dpkg(c("--listfiles", debianpkgname))
-      allFiles[which(grepl("/usr/share/java.*jar", allFiles))]
+      allFiles[which(grepl(".*/java.*jar", allFiles))]
     } else { c() }
   }
   else if (!is.null(rpmpkgname) && system2("rpm", c("--help"), stdout = FALSE) == 0) {
