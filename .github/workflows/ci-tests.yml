@@ -49,7 +49,7 @@ jobs:
           ls -la /etc/alternatives/javah
           sudo update-alternatives --remove-all javah
           echo library paths: $LD_LIBRARY_PATH
-          sudo R CMD javareconf -n | grep "Java version : "${{ matrix.java }} # fail fast
+          sudo R CMD javareconf -n
           sudo R CMD javareconf -n | grep -i "Java version : "${{ matrix.java }} # fail fast
           sudo R CMD javareconf
       - name: Install dependencies
