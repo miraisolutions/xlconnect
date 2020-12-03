@@ -16,13 +16,20 @@ on:
 
 jobs:
   build:
-    runs-on: macOS-latest
+    runs-on: ubuntu-18.04
     strategy:
       matrix:
         r-version: [3.5, 3.6]
+        # test against latest update of each major Java version, as well as specific updates of LTS versions:
+        java: [ 8, 8.0.192, 11.0.x, 11.0.3, 14, 15 ]
 
     steps:
       - uses: actions/checkout@v2
+      - name: Setup java
+        uses: actions/setup-java@v1
+        with:
+          java-version: ${{ matrix.java }}
+      #- uses: actions/checkout@v2
       - name: Set up R ${{ matrix.r-version }}
         uses: r-lib/actions/setup-r@ffe45a39586f073cc2e9af79c4ba563b657dc6e3
         with:
