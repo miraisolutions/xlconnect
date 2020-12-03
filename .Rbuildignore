@@ -67,3 +67,4 @@ Makefile
 ^inst/unitTests/resources/testWorkbookReadTable.xlsx$
 cran-comments.md
 revdep/
+.github/
