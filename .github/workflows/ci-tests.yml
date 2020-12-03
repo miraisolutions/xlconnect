@@ -95,6 +95,7 @@ jobs:
           FULL_TEST_SUITE: 1
         run: | 
           R CMD build --no-build-vignettes
+          ls -la
           ls XLConnect_*.tar.gz | xargs R CMD check --no-manual --as-cran --no-build-vignettes
           
         # run: rcmdcheck::rcmdcheck(args = c("--no-manual"), error_on = "error")
