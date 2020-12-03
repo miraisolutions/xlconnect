@@ -95,7 +95,13 @@ jobs:
           FULL_TEST_SUITE: 1
         run: | 
           R CMD build --no-build-vignettes
-          R CMD check XLConnect*tar.gz --no-manual --as-cran --no-build-vignettes
+          ls XLConnect_*.tar.gz | xargs R CMD check --no-manual --as-cran --no-build-vignettes
           
         # run: rcmdcheck::rcmdcheck(args = c("--no-manual"), error_on = "error")
         # shell: Rscript {0}
+      - name: Upload check results
+        if: failure()
+        uses: actions/upload-artifact@main
+        with:
+          name: ${{ runner.os }}-r${{ matrix.config.r }}-results
+          path: check
