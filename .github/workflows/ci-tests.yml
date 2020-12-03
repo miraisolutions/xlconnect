@@ -53,6 +53,8 @@ jobs:
           echo java_home:$JAVA_HOME
           echo library paths: $LD_LIBRARY_PATH
           sudo R CMD javareconf JAVA_HOME=$JAVA_HOME
+      - name: Install tinytex
+        uses: r-lib/actions/setup-tinytex@v1
       - name: Install dependencies
         run: |
           install.packages(c("rJava"))
