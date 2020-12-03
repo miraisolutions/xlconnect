@@ -16,13 +16,16 @@ on:
 
 jobs:
   build:
-    runs-on: ${{ matrix.os }}
+    runs-on: ${{ matrix.config.os }}
     strategy:
       matrix:
-        os: [ubuntu-18.04] # windows-2019, macos-10.15]
-        r-version: [4] #, 3.5, 3.6]
-        # test against latest update of each major Java version, as well as specific updates of LTS versions:
-        java: [15] #  8, 11.0.x,
+        config: 
+          - os: ubuntu-18.04 # windows-2019, macos-10.15]
+            r-version: 4 #, 3.5, 3.6]
+            # test against latest update of each major Java version, as well as specific updates of LTS versions:
+            java: 15 #  8, 11.0.x,
+    env:
+      R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
 
     steps:
       - name: remove unwanted preinstalled java
@@ -35,18 +38,12 @@ jobs:
       - name: Setup java
         uses: actions/setup-java@v1
         with:
-          java-version: ${{ matrix.java }}
+          java-version: ${{ matrix.config.java }}
           java-package: jdk
-      # - name: set variables for javareconf
-      #   run: |
-      #     echo JAVA=$(which java) >> $GITHUB_ENV 
-      #     echo JAVAC=$(which javac) >> $GITHUB_ENV
-      #     echo JAVAP=$(which javap) >> $GITHUB_ENV
-      #     echo JAR=$(which jar) >> $GITHUB_ENV
-      - name: Set up R ${{ matrix.r-version }}
+      - name: Set up R ${{ matrix.config.r-version }}
         uses: r-lib/actions/setup-r@v1
         with:
-          r-version: ${{ matrix.r-version }}
+          r-version: ${{ matrix.config.r-version }}
       - name: run javareconf
         run: |
           java -version
@@ -55,17 +52,47 @@ jobs:
           sudo R CMD javareconf JAVA_HOME=$JAVA_HOME
       # - name: Install tinytex
       #   uses: r-lib/actions/setup-tinytex@v1
+      - name: Query dependencies
+        run: |
+          install.packages('remotes')
+          saveRDS(remotes::dev_package_deps(dependencies = TRUE), ".github/depends.Rds", version = 2)
+          writeLines(sprintf("R-%i.%i", getRversion()$major, getRversion()$minor), ".github/R-version")
+        shell: Rscript {0}
+
+      - name: Cache R packages
+        if: runner.os != 'Windows'
+        uses: actions/cache@v2
+        with:
+          path: ${{ env.R_LIBS_USER }}
+          key: ${{ runner.os }}-${{ hashFiles('.github/R-version') }}-1-${{ hashFiles('.github/depends.Rds') }}
+          restore-keys: ${{ runner.os }}-${{ hashFiles('.github/R-version') }}-1-
+
+      - name: Install system dependencies
+        if: runner.os == 'Linux'
+        run: |
+          while read -r cmd
+          do
+            eval sudo $cmd
+          done < <(Rscript -e 'writeLines(remotes::system_requirements("ubuntu", "16.04"))')
       - name: Install dependencies
         run: |
-          install.packages(c("rJava"))
-          install.packages(c("remotes", "rcmdcheck"))
           remotes::install_deps(dependencies = TRUE)
+          remotes::install_cran("rcmdcheck")
         shell: Rscript {0}
-      - name: Check
+
+      - name: Session info
         run: |
-            R CMD build --compact-vignettes=both --md5 .
-            R CMD check XLConnect*tar.gz
+          options(width = 100)
+          pkgs <- installed.packages()[, "Package"]
+          sessioninfo::session_info(pkgs, include_base = TRUE)
+        shell: Rscript {0}
+
+      - name: Check
         env:
+          _R_CHECK_CRAN_INCOMING_: false
           FULL_TEST_SUITE: 1
+        run: rcmdcheck::rcmdcheck(args = c("--no-manual", "--as-cran"), error_on = "warning", check_dir = "check")
+        shell: Rscript {0}
+          
         # run: rcmdcheck::rcmdcheck(args = c("--no-manual"), error_on = "error")
         # shell: Rscript {0}
