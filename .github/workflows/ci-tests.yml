@@ -47,7 +47,7 @@ jobs:
           echo java_home:$JAVA_HOME
           which javah | xargs ls -la
           ls -la /etc/alternatives/javah
-          sudo update-alternatives remove-all javah
+          sudo update-alternatives --remove-all javah
           echo library paths: $LD_LIBRARY_PATH
           sudo R CMD javareconf -n | grep -i "Java version : "${{ matrix.java }} # fail fast
           sudo R CMD javareconf
