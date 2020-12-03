@@ -39,9 +39,15 @@ jobs:
         run: | 
           sudo R CMD javareconf
           which java | xargs ls -la
+          which javac | xargs ls -la
+          which javap | xargs ls -la
+          which javah | xargs ls -la
+          which jar | xargs ls -la
           echo java_home:$JAVA_HOME
+          echo library paths: $LD_LIBRARY_PATH
       - name: Install dependencies
         run: |
+          install.packages(c("rJava"))
           install.packages(c("remotes", "rcmdcheck"))
           remotes::install_deps(dependencies = TRUE)
         shell: Rscript {0}
