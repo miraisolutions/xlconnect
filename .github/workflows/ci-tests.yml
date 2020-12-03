@@ -17,6 +17,7 @@ on:
 jobs:
   build:
     runs-on: ${{ matrix.config.os-name }}-${{ matrix.config.os-version }}
+    name: ${{ matrix.config.os-name }}-${{ matrix.config.os-version }} ${{ matrix.config.r}} - java ${{ matrix.config.java}}
     strategy:
       matrix:
         config: 
@@ -92,8 +93,9 @@ jobs:
         env:
           _R_CHECK_CRAN_INCOMING_: false
           FULL_TEST_SUITE: 1
-        run: rcmdcheck::rcmdcheck(args = c("--no-manual", "--as-cran", "--no-build-vignettes"), error_on = "warning", check_dir = "check")
-        shell: Rscript {0}
+        run: | 
+          R CMD build --no-build-vignettes
+          R CMD check XLConnect*tar.gz --no-manual --as-cran --no-build-vignettes
           
         # run: rcmdcheck::rcmdcheck(args = c("--no-manual"), error_on = "error")
         # shell: Rscript {0}
