@@ -31,23 +31,24 @@ jobs:
         with:
           java-version: ${{ matrix.java }}
           java-package: jdk
-      - name: Set up R ${{ matrix.r-version }}
-        uses: r-lib/actions/setup-r@v1
-        with:
-          r-version: ${{ matrix.r-version }}
       - name: set variables for javareconf
         run: |
+          which javah | xargs ls -la
+          ls -la /etc/alternatives/javah
+          sudo update-alternatives --remove-all javah
           echo JAVA=$(which java) >> $GITHUB_ENV 
           echo JAVAC=$(which javac) >> $GITHUB_ENV
           echo JAVAP=$(which javap) >> $GITHUB_ENV
           echo JAR=$(which jar) >> $GITHUB_ENV
+      - name: Set up R ${{ matrix.r-version }}
+        uses: r-lib/actions/setup-r@v1
+        with:
+          r-version: ${{ matrix.r-version }}
       - name: run javareconf
         run: | 
           echo path:$PATH
           echo java_home:$JAVA_HOME
-          which javah | xargs ls -la
-          ls -la /etc/alternatives/javah
-          sudo update-alternatives --remove-all javah
+          echo javac_var:$JAVAC
           echo library paths: $LD_LIBRARY_PATH
           sudo R CMD javareconf -n
           sudo R CMD javareconf -n | grep -i "Java version : "${{ matrix.java }} # fail fast
