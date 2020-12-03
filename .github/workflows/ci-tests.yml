@@ -52,8 +52,6 @@ jobs:
           java -version
           echo java_home:$JAVA_HOME
           echo library paths: $LD_LIBRARY_PATH
-          sudo R CMD javareconf -n JAVA_HOME=$JAVA_HOME
-          sudo R CMD javareconf -n JAVA_HOME=$JAVA_HOME | grep -i "Java version : "${{ matrix.java }} # fail fast
           sudo R CMD javareconf JAVA_HOME=$JAVA_HOME
       - name: Install dependencies
         run: |
