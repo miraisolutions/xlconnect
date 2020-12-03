@@ -31,15 +31,12 @@ jobs:
         with:
           java-version: ${{ matrix.java }}
           java-package: jdk
-      #- uses: actions/checkout@v2
       - name: Set up R ${{ matrix.r-version }}
         uses: r-lib/actions/setup-r@v1
         with:
           r-version: ${{ matrix.r-version }}
       - name: Set up java with R
-        run: sudo R CMD javareconf
-      - name: install rJava
-        run: sudo apt-get install r-cran-rjava
+        run: R CMD javareconf -e
       - name: Install dependencies
         run: |
           install.packages(c("remotes", "rcmdcheck"))
