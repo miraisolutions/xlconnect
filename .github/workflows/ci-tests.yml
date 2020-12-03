@@ -26,7 +26,11 @@ jobs:
 
     steps:
       - name: remove unwanted preinstalled java
-        run: sudo rm -rf /usr/lib/jvm/*
+        run: |
+          which javah | xargs ls -la
+          ls -la /etc/alternatives/javah
+          sudo update-alternatives --remove-all javah
+          sudo rm -rf /usr/lib/jvm/*
       - uses: actions/checkout@v2
       - name: Setup java
         uses: actions/setup-java@v1
@@ -35,9 +39,6 @@ jobs:
           java-package: jdk
       - name: set variables for javareconf
         run: |
-          which javah | xargs ls -la
-          ls -la /etc/alternatives/javah
-          sudo update-alternatives --remove-all javah
           echo JAVA=$(which java) >> $GITHUB_ENV 
           echo JAVAC=$(which javac) >> $GITHUB_ENV
           echo JAVAP=$(which javap) >> $GITHUB_ENV
@@ -47,12 +48,15 @@ jobs:
         with:
           r-version: ${{ matrix.r-version }}
       - name: run javareconf
-        run: | 
+        run: |
+          echo java_var:$JAVA
+          java -version
           echo path:$PATH
           echo java_home:$JAVA_HOME
+          ls -la $JAVA_HOME
           echo javac_var:$JAVAC
           echo library paths: $LD_LIBRARY_PATH
-          sudo R CMD javareconf -n
+          sudo R CMD javareconf -n JAVA_HOME=$JAVA_HOME
           sudo R CMD javareconf -n | grep -i "Java version : "${{ matrix.java }} # fail fast
           sudo R CMD javareconf
       - name: Install dependencies
