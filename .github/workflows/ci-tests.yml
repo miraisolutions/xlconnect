@@ -36,7 +36,7 @@ jobs:
         with:
           r-version: ${{ matrix.r-version }}
       - name: Set up java with R
-        run: R CMD javareconf
+        run: sudo R CMD javareconf
       - name: Install dependencies
         run: |
           install.packages(c("remotes", "rcmdcheck"))
