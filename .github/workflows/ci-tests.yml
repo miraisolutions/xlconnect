@@ -10,7 +10,7 @@ name: R
 
 on:
   push:
-    branches: [ master ]
+    branches: [ master, java15-#109 ]
   pull_request:
     branches: [ master ]
 
