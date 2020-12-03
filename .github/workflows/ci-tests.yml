@@ -37,28 +37,24 @@ jobs:
         with:
           java-version: ${{ matrix.java }}
           java-package: jdk
-      - name: set variables for javareconf
-        run: |
-          echo JAVA=$(which java) >> $GITHUB_ENV 
-          echo JAVAC=$(which javac) >> $GITHUB_ENV
-          echo JAVAP=$(which javap) >> $GITHUB_ENV
-          echo JAR=$(which jar) >> $GITHUB_ENV
+      # - name: set variables for javareconf
+      #   run: |
+      #     echo JAVA=$(which java) >> $GITHUB_ENV 
+      #     echo JAVAC=$(which javac) >> $GITHUB_ENV
+      #     echo JAVAP=$(which javap) >> $GITHUB_ENV
+      #     echo JAR=$(which jar) >> $GITHUB_ENV
       - name: Set up R ${{ matrix.r-version }}
         uses: r-lib/actions/setup-r@v1
         with:
           r-version: ${{ matrix.r-version }}
       - name: run javareconf
         run: |
-          echo java_var:$JAVA
           java -version
-          echo path:$PATH
           echo java_home:$JAVA_HOME
-          ls -la $JAVA_HOME
-          echo javac_var:$JAVAC
           echo library paths: $LD_LIBRARY_PATH
           sudo R CMD javareconf -n JAVA_HOME=$JAVA_HOME
-          sudo R CMD javareconf -n | grep -i "Java version : "${{ matrix.java }} # fail fast
-          sudo R CMD javareconf
+          sudo R CMD javareconf -n JAVA_HOME=$JAVA_HOME | grep -i "Java version : "${{ matrix.java }} # fail fast
+          sudo R CMD javareconf JAVA_HOME=$JAVA_HOME
       - name: Install dependencies
         run: |
           install.packages(c("rJava"))
