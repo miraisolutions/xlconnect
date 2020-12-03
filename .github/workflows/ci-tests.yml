@@ -35,16 +35,21 @@ jobs:
         uses: r-lib/actions/setup-r@v1
         with:
           r-version: ${{ matrix.r-version }}
-      - name: Set up java with R
+      - name: set variables for javareconf
+        run: |
+          echo JAVA=$(which java) >> $GITHUB_ENV 
+          echo JAVAC=$(which javac) >> $GITHUB_ENV
+          echo JAVAP=$(which javap) >> $GITHUB_ENV
+          echo JAR=$(which jar) >> $GITHUB_ENV
+      - name: run javareconf
         run: | 
           echo path:$PATH
           echo java_home:$JAVA_HOME
-          which java | xargs ls -la
-          which javac | xargs ls -la
-          which javap | xargs ls -la
           which javah | xargs ls -la
-          which jar | xargs ls -la
+          ls -la /etc/alternatives/javah
+          sudo update-alternatives remove-all javah
           echo library paths: $LD_LIBRARY_PATH
+          sudo R CMD javareconf -n | grep -i "Java version : "${{ matrix.java }} # fail fast
           sudo R CMD javareconf
       - name: Install dependencies
         run: |
