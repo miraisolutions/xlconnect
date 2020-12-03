@@ -10,18 +10,19 @@ name: R
 
 on:
   push:
-    branches: [ master, java15-#109 ]
+    branches: [ master ]
   pull_request:
     branches: [ master ]
 
 jobs:
   build:
-    runs-on: ubuntu-18.04
+    runs-on: ${{ matrix.os }}
     strategy:
       matrix:
+        os: [ubuntu-18.04] # windows-2019, macos-10.15]
         r-version: [3.5, 3.6]
         # test against latest update of each major Java version, as well as specific updates of LTS versions:
-        java: [ 8, 8.0.192, 11.0.x, 11.0.3, 14, 15 ]
+        java: [ 8, 11.0.x, 15 ]
 
     steps:
       - uses: actions/checkout@v2
@@ -34,6 +35,8 @@ jobs:
         uses: r-lib/actions/setup-r@v1
         with:
           r-version: ${{ matrix.r-version }}
+      - name: Set up java with R
+        run: R CMD javareconf
       - name: Install dependencies
         run: |
           install.packages(c("remotes", "rcmdcheck"))
