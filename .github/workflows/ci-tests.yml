@@ -54,15 +54,16 @@ jobs:
         if: matrix.config.vignettes
         uses: r-lib/actions/setup-tinytex@v1
 
-      - name: Install extra Tex packages # not clear what the setup action does
+      - name: Install extra Tex packages
         if: matrix.config.vignettes
         run: |
-          install.packages('tinytex')
           library(tinytex)
           tlmgr_install('datetime') 
           tlmgr_install('inputenc')
           tlmgr_install('hyperref')
           tlmgr_install('url')
+          tlmgr_install('fmtcount')
+          tinytex:::install_yihui_pkgs()
         shell: Rscript {0}
 
       - name: run javareconf # Yes it actually needs JAVA_HOME=$JAVA_HOME, doesn't use actual env vars (!)
