@@ -179,7 +179,7 @@ jobs:
       #     fail_ci_if_error: true # optional (default = false)
       #     verbose: true # optional (default = false)
       - name: coverage report
-        if: always()
+        if: success()
         run: |
           library(covr)
           covr::codecov(function_exclusions=c("onLoad", "onAttach", "xlcEnsureDependencies"))
