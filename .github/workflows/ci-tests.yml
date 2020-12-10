@@ -42,7 +42,7 @@ jobs:
         uses: r-lib/actions/setup-tinytex@v1
       - name: Install extra Tex packages
         run: |
-          library(tlmgr)
+          library(tinytex)
           tlmgr_install('datetime') 
           tlmgr_install('inputenc')
           tlmgr_install('hyperref')
