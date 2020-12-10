@@ -54,10 +54,12 @@ jobs:
             vignettes: false
             xlc-repo: https://jcenter.bintray.com
             timezone-name: Canada/Newfoundland
+            pkgrepo: https://mran.revolutionanalytics.com/snapshot/2017-12-31
     env:
       R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
-      XLCONNECT_JAVA_REPO_URL: ${{matrix.config.xlc-repo}}
-      TZ: ${{matrix.config.timezone-name}} 
+      XLCONNECT_JAVA_REPO_URL: ${{ matrix.config.xlc-repo }}
+      TZ: ${{ matrix.config.timezone-name }}
+      RSPM: ${{ matrix.config.pkgrepo }}
 
     steps:
       - uses: actions/checkout@v2
