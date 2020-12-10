@@ -17,12 +17,14 @@ on:
 jobs:
   build:
     runs-on: ${{ matrix.config.os-name }}-${{ matrix.config.os-version }}
-    name: ${{ matrix.config.os-name }}-${{ matrix.config.os-version }} R ${{ matrix.config.r}} - java ${{ matrix.config.java}}
+    name: >- 
+      ${{ matrix.config.os-name }}-${{ matrix.config.os-version }}
+      R ${{ matrix.config.r-version}} - java ${{ matrix.config.java}}
     strategy:
       matrix:
         config: 
           - os-name: ubuntu # windows-2019, macos-10.15]
-            os-version: "18.04"
+            os-version: latest
             r-version: oldrel
             java: 15
             vignettes: false
@@ -45,10 +47,10 @@ jobs:
             r-version: release
             java: 13
             vignettes: false
-          - os-name: windows 
-            os-version: "2019"
+          - os-name: ubuntu 
+            os-version: "16.04"
             r-version: 3.2.5
-            java: 11
+            java: 8
             vignettes: false
             xlc-repo: https://jcenter.bintray.com
             timezone-name: Canada/Newfoundland
@@ -70,6 +72,10 @@ jobs:
         uses: r-lib/actions/setup-r@v1
         with:
           r-version: ${{ matrix.config.r-version }}
+
+      - name: print effective R version
+        run: version
+        shell: Rscript {0}
 
       - name: Install tinytex
         if: matrix.config.vignettes
@@ -150,6 +156,11 @@ jobs:
           rcmdcheck::rcmdcheck(args = c("--as-cran"), 
           build_args=c("--compact-vignettes=gs+qpdf"), error_on = "warning", check_dir = "check")
         shell: Rscript {0}
+
+      - name: Show test output
+        if: always()
+        run: cat check/XLConnect.Rcheck/tests/XLConnect_Unit_Tests.txt || true
+        shell: bash
 
       - name: Upload check results
         if: failure()
