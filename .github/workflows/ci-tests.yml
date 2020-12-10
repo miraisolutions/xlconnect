@@ -57,6 +57,7 @@ jobs:
       - name: Install extra Tex packages
         if: matrix.config.vignettes
         run: |
+          install.package('tinytex')
           library(tinytex)
           tlmgr_install('datetime') 
           tlmgr_install('inputenc')
