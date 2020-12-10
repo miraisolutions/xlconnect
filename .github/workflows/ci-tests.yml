@@ -125,6 +125,7 @@ jobs:
       - name: Install system dependencies
         if: runner.os == 'Linux'
         run: |
+          sudo apt-get install libcurl4-openssl-dev
           while read -r cmd
           do
             eval sudo $cmd
@@ -132,6 +133,7 @@ jobs:
 
       - name: Install dependencies
         run: |
+          remotes::install_cran("covr")
           remotes::install_deps(dependencies = TRUE, repos=options('repos')[['repos']][['RSPM']])
           remotes::install_cran("rcmdcheck")
         shell: Rscript {0}
@@ -179,7 +181,6 @@ jobs:
       - name: coverage report
         if: always()
         run: |
-          remotes::install_cran("covr")
           library(covr)
           covr::codecov(function_exclusions=c("onLoad", "onAttach", "xlcEnsureDependencies"))
         shell: Rscript {0}
