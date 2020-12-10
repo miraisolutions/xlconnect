@@ -40,8 +40,9 @@ jobs:
       - uses: actions/checkout@v2
       - name: Install tinytex
         uses: r-lib/actions/setup-tinytex@v1
-      - name: Install extra Tex packages
+      - name: Install extra Tex packages # not clear what the setup action does
         run: |
+          install.packages('tinytex')
           library(tinytex)
           tlmgr_install('datetime') 
           tlmgr_install('inputenc')
