@@ -30,13 +30,16 @@ jobs:
       R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
 
     steps:
-      - name: remove unwanted preinstalled java
-        run: |
-          which javah | xargs ls -la
-          ls -la /etc/alternatives/javah
-          sudo update-alternatives --remove-all javah
-          sudo rm -rf /usr/lib/jvm/*
+      # - name: remove unwanted preinstalled java
+      #   run: |
+      #     which javah | xargs ls -la
+      #     ls -la /etc/alternatives/javah
+      #     sudo update-alternatives --remove-all javah
+      #     sudo rm -rf /usr/lib/jvm/*
+      
       - uses: actions/checkout@v2
+      - name: Install tinytex
+        uses: r-lib/actions/setup-tinytex@v1
       - name: Setup java
         uses: actions/setup-java@v1
         with:
@@ -93,12 +96,8 @@ jobs:
         env:
           _R_CHECK_CRAN_INCOMING_: false
           FULL_TEST_SUITE: 1
-        run: | 
-          R CMD build --no-build-vignettes
-          ls -la ../
-          ls -la 
-          git status
-          ls XLConnect_*.tar.gz | xargs R CMD check --no-manual --as-cran --no-build-vignettes
+        run: rcmdcheck::rcmdcheck(args = c("--no-manual", "--as-cran", "--no-build-vignettes"), error_on = "warning", check_dir = "check")
+        shell: Rscript {0}
           
         # run: rcmdcheck::rcmdcheck(args = c("--no-manual"), error_on = "error")
         # shell: Rscript {0}
