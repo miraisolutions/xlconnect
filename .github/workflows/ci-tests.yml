@@ -29,12 +29,12 @@ jobs:
           #   java: 15
           #   vignettes: false
           #   xlc-repo: https://jcenter.bintray.com
-          # - os-name: ubuntu # windows-2019, macos-10.15]
-          #   os-version: "18.04"
-          #   r-version: release
-          #   java: 11
-          #   vignettes: true
-          #   timezone-name: Asia/Kathmandu
+          - os-name: ubuntu # windows-2019, macos-10.15]
+            os-version: "18.04"
+            r-version: release
+            java: 11
+            vignettes: true
+            timezone-name: Asia/Kathmandu
           # - os-name: ubuntu # windows-2019, macos-10.15]
           #   os-version: "18.04"
           #   r-version: devel
@@ -60,10 +60,13 @@ jobs:
       XLCONNECT_JAVA_REPO_URL: ${{ matrix.config.xlc-repo }}
       TZ: ${{ matrix.config.timezone-name }}
       RSPM: ${{ matrix.config.pkgrepo }}
-      CRAN: ${{ matrix.config.pkgrepo }}
 
     steps:
       - uses: actions/checkout@v2
+
+      - name: RSPM fallback
+        if: matrix.config.pkgrepo == ''
+        run: echo 'RSPM=https://cloud.r-project.org' >> $GITHUB_ENV
 
       - name: Setup java
         uses: actions/setup-java@v1
@@ -89,7 +92,7 @@ jobs:
 
       - name: Query dependencies
         run: |
-          install.packages('remotes')
+          install.packages('remotes', repos=options('repos')[['repos']][['CRAN']])
           saveRDS(remotes::dev_package_deps(dependencies = TRUE), ".github/depends.Rds", version = 2)
           writeLines(sprintf("R-%i.%i", getRversion()$major, getRversion()$minor), ".github/R-version")
         shell: Rscript {0}
@@ -109,7 +112,7 @@ jobs:
       - name: Install extra Tex packages
         if: matrix.config.vignettes
         run: |
-          remotes::install_cran('tinytex')
+          remotes::install_cran('tinytex', repos=options('repos')[['repos']][['RSPM']])
           library(tinytex)
           tlmgr_install('datetime') 
           tlmgr_install('inputenc')
@@ -129,10 +132,10 @@ jobs:
 
       - name: Install dependencies
         run: |
-          remotes::install_deps(dependencies = TRUE)
-          remotes::install_cran("rcmdcheck")
+          remotes::install_deps(dependencies = TRUE, repos=options('repos')[['repos']][['RSPM']])
+          remotes::install_cran("rcmdcheck", repos=options('repos')[['repos']][['RSPM']])
           if(!require("rcmdcheck")){
-            remotes::install_cran("devtools")
+            remotes::install_cran("devtools", repos=options('repos')[['repos']][['RSPM']])
           }
         shell: Rscript {0}
 
