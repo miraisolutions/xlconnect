@@ -23,30 +23,30 @@ jobs:
     strategy:
       matrix:
         config: 
-          - os-name: ubuntu # windows-2019, macos-10.15]
-            os-version: latest
-            r-version: oldrel
-            java: 15
-            vignettes: false
-            xlc-repo: https://jcenter.bintray.com
-          - os-name: ubuntu # windows-2019, macos-10.15]
-            os-version: "18.04"
-            r-version: release
-            java: 11
-            vignettes: true
-            timezone-name: Asia/Kathmandu
-          - os-name: ubuntu # windows-2019, macos-10.15]
-            os-version: "18.04"
-            r-version: devel
-            java: 8
-            vignettes: false
-            xlc-repo: https://jcenter.bintray.com
-            timezone-name: Pacific/Marquesas
-          - os-name: macos
-            os-version: "10.15"
-            r-version: release
-            java: 13
-            vignettes: false
+          # - os-name: ubuntu # windows-2019, macos-10.15]
+          #   os-version: latest
+          #   r-version: oldrel
+          #   java: 15
+          #   vignettes: false
+          #   xlc-repo: https://jcenter.bintray.com
+          # - os-name: ubuntu # windows-2019, macos-10.15]
+          #   os-version: "18.04"
+          #   r-version: release
+          #   java: 11
+          #   vignettes: true
+          #   timezone-name: Asia/Kathmandu
+          # - os-name: ubuntu # windows-2019, macos-10.15]
+          #   os-version: "18.04"
+          #   r-version: devel
+          #   java: 8
+          #   vignettes: false
+          #   xlc-repo: https://jcenter.bintray.com
+          #   timezone-name: Pacific/Marquesas
+          # - os-name: macos
+          #   os-version: "10.15"
+          #   r-version: release
+          #   java: 13
+          #   vignettes: false
           - os-name: ubuntu 
             os-version: "16.04"
             r-version: 3.2.5
@@ -79,23 +79,6 @@ jobs:
         run: version
         shell: Rscript {0}
 
-      - name: Install tinytex
-        if: matrix.config.vignettes
-        uses: r-lib/actions/setup-tinytex@v1
-
-      - name: Install extra Tex packages
-        if: matrix.config.vignettes
-        run: |
-          install.packages('tinytex')
-          library(tinytex)
-          tlmgr_install('datetime') 
-          tlmgr_install('inputenc')
-          tlmgr_install('hyperref')
-          tlmgr_install('url')
-          tlmgr_install('fmtcount')
-          tinytex:::install_yihui_pkgs()
-        shell: Rscript {0}
-
       - name: run javareconf # Yes it actually needs JAVA_HOME=$JAVA_HOME, doesn't use actual env vars (!)
         run: |
           java -version
@@ -115,8 +98,25 @@ jobs:
         uses: actions/cache@v2
         with:
           path: ${{ env.R_LIBS_USER }}
-          key: ${{ runner.os }}-${{ hashFiles('.github/R-version') }}-1-${{ hashFiles('.github/depends.Rds') }}
+          key: ${{ runner.os }}-${{ hashFiles('.github/R-version') }}-1-${{ hashFiles('.github/depends.Rds') }}${{matrix.config.pkgrepo}}
           restore-keys: ${{ runner.os }}-${{ hashFiles('.github/R-version') }}-1-
+
+      - name: Install tinytex
+        if: matrix.config.vignettes
+        uses: r-lib/actions/setup-tinytex@v1
+
+      - name: Install extra Tex packages
+        if: matrix.config.vignettes
+        run: |
+          remotes::install_cran('tinytex')
+          library(tinytex)
+          tlmgr_install('datetime') 
+          tlmgr_install('inputenc')
+          tlmgr_install('hyperref')
+          tlmgr_install('url')
+          tlmgr_install('fmtcount')
+          tinytex:::install_yihui_pkgs()
+        shell: Rscript {0}
 
       - name: Install system dependencies
         if: runner.os == 'Linux'
