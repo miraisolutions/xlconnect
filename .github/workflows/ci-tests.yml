@@ -60,6 +60,7 @@ jobs:
       XLCONNECT_JAVA_REPO_URL: ${{ matrix.config.xlc-repo }}
       TZ: ${{ matrix.config.timezone-name }}
       RSPM: ${{ matrix.config.pkgrepo }}
+      CRAN: ${{ matrix.config.pkgrepo }}
 
     steps:
       - uses: actions/checkout@v2
