@@ -27,7 +27,7 @@
 #############################################################################
 
 # Set timezone to UTC
-Sys.setenv("TZ" = "UTC")
+# Sys.setenv("TZ" = "UTC")
 
 # Limit number of GC threads; set timezone
 options(java.parameters = c("-XX:+UseParallelGC", "-XX:ParallelGCThreads=1", paste0("-Duser.timezone=", Sys.timezone())))
