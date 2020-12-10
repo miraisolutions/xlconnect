@@ -23,35 +23,41 @@ jobs:
         config: 
           - os-name: ubuntu # windows-2019, macos-10.15]
             os-version: "18.04"
-            r-version: oldrel #, 3.5, 3.6]
-            java: 15 #  8, 11.0.x]
+            r-version: oldrel
+            java: 15
             vignettes: false
+            xlc-repo: https://jcenter.bintray.com
           - os-name: ubuntu # windows-2019, macos-10.15]
             os-version: "18.04"
-            r-version: release #, 3.5, 3.6]
-            java: 11 #  8, 11.0.x]
+            r-version: release
+            java: 11
             vignettes: true
+            timezone-name: Asia/Kathmandu
           - os-name: ubuntu # windows-2019, macos-10.15]
             os-version: "18.04"
-            r-version: devel #, 3.5, 3.6]
-            java: 8 #  8, 11.0.x]
+            r-version: devel
+            java: 8
             vignettes: false
-          - os-name: macos # windows-2019, macos-10.15]
+            xlc-repo: https://jcenter.bintray.com
+            timezone-name: Pacific/Marquesas
+          - os-name: macos
             os-version: "10.15"
-            r-version: release #, 3.5, 3.6]
-            java: 13 #  8, 11.0.x]
+            r-version: release
+            java: 13
             vignettes: false
+          - os-name: windows 
+            os-version: "2019"
+            r-version: 3.2.5
+            java: 11
+            vignettes: false
+            xlc-repo: https://jcenter.bintray.com
+            timezone-name: Canada/Newfoundland
     env:
       R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
+      XLCONNECT_JAVA_REPO_URL: ${{matrix.config.xlc-repo}}
+      TZ: ${{matrix.config.timezone-name}} 
 
     steps:
-      # - name: remove unwanted preinstalled java
-      #   run: |
-      #     which javah | xargs ls -la
-      #     ls -la /etc/alternatives/javah
-      #     sudo update-alternatives --remove-all javah
-      #     sudo rm -rf /usr/lib/jvm/*
-      
       - uses: actions/checkout@v2
 
       - name: Setup java
@@ -134,6 +140,7 @@ jobs:
           rcmdcheck::rcmdcheck(args = c("--no-manual", "--no-vignettes", "--no-build-vignettes", "--check-subdirs=no"),
           build_args=c("--no-build-vignettes"), error_on = "error", check_dir = "check")
         shell: Rscript {0}
+
       - name: Check with doc
         if: matrix.config.vignettes
         env:
@@ -143,6 +150,7 @@ jobs:
           rcmdcheck::rcmdcheck(args = c("--as-cran"), 
           build_args=c("--compact-vignettes=gs+qpdf"), error_on = "warning", check_dir = "check")
         shell: Rscript {0}
+
       - name: Upload check results
         if: failure()
         uses: actions/upload-artifact@main
@@ -152,6 +160,7 @@ jobs:
             check/XLConnect.Rcheck/
             !check/XLConnect.Rcheck/**/*.jar
             !check/XLConnect.Rcheck/00_pkg_src/
+
       - name: Upload successfully built package
         if: success() && matrix.config.vignettes
         uses: actions/upload-artifact@main
