@@ -149,7 +149,7 @@ jobs:
         if: ${{!matrix.config.vignettes}}
         env:
           _R_CHECK_CRAN_INCOMING_: false
-          FULL_TEST_SUITE: 1
+          #FULL_TEST_SUITE: 1
         run: >-
             rcmdcheck::rcmdcheck(args = c("--no-manual", "--no-vignettes", "--no-build-vignettes", "--check-subdirs=no"),
             build_args=c("--no-build-vignettes"), error_on = "error", check_dir = "check")
@@ -159,7 +159,7 @@ jobs:
         if: matrix.config.vignettes
         env:
           _R_CHECK_CRAN_INCOMING_: false
-          FULL_TEST_SUITE: 1
+          #FULL_TEST_SUITE: 1
         run: >- 
           rcmdcheck::rcmdcheck(args = c("--as-cran"), 
           build_args=c("--compact-vignettes=gs+qpdf"), error_on = "warning", check_dir = "check")
