@@ -133,7 +133,7 @@ jobs:
       - name: Install dependencies
         run: |
           remotes::install_deps(dependencies = TRUE, repos=options('repos')[['repos']][['RSPM']])
-          remotes::install_cran("rcmdcheck", repos=options('repos')[['repos']][['RSPM']])
+          remotes::install_cran("rcmdcheck")
           if(!require("rcmdcheck")){
             remotes::install_cran("devtools", repos=options('repos')[['repos']][['RSPM']])
           }
