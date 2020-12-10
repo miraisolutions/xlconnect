@@ -124,7 +124,9 @@ jobs:
         env:
           _R_CHECK_CRAN_INCOMING_: false
           FULL_TEST_SUITE: 1
-        run: rcmdcheck::rcmdcheck(args = c("--as-cran"), error_on = "warning", check_dir = "check")
+        run: >- 
+          rcmdcheck::rcmdcheck(args = c("--as-cran"), 
+          build_args=c("--compact-vignettes=gs+qpdf"), error_on = "warning", check_dir = "check")
         shell: Rscript {0}
       - name: Upload check results
         if: failure()
