@@ -180,7 +180,9 @@ jobs:
         if: always()
         run: |
           remotes::install_cran("covr")
+          library(covr)
           covr::codecov(function_exclusions=c("onLoad", "onAttach", "xlcEnsureDependencies"))
+        shell: Rscript {0}
       
       - name: Upload check results
         if: failure()
