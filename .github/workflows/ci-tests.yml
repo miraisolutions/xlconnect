@@ -21,11 +21,16 @@ jobs:
     strategy:
       matrix:
         config: 
+          # - os-name: ubuntu # windows-2019, macos-10.15]
+          #   os-version: "18.04"
+          #   r-version: 4 #, 3.5, 3.6]
+          #   java: 15 #  8, 11.0.x]
+          #   vignettes: true
           - os-name: ubuntu # windows-2019, macos-10.15]
             os-version: "18.04"
-            r-version: 4 #, 3.5, 3.6]
-            java: 15 #  8, 11.0.x]
-            vignettes: true
+            r-version: 3.5 #, 3.5, 3.6]
+            java: 11 #  8, 11.0.x]
+            vignettes: false
     env:
       R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
 
