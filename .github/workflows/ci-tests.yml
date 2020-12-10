@@ -17,7 +17,7 @@ on:
 jobs:
   build:
     runs-on: ${{ matrix.config.os-name }}-${{ matrix.config.os-version }}
-    name: ${{ matrix.config.os-name }}-${{ matrix.config.os-version }} ${{ matrix.config.r}} - java ${{ matrix.config.java}}
+    name: ${{ matrix.config.os-name }}-${{ matrix.config.os-version }} R ${{ matrix.config.r}} - java ${{ matrix.config.java}}
     strategy:
       matrix:
         config: 
@@ -31,6 +31,16 @@ jobs:
             r-version: release #, 3.5, 3.6]
             java: 11 #  8, 11.0.x]
             vignettes: true
+          - os-name: ubuntu # windows-2019, macos-10.15]
+            os-version: "18.04"
+            r-version: devel #, 3.5, 3.6]
+            java: 8 #  8, 11.0.x]
+            vignettes: false
+          - os-name: macos # windows-2019, macos-10.15]
+            os-version: "10.15"
+            r-version: release #, 3.5, 3.6]
+            java: 13 #  8, 11.0.x]
+            vignettes: false
     env:
       R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
 
