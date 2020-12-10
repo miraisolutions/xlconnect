@@ -21,16 +21,16 @@ jobs:
     strategy:
       matrix:
         config: 
-          # - os-name: ubuntu # windows-2019, macos-10.15]
-          #   os-version: "18.04"
-          #   r-version: 4 #, 3.5, 3.6]
-          #   java: 15 #  8, 11.0.x]
-          #   vignettes: true
           - os-name: ubuntu # windows-2019, macos-10.15]
             os-version: "18.04"
-            r-version: 3.5 #, 3.5, 3.6]
-            java: 11 #  8, 11.0.x]
+            r-version: oldrel #, 3.5, 3.6]
+            java: 15 #  8, 11.0.x]
             vignettes: false
+          - os-name: ubuntu # windows-2019, macos-10.15]
+            os-version: "18.04"
+            r-version: release #, 3.5, 3.6]
+            java: 11 #  8, 11.0.x]
+            vignettes: true
     env:
       R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
 
@@ -138,4 +138,14 @@ jobs:
         uses: actions/upload-artifact@main
         with:
           name: ${{ runner.os }}-r${{ matrix.config.r }}-results
-          path: check
+          path: | 
+            check/XLConnect.Rcheck/
+            !check/XLConnect.Rcheck/**/*.jar
+            !check/XLConnect.Rcheck/00_pkg_src/
+      - name: Upload successfully built package
+        if: success() && matrix.config.vignettes
+        uses: actions/upload-artifact@main
+        with:
+          name: ${{ runner.os }}-r${{ matrix.config.r }}-results
+          path: | 
+            check/XLConnect_*.tar.gz
