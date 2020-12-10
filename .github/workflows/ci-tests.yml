@@ -122,7 +122,7 @@ jobs:
           FULL_TEST_SUITE: 1
         run: >-
           rcmdcheck::rcmdcheck(args = c("--no-manual", "--no-vignettes", "--no-build-vignettes", "--check-subdirs=no"),
-          build_args=c("--no-build-vignettes"), error_on = "warning", check_dir = "check")
+          build_args=c("--no-build-vignettes"), error_on = "error", check_dir = "check")
         shell: Rscript {0}
       - name: Check with doc
         if: matrix.config.vignettes
