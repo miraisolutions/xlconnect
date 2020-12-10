@@ -40,6 +40,8 @@ jobs:
       - uses: actions/checkout@v2
       - name: Install tinytex
         uses: r-lib/actions/setup-tinytex@v1
+      - name: Install extra Tex packages
+        run: sudo tlmgr install datetime inputenc hyperref url
       - name: Setup java
         uses: actions/setup-java@v1
         with:
