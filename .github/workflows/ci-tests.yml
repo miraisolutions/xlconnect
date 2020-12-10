@@ -23,30 +23,30 @@ jobs:
     strategy:
       matrix:
         config: 
-          # - os-name: ubuntu # windows-2019, macos-10.15]
-          #   os-version: latest
-          #   r-version: oldrel
-          #   java: 15
-          #   vignettes: false
-          #   xlc-repo: https://jcenter.bintray.com
+          - os-name: ubuntu # windows-2019, macos-10.15]
+            os-version: latest
+            r-version: oldrel
+            java: 15
+            vignettes: false
+            xlc-repo: https://jcenter.bintray.com
           - os-name: ubuntu # windows-2019, macos-10.15]
             os-version: "18.04"
             r-version: release
             java: 11
             vignettes: true
             timezone-name: Asia/Kathmandu
-          # - os-name: ubuntu # windows-2019, macos-10.15]
-          #   os-version: "18.04"
-          #   r-version: devel
-          #   java: 8
-          #   vignettes: false
-          #   xlc-repo: https://jcenter.bintray.com
-          #   timezone-name: Pacific/Marquesas
-          # - os-name: macos
-          #   os-version: "10.15"
-          #   r-version: release
-          #   java: 13
-          #   vignettes: false
+          - os-name: ubuntu # windows-2019, macos-10.15]
+            os-version: "18.04"
+            r-version: devel
+            java: 8
+            vignettes: false
+            xlc-repo: https://jcenter.bintray.com
+            timezone-name: Pacific/Marquesas
+          - os-name: macos
+            os-version: "10.15"
+            r-version: release
+            java: 13
+            vignettes: false
           - os-name: ubuntu 
             os-version: "16.04"
             r-version: 3.2.5
@@ -134,9 +134,6 @@ jobs:
         run: |
           remotes::install_deps(dependencies = TRUE, repos=options('repos')[['repos']][['RSPM']])
           remotes::install_cran("rcmdcheck")
-          if(!require("rcmdcheck")){
-            remotes::install_cran("devtools", repos=options('repos')[['repos']][['RSPM']])
-          }
         shell: Rscript {0}
 
       - name: Session info
@@ -152,13 +149,8 @@ jobs:
           _R_CHECK_CRAN_INCOMING_: false
           FULL_TEST_SUITE: 1
         run: >-
-          if(!require("rcmdcheck")){
-            devtools::check(args = c("--no-manual", "--no-vignettes", "--no-build-vignettes", "--check-subdirs=no"),
-            build_args=c("--no-build-vignettes"), error_on = "error", check_dir = "check")
-          } else {
             rcmdcheck::rcmdcheck(args = c("--no-manual", "--no-vignettes", "--no-build-vignettes", "--check-subdirs=no"),
             build_args=c("--no-build-vignettes"), error_on = "error", check_dir = "check")
-          }
         shell: Rscript {0}
 
       - name: Check with doc
