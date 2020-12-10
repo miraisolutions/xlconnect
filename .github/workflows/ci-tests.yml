@@ -143,7 +143,7 @@ jobs:
         run: |
           options(width = 100)
           pkgs <- installed.packages()[, "Package"]
-          sessioninfo::session_info(pkgs, include_base = TRUE)
+          sessionInfo()
         shell: Rscript {0}
 
       - name: Check without doc
