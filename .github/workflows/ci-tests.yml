@@ -24,8 +24,8 @@ jobs:
           - os-name: ubuntu # windows-2019, macos-10.15]
             os-version: "18.04"
             r-version: 4 #, 3.5, 3.6]
-            # test against latest update of each major Java version, as well as specific updates of LTS versions:
-            java: 15 #  8, 11.0.x,
+            java: 15 #  8, 11.0.x]
+            vignettes: true
     env:
       R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
 
@@ -38,9 +38,24 @@ jobs:
       #     sudo rm -rf /usr/lib/jvm/*
       
       - uses: actions/checkout@v2
+
+      - name: Setup java
+        uses: actions/setup-java@v1
+        with:
+          java-version: ${{ matrix.config.java }}
+          java-package: jdk
+
+      - name: Set up R ${{ matrix.config.r-version }}
+        uses: r-lib/actions/setup-r@v1
+        with:
+          r-version: ${{ matrix.config.r-version }}
+
       - name: Install tinytex
+        if: matrix.config.vignettes
         uses: r-lib/actions/setup-tinytex@v1
+
       - name: Install extra Tex packages # not clear what the setup action does
+        if: matrix.config.vignettes
         run: |
           install.packages('tinytex')
           library(tinytex)
@@ -49,23 +64,14 @@ jobs:
           tlmgr_install('hyperref')
           tlmgr_install('url')
         shell: Rscript {0}
-      - name: Setup java
-        uses: actions/setup-java@v1
-        with:
-          java-version: ${{ matrix.config.java }}
-          java-package: jdk
-      - name: Set up R ${{ matrix.config.r-version }}
-        uses: r-lib/actions/setup-r@v1
-        with:
-          r-version: ${{ matrix.config.r-version }}
-      - name: run javareconf
+
+      - name: run javareconf # Yes it actually needs JAVA_HOME=$JAVA_HOME, doesn't use actual env vars (!)
         run: |
           java -version
           echo java_home:$JAVA_HOME
           echo library paths: $LD_LIBRARY_PATH
           sudo R CMD javareconf JAVA_HOME=$JAVA_HOME
-      # - name: Install tinytex
-      #   uses: r-lib/actions/setup-tinytex@v1
+
       - name: Query dependencies
         run: |
           install.packages('remotes')
@@ -88,6 +94,7 @@ jobs:
           do
             eval sudo $cmd
           done < <(Rscript -e 'writeLines(remotes::system_requirements("${{ matrix.config.os-name }}", "${{ matrix.config.os-version }}"))')
+
       - name: Install dependencies
         run: |
           remotes::install_deps(dependencies = TRUE)
@@ -101,15 +108,22 @@ jobs:
           sessioninfo::session_info(pkgs, include_base = TRUE)
         shell: Rscript {0}
 
-      - name: Check
+      - name: Check without doc
+        if: ${{!matrix.config.vignettes}}
         env:
           _R_CHECK_CRAN_INCOMING_: false
           FULL_TEST_SUITE: 1
-        run: rcmdcheck::rcmdcheck(args = c("--no-manual", "--as-cran", "--no-build-vignettes"), error_on = "warning", check_dir = "check")
+        run: >-
+          rcmdcheck::rcmdcheck(args = c("--no-manual", "--as-cran"),
+          build-args=c("--no-build-vignettes"), error_on = "warning", check_dir = "check")
         shell: Rscript {0}
-          
-        # run: rcmdcheck::rcmdcheck(args = c("--no-manual"), error_on = "error")
-        # shell: Rscript {0}
+      - name: Check with doc
+        if: matrix.config.vignettes
+        env:
+          _R_CHECK_CRAN_INCOMING_: false
+          FULL_TEST_SUITE: 1
+        run: rcmdcheck::rcmdcheck(args = c("--as-cran"), error_on = "warning", check_dir = "check")
+        shell: Rscript {0}
       - name: Upload check results
         if: failure()
         uses: actions/upload-artifact@main
