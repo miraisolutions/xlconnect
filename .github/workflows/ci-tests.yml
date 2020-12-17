@@ -179,7 +179,7 @@ jobs:
 
       - name: Show test output
         if: always()
-        run: cat XLConnect_Unit_Tests.txt || true
+        run: cat tests/XLConnect_Unit_Tests.txt || true
         shell: bash
 
       - name: coverage report
