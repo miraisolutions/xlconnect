@@ -171,7 +171,7 @@ jobs:
           _R_CHECK_CRAN_INCOMING_: false
           FULL_TEST_SUITE: 1
         run: |
-         install.packages(list.files("./check", pattern = "XLConnect_.*.tar.gz"), repos=NULL, type="source")
+         install.packages(list.files("./check", pattern = "XLConnect_.*.tar.gz", full.names = TRUE), repos=NULL, type="source")
          source("tests/run_tests.R")
         shell: Rscript {0}
 
