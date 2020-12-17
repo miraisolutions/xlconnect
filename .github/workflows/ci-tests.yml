@@ -95,13 +95,6 @@ jobs:
           echo java_home:$JAVA_HOME
           echo library paths: $LD_LIBRARY_PATH
           sudo R CMD javareconf JAVA_HOME=$JAVA_HOME
-      
-      - name: run javareconf (for Windows) # Yes it actually needs JAVA_HOME=%JAVA_HOME%, doesn't use actual env vars (!)
-        if: runner.os == 'Windows'
-        run: |
-          java -version          
-          R CMD javareconf
-        shell: cmd
 
       - name: Query dependencies
         run: |
