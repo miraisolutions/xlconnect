@@ -36,7 +36,7 @@
   rpm <- function(args) {
     suppressWarnings(system2("rpm", args, stdout = TRUE))
   }
-  if(!is.null(debianpkgname) && system2("dpkg", c("--help"), stdout=FALSE) == 0) {
+  if(!is.null(debianpkgname) && suppressWarnings(system2("dpkg", c("--help"), stdout=FALSE)) == 0) {
     pkgList <- dpkg(c("-l", debianpkgname))
     pkgLine <- pkgList[which(grepl(debianpkgname, pkgList))][1]
     foundVersion <- strsplit(pkgLine, " +")[[1]][3]
@@ -45,7 +45,7 @@
       allFiles[which(grepl(".*/java.*jar", allFiles))]
     } else { c() }
   }
-  else if (!is.null(rpmpkgname) && system2("rpm", c("--help"), stdout = FALSE) == 0) {
+  else if (!is.null(rpmpkgname) && suppressWarnings(system2("rpm", c("--help"), stdout = FALSE)) == 0) {
     pkgInfo <- rpm(c("-qi", rpmpkgname))
     versionStr <- pkgInfo[which(grepl('Version', pkgInfo))]
     foundVersion <- strsplit(versionStr, " +: +")[[1]][2]
