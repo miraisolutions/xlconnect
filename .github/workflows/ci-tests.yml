@@ -99,9 +99,9 @@ jobs:
       - name: run javareconf (for Windows) # Yes it actually needs JAVA_HOME=%JAVA_HOME%, doesn't use actual env vars (!)
         if: runner.os == 'Windows'
         run: |
-          java -version
-          echo java_home:%JAVA_HOME%
-          R CMD javareconf JAVA_HOME=%JAVA_HOME%
+          java -version          
+          R CMD javareconf
+        shell: cmd
 
       - name: Query dependencies
         run: |
