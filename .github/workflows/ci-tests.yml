@@ -80,7 +80,7 @@ jobs:
           java-version: ${{ matrix.config.java }}
           java-package: jdk
           architecture: x86
-        if: matrix.config.java != '13'
+        if: matrix.config.os-name != 'macos'
       
       - name: Setup java (x64)
         uses: actions/setup-java@v1
