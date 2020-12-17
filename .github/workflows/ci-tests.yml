@@ -171,7 +171,7 @@ jobs:
           _R_CHECK_CRAN_INCOMING_: false
           FULL_TEST_SUITE: 1
         run: |-
-            check_args <- if(${{matrix.config.os-name}} == "windows") {
+            check_args <- if("${{matrix.config.os-name}}" == "windows") {
               c("--no-manual", "--no-vignettes", "--no-build-vignettes", "--check-subdirs=no", "--no-multiarch")
             } else {
               c("--no-manual", "--no-vignettes", "--no-build-vignettes", "--check-subdirs=no")
@@ -195,7 +195,7 @@ jobs:
           FULL_TEST_SUITE: 1
           RCMDCHECK: "FALSE"
         run: |
-         install_opts = if(${{matrix.config.os-name}} == "windows") {
+         install_opts = if("${{matrix.config.os-name}}" == "windows") {
            c("--no-multiarch")
          } else {
            c()
