@@ -170,14 +170,6 @@ jobs:
         run: cat check/XLConnect.Rcheck/tests/XLConnect_Unit_Tests.txt || true
         shell: bash
 
-      # - uses: codecov/codecov-action@v1
-      #   with:
-      #     file: ./coverage.xml # optional
-      #     files: ./coverage1.xml,./coverage2.xml # optional
-      #     flags: unittests # optional
-      #     name: codecov-umbrella # optional
-      #     fail_ci_if_error: true # optional (default = false)
-      #     verbose: true # optional (default = false)
       - name: coverage report
         if: success()
         run: |
