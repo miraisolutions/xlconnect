@@ -165,9 +165,16 @@ jobs:
           build_args=c("--compact-vignettes=gs+qpdf"), error_on = "warning", check_dir = "check")
         shell: Rscript {0}
 
+      - name: run complete test suite # some tests are not run in r check, as test xls(x) files are Rbuild-ignored
+        env:
+          _R_CHECK_CRAN_INCOMING_: false
+          FULL_TEST_SUITE: 1
+        run: source("tests/run_tests.R")
+        shell: Rscript {0}
+
       - name: Show test output
         if: always()
-        run: cat check/XLConnect.Rcheck/tests/XLConnect_Unit_Tests.txt || true
+        run: cat XLConnect_Unit_Tests.txt || true
         shell: bash
 
       - name: coverage report
@@ -182,7 +189,8 @@ jobs:
         uses: actions/upload-artifact@main
         with:
           name: ${{ runner.os }}-r${{ matrix.config.r }}-results
-          path: | 
+          path: |
+            XLConnect_Unit_Tests.*
             check/XLConnect.Rcheck/
             !check/XLConnect.Rcheck/**/*.jar
             !check/XLConnect.Rcheck/00_pkg_src/
