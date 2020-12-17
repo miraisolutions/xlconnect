@@ -136,6 +136,7 @@ jobs:
           remotes::install_cran("covr")
           remotes::install_deps(dependencies = TRUE, repos=options('repos')[['repos']][['RSPM']])
           remotes::install_cran("rcmdcheck")
+
         shell: Rscript {0}
 
       - name: Session info
@@ -169,7 +170,9 @@ jobs:
         env:
           _R_CHECK_CRAN_INCOMING_: false
           FULL_TEST_SUITE: 1
-        run: source("tests/run_tests.R")
+        run: |
+         install.packages(list.files("./check", pattern = "XLConnect_.*.tar.gz"), repos=NULL, type="source")
+         source("tests/run_tests.R")
         shell: Rscript {0}
 
       - name: Show test output
