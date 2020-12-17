@@ -21,7 +21,7 @@
 #############################################################################
 #
 # XLConnect Package Installation: find system packages by name, including
-# installed files, using debian and / or rpm package managers
+# installed files, using Debian or Red Hat package managers
 # 
 # example: with 
 #
@@ -31,10 +31,10 @@
 
  checkSystemPackage <- function (debianpkgname, rpmpkgname, versionpattern) {
   dpkg <- function(args) {
-    system2("dpkg", args, stdout = TRUE)
+    suppressWarnings(system2("dpkg", args, stdout = TRUE))
   }
   rpm <- function(args) {
-    system2("rpm", args, stdout = TRUE)
+    suppressWarnings(system2("rpm", args, stdout = TRUE))
   }
   if(!is.null(debianpkgname) && system2("dpkg", c("--help"), stdout=FALSE) == 0) {
     pkgList <- dpkg(c("-l", debianpkgname))
