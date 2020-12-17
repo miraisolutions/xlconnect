@@ -171,7 +171,7 @@ jobs:
           _R_CHECK_CRAN_INCOMING_: false
           FULL_TEST_SUITE: 1
         run: >-
-            rcmdcheck::rcmdcheck(args = c("--no-manual", "--no-vignettes", "--no-build-vignettes", "--check-subdirs=no"),
+            rcmdcheck::rcmdcheck(args = c("--no-manual", "--no-vignettes", "--no-build-vignettes", "--check-subdirs=no", "--no-multiarch"),
             build_args=c("--no-build-vignettes"), error_on = "error", check_dir = "check")
         shell: Rscript {0}
 
