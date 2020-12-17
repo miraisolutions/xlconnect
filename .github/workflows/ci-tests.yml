@@ -179,7 +179,10 @@ jobs:
 
       - name: Show test output
         if: always()
-        run: cat tests/XLConnect_Unit_Tests.txt || true
+        run: | 
+          cat tests/XLConnect_Unit_Tests.txt || true
+          git clean -fd "*xls*"
+          grep -i "0 errors, 0 failures" tests/XLConnect_Unit_Tests.txt
         shell: bash
 
       - name: coverage report
