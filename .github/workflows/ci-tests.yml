@@ -96,6 +96,10 @@ jobs:
           echo java_home:$JAVA_HOME
           echo library paths: $LD_LIBRARY_PATH
           sudo R CMD javareconf JAVA_HOME=$JAVA_HOME
+      
+      - name: effective java version # Yes it actually needs JAVA_HOME=$JAVA_HOME, doesn't use actual env vars (!)
+        if: runner.os == 'Windows'
+        run: java -version
 
       - name: Query dependencies
         run: |
@@ -204,7 +208,7 @@ jobs:
         with:
           name: ${{ runner.os }}-r${{ matrix.config.r }}-results
           path: |
-            XLConnect_Unit_Tests.*
+            tests/XLConnect_Unit_Tests.*
             check/XLConnect.Rcheck/
             !check/XLConnect.Rcheck/**/*.jar
             !check/XLConnect.Rcheck/00_pkg_src/
