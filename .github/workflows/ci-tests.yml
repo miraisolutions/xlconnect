@@ -191,7 +191,7 @@ jobs:
           FULL_TEST_SUITE: 1
           RCMDCHECK: "FALSE"
         run: |
-         install.packages(list.files("./check", pattern = "XLConnect_.*.tar.gz", full.names = TRUE), repos=NULL, type="source")
+         install.packages(list.files("./check", pattern = "XLConnect_.*.tar.gz", full.names = TRUE), repos=NULL, type="source", INSTALL_opts=c("--no-multiarch"))
          setwd("tests")
          source("run_tests.R")
         shell: Rscript {0}
