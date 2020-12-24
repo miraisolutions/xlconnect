@@ -31,19 +31,21 @@
 
  checkSystemPackage <- function (debianpkgname, rpmpkgname, versionpattern) {
   dpkg <- function(args) {
-    capture.output(system2("dpkg", args, stdout = TRUE))
+    output <- capture.output(system2("dpkg", args, stdout = TRUE))
+    trimws(sub("[[0-9]+] \"(.+)\"", "\\1",output))
   }
   rpm <- function(args) {
-    capture.output(system2("rpm", args, stdout = TRUE))
+    output <- capture.output(system2("rpm", args, stdout = TRUE))
+    trimws(sub("[[0-9]+] \"(.+)\"", "\\1",output))
   }
   distro <- function(distroName) {
     releaseLines <- system2("cat",c("/etc/*-release"), stdout = TRUE)
     sum(grepl(pattern = paste0("ID.*",distroName), x = releaseLines, ignore.case = TRUE), na.rm = TRUE) > 0
   }
-  output <- if (!is.null(rpmpkgname) && distro("rhel")) {
+  if (!is.null(rpmpkgname) && distro("rhel")) {
     pkgInfo <- rpm(c("-qi", rpmpkgname))
     versionStr <- pkgInfo[which(grepl('Version', pkgInfo))]
-    foundVersion <- strsplit(versionStr, " +: +")[[1]][3]
+    foundVersion <- strsplit(versionStr, " +: +")[[1]][2]
     if(grepl(versionpattern, foundVersion)) {
       allFiles <- rpm(c("-ql", rpmpkgname))
       allFiles[which(grepl(".*/java.*jar", allFiles))]
@@ -52,12 +54,11 @@
   else if(!is.null(debianpkgname) && distro("debian")) {
     pkgList <- dpkg(c("-l", debianpkgname))
     pkgLine <- pkgList[which(grepl(debianpkgname, pkgList))][1]
-    foundVersion <- strsplit(pkgLine, " +")[[1]][4]
+    foundVersion <- strsplit(pkgLine, " +")[[1]][3]
     if(grepl(versionpattern, foundVersion)) {
       allFiles <- dpkg(c("--listfiles", debianpkgname))
       allFiles[which(grepl(".*/java.*jar", allFiles))]
     } else { c() }
   }
   else { c() }
-  trimws(sub("[[0-9]+] \"(.+)\"", "\\1",output))
 }
