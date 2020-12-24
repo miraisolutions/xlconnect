@@ -72,7 +72,7 @@
   } else {
 	  jvn <- as.numeric(twoFirst)
   }
-  if (jvn<8 || jvn>11) stop(paste0("Installed java version ",jv ," is not between Java>=8 and <=11! This is needed for this package"))
+  if (jvn<8 || jvn>15) stop(paste0("Installed java version ",jv ," is not between Java>=8 and <=15! This is needed for this package"))
 
   # Perform general XLConnect settings - pass package description
   XLConnectSettings(packageDescription(pkgname))

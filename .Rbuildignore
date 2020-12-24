@@ -4,12 +4,10 @@
 [.]gitignore$
 [.]Rproj$
 ^.*\.Rproj$
-^\.travis\.yml$
 ^\.codecov\.yml$
 Makefile
 ^cloudcheck\.sh$
 ^cloudbuild\.yaml$
-^travissetup\.sh$
 
 ^inst/unitTests/runit.workbook.getLastColumn.R$
 ^inst/unitTests/runit.workbook.getLastRow.R$
@@ -67,3 +65,4 @@ Makefile
 ^inst/unitTests/resources/testWorkbookReadTable.xlsx$
 cran-comments.md
 revdep/
+.github/

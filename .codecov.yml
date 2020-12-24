@@ -2,3 +2,5 @@ coverage:
   range: 30...100
 
 comment: false
+github_checks:
+  annotations: true
