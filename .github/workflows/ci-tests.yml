@@ -112,7 +112,7 @@ jobs:
 
       - name: Query dependencies
         run: |
-          install.packages('remotes', repos=options('repos')[['repos']][['CRAN']])
+          install.packages('remotes', repos=getOption('repos')[['CRAN']])
           saveRDS(remotes::dev_package_deps(dependencies = TRUE), ".github/depends.Rds", version = 2)
           writeLines(sprintf("R-%i.%i", getRversion()$major, getRversion()$minor), ".github/R-version")
         shell: Rscript {0}
@@ -132,7 +132,7 @@ jobs:
       - name: Install extra Tex packages
         if: matrix.config.vignettes
         run: |
-          remotes::install_cran('tinytex', repos=options('repos')[['repos']][['RSPM']])
+          remotes::install_cran('tinytex', repos=getOption('repos')[['RSPM']])
           library(tinytex)
           tlmgr_install('datetime') 
           tlmgr_install('inputenc')
@@ -154,7 +154,7 @@ jobs:
       - name: Install dependencies
         run: |
           remotes::install_cran("covr")
-          remotes::install_deps(dependencies = TRUE, repos=options('repos')[['repos']][['RSPM']])
+          remotes::install_deps(dependencies = TRUE, repos=getOption('repos')[['RSPM']])
           remotes::install_cran("rcmdcheck")
         shell: Rscript {0}
 
@@ -224,7 +224,7 @@ jobs:
         if: failure()
         uses: actions/upload-artifact@main
         with:
-          name: ${{ runner.os }}-r${{ matrix.config.r }}-results
+          name: ${{ runner.os }}-r${{ matrix.config.r-version }}-results
           path: |
             tests/XLConnect_Unit_Tests.*
             check/XLConnect.Rcheck/
@@ -235,6 +235,6 @@ jobs:
         if: success() && matrix.config.vignettes
         uses: actions/upload-artifact@main
         with:
-          name: ${{ runner.os }}-r${{ matrix.config.r }}-results
+          name: ${{ runner.os }}-r${{ matrix.config.r-version }}-results
           path: | 
             check/XLConnect_*.tar.gz
