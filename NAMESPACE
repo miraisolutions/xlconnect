@@ -4,7 +4,6 @@ import(rJava)
 importFrom(utils, packageDescription)
 importFrom(utils, browseURL)
 importFrom(utils, download.file)
-importFrom(utils, capture.output)
 
 # XLConnect exports the following S4 classes & methods
 exportClasses(workbook, cellstyle)

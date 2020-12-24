@@ -31,12 +31,10 @@
 
  checkSystemPackage <- function (debianpkgname, rpmpkgname, versionpattern) {
   dpkg <- function(args) {
-    output <- capture.output(system2("dpkg", args, stdout = TRUE))
-    trimws(sub("[[0-9]+] \"(.+)\"", "\\1",output))
+    system2("dpkg", args, stdout = TRUE, stderr = TRUE)
   }
   rpm <- function(args) {
-    output <- capture.output(system2("rpm", args, stdout = TRUE))
-    trimws(sub("[[0-9]+] \"(.+)\"", "\\1",output))
+    system2("rpm", args, stdout = TRUE, stderr = TRUE)
   }
   distro <- function(distroName) {
     releaseLines <- system2("cat",c("/etc/*-release"), stdout = TRUE)
