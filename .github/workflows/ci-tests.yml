@@ -214,7 +214,7 @@ jobs:
         shell: bash
 
       - name: coverage report
-        if: success() && matrix.config.r-version == 'release' && matrix.config.os-name == "ubuntu"
+        if: success() && matrix.config.r-version == 'release' && matrix.config.os-name == 'ubuntu'
         run: |
           library(covr)
           covr::codecov(function_exclusions=c("onLoad", "onAttach", "xlcEnsureDependencies"))
