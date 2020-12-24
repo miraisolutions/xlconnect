@@ -31,28 +31,29 @@
 
  checkSystemPackage <- function (debianpkgname, rpmpkgname, versionpattern) {
   dpkg <- function(args) {
-    suppressPackageStartupMessages(suppressWarnings(system2("dpkg", args, stdout = TRUE)))
+    capture.output(system2("dpkg", args, stdout = TRUE))
   }
   rpm <- function(args) {
-    suppressPackageStartupMessages(suppressWarnings(system2("rpm", args, stdout = TRUE)))
+    capture.output(system2("rpm", args, stdout = TRUE))
   }
-  if(!is.null(debianpkgname) && suppressPackageStartupMessages(suppressWarnings(system2("dpkg", c("--help"), stdout=FALSE)) == 0)) {
-    pkgList <- dpkg(c("-l", debianpkgname))
-    pkgLine <- pkgList[which(grepl(debianpkgname, pkgList))][1]
-    foundVersion <- strsplit(pkgLine, " +")[[1]][3]
-    if(grepl(versionpattern, foundVersion)) {
-      allFiles <- dpkg(c("--listfiles", debianpkgname))
-      allFiles[which(grepl(".*/java.*jar", allFiles))]
-    } else { c() }
-  }
-  else if (!is.null(rpmpkgname) && suppressPackageStartupMessages(suppressWarnings(system2("rpm", c("--help"), stdout = FALSE)) == 0)) {
+  output <- if (!is.null(rpmpkgname) && system2("which", c("rpm"), stdout = FALSE) == 0) {
     pkgInfo <- rpm(c("-qi", rpmpkgname))
     versionStr <- pkgInfo[which(grepl('Version', pkgInfo))]
-    foundVersion <- strsplit(versionStr, " +: +")[[1]][2]
+    foundVersion <- strsplit(versionStr, " +: +")[[1]][3]
     if(grepl(versionpattern, foundVersion)) {
       allFiles <- rpm(c("-ql", rpmpkgname))
       allFiles[which(grepl(".*/java.*jar", allFiles))]
     } else { c() }
   }
+  else if(!is.null(debianpkgname) && system2("which", c("dpkg"), stdout=FALSE) == 0) {
+    pkgList <- dpkg(c("-l", debianpkgname))
+    pkgLine <- pkgList[which(grepl(debianpkgname, pkgList))][1]
+    foundVersion <- strsplit(pkgLine, " +")[[1]][4]
+    if(grepl(versionpattern, foundVersion)) {
+      allFiles <- dpkg(c("--listfiles", debianpkgname))
+      allFiles[which(grepl(".*/java.*jar", allFiles))]
+    } else { c() }
+  } 
   else { c() }
+  trimws(sub("[[0-9]+] \"(.+)\"", "\\1",output))
 }
