@@ -36,7 +36,11 @@
   rpm <- function(args) {
     capture.output(system2("rpm", args, stdout = TRUE))
   }
-  output <- if (!is.null(rpmpkgname) && system2("which", c("rpm"), stdout = FALSE) == 0) {
+  distro <- function(distroName) {
+    releaseLines <- system2("cat",c("/etc/*-release"), stdout = TRUE)
+    sum(grepl(pattern = paste0("ID.*",distroName), x = releaseLines, ignore.case = TRUE), na.rm = TRUE) > 0
+  }
+  output <- if (!is.null(rpmpkgname) && distro("rhel")) {
     pkgInfo <- rpm(c("-qi", rpmpkgname))
     versionStr <- pkgInfo[which(grepl('Version', pkgInfo))]
     foundVersion <- strsplit(versionStr, " +: +")[[1]][3]
@@ -45,7 +49,7 @@
       allFiles[which(grepl(".*/java.*jar", allFiles))]
     } else { c() }
   }
-  else if(!is.null(debianpkgname) && system2("which", c("dpkg"), stdout=FALSE) == 0) {
+  else if(!is.null(debianpkgname) && distro("debian")) {
     pkgList <- dpkg(c("-l", debianpkgname))
     pkgLine <- pkgList[which(grepl(debianpkgname, pkgList))][1]
     foundVersion <- strsplit(pkgLine, " +")[[1]][4]
@@ -53,7 +57,7 @@
       allFiles <- dpkg(c("--listfiles", debianpkgname))
       allFiles[which(grepl(".*/java.*jar", allFiles))]
     } else { c() }
-  } 
+  }
   else { c() }
   trimws(sub("[[0-9]+] \"(.+)\"", "\\1",output))
 }
