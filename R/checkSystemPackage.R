@@ -31,13 +31,13 @@
 
  checkSystemPackage <- function (debianpkgname, rpmpkgname, versionpattern) {
   dpkg <- function(args) {
-    system2("dpkg", args, stdout = TRUE, stderr = TRUE)
+    suppressWarnings(system2("dpkg", args, stdout = TRUE, stderr = TRUE))
   }
   rpm <- function(args) {
-    system2("rpm", args, stdout = TRUE, stderr = TRUE)
+    suppressWarnings(system2("rpm", args, stdout = TRUE, stderr = TRUE))
   }
   distro <- function(distroName) {
-    releaseLines <- system2("cat",c("/etc/*-release"), stdout = TRUE)
+    releaseLines <- suppressWarnings(system2("cat",c("/etc/*-release"), stdout = TRUE, stderr = TRUE))
     sum(grepl(pattern = paste0("ID.*",distroName), x = releaseLines, ignore.case = TRUE), na.rm = TRUE) > 0
   }
   if (!is.null(rpmpkgname) && distro("rhel")) {
