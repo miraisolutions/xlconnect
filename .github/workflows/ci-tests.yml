@@ -224,7 +224,7 @@ jobs:
         if: failure()
         uses: actions/upload-artifact@main
         with:
-          name: ${{ runner.os }}-r${{ matrix.config.r-version }}-results
+          name: ${{ matrix.config.os-name }}${{matrix.config.os-version}}-java${{ matrix.config.java }}-R${{ matrix.config.r-version }}-results
           path: |
             tests/XLConnect_Unit_Tests.*
             check/XLConnect.Rcheck/
