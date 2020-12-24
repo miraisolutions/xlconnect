@@ -235,6 +235,6 @@ jobs:
         if: success() && matrix.config.vignettes
         uses: actions/upload-artifact@main
         with:
-          name: ${{ matrix.config.os-name }}${{matrix.config.os-version}}-java${{ matrix.config.java }}-r${{ matrix.config.r-version }}-results
+          name: ${{ matrix.config.os-name }}${{matrix.config.os-version}}-java${{ matrix.config.java }}-R${{ matrix.config.r-version }}-results
           path: | 
             check/XLConnect_*.tar.gz
