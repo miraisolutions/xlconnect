@@ -90,7 +90,7 @@ jobs:
           architecture: x64
 
       - name: Set up R ${{ matrix.config.r-version }}
-        uses: r-lib/actions/setup-r@v1
+        uses: r-lib/actions/setup-r@master
         with:
           r-version: ${{ matrix.config.r-version }}
 
