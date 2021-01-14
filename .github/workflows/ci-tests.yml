@@ -217,7 +217,7 @@ jobs:
         if: success() && matrix.config.r-version == 'release' && matrix.config.os-name == 'ubuntu'
         run: |
           library(covr)
-          covr::codecov(function_exclusions=c("onLoad", "onAttach", "xlcEnsureDependencies"))
+          covr::codecov(function_exclusions=c("onLoad", "onAttach", "xlcEnsureDependencies", "checkSystemPackage"))
         shell: Rscript {0}
       
       - name: Upload check results
