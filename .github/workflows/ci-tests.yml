@@ -42,11 +42,11 @@ jobs:
             vignettes: true
             xlc-repo: https://jcenter.bintray.com
             timezone-name: Pacific/Marquesas
-          - os-name: macos
-            os-version: "10.15"
-            r-version: release
-            java: 13
-            vignettes: false
+          #- os-name: macos
+          #  os-version: "10.15"
+          #  r-version: release
+          #  java: 13
+          #  vignettes: false
           - os-name: ubuntu 
             os-version: "16.04"
             r-version: 3.2.5
