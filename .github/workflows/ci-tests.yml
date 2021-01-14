@@ -42,11 +42,11 @@ jobs:
             vignettes: true
             xlc-repo: https://jcenter.bintray.com
             timezone-name: Pacific/Marquesas
-          #- os-name: macos
-          #  os-version: "10.15"
-          #  r-version: release
-          #  java: 13
-          #  vignettes: false
+          - os-name: macos
+            os-version: "10.15"
+            r-version: release
+            java: 13
+            vignettes: false
           - os-name: ubuntu 
             os-version: "16.04"
             r-version: 3.2.5
@@ -90,7 +90,7 @@ jobs:
           architecture: x64
 
       - name: Set up R ${{ matrix.config.r-version }}
-        uses: r-lib/actions/setup-r@v1
+        uses: miraisolutions/r-lib-actions/setup-r@setup-r-brew-cask-deprecated
         with:
           r-version: ${{ matrix.config.r-version }}
 
