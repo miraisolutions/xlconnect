@@ -43,10 +43,12 @@
   if (!is.null(rpmpkgname) && distro("rhel")) {
     pkgInfo <- rpm(c("-qi", rpmpkgname))
     versionStr <- pkgInfo[which(grepl('Version', pkgInfo))]
-    foundVersion <- strsplit(versionStr, " +: +")[[1]][2]
-    if(grepl(versionpattern, foundVersion)) {
-      allFiles <- rpm(c("-ql", rpmpkgname))
-      allFiles[which(grepl(".*/java.*jar", allFiles))]
+    if(length(versionStr) != 0) {
+      foundVersion <- strsplit(versionStr, " +: +")[[1]][2]
+      if(grepl(versionpattern, foundVersion)) {
+        allFiles <- rpm(c("-ql", rpmpkgname))
+        allFiles[which(grepl(".*/java.*jar", allFiles))]
+      } else { c() }
     } else { c() }
   }
   else if(!is.null(debianpkgname) && distro("debian")) {
