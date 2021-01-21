@@ -49,8 +49,8 @@ test.workbook.getLastRow <- function() {
 	checkException(getLastRow(wb.xlsx, "doesNotExist"))
 	
 	# Last row of an empty worksheet is 1 (.xls)
-	checkEquals(getLastRow(wb.xls, "empty"), c(empty = 0))
+	checkEquals(getLastRow(wb.xls, "empty"), c(empty = 1))
 	
 	# Last row of an empty worksheet is 1 (.xlsx)
-	checkEquals(getLastRow(wb.xlsx, "empty"), c(empty = 0))
+	checkEquals(getLastRow(wb.xlsx, "empty"), c(empty = 1))
 }
