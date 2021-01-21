@@ -36,12 +36,12 @@ test.workbook.clearSheet <- function() {
 	clearSheet(wb.xls, c("clearSheet1", "clearSheet2"))
 	res1 <- getLastRow(wb.xls, "clearSheet1")
 	res2 <- getLastRow(wb.xls, "clearSheet2")
-	checkEquals(c(res1, res2), c(clearSheet1 = 1, clearSheet2=1))
+	checkEquals(c(res1, res2), c(clearSheet1 = 0, clearSheet2=0))
 
 	# Check that clearing sheets returns empty sheets (*.xlsx)
 	clearSheet(wb.xlsx, c("clearSheet1", "clearSheet2"))
 	res1 <- getLastRow(wb.xlsx, "clearSheet1")
 	res2 <- getLastRow(wb.xlsx, "clearSheet2")
-	checkEquals(c(res1, res2), c(clearSheet1 = 1, clearSheet2=1))
+	checkEquals(c(res1, res2), c(clearSheet1 = 0, clearSheet2=0))
 
 }

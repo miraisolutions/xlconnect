@@ -34,13 +34,13 @@
   apachePrefix <- paste0(repo, "/org/apache")
   sharedPaths <- tryCatch({
     c(xlcEnsureDependenciesFor(
-      paste0(apachePrefix, "/poi/poi-ooxml-schemas/4.1.1/poi-ooxml-schemas-4.1.1.jar"), "poi-ooxml-schemas.jar", 
+      paste0(apachePrefix, "/poi/poi-ooxml-schemas/4.1.2/poi-ooxml-schemas-4.1.2.jar"), "poi-ooxml-schemas.jar", 
       "4\\.[1-9].*",  libname, pkgname, debianpkg = "libapache-poi-java", rpmpkg="apache-poi"),
     xlcEnsureDependenciesFor(
-      paste0(apachePrefix, "/poi/poi-ooxml/4.1.1/poi-ooxml-4.1.1.jar"), "poi-ooxml.jar", 
+      paste0(apachePrefix, "/poi/poi-ooxml/4.1.2/poi-ooxml-4.1.2.jar"), "poi-ooxml.jar", 
       "4\\.[1-9].*",  libname, pkgname, debianpkg = "libapache-poi-java", rpmpkg="apache-poi"),
     xlcEnsureDependenciesFor(
-      paste0(apachePrefix, "/poi/poi/4.1.1/poi-4.1.1.jar"), "poi.jar", 
+      paste0(apachePrefix, "/poi/poi/4.1.2/poi-4.1.2.jar"), "poi.jar", 
       "4\\.[1-9].*",  libname, pkgname, debianpkg = "libapache-poi-java", rpmpkg="apache-poi"),
     xlcEnsureDependenciesFor(
       paste0(apachePrefix, "/commons/commons-compress/1.20/commons-compress-1.20.jar"), "commons-compress.jar",
