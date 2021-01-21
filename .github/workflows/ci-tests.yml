@@ -90,7 +90,7 @@ jobs:
           architecture: x64
 
       - name: Set up R ${{ matrix.config.r-version }}
-        uses: miraisolutions/r-lib-actions/setup-r@setup-r-brew-cask-deprecated
+        uses: r-lib/actions/setup-r@master
         with:
           r-version: ${{ matrix.config.r-version }}
 
