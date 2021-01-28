@@ -27,9 +27,26 @@
 #############################################################################
 
 .onLoad <- function(libname, pkgname) {
+  
+  javaCheck <- function() {
+    # Java version check
+    jv <- .jcall("java/lang/System", "S", "getProperty", "java.runtime.version")
+    twoFirst <- substr(jv, 1L, 2L)
+    if(twoFirst == "1.") {
+      jvn <- as.numeric(substr(jv,3L,3L))
+    } else {
+      jvn <- as.numeric(twoFirst)
+    }
+    if (jvn<8 || jvn>15) stop(paste0("Installed java version ",jv ," is not between Java>=8 and <=15! This is needed for this package"))
+  }
+  
   repo <- Sys.getenv("XLCONNECT_JAVA_REPO_URL")
   if (is.null(repo) || repo=="") {
     repo <- "https://repo1.maven.org/maven2"
+  }
+  if(!interactive()){
+    .jinit()
+    javaCheck()
   }
   apachePrefix <- paste0(repo, "/org/apache")
   sharedPaths <- tryCatch({
@@ -66,17 +83,10 @@
           e
         }
   )
-  .jpackage(name = pkgname, jars = "*", morePaths = sharedPaths)
-  # Java version check
-  jv <- .jcall("java/lang/System", "S", "getProperty", "java.runtime.version")
-  twoFirst <- substr(jv, 1L, 2L)
-  if(twoFirst == "1.") {
-  	jvn <- as.numeric(substr(jv,3L,3L))
-  } else {
-	  jvn <- as.numeric(twoFirst)
+  if(interactive()){
+    .jpackage(name = pkgname, jars = "*", morePaths = sharedPaths)
+    javaCheck()
   }
-  if (jvn<8 || jvn>15) stop(paste0("Installed java version ",jv ," is not between Java>=8 and <=15! This is needed for this package"))
-
   # Perform general XLConnect settings - pass package description
   XLConnectSettings(packageDescription(pkgname))
 }
