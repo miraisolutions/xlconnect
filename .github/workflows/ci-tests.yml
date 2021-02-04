@@ -66,12 +66,11 @@ jobs:
           - os-name: ubuntu
             container: henrikbengtsson/r-base-centos7:latest # R 3.4.0, java 8
             os-version: "18.04"
-            java: 11
             vignettes: true
-          # - os-name: ubuntu # windows-2019, macos-10.15]
-          #   container: rocker/r-base:3.6.3 # java 15
-          #   os-version: "18.04"
-          #   vignettes: true
+          - os-name: ubuntu # windows-2019, macos-10.15]
+            container: rocker/r-base:3.6.3 # java 15
+            os-version: "18.04"
+            vignettes: true
     env:
       R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
       XLCONNECT_JAVA_REPO_URL: ${{ matrix.config.xlc-repo }}
