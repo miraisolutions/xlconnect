@@ -65,11 +65,13 @@ jobs:
           - os-name: ubuntu
             container: henrikbengtsson/r-base-centos7:latest
             os-version: "18.04"
+            r-version: 3.4.0 # should match container
             java: 11
             vignettes: true
           - os-name: ubuntu # windows-2019, macos-10.15]
             container: rocker/r-base:3.6.3
             os-version: "18.04"
+            r-version: 3.6.3  # should match container
             java: 11
             vignettes: true
     env:
