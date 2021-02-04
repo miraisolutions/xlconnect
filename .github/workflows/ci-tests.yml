@@ -64,16 +64,13 @@ jobs:
             vignettes: false
             pkgrepo: "https://cloud.r-project.org"
           - os-name: ubuntu
-            container: henrikbengtsson/r-base-centos7:latest
+            container: henrikbengtsson/r-base-centos7:latest # R 3.4.0, java 8
             os-version: "18.04"
-            r-version: 3.4.0 # should match container
             java: 11
             vignettes: true
           - os-name: ubuntu # windows-2019, macos-10.15]
-            container: rocker/r-base:3.6.3
+            container: rocker/r-base:3.6.3 # java 15
             os-version: "18.04"
-            r-version: 3.6.3  # should match container
-            java: 11
             vignettes: true
     env:
       R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
@@ -94,7 +91,7 @@ jobs:
           java-version: ${{ matrix.config.java }}
           java-package: jdk
           architecture: x86
-        if: matrix.config.os-name != 'macos'
+        if: matrix.config.os-name != 'macos' && !matrix.config.container
       
       - name: Setup java (x64)
         uses: actions/setup-java@v1
