@@ -1,7 +1,7 @@
 #############################################################################
 #
 # XLConnect
-# Copyright (C) 2010-2020 Mirai Solutions GmbH
+# Copyright (C) 2010-2021 Mirai Solutions GmbH
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -22,8 +22,6 @@
 #
 # XLConnect Package Installation: find system packages by name, including
 # installed files, using Debian or Red Hat package managers
-# 
-# example: with 
 #
 # Author: Simon Poltier, Mirai Solutions GmbH
 #
