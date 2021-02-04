@@ -18,9 +18,10 @@ jobs:
   build:
     runs-on: ${{ matrix.config.os-name }}-${{ matrix.config.os-version }}
     container: ${{ matrix.config.container}}
-    name: >- ${{ matrix.config.os-name }}-${{ matrix.config.os-version }}
-      R ${{ matrix.config.r-version}} - java ${{ matrix.config.java}}
-      #- ${{ matrix.config.container }}
+    name: >-
+         ${{ matrix.config.container}}-
+         ${{ matrix.config.os-name }}-${{ matrix.config.os-version }}
+         R ${{ matrix.config.r-version}} - java ${{ matrix.config.java}}
     strategy:
       matrix:
         config: 
