@@ -155,7 +155,7 @@ jobs:
         shell: Rscript {0}
 
       - name: Install system dependencies
-        if: runner.os == 'Linux'
+        if: runner.os == 'Linux' && !matrix.config.container
         run: |
           sudo apt-get install libcurl4-openssl-dev
           while read -r cmd
