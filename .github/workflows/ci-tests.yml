@@ -104,7 +104,7 @@ jobs:
           architecture: x64
 
       - name: Set up R ${{ matrix.config.r-version }}
-        if: ${{!$matrix.config.container}}
+        if: ${{!matrix.config.container}}
         uses: r-lib/actions/setup-r@master
         with:
           r-version: ${{ matrix.config.r-version }}
