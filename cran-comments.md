@@ -15,12 +15,11 @@ There was 1 NOTE:
     sub-directories of 1Mb or more:
       java  34.0Mb
 
-Justification: XLConnect uses a java component which we maintain in a separate project, as well as Apache POI 4.1.1 and
+Justification: XLConnect uses a java component which we maintain in a separate project, as well as Apache POI 4.1.x and
 its dependencies. At install time, the presence of these dependencies in the correct version is checked; if missing,
-they are downloaded into XLConnect's installation directory. XLConnect depends on Apache POI 4.1.x, which is not yet
-available from major distributions' package managers at the time of writing. In addition, it requires the full
-ooxml-schemas-1.4.jar, which is not distributed via package managers. See http://poi.apache.org/help/faq.html#faq-N10109
-for more information.
+they are downloaded into XLConnect's installation directory. Apache POI 4.1.x is not yet available from major 
+distributions' package managers at the time of writing. In addition, the full ooxml-schemas-1.4.jar is required, which 
+is not distributed via package managers. See http://poi.apache.org/help/faq.html#faq-N10109 for more information.
 
 # Downstream dependencies
 
