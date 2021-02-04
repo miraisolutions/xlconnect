@@ -18,7 +18,7 @@ jobs:
   build:
     runs-on: ${{ matrix.config.os-name }}-${{ matrix.config.os-version }}
     container: ${{ matrix.config.container}}
-    name: >- 
+    name: >- ${{ matrix.config.container }} 
       ${{ matrix.config.os-name }}-${{ matrix.config.os-version }}
       R ${{ matrix.config.r-version}} - java ${{ matrix.config.java}}
     strategy:
@@ -62,14 +62,16 @@ jobs:
             java: 11
             vignettes: false
             pkgrepo: "https://cloud.r-project.org"
-          - os-name: ubuntu # windows-2019, macos-10.15]
-            container: centos:8
+          - os-name: ubuntu
+            container: henrikbengtsson/r-base-centos7:latest
             os-version: "18.04"
-            r-version: devel
-            java: 8
+            java: 11
             vignettes: true
-            xlc-repo: https://jcenter.bintray.com
-            timezone-name: Pacific/Marquesas
+          - os-name: ubuntu # windows-2019, macos-10.15]
+            container: rocker/r-base:3.6.3
+            os-version: "18.04"
+            java: 11
+            vignettes: true
     env:
       R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
       XLCONNECT_JAVA_REPO_URL: ${{ matrix.config.xlc-repo }}
@@ -99,6 +101,7 @@ jobs:
           architecture: x64
 
       - name: Set up R ${{ matrix.config.r-version }}
+        if: !matrix.config.container
         uses: r-lib/actions/setup-r@master
         with:
           r-version: ${{ matrix.config.r-version }}
@@ -115,7 +118,7 @@ jobs:
           echo library paths: $LD_LIBRARY_PATH
           sudo R CMD javareconf JAVA_HOME=$JAVA_HOME
       
-      - name: effective java version # Yes it actually needs JAVA_HOME=$JAVA_HOME, doesn't use actual env vars (!)
+      - name: effective java version
         if: runner.os == 'Windows'
         run: java -version
 
@@ -131,8 +134,8 @@ jobs:
         uses: actions/cache@v2
         with:
           path: ${{ env.R_LIBS_USER }}
-          key: ${{ runner.os }}-${{ hashFiles('.github/R-version') }}-1-${{ hashFiles('.github/depends.Rds') }}${{matrix.config.pkgrepo}}
-          restore-keys: ${{ runner.os }}-${{ hashFiles('.github/R-version') }}-1-
+          key: ${{ matrix.config.container }}-${{ runner.os }}-${{ hashFiles('.github/R-version') }}-1-${{ hashFiles('.github/depends.Rds') }}${{matrix.config.pkgrepo}}
+          restore-keys: ${{ matrix.config.container }}-${{ runner.os }}-${{ hashFiles('.github/R-version') }}-1-
 
       - name: Install tinytex
         if: matrix.config.vignettes
@@ -223,7 +226,7 @@ jobs:
         shell: bash
 
       - name: coverage report
-        if: success() && matrix.config.r-version == 'release' && matrix.config.os-name == 'ubuntu'
+        if: success() && matrix.config.r-version == 'release' && matrix.config.os-name == 'ubuntu' && !matrix.config.container
         run: |
           library(covr)
           covr::codecov(function_exclusions=c("onLoad", "onAttach", "xlcEnsureDependencies", "checkSystemPackage"))
@@ -233,7 +236,7 @@ jobs:
         if: failure()
         uses: actions/upload-artifact@main
         with:
-          name: ${{ matrix.config.os-name }}${{matrix.config.os-version}}-java${{ matrix.config.java }}-R${{ matrix.config.r-version }}-results
+          name: ${{ matrix.config.container }}${{ matrix.config.os-name }}${{matrix.config.os-version}}-java${{ matrix.config.java }}-R${{ matrix.config.r-version }}-results
           path: |
             tests/XLConnect_Unit_Tests.*
             check/XLConnect.Rcheck/
@@ -244,6 +247,6 @@ jobs:
         if: success() && matrix.config.vignettes
         uses: actions/upload-artifact@main
         with:
-          name: ${{ matrix.config.os-name }}${{matrix.config.os-version}}-java${{ matrix.config.java }}-R${{ matrix.config.r-version }}-results
+          name: ${{ matrix.config.container }}${{ matrix.config.os-name }}${{matrix.config.os-version}}-java${{ matrix.config.java }}-R${{ matrix.config.r-version }}-results
           path: | 
             check/XLConnect_*.tar.gz
