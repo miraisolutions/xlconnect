@@ -33,7 +33,7 @@ The workbook extraction operators are basically syntactic sugar for the common m
 }
 \author{
 Martin Studer\cr
-Mirai Solutions GmbH \url{http://www.mirai-solutions.com}
+Mirai Solutions GmbH \url{https://mirai-solutions.ch}
 }
 \seealso{
 \code{\linkS4class{workbook}}, \code{\link[=readWorksheet-methods]{readWorksheet}}, \code{\link[=writeWorksheet-methods]{writeWorksheet}},

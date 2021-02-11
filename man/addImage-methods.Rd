@@ -24,7 +24,7 @@ Adds an image to a worksheet using a named region.
 
 \author{
 Martin Studer\cr
-Mirai Solutions GmbH \url{http://www.mirai-solutions.com}
+Mirai Solutions GmbH \url{https://mirai-solutions.ch}
 }
 \note{
 There is an known issue in Apache POI with adding images to xls workbooks. The result of adding

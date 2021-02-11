@@ -21,7 +21,7 @@ See \code{\link[=setStyleAction-methods]{setStyleAction}} for more information.}
 
 \author{
 Thomas Themel\cr
-Mirai Solutions GmbH \url{http://www.mirai-solutions.com}
+Mirai Solutions GmbH \url{https://mirai-solutions.ch}
 }
 
 \seealso{

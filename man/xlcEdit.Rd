@@ -36,7 +36,7 @@ Invisibly returns the value of the \code{\link{xlcRestore}} operation.
 }
 \author{
 Martin Studer\cr
-Mirai Solutions GmbH \url{http://www.mirai-solutions.com}
+Mirai Solutions GmbH \url{https://mirai-solutions.ch}
 }
 \note{
 This function only works under Windows and MacOS with a corresponding Excel

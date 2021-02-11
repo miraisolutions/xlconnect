@@ -12,7 +12,7 @@
 \usepackage{datetime}
 
 % So that more colours can be used, not only the pre-defined ones
-% List of colours here: http://en.wikibooks.org/wiki/LaTeX/Colors
+% List of colours here: https://en.wikibooks.org/wiki/LaTeX/Colors
 \usepackage[usenames,dvipsnames]{color}
 
 % To get URLs in a normal font, by using \urlwofont
@@ -76,13 +76,13 @@ require(XLConnect)
 @
 
 \title{The \pkg{XLConnect} Package\\
-{\small\urlwofont{http://www.mirai-solutions.com}}\\[-0.3cm]
+{\small\urlwofont{https://mirai-solutions.ch}}\\[-0.3cm]
 {\small\urlwofont{https://cran.r-project.org/package=XLConnect}}
 }
 
 
 % \author{\small{Author of the \pkg{XLConnect} package:} \\\textcolor{Fuchsia}{\bf{Martin Studer}}, \\\small{Mirai Solutions GmbH}
-\author{\small{Author of this Vignette:}	\\\textcolor{Fuchsia}{\bf{Anna Maria Ksiezopolska}}, \\\small{\href{http://www.mirai-solutions.com}{\textcolor{Black}{Mirai Solutions GmbH}}}}
+\author{\small{Author of this Vignette:}	\\\textcolor{Fuchsia}{\bf{Anna Maria Ksiezopolska}}, \\\small{\href{https://mirai-solutions.ch}{\textcolor{Black}{Mirai Solutions GmbH}}}}
 
 \date{\pkg{XLConnect} Version \Sexpr{getOption("XLConnect.Version")}\qquad \monthname, \the\year}
 
@@ -134,7 +134,7 @@ require(XLConnect)
 \end{tikzpicture}
 
 % Excel icon on top right of the title page
-% Source: http://www.iconarchive.com/show/softdimension-icons-by-benjigarner/Excel-icon.html
+% Source: https://www.iconarchive.com/show/softdimension-icons-by-benjigarner/Excel-icon.html
 
 \begin{tikzpicture}[remember picture,overlay,>=stealth]
 
@@ -198,10 +198,10 @@ directory. You can also open the document by using the following command:
 \subsection{Introduction to XLConnect}
 
 \pkg{XLConnect} is a package that allows for reading, writing and manipulating Microsoft Excel 
-files from within R. It uses the Apache POI API\footnote{ For more information on the Apache POI API, see the \url{http://poi.apache.org/} webpage.}  
+files from within R. It uses the Apache POI API\footnote{ For more information on the Apache POI API, see the \url{https://poi.apache.org/} webpage.}  
 as the underlying interface.
 
-%\footnotetext{ For more information on the Apache POI API, see the \url{http://poi.apache.org/} webpage.} 
+%\footnotetext{ For more information on the Apache POI API, see the \url{https://poi.apache.org/} webpage.} 
 
 \pkg{XLConnect} allows you to produce formatted Excel reports, including graphics, straight from within R. 
 This enables automation of manual formatting and reporting processes. Reading and writing named ranges 
@@ -906,7 +906,7 @@ We will do our best to reply to your enquires as quickly as possible!
 
 \begin{enumerate}
 	\item	Mirai Solutions website: 
-			\\\urlwofont{http://www.mirai-solutions.com}
+			\\\urlwofont{https://mirai-solutions.ch}
 	\item Mirai Solutions on LinkedIn: 
 			\\\urlwofont{https://www.linkedin.com/company/mirai-solutions-gmbh/}
 	\item \pkg{XLConnect} on CRAN: 
@@ -920,12 +920,12 @@ We will do our best to reply to your enquires as quickly as possible!
 	\item \pkg{XLConnect} in the R Programming section on Wikibooks:
 			\\\urlwofont{https://en.wikibooks.org/wiki/R_Programming/Importing_and_exporting_data}
 	\item Quick Intro to \pkg{XLConnect}:
-	    \\\urlwofont{http://altons.github.io/rstats/2015/02/13/quick-intro-to-xlconnect/}
+	    \\\urlwofont{https://altons.github.io/rstats/2015/02/13/quick-intro-to-xlconnect/}
 	\item "How to Read Data from Excel into R", article by Joris Meys and Andrie de Vries:
-			\\\urlwofont{http://www.dummies.com/how-to/content/how-to-read-data-from-excel-into-r.html}
+			\\\urlwofont{https://www.dummies.com/how-to/content/how-to-read-data-from-excel-into-r.html}
   \item R and Excel: Making Your Data Dumps Pretty with XLConnect:
       \\\urlwofont{https://www.youtube.com/watch?v=G3mOUbZr4HI}
-      \\\urlwofont{http://amunategui.github.io/excel-data-dumps/}
+      \\\urlwofont{https://amunategui.github.io/excel-data-dumps/}
 \end{enumerate}
 
 \end{document}

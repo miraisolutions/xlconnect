@@ -40,7 +40,7 @@ of \code{data.frame}s.
 
 \author{
 Martin Studer\cr
-Mirai Solutions GmbH \url{http://www.mirai-solutions.com}
+Mirai Solutions GmbH \url{https://mirai-solutions.ch}
 }
 \note{
 When writing data to Excel, \code{writeWorksheet} further applies cell

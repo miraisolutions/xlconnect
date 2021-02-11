@@ -14,7 +14,7 @@ Package: \tab XLConnect\cr
 Type: \tab Package\cr
 Version: \tab 0.2-15\cr
 Date: \tab 2018-04-05\cr
-URL: \tab \url{http://www.mirai-solutions.com}\cr
+URL: \tab \url{https://mirai-solutions.ch}\cr
 \tab \url{https://github.com/miraisolutions/xlconnect}\cr
 BugReports: \tab \url{https://github.com/miraisolutions/xlconnect/issues}\cr
 SystemRequirements: \tab Java (>= 6)\cr
@@ -32,10 +32,10 @@ For an overview over the package please refer to the available demos:\cr
 Mirai Solutions GmbH, \email{xlconnect@mirai-solutions.com}
 }
 \references{
-Mirai Solutions GmbH: \url{http://www.mirai-solutions.com}\cr
+Mirai Solutions GmbH: \url{https://mirai-solutions.ch}\cr
 XLConnect on GitHub: \url{https://github.com/miraisolutions/xlconnect}
 Mirai Solutions on GitHub: \url{https://github.com/miraisolutions}\cr
-Apache POI: \url{http://poi.apache.org}
+Apache POI: \url{https://poi.apache.org}
 }
 \keyword{ package }
 \examples{\dontrun{

@@ -35,13 +35,13 @@ vectorized such that multiple names can be created in one method call.
 
 \references{
 What are named regions/ranges?\cr
-\url{http://www.officearticles.com/excel/named_ranges_in_microsoft_excel.htm}\cr
+\url{https://www.officearticles.com/excel/named_ranges_in_microsoft_excel.htm}\cr
 How to create named regions/ranges?\cr
-\url{http://www.youtube.com/watch?v=iAE9a0uRtpM}
+\url{https://www.youtube.com/watch?v=iAE9a0uRtpM}
 }
 \author{
 Martin Studer\cr
-Mirai Solutions GmbH \url{http://www.mirai-solutions.com}
+Mirai Solutions GmbH \url{https://mirai-solutions.ch}
 }
 \seealso{
 \code{\linkS4class{workbook}},

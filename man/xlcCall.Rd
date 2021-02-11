@@ -45,7 +45,7 @@ Result of the specified function by calling it with the vectorized argument list
 }
 \author{
 Martin Studer\cr
-Mirai Solutions GmbH \url{http://www.mirai-solutions.com}
+Mirai Solutions GmbH \url{https://mirai-solutions.ch}
 }
 \seealso{
 \code{\link{wrapList}}, \code{\link{jTryCatch}}

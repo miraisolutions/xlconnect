@@ -23,11 +23,11 @@ a shortcut form of \code{new("workbook", filename, create)} with some additional
 }
 \references{
 Wikipedia: Office Open XML\cr
-\url{http://en.wikipedia.org/wiki/Office_Open_XML}
+\url{https://en.wikipedia.org/wiki/Office_Open_XML}
 }
 \author{
 Martin Studer\cr
-Mirai Solutions GmbH \url{http://www.mirai-solutions.com}
+Mirai Solutions GmbH \url{https://mirai-solutions.ch}
 }
 \note{
 \pkg{XLConnect} supports both Excel 97-2003 (*.xls) and OOXML (Excel 2007+, *.xlsx) file formats.\cr\cr

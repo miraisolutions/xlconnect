@@ -73,11 +73,11 @@ dateTimeFormat, check.names, useCachedValues, keep, drop, simplify, readStrategy
 }
 \references{
 Overview of Excel tables\cr
-\url{http://office.microsoft.com/en-001/excel-help/overview-of-excel-tables-HA010048546.aspx}
+\url{https://support.microsoft.com/en-us/office/overview-of-excel-tables-7ab0bb7d-3a9e-4b56-a3c9-6c94334e492c?ocmsassetid=ha010048546&correlationid=ecf0d51a-596f-42e5-9c05-8653648bb180&ui=en-us&rs=en-us&ad=us}
 }
 \author{
 Martin Studer\cr
-Mirai Solutions GmbH \url{http://www.mirai-solutions.com}
+Mirai Solutions GmbH \url{https://mirai-solutions.ch}
 }
 \note{
 If no specific column types (see argument \code{colTypes}) are specified,

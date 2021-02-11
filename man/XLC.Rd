@@ -104,7 +104,7 @@ List of 90
 }
 \author{
 Martin Studer\cr
-Mirai Solutions GmbH \url{http://www.mirai-solutions.com}
+Mirai Solutions GmbH \url{https://mirai-solutions.ch}
 }
 \details{
 The \code{XLC} list structure defines several constants used throughout \pkg{XLConnect}. The general convention for

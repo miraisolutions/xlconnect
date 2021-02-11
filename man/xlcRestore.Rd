@@ -31,7 +31,7 @@ was an issue with reading the data from the worksheet or the object already exis
 }
 \author{
 Martin Studer\cr
-Mirai Solutions GmbH \url{http://www.mirai-solutions.com}
+Mirai Solutions GmbH \url{https://mirai-solutions.ch}
 }
 \seealso{
 \code{\link{xlcDump}}, \code{\link[=readNamedRegion-methods]{readNamedRegion}}, 

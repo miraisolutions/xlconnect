@@ -133,7 +133,7 @@ named \code{list} named by the corresponding worksheets.
 Martin Studer\cr
 Thomas Themel\cr
 Nicola Lambiase\cr
-Mirai Solutions GmbH \url{http://www.mirai-solutions.com}
+Mirai Solutions GmbH \url{https://mirai-solutions.ch}
 }
 \note{
 If no specific column types (see argument \code{colTypes}) are specified,

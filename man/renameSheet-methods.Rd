@@ -21,7 +21,7 @@ Renames a worksheet from a \code{\linkS4class{workbook}}.
 
 \author{
 Martin Studer\cr
-Mirai Solutions GmbH \url{http://www.mirai-solutions.com}
+Mirai Solutions GmbH \url{https://mirai-solutions.ch}
 }
 \note{
 Note that renaming worksheets may result in invalid name references.

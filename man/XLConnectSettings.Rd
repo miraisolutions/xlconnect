@@ -20,6 +20,6 @@ used by \pkg{XLConnect}.
 }
 \author{
 Martin Studer\cr
-Mirai Solutions GmbH \url{http://www.mirai-solutions.com}
+Mirai Solutions GmbH \url{https://mirai-solutions.ch}
 }
 \keyword{internal}

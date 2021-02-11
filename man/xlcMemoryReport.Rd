@@ -14,7 +14,7 @@ This function uses Java's Runtime class to query the free JVM memory.
 }
 \author{
 Martin Studer\cr
-Mirai Solutions GmbH \url{http://www.mirai-solutions.com}
+Mirai Solutions GmbH \url{https://mirai-solutions.ch}
 }
 \seealso{
 \code{\link{xlcFreeMemory}}

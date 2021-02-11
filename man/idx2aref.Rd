@@ -21,7 +21,7 @@ Returns a \code{character} vector of corresponding Excel area references.
 }
 \author{
 Martin Studer\cr
-Mirai Solutions GmbH \url{http://www.mirai-solutions.com}
+Mirai Solutions GmbH \url{https://mirai-solutions.ch}
 }
 \seealso{
 \code{\link{aref2idx}}, \code{\link{aref}}, \code{\link{idx2cref}},

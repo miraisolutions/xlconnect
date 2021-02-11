@@ -20,7 +20,7 @@ and the third and fourth columns represent the bottom right corner of the refere
 }
 \author{
 Martin Studer\cr
-Mirai Solutions GmbH \url{http://www.mirai-solutions.com}
+Mirai Solutions GmbH \url{https://mirai-solutions.ch}
 }
 \seealso{
 \code{\link{idx2aref}}, \code{\link{aref}}, \code{\link{cref2idx}},

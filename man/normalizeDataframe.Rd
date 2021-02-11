@@ -20,7 +20,7 @@ Returns a normalized \code{data.frame}
 }
 \author{
 Martin Studer\cr
-Mirai Solutions GmbH \url{http://www.mirai-solutions.com}
+Mirai Solutions GmbH \url{https://mirai-solutions.ch}
 }
 \keyword{utilities}
 \keyword{internal}

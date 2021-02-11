@@ -20,7 +20,7 @@ Sets the active worksheet of a \code{\linkS4class{workbook}}.
 
 \author{
 Martin Studer\cr
-Mirai Solutions GmbH \url{http://www.mirai-solutions.com}
+Mirai Solutions GmbH \url{https://mirai-solutions.ch}
 }
 \note{
 The active worksheet of a \code{\linkS4class{workbook}} is the worksheet that is displayed

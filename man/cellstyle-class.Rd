@@ -20,11 +20,11 @@ Cell styles are created by calling the \code{\link[=createCellStyle-methods]{cre
 }
 \references{
 Apply, create, or remove a cell style:\cr
-\url{http://bit.ly/gj1KRx} 
+\url{https://support.microsoft.com/en-us/office/apply-create-or-remove-a-cell-style-472213bf-66bd-40c8-815c-594f0f90cd22?ocmsassetid=hp001216732&correlationid=5691ac73-b7a2-40c3-99aa-a06e806bb566&ui=en-us&rs=en-us&ad=us} 
 }
 \author{
 Martin Studer\cr
-Mirai Solutions GmbH \url{http://www.mirai-solutions.com}
+Mirai Solutions GmbH \url{https://mirai-solutions.ch}
 }
 \note{
 \pkg{XLConnect} generally makes use of custom (named) cell styles. This allows users to more easily manage cell styles via Excel's cell style

@@ -9,7 +9,7 @@
 \usepackage{datetime}
 
 % So that more colours can be used, not only the pre-defined ones
-% List of colours here: http://en.wikibooks.org/wiki/LaTeX/Colors
+% List of colours here: https://en.wikibooks.org/wiki/LaTeX/Colors
 \usepackage[usenames,dvipsnames]{color}
 
 % To get URLs in a normal font, by using \urlwofont
@@ -81,7 +81,7 @@
 \thispagestyle{empty}
 \pagestyle{empty}
 
-% http://tex.stackexchange.com/questions/69838/positioning-of-rotated-nodes-in-a-matrix
+% https://tex.stackexchange.com/questions/69838/positioning-of-rotated-nodes-in-a-matrix
 \begin{tikzpicture}
 
 \tikzstyle{phase} =[draw,fill=white,rotate=90,sloped, minimum width = 14.5em, align=center];
@@ -137,7 +137,7 @@
 
 \vspace{0.5cm}
 \begin{center}
-\url{http://www.mirai-solutions.com}, \url{https://github.com/miraisolutions/xlconnect}
+\url{https://mirai-solutions.ch}, \url{https://github.com/miraisolutions/xlconnect}
 \end{center}
 
 \end{document}

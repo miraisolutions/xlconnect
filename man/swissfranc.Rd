@@ -9,5 +9,5 @@
 }
 \usage{swissfranc}
 \format{A data.frame with daily exchange rates in the mentioned time frame.}
-\source{\url{http://www.oanda.com/currency/historical-rates/}}
+\source{\url{https://www.oanda.com/currency/historical-rates/}}
 \keyword{datasets}

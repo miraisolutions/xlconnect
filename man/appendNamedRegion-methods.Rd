@@ -30,7 +30,7 @@ for further information on writing named regions.
 }
 \author{
 Martin Studer\cr
-Mirai Solutions GmbH \url{http://www.mirai-solutions.com}
+Mirai Solutions GmbH \url{https://mirai-solutions.ch}
 }
 \note{
 Named regions are automatically redefined to the area occupied by the

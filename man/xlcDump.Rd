@@ -44,7 +44,7 @@ the workbook.
 }
 \author{
 Martin Studer\cr
-Mirai Solutions GmbH \url{http://www.mirai-solutions.com}
+Mirai Solutions GmbH \url{https://mirai-solutions.ch}
 }
 \seealso{
 \code{\link{xlcRestore}}, \code{\link[=writeNamedRegion-methods]{writeNamedRegion}}, 

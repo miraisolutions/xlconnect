@@ -22,7 +22,7 @@ Checks whether the \code{\linkS4class{cellstyle}} with the specified \code{name}
 
 \author{
 Martin Studer\cr
-Mirai Solutions GmbH \url{http://www.mirai-solutions.com}
+Mirai Solutions GmbH \url{https://mirai-solutions.ch}
 }
 
 \seealso{

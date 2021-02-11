@@ -20,7 +20,7 @@ Removes a worksheet from a \code{\linkS4class{workbook}}.
 
 \author{
 Martin Studer\cr
-Mirai Solutions GmbH \url{http://www.mirai-solutions.com}
+Mirai Solutions GmbH \url{https://mirai-solutions.ch}
 }
 \note{
 When removing a worksheet that is the currently active sheet then \pkg{XLConnect} resets

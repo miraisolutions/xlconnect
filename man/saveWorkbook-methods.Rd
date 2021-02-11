@@ -31,7 +31,7 @@ Saves the specified \code{\linkS4class{workbook}} object to disk.
 }
 \author{
 Martin Studer\cr
-Mirai Solutions GmbH \url{http://www.mirai-solutions.com}
+Mirai Solutions GmbH \url{https://mirai-solutions.ch}
 }
 \note{
 As already mentioned in the documentation of the

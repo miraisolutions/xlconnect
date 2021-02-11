@@ -29,11 +29,11 @@ Returns a \code{\linkS4class{workbook}} object for further manipulation.
 }
 \references{
 Wikipedia: Office Open XML\cr
-\url{http://en.wikipedia.org/wiki/Office_Open_XML}
+\url{https://en.wikipedia.org/wiki/Office_Open_XML}
 }
 \author{
 Martin Studer\cr
-Mirai Solutions GmbH \url{http://www.mirai-solutions.com}
+Mirai Solutions GmbH \url{https://mirai-solutions.ch}
 }
 \note{
 \code{loadWorkbook} is basically just a shortcut form of \code{new("workbook", filename, create)} with some additional error checking. As such

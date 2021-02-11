@@ -16,7 +16,7 @@ Allows to execute \code{\linkS4class{workbook}} methods in \code{workbook-object
 }
 \author{
 Martin Studer\cr
-Mirai Solutions GmbH \url{http://www.mirai-solutions.com}
+Mirai Solutions GmbH \url{https://mirai-solutions.ch}
 }
 \note{
 The \code{\linkS4class{workbook}} \code{$}-operator allows to call \code{\linkS4class{workbook}}-methods in \code{workbook-object$method(...)} form. 

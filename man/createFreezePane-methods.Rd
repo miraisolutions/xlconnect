@@ -23,11 +23,11 @@ Creates a freeze pane on a specified worksheet.
 }
 \references{
 How to create a freeze pane/split pane in Office 2007
-\url{http://office.microsoft.com/en-us/excel-help/freeze-or-lock-rows-and-columns-HP001217048.aspx}
+\url{https://support.microsoft.com/en-us/office/freeze-panes-to-lock-rows-and-columns-dab2ffc9-020d-4026-8121-67dd25f2508f?ocmsassetid=hp001217048&correlationid=b4f5baeb-b622-4487-a96f-514d2f00208a&ui=en-us&rs=en-us&ad=us}
 }
 \author{
 Nicola Lambiase\cr
-Mirai Solutions GmbH \url{http://www.mirai-solutions.com}
+Mirai Solutions GmbH \url{https://mirai-solutions.ch}
 }
 \note{
 To keep an area of a worksheet visible while you scroll to another area of the worksheet,

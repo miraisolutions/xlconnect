@@ -22,7 +22,7 @@ are post-processed and re-thrown using \code{\link{stop}}.
 }
 \author{
 Martin Studer\cr
-Mirai Solutions GmbH \url{http://www.mirai-solutions.com}
+Mirai Solutions GmbH \url{https://mirai-solutions.ch}
 }
 \seealso{
 \code{\link{tryCatch}}, \code{\link{stop}}

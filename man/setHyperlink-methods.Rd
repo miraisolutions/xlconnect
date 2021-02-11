@@ -22,7 +22,7 @@ Sets hyperlinks for specific cells in a \code{\linkS4class{workbook}}.
   \item{row}{Row index of the cell to apply the cellstyle to.}
   \item{col}{Column index of the cell to apply the cellstyle to.}
   \item{type}{Hyperlink type. See the corresponding "HYPERLINK.*" constants from the \code{\link{XLC}} object.}
-  \item{address}{Hyperlink address. This needs to be a valid URI including scheme. E.g. for email \code{mailto:myself@me.org}, for a URL \code{http://www.somewhere.net} or for a file \code{file:///a/b/c.dat}}
+  \item{address}{Hyperlink address. This needs to be a valid URI including scheme. E.g. for email \code{mailto:myself@me.org}, for a URL \code{https://www.somewhere.net} or for a file \code{file:///a/b/c.dat}}
 }
 
 \details{
@@ -32,7 +32,7 @@ method call. Use either the argument \code{formula} or the combination of \code{
 }
 \author{
 Martin Studer\cr
-Mirai Solutions GmbH \url{http://www.mirai-solutions.com}
+Mirai Solutions GmbH \url{https://mirai-solutions.ch}
 }
 \seealso{
   \code{\linkS4class{workbook}}, \code{\link[=setCellStyle-methods]{setCellStyle}}
@@ -49,7 +49,7 @@ createSheet(wb, name = "mtcars")
 writeWorksheet(wb, mtcars, sheet = "mtcars", rownames = "Car")
 
 # Set hyperlinks
-links <- paste0("http://www.google.com?q=", gsub(" ", "+", rownames(mtcars)))
+links <- paste0("https://www.google.com?q=", gsub(" ", "+", rownames(mtcars)))
 setHyperlink(wb, sheet = "mtcars", row = seq_len(nrow(mtcars)) + 1, col = 1,
   type = XLC$HYPERLINK.URL, address = links)
 

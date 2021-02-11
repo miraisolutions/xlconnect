@@ -20,7 +20,7 @@ Returns the area reference (\code{character}) for the specified top left cell an
 }
 \author{
 Martin Studer\cr
-Mirai Solutions GmbH \url{http://www.mirai-solutions.com}
+Mirai Solutions GmbH \url{https://mirai-solutions.ch}
 }
 \seealso{
 \code{\link{aref2idx}}, \code{\link{idx2aref}},
