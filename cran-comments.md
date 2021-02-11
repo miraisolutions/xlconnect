@@ -9,7 +9,7 @@
 
 There were no ERRORs or WARNINGs
 
-There was 1 NOTE:
+There were 2 NOTEs:
 > checking installed package size ... NOTE
     installed size is 36.3Mb
     sub-directories of 1Mb or more:
@@ -21,6 +21,18 @@ they are downloaded into XLConnect's installation directory. Apache POI 4.1.x is
 distributions' package managers at the time of writing. In addition, the full ooxml-schemas-1.4.jar is required, which 
 is not distributed via package managers. See http://poi.apache.org/help/faq.html#faq-N10109 for more information.
 
+> checking CRAN incoming feasibility ... NOTE
+  Maintainer: ‘Martin Studer <martin.studer@mirai-solutions.com>’
+  
+  Found the following (possibly) invalid URLs:
+    URL: https://www.ozgrid.com/Excel/CustomFormats.htm
+      From: man/setDataFormat-methods.Rd
+            man/setDataFormatForType-methods.Rd
+      Status: 301
+      Message: Moved Permanently
+
+
+Justification: the linked website uses cloudflare DDoS protection, which results in a redirect when accessing the URL.
 # Downstream dependencies
 
 _revdepcheck_ found 10 downstream dependencies; they were all checked successfully.

@@ -24,7 +24,7 @@ information.
 }
 \references{
 Excel custom data formats:\cr
-\url{http://www.ozgrid.com/Excel/CustomFormats.htm}
+\url{https://www.ozgrid.com/Excel/CustomFormats.htm}
 }
 \author{
 Martin Studer\cr
