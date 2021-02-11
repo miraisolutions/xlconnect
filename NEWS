@@ -1,6 +1,6 @@
 XLConnect News
 --------------
-1.0.2 2021-02-??
+1.0.2 2021-02-11
   * Increase compatibility up to java 15
   * fix missing jar dependency: poi-ooxml-schemas.jar
   * resolve existing shared jars via package manager instead of via the file system
