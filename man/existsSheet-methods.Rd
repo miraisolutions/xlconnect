@@ -33,6 +33,7 @@ Mirai Solutions GmbH \url{https://mirai-solutions.ch}
 \code{\link[=getSheets-methods]{getSheets}}, \code{\link[=cloneSheet-methods]{cloneSheet}}
 }
 \examples{
+\dontrun{
 # mtcars xlsx file from demoFiles subfolder of package XLConnect
 demoExcelFile <- system.file("demoFiles/mtcars.xlsx", package = "XLConnect")
 
@@ -41,6 +42,7 @@ wb <- loadWorkbook(demoExcelFile)
 
 # Check for existence of a worksheet called 'mtcars'
 existsSheet(wb, "mtcars")
+}
 }
 \keyword{methods}
 \keyword{utilities}

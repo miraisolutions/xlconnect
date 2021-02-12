@@ -29,6 +29,7 @@ Mirai Solutions GmbH \url{https://mirai-solutions.ch}
 \code{\linkS4class{workbook}}
 }
 \examples{
+\dontrun{
 # mtcars xlsx file from demoFiles subfolder of package XLConnect
 demoExcelFile <- system.file("demoFiles/mtcars.xlsx", package = "XLConnect")
 
@@ -43,6 +44,7 @@ getLastRow(wb, "mtcars2")
 
 # Query the last row of the 'mtcars3' worksheet
 getLastRow(wb, "mtcars3")
+}
 }
 \keyword{methods}
 \keyword{utilities}

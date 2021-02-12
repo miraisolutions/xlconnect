@@ -26,12 +26,14 @@ Mirai Solutions GmbH \url{https://mirai-solutions.ch}
 \code{\link[=getDefinedNames-methods]{getDefinedNames}}, \code{\link[=getActiveSheetName-methods]{getActiveSheetName}}
 }
 \examples{
+\dontrun{
 # Load existing demo Excel file 'mtcars.xlsx' from the XLConnect package
 wb.mtcars <- loadWorkbook(system.file("demoFiles/mtcars.xlsx", 
                           package = "XLConnect"))
 
 # Print a workbook summary
 summary(wb.mtcars)
+}
 }
 \keyword{methods}
 \keyword{print}

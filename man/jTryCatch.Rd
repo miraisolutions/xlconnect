@@ -28,7 +28,9 @@ Mirai Solutions GmbH \url{https://mirai-solutions.ch}
 \code{\link{tryCatch}}, \code{\link{stop}}
 }
 \examples{
+\dontrun{
 try(XLConnect:::jTryCatch(J("java.lang.Integer")$valueOf("not an integer")))
+}
 }
 \keyword{error}
 \keyword{internal}

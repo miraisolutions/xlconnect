@@ -20,6 +20,8 @@ Mirai Solutions GmbH \url{https://mirai-solutions.ch}
 \code{\link{xlcFreeMemory}}
 }
 \examples{
+\dontrun{
 xlcMemoryReport()
+}
 }
 \keyword{utilities}

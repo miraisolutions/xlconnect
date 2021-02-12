@@ -29,6 +29,7 @@ Mirai Solutions GmbH \url{https://mirai-solutions.ch}
 \code{\link[=removeName-methods]{removeName}}, \code{\link[=getReferenceFormula-methods]{getReferenceFormula}}
 }
 \examples{
+\dontrun{
 # mtcars xlsx file from demoFiles subfolder of package XLConnect
 demoExcelFile <- system.file("demoFiles/mtcars.xlsx", package = "XLConnect")
 
@@ -37,6 +38,7 @@ wb <- loadWorkbook(demoExcelFile)
 
 # Query reference coordinate for name 'mtcars'
 print(getReferenceCoordinatesForName(wb, name = "mtcars"))
+}
 }
 \keyword{methods}
 \keyword{utilities}

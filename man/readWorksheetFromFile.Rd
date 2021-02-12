@@ -29,6 +29,7 @@ Mirai Solutions GmbH \url{https://mirai-solutions.ch}
   \code{\link[=onErrorCell-methods]{onErrorCell}}
 }
 \examples{
+\dontrun{
 # multiregion xlsx file from demoFiles subfolder of 
 # package XLConnect
 demoExcelFile <- system.file("demoFiles/multiregion.xlsx", 
@@ -51,5 +52,6 @@ dflist <- readWorksheetFromFile(demoExcelFile,
                                 startCol = c(2,5,2),
                                 endCol = c(5,8,6), 
                                 endRow = c(9,15,153))
+}
 }
 \keyword{IO}

@@ -33,6 +33,7 @@ Mirai Solutions GmbH \url{https://mirai-solutions.ch}
 \code{\link[=readTable-methods]{readTable}}
 }
 \examples{
+\dontrun{
 # mtcars xlsx file from demoFiles subfolder of package XLConnect
 demoExcelFile <- system.file("demoFiles/mtcars.xlsx", package = "XLConnect")
 
@@ -44,6 +45,7 @@ tables <- getTables(wb, sheet = "mtcars_table")
 
 # ... or via sheet index
 tables <- getTables(wb, sheet = 4)
+}
 }
 \keyword{methods}
 \keyword{utilities}

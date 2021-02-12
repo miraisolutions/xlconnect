@@ -23,6 +23,7 @@ Mirai Solutions GmbH \url{https://mirai-solutions.ch}
 \code{\linkS4class{workbook}}, \code{\link[=getActiveSheetName-methods]{getActiveSheetName}}
 }
 \examples{
+\dontrun{
 # mtcars xlsx file from demoFiles subfolder of package XLConnect
 demoExcelFile <- system.file("demoFiles/mtcars.xlsx", package = "XLConnect")
 
@@ -31,6 +32,7 @@ wb <- loadWorkbook(demoExcelFile)
 
 # Query the active sheet index
 activeSheet <- getActiveSheetIndex(wb)
+}
 }
 \keyword{methods}
 \keyword{utilities}

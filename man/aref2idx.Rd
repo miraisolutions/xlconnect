@@ -27,6 +27,8 @@ Mirai Solutions GmbH \url{https://mirai-solutions.ch}
 \code{\link{idx2cref}}, \code{\link{col2idx}}, \code{\link{idx2col}}
 }
 \examples{
+\dontrun{
 aref2idx(c("A1:B6", "B6:C17"))
+}
 }
 \keyword{utilities}

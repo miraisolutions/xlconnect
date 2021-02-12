@@ -24,6 +24,7 @@ Mirai Solutions GmbH \url{https://mirai-solutions.ch}
 \code{\linkS4class{workbook}}, \code{\link[=print-methods]{print}}
 }
 \examples{
+\dontrun{
 # Load existing demo Excel file 'mtcars.xlsx' from the XLConnect package
 wb.mtcars <- loadWorkbook(system.file("demoFiles/mtcars.xlsx", 
                           package = "XLConnect"))
@@ -33,6 +34,7 @@ wb.mtcars
 
 # Alternatively, show can be called explicitely
 show(wb.mtcars)
+}
 }
 \keyword{methods}
 \keyword{print}

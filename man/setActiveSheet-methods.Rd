@@ -32,6 +32,7 @@ when the corresponding Excel file is opened.
 \code{\link[=existsSheet-methods]{existsSheet}}, \code{\link[=getSheets-methods]{getSheets}}
 }
 \examples{
+\dontrun{
 # mtcars xlsx file from demoFiles subfolder of package XLConnect
 mtcarsFile <- system.file("demoFiles/mtcars.xlsx", package = "XLConnect")
 
@@ -40,6 +41,7 @@ wb <- loadWorkbook(mtcarsFile)
 
 # Sets the active sheet to the sheet 'mtcars3'
 setActiveSheet(wb, sheet = "mtcars3")
+}
 }
 \keyword{methods}
 \keyword{utilities}

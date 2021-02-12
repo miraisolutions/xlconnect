@@ -32,6 +32,7 @@ Mirai Solutions GmbH \url{https://mirai-solutions.ch}
 \code{\link[=getSheets-methods]{getSheets}}
 }
 \examples{
+\dontrun{
 # mtcars xlsx file from demoFiles subfolder of package XLConnect
 demoExcelFile <- system.file("demoFiles/mtcars.xlsx", package = "XLConnect")
 
@@ -40,6 +41,7 @@ wb <- loadWorkbook(demoExcelFile)
 
 # Move the 'mtcars3' worksheet to the front
 setSheetPos(wb, sheet = "mtcars3", pos = 1)
+}
 }
 \keyword{methods}
 \keyword{utilities}

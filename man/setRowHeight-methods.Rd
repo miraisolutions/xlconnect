@@ -35,6 +35,7 @@ Mirai Solutions GmbH \url{https://mirai-solutions.ch}
 \code{\linkS4class{workbook}}, \code{\link[=setColumnWidth-methods]{setColumnWidth}}
 }
 \examples{
+\dontrun{
 # mtcars xlsx file from demoFiles subfolder of package XLConnect
 mtcarsFile <- system.file("demoFiles/mtcars.xlsx", package = "XLConnect")
 
@@ -44,6 +45,7 @@ wb <- loadWorkbook(mtcarsFile)
 # Sets the row height of the 1st row on sheet 'mtcars'
 # to 20 points
 setRowHeight(wb, sheet = "mtcars", row = 1, height = 20)
+}
 }
 \keyword{methods}
 \keyword{utilities}

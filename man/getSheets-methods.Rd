@@ -24,6 +24,7 @@ Mirai Solutions GmbH \url{https://mirai-solutions.ch}
 \code{\link[=getSheetPos-methods]{getSheetPos}}, \code{\link[=setSheetPos-methods]{setSheetPos}}
 }
 \examples{
+\dontrun{
 # mtcars xlsx file from demoFiles subfolder of package XLConnect
 demoExcelFile <- system.file("demoFiles/mtcars.xlsx", package = "XLConnect")
 
@@ -32,6 +33,7 @@ wb <- loadWorkbook(demoExcelFile)
 
 # Query available worksheets
 sheets <- getSheets(wb)
+}
 }
 \keyword{methods}
 \keyword{utilities}

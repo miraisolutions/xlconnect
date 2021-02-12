@@ -37,6 +37,7 @@ Mirai Solutions GmbH \url{https://mirai-solutions.ch}
 \code{\link[=clearRangeFromReference-methods]{clearRangeFromReference}}
 }
 \examples{
+\dontrun{
 # mtcars xlsx file from demoFiles subfolder of 
 # package XLConnect
 demoExcelFile <- system.file("demoFiles/mtcars.xlsx", 
@@ -50,6 +51,7 @@ clearSheet(wb, sheet = c("mtcars", "mtcars2"))
 
 # Clear 3rd worksheet
 clearSheet(wb, sheet = 3) 
+}
 }
 \keyword{methods}
 \keyword{utilities}

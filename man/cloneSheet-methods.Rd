@@ -31,6 +31,7 @@ Mirai Solutions GmbH \url{https://mirai-solutions.ch}
 \code{\link[=getSheets-methods]{getSheets}}, \code{\link[=existsSheet-methods]{existsSheet}}
 }
 \examples{
+\dontrun{
 # mtcars xlsx file from demoFiles subfolder of package XLConnect
 demoExcelFile <- system.file("demoFiles/mtcars.xlsx", package = "XLConnect")
 
@@ -39,6 +40,7 @@ wb <- loadWorkbook(demoExcelFile)
 
 # Clone the 'mtcars' worksheet and assign it the name 'mtcars cloned'
 cloneSheet(wb, sheet = "mtcars", name = "mtcars cloned")
+}
 }
 \keyword{methods}
 \keyword{utilities}

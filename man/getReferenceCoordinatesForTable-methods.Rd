@@ -30,6 +30,7 @@ Mirai Solutions GmbH \url{https://mirai-solutions.ch}
 \code{\link[=getReferenceCoordinatesForName-methods]{getReferenceCoordinatesForName}}
 }
 \examples{
+\dontrun{
 # mtcars xlsx file from demoFiles subfolder of package XLConnect
 demoExcelFile <- system.file("demoFiles/mtcars.xlsx", package = "XLConnect")
 
@@ -40,6 +41,7 @@ wb <- loadWorkbook(demoExcelFile)
 # 'mtcars_table'
 print(getReferenceCoordinatesForTable(wb, sheet = "mtcars_table", 
                                       table = "MtcarsTable"))
+}
 }
 \keyword{methods}
 \keyword{utilities}

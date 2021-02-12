@@ -28,6 +28,7 @@ Mirai Solutions GmbH \url{https://mirai-solutions.ch}
 \code{\link[=getSheets-methods]{getSheets}}
 }
 \examples{
+\dontrun{
 # mtcars xlsx file from demoFiles subfolder of package XLConnect
 demoExcelFile <- system.file("demoFiles/mtcars.xlsx", package = "XLConnect")
 
@@ -37,6 +38,7 @@ wb <- loadWorkbook(demoExcelFile)
 # Query worksheet positions for the worksheets 'mtcars2', 'mtcars3',
 # 'mtcars' and 'NotThere' (which actually does not exist)
 print(getSheetPos(wb, sheet = c("mtcars2", "mtcars3", "mtcars", "NotThere")))
+}
 }
 \keyword{methods}
 \keyword{utilities}

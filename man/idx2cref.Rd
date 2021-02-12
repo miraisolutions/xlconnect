@@ -35,6 +35,8 @@ Mirai Solutions GmbH \url{https://mirai-solutions.ch}
 \code{\link{idx2aref}}, \code{\link{aref2idx}}, \code{\link{aref}}
 }
 \examples{
+\dontrun{
 idx2cref(c(5, 8, 14, 38))
+}
 }
 \keyword{utilities}

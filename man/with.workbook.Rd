@@ -34,6 +34,7 @@ Mirai Solutions GmbH \url{https://mirai-solutions.ch}
   \code{\link[=readNamedRegion-methods]{readNamedRegion}},
 }
 \examples{
+\dontrun{
 # multiregion xlsx file from demoFiles subfolder of package XLConnect
 demoExcelFile <- system.file("demoFiles/multiregion.xlsx",
                              package = "XLConnect")
@@ -50,5 +51,6 @@ with(wb, {
   summary(IQ)
   summary(Iris)
 })
+}
 }
 \keyword{IO}

@@ -35,6 +35,7 @@ Mirai Solutions GmbH \url{https://mirai-solutions.ch}
 \code{\link[=clearSheet-methods]{clearSheet}}
 }
 \examples{
+  \dontrun{
 # mtcars xlsx file from demoFiles subfolder of 
 # package XLConnect
 demoExcelFile <- system.file("demoFiles/mtcars.xlsx", 
@@ -58,6 +59,7 @@ clearNamedRegion(wb, name = "mtcars")
 # to the size/area of the data
 writeNamedRegion(wb, data = data, name = "mtcars",
                  header = TRUE) 
+} 
 }
 \keyword{methods}
 \keyword{utilities}

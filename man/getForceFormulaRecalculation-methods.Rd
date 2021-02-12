@@ -30,6 +30,7 @@ Mirai Solutions GmbH \url{https://mirai-solutions.ch}
 \code{\link[=setForceFormulaRecalculation-methods]{setForceFormulaRecalculation}}
 }
 \examples{
+\dontrun{
 # mtcars xlsx file from demoFiles subfolder of package XLConnect
 demoExcelFile <- system.file("demoFiles/mtcars.xlsx", package = "XLConnect")
 
@@ -38,6 +39,7 @@ wb <- loadWorkbook(demoExcelFile)
 
 # Ask whether Excel will automatically recalculate formulas on sheet mtcars
 print(getForceFormulaRecalculation(wb, sheet = "mtcars"))
+}
 }
 \keyword{methods}
 \keyword{utilities}

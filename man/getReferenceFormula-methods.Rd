@@ -26,6 +26,7 @@ Mirai Solutions GmbH \url{https://mirai-solutions.ch}
 \code{\link[=removeName-methods]{removeName}}
 }
 \examples{
+\dontrun{
 # mtcars xlsx file from demoFiles subfolder of package XLConnect
 demoExcelFile <- system.file("demoFiles/mtcars.xlsx", package = "XLConnect")
 
@@ -34,6 +35,7 @@ wb <- loadWorkbook(demoExcelFile)
 
 # Query reference formula for name 'mtcars'
 print(getReferenceFormula(wb, name = "mtcars"))
+}
 }
 \keyword{methods}
 \keyword{utilities}

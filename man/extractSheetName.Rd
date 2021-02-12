@@ -23,6 +23,8 @@ Martin Studer\cr
 Mirai Solutions GmbH \url{https://mirai-solutions.ch}
 }
 \examples{
+\dontrun{
 extractSheetName(c("MySheet!$A$1", "'My Sheet'!$A$1", "'My!Sheet'!$A$1"))
+}
 }
 \keyword{utilities}
