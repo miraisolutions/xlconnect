@@ -90,7 +90,7 @@ runUnitTests <- function() {
 		printHTMLProtocol(TestResult, fileName = htmlProtocol)
 		
 		# Show HTML Test Protocol
-		browseURL(url = htmlProtocol)
+		if (interactive()) { browseURL(url = htmlProtocol) }
 		
 		## Return stop() to cause R CMD check stop in case of
 		##  - failures i.e. FALSE to unit tests or
