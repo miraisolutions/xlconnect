@@ -71,26 +71,11 @@ jobs:
       RSPM: ${{ matrix.config.pkgrepo }}
 
     steps:
-      - uses: 'szenius/set-timezone@v1.0'
-        if: matrix.config.os-name == 'ubuntu'
-        with:
-          timezoneLinux: ${{ matrix.config.timezone-name }}
-      - uses: 'szenius/set-timezone@v1.0'
-        if: matrix.config.os-name == 'macos'
-        with:
-          timezoneMacos: ${{ matrix.config.timezone-name }}
-      - uses: 'szenius/set-timezone@v1.0'
-        if: matrix.config.os-name == 'windows'
-        with:
-          timezoneWindows: ${{ matrix.config.timezone-name }}
-      
       - uses: actions/checkout@v2
 
       - name: RSPM fallback
         if: matrix.config.pkgrepo == ''
-        run: | 
-          echo $(date)
-          echo 'RSPM=https://cloud.r-project.org' >> $GITHUB_ENV
+        run: echo 'RSPM=https://cloud.r-project.org' >> $GITHUB_ENV
 
       - name: Setup java (x86)
         uses: actions/setup-java@v1
@@ -119,7 +104,6 @@ jobs:
       - name: run javareconf # Yes it actually needs JAVA_HOME=$JAVA_HOME, doesn't use actual env vars (!)
         if: runner.os != 'Windows'
         run: |
-          echo $(date)
           java -version
           echo java_home:$JAVA_HOME
           echo library paths: $LD_LIBRARY_PATH
@@ -179,7 +163,6 @@ jobs:
 
       - name: Session info
         run: |
-          date()
           options(width = 100)
           pkgs <- installed.packages()[, "Package"]
           sessionInfo()
