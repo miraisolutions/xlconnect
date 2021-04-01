@@ -70,7 +70,7 @@ jobs:
       RSPM: ${{ matrix.config.pkgrepo }}
 
     steps:
-      - uses: 'actions/set-timezone-action@v1.0'
+      - uses: 'szenius/set-timezone@v1.0'
         with:
           timezoneLinux: ${{ matrix.config.timezone-name }}
           timezoneMacos: ${{ matrix.config.timezone-name }}
