@@ -68,15 +68,22 @@ jobs:
     env:
       R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
       XLCONNECT_JAVA_REPO_URL: ${{ matrix.config.xlc-repo }}
-      TZ: ${{ matrix.config.timezone-name }}
       RSPM: ${{ matrix.config.pkgrepo }}
 
     steps:
       - uses: 'szenius/set-timezone@v1.0'
+        if: matrix.config.os-name == 'ubuntu'
         with:
           timezoneLinux: ${{ matrix.config.timezone-name }}
+      - uses: 'szenius/set-timezone@v1.0'
+        if: matrix.config.os-name == 'macos'
+        with:
           timezoneMacos: ${{ matrix.config.timezone-name }}
+      - uses: 'szenius/set-timezone@v1.0'
+        if: matrix.config.os-name == 'windows'
+        with:
           timezoneWindows: ${{ matrix.config.timezone-name }}
+      
       - uses: actions/checkout@v2
 
       - name: RSPM fallback
