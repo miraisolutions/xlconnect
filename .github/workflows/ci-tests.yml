@@ -185,6 +185,9 @@ jobs:
           sessionInfo()
         shell: Rscript {0}
 
+      - name: set TZ for tests / check
+        run: echo 'TZ=${{ matrix.config.timezone-name }}' >> $GITHUB_ENV
+
       - uses: 'szenius/set-timezone@v1.0'
         if: matrix.config.os-name == 'ubuntu'
         with:
