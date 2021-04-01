@@ -82,7 +82,7 @@ jobs:
       - name: RSPM fallback
         if: matrix.config.pkgrepo == ''
         run: | 
-          date
+          echo $(date)
           echo 'RSPM=https://cloud.r-project.org' >> $GITHUB_ENV
 
       - name: Setup java (x86)
@@ -112,7 +112,7 @@ jobs:
       - name: run javareconf # Yes it actually needs JAVA_HOME=$JAVA_HOME, doesn't use actual env vars (!)
         if: runner.os != 'Windows'
         run: |
-          date
+          echo $(date)
           java -version
           echo java_home:$JAVA_HOME
           echo library paths: $LD_LIBRARY_PATH
@@ -221,7 +221,7 @@ jobs:
       - name: Show test output
         if: always()
         run: | 
-          date
+          echo $(date)
           cat tests/XLConnect_Unit_Tests.txt || true
           git clean -fd "*xls*"
           grep -i "0 errors, 0 failures" tests/XLConnect_Unit_Tests.txt
