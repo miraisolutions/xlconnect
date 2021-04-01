@@ -63,6 +63,7 @@ jobs:
             java: 11
             vignettes: false
             pkgrepo: "https://cloud.r-project.org"
+            timezone-name: "W. Europe Standard Time"
     env:
       R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
       XLCONNECT_JAVA_REPO_URL: ${{ matrix.config.xlc-repo }}
