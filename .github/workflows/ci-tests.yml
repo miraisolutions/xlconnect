@@ -209,6 +209,7 @@ jobs:
         shell: Rscript {0}
 
       - name: run complete test suite # some tests are not run in r check, as test xls(x) files are Rbuild-ignored
+        if: always()
         env:
           _R_CHECK_CRAN_INCOMING_: false
           FULL_TEST_SUITE: 1
