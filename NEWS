@@ -1,5 +1,9 @@
 XLConnect News
 --------------
+1.0.3 2021-04-09
+  * Fix DST related date parsing bug
+  * Fix always displaying a failure message when installing on windows
+  
 1.0.2 2021-02-11
   * Increase compatibility up to java 15
   * fix missing jar dependency: poi-ooxml-schemas.jar
@@ -8,6 +12,7 @@ XLConnect News
 
 1.0.1 2020-03-20
   * Add java version check
+  
 1.0.0 2020-03-19
   * Update to apache POI 4.1.1
   * Download missing dependency jars on installation instead of including them in the package

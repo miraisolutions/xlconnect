@@ -35,7 +35,13 @@ xlcEnsureDependenciesFor <- function (url, name, versionpattern, libname, pkgnam
       destDir <- file.path(libname, pkgname, "java")
       dst <- file.path(destDir, name)
       if(!file.exists(dst)){
-        download.file(url, dst, mode="wb")
+        tryCatch({
+          download.file(url, dst, mode="wb")
+        },
+        error=function(e) {
+          write(paste0("downloading JAR dependencies failed: ",url), file.path(libname, pkgname, ".fail"))
+          e
+        })
       }
     }
     c()
