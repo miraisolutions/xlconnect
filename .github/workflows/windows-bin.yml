@@ -49,7 +49,9 @@ jobs:
           r-version: ${{ matrix.config.r-version }}
 
       - name: find out PATH changes
-        run: echo %PATH%
+        run: | 
+          echo %PATH%
+          dir C:\R\bin
         shell: cmd
 
       - name: print effective R version
@@ -160,5 +162,5 @@ jobs:
           echo install.packages(pkg="XLConnect.zip") >> test.r
           echo library(XLConnect)  >> test.r
           XLConnect::loadWorkbook("test.xls", create=TRUE) >> test.r
-          Rscript test.r
+          rscript test.r
         shell: cmd
