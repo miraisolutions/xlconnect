@@ -32,15 +32,15 @@ jobs:
       RSPM: ${{ matrix.config.pkgrepo }}
 
     steps:
-      - name: try here - hack to skip r tools install
-        run: |
-          echo %PATH%
-          rmdir /s /q C:\MinGW
-          rmdir /s /q C:\rtools40
-          cat blabla
-          mkdir C:\Rtools
-          mkdir C:\rtools40
-        shell: cmd
+      # - name: try here - hack to skip r tools install
+      #   run: |
+      #     echo %PATH%
+      #     rmdir /s /q C:\MinGW
+      #     rmdir /s /q C:\rtools40
+      #     cat blabla
+      #     mkdir C:\Rtools
+      #     mkdir C:\rtools40
+      #   shell: cmd
 
       - uses: actions/checkout@v2
       
@@ -111,7 +111,9 @@ jobs:
             java: 11
     steps:
       - name: hack to skip r tools install
-        run: | 
+        run: |
+          rmdir /s /q C:\Program Files\Git\mingw64\
+          rmdir /s /q C:\rtools40
           mkdir C:\Rtools
           mkdir C:\rtools40
       
