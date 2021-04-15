@@ -32,15 +32,15 @@ jobs:
       RSPM: ${{ matrix.config.pkgrepo }}
 
     steps:
-      - name: try here - hack to skip r tools install
+      - name: get rid of most of the PATH
+        run: >
+          echo 'PATH=C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;
+          C:\Windows\System32\OpenSSH\;C:\ProgramData\Chocolatey\bin' >> $GITHUB_ENV
+
+      - name: see if cat still available
         run: |
-          echo %PATH%
-          rmdir /s /q C:\Program Files\Git\mingw64\
-          rmdir /s /q C:\rtools40
-          cat blabla
-          mkdir C:\Rtools
-          mkdir C:\rtools40
-          somefailingcommand
+          cat blalal
+          somegailingcommand
         shell: cmd
 
       - uses: actions/checkout@v2
