@@ -33,9 +33,11 @@ jobs:
 
     steps:
       - name: try here - hack to skip r tools install
-        run: | 
+        run: |
+          cat blabla 
           mkdir C:\Rtools
           mkdir C:\rtools40
+        shell: cmd
 
       - uses: actions/checkout@v2
       
