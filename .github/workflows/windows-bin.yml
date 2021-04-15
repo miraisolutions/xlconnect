@@ -34,14 +34,6 @@ jobs:
 
     steps:
 
-      - name: see if cat still available after setting path
-        run: |
-          set PATH=C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\ProgramData\Chocolatey\bin'
-          echo %PATH%
-          cat blalal
-          somegailingcommand
-        shell: cmd
-
       - uses: actions/checkout@v2
       
       - name: Setup java (x64)
@@ -166,7 +158,9 @@ jobs:
     
       - name: try to load and use XLConnect
         run: |
-          install.packages(pkg="XLConnect.zip")
-          library(XLConnect)
-          XLConnect::loadWorkbook("test.xls", create=TRUE)
-        shell: Rscript {0}
+          set PATH=C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\ProgramData\Chocolatey\bin'
+          echo install.packages(pkg="XLConnect.zip") >> test.r
+          echo library(XLConnect)  >> test.r
+          XLConnect::loadWorkbook("test.xls", create=TRUE) >> test.r
+          Rscript test.r
+        shell: cmd
