@@ -19,7 +19,6 @@ on:
 jobs:
   build:
     runs-on: windows-2019
-    container: mcr.microsoft.com/windows/servercore:ltsc2019
     name: >- 
       R ${{ matrix.config.r-version}} - java ${{ matrix.config.java}}
     strategy:
@@ -35,6 +34,8 @@ jobs:
     steps:
       - name: try here - hack to skip r tools install
         run: |
+          rmdir C:\MinGW
+          rmdir C:\rtools40
           cat blabla 
           mkdir C:\Rtools
           mkdir C:\rtools40
@@ -102,7 +103,6 @@ jobs:
   test-load:
     needs: build
     runs-on: windows-2019
-    container: mcr.microsoft.com/windows/servercore:ltsc2019
     strategy:
       matrix:
         config: 
