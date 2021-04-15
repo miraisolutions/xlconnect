@@ -86,7 +86,7 @@ jobs:
         uses: actions/upload-artifact@main
         with:
           name: java${{ matrix.config.java }}-R${{ matrix.config.r-version }}-binary
-          path: D:/a/xlconnect/XLConnect_*.zip
+          path: ../XLConnect_*.zip
 
   test-load:
     needs: build
@@ -97,6 +97,8 @@ jobs:
           - r-version: release
             java: 11
     steps:
+      - uses: actions/checkout@v2
+      
       - name: Download binary package from previous job
         uses: actions/download-artifact@v2
         with:
