@@ -48,6 +48,10 @@ jobs:
         with:
           r-version: ${{ matrix.config.r-version }}
 
+      - name: find out PATH changes
+        run: echo %PATH%
+        shell: cmd
+
       - name: print effective R version
         run: version
         shell: Rscript {0}
@@ -102,12 +106,6 @@ jobs:
           - r-version: release
             java: 11
     steps:
-      - name: hack to skip r tools install
-        run: |
-          rmdir /s /q C:\Program Files\Git\mingw64\
-          rmdir /s /q C:\rtools40
-          mkdir C:\Rtools
-          mkdir C:\rtools40
       
       - name: Download binary package from previous job
         uses: actions/download-artifact@v2
@@ -158,7 +156,7 @@ jobs:
     
       - name: try to load and use XLConnect
         run: |
-          set PATH=C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\ProgramData\Chocolatey\bin'
+          set PATH=C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\ProgramData\Chocolatey\bin;C:\Program Files\R\R-4.0.5\bin\x64'
           echo install.packages(pkg="XLConnect.zip") >> test.r
           echo library(XLConnect)  >> test.r
           XLConnect::loadWorkbook("test.xls", create=TRUE) >> test.r
