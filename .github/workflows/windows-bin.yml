@@ -86,7 +86,7 @@ jobs:
         uses: actions/upload-artifact@main
         with:
           name: java${{ matrix.config.java }}-R${{ matrix.config.r-version }}-binary
-          path: ../XLConnect_*.zip
+          path: D:/a/xlconnect/XLConnect_*.zip
 
   test-load:
     needs: build
