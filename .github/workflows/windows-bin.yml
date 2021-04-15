@@ -30,15 +30,13 @@ jobs:
       R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
       XLCONNECT_JAVA_REPO_URL: ${{ matrix.config.xlc-repo }}
       RSPM: ${{ matrix.config.pkgrepo }}
+      PATH: C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\ProgramData\Chocolatey\bin
 
     steps:
-      - name: get rid of most of the PATH
-        run: >
-          echo 'PATH=C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;
-          C:\Windows\System32\OpenSSH\;C:\ProgramData\Chocolatey\bin' >> $GITHUB_ENV
 
-      - name: see if cat still available
+      - name: see if cat still available after setting path
         run: |
+          set PATH=C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\ProgramData\Chocolatey\bin'
           echo %PATH%
           cat blalal
           somegailingcommand
