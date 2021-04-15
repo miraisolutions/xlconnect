@@ -32,6 +32,11 @@ jobs:
       RSPM: ${{ matrix.config.pkgrepo }}
 
     steps:
+      - name: try here - hack to skip r tools install
+        run: | 
+          mkdir C:\Rtools
+          mkdir C:\rtools40
+
       - uses: actions/checkout@v2
       
       - name: Setup java (x64)
@@ -100,6 +105,10 @@ jobs:
           - r-version: release
             java: 11
     steps:
+      - name: hack to skip r tools install
+        run: | 
+          mkdir C:\Rtools
+          mkdir C:\rtools40
       
       - name: Download binary package from previous job
         uses: actions/download-artifact@v2
