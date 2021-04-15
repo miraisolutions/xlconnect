@@ -158,7 +158,7 @@ jobs:
     
       - name: try to load and use XLConnect
         run: |
-          set PATH=C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\ProgramData\Chocolatey\bin;C:\R\bin'
+          set PATH=C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\ProgramData\Chocolatey\bin;C:\hostedtoolcache\windows\jdk\11.0.10\x64\bin;C:\R\bin'
           echo install.packages(pkg="XLConnect.zip") >> test.r
           echo library(XLConnect)  >> test.r
           XLConnect::loadWorkbook("test.xls", create=TRUE) >> test.r
