@@ -123,7 +123,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          remotes::install_deps(pkgdir = "XLConnect_binary.zip" dependencies = TRUE)
+          remotes::install_deps(pkgdir = "XLConnect_binary.zip")
         shell: Rscript {0}
 
       - name: Session info
