@@ -102,7 +102,7 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: java${{ matrix.config.java }}-R${{ matrix.config.r-version }}-binary
-          path: XLConnect_binary.zip
+          path: payload.zip
       
       - name: Setup java (x64)
         uses: actions/setup-java@v1
@@ -132,6 +132,12 @@ jobs:
           pkgs <- installed.packages()[, "Package"]
           sessionInfo()
         shell: Rscript {0}
+      
+      - name: extract downloaded payload
+        run: |
+          7z x payload.zip
+          dir
+          mv XLConnect_*.zip XLConnect_binary.zip
     
       - name: try to load and use XLConnect
         run: |
