@@ -74,7 +74,11 @@
     xlcEnsureDependenciesFor(
       paste0(apachePrefix, "/poi/ooxml-schemas/1.4/ooxml-schemas-1.4.jar"), "ooxml-schemas.jar",
       "1\\.([4-9]|[1-9][0-9]).*",  libname, pkgname))
-  })
+  },
+  error=function(e) {
+          e
+        }
+  )
   .jpackage(name = pkgname, jars = "*", morePaths = sharedPaths)
   # Perform general XLConnect settings - pass package description
   XLConnectSettings(packageDescription(pkgname))
