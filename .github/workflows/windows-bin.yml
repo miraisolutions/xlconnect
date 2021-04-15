@@ -124,6 +124,7 @@ jobs:
         uses: r-lib/actions/setup-r@master
         with:
           r-version: ${{ matrix.config.r-version }}
+          windows-path-include-mingw: false
 
       # - name: install remotes
       #   run: |
