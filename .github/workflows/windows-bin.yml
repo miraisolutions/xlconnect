@@ -78,15 +78,18 @@ jobs:
             devtools::build(binary=TRUE,args=c("--no-multiarch"))
         shell: Rscript {0}
 
-      - name: list current directory
-        run: dir
+      - name: move binary package for upload
+        run: | 
+            dir
+            mv XLConnect_*.zip XLConnect_binary.donotextract
+        working-directory: D:/a/xlconnect/
 
       - name: Upload successfully built package
         if: success()
         uses: actions/upload-artifact@main
         with:
           name: java${{ matrix.config.java }}-R${{ matrix.config.r-version }}-binary
-          path: D:/a/xlconnect/XLConnect_*.zip
+          path: D:/a/xlconnect/XLConnect_binary.donotextract
 
   test-load:
     needs: build
@@ -106,9 +109,9 @@ jobs:
 
       - name: extract downloaded payload
         run: |
-          Expand-Archive -LiteralPath 'D:\a\xlconnect\xlconnect\payload.zip' -DestinationPath .
+          7z x payload.zip
           dir
-          mv XLConnect_*.zip XLConnect_binary.zip
+          mv XLConnect_binary.donotextract XLConnect_binary.zip
         shell: powershell
       
       - name: Setup java (x64)
