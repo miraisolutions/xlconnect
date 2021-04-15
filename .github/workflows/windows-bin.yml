@@ -106,7 +106,7 @@ jobs:
 
       - name: extract downloaded payload
         run: |
-          7z x payload.zip
+          7z e payload.zip
           dir
           mv XLConnect_*.zip XLConnect_binary.zip
       
