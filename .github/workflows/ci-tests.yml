@@ -10,7 +10,7 @@ name: R
 
 on:
   push:
-    branches: [ master ]
+    branches: [ master, custom/see-env-in-ci ]
   pull_request:
     branches: [ master ]
   schedule:
@@ -32,45 +32,16 @@ jobs:
             vignettes: true
             xlc-repo: https://jcenter.bintray.com
             timezone-name: Europe/Zurich
-          - os-name: ubuntu # windows-2019, macos-10.15]
-            os-version: "18.04"
-            r-version: release
-            java: 11
-            vignettes: true
-            timezone-name: Asia/Kathmandu
-          - os-name: ubuntu # windows-2019, macos-10.15]
-            os-version: "18.04"
-            r-version: devel
-            java: 8
-            vignettes: true
-            xlc-repo: https://jcenter.bintray.com
-            timezone-name: Pacific/Marquesas
-          - os-name: macos
-            os-version: "10.15"
-            r-version: release
-            java: 13
-            vignettes: false
-          - os-name: ubuntu 
-            os-version: "16.04"
-            r-version: 3.2.5
-            java: 8
-            vignettes: false
-            xlc-repo: https://jcenter.bintray.com
-            timezone-name: Canada/Newfoundland
-            pkgrepo: https://cran.microsoft.com/snapshot/2017-12-31/
-          - os-name: windows # windows-2019, macos-10.15]
-            os-version: "2019"
-            r-version: release
-            java: 11
-            vignettes: false
-            pkgrepo: "https://cloud.r-project.org"
-            timezone-name: "W. Europe Standard Time"
     env:
       R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
       XLCONNECT_JAVA_REPO_URL: ${{ matrix.config.xlc-repo }}
       RSPM: ${{ matrix.config.pkgrepo }}
 
     steps:
+      - name: see env vars
+        run: | 
+          env
+          export
       - uses: actions/checkout@v2
 
       - name: RSPM fallback
