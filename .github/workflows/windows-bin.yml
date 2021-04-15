@@ -162,5 +162,5 @@ jobs:
           echo install.packages(pkg="XLConnect.zip") >> test.r
           echo library(XLConnect)  >> test.r
           XLConnect::loadWorkbook("test.xls", create=TRUE) >> test.r
-          rscript test.r
+          C\R\bin\Rscript.exe test.r
         shell: cmd
