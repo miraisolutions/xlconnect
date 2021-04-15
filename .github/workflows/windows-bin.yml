@@ -78,12 +78,15 @@ jobs:
             devtools::build(binary=TRUE,args=c("--no-multiarch"))
         shell: Rscript {0}
 
+      - name: list current directory
+        run: dir
+
       - name: Upload successfully built package
         if: success()
         uses: actions/upload-artifact@main
         with:
           name: java${{ matrix.config.java }}-R${{ matrix.config.r-version }}-binary
-          path: XLConnect_*.zip
+          path: D:/a/xlconnect/XLConnect_*.zip
 
   test-load:
     needs: build
