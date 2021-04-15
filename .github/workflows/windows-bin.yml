@@ -125,15 +125,15 @@ jobs:
         with:
           r-version: ${{ matrix.config.r-version }}
 
-      - name: install remotes
-        run: |
-          install.packages('remotes')
-        shell: Rscript {0}
+      # - name: install remotes
+      #   run: |
+      #     install.packages('remotes')
+      #   shell: Rscript {0}
 
-      - name: Install dependencies
-        run: |
-          remotes::install_deps(pkgdir = "XLConnect.zip")
-        shell: Rscript {0}
+      # - name: Install dependencies
+      #   run: |
+      #     remotes::install_deps(pkgdir = "XLConnect.zip")
+      #   shell: Rscript {0}
 
       - name: Session info
         run: |
