@@ -109,7 +109,7 @@ jobs:
 
       - name: extract downloaded payload
         run: |
-          7z x payload.zip
+          tar -xf payload.zip
           dir
           mv XLConnect_binary.donotextract XLConnect_binary.zip
         shell: powershell
