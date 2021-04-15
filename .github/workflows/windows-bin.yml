@@ -110,7 +110,7 @@ jobs:
       - name: check downloaded payload
         run: |
           dir
-          mv XLConnect_binary.donotextract XLConnect_binary.zip
+          mv XLConnect_binary.donotextract XLConnect.zip
         shell: powershell
       
       - name: Setup java (x64)
@@ -132,7 +132,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          remotes::install_deps(pkgdir = "XLConnect_binary.zip")
+          remotes::install_deps(pkgdir = "XLConnect.zip")
         shell: Rscript {0}
 
       - name: Session info
@@ -144,7 +144,7 @@ jobs:
     
       - name: try to load and use XLConnect
         run: |
-          install.packages(pkg="XLConnect_binary.zip")
+          install.packages(pkg="XLConnect.zip")
           library(XLConnect)
           XLConnect::loadWorkbook("test.xls", create=TRUE)
         shell: Rscript {0}
