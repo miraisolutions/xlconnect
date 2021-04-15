@@ -190,6 +190,7 @@ jobs:
           _R_CHECK_CRAN_INCOMING_: false
           FULL_TEST_SUITE: 1
         run: |-
+            paste0("java home in R: ", Sys.getenv("JAVA_HOME"))
             check_args <- if("${{matrix.config.os-name}}" == "windows") {
               c("--no-manual", "--no-vignettes", "--no-build-vignettes", "--check-subdirs=no", "--no-multiarch")
             } else {
