@@ -97,7 +97,6 @@ jobs:
           - r-version: release
             java: 11
     steps:
-      - uses: actions/checkout@v2
       
       - name: Download binary package from previous job
         uses: actions/download-artifact@v2
@@ -117,16 +116,14 @@ jobs:
         with:
           r-version: ${{ matrix.config.r-version }}
 
-      - name: Query dependencies
+      - name: install remotes
         run: |
           install.packages('remotes')
-          saveRDS(remotes::dev_package_deps(dependencies = TRUE), ".github/depends.Rds", version = 2)
-          writeLines(sprintf("R-%i.%i", getRversion()$major, getRversion()$minor), ".github/R-version")
         shell: Rscript {0}
 
       - name: Install dependencies
         run: |
-          remotes::install_deps(dependencies = TRUE)
+          remotes::install_deps(pkgdir = "XLConnect_binary.zip" dependencies = TRUE)
         shell: Rscript {0}
 
       - name: Session info
