@@ -135,6 +135,11 @@ jobs:
       #     remotes::install_deps(pkgdir = "XLConnect.zip")
       #   shell: Rscript {0}
 
+      - name: Install dependencies
+        run: |
+          install.packages('rJava')
+        shell: Rscript {0}
+
       - name: Session info
         run: |
           options(width = 100)
