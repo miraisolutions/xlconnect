@@ -34,9 +34,10 @@ jobs:
     steps:
       - name: try here - hack to skip r tools install
         run: |
-          rmdir C:\MinGW
-          rmdir C:\rtools40
-          cat blabla 
+          echo %PATH%
+          rmdir /s /q C:\MinGW
+          rmdir /s /q C:\rtools40
+          cat blabla
           mkdir C:\Rtools
           mkdir C:\rtools40
         shell: cmd
