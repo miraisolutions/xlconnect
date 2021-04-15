@@ -105,11 +105,10 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: java${{ matrix.config.java }}-R${{ matrix.config.r-version }}-binary
-          path: payload.zip
+          path: .
 
-      - name: extract downloaded payload
+      - name: check downloaded payload
         run: |
-          tar -xf payload.zip
           dir
           mv XLConnect_binary.donotextract XLConnect_binary.zip
         shell: powershell
