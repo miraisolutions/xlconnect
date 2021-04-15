@@ -39,6 +39,7 @@ jobs:
 
       - name: see if cat still available
         run: |
+          echo %PATH%
           cat blalal
           somegailingcommand
         shell: cmd
