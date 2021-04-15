@@ -106,7 +106,7 @@ jobs:
 
       - name: extract downloaded payload
         run: |
-          Expand-Archive payload.zip -DestinationPath .
+          Expand-Archive -LiteralPath 'D:\a\xlconnect\xlconnect\payload.zip' -DestinationPath .
           dir
           mv XLConnect_*.zip XLConnect_binary.zip
         shell: powershell
