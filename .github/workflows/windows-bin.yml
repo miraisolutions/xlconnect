@@ -43,6 +43,7 @@ jobs:
           echo $env:Path | sed -E 's/C:[^;]*(mingw|rtools|Rtools|Program Files)[^;]*;//g'
           echo $env:Path | sed -E 's/[^;]*(mingw|rtools|Rtools|Program Files)[^;]*;//g'
           echo '''XLConnect.zip'''
+          echo '''XLConnect.zip''' | Out-File test.txt
 
       - uses: actions/checkout@v2
       
@@ -158,7 +159,7 @@ jobs:
         run: |
           sed --version
           echo $env:Path
-          $newPath = (echo $env:Path | sed -E 's/C:\\[^;]*(mingw|rtools|Rtools|Program Files)[^;]*;//g')
+          $newPath = (echo $env:Path | sed -E 's/C:[^;]*(mingw|rtools|Rtools|Program Files)[^;]*;//g')
           $env:Path = $newPath
           echo "setting to new path:"$newPath
           echo 'xlcPkg <- ''XLConnect.zip''' | Out-File test.r
