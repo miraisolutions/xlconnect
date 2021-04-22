@@ -44,6 +44,7 @@ jobs:
           echo $env:Path | sed -E 's/[^;]*(mingw|rtools|Rtools|Program Files)[^;]*;//g'
           echo '''XLConnect.zip'''
           echo '''XLConnect.zip''' | Out-File test.txt
+          Get-Content test.txt
 
       - uses: actions/checkout@v2
       
@@ -166,5 +167,6 @@ jobs:
           echo 'install.packages(pkg=xlcPkg)' | Out-File test.r -Append
           echo 'library(XLConnect)' | Out-File test.r -Append
           echo 'XLConnect::loadWorkbook(''test.xls'', create=TRUE)' | Out-File test.r -Append
+          Get-Content test.r
           Rscript test.r
         shell: powershell
