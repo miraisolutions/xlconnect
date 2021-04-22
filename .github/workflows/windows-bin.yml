@@ -33,6 +33,13 @@ jobs:
 
     steps:
 
+      - name: test-cat
+        run: |
+          $newPath = (echo $env:Path | sed -E 's/C:[^;]*(mingw|rtools|Rtools|Program Files|Python|Ruby|Strawberry|Driver)[^;]*;//g')
+          $env:Path = $newPath
+          'hello' | Out-File test.txt
+          cat test.txt
+
       - uses: actions/checkout@v2
       
       - name: Setup java (x64)
