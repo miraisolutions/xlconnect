@@ -33,6 +33,14 @@ jobs:
 
     steps:
 
+      - name: test sed
+        run: |
+          set -e
+          echo 'bla' | sed s/a/o/g
+          echo one1o;two2t;three3t; | sed -E 's/[^;]*(1|3)[^;]*;/gone/g'
+          echo one1o;two2t;three3t; | sed 's/[^;]*\(1\|3\)[^;]*;/gone/g'
+          echo one1o;two2t;three3t; | sed -E 's/[[:alnum:]]*(1|3)[a-zA-Z0-9]*;/gone/g'
+
       - uses: actions/checkout@v2
       
       - name: Setup java (x64)
@@ -150,8 +158,8 @@ jobs:
           $newPath = (echo $env:Path | sed -E 's/C:\\[^;]*(mingw|rtools|Rtools|Program Files)[^;]*;//g')
           $env:Path = $newPath
           echo "setting to new path:"$newPath
-          "install.packages(pkg='XLConnect.zip')" | Out-File test.r
-          "library(XLConnect)" | Out-File test.r -Append
-          "XLConnect::loadWorkbook('test.xls', create=TRUE)" | Out-File test.r -Append
+          'install.packages(pkg=''XLConnect.zip'')' | Out-File test.r
+          'library(XLConnect)' | Out-File test.r -Append
+          'XLConnect::loadWorkbook(''test.xls'', create=TRUE)' | Out-File test.r -Append
           Rscript.exe test.r
         shell: powershell
