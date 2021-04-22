@@ -30,7 +30,6 @@ jobs:
       R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
       XLCONNECT_JAVA_REPO_URL: ${{ matrix.config.xlc-repo }}
       RSPM: ${{ matrix.config.pkgrepo }}
-      PATH: C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\ProgramData\Chocolatey\bin
 
     steps:
 
@@ -89,7 +88,7 @@ jobs:
       - name: move binary package for upload
         run: | 
             dir
-            mv XLConnect_*.zip XLConnect_binary.donotextract
+            mv XLConnect_*.zip XLConnect.zip
         working-directory: D:/a/xlconnect/
 
       - name: Upload successfully built package
@@ -97,7 +96,7 @@ jobs:
         uses: actions/upload-artifact@main
         with:
           name: java${{ matrix.config.java }}-R${{ matrix.config.r-version }}-binary
-          path: D:/a/xlconnect/XLConnect_binary.donotextract
+          path: D:/a/xlconnect/XLConnect.zip
 
   test-load:
     needs: build
@@ -116,9 +115,7 @@ jobs:
           path: .
 
       - name: check downloaded payload
-        run: |
-          dir
-          mv XLConnect_binary.donotextract XLConnect.zip
+        run: dir
         shell: powershell
       
       - name: Setup java (x64)
@@ -134,16 +131,6 @@ jobs:
           r-version: ${{ matrix.config.r-version }}
           windows-path-include-mingw: false
 
-      # - name: install remotes
-      #   run: |
-      #     install.packages('remotes')
-      #   shell: Rscript {0}
-
-      # - name: Install dependencies
-      #   run: |
-      #     remotes::install_deps(pkgdir = "XLConnect.zip")
-      #   shell: Rscript {0}
-
       - name: Install dependencies
         run: |
           install.packages('rJava')
@@ -158,9 +145,12 @@ jobs:
     
       - name: try to load and use XLConnect
         run: |
-          set PATH=C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\ProgramData\Chocolatey\bin;C:\hostedtoolcache\windows\jdk\11.0.10\x64\bin;C:\R\bin'
+          echo %PATH%
+          $newPath = (echo %PATH% | sed 's/C:\\[[:alnum:]\.\\]*\(mingw\|rtools\|Rtools\)[[:alnum:]\.\\]*;//g')
+          set PATH=$newPath
+          echo "Path is now "%PATH%
           echo install.packages(pkg="XLConnect.zip") >> test.r
           echo library(XLConnect)  >> test.r
           XLConnect::loadWorkbook("test.xls", create=TRUE) >> test.r
-          C:\R\bin\Rscript.exe test.r
-        shell: cmd
+          Rscript.exe test.r
+        shell: powershell
