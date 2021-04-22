@@ -35,11 +35,11 @@ jobs:
 
       - name: test-cat
         run: |
-          $newPath = (echo $env:Path | sed -E 's/C:[^;]*(mingw|rtools|Rtools|Python|Ruby|Strawberry|Driver|runneradmin|\\tools\\|cli)[^;]*;//g')
+          $newPath = (echo $env:Path | sed -E 's/C:[^;]*(mingw|rtools|Rtools|Program Files|Python|Ruby|Strawberry|Driver|runneradmin|\\tools\\|cli)[^;]*;//g')
           $env:Path = $newPath
           $env:Path
           'hello' | Out-File test.txt
-          Rscript.exe -e 'system2(''cat'',c(''test.txt''))'
+          C:\Program Files\R\R-4.0.5\bin\x64\Rscript.exe -e 'system2(''cat'',c(''test.txt''))'
 
       - uses: actions/checkout@v2
       
