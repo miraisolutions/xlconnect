@@ -10,7 +10,7 @@ name: windows-binary-test
 
 on:
   push:
-    branches: [ master, bugfix/#132-onload-fails-windows ]
+    branches: [ master ]
   pull_request:
     branches: [ master ]
   schedule:
@@ -145,12 +145,12 @@ jobs:
     
       - name: try to load and use XLConnect
         run: |
-          echo %PATH%
-          $newPath = (echo %PATH% | sed 's/C:\\[[:alnum:]\.\\]*\(mingw\|rtools\|Rtools\)[[:alnum:]\.\\]*;//g')
-          set PATH=$newPath
-          echo "Path is now "%PATH%
-          echo install.packages(pkg="XLConnect.zip") >> test.r
-          echo library(XLConnect)  >> test.r
-          XLConnect::loadWorkbook("test.xls", create=TRUE) >> test.r
+          echo $env:Path
+          $newPath = (echo $Env:Path | sed 's/C:\\[[:alnum:]\.\\]*\(mingw\|rtools\|Rtools\)[[:alnum:]\.\\]*;//g')
+          $env:Path = $newPath
+          echo "Path is now "$env:Path
+          'install.packages(pkg="XLConnect.zip")' | Out-File test.r
+          'library(XLConnect)' | Out-File test.r -Append
+          'XLConnect::loadWorkbook("test.xls", create=TRUE)' | Out-File test.r -Append
           Rscript.exe test.r
         shell: powershell
