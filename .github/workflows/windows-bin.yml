@@ -153,7 +153,7 @@ jobs:
             Rscript -e 'system2(''cat'',c(''test.txt''))' 3>&1 2>&1 | Out-File cat-test.txt
             if(Select-String '''"cat"'' not found' .\cat-test.txt) {} else {throw "cat was here!"}
           }
-          catch[NativeCommandError]{}
+          catch [NativeCommandError] {}
           'install.packages(pkg=''XLConnect.zip'')' | Out-File test.r -Encoding ascii
           'library(XLConnect)' | Out-File test.r -Append -Encoding ascii
           'XLConnect::loadWorkbook(''test.xls'', create=TRUE)' | Out-File test.r -Append -Encoding ascii
