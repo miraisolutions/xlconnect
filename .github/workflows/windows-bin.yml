@@ -147,14 +147,13 @@ jobs:
         run: |
           echo $env:Path
           $newPath = (echo $env:Path | sed -E 's/C:[^;]*(mingw|rtools|Rtools|Program Files|Python|Ruby|Strawberry|Driver|runneradmin|\\tools\\|cli)[^;]*;//g')
-          $env:Path = $newPath          
+          $env:Path = $newPath
           'hello' | Out-File test.txt
           try {
             Rscript -e 'system2(''cat'',c(''test.txt''))' 3>&1 2>&1 | Out-File cat-test.txt
           }
           catch {}
           Get-Content cat-test.txt
-          if( Select-String '''"cat"'' not found' .\cat-test.txt) {} elseif (Get-Content .\test.txt) {throw "cat was here!"} else {}
           'install.packages(pkg=''XLConnect.zip'')' | Out-File test.r -Encoding ascii
           'library(XLConnect)' | Out-File test.r -Append -Encoding ascii
           'XLConnect::loadWorkbook(''test.xls'', create=TRUE)' | Out-File test.r -Append -Encoding ascii
