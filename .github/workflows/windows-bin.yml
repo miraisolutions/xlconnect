@@ -145,11 +145,11 @@ jobs:
     
       - name: try to load and use XLConnect
         run: |
+          sed --version
           echo $env:Path
-          $newPath = (echo $env:Path | sed 's/C:\\[^;]*\(mingw\|rtools\|Rtools\|Program Files\|.dotnet\)[^;]*;//g')
+          $newPath = (echo $env:Path | sed -E 's/C:\\[^;]*(mingw|rtools|Rtools|Program Files)[^;]*;//g')
           $env:Path = $newPath
           echo "setting to new path:"$newPath
-          echo "Path is now "$env:Path
           "install.packages(pkg='XLConnect.zip')" | Out-File test.r
           "library(XLConnect)" | Out-File test.r -Append
           "XLConnect::loadWorkbook('test.xls', create=TRUE)" | Out-File test.r -Append
