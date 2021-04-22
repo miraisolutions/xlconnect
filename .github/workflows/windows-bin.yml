@@ -146,7 +146,7 @@ jobs:
       - name: try to load and use XLConnect
         run: |
           echo $env:Path
-          $newPath = (echo $Env:Path | sed 's/C:\\[[:alnum:]\.\\]*\(mingw\|rtools\|Rtools\)[[:alnum:]\.\\]*;//g')
+          $newPath = (echo $env:Path | sed 's/C:\\[0-9a-zA-Z\.\\]*\(mingw\|rtools\|Rtools\)[0-9a-zA-Z\.\\]*;//g')
           $env:Path = $newPath
           echo "Path is now "$env:Path
           'install.packages(pkg="XLConnect.zip")' | Out-File test.r
