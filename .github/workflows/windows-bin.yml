@@ -35,7 +35,7 @@ jobs:
 
       - name: test-cat
         run: |
-          $newPath = (echo $env:Path | sed -E 's/C:[^;]*(mingw|rtools|Rtools|Program Files|Python|Ruby|Strawberry|Driver)[^;]*;//g')
+          $newPath = (echo $env:Path | sed -E 's/C:[^;]*(mingw|rtools|Rtools|Program Files|Python|Ruby|Strawberry|Driver|runneradmin|\\tools\\|cli)[^;]*;//g')
           $env:Path = $newPath
           $env:Path
           'hello' | Out-File test.txt
@@ -155,7 +155,7 @@ jobs:
         run: |
           sed --version
           echo $env:Path
-          $newPath = (echo $env:Path | sed -E 's/C:[^;]*(mingw|rtools|Rtools|Program Files)[^;]*;//g')
+          $newPath = (echo $env:Path | sed -E 's/C:[^;]*(mingw|rtools|Rtools|Program Files|Python|Ruby|Strawberry|Driver|runneradmin|\\tools\\|cli)[^;]*;//g')
           $env:Path = $newPath
           echo "setting to new path:"$newPath
           'install.packages(pkg=''XLConnect.zip'')' | Out-File test.r -Encoding ascii
