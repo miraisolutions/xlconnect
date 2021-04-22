@@ -39,7 +39,7 @@ jobs:
           $env:Path = $newPath
           $env:Path
           'hello' | Out-File test.txt
-          Rscript.exe -e 'system2("cat",c("test.txt"))'
+          Rscript.exe -e 'system2(''cat'',c(''test.txt''))'
 
       - uses: actions/checkout@v2
       
