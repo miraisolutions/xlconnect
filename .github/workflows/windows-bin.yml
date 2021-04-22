@@ -146,11 +146,12 @@ jobs:
       - name: try to load and use XLConnect
         run: |
           echo $env:Path
-          $newPath = (echo $env:Path | sed 's/C:\\[0-9a-zA-Z\.\\]*\(mingw\|rtools\|Rtools\)[0-9a-zA-Z\.\\]*;//g')
+          $newPath = (echo $env:Path | sed 's/C:\\[^;]*\(mingw\|rtools\|Rtools\|Program Files\|.dotnet\)[^;]*;//g')
           $env:Path = $newPath
+          echo "setting to new path:"$newPath
           echo "Path is now "$env:Path
-          'install.packages(pkg="XLConnect.zip")' | Out-File test.r
-          'library(XLConnect)' | Out-File test.r -Append
-          'XLConnect::loadWorkbook("test.xls", create=TRUE)' | Out-File test.r -Append
+          "install.packages(pkg='XLConnect.zip')" | Out-File test.r
+          "library(XLConnect)" | Out-File test.r -Append
+          "XLConnect::loadWorkbook('test.xls', create=TRUE)" | Out-File test.r -Append
           Rscript.exe test.r
         shell: powershell
