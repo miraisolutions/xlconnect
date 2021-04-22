@@ -37,6 +37,7 @@ jobs:
         run: |
           $newPath = (echo $env:Path | sed -E 's/C:[^;]*(mingw|rtools|Rtools|Program Files|Python|Ruby|Strawberry|Driver)[^;]*;//g')
           $env:Path = $newPath
+          $env:Path
           'hello' | Out-File test.txt
           cat test.txt
 
