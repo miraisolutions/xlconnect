@@ -1,0 +1,160 @@
+# This workflow uses actions that are not certified by GitHub.
+# They are provided by a third-party and are governed by
+# separate terms of service, privacy policy, and support
+# documentation.
+#
+# See https://github.com/r-lib/actions/tree/master/examples#readme for
+# additional example workflows available for the R community.
+
+name: windows-binary-test
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+  schedule:
+    - cron: '12 23 13,28 * *'
+
+jobs:
+  build:
+    runs-on: windows-2019
+    name: >- 
+      R ${{ matrix.config.r-version}} - java ${{ matrix.config.java}}
+    strategy:
+      matrix:
+        config: 
+          - r-version: release
+            java: 11
+    env:
+      R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
+      XLCONNECT_JAVA_REPO_URL: ${{ matrix.config.xlc-repo }}
+      RSPM: ${{ matrix.config.pkgrepo }}
+
+    steps:
+
+      - uses: actions/checkout@v2
+      
+      - name: Setup java (x64)
+        uses: actions/setup-java@v1
+        with:
+          java-version: ${{ matrix.config.java }}
+          java-package: jdk
+          architecture: x64
+
+      - name: Set up R ${{ matrix.config.r-version }}
+        uses: r-lib/actions/setup-r@master
+        with:
+          r-version: ${{ matrix.config.r-version }}
+
+      - name: find out PATH changes
+        run: | 
+          echo %PATH%
+          dir C:\R\bin
+        shell: cmd
+
+      - name: print effective R version
+        run: version
+        shell: Rscript {0}
+      
+      - name: effective java version # Yes it actually needs JAVA_HOME=$JAVA_HOME, doesn't use actual env vars (!)
+        run: java -version
+
+      - name: Query dependencies
+        run: |
+          install.packages('remotes')
+          saveRDS(remotes::dev_package_deps(dependencies = TRUE), ".github/depends.Rds", version = 2)
+          writeLines(sprintf("R-%i.%i", getRversion()$major, getRversion()$minor), ".github/R-version")
+        shell: Rscript {0}
+
+      - name: Install dependencies
+        run: |
+          remotes::install_deps(dependencies = TRUE)
+          remotes::install_cran("devtools")
+        shell: Rscript {0}
+
+      - name: Session info
+        run: |
+          options(width = 100)
+          pkgs <- installed.packages()[, "Package"]
+          sessionInfo()
+        shell: Rscript {0}
+
+      - name: Build binary package
+        run: |-
+            devtools::build(binary=TRUE,args=c("--no-multiarch"))
+        shell: Rscript {0}
+
+      - name: move binary package for upload
+        run: | 
+            dir
+            mv XLConnect_*.zip XLConnect.zip
+        working-directory: D:/a/xlconnect/
+
+      - name: Upload successfully built package
+        if: success()
+        uses: actions/upload-artifact@main
+        with:
+          name: java${{ matrix.config.java }}-R${{ matrix.config.r-version }}-binary
+          path: D:/a/xlconnect/XLConnect.zip
+
+  test-load:
+    needs: build
+    runs-on: windows-2019
+    strategy:
+      matrix:
+        config: 
+          - r-version: release
+            java: 11
+    steps:
+      
+      - name: Download binary package from previous job
+        uses: actions/download-artifact@v2
+        with:
+          name: java${{ matrix.config.java }}-R${{ matrix.config.r-version }}-binary
+          path: .
+
+      - name: check downloaded payload
+        run: dir
+        shell: powershell
+      
+      - name: Setup java (x64)
+        uses: actions/setup-java@v1
+        with:
+          java-version: ${{ matrix.config.java }}
+          java-package: jdk
+          architecture: x64
+
+      - name: Set up R ${{ matrix.config.r-version }}
+        uses: r-lib/actions/setup-r@master
+        with:
+          r-version: ${{ matrix.config.r-version }}
+          windows-path-include-mingw: false
+
+      - name: Install dependencies
+        run: |
+          install.packages('rJava')
+        shell: Rscript {0}
+
+      - name: Session info
+        run: |
+          options(width = 100)
+          pkgs <- installed.packages()[, "Package"]
+          sessionInfo()
+        shell: Rscript {0}
+    
+      - name: try to load and use XLConnect
+        run: |
+          $newPath = (echo $env:Path | sed -E 's/C:[^;]*(mingw|rtools|Rtools|Program Files|Python|Ruby|Strawberry|Driver|runneradmin|\\tools\\|cli)[^;]*;//g')
+          $env:Path = $newPath
+          'hello' | Out-File test.txt
+          try {
+            Rscript -e 'system2(''cat'',c(''test.txt''))' 3>&1 2>&1 | Out-File cat-test.txt
+          }
+          catch {}
+          if(Select-String '''"cat"'' not found' .\cat-test.txt) {} elseif ((Get-Item cat-test.txt).length -gt 2) {throw "cat was here!"} else {}
+          'install.packages(pkg=''XLConnect.zip'')' | Out-File test.r -Encoding ascii
+          'library(XLConnect)' | Out-File test.r -Append -Encoding ascii
+          'XLConnect::loadWorkbook(''test.xls'', create=TRUE)' | Out-File test.r -Append -Encoding ascii
+          Rscript test.r
+        shell: powershell

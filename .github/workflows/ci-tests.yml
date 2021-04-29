@@ -45,10 +45,10 @@ jobs:
             vignettes: true
             xlc-repo: https://jcenter.bintray.com
             timezone-name: Pacific/Marquesas
-          - os-name: macos
+          - os-name: macos # TODO fix java / R interaction
             os-version: "10.15"
             r-version: release
-            java: 13
+            # java: 13
             vignettes: false
           - os-name: ubuntu 
             os-version: "16.04"
@@ -91,6 +91,7 @@ jobs:
           java-version: ${{ matrix.config.java }}
           java-package: jdk
           architecture: x64
+        if: matrix.config.os-name != 'macos'
 
       - name: Set up R ${{ matrix.config.r-version }}
         uses: r-lib/actions/setup-r@master
@@ -190,6 +191,7 @@ jobs:
           _R_CHECK_CRAN_INCOMING_: false
           FULL_TEST_SUITE: 1
         run: |-
+            paste0("java home in R: ", Sys.getenv("JAVA_HOME"))
             check_args <- if("${{matrix.config.os-name}}" == "windows") {
               c("--no-manual", "--no-vignettes", "--no-build-vignettes", "--check-subdirs=no", "--no-multiarch")
             } else {
