@@ -31,12 +31,20 @@
   javaCheck <- function() {
     # Java version check, without .jinit (we do .jpackage after downloading resources)
     rawVersion <- system2("java", c("-version"), stdout = TRUE, stderr = TRUE)
-    jv <- regmatches(rawVersion[1], regexpr("[0-9]+\\.[0-9\\.]*", rawVersion[1]))
-    twoFirst <- substr(jv, 1L, 2L)
-    if(twoFirst == "1.") {
-      jvn <- as.numeric(substr(jv,3L,3L))
-    } else {
-      jvn <- as.numeric(twoFirst)
+    jv <- regmatches(rawVersion[1], regexpr("[0-9\\.]+", rawVersion[1]))
+    if (nchar(jv)<1) {
+      stop(paste0("unable to parse java version from", paste0(rawVersion, collapse=" "), "; is java installed correctly ?"))
+    }
+    else if(nchar(jv)==1) {
+       jvn <- as.numeric(jv)
+    }
+    else {
+      twoFirst <- substr(jv, 1L, 2L)
+      if(twoFirst == "1.") {
+        jvn <- as.numeric(substr(jv,3L,3L))
+      } else {
+        jvn <- as.numeric(twoFirst)
+      }
     }
     if (jvn<8 || jvn>15) stop(paste0("XLConnect is compatible with Java versions 8 to 15. Detected java version: ",jv))
   }
