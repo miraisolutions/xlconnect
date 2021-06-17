@@ -55,7 +55,8 @@
   }
   apachePrefix <- paste0(repo, "/org/apache")
   sharedPaths <- tryCatch({
-    c(xlcEnsureDependenciesFor(
+    c(
+      xlcEnsureDependenciesFor(
       paste0(apachePrefix, "/poi/poi-ooxml-schemas/4.1.2/poi-ooxml-schemas-4.1.2.jar"), "poi-ooxml-schemas.jar", 
       "4\\.[1-9].*",  libname, pkgname, debianpkg = "libapache-poi-java", rpmpkg="apache-poi"),
     xlcEnsureDependenciesFor(
@@ -81,7 +82,11 @@
       "1\\.(1[1-9]|[2-9][0-9]).*",  libname, pkgname, debianpkg="libcommons-codec-java", rpmpkg="apache-commons-codec"),
     xlcEnsureDependenciesFor(
       paste0(apachePrefix, "/poi/ooxml-schemas/1.4/ooxml-schemas-1.4.jar"), "ooxml-schemas.jar",
-      "1\\.([4-9]|[1-9][0-9]).*",  libname, pkgname))
+      "1\\.([4-9]|[1-9][0-9]).*",  libname, pkgname),
+    xlcEnsureDependenciesFor(
+      paste0(repo, "/com/zaxxer/SparseBitSet/1.2/SparseBitSet-1.2.jar"), "SparseBitSet.jar",
+      "1\\.([2-9]|[1-9][0-9]).*",  libname, pkgname)
+    )
   },
   error=function(e) {
           e
