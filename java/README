@@ -17,4 +17,9 @@ Sources for other open source software components can be obtained from the corre
   Source Code:
   curvesapi-1.04.jar: https://central.maven.org/maven2/com/github/virtuald/curvesapi/1.04/curvesapi-1.04-sources.jar
 
+- SparseBitSet: https://github.com/brettwooldridge/SparseBitSet
+  Source Code: 
+  SparseBitSet-1.2.jar: https://repo1.maven.org/maven2/com/zaxxer/SparseBitSet/1.2/SparseBitSet-1.2-sources.jar
+
+
 See also associated copyright information in inst/COPYRIGHTS. 
