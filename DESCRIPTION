@@ -9,7 +9,9 @@ Authors@R: c(person("Mirai Solutions GmbH", role = "aut",
              person("The Apache Software Foundation", role = c("ctb", "cph"),
                     comment = "Apache POI"),
              person("Graph Builder", role = c("ctb", "cph"),
-                   comment = "Curvesapi Java library"))
+                   comment = "Curvesapi Java library"),
+             person("Brett Woolridge", role = c("ctb", "cph"),
+                   comment = "SparseBitSet Java library"))
 URL: https://mirai-solutions.ch https://github.com/miraisolutions/xlconnect
 BugReports: https://github.com/miraisolutions/xlconnect/issues
 SystemRequirements: Java (>= 8, <= 15)
