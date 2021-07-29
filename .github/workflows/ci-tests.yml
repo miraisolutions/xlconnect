@@ -154,6 +154,10 @@ jobs:
           do
             eval sudo $cmd
           done < <(Rscript -e 'writeLines(remotes::system_requirements("${{ matrix.config.os-name }}", "${{ matrix.config.os-version }}"))')
+      
+      - name: Install PDF system dependencies
+        if: runner.os == 'Linux' && matrix.config.vignettes
+        run: sudo apt-get install -y libqpdf26 qpdf ghostscript
 
       - name: Install dependencies
         run: |
