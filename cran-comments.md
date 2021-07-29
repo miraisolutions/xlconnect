@@ -28,15 +28,9 @@ Justification: XLConnect uses a java component which we maintain in a separate p
       Message: libcurl error code 51:
                 SSL: no alternative certificate subject name matches target host name 'depsy.org'
                 (Status without verification: OK)
-    URL: https://www.ozgrid.com/Excel/CustomFormats.htm
-      From: man/setDataFormat-methods.Rd
-            man/setDataFormatForType-methods.Rd
-      Status: 301
-      Message: Moved Permanently
 ```
 
-Justification: the first linked website has an invalid certificate, the other seems to uses cloudflare DDoS protection,
-which results in a redirect when accessing the URL.
+Justification: the first linked website has an invalid certificate.
 
 # Downstream dependencies
 

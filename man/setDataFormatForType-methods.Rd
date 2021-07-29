@@ -24,7 +24,7 @@ Excel way. Refer to the Excel help or to the link below for more information.
 }
 \references{
 Excel custom data formats:\cr
-\url{https://www.ozgrid.com/Excel/CustomFormats.htm}
+\url{https://www.excelefficiency.com/custom-number-format-guide/}
 }
 \author{
 Martin Studer\cr
