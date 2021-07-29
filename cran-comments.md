@@ -1,3 +1,4 @@
+This is a resubmission of XLConnect 1.0.4 to address feedback by the CRAN team.
 # Test Environments
 
 * Ubuntu 18.04 on Github Actions
@@ -30,7 +31,7 @@ Justification: XLConnect uses a java component which we maintain in a separate p
                 (Status without verification: OK)
 ```
 
-Justification: the first linked website has an invalid certificate.
+Justification: the linked website has an invalid certificate.
 
 # Downstream dependencies
 
