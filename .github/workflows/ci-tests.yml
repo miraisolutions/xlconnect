@@ -28,7 +28,7 @@ jobs:
           - os-name: ubuntu # windows-2019, macos-10.15]
             os-version: latest
             r-version: oldrel
-            java: 15
+            java: 16
             vignettes: true
             xlc-repo: https://jcenter.bintray.com
             timezone-name: Europe/Zurich
@@ -154,6 +154,11 @@ jobs:
           do
             eval sudo $cmd
           done < <(Rscript -e 'writeLines(remotes::system_requirements("${{ matrix.config.os-name }}", "${{ matrix.config.os-version }}"))')
+      
+      - name: Install PDF system dependencies
+        if: runner.os == 'Linux' && matrix.config.vignettes
+        run: | 
+          sudo apt-get install -y qpdf ghostscript
 
       - name: Install dependencies
         run: |

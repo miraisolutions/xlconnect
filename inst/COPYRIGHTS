@@ -21,3 +21,11 @@ Transitive dependencies include:
    Project Website: https://github.com/virtuald/curvesapi
    License Information: https://github.com/virtuald/curvesapi, https://github.com/virtuald/curvesapi/blob/master/license.txt
    Related JARs: curvesapi-*.jar
+
+** SparseBitSet
+
+   Licensed under Apache 2.0 by Brett Woolridge
+
+   Project Website: https://github.com/brettwooldridge/SparseBitSet
+   License Information: https://github.com/brettwooldridge/SparseBitSet, https://github.com/brettwooldridge/SparseBitSet/blob/master/LICENSE
+   Related JARs: SparseBitSet-*.jar

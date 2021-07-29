@@ -652,4 +652,8 @@ test.workbook.readWorksheet <- function() {
 	expected = data.frame(A = as.POSIXct(c("2015-12-01", "2015-11-17", "1984-01-11")))
 	res <- readWorksheetFromFile(rsrc("resources/testBug53.xlsx"), sheet = 2, colTypes = "POSIXt", forceConversion = TRUE)
   checkEquals(expected, res)
+  
+  # cover use of SparseBitSet in POI 4.1.2 (GH #131)
+  wbSparse.xlsx <- loadWorkbook(rsrc("resources/testReadWorksheetSparseBitSet.xlsx"), create = FALSE)
+  sparseSheet <- readWorksheet(wbSparse.xlsx, "hist")
 }

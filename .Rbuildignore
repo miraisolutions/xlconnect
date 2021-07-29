@@ -6,8 +6,8 @@
 ^.*\.Rproj$
 ^\.codecov\.yml$
 Makefile
-^cloudcheck\.sh$
-^cloudbuild\.yaml$
+^cloudcheck.*\.sh$
+^cloudbuild.*\.yaml$
 
 ^inst/unitTests/runit.workbook.getLastColumn.R$
 ^inst/unitTests/runit.workbook.getLastRow.R$

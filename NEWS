@@ -1,5 +1,11 @@
 XLConnect News
 --------------
+1.0.4 TBD
+  * Extend support to java 16
+  * Download missing dependency for POI 4.1.2
+  * fix java version parsing
+  * fix onLoad failing in Windows
+
 1.0.3 2021-04-09
   * Fix DST related date parsing bug
   * Fix always displaying a failure message when installing on windows
