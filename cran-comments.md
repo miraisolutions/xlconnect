@@ -1,5 +1,3 @@
-This is a resubmission of XLConnect 1.0.2 to fix NOTEs in the previous submission.
-
 # Test Environments
 
 * Ubuntu 18.04 on Github Actions
@@ -12,15 +10,17 @@ This is a resubmission of XLConnect 1.0.2 to fix NOTEs in the previous submissio
 There were no ERRORs or WARNINGs
 
 There were 2 NOTEs:
+
+```sh
 > checking installed package size ... NOTE
     installed size is 36.3Mb
     sub-directories of 1Mb or more:
       java  34.0Mb
+```
 
-Justification: XLConnect uses a java component which we maintain in a separate project, as well as Apache POI 4.1.x and its dependencies. At install time, the presence of these dependencies in the correct version is checked; if missing, they are downloaded into XLConnect's installation directory. Apache POI 4.1.x is not yet available from major distributions' package managers at the time of writing. In addition, the full ooxml-schemas-1.4.jar is required, which is not distributed via package managers. See https://poi.apache.org/help/faq.html#faq-N10109 for more information.
+Justification: XLConnect uses a java component which we maintain in a separate project, as well as Apache POI 4.1.x and its dependencies. At install time, the presence of these dependencies in the correct version is checked; if missing, they are downloaded into XLConnect's installation directory. Apache POI 4.1.x is not yet available from major distributions' package managers at the time of writing. In addition, the full ooxml-schemas-1.4.jar is required, which is not distributed via package managers. See [The POI FAQ](https://poi.apache.org/help/faq.html#faq-N10109) for more information.
 
-Maintainer: ‘Martin Studer <martin.studer@mirai-solutions.com>’
-  
+```sh  
   Found the following (possibly) invalid URLs:
     URL: https://depsy.org/package/r/XLConnect
       From: README.md
@@ -33,8 +33,9 @@ Maintainer: ‘Martin Studer <martin.studer@mirai-solutions.com>’
             man/setDataFormatForType-methods.Rd
       Status: 301
       Message: Moved Permanently
+```
 
-Justification: the first linked website has an invalid certificate, the other seems to uses cloudflare DDoS protection, 
+Justification: the first linked website has an invalid certificate, the other seems to uses cloudflare DDoS protection,
 which results in a redirect when accessing the URL.
 
 # Downstream dependencies
