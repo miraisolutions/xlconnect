@@ -157,7 +157,7 @@ jobs:
       
       - name: Install PDF system dependencies
         if: runner.os == 'Linux' && matrix.config.vignettes
-        run: sudo apt-get install -y libqpdf26 qpdf ghostscript
+        run: sudo apt-get install -y libqpdf21 qpdf ghostscript
 
       - name: Install dependencies
         run: |
