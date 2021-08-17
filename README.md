@@ -3,7 +3,13 @@
 XLConnect: Excel Connector for R
 ================================
 
-[![CRAN\_Status\_Badge](https://www.r-pkg.org/badges/version/XLConnect)](https://cran.r-project.org/package=XLConnect) [![Rdoc](https://www.rdocumentation.org/badges/version/XLConnect)](https://www.rdocumentation.org/packages/XLConnect) [![Research software impact](https://depsy.org/api/package/cran/XLConnect/badge.svg)](https://depsy.org/package/r/XLConnect) [![R](https://github.com/miraisolutions/xlconnect/workflows/R/badge.svg?branch=master&event=push)](https://github.com/miraisolutions/xlconnect/actions?query=workflow%3AR+branch%3Amaster) [![codecov](https://codecov.io/gh/miraisolutions/xlconnect/branch/master/graph/badge.svg)](https://codecov.io/gh/miraisolutions/xlconnect)
+[![CRAN\_Status\_Badge](https://www.r-pkg.org/badges/version/XLConnect)](https://cran.r-project.org/package=XLConnect)
+[![rdocumentation.org](https://www.rdocumentation.org/badges/version/XLConnect)](https://www.rdocumentation.org/packages/XLConnect)
+[![CranLogsTotal](https://cranlogs.r-pkg.org/badges/grand-total/XLConnect?color=yellow)](#xlconnect-excel-connector-for-r)
+[![CranLogsMonthly](https://cranlogs.r-pkg.org/badges/XLConnect?color=blue)](#xlconnect-excel-connector-for-r)
+[![CranLogsWeekly](https://cranlogs.r-pkg.org/badges/last-week/XLConnect?color=green)](#xlconnect-excel-connector-for-r)
+[![R](https://github.com/miraisolutions/xlconnect/workflows/R/badge.svg?branch=master&event=push)](https://github.com/miraisolutions/xlconnect/actions?query=workflow%3AR+branch%3Amaster)
+[![codecov](https://codecov.io/gh/miraisolutions/xlconnect/branch/master/graph/badge.svg)](https://codecov.io/gh/miraisolutions/xlconnect)
 
 XLConnect is a comprehensive and cross-platform R package for manipulating Microsoft Excel files from within R. XLConnect differs from other related R packages in that it is completely cross-platform and as such runs under Windows, Unix/Linux and Mac (32- and 64-bit). Moreover, it does not require any installation of Microsoft Excel or any other special drivers to be able to read & write Excel files. The only requirement is a recent version of a Java Runtime Environment (JRE).
 
