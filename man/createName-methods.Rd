@@ -8,7 +8,7 @@
 Creates a name for a specified formula in a \code{\linkS4class{workbook}}.
 }
 \usage{
-\S4method{createName}{workbook}(object, name, formula, overwrite)
+\S4method{createName}{workbook}(object, name, formula, overwrite, worksheetName)
 }
 
 \arguments{
@@ -20,6 +20,7 @@ Creates a name for a specified formula in a \code{\linkS4class{workbook}}.
     the new one is created. If a name already exists and
     \code{overwrite = FALSE}, then an exception is thrown. The default
     value for \code{overwrite} is \code{FALSE}.}
+  \item{worksheetName}{Optional - specific worksheet to create the name in, without setting the current worksheet first.}
 }
 
 \details{

@@ -8,12 +8,14 @@
 Clears named regions in a \code{\linkS4class{workbook}}.
 }
 \usage{
-  \S4method{clearNamedRegion}{workbook,character}(object, name)
+  \S4method{clearNamedRegion}{workbook,character}(object, name, worksheetName)
 }
 
 \arguments{
   \item{object}{The \code{\linkS4class{workbook}} to use}
   \item{name}{The name of the named region to clear}
+  \item{worksheetName}{Optional - the name of the worksheet in which the region is located;
+  useful if regions have the same name in different sheets}
 }
 
 \details{
