@@ -92,7 +92,8 @@
           e
         }
   )
-  .jpackage(name = pkgname, jars = "*", morePaths = sharedPaths)
+  .jpackage(name = pkgname, jars = "*", morePaths = sharedPaths, own.loader=TRUE)
+  J <- function(...) rJava::J(..., class.loader=.rJava.class.loader)
   # Perform general XLConnect settings - pass package description
   XLConnectSettings(packageDescription(pkgname))
 }
