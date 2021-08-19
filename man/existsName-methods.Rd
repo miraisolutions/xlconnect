@@ -9,12 +9,13 @@ Checks the existence of a name in a \code{\linkS4class{workbook}}.
 }
 
 \usage{
-\S4method{existsName}{workbook}(object, name)
+\S4method{existsName}{workbook}(object, name, worksheetName)
 }
 
 \arguments{
   \item{object}{The \code{\linkS4class{workbook}} to use}
   \item{name}{The name to check for}
+  \item{worksheetName}{Optional - the specific worksheet to check}
 }
 
 \details{
