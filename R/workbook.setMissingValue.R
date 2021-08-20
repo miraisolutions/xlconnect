@@ -42,9 +42,9 @@ setMethod("setMissingValue",
         if(is.null(x) || is.na(x)) {
           .jnull()
 		    } else if(is.character(x)) {
-		      new(J("java.lang.String", x))
+		      new(J("java.lang.String"), x)
 		    } else if(is.numeric(x)) {
-		      new(J("java.lang.Double", as.double(x)))
+		      new(J("java.lang.Double"), as.double(x))
 		    } else {
 		      NULL
 		    }
