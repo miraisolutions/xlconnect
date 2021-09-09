@@ -50,14 +50,6 @@ jobs:
             r-version: release
             # java: 13
             vignettes: false
-          # - os-name: ubuntu 
-          #   os-version: "16.04"
-          #   r-version: 3.2.5
-          #   java: 8
-          #   vignettes: false
-          #   xlc-repo: https://jcenter.bintray.com
-          #   timezone-name: Canada/Newfoundland
-          #   pkgrepo: https://cran.microsoft.com/snapshot/2017-12-31/
           - os-name: windows # windows-2019, macos-10.15]
             os-version: "2019"
             r-version: release
