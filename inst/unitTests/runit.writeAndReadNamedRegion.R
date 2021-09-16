@@ -53,7 +53,7 @@ test.writeAndReadNamedRegion <- function() {
 		checkEquals(normalizeDataframe(df, replaceInf = TRUE), res, check.attributes = FALSE, check.names = TRUE)
 	}
 	
-	if(TRUE) {
+	if(getOption("FULL.TEST.SUITE")) {
 		# built-in dataset mtcars (*.xls)
 		testDataFrame(wb.xls, mtcars, "$C$8")
 		# built-in dataset mtcars (*.xlsx)
