@@ -14,13 +14,14 @@ Creates a name for a specified formula in a \code{\linkS4class{workbook}}.
 \arguments{
   \item{object}{The \code{\linkS4class{workbook}} to use}
   \item{name}{The name's name to create}
-  \item{formula}{Excel formula specifying the name}
+  \item{formula}{Excel formula specifying the value / data the name refers to}
   \item{overwrite}{If a name with the same \code{name} already exists
     and \code{overwrite = TRUE}, then this name is removed first before
     the new one is created. If a name already exists and
     \code{overwrite = FALSE}, then an exception is thrown. The default
     value for \code{overwrite} is \code{FALSE}.}
-  \item{worksheetName}{Optional - specific worksheet to create the name in, without setting the current worksheet first.}
+  \item{worksheetName}{Optional - specific worksheet the name should be valid in. 
+    If unspecified the name will be valid in the whole workbook.}
 }
 
 \details{
