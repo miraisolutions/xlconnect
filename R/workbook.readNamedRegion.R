@@ -44,7 +44,7 @@ setMethod("readNamedRegion",
       readStrategy = "default", worksheetName = .jnull(class = "java/lang/String")) {
 
 		# returns a list of RDataFrameWrapper Java object references
-	  if(identical(dim(worksheetName),NULL)) {
+	  if(identical(worksheetName,.jnull(class = "java/lang/String"))) {
 		  sheet = as.vector(extractSheetName(getReferenceFormula(object, name)))
 	  }
 	  else {
