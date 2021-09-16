@@ -35,6 +35,7 @@ test.workbook.cloneSheet <- function() {
 	# Check cloning of worksheet (*.xls)
 	checkNoException(cloneSheet(wb.xls, sheet = "Test1", name = "Clone1"))
 	checkNoException(readWorksheet(wb.xls, sheet = "Clone1"))
+	checkNoException(readNamedRegion(wb.xls, 'testName', worksheetName = 'Clone1'))
 	
 	# Check cloning of worksheet (*.xlsx)
 	checkNoException(cloneSheet(wb.xlsx, sheet = "Test1", name = "Clone1"))
