@@ -94,6 +94,8 @@ When reading dates, if your system uses a time zone that has / had daylight savi
 certain dates / timestamps will not be read exactly as they were written. See
 \url{https://poi.apache.org/apidocs/dev/org/apache/poi/ss/usermodel/DateUtil.html#getJavaDate-double-}
 
+If \code{worksheetName} is unspecified, the contents of the name found anywhere in the workbook will be read.
+Otherwise, only a name specifically scoped to the specified sheet may be read.
 }
 \references{
 What are named regions/ranges?\cr

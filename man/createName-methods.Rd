@@ -20,8 +20,8 @@ Creates a name for a specified formula in a \code{\linkS4class{workbook}}.
     the new one is created. If a name already exists and
     \code{overwrite = FALSE}, then an exception is thrown. The default
     value for \code{overwrite} is \code{FALSE}.}
-  \item{worksheetName}{Optional - specific worksheet the name should be valid in. 
-    If unspecified the name will be valid in the whole workbook.}
+  \item{worksheetName}{Optional - specific worksheet the name should be scoped to. 
+    If unspecified the name will be scoped to the whole workbook.}
 }
 
 \details{
