@@ -42,7 +42,18 @@ test.writeAndReadNamedRegion <- function() {
 		checkEquals(normalizeDataframe(df, replaceInf = TRUE), res, check.attributes = FALSE, check.names = TRUE)
 	}
 
-	if(getOption("FULL.TEST.SUITE")) {
+	testDataFrameNameScope <- function(wb, df, lref) {
+		namedRegion <- paste(deparse(substitute(df)), "1", sep = "")
+		worksheetScopeName <- paste(namedRegion, "2", sep = "")
+		createSheet(wb, name = namedRegion)
+		createSheet(wb, name = worksheetScopeName)
+		createName(wb, name = namedRegion, formula = paste(namedRegion, lref, sep = "!"), worksheetName = worksheetScopeName)
+		writeNamedRegion(wb, df, name = namedRegion, worksheetName = worksheetScopeName, header = TRUE)
+		res <- readNamedRegion(wb, namedRegion, worksheetName = worksheetScopeName)
+		checkEquals(normalizeDataframe(df, replaceInf = TRUE), res, check.attributes = FALSE, check.names = TRUE)
+	}
+	
+	if(TRUE) {
 		# built-in dataset mtcars (*.xls)
 		testDataFrame(wb.xls, mtcars, "$C$8")
 		# built-in dataset mtcars (*.xlsx)
@@ -84,10 +95,20 @@ test.writeAndReadNamedRegion <- function() {
 		# built-in dataset morley (*.xlsx)
 		testDataFrame(wb.xlsx, morley, "$K$4")
 
+		# built-in dataset morley (*.xls)
+		testDataFrameNameScope(wb.xls, morley, "$K$4")
+		# built-in dataset morley (*.xlsx)
+		testDataFrameNameScope(wb.xlsx, morley, "$K$4")
+
 		# built-in dataset swiss (*.xls)
 		testDataFrame(wb.xls, swiss, "$M$2")
 		# built-in dataset swiss (*.xlsx)
 		testDataFrame(wb.xlsx, swiss, "$M$2")
+
+		# built-in dataset swiss (*.xls)
+		testDataFrameNameScope(wb.xls, swiss, "$M$2")
+		# built-in dataset swiss (*.xlsx)
+		testDataFrameNameScope(wb.xlsx, swiss, "$M$2")
 	}
 
 	# custom test dataset
