@@ -22,6 +22,9 @@ Checks the existence of a name in a \code{\linkS4class{workbook}}.
 Returns \code{TRUE} if the specified \code{name} exists and \code{FALSE}
 otherwise. Note that the \code{name} argument is vectorized and
 therefore multiple names can be checked for existence in one method call.
+
+If \code{worksheetName} is provided, TRUE will be returned only if a matching
+name exists in the local scope of the specified sheet.
 }
 
 \author{
