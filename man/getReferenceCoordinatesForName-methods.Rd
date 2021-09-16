@@ -17,6 +17,9 @@ Queries the coordinates of an Excel name in a \code{\linkS4class{workbook}}.
   multiple names can be queried with one method call.}
   \item{worksheetName}{Optional, the name of the worksheet to use for resolving the named region}
 }
+\details{
+  If \code{worksheetName} is defined, only coordinates for a name scoped strictly to the specified worksheet.
+}
 
 \author{
 Thomas Themel\cr
