@@ -27,11 +27,11 @@
 #############################################################################
 
 setGeneric("existsName",
-	function(object, name, worksheetName = NULL) standardGeneric("existsName"))
+	function(object, name, worksheetScope = NULL) standardGeneric("existsName"))
 
 setMethod("existsName", 
 		signature(object = "workbook"), 
-		function(object, name, worksheetName = NULL) {
-			xlcCall(object, "existsName", name, worksheetName %||% .jnull())
+		function(object, name, worksheetScope = NULL) {
+			xlcCall(object, "existsName", name, worksheetScope %||% .jnull())
 		}
 )

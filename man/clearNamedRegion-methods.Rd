@@ -8,13 +8,13 @@
 Clears named regions in a \code{\linkS4class{workbook}}.
 }
 \usage{
-  \S4method{clearNamedRegion}{workbook,character}(object, name, worksheetName)
+  \S4method{clearNamedRegion}{workbook,character}(object, name, worksheetScope)
 }
 
 \arguments{
   \item{object}{The \code{\linkS4class{workbook}} to use}
   \item{name}{The name of the named region to clear}
-  \item{worksheetName}{Optional - the name of the worksheet in which the region is scoped;
+  \item{worksheetScope}{Optional - the name of the worksheet in which the region is scoped;
   useful if different sheets have scoped regions with the same name.}
 }
 
@@ -25,7 +25,7 @@ to be replaced, i.e. data is first read, modified in R and finally written back 
 the same named region. Without clearing the named region first, (parts of) the original 
 data may still be visible if they occupied a larger range in the worksheet.
 
-If \code{worksheetName} is unspecified, the first matching name found anywhere in the workbook
+If \code{worksheetScope} is unspecified, the first matching name found anywhere in the workbook
 will be cleared. Otherwise, only a name specifically scoped to the worksheet may be cleared.
 }
 

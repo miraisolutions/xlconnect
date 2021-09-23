@@ -36,9 +36,9 @@ test.writeAndReadNamedRegion <- function() {
 	testDataFrame <- function(wb, df, lref) {
 		namedRegion <- deparse(substitute(df))
 		createSheet(wb, name = namedRegion)
-		createName(wb, name = namedRegion, formula = paste(namedRegion, lref, sep = "!"), worksheetName = namedRegion)
-		writeNamedRegion(wb, df, name = namedRegion, worksheetName = namedRegion, header = TRUE)
-		res <- readNamedRegion(wb, namedRegion, worksheetName = namedRegion)
+		createName(wb, name = namedRegion, formula = paste(namedRegion, lref, sep = "!"), worksheetScope = namedRegion)
+		writeNamedRegion(wb, df, name = namedRegion, worksheetScope = namedRegion, header = TRUE)
+		res <- readNamedRegion(wb, namedRegion, worksheetScope = namedRegion)
 		checkEquals(normalizeDataframe(df, replaceInf = TRUE), res, check.attributes = FALSE, check.names = TRUE)
 	}
 
@@ -47,9 +47,9 @@ test.writeAndReadNamedRegion <- function() {
 		worksheetScopeName <- paste(namedRegion, "2", sep = "")
 		createSheet(wb, name = namedRegion)
 		createSheet(wb, name = worksheetScopeName)
-		createName(wb, name = namedRegion, formula = paste(namedRegion, lref, sep = "!"), worksheetName = worksheetScopeName)
-		writeNamedRegion(wb, df, name = namedRegion, worksheetName = worksheetScopeName, header = TRUE)
-		res <- readNamedRegion(wb, namedRegion, worksheetName = worksheetScopeName)
+		createName(wb, name = namedRegion, formula = paste(namedRegion, lref, sep = "!"), worksheetScope = worksheetScopeName)
+		writeNamedRegion(wb, df, name = namedRegion, worksheetScope = worksheetScopeName, header = TRUE)
+		res <- readNamedRegion(wb, namedRegion, worksheetScope = worksheetScopeName)
 		checkEquals(normalizeDataframe(df, replaceInf = TRUE), res, check.attributes = FALSE, check.names = TRUE)
 	}
 	

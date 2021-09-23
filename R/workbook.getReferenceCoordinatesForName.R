@@ -27,14 +27,14 @@
 #############################################################################
 
 setGeneric("getReferenceCoordinatesForName",
-		function(object, name, worksheetName = NULL) standardGeneric("getReferenceCoordinatesForName"))
+		function(object, name, worksheetScope = NULL) standardGeneric("getReferenceCoordinatesForName"))
 
 setMethod("getReferenceCoordinatesForName", 
 		signature(object = "workbook"), 
-		function(object, name, worksheetName = NULL) {
-		  # print(paste("about to xlc call get reference coordinates for name", worksheetName))
-			res <- xlcCall(object, "getReferenceCoordinatesForName", name, worksheetName %||% .jnull())
-			# print(paste("called get reference coordinates for name" , worksheetName))
+		function(object, name, worksheetScope = NULL) {
+		  # print(paste("about to xlc call get reference coordinates for name", worksheetScope))
+			res <- xlcCall(object, "getReferenceCoordinatesForName", name, worksheetScope %||% .jnull())
+			# print(paste("called get reference coordinates for name" , worksheetScope))
       if(is.numeric(res)) { matrix(res, nrow = 2, byrow = TRUE) + 1 } else { res } 
 		}
 )
