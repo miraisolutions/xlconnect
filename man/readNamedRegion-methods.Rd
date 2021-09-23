@@ -95,7 +95,8 @@ certain dates / timestamps will not be read exactly as they were written. See
 \url{https://poi.apache.org/apidocs/dev/org/apache/poi/ss/usermodel/DateUtil.html#getJavaDate-double-}
 
 If \code{worksheetScope} is unspecified, the contents of the name found anywhere in the workbook will be read.
-Otherwise, only a name specifically scoped to the specified sheet may be read.
+Otherwise, only a name specifically scoped to the specified sheet may be read. 
+To read only names defined in the global scope, pass "" as the value.
 }
 \references{
 What are named regions/ranges?\cr
