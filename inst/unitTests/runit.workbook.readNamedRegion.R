@@ -47,6 +47,15 @@ test.workbook.readNamedRegion <- function() {
 	# Check that the read named region equals the defined data.frame (*.xlsx)
 	res <- readNamedRegion(wb.xlsx, "Test", header = TRUE)
 	checkEquals(res, checkDf)
+
+	# Check that the same works when explicitly specifying global scope (*.xls)
+	res <- readNamedRegion(wb.xls, "Test", header = TRUE, worksheetScope = "")
+	checkEquals(res, checkDf)
+
+	# Check that the same works when explicitly specifying global scope (*.xlsx)
+	res <- readNamedRegion(wb.xlsx, "Test", header = TRUE, worksheetScope = "")
+	checkEquals(res, checkDf)
+
 	
 	# Check that attempting to read a non-existing named region throws an exception (*.xls)
 	checkException(readNamedRegion(wb.xls, "NameThatDoesNotExist"))
