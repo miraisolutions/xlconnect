@@ -58,7 +58,7 @@ test.workbook.clearNamedRegion <- function() {
 	wb.xlsx <- loadWorkbook(rsrc("resources/testWorkbookClearCells.xlsx"), create = FALSE)
 	
 	# check that specifying the worksheet name doesn't find globally scoped names
-	checkException(clearNamedRegion(wb.xls, c("region1", "region2"), worksheetName = "clearNamedRegion"))
+	checkException(clearNamedRegion(wb.xls, c("region1", "region2"), worksheetScope = "clearNamedRegion"))
 	
 	# Check that clearing 2 of 3 named regions in a sheet returns only the third one (*.xls)
 	clearNamedRegion(wb.xls, c("region1", "region2"))

@@ -32,7 +32,7 @@ setGeneric("readNamedRegion",
 	function(object, name, header = TRUE, rownames = NULL, colTypes = character(0),
 			forceConversion = FALSE, dateTimeFormat = getOption("XLConnect.dateTimeFormat"),
 			check.names = TRUE, useCachedValues = FALSE, keep = NULL, drop = NULL, simplify = FALSE,
-      readStrategy = "default", worksheetName = NULL)
+      readStrategy = "default", worksheetScope = NULL)
     standardGeneric("readNamedRegion"))
 
 
@@ -41,12 +41,12 @@ setMethod("readNamedRegion",
 	function(object, name, header = TRUE, rownames = NULL, colTypes = character(0),
 			forceConversion = FALSE, dateTimeFormat = getOption("XLConnect.dateTimeFormat"),
 			check.names = TRUE, useCachedValues = FALSE, keep = NULL, drop = NULL, simplify = FALSE,
-      readStrategy = "default", worksheetName = NULL) {
+      readStrategy = "default", worksheetScope = NULL) {
 
 	# returns a list of RDataFrameWrapper Java object references
-	sheet = as.vector(extractSheetName(getReferenceFormula(object, name))) #TODO worksheetName in getRefFormula
+	sheet = as.vector(extractSheetName(getReferenceFormula(object, name))) #TODO worksheetScope in getRefFormula
 	
-	namedim = matrix(as.vector(t(getReferenceCoordinatesForName(object, name, worksheetName))), nrow=4, byrow=FALSE)
+	namedim = matrix(as.vector(t(getReferenceCoordinatesForName(object, name, worksheetScope))), nrow=4, byrow=FALSE)
 	startRow = namedim[1,]
 	startCol = namedim[2,]
 	endRow = namedim[3,]
@@ -56,7 +56,7 @@ setMethod("readNamedRegion",
 	subset <- getColSubset(object, sheet, startRow, endRow, startCol, endCol, header, numcols, keep, drop)
 	
 	dataFrame <- xlcCall(object, "readNamedRegion", name, header, .jarray(classToXlcType(colTypes)),
-		forceConversion, dateTimeFormat, useCachedValues, subset, readStrategy, worksheetName %||% .jnull(),
+		forceConversion, dateTimeFormat, useCachedValues, subset, readStrategy, worksheetScope %||% .jnull(),
 		.simplify = FALSE
 	)
 	
