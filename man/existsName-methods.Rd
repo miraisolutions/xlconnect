@@ -25,7 +25,7 @@ therefore multiple names can be checked for existence in one method call.
 
 If \code{worksheetScope} is provided, TRUE will be returned only if a matching
 name exists in the local scope of the specified sheet. To explicitly match only
- in the global scope, pass "" as the value.
+ in the global scope, pass \code{""} as the value.
 }
 
 \author{
