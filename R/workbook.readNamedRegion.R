@@ -32,7 +32,7 @@ setGeneric("readNamedRegion",
 	function(object, name, header = TRUE, rownames = NULL, colTypes = character(0),
 			forceConversion = FALSE, dateTimeFormat = getOption("XLConnect.dateTimeFormat"),
 			check.names = TRUE, useCachedValues = FALSE, keep = NULL, drop = NULL, simplify = FALSE,
-      readStrategy = "default", worksheetName = .jnull(class = "java/lang/String")) 
+      readStrategy = "default", worksheetName = NULL)
     standardGeneric("readNamedRegion"))
 
 
@@ -41,28 +41,25 @@ setMethod("readNamedRegion",
 	function(object, name, header = TRUE, rownames = NULL, colTypes = character(0),
 			forceConversion = FALSE, dateTimeFormat = getOption("XLConnect.dateTimeFormat"),
 			check.names = TRUE, useCachedValues = FALSE, keep = NULL, drop = NULL, simplify = FALSE,
-      readStrategy = "default", worksheetName = .jnull(class = "java/lang/String")) {
+      readStrategy = "default", worksheetName = NULL) {
 
-		# returns a list of RDataFrameWrapper Java object references
-	  if(identical(worksheetName,.jnull(class = "java/lang/String"))) {
-		  sheet = as.vector(extractSheetName(getReferenceFormula(object, name)))
-	  }
-	  else {
-	    sheet = as.vector(worksheetName)
-	  }
-	  
-		namedim = matrix(as.vector(t(getReferenceCoordinatesForName(object, name, worksheetName))), nrow=4, byrow=FALSE)
-		startRow = namedim[1,]
-		startCol = namedim[2,]
-		endRow = namedim[3,]
-		endCol = namedim[4,]
-		numcols = endCol-startCol+1
+	# returns a list of RDataFrameWrapper Java object references
+	sheet = as.vector(extractSheetName(getReferenceFormula(object, name))) #TODO worksheetName in getRefFormula
+	
+	namedim = matrix(as.vector(t(getReferenceCoordinatesForName(object, name, worksheetName))), nrow=4, byrow=FALSE)
+	startRow = namedim[1,]
+	startCol = namedim[2,]
+	endRow = namedim[3,]
+	endCol = namedim[4,]
+	numcols = endCol-startCol+1
 
-		subset <- getColSubset(object, sheet, startRow, endRow, startCol, endCol, header, numcols, keep, drop)
-		
-		dataFrame <- xlcCall(object, "readNamedRegion", name, header, .jarray(classToXlcType(colTypes)), 
-				forceConversion, dateTimeFormat, useCachedValues, subset, readStrategy, worksheetName, .simplify = FALSE)
-		
+	subset <- getColSubset(object, sheet, startRow, endRow, startCol, endCol, header, numcols, keep, drop)
+	
+	dataFrame <- xlcCall(object, "readNamedRegion", name, header, .jarray(classToXlcType(colTypes)),
+		forceConversion, dateTimeFormat, useCachedValues, subset, readStrategy, worksheetName %||% .jnull(),
+		.simplify = FALSE
+	)
+	
 
     # get data.frames from Java
     dataFrame = lapply(dataFrame, dataframeFromJava, check.names = check.names)
