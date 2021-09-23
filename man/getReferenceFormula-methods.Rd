@@ -8,7 +8,7 @@
 Queries the reference formula of an Excel name in a \code{\linkS4class{workbook}}.
 }
 \usage{
-\S4method{getReferenceFormula}{workbook}(object,name)
+\S4method{getReferenceFormula}{workbook}(object,name, worksheetScope)
 }
 
 \arguments{
