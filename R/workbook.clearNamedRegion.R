@@ -27,12 +27,12 @@
 #############################################################################
 
 setGeneric("clearNamedRegion",
-		function(object, name, worksheetName = NULL) standardGeneric("clearNamedRegion"))
+		function(object, name, worksheetScope = NULL) standardGeneric("clearNamedRegion"))
 
 setMethod("clearNamedRegion", 
 		signature(object = "workbook", name = "character"), 
-		function(object, name, worksheetName = NULL) {
-			xlcCall(object, "clearNamedRegion", name, worksheetName %||% .jnull(), .simplify = FALSE)
+		function(object, name, worksheetScope = NULL) {
+			xlcCall(object, "clearNamedRegion", name, worksheetScope %||% .jnull(), .simplify = FALSE)
 			invisible()
 		}
 )
