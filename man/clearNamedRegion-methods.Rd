@@ -27,6 +27,7 @@ data may still be visible if they occupied a larger range in the worksheet.
 
 If \code{worksheetScope} is unspecified, the first matching name found anywhere in the workbook
 will be cleared. Otherwise, only a name specifically scoped to the worksheet may be cleared.
+To only clear a name in global scope, pass \code{""} as the value.
 }
 
 \author{
