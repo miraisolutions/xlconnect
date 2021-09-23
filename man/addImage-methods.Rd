@@ -8,7 +8,7 @@
 Adds an image to a worksheet using a named region.
 }
 \usage{
- \S4method{addImage}{workbook}(object, filename, name, originalSize)
+ \S4method{addImage}{workbook}(object, filename, name, worksheetScope, originalSize)
 }
 
 \arguments{
@@ -20,6 +20,8 @@ Adds an image to a worksheet using a named region.
   inserted in the top left corner of the named region and not
   scaled. Otherwise, the image is scaled to fit the named region.
   The default value for \code{originalSize} is \code{FALSE}.}
+  \item{worksheetScope}{Optional - the name of the worksheet in which the name is scoped;
+  useful if different sheets have scoped regions with the same name.}
 }
 
 \author{

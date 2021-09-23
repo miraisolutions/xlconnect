@@ -27,7 +27,7 @@
 #############################################################################
 
 setGeneric("removeName",
-	function(object, name, worksheetScope) standardGeneric("removeName"))
+	function(object, name, worksheetScope = NULL) standardGeneric("removeName"))
 
 setMethod("removeName", 
 		signature(object = "workbook"), 

@@ -26,13 +26,13 @@
 #
 #############################################################################
 
-setGeneric("addImage", 
-	function(object, filename, name, originalSize = FALSE) standardGeneric("addImage"))
+setGeneric("addImage",
+	function(object, filename, name, worksheetScope = NULL, originalSize = FALSE) standardGeneric("addImage"))
 
-setMethod("addImage", 
-		signature(object = "workbook"), 
-		function(object, filename, name, originalSize = FALSE) {
-			xlcCall(object, "addImage", filename, name, originalSize)
+setMethod("addImage",
+		signature(object = "workbook"),
+		function(object, filename, name, worksheetScope, originalSize = FALSE) {
+			xlcCall(object, "addImage", filename, name, worksheetScope %||% .jnull(), originalSize)
 			invisible()
 		}
 )
