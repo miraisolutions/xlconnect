@@ -18,7 +18,8 @@ Queries the coordinates of an Excel name in a \code{\linkS4class{workbook}}.
   \item{worksheetScope}{Optional, the name of the worksheet to use for resolving the named region}
 }
 \details{
-  If \code{worksheetScope} is defined, only coordinates for a name scoped strictly to the specified worksheet.
+  If \code{worksheetScope} is defined, only coordinates for a name scoped strictly to the specified worksheet are 
+  returned. To explicitly match only if the name is in the global scope, pass "" as the value.
 }
 
 \author{

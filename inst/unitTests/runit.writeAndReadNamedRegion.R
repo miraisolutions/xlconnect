@@ -52,6 +52,15 @@ test.writeAndReadNamedRegion <- function() {
 		res <- readNamedRegion(wb, namedRegion, worksheetScope = worksheetScopeName)
 		checkEquals(normalizeDataframe(df, replaceInf = TRUE), res, check.attributes = FALSE, check.names = TRUE)
 	}
+
+	testDataFrameGlobalExplicit <- function(wb, df, lref) {
+		namedRegion <- paste(deparse(substitute(df)), "forGlobal", sep = "")
+		createSheet(wb, name = namedRegion)
+		createName(wb, name = namedRegion, formula = paste(namedRegion, lref, sep = "!"), worksheetScope = "")
+		writeNamedRegion(wb, df, name = namedRegion, worksheetScope = "", header = TRUE)
+		res <- readNamedRegion(wb, namedRegion, worksheetScope = "")
+		checkEquals(normalizeDataframe(df, replaceInf = TRUE), res, check.attributes = FALSE, check.names = TRUE)
+	}
 	
 	if(getOption("FULL.TEST.SUITE")) {
 		# built-in dataset mtcars (*.xls)
@@ -69,10 +78,20 @@ test.writeAndReadNamedRegion <- function() {
 		# built-in dataset attenu (*.xlsx)
 		testDataFrame(wb.xlsx, attenu, "$A$8")
 
+		# built-in dataset attenu (*.xls) - explicit global scope
+		testDataFrameGlobalExplicit(wb.xls, attenu, "$A$8")
+		# built-in dataset attenu (*.xlsx) - explicit global scope
+		testDataFrameGlobalExplicit(wb.xlsx, attenu, "$A$8")
+
 		# built-in dataset ChickWeight (*.xls)
 		testDataFrame(wb.xls, ChickWeight, "$BQ$7")
 		# built-in dataset ChickWeight (*.xlsx)
 		testDataFrame(wb.xlsx, ChickWeight, "$BQ$7")
+
+		# built-in dataset ChickWeight (*.xls) - explicit global scope
+		testDataFrameGlobalExplicit(wb.xls, ChickWeight, "$BQ$7")
+		# built-in dataset ChickWeight (*.xlsx) - explicit global scope
+		testDataFrameGlobalExplicit(wb.xlsx, ChickWeight, "$BQ$7")
 
 		# built-in dataset CO2 (*.xls)
 		CO = CO2 # CO2 seems to be an illegal name
