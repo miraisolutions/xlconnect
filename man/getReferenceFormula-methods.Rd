@@ -15,6 +15,8 @@ Queries the reference formula of an Excel name in a \code{\linkS4class{workbook}
   \item{object}{The \code{\linkS4class{workbook}} to use}
   \item{name}{The name to query. This argument is vectorized such that
   multiple names can be queried with one method call.}
+  \item{worksheetScope}{Optional - the name of the worksheet in which the name is scoped;
+  if undefined any name can be returned. To specify global scope, use the value \code{""}}
 }
 
 \author{
