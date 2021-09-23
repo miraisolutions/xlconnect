@@ -8,17 +8,17 @@
 Queries the coordinates of an Excel name in a \code{\linkS4class{workbook}}.
 }
 \usage{
-\S4method{getReferenceCoordinatesForName}{workbook}(object,name, worksheetName)
+\S4method{getReferenceCoordinatesForName}{workbook}(object,name, worksheetScope)
 }
 
 \arguments{
   \item{object}{The \code{\linkS4class{workbook}} to use}
   \item{name}{The name to query. This argument is vectorized such that
   multiple names can be queried with one method call.}
-  \item{worksheetName}{Optional, the name of the worksheet to use for resolving the named region}
+  \item{worksheetScope}{Optional, the name of the worksheet to use for resolving the named region}
 }
 \details{
-  If \code{worksheetName} is defined, only coordinates for a name scoped strictly to the specified worksheet.
+  If \code{worksheetScope} is defined, only coordinates for a name scoped strictly to the specified worksheet.
 }
 
 \author{
