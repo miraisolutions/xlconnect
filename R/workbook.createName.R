@@ -27,12 +27,12 @@
 #############################################################################
 
 setGeneric("createName",
-	function(object, name, formula, overwrite = FALSE, worksheetName = .jnull(class = "java/lang/String")) standardGeneric("createName"))
+	function(object, name, formula, overwrite = FALSE, worksheetName = NULL) standardGeneric("createName"))
 
 setMethod("createName", 
 		signature(object = "workbook"), 
-		function(object, name, formula, overwrite = FALSE, worksheetName = .jnull(class = "java/lang/String")) {
-			xlcCall(object, "createName", name, worksheetName, formula, overwrite)
+		function(object, name, formula, overwrite = FALSE, worksheetName = NULL) {
+			xlcCall(object, "createName", name, worksheetName %||% .jnull(), formula, overwrite)
 			invisible()
 		}
 )
