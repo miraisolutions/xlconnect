@@ -19,7 +19,7 @@ Queries the coordinates of an Excel name in a \code{\linkS4class{workbook}}.
 }
 \details{
   If \code{worksheetScope} is defined, only coordinates for a name scoped strictly to the specified worksheet are 
-  returned. To explicitly match only if the name is in the global scope, pass "" as the value.
+  returned. To explicitly match only if the name is in the global scope, pass \code{""} as the value.
 }
 
 \author{

@@ -44,7 +44,7 @@ setMethod("readNamedRegion",
       readStrategy = "default", worksheetScope = NULL) {
 
 	# returns a list of RDataFrameWrapper Java object references
-	sheet = as.vector(extractSheetName(getReferenceFormula(object, name))) #TODO worksheetScope in getRefFormula
+	sheet = as.vector(extractSheetName(getReferenceFormula(object, name, worksheetScope)))
 	
 	namedim = matrix(as.vector(t(getReferenceCoordinatesForName(object, name, worksheetScope))), nrow=4, byrow=FALSE)
 	startRow = namedim[1,]
