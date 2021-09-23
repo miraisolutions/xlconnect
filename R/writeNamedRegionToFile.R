@@ -27,25 +27,27 @@
 #############################################################################
 
 
-writeNamedRegionToFile <- function(file, data, name, formula = NA, ..., 
+writeNamedRegionToFile <- function(file, data, name, formula = NA, worksheetScope = NULL , ...,
 		styleAction = XLC$STYLE_ACTION.XLCONNECT,clearNamedRegions=FALSE) {
 
-  wb <- loadWorkbook(file, create = !file.exists(file))  
+  wb <- loadWorkbook(file, create = !file.exists(file))
   setStyleAction(wb, styleAction)
  
   # clear existing named regions
-  existingNames <- getDefinedNames(wb)
+  existingNames <- getDefinedNames(wb, worksheetScope = worksheetScope)
   toClear <- intersect(name[clearNamedRegions], existingNames)
-  try(clearNamedRegion(wb, toClear))
-  
+  clearNamesFun <- function(toClear) {
+    clearNamedRegion(wb, toClear, worksheetScope = worksheetScope)
+    }
+  sapply(toClear, clearNamesFun)
   
   if(!is.na(formula)) {
     sheets = extractSheetName(formula)
     createSheet(wb, sheets[sheets != ""])
-    createName(wb, name, formula)
+    createName(wb, name, formula, worksheetScope = worksheetScope)
   }
   
-  writeNamedRegion(wb, data, name, ...)
+  writeNamedRegion(wb, data, name, worksheetScope = worksheetScope, ...)
   
   saveWorkbook(wb)
   invisible(wb)  
