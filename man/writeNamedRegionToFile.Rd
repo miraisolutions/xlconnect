@@ -16,7 +16,7 @@ styleAction = XLC$STYLE_ACTION.XLCONNECT, clearNamedRegions=FALSE)
 the named region identified by the corresponding entry of
 \code{name}. Use this if you want to create the document from scratch
 instead of writing to a template!}
-\item(worksheetScope){The scope of validity for the named region. If not specified, the named region has global scope.}
+\item{worksheetScope}{The scope of validity for the named region. If not specified, the named region has global scope.}
 \item{...}{Additional arguments passed to \code{\link[=writeNamedRegion-methods]{writeNamedRegion}}}
 \item{styleAction}{Style action to be used when writing the data.\cr
 The default is \code{XLC$STYLE_ACTION.XLCONNECT}. 
