@@ -8,7 +8,7 @@
 Adds an image to a worksheet using a named region.
 }
 \usage{
- \S4method{addImage}{workbook}(object, filename, name, worksheetScope, originalSize)
+ \S4method{addImage}{workbook}(object, filename, name, originalSize, worksheetScope)
 }
 
 \arguments{
