@@ -51,7 +51,7 @@ jobs:
             # java: 13
             vignettes: false
           - os-name: ubuntu 
-            os-version: "16.04"
+            os-version: "18.04"
             r-version: 3.2.5
             java: 8
             vignettes: false
