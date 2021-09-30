@@ -28,7 +28,7 @@ jobs:
           - os-name: ubuntu # windows-2019, macos-10.15]
             os-version: latest
             r-version: oldrel
-            java: 16
+            java: 17
             vignettes: true
             xlc-repo: https://jcenter.bintray.com
             timezone-name: Europe/Zurich
@@ -51,7 +51,7 @@ jobs:
             # java: 13
             vignettes: false
           - os-name: ubuntu 
-            os-version: "16.04"
+            os-version: "18.04"
             r-version: 3.2.5
             java: 8
             vignettes: false
