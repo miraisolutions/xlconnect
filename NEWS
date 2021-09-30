@@ -1,5 +1,7 @@
 XLConnect News
 --------------
+1.0.5 2021-09-30
+  * Support java 17
 1.0.4 2021-07-29
   * Extend support to java 16
   * Download missing dependency for POI 4.1.2
