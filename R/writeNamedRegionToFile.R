@@ -27,7 +27,7 @@
 #############################################################################
 
 
-writeNamedRegionToFile <- function(file, data, name, formula = NA, worksheetScope = NULL , ...,
+writeNamedRegionToFile <- function(file, data, name, formula = NA , ..., worksheetScope = NULL,
 		styleAction = XLC$STYLE_ACTION.XLCONNECT,clearNamedRegions=FALSE) {
 
   wb <- loadWorkbook(file, create = !file.exists(file))
