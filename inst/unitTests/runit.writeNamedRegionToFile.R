@@ -155,8 +155,8 @@ test.writeNamedRegionToFile <- function() {
     # overwrite name with shorter version & clearing
     writeNamedRegionToFile(file, data=df.short, name="cdfRegion", clearNamedRegions=TRUE)
     # should be cleared
-    #checkEquals(nrow(readNamedRegionFromFile(file, name="cdfRegion")), 1)
-    #checkEquals(nrow(readWorksheetFromFile(file, sheet="cdf")), 1)
+    checkEquals(nrow(readNamedRegionFromFile(file, name="cdfRegion")), 1)
+    checkEquals(nrow(readWorksheetFromFile(file, sheet="cdf")), 1)
   }
 
   testClearNamedRegions(file.xls, cdf)
