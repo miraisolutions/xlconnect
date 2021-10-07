@@ -65,7 +65,7 @@ setMethod("readNamedRegion",
     dataFrame = lapply(dataFrame, dataframeFromJava, check.names = check.names)
 		# extract rownames
     dataFrame = extractRownames(dataFrame, rownames)
-		names(dataFrame) <- name
+	names(dataFrame) <- rep(name, length.out = length(dataFrame))
     
     # simplify
     dataFrame =
