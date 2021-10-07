@@ -34,12 +34,12 @@ writeNamedRegionToFile <- function(file, data, name, formula = NA , ..., workshe
   setStyleAction(wb, styleAction)
  
   # clear existing named regions
-  existingNames <- getDefinedNames(wb, worksheetScope = worksheetScope)
-  toClear <- intersect(name[clearNamedRegions], existingNames)
-  clearNamesFun <- function(toClear) {
-    clearNamedRegion(wb, toClear, worksheetScope = worksheetScope)
-    }
-  sapply(toClear, clearNamesFun)
+  nameExists <- existsName(wb, name, worksheetScope = worksheetScope)
+  clearExistingName <- function(n, wsScope, clearExisting) {
+    if(clearExisting) clearNamedRegion(wb, n, worksheetScope = wsScope)
+  }
+  mapply(clearExistingName, name, worksheetScope %||% list(NULL), nameExists & clearNamedRegions)
+
   
   if(!is.na(formula)) {
     sheets = extractSheetName(formula)
@@ -50,5 +50,5 @@ writeNamedRegionToFile <- function(file, data, name, formula = NA , ..., workshe
   writeNamedRegion(wb, data, name, worksheetScope = worksheetScope, ...)
   
   saveWorkbook(wb)
-  invisible(wb)  
+  invisible(wb)
 }
