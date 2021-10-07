@@ -166,10 +166,11 @@ test.writeNamedRegionToFile <- function() {
 	clearParam <- c(TRUE, FALSE)
     df.short <- df[1,]
 
-	wb <- loadWorkbook(file, create = FALSE)
+	wb <- loadWorkbook(file, create = TRUE)
 	createSheet(wb, scope)
 	saveWorkbook(wb, file)
 
+	writeNamedRegionToFile(file, data=df, name="cdfRegionScoped", formula=paste(scope, "A1", sep="!"), worksheetScope = scope)
     # overwrite named region with shorter version
     writeNamedRegionToFile(file, data=df.short, name="cdfRegionScoped", formula=paste(scope, "A1", sep="!"), worksheetScope = scope)
     # default behaviour: not cleared, only named region is shortened
@@ -188,7 +189,10 @@ test.writeNamedRegionToFile <- function() {
     checkEquals(nrow(readWorksheetFromFile(file, sheet=scope)[[1]]), 1)
 	checkEquals(nrow(readWorksheetFromFile(file, sheet=scope)[[2]]), nrow(df))
   }
+
+  scopedfile.xls <- "testWriteNamedRegionToFileWorkbookScoped.xls"
+  scopedfile.xlsx <- "testWriteNamedRegionToFileWorkbookScoped.xlsx"
   
-  testClearNamedRegionsScoped(file.xls, cdf)
-  testClearNamedRegionsScoped(file.xlsx, cdf)
+  testClearNamedRegionsScoped(scopedfile.xls, cdf)
+  testClearNamedRegionsScoped(scopedfile.xlsx, cdf)
 }
