@@ -25,32 +25,56 @@
 #
 # Atomic objects are replicated as is, others are wrapped in a list as defined
 # by wrapList and then replicated
-# 
+#
 # Author: Martin Studer, Mirai Solutions GmbH
 #
 #############################################################################
 
-xlcAttributesCall <- function(obj, fun, ..., .recycle = TRUE, .simplify = TRUE) {
-  res <- xlcCall(obj, fun, ..., .recycle = TRUE, .simplify = TRUE)
-  definedNames <- names(res)[!is.na(names(res))]
-  names(res) <- rep(definedNames, length.out = length(names(res)))
-  jni <- mapply(function(resw) {
-    .jcall(resw, "S", "jni")
-  }, res)
-  unwrapped <- mapply(function(resw, jtype) {
-    .jcall(resw, jtype, "getValue")
-  }, res, jni)
-  
-  attributesToSet <- mapply(function(resw) {
-    aNames <- .jcall(resw, "[S", "getAttributeNames")
-    aValues <- .jcall(resw, "[S", "getAttributeValues")
-    attList <- list()
-    for (i in seq(along = aNames)) {
-      attList[aNames[i]]=aValues[i]
+xlcAttributesCall <-
+  function(obj,
+           fun,
+           ...,
+           .recycle = TRUE,
+           .simplify = TRUE) {
+    res <- xlcCall(obj, fun, ..., .recycle = TRUE, .simplify = TRUE)
+    definedNames <- names(res)[!is.na(names(res))]
+    names(res) <- rep(definedNames, length.out = length(names(res)))
+    
+    jni <- mapply(function(resw) {
+      .jcall(resw, "S", "jni")
+    }, res)
+    
+    unwrapped <- mapply(function(resw, jtype) {
+      .jcall(resw, jtype, "getValue")
+    }, res, jni)
+    
+    allANames = unique(Reduce(function(resw1, resw2) {
+      append(
+        .jcall(resw1, "[S", "getAttributeNames"),
+        .jcall(resw2, "[S", "getAttributeNames")
+      )
+    }, res))
+    
+    
+    attributeRows <- Map(function(aName) {
+      Map(function(resw) {
+        thev <- .jcall(resw, "S", "getAttributeValue", aName)
+        if (is.null(thev))
+          NA
+        else
+          thev
+      }, res)
+    }, allANames)
+    
+    attrMtx <- Reduce(rbind, attributeRows)
+    if (length(allANames) > 1) {
+      colnames(attrMtx) <- allANames
+      
+      Map(function(aName) {
+        attr(unwrapped, aName) <- attrMtx[, aName]
+      }, allANames)
     }
-    attList
-  }, res)
-  # print(attributesToSet)
-  attributes(unwrapped) <- append(attributes(unwrapped), attributesToSet)
-  unwrapped
-}
+    else
+      attr(unwrapped, allANames[1]) <- attrMtx
+    unwrapped
+  }
