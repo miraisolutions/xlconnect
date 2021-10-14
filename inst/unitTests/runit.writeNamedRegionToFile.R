@@ -172,7 +172,7 @@ test.writeNamedRegionToFile <- function() {
 
 	writeNamedRegionToFile(file, data=df, name="cdfRegionScoped", formula=paste(scope, "A1", sep="!"), worksheetScope = scope)
     # overwrite named region with shorter version
-    writeNamedRegionToFile(file, data=df.short, name="cdfRegionScoped", formula=paste(scope, "A1", sep="!"), worksheetScope = scope)
+    writeNamedRegionToFile(file, data=df.short, name="cdfRegionScoped", worksheetScope = scope)
     # default behaviour: not cleared, only named region is shortened
     checkEquals(nrow(readNamedRegionFromFile(file, name="cdfRegionScoped", worksheetScope = scope)[[1]]), 1)
 	checkEquals(nrow(readNamedRegionFromFile(file, name="cdfRegionScoped", worksheetScope = scope)[[2]]), 1)
