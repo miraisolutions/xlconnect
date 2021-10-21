@@ -49,7 +49,7 @@ xlcWithAttributesCall <- function(obj, fun, ..., .recycle = TRUE, .simplify = TR
       res <- simplify2array(res)
       attributes(res) <- res_attr
     }
-    names(res) <- rep(definedNames, length.out = length(names(res)))
+    names(res) <- rep(definedNames, length.out = length((res)))
   } else {
     res = jTryCatch(do.call(f, args))
   }
