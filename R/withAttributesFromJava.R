@@ -1,7 +1,7 @@
 #############################################################################
 #
 # XLConnect
-# Copyright (C) 2010-2024 Mirai Solutions GmbH
+# Copyright (C) 2010-2021 Mirai Solutions GmbH
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -20,18 +20,23 @@
 
 #############################################################################
 #
-# Checking existence of names in a workbook
-# 
-# Author: Martin Studer, Mirai Solutions GmbH
+# Utility function for converting XLConnect java objects with added attributes
+# to R variables with the corresponding attributes.
+#
+# Author: Simon Poltier, Mirai Solutions GmbH
 #
 #############################################################################
 
-setGeneric("existsName",
-	function(object, name, worksheetScope = NULL) standardGeneric("existsName"))
-
-setMethod("existsName", 
-		signature(object = "workbook"), 
-		function(object, name, worksheetScope = NULL) {
-		  xlcWithAttributesCall(object, "existsName", name, worksheetScope %||% .jnull())
-		}
-)
+withAttributesFromJava <- function(jobj) {
+    
+    jni <- .jcall(jobj, "S", "jni")
+    unwrapped <- .jcall(jobj, jni, "getValue")
+    
+    allANames = .jcall(jobj, "[S", "getAttributeNames")
+    allAValues = .jcall(jobj, "[S", "getAttributeValues")
+    
+    for(i in seq(along = allANames)) {
+        attr(unwrapped, allANames[i]) <- allAValues[i]
+    }
+    unwrapped
+  }
