@@ -29,8 +29,9 @@
 
 withAttributesFromJava <- function(jobj) {
     
-    jni <- .jcall(jobj, "S", "jni")
-    unwrapped <- .jcall(jobj, jni, "getValue")
+    # jni <- .jcall(jobj, "S", "jni")
+    # unwrapped <- .jcall(jobj, jni, "getValue")
+    unwrapped <- jobj$getValue()
     
     allANames = .jcall(jobj, "[S", "getAttributeNames")
     allAValues = .jcall(jobj, "[S", "getAttributeValues")
