@@ -55,7 +55,7 @@ setMethod("readNamedRegion",
 
 	subset <- getColSubset(object, sheet, startRow, endRow, startCol, endCol, header, numcols, keep, drop)
 	
-	dataFrame <- xlcCall(object, "readNamedRegion", name, header, .jarray(classToXlcType(colTypes)),
+	dataFrame <- xlcWithAttributesCall(object, "readNamedRegion", name, header, .jarray(classToXlcType(colTypes)),
 		forceConversion, dateTimeFormat, useCachedValues, subset, readStrategy, worksheetScope %||% .jnull(),
 		.simplify = FALSE
 	)
