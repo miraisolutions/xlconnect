@@ -34,10 +34,10 @@ withAttributesFromJava <- function(jobj) {
     unwrapped <- jobj$getValue()
     
     allANames = .jcall(jobj, "[S", "getAttributeNames")
-    allAValues = .jcall(jobj, "[S", "getAttributeValues")
+    # allAValues = .jcall(jobj, "[S", "getAttributeValues")
     
     for(i in seq(along = allANames)) {
-        attr(unwrapped, allANames[i]) <- allAValues[i]
+        attr(unwrapped, allANames[i]) <- jobj$getAttributeValue(allANames[i])
     }
     unwrapped
   }
