@@ -26,7 +26,9 @@
 # Atomic objects are replicated as is, others are wrapped in a list as defined
 # by wrapList and then replicated
 # 
-# Author: Martin Studer, Mirai Solutions GmbH
+# Extracts attributes from a wrapper Java type and sets them on the R object.
+# 
+# Author: Martin Studer & Simon Poltier, Mirai Solutions GmbH
 #
 #############################################################################
 
@@ -39,8 +41,7 @@ xlcWithAttributesCall <- function(obj, fun, ..., .recycle = TRUE, .simplify = TR
       if(is.atomic(x)) x
       else wrapList(x)
     })
-    res = jTryCatch(do.call("mapply", args = c(FUN = f, args, SIMPLIFY = FALSE)))
-    definedNames <- names(res)[!is.na(names(res))]
+    res = jTryCatch(do.call("mapply", args = c(FUN = f, args, SIMPLIFY = FALSE, USE.NAMES = FALSE)))
     if(.simplify) {
       res_attr <- Reduce(function(atts1, atts2) {
         aNames <- unique(c(names(atts1), names(atts2)))
@@ -49,7 +50,6 @@ xlcWithAttributesCall <- function(obj, fun, ..., .recycle = TRUE, .simplify = TR
       res <- simplify2array(res)
       attributes(res) <- res_attr
     }
-    names(res) <- rep(definedNames, length.out = length(res))
   } else {
     res = jTryCatch(do.call(f, args))
   }
