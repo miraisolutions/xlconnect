@@ -103,7 +103,7 @@ test.writeAndReadNamedRegion <- function() {
 			stringsAsFactors = F
 	)
 	if(getOption("FULL.TEST.SUITE")) {
-	  cdf[["Column.H"]] <- rep(c(Sys.Date(), Sys.Date() + 236, NA), length = 10)
+	  cdf[["Column.H"]] <- rep(c(as.Date("2021-10-31") , as.Date("2022-06-24"), NA), length = 10)
 	  # NOTE: Column.I is automatically converted to POSIXct!!!
 	  cdf[["Column.I"]] <- rep(c(as.POSIXlt(Sys.time()), as.POSIXlt(Sys.time()) + 3523523, NA, as.POSIXlt(Sys.time()) + 838239), length = 10)
 	  cdf[["Column.J"]] <- rep(c(as.POSIXct(Sys.time()), as.POSIXct(Sys.time()) + 436322, NA, as.POSIXct(Sys.time()) - 1295022), length = 10)
