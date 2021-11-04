@@ -107,12 +107,15 @@ test.writeNamedRegionToFile <- function() {
 			"Column.E" = c(TRUE, TRUE, NA, NA, FALSE, FALSE, TRUE, NA, FALSE, TRUE),
 			"Column.F" = c("High", "Medium", "Low", "Low", "Low", NA, NA, "Medium", "High", "High"),
 			"Column.G" = c("High", "Medium", NA, "Low", "Low", "Medium", NA, "Medium", "High", "High"),
-			"Column.H" = rep(c(Sys.Date(), Sys.Date() + 236, NA), length = 10),
-			# NOTE: Column.I is automatically converted to POSIXct!!!
-			"Column.I" = rep(c(as.POSIXlt(Sys.time()), as.POSIXlt(Sys.time()) + 3523523, NA, as.POSIXlt(Sys.time()) + 838239), length = 10),
-			"Column.J" = rep(c(as.POSIXct(Sys.time()), as.POSIXct(Sys.time()) + 436322, NA, as.POSIXct(Sys.time()) - 1295022), length = 10),
+			"Column.H" = rep(c(1, NA), length = 10),
 			stringsAsFactors = F
 	)
+	if(getOption("FULL.TEST.SUITE")) {
+	  cdf[["Column.H"]] <- rep(c(Sys.Date(), Sys.Date() + 236, NA), length = 10)
+	  # NOTE: Column.I is automatically converted to POSIXct!!!
+	  cdf[["Column.I"]] <- rep(c(as.POSIXlt(Sys.time()), as.POSIXlt(Sys.time()) + 3523523, NA, as.POSIXlt(Sys.time()) + 838239), length = 10)
+	  cdf[["Column.J"]] <- rep(c(as.POSIXct(Sys.time()), as.POSIXct(Sys.time()) + 436322, NA, as.POSIXct(Sys.time()) - 1295022), length = 10)
+	}
 	cdf[["Column.F"]] <- factor(cdf[["Column.F"]])
 	cdf[["Column.F"]] <- ordered(cdf[["Column.F"]], levels = c("Low", "Medium", "High"))
 	
