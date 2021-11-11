@@ -66,7 +66,6 @@ setMethod("readNamedRegion",
 		# extract rownames
     dataFrame = extractRownames(dataFrame, rownames)
 	names(dataFrame) <- rep(name, length.out = length(dataFrame))
-    
     # simplify
     dataFrame =
     mapply(df = dataFrame, simplify = rep(simplify, length.out = length(dataFrame)), 
@@ -75,7 +74,6 @@ setMethod("readNamedRegion",
              else df
           }, SIMPLIFY = FALSE
     )
-		
 		# Return data.frame directly in case only one data.frame is read
 		if(length(dataFrame) == 1) dataFrame[[1]]
 		else dataFrame
