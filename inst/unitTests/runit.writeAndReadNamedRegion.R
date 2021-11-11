@@ -99,15 +99,13 @@ test.writeAndReadNamedRegion <- function() {
 			"Column.E" = c(TRUE, TRUE, NA, NA, FALSE, FALSE, TRUE, NA, FALSE, TRUE),
 			"Column.F" = c("High", "Medium", "Low", "Low", "Low", NA, NA, "Medium", "High", "High"),
 			"Column.G" = c("High", "Medium", NA, "Low", "Low", "Medium", NA, "Medium", "High", "High"),
-			"Column.H" = rep(c(1), length = 10),
+			"Column.H" = rep(c(as.Date("2021-10-30") , as.Date("2021-03-28"), NA), length = 10),
+			# NOTE: Column.I is automatically converted to POSIXct!!!
+			"Column.I" = rep(c(as.POSIXlt("2021-10-31 03:00:00"), as.POSIXlt(1582963631, origin="1970-01-01"), NA, as.POSIXlt("2001-12-31 23:59:59")), length = 10),
+			"Column.J" = rep(c(as.POSIXct("2021-10-31 03:00:00"), as.POSIXct(1582963631, origin="1970-01-01"), NA, as.POSIXct("2001-12-31 23:59:59")), length = 10),
 			stringsAsFactors = F
 	)
-	if(getOption("FULL.TEST.SUITE")) {
-	  cdf[["Column.H"]] <- rep(c(as.Date("2021-10-31") , as.Date("2022-06-24"), NA), length = 10)
-	  # NOTE: Column.I is automatically converted to POSIXct!!!
-	  cdf[["Column.I"]] <- rep(c(as.POSIXlt(Sys.time()), as.POSIXlt(Sys.time()) + 3523523, NA, as.POSIXlt(Sys.time()) + 838239), length = 10)
-	  cdf[["Column.J"]] <- rep(c(as.POSIXct(Sys.time()), as.POSIXct(Sys.time()) + 436322, NA, as.POSIXct(Sys.time()) - 1295022), length = 10)
-	}
+	
 	cdf[["Column.F"]] <- factor(cdf[["Column.F"]])
 	cdf[["Column.F"]] <- ordered(cdf[["Column.F"]], levels = c("Low", "Medium", "High"))
 	
