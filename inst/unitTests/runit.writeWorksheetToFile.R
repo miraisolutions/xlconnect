@@ -136,7 +136,7 @@ test.writeWorksheetToFile <- function() {
 		checkEquals(nrow(readWorksheetFromFile(file, sheet="cdfRegion")), 1)
 	}
 
-	# testClearSheets(file.xls, cdf)
-	# testClearSheets(file.xlsx, cdf)
+	testClearSheets(file.xls, cdf)
+	testClearSheets(file.xlsx, cdf)
 
 }
