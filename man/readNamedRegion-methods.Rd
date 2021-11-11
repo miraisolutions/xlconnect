@@ -87,7 +87,11 @@ multiple named regions can be read with one method call. If only one
 single named region is read, the return value is a \code{data.frame}.If
 multiple named regions are specified, the return value is a (named)
 \code{list} of \code{data.frame}'s returned in the order they have been
-specified with the argument \code{name}.
+specified with the argument \code{name}.\cr
+When reading dates, if your system uses a time zone that has / had daylight saving time,
+certain dates / timestamps will not be read exactly as they were written. See
+\url{https://poi.apache.org/apidocs/dev/org/apache/poi/ss/usermodel/DateUtil.html#getJavaDate-double-}
+
 }
 \references{
 What are named regions/ranges?\cr
