@@ -7,13 +7,13 @@
 %\VignetteDepends{ggplot2}
 %\VignetteDepends{zoo}
 % \usepackage{Sweave}
-\usepackage[utf8]{inputenc}
-\usepackage[colorlinks]{hyperref}
-\usepackage{datetime}
 
+\usepackage[utf8]{inputenc}
 % So that more colours can be used, not only the pre-defined ones
 % List of colours here: https://en.wikibooks.org/wiki/LaTeX/Colors
-\usepackage[usenames,dvipsnames]{color}
+\usepackage[dvipsnames]{xcolor}
+\usepackage[colorlinks]{hyperref}
+\usepackage{datetime}
 
 % To get URLs in a normal font, by using \urlwofont
 \usepackage{url}
