@@ -1,12 +1,17 @@
 XLConnect News
 --------------
+
+1.0.6 ???
+  * Fix building of vignettes (#154)
+
 1.0.5 2021-09-30
   * Support java 17
+
 1.0.4 2021-07-29
   * Extend support to java 16
   * Download missing dependency for POI 4.1.2
-  * fix java version parsing
-  * fix onLoad failing in Windows
+  * Fix java version parsing
+  * Fix onLoad failing in Windows
 
 1.0.3 2021-04-09
   * Fix DST related date parsing bug
@@ -14,9 +19,9 @@ XLConnect News
   
 1.0.2 2021-02-11
   * Increase compatibility up to java 15
-  * fix missing jar dependency: poi-ooxml-schemas.jar
-  * resolve existing shared jars via package manager instead of via the file system
-  * upgrade java dependencies: commons compress (1.20) and commons codec (1.15)
+  * Fix missing jar dependency: poi-ooxml-schemas.jar
+  * Resolve existing shared jars via package manager instead of via the file system
+  * Upgrade java dependencies: commons compress (1.20) and commons codec (1.15)
 
 1.0.1 2020-03-20
   * Add java version check
