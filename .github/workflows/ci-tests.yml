@@ -69,7 +69,7 @@ jobs:
       R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
       XLCONNECT_JAVA_REPO_URL: ${{ matrix.config.xlc-repo }}
       RSPM: ${{ matrix.config.pkgrepo }}
-      JAVA_TOOL_OPTIONS: "-Dlog4j.formatMsgNoLookups=true"
+      # JAVA_TOOL_OPTIONS: "-Dlog4j.formatMsgNoLookups=true"
 
     steps:
       - uses: actions/checkout@v2
@@ -102,6 +102,10 @@ jobs:
       - name: print effective R version
         run: version
         shell: Rscript {0}
+      
+      - name: test additional java env var
+        if: java == '17'
+        run: echo '_JAVA_OPTIONS=-Xmx1024M' >> $GITHUB_ENV
 
       - name: run javareconf # Yes it actually needs JAVA_HOME=$JAVA_HOME, doesn't use actual env vars (!)
         if: runner.os != 'Windows'
@@ -113,9 +117,7 @@ jobs:
       
       - name: effective java version # Yes it actually needs JAVA_HOME=$JAVA_HOME, doesn't use actual env vars (!)
         if: runner.os == 'Windows'
-        run: | # we also test java version parsing with additional env vars
-          java -version
-          echo 'JAVA_TOOL_OPTIONS="-Dlog4j.formatMsgNoLookups=true"' >> $GITHUB_ENV
+        run: java -version
 
       - name: Query dependencies
         run: |
