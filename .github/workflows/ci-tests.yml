@@ -112,7 +112,9 @@ jobs:
       
       - name: effective java version # Yes it actually needs JAVA_HOME=$JAVA_HOME, doesn't use actual env vars (!)
         if: runner.os == 'Windows'
-        run: java -version
+        run: | # we also test java version parsing with additional env vars
+          java -version
+          echo 'JAVA_TOOL_OPTIONS=-Dlog4j.formatMsgNoLookups=true' >> $GITHUB_ENV
 
       - name: Query dependencies
         run: |
