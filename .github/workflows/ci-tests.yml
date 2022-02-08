@@ -69,6 +69,7 @@ jobs:
       R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
       XLCONNECT_JAVA_REPO_URL: ${{ matrix.config.xlc-repo }}
       RSPM: ${{ matrix.config.pkgrepo }}
+      JAVA_TOOL_OPTIONS: "-Dlog4j.formatMsgNoLookups=true"
 
     steps:
       - uses: actions/checkout@v2
@@ -114,7 +115,7 @@ jobs:
         if: runner.os == 'Windows'
         run: | # we also test java version parsing with additional env vars
           java -version
-          echo 'JAVA_TOOL_OPTIONS=-Dlog4j.formatMsgNoLookups=true' >> $GITHUB_ENV
+          echo 'JAVA_TOOL_OPTIONS="-Dlog4j.formatMsgNoLookups=true"' >> $GITHUB_ENV
 
       - name: Query dependencies
         run: |
