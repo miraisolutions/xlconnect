@@ -69,7 +69,6 @@ jobs:
       R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
       XLCONNECT_JAVA_REPO_URL: ${{ matrix.config.xlc-repo }}
       RSPM: ${{ matrix.config.pkgrepo }}
-      # JAVA_TOOL_OPTIONS: "-Dlog4j.formatMsgNoLookups=true"
 
     steps:
       - uses: actions/checkout@v2
