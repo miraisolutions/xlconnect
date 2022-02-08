@@ -29,9 +29,9 @@
 .onLoad <- function(libname, pkgname) {
   
   javaCheck <- function() {
-    # Java version check, without .jinit (we do .jpackage after downloading resources)
+    # Java version check, without initializing rJava (we can only do .jpackage(...) after downloading resources below)
     rawVersion <- system2("java", c("-version"), stdout = TRUE, stderr = TRUE)
-    versionLines <- rawVersion[!grepl("Picked up", rawVersion)]
+    versionLines <- rawVersion[!grepl("Picked up", rawVersion)] # ignore java environment variables being logged
     jv <- regmatches(versionLines[1], regexpr("[0-9\\.]+", versionLines[1]))
     if (nchar(jv)<1) {
       stop(paste0("unable to parse java version from", paste0(versionLines, collapse=" "), "; is java installed correctly ?"))
