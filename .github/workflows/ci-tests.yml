@@ -104,7 +104,7 @@ jobs:
         shell: Rscript {0}
       
       - name: test additional java env var
-        if: java == '17'
+        if: matrix.config.java == '17'
         run: echo '_JAVA_OPTIONS=-Xmx1024M' >> $GITHUB_ENV
 
       - name: run javareconf # Yes it actually needs JAVA_HOME=$JAVA_HOME, doesn't use actual env vars (!)
