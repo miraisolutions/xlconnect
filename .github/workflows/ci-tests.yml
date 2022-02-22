@@ -38,6 +38,7 @@ jobs:
             r-version: release
             java: 11
             vignettes: true
+            xlc-repo: https://jcenter.bintray.com
             timezone-name: Asia/Kathmandu
           - os-name: ubuntu # windows-2019, macos-10.15]
             os-version: "18.04"
