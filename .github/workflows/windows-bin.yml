@@ -60,18 +60,23 @@ jobs:
       - name: effective java version # Yes it actually needs JAVA_HOME=$JAVA_HOME, doesn't use actual env vars (!)
         run: java -version
 
-      - name: Query dependencies
-        run: |
-          install.packages('remotes')
-          saveRDS(remotes::dev_package_deps(dependencies = TRUE), ".github/depends.Rds", version = 2)
-          writeLines(sprintf("R-%i.%i", getRversion()$major, getRversion()$minor), ".github/R-version")
-        shell: Rscript {0}
+      - name: Install and cache dependencies
+        uses: r-lib/actions/setup-r-dependencies@v2
+        with:
+          extra-packages: any::devtools
 
-      - name: Install dependencies
-        run: |
-          remotes::install_deps(dependencies = TRUE)
-          remotes::install_cran("devtools")
-        shell: Rscript {0}
+      # - name: Query dependencies
+      #   run: |
+      #     install.packages('remotes')
+      #     saveRDS(remotes::dev_package_deps(dependencies = TRUE), ".github/depends.Rds", version = 2)
+      #     writeLines(sprintf("R-%i.%i", getRversion()$major, getRversion()$minor), ".github/R-version")
+      #   shell: Rscript {0}
+      # 
+      # - name: Install dependencies
+      #   run: |
+      #     remotes::install_deps(dependencies = TRUE)
+      #     remotes::install_cran("devtools")
+      #   shell: Rscript {0}
 
       - name: Session info
         run: |
