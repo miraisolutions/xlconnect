@@ -210,8 +210,8 @@ jobs:
         with:
           args: 'c("--no-manual", "--no-vignettes", "--no-build-vignettes", "--check-subdirs=no", "--no-multiarch")'
           build_args: 'c("--no-build-vignettes")'
-          error-on: error
-          # check_dir: check # default provided by check-r-package
+          error-on: '"error"'
+          # check_dir: '"check"' # default provided by check-r-package
         env:
           # _R_CHECK_CRAN_INCOMING_: false # default provided by check-r-package
           FULL_TEST_SUITE: 1
@@ -222,8 +222,8 @@ jobs:
         with:
           args: 'c("--no-manual", "--no-vignettes", "--no-build-vignettes", "--check-subdirs=no")'
           build_args: 'c("--no-build-vignettes")'
-          error-on: error
-          # check_dir: check # default provided by check-r-package
+          error-on: '"error"'
+          # check_dir: '"check"' # default provided by check-r-package
         env:
           # _R_CHECK_CRAN_INCOMING_: false # default provided by check-r-package
           FULL_TEST_SUITE: 1
@@ -249,8 +249,8 @@ jobs:
         with:
           args: 'c("--as-cran")'
           build_args: 'c("--compact-vignettes=gs+qpdf")'
-          # error-on: warning # default provided by check-r-package
-          # check_dir: check # default provided by check-r-package
+          # error-on: '"warning"' # default provided by check-r-package
+          # check_dir: '"check"' # default provided by check-r-package
         env:
           # _R_CHECK_CRAN_INCOMING_: false # default provided by check-r-package
           FULL_TEST_SUITE: 1
