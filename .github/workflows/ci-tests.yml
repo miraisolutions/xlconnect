@@ -133,6 +133,7 @@ jobs:
           extra-packages: |
             any::covr
             any::rcmdcheck
+            any::remotes
 
       # - name: Cache R packages
       #   if: runner.os != 'Windows'
