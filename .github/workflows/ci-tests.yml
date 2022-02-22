@@ -3,7 +3,7 @@
 # separate terms of service, privacy policy, and support
 # documentation.
 #
-# See https://github.com/r-lib/actions/tree/master/examples#readme for
+# See https://github.com/r-lib/actions/tree/v2/examples#readme for
 # additional example workflows available for the R community.
 
 name: R
@@ -94,7 +94,7 @@ jobs:
         if: matrix.config.os-name != 'macos'
 
       - name: Set up R ${{ matrix.config.r-version }}
-        uses: r-lib/actions/setup-r@master
+        uses: r-lib/actions/setup-r@v2
         with:
           r-version: ${{ matrix.config.r-version }}
 
@@ -135,7 +135,7 @@ jobs:
 
       - name: Install tinytex
         if: matrix.config.vignettes
-        uses: r-lib/actions/setup-tinytex@v1
+        uses: r-lib/actions/setup-tinytex@v2
 
       - name: Install extra Tex packages
         if: matrix.config.vignettes
