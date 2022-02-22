@@ -207,6 +207,7 @@ jobs:
       - name: Check without doc
         if: ${{!matrix.config.vignettes}} && matrix.config.os-name == 'windows'
         uses: r-lib/actions/check-r-package@v2
+        with:
           args: 'c("--no-manual", "--no-vignettes", "--no-build-vignettes", "--check-subdirs=no", "--no-multiarch")'
           build_args: 'c("--no-build-vignettes")'
           error-on: "error"
@@ -218,6 +219,7 @@ jobs:
       - name: Check without doc
         if: ${{!matrix.config.vignettes}} && matrix.config.os-name != 'windows'
         uses: r-lib/actions/check-r-package@v2
+        with:
           args: 'c("--no-manual", "--no-vignettes", "--no-build-vignettes", "--check-subdirs=no")'
           build_args: 'c("--no-build-vignettes")'
           error-on: "error"
@@ -244,6 +246,7 @@ jobs:
       - name: Check with doc
         if: matrix.config.vignettes
         uses: r-lib/actions/check-r-package@v2
+        with:
           args: 'c("--as-cran")'
           build_args: 'c("--compact-vignettes=gs+qpdf")'
           # error-on: "warning" # default provided by check-r-package
