@@ -148,14 +148,14 @@ jobs:
           tinytex:::install_yihui_pkgs()
         shell: Rscript {0}
 
-      - name: Install system dependencies
-        if: runner.os == 'Linux'
-        run: |
-          sudo apt-get install libcurl4-openssl-dev
-          while read -r cmd
-          do
-            eval sudo $cmd
-          done < <(Rscript -e 'writeLines(remotes::system_requirements("${{ matrix.config.os-name }}", "${{ matrix.config.os-version }}"))')
+      # - name: Install system dependencies
+      #   if: runner.os == 'Linux'
+      #   run: |
+      #     sudo apt-get install libcurl4-openssl-dev
+      #     while read -r cmd
+      #     do
+      #       eval sudo $cmd
+      #     done < <(Rscript -e 'writeLines(remotes::system_requirements("${{ matrix.config.os-name }}", "${{ matrix.config.os-version }}"))')
       
       - name: Install PDF system dependencies
         if: runner.os == 'Linux' && matrix.config.vignettes
