@@ -161,66 +161,66 @@ jobs:
         with:
           timezoneWindows: ${{ matrix.config.timezone-name }}
 
-      # - name: Check without doc
-      #   if: ${{!matrix.config.vignettes && matrix.config.os-name == 'windows'}}
-      #   uses: r-lib/actions/check-r-package@v2
-      #   with:
-      #     args: 'c("--no-manual", "--no-vignettes", "--no-build-vignettes", "--check-subdirs=no", "--no-multiarch")'
-      #     build_args: 'c("--no-build-vignettes")'
-      #     error-on: '"error"'
-      #     # check_dir: '"check"' # default provided by check-r-package
-      #   env:
-      #     # _R_CHECK_CRAN_INCOMING_: false # default provided by check-r-package
-      #     FULL_TEST_SUITE: 1
-      # 
-      # - name: Check without doc
-      #   if: ${{!matrix.config.vignettes && matrix.config.os-name != 'windows'}}
-      #   uses: r-lib/actions/check-r-package@v2
-      #   with:
-      #     args: 'c("--no-manual", "--no-vignettes", "--no-build-vignettes", "--check-subdirs=no")'
-      #     build_args: 'c("--no-build-vignettes")'
-      #     error-on: '"error"'
-      #     # check_dir: '"check"' # default provided by check-r-package
-      #   env:
-      #     # _R_CHECK_CRAN_INCOMING_: false # default provided by check-r-package
-      #     FULL_TEST_SUITE: 1
+      - name: Check without doc
+        if: ${{!matrix.config.vignettes && matrix.config.os-name == 'windows'}}
+        uses: r-lib/actions/check-r-package@v2
+        with:
+          args: 'c("--no-manual", "--no-vignettes", "--no-build-vignettes", "--check-subdirs=no", "--no-multiarch")'
+          build_args: 'c("--no-build-vignettes")'
+          error-on: '"error"'
+          # check_dir: '"check"' # default provided by check-r-package
+        env:
+          # _R_CHECK_CRAN_INCOMING_: false # default provided by check-r-package
+          FULL_TEST_SUITE: 1
 
       - name: Check without doc
-        if: ${{!matrix.config.vignettes}}
+        if: ${{!matrix.config.vignettes && matrix.config.os-name != 'windows'}}
+        uses: r-lib/actions/check-r-package@v2
+        with:
+          args: 'c("--no-manual", "--no-vignettes", "--no-build-vignettes", "--check-subdirs=no")'
+          build_args: 'c("--no-build-vignettes")'
+          error-on: '"error"'
+          # check_dir: '"check"' # default provided by check-r-package
         env:
-          _R_CHECK_CRAN_INCOMING_: false
+          # _R_CHECK_CRAN_INCOMING_: false # default provided by check-r-package
           FULL_TEST_SUITE: 1
-        run: |-
-            paste0("java home in R: ", Sys.getenv("JAVA_HOME"))
-            check_args <- if("${{matrix.config.os-name}}" == "windows") {
-              c("--no-manual", "--no-vignettes", "--no-build-vignettes", "--check-subdirs=no", "--no-multiarch")
-            } else {
-              c("--no-manual", "--no-vignettes", "--no-build-vignettes", "--check-subdirs=no")
-            }
-            rcmdcheck::rcmdcheck(args = check_args, build_args=c("--no-build-vignettes"), error_on = "error", check_dir = "check")
-        shell: Rscript {0}
-      
-      # - name: Check with doc
-      #   if: matrix.config.vignettes
-      #   uses: r-lib/actions/check-r-package@v2
-      #   with:
-      #     args: 'c("--as-cran")'
-      #     build_args: 'c("--compact-vignettes=gs+qpdf")'
-      #     # error-on: '"warning"' # default provided by check-r-package
-      #     # check_dir: '"check"' # default provided by check-r-package
-      #   env:
-      #     # _R_CHECK_CRAN_INCOMING_: false # default provided by check-r-package
-      #     FULL_TEST_SUITE: 1
 
+      # - name: Check without doc
+      #   if: ${{!matrix.config.vignettes}}
+      #   env:
+      #     _R_CHECK_CRAN_INCOMING_: false
+      #     FULL_TEST_SUITE: 1
+      #   run: |-
+      #       paste0("java home in R: ", Sys.getenv("JAVA_HOME"))
+      #       check_args <- if("${{matrix.config.os-name}}" == "windows") {
+      #         c("--no-manual", "--no-vignettes", "--no-build-vignettes", "--check-subdirs=no", "--no-multiarch")
+      #       } else {
+      #         c("--no-manual", "--no-vignettes", "--no-build-vignettes", "--check-subdirs=no")
+      #       }
+      #       rcmdcheck::rcmdcheck(args = check_args, build_args=c("--no-build-vignettes"), error_on = "error", check_dir = "check")
+      #   shell: Rscript {0}
+      
       - name: Check with doc
         if: matrix.config.vignettes
+        uses: r-lib/actions/check-r-package@v2
+        with:
+          args: 'c("--as-cran")'
+          build_args: 'c("--compact-vignettes=gs+qpdf")'
+          # error-on: '"warning"' # default provided by check-r-package
+          # check_dir: '"check"' # default provided by check-r-package
         env:
-          _R_CHECK_CRAN_INCOMING_: false
+          # _R_CHECK_CRAN_INCOMING_: false # default provided by check-r-package
           FULL_TEST_SUITE: 1
-        run: >-
-          rcmdcheck::rcmdcheck(args = c("--as-cran"),
-          build_args=c("--compact-vignettes=gs+qpdf"), error_on = "warning", check_dir = "check")
-        shell: Rscript {0}
+
+      # - name: Check with doc
+      #   if: matrix.config.vignettes
+      #   env:
+      #     _R_CHECK_CRAN_INCOMING_: false
+      #     FULL_TEST_SUITE: 1
+      #   run: >-
+      #     rcmdcheck::rcmdcheck(args = c("--as-cran"),
+      #     build_args=c("--compact-vignettes=gs+qpdf"), error_on = "warning", check_dir = "check")
+      #   shell: Rscript {0}
 
       - name: run complete test suite # some tests are not run in r check, as test xls(x) files are Rbuild-ignored
         if: always()
