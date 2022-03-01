@@ -108,13 +108,6 @@ jobs:
         if: runner.os == 'Windows'
         run: java -version
 
-      # - name: Query dependencies
-      #   run: |
-      #     install.packages('remotes', repos=getOption('repos')[['CRAN']])
-      #     saveRDS(remotes::dev_package_deps(dependencies = TRUE), ".github/depends.Rds", version = 2)
-      #     writeLines(sprintf("R-%i.%i", getRversion()$major, getRversion()$minor), ".github/R-version")
-      #   shell: Rscript {0}
-
       - name: Install and cache dependencies
         uses: r-lib/actions/setup-r-dependencies@v2
         with:
@@ -122,14 +115,6 @@ jobs:
             any::covr
             any::rcmdcheck
             any::remotes
-
-      # - name: Cache R packages
-      #   if: runner.os != 'Windows'
-      #   uses: actions/cache@v2
-      #   with:
-      #     path: ${{ env.R_LIBS_USER }}
-      #     key: ${{ runner.os }}-${{ hashFiles('.github/R-version') }}-1-${{ hashFiles('.github/depends.Rds') }}${{matrix.config.pkgrepo}}
-      #     restore-keys: ${{ runner.os }}-${{ hashFiles('.github/R-version') }}-1-
 
       - name: Install tinytex
         if: matrix.config.vignettes
@@ -148,26 +133,10 @@ jobs:
           tinytex:::install_yihui_pkgs()
         shell: Rscript {0}
 
-      # - name: Install system dependencies
-      #   if: runner.os == 'Linux'
-      #   run: |
-      #     sudo apt-get install libcurl4-openssl-dev
-      #     while read -r cmd
-      #     do
-      #       eval sudo $cmd
-      #     done < <(Rscript -e 'writeLines(remotes::system_requirements("${{ matrix.config.os-name }}", "${{ matrix.config.os-version }}"))')
-      
       - name: Install PDF system dependencies
         if: runner.os == 'Linux' && matrix.config.vignettes
         run: | 
           sudo apt-get install -y qpdf ghostscript
-
-      # - name: Install dependencies
-      #   run: |
-      #     remotes::install_cran("covr")
-      #     remotes::install_deps(dependencies = TRUE, repos=getOption('repos')[['RSPM']])
-      #     remotes::install_cran("rcmdcheck")
-      #   shell: Rscript {0}
 
       - name: Session info
         run: |
