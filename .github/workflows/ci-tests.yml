@@ -138,7 +138,7 @@ jobs:
       - name: Install extra Tex packages
         if: matrix.config.vignettes
         run: |
-          pak::pkg_install('tinytex', repos=getOption('repos')[['RSPM']])
+          pak::pkg_install('tinytex')
           library(tinytex)
           tlmgr_install('datetime') 
           tlmgr_install('inputenc')
