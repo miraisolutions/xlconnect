@@ -165,9 +165,8 @@ jobs:
         if: ${{!matrix.config.vignettes && matrix.config.os-name == 'windows'}}
         uses: r-lib/actions/check-r-package@v2
         with:
-          args: >-
-            'c("--no-manual", "--no-vignettes", "--no-build-vignettes", "--check-subdirs=no",
-            "--no-multiarch"["${{matrix.config.os-name}}" == "windows"])'
+          args: 'c("--no-manual", "--no-vignettes", "--no-build-vignettes", "--check-subdirs=no",
+                   "--no-multiarch"["${{matrix.config.os-name}}" == "windows"])'
           build_args: 'c("--no-build-vignettes")'
           error-on: '"error"'
         env:
