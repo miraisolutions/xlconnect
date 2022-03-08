@@ -97,7 +97,7 @@ jobs:
         shell: Rscript {0}
 
       - name: test additional java env var
-        if: matrix.config.java > 8 # covering with / without the var being present
+        if: ${{!matrix.config.vignettes}} # covering with / without the var being present
         run: echo 'JAVA_TOOL_OPTIONS="-Dlog4j.formatMsgNoLookups=true"' >> $GITHUB_ENV
 
       - name: run javareconf # Yes it actually needs JAVA_HOME=$JAVA_HOME, doesn't use actual env vars (!)
