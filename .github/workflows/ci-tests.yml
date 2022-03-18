@@ -12,7 +12,7 @@ on:
   push:
     branches: [ master ]
   pull_request:
-    branches: [ master ]
+    branches: [ master, feature/#159-switch-to-rlib-actions-v2 ]
   schedule:
     - cron: '12 23 13,28 * *'
 
