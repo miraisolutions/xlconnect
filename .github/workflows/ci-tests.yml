@@ -167,7 +167,7 @@ jobs:
           timezoneWindows: ${{ matrix.config.timezone-name }}
 
       - name: Check without doc
-        if: ${{!matrix.config.vignettes && matrix.config.os-name == 'windows'}}
+        if: ${{!matrix.config.vignettes}}
         uses: r-lib/actions/check-r-package@v2
         with:
           args: 'c("--no-manual", "--no-vignettes", "--no-build-vignettes", "--check-subdirs=no",
