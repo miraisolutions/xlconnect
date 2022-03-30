@@ -23,47 +23,47 @@
 # Tests whether data.frame's pushed and pulled to/from Java
 # are consistent (with respect to some defined differences;
 # see 'normalizeDataframe')
-# 
+#
 # Author: Martin Studer, Mirai Solutions GmbH
 #
 #############################################################################
 
 test.dataframeConversion <- function() {
-	
+
 	testDataFrame <- function(df) {
 		res <- XLConnect:::dataframeFromJava(XLConnect:::dataframeToJava(df), check.names = TRUE)
 		checkEquals(normalizeDataframe(df), res, check.attributes = FALSE, check.names = TRUE)
 	}
-	
+
 	if(getOption("FULL.TEST.SUITE")) {
 		# built-in dataset mtcars
 		testDataFrame(mtcars)
-		
+
 		# built-in dataset airquality
 		testDataFrame(airquality)
-		
+
 		# built-in dataset attenu
 		testDataFrame(attenu)
-		
+
 		# built-in dataset ChickWeight
 		testDataFrame(ChickWeight)
-		
+
 		# built-in dataset CO2
 		testDataFrame(CO2)
-		
+
 		# built-in dataset iris
 		testDataFrame(iris)
-		
+
 		# built-in dataset longley
 		testDataFrame(longley)
-		
+
 		# built-in dataset morley
 		testDataFrame(morley)
-		
+
 		# built-in dataset swiss
 		testDataFrame(swiss)
 	}
-	
+
 	# custom test dataset
 	cdf <- data.frame(
 			"Column.A" = c(1, 2, 3, NA, 5, Inf, 7, 8, NA, 10),
@@ -76,18 +76,19 @@ test.dataframeConversion <- function() {
 			"Column.H" = rep(c(as.Date("2021-10-30") , as.Date("2021-03-28"), NA), length = 10),
 			# NOTE: Column.I is automatically converted to POSIXct!!!
 			"Column.I" = rep(c(as.POSIXlt("2021-10-31 03:00:00"), as.POSIXlt(1582963631, origin="1970-01-01"), NA, as.POSIXlt("2001-12-31 23:59:59")), length = 10),
+			# NOTE: 1582963631 with origin="1970-01-01" corresponds to 2020 Feb 29
 			"Column.J" = rep(c(as.POSIXct("2021-10-31 03:00:00"), as.POSIXct(1582963631, origin="1970-01-01"), NA, as.POSIXct("2001-12-31 23:59:59")), length = 10),
 			stringsAsFactors = F
 	)
 	cdf[["Column.F"]] <- factor(cdf[["Column.F"]])
 	cdf[["Column.F"]] <- ordered(cdf[["Column.F"]], levels = c("Low", "Medium", "High"))
-	
+
 	testDataFrame(cdf)
-	
+
 	# Check that when being supplied with an object that is not coercable
 	# into a data.frame, an appropriate exception is thrown
 	checkException(XLConnect:::dataframeToJava(search))
-	
+
 	# Check that exceptions are thrown when calling dataframeFromJava
 	# with inappropriate objects
 	checkException(XLConnect:::dataframeFromJava(NULL))
