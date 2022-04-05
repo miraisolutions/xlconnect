@@ -1,7 +1,7 @@
 Package: XLConnect
 Type: Package
 Title: Excel Connector for R
-Version: 1.0.4
+Version: 1.0.6.9999
 Authors@R: c(person("Mirai Solutions GmbH", role = "aut",
                     email = "xlconnect@mirai-solutions.com"),
              person("Martin", "Studer", role = "cre",
@@ -14,7 +14,7 @@ Authors@R: c(person("Mirai Solutions GmbH", role = "aut",
                    comment = "SparseBitSet Java library"))
 URL: https://mirai-solutions.ch https://github.com/miraisolutions/xlconnect
 BugReports: https://github.com/miraisolutions/xlconnect/issues
-SystemRequirements: Java (>= 8, <= 16)
+SystemRequirements: Java (>= 8, <= 17)
 Depends: R (>= 3.6.0)
 Imports: methods, rJava (>= 1.0-1)
 Suggests: RUnit, lattice, ggplot2 (>= 0.9.3), zoo

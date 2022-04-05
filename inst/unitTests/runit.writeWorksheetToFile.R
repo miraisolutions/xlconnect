@@ -29,7 +29,7 @@
 #############################################################################
 
 test.writeWorksheetToFile <- function() {
-	
+
 	# Create workbooks
         file.xls <- "testWriteWorksheetToFileWorkbook.xls"
         file.xlsx <- "testWriteWorksheetToFileWorkbook.xlsx"
@@ -41,64 +41,64 @@ test.writeWorksheetToFile <- function() {
         if(file.exists(file.xlsx)) {
           file.remove(file.xlsx)
         }
-	
+
 	testDataFrame <- function(file, df) {
 		worksheet <- deparse(substitute(df))
                 print(paste("Writing dataset ", worksheet, "to file", file))
                 name <- paste(worksheet, "Region", sep="")
 		writeWorksheetToFile(file, data=df, sheet=name)
-		res <- readWorksheetFromFile(file, sheet=name)                
+		res <- readWorksheetFromFile(file, sheet=name)
                 checkEquals(normalizeDataframe(df), res, check.attributes = FALSE, check.names = TRUE)
         }
-	
+
 	if(getOption("FULL.TEST.SUITE")) {
 		# built-in dataset mtcars (*.xls)
 		testDataFrame(file.xls, mtcars)
 		# built-in dataset mtcars (*.xlsx)
 		testDataFrame(file.xlsx, mtcars)
-		
+
 		# built-in dataset airquality (*.xls)
 		testDataFrame(file.xls, airquality)
 		# built-in dataset airquality (*.xlsx)
 		testDataFrame(file.xlsx, airquality)
-		
+
 		# built-in dataset attenu (*.xls)
 		testDataFrame(file.xls, attenu)
 		# built-in dataset attenu (*.xlsx)
 		testDataFrame(file.xlsx, attenu)
-		
+
 		# built-in dataset ChickWeight (*.xls)
 		testDataFrame(file.xls, ChickWeight)
 		# built-in dataset ChickWeight (*.xlsx)
 		testDataFrame(file.xlsx, ChickWeight)
-		
+
 		CO = CO2 # CO2 seems to be an illegal name
 		# built-in dataset CO2 (*.xls)
 		testDataFrame(file.xls, CO2)
 		# built-in dataset CO2 (*.xlsx)
 		testDataFrame(file.xlsx, CO2)
-		
+
 		# built-in dataset iris (*.xls)
 		testDataFrame(file.xls, iris)
 		# built-in dataset iris (*.xlsx)
 		testDataFrame(file.xlsx, iris)
-		
+
 		# built-in dataset longley (*.xls)
 		testDataFrame(file.xls, longley)
 		# built-in dataset longley (*.xlsx)
 		testDataFrame(file.xlsx, longley)
-		
+
 		# built-in dataset morley (*.xls)
 		testDataFrame(file.xls, morley)
 		# built-in dataset morley (*.xlsx)
 		testDataFrame(file.xlsx, morley)
-		
+
 		# built-in dataset swiss (*.xls)
 		testDataFrame(file.xls, swiss)
 		# built-in dataset swiss (*.xlsx)
 		testDataFrame(file.xlsx, swiss)
 	}
-	
+
 	# custom test dataset
 	cdf <- data.frame(
 			"Column.A" = c(1, 2, 3, NA, 5, 6, 7, 8, NA, 10),
@@ -108,29 +108,30 @@ test.writeWorksheetToFile <- function() {
 			"Column.E" = c(TRUE, TRUE, NA, NA, FALSE, FALSE, TRUE, NA, FALSE, TRUE),
 			"Column.F" = c("High", "Medium", "Low", "Low", "Low", NA, NA, "Medium", "High", "High"),
 			"Column.G" = c("High", "Medium", NA, "Low", "Low", "Medium", NA, "Medium", "High", "High"),
-			"Column.H" = rep(c(Sys.Date(), Sys.Date() + 236, NA), length = 10),
+			"Column.H" = rep(c(as.Date("2021-10-30") , as.Date("2021-03-28"), NA), length = 10),
 			# NOTE: Column.I is automatically converted to POSIXct!!!
-			"Column.I" = rep(c(as.POSIXlt(Sys.time()), as.POSIXlt(Sys.time()) + 3523523, NA, as.POSIXlt(Sys.time()) + 838239), length = 10),
-			"Column.J" = rep(c(as.POSIXct(Sys.time()), as.POSIXct(Sys.time()) + 436322, NA, as.POSIXct(Sys.time()) - 1295022), length = 10),
+			"Column.I" = rep(c(as.POSIXlt("2021-10-31 03:00:00"), as.POSIXlt(1582963631, origin="1970-01-01"), NA, as.POSIXlt("2001-12-31 23:59:59")), length = 10),
+			# NOTE: 1582963631 with origin="1970-01-01" corresponds to 2020 Feb 29
+			"Column.J" = rep(c(as.POSIXct("2021-10-31 03:00:00"), as.POSIXct(1582963631, origin="1970-01-01"), NA, as.POSIXct("2001-12-31 23:59:59")), length = 10),
 			stringsAsFactors = FALSE
 	)
 	cdf[["Column.F"]] <- factor(cdf[["Column.F"]])
 	cdf[["Column.F"]] <- ordered(cdf[["Column.F"]], levels = c("Low", "Medium", "High"))
-	
+
 	# (*.xls)
 	testDataFrame(file.xls, cdf)
 	# (*.xlsx)
-	testDataFrame(file.xlsx, cdf)	
+	testDataFrame(file.xlsx, cdf)
 
         # test clearSheets
         testClearSheets <- function(file, df) {
 		df.short <- df[1,]
 
-		# overwrite sheet with shorter version 
+		# overwrite sheet with shorter version
 		writeWorksheetToFile(file, data=c(df.short), sheet="cdfRegion")
 		# default behaviour: not cleared
 		checkEquals(nrow(readWorksheetFromFile(file, sheet="cdfRegion")), nrow(df))
-		# overwrite sheet with shorter version 
+		# overwrite sheet with shorter version
 		writeWorksheetToFile(file, data=c(df.short), sheet="cdfRegion", clearSheets=TRUE)
 		# should be cleared
 		checkEquals(nrow(readWorksheetFromFile(file, sheet="cdfRegion")), 1)

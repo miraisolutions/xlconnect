@@ -22,73 +22,73 @@
 #
 # Tests for checking equality of data.frame's being written to and read
 # from Excel worksheets
-# 
+#
 # Author: Martin Studer, Mirai Solutions GmbH
 #
 #############################################################################
 
 test.workbook.writeAndReadWorksheet <- function() {
-	
+
 	# Create workbooks
 	wb.xls <- loadWorkbook(rsrc("resources/testWriteAndReadWorksheet.xls"), create = TRUE)
 	wb.xlsx <- loadWorkbook(rsrc("resources/testWriteAndReadWorksheet.xlsx"), create = TRUE)
-	
+
 	testDataFrame <- function(wb, df, startRow, startCol) {
 		worksheet <- deparse(substitute(df))
 		createSheet(wb, worksheet)
 		writeWorksheet(wb, df, worksheet, startRow = startRow, startCol = startCol)
 		res <- readWorksheet(wb, worksheet, startRow = startRow, startCol = startCol,
-				endRow = 0, endCol = 0)	
+				endRow = 0, endCol = 0)
 		checkEquals(normalizeDataframe(df), res, check.attributes = FALSE, check.names = TRUE)
 	}
-	
+
 	if(getOption("FULL.TEST.SUITE")) {
 		# built-in dataset mtcars (*.xls)
 		testDataFrame(wb.xls, mtcars, 8, 13)
 		# built-in dataset mtcars (*.xlsx)
 		testDataFrame(wb.xlsx, mtcars, 8, 13)
-		
+
 		# built-in dataset airquality (*.xls)
 		testDataFrame(wb.xls, airquality, 2, 9)
 		# built-in dataset airquality (*.xlsx)
 		testDataFrame(wb.xlsx, airquality, 2, 9)
-		
+
 		# built-in dataset attenu (*.xls)
 		testDataFrame(wb.xls, attenu, 7, 1)
 		# built-in dataset attenu (*.xlsx)
 		testDataFrame(wb.xlsx, attenu, 7, 1)
-		
+
 		# built-in dataset ChickWeight (*.xls)
 		testDataFrame(wb.xls, ChickWeight, 8, 8)
 		# built-in dataset ChickWeight (*.xlsx)
 		testDataFrame(wb.xlsx, ChickWeight, 8, 8)
-		
+
 		# built-in dataset CO2 (*.xls)
 		testDataFrame(wb.xls, CO2, 100, 12)
 		# built-in dataset CO2 (*.xlsx)
 		testDataFrame(wb.xlsx, CO2, 100, 12)
-		
+
 		# built-in dataset iris (*.xls)
 		testDataFrame(wb.xls, iris, 1, 1)
 		# built-in dataset iris (*.xlsx)
 		testDataFrame(wb.xlsx, iris, 1, 1)
-		
+
 		# built-in dataset longley (*.xls)
 		testDataFrame(wb.xls, longley, 5, 214)
 		# built-in dataset longley (*.xlsx)
 		testDataFrame(wb.xlsx, longley, 5, 214)
-		
+
 		# built-in dataset morley (*.xls)
 		testDataFrame(wb.xls, morley, 1000, 6)
 		# built-in dataset morley (*.xlsx)
 		testDataFrame(wb.xlsx, morley, 1000, 6)
-		
+
 		# built-in dataset swiss (*.xls)
 		testDataFrame(wb.xls, swiss, 4, 4)
 		# built-in dataset swiss (*.xlsx)
 		testDataFrame(wb.xlsx, swiss, 4, 4)
 	}
-	
+
 	# custom test dataset
 	cdf <- data.frame(
 			"Column.A" = c(1, 2, 3, NA, 5, 6, 7, 8, NA, 10),
@@ -98,39 +98,40 @@ test.workbook.writeAndReadWorksheet <- function() {
 			"Column.E" = c(TRUE, TRUE, NA, NA, FALSE, FALSE, TRUE, NA, FALSE, TRUE),
 			"Column.F" = c("High", "Medium", "Low", "Low", "Low", NA, NA, "Medium", "High", "High"),
 			"Column.G" = c("High", "Medium", NA, "Low", "Low", "Medium", NA, "Medium", "High", "High"),
-			"Column.H" = rep(c(Sys.Date(), Sys.Date() + 236, NA), length = 10),
+			"Column.H" = rep(c(as.Date("2021-10-30") , as.Date("2021-03-28"), NA), length = 10),
 			# NOTE: Column.I is automatically converted to POSIXct!!!
-			"Column.I" = rep(c(as.POSIXlt(Sys.time()), as.POSIXlt(Sys.time()) + 3523523, NA, as.POSIXlt(Sys.time()) + 838239), length = 10),
-			"Column.J" = rep(c(as.POSIXct(Sys.time()), as.POSIXct(Sys.time()) + 436322, NA, as.POSIXct(Sys.time()) - 1295022), length = 10),
+			"Column.I" = rep(c(as.POSIXlt("2021-10-31 03:00:00"), as.POSIXlt(1582963631, origin="1970-01-01"), NA, as.POSIXlt("2001-12-31 23:59:59")), length = 10),
+			# NOTE: 1582963631 with origin="1970-01-01" corresponds to 2020 Feb 29
+			"Column.J" = rep(c(as.POSIXct("2021-10-31 03:00:00"), as.POSIXct(1582963631, origin="1970-01-01"), NA, as.POSIXct("2001-12-31 23:59:59")), length = 10),
 			stringsAsFactors = F
 	)
 	cdf[["Column.F"]] <- factor(cdf[["Column.F"]])
 	cdf[["Column.F"]] <- ordered(cdf[["Column.F"]], levels = c("Low", "Medium", "High"))
-	
+
 	# (*.xls)
 	testDataFrame(wb.xls, cdf, 1, 1)
 	# (*.xlsx)
 	testDataFrame(wb.xlsx, cdf, 1, 1)
-	
+
 	# Check writing of data.frame with row names (*.xls)
 	createSheet(wb.xls, "rownames")
 	writeWorksheet(wb.xls, mtcars, "rownames", startRow = 9, startCol = 10, header = TRUE, rownames = "Car")
 	res <- readWorksheet(wb.xls, "rownames", startRow = 9, startCol = 10)
 	checkEquals(XLConnect:::includeRownames(mtcars, "Car"), res, check.attributes = FALSE, check.names = TRUE)
-	
+
 	# Check writing of data.frame with row names (*.xlsx)
 	createSheet(wb.xlsx, "rownames")
 	writeWorksheet(wb.xlsx, mtcars, "rownames", startRow = 9, startCol = 10, header = TRUE, rownames = "Car")
 	res <- readWorksheet(wb.xlsx, "rownames", startRow = 9, startCol = 10)
 	checkEquals(XLConnect:::includeRownames(mtcars, "Car"), res, check.attributes = FALSE, check.names = TRUE)
-	
+
 	# Check writing & reading of data.frame with row names (*.xls)
 	createSheet(wb.xls, name = "rownames2")
 	writeWorksheet(wb.xls, mtcars, "rownames2", startRow = 31, startCol = 8, header = TRUE, rownames = "Car")
 	res <- readWorksheet(wb.xls, "rownames2", rownames = "Car")
 	checkEquals(mtcars, res, check.attributes = FALSE, check.names = TRUE)
 	checkEquals(attr(mtcars, "row.names"), attr(res, "row.names"))
-	
+
 	# Check writing & reading of data.frame with row names (*.xlsx)
 	createSheet(wb.xlsx, name = "rownames2")
 	writeWorksheet(wb.xlsx, mtcars, "rownames2", startRow = 31, startCol = 8, header = TRUE, rownames = "Car")
