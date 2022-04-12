@@ -15,8 +15,8 @@ Authors@R: c(person("Mirai Solutions GmbH", role = "aut",
 URL: https://mirai-solutions.ch https://github.com/miraisolutions/xlconnect
 BugReports: https://github.com/miraisolutions/xlconnect/issues
 SystemRequirements: Java (>= 8, <= 17)
-Depends: R (>= 2.10.0)
-Imports: methods, rJava
+Depends: R (>= 3.6.0)
+Imports: methods, rJava (>= 1.0-1)
 Suggests: RUnit, lattice, ggplot2 (>= 0.9.3), zoo
 Description: Provides comprehensive functionality to read, write and format Excel data.
 License: GPL-3

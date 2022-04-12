@@ -93,7 +93,7 @@
           e
         }
   )
-  .jpackage(name = pkgname, jars = "*", morePaths = sharedPaths)
+  .jpackage(name = pkgname, jars = "*", morePaths = sharedPaths, own.loader=TRUE)  
   # Perform general XLConnect settings - pass package description
   XLConnectSettings(packageDescription(pkgname))
 }
