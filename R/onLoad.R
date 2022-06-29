@@ -47,7 +47,7 @@
         jvn <- as.numeric(twoFirst)
       }
     }
-    if (jvn<8 || jvn>17) stop(paste0("XLConnect is compatible with Java versions 8 to 17. Detected java version: ",jv))
+    if (jvn<8) stop(paste0("XLConnect is compatible with Java versions 8 and above. Detected java version: ",jv))
   }
   javaCheck()
   repo <- Sys.getenv("XLCONNECT_JAVA_REPO_URL")

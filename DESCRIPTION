@@ -14,7 +14,7 @@ Authors@R: c(person("Mirai Solutions GmbH", role = "aut",
                    comment = "SparseBitSet Java library"))
 URL: https://mirai-solutions.ch https://github.com/miraisolutions/xlconnect
 BugReports: https://github.com/miraisolutions/xlconnect/issues
-SystemRequirements: Java (>= 8, <= 17)
+SystemRequirements: Java (>= 8)
 Depends: R (>= 3.6.0)
 Imports: methods, rJava (>= 1.0-1)
 Suggests: RUnit, lattice, ggplot2 (>= 0.9.3), zoo
