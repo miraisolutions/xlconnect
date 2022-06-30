@@ -36,7 +36,7 @@ jobs:
           - os-name: ubuntu # windows-2019, macos-10.15]
             os-version: "18.04"
             r-version: release
-            java: 19-ea
+            java: 18
             vignettes: true
             timezone-name: Asia/Kathmandu
           - os-name: ubuntu # windows-2019, macos-10.15]
