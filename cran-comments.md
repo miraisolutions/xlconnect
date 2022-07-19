@@ -10,7 +10,7 @@ XLConnect 1.0.6
 
 There were no ERRORs or WARNINGs
 
-There were 1 NOTEs:
+There was 1 NOTE:
 
 ```sh
 > checking installed package size ... NOTE
