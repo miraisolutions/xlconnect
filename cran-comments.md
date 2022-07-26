@@ -35,4 +35,4 @@ Justification: the linked website has an invalid certificate.
 
 # Downstream dependencies
 
-_revdepcheck_ found 10 downstream dependencies; they were all checked successfully.
+_revdepcheck_ found 7 downstream dependencies; they were all checked successfully.
