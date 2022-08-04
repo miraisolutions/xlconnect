@@ -1,6 +1,6 @@
 # Purpose of the devcontainer
 
-This devcontainer uses a `Dockerfile` and is meant to allow reproducible R CMD checks of XLConnect, as well as reverse dependency checks before new XLConnect releases.
+This devcontainer uses a `Dockerfile` and supports the development of XLConnect with VS Code, see also the [documentation related to devcontainers](https://microsoft.github.io/code-with-engineering-playbook/developer-experience/devcontainers/).
 
 
 ## How to use the devcontainer
