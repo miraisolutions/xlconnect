@@ -59,7 +59,7 @@
     c(
       xlcEnsureDependenciesFor(
       paste0(apachePrefix, "/poi/poi-ooxml-full/5.2.2/poi-ooxml-full-5.2.2.jar"), "poi-ooxml-full.jar", 
-      "5.2.2",  libname, pkgname, debianpkg = "libapache-poi-java", rpmpkg="apache-poi"),
+      "5.2.2",  libname, pkgname),
     xlcEnsureDependenciesFor(
       paste0(apachePrefix, "/poi/poi-ooxml/5.2.2/poi-ooxml-5.2.2.jar"), "poi-ooxml.jar", 
       "5.2.2",  libname, pkgname, debianpkg = "libapache-poi-java", rpmpkg="apache-poi"),
