@@ -2,7 +2,7 @@ The package XLConnect includes other open source software components. The follow
 
 ** Apache POI
 
-   Copyright © 2002-2021, The Apache Software Foundation
+   Copyright © 2002-2022, The Apache Software Foundation
 
    Apache POI, POI, Apache, the Apache feather logo, and the Apache POI project logo are trademarks of The Apache Software Foundation.
 
@@ -11,12 +11,11 @@ The package XLConnect includes other open source software components. The follow
 
    Related JARs: poi-*.jar, poi-ooxml-*.jar
 
-
 Transitive dependencies include:
 
 ** Curvesapi
 
-   Copyright © 2005, Graph Builder
+   Copyright © 2005, Graph Builder, 2022 The Apache Software Foundation
 
    Project Website: https://github.com/virtuald/curvesapi
    License Information: https://github.com/virtuald/curvesapi, https://github.com/virtuald/curvesapi/blob/master/license.txt
