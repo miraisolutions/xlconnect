@@ -32,11 +32,11 @@ setGeneric("setForceFormulaRecalculation",
 setMethod("setForceFormulaRecalculation", 
 		signature(object = "workbook", sheet = "character"), 
 		function(object, sheet, value) {
-			if(sheet == "*") {
+		  if(length(sheet) == 1L && sheet == "*") {
 				callGeneric(object, getSheets(object), value)
 			} else
 				xlcCall(object, "setForceFormulaRecalculation", sheet, value)
-			
+		  
 			invisible()
 		}
 )

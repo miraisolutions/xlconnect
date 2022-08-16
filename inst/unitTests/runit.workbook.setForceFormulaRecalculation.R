@@ -20,7 +20,9 @@
 
 #############################################################################
 #
-# Tests around setting flags to force excel to recalculate formula values
+# Tests around setting flags to force excel to recalculate formula values.
+# Tests also getting said flag, assuming getForceFormulaRecalculation works
+# as intended.
 # 
 # Author: Peter Schmid, Mirai Solutions GmbH
 #
@@ -35,12 +37,12 @@ test.workbook.setForceFormulaRecalculation <- function() {
   # (assumes that 'getForceFormulaRecalculation' works fine)
   setForceFormulaRecalculation(wb.xlsx, 1, TRUE)
   checkTrue(getForceFormulaRecalculation(wb.xlsx, 1))
-  setForceFormulaRecalculation(wb.xlsx, "Sheet1", FALSE)
-  checkTrue(!getForceFormulaRecalculation(wb.xlsx, 1))
+  setForceFormulaRecalculation(wb.xlsx, c("Sheet1", "Sheet2"), FALSE)
+  checkTrue(!getForceFormulaRecalculation(wb.xlsx, "Sheet2"))
   
   # Check that passing multiple sheets doesn't cause problems
   setForceFormulaRecalculation(wb.xlsx, "*", TRUE)
-  checkTrue(getForceFormulaRecalculation(wb.xlsx, "*"))
+  checkTrue(all(getForceFormulaRecalculation(wb.xlsx, "*")))
   
   # Check that setting the force formula recalculation flag an illegal active sheet throws an exception (*.xlsx)
   checkException(setForceFormulaRecalculation(wb.xlsx, 12, TRUE))

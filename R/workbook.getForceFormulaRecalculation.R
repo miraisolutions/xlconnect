@@ -39,7 +39,7 @@ setMethod("getForceFormulaRecalculation",
 setMethod("getForceFormulaRecalculation", 
 	signature(object = "workbook", sheet = "character"), 
 	function(object, sheet) {
-		if(sheet == "*")
+		if(length(sheet) == 1L && sheet == "*")
 			callGeneric(object, getSheets(object))
 		else
 			xlcCall(object, "getForceFormulaRecalculation", sheet)
