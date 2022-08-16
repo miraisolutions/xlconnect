@@ -2,7 +2,7 @@ XLConnect depends on other open source software components. The following is a l
 
 * Apache POI
 
-   Includes other Apache projects as transitive dependencies: commons-compress, commons-collections, commons-math, commons-codec, commons-io, log4j, xmlbeans
+   Includes other Apache projects as transitive dependencies: Commons Compress, Commons Collections, Commons Math, Commons Codec, Commons IO, Log4j 2, XMLBeans
 
    Copyright © 2002-2022, The Apache Software Foundation
 
