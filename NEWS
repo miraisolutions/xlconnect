@@ -4,9 +4,10 @@ XLConnect News
 1.0.6 2022-08-??
   * Fix building of vignettes (#154)
   * Fix java version parsing (#156)
-  * Update to apache POI 5.2.2 (#168)
+  * Remove java version compatibility upper limit (#165)
+  * upgrade to POI 5.2.2 (#168)
   * Fix setForceFormulaRecalculation / getForceFormulaRecalculation for R >= 4.2.0 (#170)
-  
+
 1.0.5 2021-09-30
   * Support java 17
 

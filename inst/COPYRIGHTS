@@ -1,31 +1,29 @@
-The package XLConnect includes other open source software components. The following is a list of these components:
+XLConnect depends on other open source software components. The following is a list of these components:
 
-** Apache POI
+* Apache POI
 
-   Copyright © 2002-2021, The Apache Software Foundation
+   Includes other Apache projects as transitive dependencies: Commons Compress, Commons Collections, Commons Math, Commons Codec, Commons IO, Log4j 2, XMLBeans
+
+   Copyright © 2002-2022, The Apache Software Foundation
 
    Apache POI, POI, Apache, the Apache feather logo, and the Apache POI project logo are trademarks of The Apache Software Foundation.
 
    Project Website: https://poi.apache.org/
    License Information: https://www.apache.org/licenses/LICENSE-2.0
 
-   Related JARs: poi-*.jar, poi-ooxml-*.jar
 
+   Further transitive dependencies include:
+   * Curvesapi
 
-Transitive dependencies include:
+      Copyright © 2005, Graph Builder, 2022 The Apache Software Foundation
 
-** Curvesapi
+      Project Website: https://github.com/virtuald/curvesapi
+      License Information: https://github.com/virtuald/curvesapi, https://github.com/virtuald/curvesapi/blob/master/license.txt
+      Related JARs: curvesapi-*.jar
 
-   Copyright © 2005, Graph Builder
+   * SparseBitSet
 
-   Project Website: https://github.com/virtuald/curvesapi
-   License Information: https://github.com/virtuald/curvesapi, https://github.com/virtuald/curvesapi/blob/master/license.txt
-   Related JARs: curvesapi-*.jar
+      Licensed under Apache 2.0 by Brett Woolridge
 
-** SparseBitSet
-
-   Licensed under Apache 2.0 by Brett Woolridge
-
-   Project Website: https://github.com/brettwooldridge/SparseBitSet
-   License Information: https://github.com/brettwooldridge/SparseBitSet, https://github.com/brettwooldridge/SparseBitSet/blob/master/LICENSE
-   Related JARs: SparseBitSet-*.jar
+      Project Website: https://github.com/brettwooldridge/SparseBitSet
+      License Information: https://github.com/brettwooldridge/SparseBitSet, https://github.com/brettwooldridge/SparseBitSet/blob/master/LICENSE
