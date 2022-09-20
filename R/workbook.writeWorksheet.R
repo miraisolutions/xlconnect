@@ -27,28 +27,31 @@
 #############################################################################
 
 setGeneric("writeWorksheet",
-	function(object, data, sheet, startRow = 1, startCol = 1, header = TRUE, rownames = NULL) standardGeneric("writeWorksheet"))
+	function(object, data, sheet, startRow = 1, startCol = 1, header = TRUE,
+	         overwriteFormulaCells = TRUE, rownames = NULL) standardGeneric("writeWorksheet"))
 
 setMethod("writeWorksheet", 
 	signature(object = "workbook", data = "ANY", sheet = "numeric"), 
-	function(object, data, sheet, startRow = 1, startCol = 1, header = TRUE, rownames = NULL) {
+	function(object, data, sheet, startRow = 1, startCol = 1, header = TRUE,
+	         overwriteFormulaCells = TRUE, rownames = NULL) {
 		data <- includeRownames(data, rownames)
 		# pass data.frame's to Java - construct RDataFrameWrapper Java object references
 		data <- lapply(wrapList(data), dataframeToJava)
 		xlcCall(object, "writeWorksheet", data, as.integer(sheet - 1), as.integer(startRow - 1),
-			as.integer(startCol - 1), header)
+			as.integer(startCol - 1), header, overwriteFormulaCells)
 		invisible()
 	}
 )
 
 setMethod("writeWorksheet", 
 	signature(object = "workbook", data = "ANY", sheet = "character"), 
-	function(object, data, sheet, startRow = 1, startCol = 1, header = TRUE, rownames = NULL) {
+	function(object, data, sheet, startRow = 1, startCol = 1, header = TRUE,
+	         overwriteFormulaCells = TRUE, rownames = NULL) {
 	  data <- includeRownames(data, rownames)
 		# pass data.frame's to Java - construct RDataFrameWrapper Java object references
 		data <- lapply(wrapList(data), dataframeToJava)
 		xlcCall(object, "writeWorksheet", data, sheet, as.integer(startRow - 1), 
-			as.integer(startCol - 1), header)
+			as.integer(startCol - 1), header, overwriteFormulaCells)
 		invisible()
 	}
 )
