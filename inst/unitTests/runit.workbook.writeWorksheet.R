@@ -47,4 +47,30 @@ test.workbook.writeWorksheet <- function() {
 	
 	# Check that attempting to write to a non-existing sheet causes an exception (*.xlsx)
 	checkException(writeWorksheet(wb.xlsx, mtcars, "sheetDoesNotExist"))
+	
+	# Load workbooks with formulas on them
+	wb.xls <- loadWorkbook(rsrc("resources/testWorkbookOverwriteFormulas.xls"))
+	wb.xlsx <- loadWorkbook(rsrc("resources/testWorkbookOverwriteFormulas.xlsx"))
+	
+	# Initialize mtcars_mod as is defined with the formula in the carb column (set equal to the gear column)
+	mtcars_mod = mtcars
+	mtcars_mod$carb = mtcars_mod$gear
+	
+	test_overwrite_formula <- function(wb, expected, overwrite = TRUE) {
+	  writeWorksheet(wb, mtcars, "mtcars_formula", startRow = 9, startCol = 5, overwriteFormulaCells = overwrite)
+	  res = readWorksheet(wb, "mtcars_formula")
+	  checkEquals(res, normalizeDataframe(expected), check.attributes = FALSE, check.names = TRUE)
+	}
+	
+	# Check that formulas can be kept in existing named region (*.xls)
+	test_overwrite_formula(wb.xls, mtcars_mod, overwrite = FALSE)
+	
+	# Check that formulas can be kept in existing named region (*.xlsx)
+	test_overwrite_formula(wb.xlsx, mtcars_mod, overwrite = FALSE)
+	
+	# Check that formulas are overwritten (*.xls)
+	test_overwrite_formula(wb.xls, mtcars)
+	
+	# Check that formulas are overwritten (*.xlsx)
+	test_overwrite_formula(wb.xlsx, mtcars)
 }

@@ -72,4 +72,29 @@ test.workbook.writeNamedRegion <- function() {
 	checkNoException(writeNamedRegion(wb.xlsx, data.frame(), "empty1"))
 	checkNoException(writeNamedRegion(wb.xlsx, data.frame(a = character(0), b = numeric(0)), "empty2"))
 	
+	# Load workbooks with formulas on them
+	wb.xls <- loadWorkbook(rsrc("resources/testWorkbookOverwriteFormulas.xls"))
+	wb.xlsx <- loadWorkbook(rsrc("resources/testWorkbookOverwriteFormulas.xlsx"))
+	
+	# Initialize mtcars_mod as is defined with the formula in the carb column (set equal to the gear column)
+	mtcars_mod = mtcars
+	mtcars_mod$carb = mtcars_mod$gear
+	
+	test_overwrite_formula <- function(wb, expected, overwrite = TRUE) {
+	  writeNamedRegion(wb, mtcars, "mtcars_formula", overwriteFormulaCells = overwrite)
+	  res = readNamedRegion(wb, "mtcars_formula")
+	  checkEquals(res, normalizeDataframe(expected), check.attributes = FALSE, check.names = TRUE)
+	}
+	
+	# Check that formulas can be kept in existing named region (*.xls)
+	test_overwrite_formula(wb.xls, mtcars_mod, overwrite = FALSE)
+	
+	# Check that formulas can be kept in existing named region (*.xlsx)
+	test_overwrite_formula(wb.xlsx, mtcars_mod, overwrite = FALSE)
+	
+	# Check that formulas are overwritten (*.xls)
+	test_overwrite_formula(wb.xls, mtcars)
+	
+	# Check that formulas are overwritten (*.xlsx)
+	test_overwrite_formula(wb.xlsx, mtcars)
 }
