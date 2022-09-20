@@ -29,8 +29,8 @@
 test.workbook.appendWorksheet <- function() {
 	
   test_overwrite_formula <- function(wb, expected, overwrite = TRUE) {
-    appendWorksheet(wb, mtcars, name = "mtcars_formula", overwriteFormulaCells = overwrite)
-    res = readWorksheet(wb, name = "mtcars_formula")
+    appendWorksheet(wb, mtcars, sheet = "mtcars_formula", overwriteFormulaCells = overwrite)
+    res = readWorksheet(wb, sheet = "mtcars_formula")
     checkEquals(getLastRow(wb, "mtcars"), c(mtcars = 73))
     checkEquals(res, normalizeDataframe(expected), check.attributes = FALSE, check.names = TRUE)
   }
