@@ -76,6 +76,7 @@ test.workbook.appendNamedRegion <- function() {
 	wb.xlsx <- loadWorkbook(rsrc("resources/testWorkbookAppend.xlsx"))
 	
 	refCoord = matrix(c(9, 5, 194, 15), ncol = 2, byrow = TRUE)
+	refCoordFormula = matrix(c(9, 5, 73, 15), ncol = 2, byrow = TRUE)
 	
 	# Check that appending data to a named region with a different structure results
 	# in the correct bounding box for the re-defined named region (*.xls)
@@ -89,9 +90,9 @@ test.workbook.appendNamedRegion <- function() {
 	
 	# Check that appending data to a named region with a formula below it overwrites it if
 	# overwriteFormulaCells is set to TRUE (default) (*.xls)
-	test_overwrite_formula(wb.xls, rbind(mtcars_mod, mtcars), refCoord)
+	test_overwrite_formula(wb.xls, rbind(mtcars_mod, mtcars), refCoordFormula)
 	
 	# Check that appending data to a named region with a formula below it overwrites it if
 	# overwriteFormulaCells is set to TRUE (default) (*.xlsx)
-	test_overwrite_formula(wb.xlsx, rbind(mtcars_mod, mtcars), refCoord)
+	test_overwrite_formula(wb.xlsx, rbind(mtcars_mod, mtcars), refCoordFormula)
 }
