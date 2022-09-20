@@ -49,4 +49,40 @@ test.workbook.appendWorksheet <- function() {
 	
 	# Check that trying to append to an non-existing worksheet throws an error (*.xlsx)
 	checkException(appendWorksheet(wb.xlsx, mtcars, sheet = "doesNotExist"))
+	
+	# Initialize mtcars_mod as is defined with the formula in the carb column (set equal to the gear column)
+	mtcars_mod = mtcars
+	mtcars_mod$carb = mtcars_mod$gear
+	
+	# Check that appending data to a named region with a formula below it does not overwrite it if
+	# overwriteFormulaCells is set to FALSE (*.xls)
+	appendWorksheet(wb.xls, mtcars, name = "mtcars_formula", overwriteFormulaCells = FALSE)
+	res = readWorksheet(wb.xls, name = "mtcars_formula")
+	checkEquals(getLastRow(wb.xls, "mtcars"), c(mtcars = 73))
+	checkEquals(res, normalizeDataframe(rbind(mtcars_mod, mtcars_mod)), check.attributes = FALSE, check.names = TRUE)
+	
+	# Check that appending data to a named region with a formula below it does not overwrite it if
+	# overwriteFormulaCells is set to FALSE (*.xlsx)
+	appendWorksheet(wb.xlsx, mtcars, name = "mtcars_formula", overwriteFormulaCells = FALSE)
+	res = readWorksheet(wb.xlsx, name = "mtcars_formula")
+	checkEquals(getLastRow(wb.xlsx, "mtcars"), c(mtcars = 73))
+	checkEquals(res, normalizeDataframe(rbind(mtcars_mod, mtcars_mod)), check.attributes = FALSE, check.names = TRUE)
+	
+	# Re-create workbooks
+	wb.xls <- loadWorkbook(rsrc("resources/testWorkbookAppend.xls"))
+	wb.xlsx <- loadWorkbook(rsrc("resources/testWorkbookAppend.xlsx"))
+	
+	# Check that appending data to a named region with a formula below it overwrites it if
+	# overwriteFormulaCells is set to TRUE (default) (*.xls)
+	appendWorksheet(wb.xls, mtcars, name = "mtcars_formula")
+	res = readWorksheet(wb.xls, name = "mtcars_formula")
+	checkEquals(getLastRow(wb.xls, "mtcars"), c(mtcars = 73))
+	checkEquals(res, normalizeDataframe(rbind(mtcars_mod, mtcars)), check.attributes = FALSE, check.names = TRUE)
+	
+	# Check that appending data to a named region with a formula below it overwrites it if
+	# overwriteFormulaCells is set to TRUE (default) (*.xlsx)
+	appendWorksheet(wb.xlsx, mtcars, name = "mtcars_formula")
+	res = readWorksheet(wb.xlsx, name = "mtcars_formula")
+	checkEquals(getLastRow(wb.xlsx, "mtcars"), c(mtcars = 73))
+	checkEquals(res, normalizeDataframe(rbind(mtcars_mod, mtcars)), check.attributes = FALSE, check.names = TRUE)
 }
