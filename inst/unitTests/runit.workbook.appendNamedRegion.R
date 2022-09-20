@@ -28,6 +28,13 @@
 
 test.workbook.appendNamedRegion <- function() {
 	
+  test_overwrite_formula <- function(wb, expected, coords, overwrite = TRUE) {
+    appendNamedRegion(wb, mtcars, name = "mtcars_formula", overwriteFormulaCells = overwrite)
+    res = readNamedRegion(wb, name = "mtcars_formula")
+    checkEquals(res, normalizeDataframe(expected), check.attributes = FALSE, check.names = TRUE)
+    checkEquals(getReferenceCoordinatesForName(wb, "mtcars_formula"), coords)
+  }
+  
 	# Create workbooks
 	wb.xls <- loadWorkbook(rsrc("resources/testWorkbookAppend.xls"))
 	wb.xlsx <- loadWorkbook(rsrc("resources/testWorkbookAppend.xlsx"))
@@ -58,17 +65,11 @@ test.workbook.appendNamedRegion <- function() {
 	
 	# Check that appending data to a named region with a formula below it does not overwrite it if
 	# overwriteFormulaCells is set to FALSE (*.xls)
-	appendNamedRegion(wb.xls, mtcars, name = "mtcars_formula", overwriteFormulaCells = FALSE)
-	res = readNamedRegion(wb.xls, name = "mtcars_formula")
-	checkEquals(res, normalizeDataframe(rbind(mtcars_mod, mtcars_mod)), check.attributes = FALSE, check.names = TRUE)
-	checkEquals(getReferenceCoordinatesForName(wb.xls, "mtcars_formula"), refCoord)
+	test_overwrite_formula(wb.xls, rbind(mtcars_mod, mtcars_mod), refCoord, overwrite = FALSE)
 	
 	# Check that appending data to a named region with a formula below it does not overwrite it if
 	# overwriteFormulaCells is set to FALSE (*.xlsx)
-	appendNamedRegion(wb.xlsx, mtcars, name = "mtcars_formula", overwriteFormulaCells = FALSE)
-	res = readNamedRegion(wb.xlsx, name = "mtcars_formula")
-	checkEquals(res, normalizeDataframe(rbind(mtcars_mod, mtcars_mod)), check.attributes = FALSE, check.names = TRUE)
-	checkEquals(getReferenceCoordinatesForName(wb.xlsx, "mtcars_formula"), refCoord)
+	test_overwrite_formula(wb.xlsx, rbind(mtcars_mod, mtcars_mod), refCoord, overwrite = FALSE)
 	
 	# Re-create workbooks
 	wb.xls <- loadWorkbook(rsrc("resources/testWorkbookAppend.xls"))
@@ -88,15 +89,9 @@ test.workbook.appendNamedRegion <- function() {
 	
 	# Check that appending data to a named region with a formula below it overwrites it if
 	# overwriteFormulaCells is set to TRUE (default) (*.xls)
-	appendNamedRegion(wb.xls, mtcars, name = "mtcars_formula")
-	res = readNamedRegion(wb.xls, name = "mtcars_formula")
-	checkEquals(res, normalizeDataframe(rbind(mtcars_mod, mtcars)), check.attributes = FALSE, check.names = TRUE)
-	checkEquals(getReferenceCoordinatesForName(wb.xls, "mtcars_formula"), refCoord)
+	test_overwrite_formula(wb.xls, rbind(mtcars_mod, mtcars), refCoord)
 	
 	# Check that appending data to a named region with a formula below it overwrites it if
 	# overwriteFormulaCells is set to TRUE (default) (*.xlsx)
-	appendNamedRegion(wb.xlsx, mtcars, name = "mtcars_formula")
-	res = readNamedRegion(wb.xlsx, name = "mtcars_formula")
-	checkEquals(res, normalizeDataframe(rbind(mtcars_mod, mtcars)), check.attributes = FALSE, check.names = TRUE)
-	checkEquals(getReferenceCoordinatesForName(wb.xlsx, "mtcars_formula"), refCoord)
+	test_overwrite_formula(wb.xlsx, rbind(mtcars_mod, mtcars), refCoord)
 }
