@@ -9,8 +9,8 @@
 Appends data to worksheets of a \code{\linkS4class{workbook}}.
 }
 \usage{
-\S4method{appendWorksheet}{workbook,ANY,character}(object,data,sheet,header,rownames)
-\S4method{appendWorksheet}{workbook,ANY,numeric}(object,data,sheet,header,rownames)
+\S4method{appendWorksheet}{workbook,ANY,character}(object,data,sheet,header,overwriteFormulaCells,rownames)
+\S4method{appendWorksheet}{workbook,ANY,numeric}(object,data,sheet,header,overwriteFormulaCells,rownames)
 }
 
 \arguments{

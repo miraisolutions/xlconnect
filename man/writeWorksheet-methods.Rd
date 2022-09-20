@@ -9,8 +9,8 @@
 Writes data to worksheets of a \code{\linkS4class{workbook}}.
 }
 \usage{
-\S4method{writeWorksheet}{workbook,ANY,character}(object,data,sheet,startRow,startCol,header,rownames)
-\S4method{writeWorksheet}{workbook,ANY,numeric}(object,data,sheet,startRow,startCol,header,rownames)
+\S4method{writeWorksheet}{workbook,ANY,character}(object,data,sheet,startRow,startCol,header,overwriteFormulaCells,rownames)
+\S4method{writeWorksheet}{workbook,ANY,numeric}(object,data,sheet,startRow,startCol,header,overwriteFormulaCells,rownames)
 }
 
 \arguments{

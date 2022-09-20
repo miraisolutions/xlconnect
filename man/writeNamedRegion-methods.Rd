@@ -9,7 +9,7 @@
 Writes named regions to a \code{\linkS4class{workbook}}.
 }
 \usage{
-\S4method{writeNamedRegion}{workbook,ANY}(object,data,name,header,rownames)
+\S4method{writeNamedRegion}{workbook,ANY}(object,data,name,header,overwriteFormulaCells,rownames)
 }
 
 \arguments{

@@ -9,7 +9,7 @@
 Appends data to an existing named region.
 }
 \usage{
-\S4method{appendNamedRegion}{workbook,ANY}(object,data,name,header,rownames)
+\S4method{appendNamedRegion}{workbook,ANY}(object,data,name,header,overwriteFormulaCells,rownames)
 }
 
 \arguments{
