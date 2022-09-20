@@ -28,13 +28,6 @@
 
 test.workbook.appendWorksheet <- function() {
 	
-  test_overwrite_formula <- function(wb, expected, overwrite = TRUE) {
-    appendWorksheet(wb, mtcars, sheet = "mtcars_formula", overwriteFormulaCells = overwrite)
-    res = readWorksheet(wb, sheet = "mtcars_formula")
-    checkEquals(getLastRow(wb, "mtcars"), c(mtcars = 73))
-    checkEquals(res, normalizeDataframe(expected), check.attributes = FALSE, check.names = TRUE)
-  }
-  
 	# Create workbooks
 	wb.xls <- loadWorkbook(rsrc("resources/testWorkbookAppend.xls"))
 	wb.xlsx <- loadWorkbook(rsrc("resources/testWorkbookAppend.xlsx"))
@@ -56,28 +49,4 @@ test.workbook.appendWorksheet <- function() {
 	
 	# Check that trying to append to an non-existing worksheet throws an error (*.xlsx)
 	checkException(appendWorksheet(wb.xlsx, mtcars, sheet = "doesNotExist"))
-	
-	# Initialize mtcars_mod as is defined with the formula in the carb column (set equal to the gear column)
-	mtcars_mod = mtcars
-	mtcars_mod$carb = mtcars_mod$gear
-	
-	# Check that appending data to a named region with a formula below it does not overwrite it if
-	# overwriteFormulaCells is set to FALSE (*.xls)
-	test_overwrite_formula(wb.xls, rbind(mtcars_mod, mtcars_mod), overwrite = FALSE)
-	
-	# Check that appending data to a named region with a formula below it does not overwrite it if
-	# overwriteFormulaCells is set to FALSE (*.xlsx)
-	test_overwrite_formula(wb.xlsx, rbind(mtcars_mod, mtcars_mod), overwrite = FALSE)
-	
-	# Re-create workbooks
-	wb.xls <- loadWorkbook(rsrc("resources/testWorkbookAppend.xls"))
-	wb.xlsx <- loadWorkbook(rsrc("resources/testWorkbookAppend.xlsx"))
-	
-	# Check that appending data to a named region with a formula below it overwrites it if
-	# overwriteFormulaCells is set to TRUE (default) (*.xls)
-	test_overwrite_formula(wb.xls, rbind(mtcars_mod, mtcars))
-	
-	# Check that appending data to a named region with a formula below it overwrites it if
-	# overwriteFormulaCells is set to TRUE (default) (*.xlsx)
-	test_overwrite_formula(wb.xlsx, rbind(mtcars_mod, mtcars))
 }
