@@ -27,31 +27,28 @@
 #############################################################################
 
 setGeneric("appendWorksheet",
-		function(object, data, sheet, header = FALSE, overwriteFormulaCells = TRUE,
-		         rownames = NULL) standardGeneric("appendWorksheet"))
+		function(object, data, sheet, header = FALSE, rownames = NULL) standardGeneric("appendWorksheet"))
 
 setMethod("appendWorksheet", 
 	signature(object = "workbook", data = "ANY", sheet = "numeric"), 
-	function(object, data, sheet, header = FALSE, overwriteFormulaCells = TRUE,
-	         rownames = NULL) {
+	function(object, data, sheet, header = FALSE, rownames = NULL) {
 		if(is.character(rownames))
 			data <- includeRownames(data, rownames)
 		# pass data.frame's to Java - construct RDataFrameWrapper Java object references
 		data <- lapply(wrapList(data), dataframeToJava)
-		xlcCall(object, "appendWorksheet", data, as.integer(sheet - 1), header, overwriteFormulaCells)
+		xlcCall(object, "appendWorksheet", data, as.integer(sheet - 1), header, overwriteFormulaCells = TRUE)
 		invisible()
 	}
 )
 
 setMethod("appendWorksheet", 
 	signature(object = "workbook", data = "ANY", sheet = "character"), 
-	function(object, data, sheet, header = FALSE, overwriteFormulaCells = TRUE,
-	         rownames = NULL) {
+	function(object, data, sheet, header = FALSE, rownames = NULL) {
 		if(is.character(rownames))
 			data <- includeRownames(data, rownames)
 		# pass data.frame's to Java - construct RDataFrameWrapper Java object references
 		data <- lapply(wrapList(data), dataframeToJava)
-		xlcCall(object, "appendWorksheet", data, sheet, header, overwriteFormulaCells)
+		xlcCall(object, "appendWorksheet", data, sheet, header, overwriteFormulaCells = TRUE)
 		invisible()
 	}
 )
