@@ -52,6 +52,24 @@ test.workbook.appendNamedRegion <- function() {
 	# Check that trying to append to an non-existing named region throws an error (*.xlsx)
 	checkException(appendNamedRegion(wb.xlsx, mtcars, name = "doesNotExist"))
 	
+	# Initialize mtcars_mod as is defined with the formula in the carb column (set equal to the gear column)
+	mtcars_mod = mtcars
+	mtcars_mod$carb = mtcars_mod$gear
+	
+	# Check that appending data to a named region with a formula below it does not overwrite it if
+	# overwriteFormulaCells is set to FALSE (*.xls)
+	appendNamedRegion(wb.xls, mtcars, name = "mtcars_formula", overwriteFormulaCells = FALSE)
+	res = readNamedRegion(wb.xls, name = "mtcars_formula")
+	checkEquals(res, normalizeDataframe(rbind(mtcars_mod, mtcars_mod)), check.attributes = FALSE, check.names = TRUE)
+	checkEquals(getReferenceCoordinatesForName(wb.xls, "mtcars_formula"), refCoord)
+	
+	# Check that appending data to a named region with a formula below it does not overwrite it if
+	# overwriteFormulaCells is set to FALSE (*.xlsx)
+	appendNamedRegion(wb.xlsx, mtcars, name = "mtcars_formula", overwriteFormulaCells = FALSE)
+	res = readNamedRegion(wb.xlsx, name = "mtcars_formula")
+	checkEquals(res, normalizeDataframe(rbind(mtcars_mod, mtcars_mod)), check.attributes = FALSE, check.names = TRUE)
+	checkEquals(getReferenceCoordinatesForName(wb.xlsx, "mtcars_formula"), refCoord)
+	
 	# Re-create workbooks
 	wb.xls <- loadWorkbook(rsrc("resources/testWorkbookAppend.xls"))
 	wb.xlsx <- loadWorkbook(rsrc("resources/testWorkbookAppend.xlsx"))
@@ -67,4 +85,18 @@ test.workbook.appendNamedRegion <- function() {
 	# in the correct bounding box for the re-defined named region (*.xlsx)
 	appendNamedRegion(wb.xlsx, airquality, name = "mtcars")
 	checkEquals(getReferenceCoordinatesForName(wb.xlsx, "mtcars"), refCoord)
+	
+	# Check that appending data to a named region with a formula below it overwrites it if
+	# overwriteFormulaCells is set to TRUE (default) (*.xls)
+	appendNamedRegion(wb.xls, mtcars, name = "mtcars_formula")
+	res = readNamedRegion(wb.xls, name = "mtcars_formula")
+	checkEquals(res, normalizeDataframe(rbind(mtcars_mod, mtcars)), check.attributes = FALSE, check.names = TRUE)
+	checkEquals(getReferenceCoordinatesForName(wb.xls, "mtcars_formula"), refCoord)
+	
+	# Check that appending data to a named region with a formula below it overwrites it if
+	# overwriteFormulaCells is set to TRUE (default) (*.xlsx)
+	appendNamedRegion(wb.xlsx, mtcars, name = "mtcars_formula")
+	res = readNamedRegion(wb.xlsx, name = "mtcars_formula")
+	checkEquals(res, normalizeDataframe(rbind(mtcars_mod, mtcars)), check.attributes = FALSE, check.names = TRUE)
+	checkEquals(getReferenceCoordinatesForName(wb.xlsx, "mtcars_formula"), refCoord)
 }
