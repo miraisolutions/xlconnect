@@ -36,7 +36,7 @@ setMethod("appendWorksheet",
 			data <- includeRownames(data, rownames)
 		# pass data.frame's to Java - construct RDataFrameWrapper Java object references
 		data <- lapply(wrapList(data), dataframeToJava)
-		xlcCall(object, "appendWorksheet", data, as.integer(sheet - 1), header, overwriteFormulaCells = TRUE)
+		xlcCall(object, "appendWorksheet", data, as.integer(sheet - 1), header)
 		invisible()
 	}
 )
@@ -48,7 +48,7 @@ setMethod("appendWorksheet",
 			data <- includeRownames(data, rownames)
 		# pass data.frame's to Java - construct RDataFrameWrapper Java object references
 		data <- lapply(wrapList(data), dataframeToJava)
-		xlcCall(object, "appendWorksheet", data, sheet, header, overwriteFormulaCells = TRUE)
+		xlcCall(object, "appendWorksheet", data, sheet, header)
 		invisible()
 	}
 )
