@@ -58,14 +58,14 @@
   sharedPaths <- tryCatch({
     c(
       xlcEnsureDependenciesFor(
-      paste0(apachePrefix, "/poi/poi-ooxml-full/5.2.2/poi-ooxml-full-5.2.2.jar"), "poi-ooxml-full.jar", 
-      "5.2.2",  libname, pkgname),
+      paste0(apachePrefix, "/poi/poi-ooxml-full/5.2.3/poi-ooxml-full-5.2.3.jar"), "poi-ooxml-full.jar", 
+      "5.2.3",  libname, pkgname),
     xlcEnsureDependenciesFor(
-      paste0(apachePrefix, "/poi/poi-ooxml/5.2.2/poi-ooxml-5.2.2.jar"), "poi-ooxml.jar", 
-      "5.2.2",  libname, pkgname, debianpkg = "libapache-poi-java", rpmpkg="apache-poi"),
+      paste0(apachePrefix, "/poi/poi-ooxml/5.2.3/poi-ooxml-5.2.3.jar"), "poi-ooxml.jar", 
+      "5.2.3",  libname, pkgname, debianpkg = "libapache-poi-java", rpmpkg="apache-poi"),
     xlcEnsureDependenciesFor(
-      paste0(apachePrefix, "/poi/poi/5.2.2/poi-5.2.2.jar"), "poi.jar", 
-      "5.2.2",  libname, pkgname, debianpkg = "libapache-poi-java", rpmpkg="apache-poi"),
+      paste0(apachePrefix, "/poi/poi/5.2.3/poi-5.2.3.jar"), "poi.jar", 
+      "5.2.3",  libname, pkgname, debianpkg = "libapache-poi-java", rpmpkg="apache-poi"),
     xlcEnsureDependenciesFor(
       paste0(apachePrefix, "/commons/commons-compress/1.21/commons-compress-1.21.jar"), "commons-compress.jar",
       "1\\.(1[8-9]|[2-9][0-9]).*",  libname, pkgname, debianpkg = "libcommons-compress-java", rpmpkg="apache-commons-compress"),
