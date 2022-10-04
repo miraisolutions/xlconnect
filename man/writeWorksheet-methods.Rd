@@ -9,8 +9,8 @@
 Writes data to worksheets of a \code{\linkS4class{workbook}}.
 }
 \usage{
-\S4method{writeWorksheet}{workbook,ANY,character}(object,data,sheet,startRow,startCol,header,rownames)
-\S4method{writeWorksheet}{workbook,ANY,numeric}(object,data,sheet,startRow,startCol,header,rownames)
+\S4method{writeWorksheet}{workbook,ANY,character}(object,data,sheet,startRow,startCol,header,overwriteFormulaCells,rownames)
+\S4method{writeWorksheet}{workbook,ANY,numeric}(object,data,sheet,startRow,startCol,header,overwriteFormulaCells,rownames)
 }
 
 \arguments{
@@ -20,6 +20,8 @@ Writes data to worksheets of a \code{\linkS4class{workbook}}.
   \item{startRow}{Index of the first row to write to. The default is \code{startRow = 1}.}
   \item{startCol}{Index of the first column to write to. The default is \code{startCol = 1}.}
   \item{header}{Specifies if the column names should be written. The default is \code{TRUE}.}
+  \item{overwriteFormulaCells}{Specifies if existing formula cells in the \code{\linkS4class{workbook}}
+  should be overwritten. The default is \code{TRUE}.}
   \item{rownames}{Name (\code{character}) of column to use for the row names of the provided
   \code{data} object. If specified, the row names of the data object (\code{data.frame}) will be
   included as an additional column with the specified name. If \code{rownames = NULL} (default),

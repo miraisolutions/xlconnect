@@ -9,7 +9,7 @@
 Appends data to an existing named region.
 }
 \usage{
-\S4method{appendNamedRegion}{workbook,ANY}(object,data,name,header,rownames)
+\S4method{appendNamedRegion}{workbook,ANY}(object,data,name,header,overwriteFormulaCells,rownames)
 }
 
 \arguments{
@@ -17,6 +17,8 @@ Appends data to an existing named region.
   \item{data}{Data to write}
   \item{name}{Name of the (existing) named region to which to append the \code{data}}
   \item{header}{Specifies if the column names should be written. The default is \code{FALSE}.}
+  \item{overwriteFormulaCells}{Specifies if existing formula cells in the \code{\linkS4class{workbook}}
+  should be overwritten. The default is \code{TRUE}.}
   \item{rownames}{Name (\code{character}) of column to use for the row names of the provided
   \code{data} object. If specified, the row names of the data object (\code{data.frame}) will be
   included as an additional column with the specified name. If \code{rownames = NULL} (default),
