@@ -1,7 +1,7 @@
 XLConnect News
 --------------
 
-1.0.6 2022-08-??
+1.0.6 2022-10-04
   * Fix building of vignettes (#154)
   * Fix java version parsing (#156)
   * Remove java version compatibility upper limit (#165)
