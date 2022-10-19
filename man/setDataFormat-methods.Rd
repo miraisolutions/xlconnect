@@ -22,10 +22,6 @@ Specifies the data \code{format} to be used by the corresponding
 Excel way. Refer to the Excel help or to the link below for more
 information. 
 }
-\references{
-Excel custom data formats:\cr
-\url{https://www.excelefficiency.com/custom-number-format-guide/}
-}
 \author{
 Martin Studer\cr
 Mirai Solutions GmbH \url{https://mirai-solutions.ch}
