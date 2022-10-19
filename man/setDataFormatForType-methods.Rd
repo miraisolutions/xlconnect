@@ -22,10 +22,6 @@ sets the data format for the corresponding cells. The data \code{type} is normal
 corresponding data type constant from the \code{\link{XLC}} object. Data formats are specified the standard
 Excel way. Refer to the Excel help or to the link below for more information. 
 }
-\references{
-Excel custom data formats:\cr
-\url{https://www.excelefficiency.com/custom-number-format-guide/}
-}
 \author{
 Martin Studer\cr
 Mirai Solutions GmbH \url{https://mirai-solutions.ch}
