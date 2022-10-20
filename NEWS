@@ -280,9 +280,7 @@ XLConnect News
   * Functionality for dumping and restoring objects to/from Excel
     files (xlcDump, xlcRestore)
   * Added a package vignette
-	
-0.1-6 Non-public release
-		
+
 0.1-5 2011-07-07
   * Support for setting/getting cell formulas. See methods
     set/getCellFormula.
