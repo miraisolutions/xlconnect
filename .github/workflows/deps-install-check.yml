@@ -1,0 +1,42 @@
+
+name: dependency-install-test
+
+# Check that installed JAR dependencies match the XLConnect (POI) transitive dependencies
+
+on:
+  workflow_run:
+    workflows: ["R"]
+    branches: [master, 'feature/**']
+    types:
+      - completed
+
+jobs:
+  install-check-pkg-deps:
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    runs-on: ubuntu-latest
+    name: Check installed JAR dependencies
+
+    steps:
+    
+    - name: Download package
+      uses: dawidd6/action-download-artifact@v2.24.2
+      with:
+        name: ubuntulatest-java17-Roldrel-results 
+        path: .
+        workflow: R
+        run_id: github.event.workflow_run.id
+    
+    - name: Install Package
+      run: install.packages(pkg="XLConnect.zip")
+      shell: Rscript {0}
+
+    - name: checkout XLConnect java
+      uses: actions/checkout@v3
+      with:
+        repository: miraisolutions/xlconnect-java
+        # specify the below if you are working on a paralllel xlconnect-java branch
+        # ref: feature/...
+    
+    - name: retrieve dependencies using maven
+      run: mvn dependency:copy-dependencies
+      working-directory: $GITHUB_WORKSPACE
