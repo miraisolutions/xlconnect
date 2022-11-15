@@ -5,7 +5,7 @@ name: dependency-install-test
 
 on:
   workflow_run:
-    workflows: ["R"]
+    workflows: ["ci-tests"]
     branches: [master, 'feature/**']
     types:
       - completed

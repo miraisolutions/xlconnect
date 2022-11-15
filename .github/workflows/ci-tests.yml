@@ -6,7 +6,7 @@
 # See https://github.com/r-lib/actions/tree/v2/examples#readme for
 # additional example workflows available for the R community.
 
-name: R
+name: ci-tests
 
 on:
   push:
