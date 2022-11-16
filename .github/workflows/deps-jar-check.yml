@@ -4,8 +4,8 @@ name: dependency-install-test
 # Check that installed JAR dependencies match the XLConnect (POI) transitive dependencies
 
 on:
-  # pull_request:
-    # branches: [ master ]
+  pull_request:
+    branches: [ master ]
   workflow_run:
     workflows: ["ci-tests"]
     # branches: [master, 'feature/**']
@@ -14,7 +14,7 @@ on:
 
 jobs:
   install-check-pkg-deps:
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    # if: ${{ github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
     name: Check installed JAR dependencies
 
@@ -26,7 +26,8 @@ jobs:
         name: ubuntulatest-java17-Roldrel-results 
         path: .
         workflow: R
-        run_id: github.event.workflow_run.id
+        # run_id: github.event.workflow_run.id
+        run_id: 3481035224
     
     - name: Install Package
       run: install.packages(pkg="XLConnect.zip")
