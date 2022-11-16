@@ -4,11 +4,11 @@ name: dependency-install-test
 # Check that installed JAR dependencies match the XLConnect (POI) transitive dependencies
 
 on:
-  pull_request:
-    branches: [ master ]
+  # pull_request:
+    # branches: [ master ]
   workflow_run:
     workflows: ["ci-tests"]
-    branches: [master, 'feature/**']
+    # branches: [master, 'feature/**']
     types:
       - completed
 
