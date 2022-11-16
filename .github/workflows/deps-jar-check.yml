@@ -54,5 +54,6 @@ jobs:
         # ref: feature/...
     
     - name: retrieve dependencies using maven
-      run: mvn dependency:copy-dependencies
-      working-directory: $GITHUB_WORKSPACE
+      run: |
+        ls -la
+        mvn dependency:copy-dependencies
