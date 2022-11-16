@@ -29,8 +29,8 @@ jobs:
         # run_id: github.event.workflow_run.id
         run_id: 3481035224
 
-    - name: unzip artifact
-      run: unzip ubuntulatest-java17-Roldrel-results.zip
+    - name: normalize artifact
+      run: mv XLConnect_*.tar.gz XLConnect.tar.gz
     
     - name: Install Package
       run: install.packages(pkg="XLConnect.tar.gz", lib="./R-pkgs/")
