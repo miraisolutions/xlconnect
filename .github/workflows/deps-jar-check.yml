@@ -28,9 +28,12 @@ jobs:
         workflow: R
         # run_id: github.event.workflow_run.id
         run_id: 3481035224
+
+    - name: unzip artifact
+      run: unzip ubuntulatest-java17-Roldrel-results.zip
     
     - name: Install Package
-      run: install.packages(pkg="XLConnect.zip")
+      run: install.packages(pkg="XLConnect.tar.gz", lib="./R-pkgs/")
       shell: Rscript {0}
 
     - name: checkout XLConnect java
