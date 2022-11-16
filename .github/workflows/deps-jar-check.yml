@@ -19,6 +19,17 @@ jobs:
     name: Check installed JAR dependencies
 
     steps:
+    - name: checkout XLConnect java
+      uses: actions/checkout@v3
+      with:
+        repository: miraisolutions/xlconnect-java
+        # specify the below if you are working on a paralllel xlconnect-java branch
+        # ref: feature/...
+    
+    - name: retrieve dependencies using maven
+      run: |
+        ls -la
+        mvn dependency:copy-dependencies
     
     - name: Download package
       uses: dawidd6/action-download-artifact@v2.24.2
@@ -46,14 +57,14 @@ jobs:
       run: install.packages(list.files(".", pattern = "XLConnect_.*.tar.gz", full.names = TRUE))
       shell: Rscript {0}
 
-    - name: checkout XLConnect java
-      uses: actions/checkout@v3
-      with:
-        repository: miraisolutions/xlconnect-java
-        # specify the below if you are working on a paralllel xlconnect-java branch
-        # ref: feature/...
-    
-    - name: retrieve dependencies using maven
-      run: |
-        ls -la
-        mvn dependency:copy-dependencies
+    - name: compare jar hashes
+      run: | 
+        find /home/runner/work/xlconnect/xlconnect/target/dependency/ -maxdepth 1 -type f |\
+        xargs -l sha512sum | sort | awk '{print $1}' > expected_hashes
+        XLC_JAR_PATH=$(RScript "cat(.libPaths()[1])")/XLConnect/java
+        find $XLC_JAR_PATH -maxdepth 1 -type f |\
+        xargs -l sha512sum | sort | awk '{print $1}' > effective_hashes
+        cmp expected_hashes effective_hashes ||\
+        (echo "JARs are different!" && ls -la /home/runner/work/xlconnect/xlconnect/target/dependency/ &&\
+         ls -la $XLC_JAR_PATH &&\
+         exit 1)
