@@ -11,8 +11,8 @@ name: windows-binary-test
 on:
   push:
     branches: [ master ]
-  pull_request:
-    branches: [ master ]
+  # pull_request:
+  #   branches: [ master ]
   schedule:
     - cron: '12 23 13,28 * *'
 
