@@ -4,7 +4,7 @@ XLConnect: Excel Connector for R
 ================================
 
 [![CRAN\_Status\_Badge](https://www.r-pkg.org/badges/version/XLConnect)](https://cran.r-project.org/package=XLConnect)
-[![rdocumentation.org](https://www.rdocumentation.org/badges/version/XLConnect)](https://www.rdocumentation.org/packages/XLConnect)
+[![rdocumentation.org](https://api.rdocumentation.org/badges/version/XLConnect)](https://www.rdocumentation.org/packages/XLConnect)
 [![CranLogsTotal](https://cranlogs.r-pkg.org/badges/grand-total/XLConnect?color=yellow)](#xlconnect-excel-connector-for-r)
 [![CranLogsMonthly](https://cranlogs.r-pkg.org/badges/XLConnect?color=blue)](#xlconnect-excel-connector-for-r)
 [![CranLogsWeekly](https://cranlogs.r-pkg.org/badges/last-week/XLConnect?color=green)](#xlconnect-excel-connector-for-r)
