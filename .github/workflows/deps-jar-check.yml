@@ -52,6 +52,14 @@ jobs:
       with:
         r-version: release
         use-public-rspm: true
+
+    - name: run javareconf # Yes it actually needs JAVA_HOME=$JAVA_HOME, doesn't use actual env vars (!)
+        if: runner.os != 'Windows' && matrix.config.java != 11
+        run: |
+          java -version
+          echo java_home:$JAVA_HOME
+          echo library paths: $LD_LIBRARY_PATH
+          sudo R CMD javareconf JAVA_HOME=$JAVA_HOME
     
     - name: Install Package
       run: |
