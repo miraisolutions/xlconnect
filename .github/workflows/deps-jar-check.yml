@@ -54,7 +54,7 @@ jobs:
         use-public-rspm: true
     
     - name: Install Package
-      run: install.packages(list.files(".", pattern = "XLConnect_.*.tar.gz", full.names = TRUE))
+      run: install.packages(list.files(".", pattern = "XLConnect_.*.tar.gz", full.names = TRUE), repos="https://cloud.r-project.org")
       shell: Rscript {0}
 
     - name: compare jar hashes
