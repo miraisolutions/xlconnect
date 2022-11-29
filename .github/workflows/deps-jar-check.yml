@@ -54,7 +54,7 @@ jobs:
         use-public-rspm: true
     
     - name: Install Package
-      run:|
+      run: |
         install.packages("rJava",repos="https://cloud.r-project.org")
         install.packages(list.files(".", pattern = "XLConnect_.*.tar.gz", full.names = TRUE))
 
