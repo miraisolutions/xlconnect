@@ -54,11 +54,11 @@ jobs:
         use-public-rspm: true
 
     - name: run javareconf # Yes it actually needs JAVA_HOME=$JAVA_HOME, doesn't use actual env vars (!)
-        run: |
-          java -version
-          echo java_home:$JAVA_HOME
-          echo library paths: $LD_LIBRARY_PATH
-          sudo R CMD javareconf JAVA_HOME=$JAVA_HOME
+      run: |
+        java -version
+        echo java_home:$JAVA_HOME
+        echo library paths: $LD_LIBRARY_PATH
+        sudo R CMD javareconf JAVA_HOME=$JAVA_HOME
     
     - name: Install Package
       run: |
