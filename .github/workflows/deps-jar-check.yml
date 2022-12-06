@@ -70,16 +70,16 @@ jobs:
     - name: compare jar hashes
       run: | 
         set -eux -o pipefail
-        find /home/runner/work/xlconnect/xlconnect/target/dependency/ -maxdepth 1 -type f |\
-        grep -v -E "poi-ooxml-lite|junit|hamcrest" |\
-        xargs -l sha512sum | sort | awk '{print $1}' > expected_hashes
-        echo "computed expected hashes"
-        cat expected_hashes
         XLC_JAR_PATH=$(Rscript -e "cat(.libPaths()[1])")/XLConnect/java
         find "$XLC_JAR_PATH" -maxdepth 1 -type f | grep -v -E "XLConnect" |\
         xargs -l sha512sum | sort | awk '{print $1}' > effective_hashes
         echo "computed actual hashes"
         cat effective_hashes
+        find /home/runner/work/xlconnect/xlconnect/target/dependency/ -maxdepth 1 -type f |\
+        grep -v -E "poi-ooxml-lite|junit|hamcrest" |\
+        xargs -l sha512sum | sort | awk '{print $1}' > expected_hashes
+        echo "computed expected hashes"
+        cat expected_hashes
         cmp expected_hashes effective_hashes ||\
         (echo "JARs are different!" && ls -la /home/runner/work/xlconnect/xlconnect/target/dependency/ &&\
          ls -la "$XLC_JAR_PATH" &&\
