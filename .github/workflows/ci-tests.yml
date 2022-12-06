@@ -254,6 +254,7 @@ jobs:
           mvn dependency:copy-dependencies
 
       - name: compare jar hashes
+        if: success() && matrix.config.r-version == 'release' && matrix.config.os-name == 'ubuntu'
         run: | 
           set -eux -o pipefail
           XLC_JAR_PATH=$(Rscript -e "cat(.libPaths()[1])")/XLConnect/java
