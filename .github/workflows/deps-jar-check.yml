@@ -5,7 +5,7 @@ name: dependency-install-test
 
 on:
   pull_request:
-    branches: [ master ]
+    # branches: [ master ]
   workflow_run:
     workflows: ["ci-tests"]
     # branches: [master, 'feature/**']
