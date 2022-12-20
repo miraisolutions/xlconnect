@@ -236,8 +236,8 @@ jobs:
         uses: actions/checkout@v3
         with:
           repository: miraisolutions/xlconnect-java
-          # specify the below if you are working on a parallel xlconnect-java branch # TODO comment out once below is merged
-          ref: bugfix/#181-poi_5_2_3-dependencies
+          # specify the below if you are working on a parallel xlconnect-java branch
+          # ref: feature/...
       
       - name: retrieve POM dependencies using maven
         if: success() && matrix.config.r-version == 'release' && matrix.config.os-name == 'ubuntu'
