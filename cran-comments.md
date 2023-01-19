@@ -1,4 +1,4 @@
-XLConnect 1.0.6
+XLConnect 1.0.7
 # Test Environments
 
 * Ubuntu 18.04 on Github Actions

@@ -1,6 +1,9 @@
 XLConnect News
 --------------
 
+1.0.7 2023-01-19
+  * Fix issue with loadWorkbook (#181)
+
 1.0.6 2022-10-04
   * Fix building of vignettes (#154)
   * Fix java version parsing (#156)
