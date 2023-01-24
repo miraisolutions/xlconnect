@@ -1,4 +1,5 @@
 XLConnect 1.0.7
+
 # Test Environments
 
 * Ubuntu 18.04 on Github Actions
@@ -14,7 +15,7 @@ There was 1 NOTE:
 
 ```sh
 > checking installed package size ... NOTE
-    installed size is 26.5Mb
+    installed size is 27.0Mb
     sub-directories of 1Mb or more:
       java  24.5Mb
 ```

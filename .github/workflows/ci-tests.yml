@@ -245,7 +245,15 @@ jobs:
           ls -la
           mvn dependency:copy-dependencies
 
-      - name: compare JAR hashes
+      - name: Upload successfully built package
+        if: success() && matrix.config.vignettes
+        uses: actions/upload-artifact@main
+        with:
+          name: ${{ matrix.config.os-name }}${{matrix.config.os-version}}-java${{ matrix.config.java }}-R${{ matrix.config.r-version }}-results
+          path: | 
+            check/XLConnect_*.tar.gz
+      
+      - name: compare JAR hashes # this step may mess up the upload, so was moved below that step
         if: success() && matrix.config.r-version == 'release' && matrix.config.os-name == 'ubuntu'
         run: | 
           set -eux -o pipefail
@@ -260,11 +268,3 @@ jobs:
           (echo "JARs are different!" && ls -la /home/runner/work/xlconnect/xlconnect/target/dependency/ &&\
           ls -la "$XLC_JAR_PATH" &&\
           exit 1)
-
-      - name: Upload successfully built package
-        if: success() && matrix.config.vignettes
-        uses: actions/upload-artifact@main
-        with:
-          name: ${{ matrix.config.os-name }}${{matrix.config.os-version}}-java${{ matrix.config.java }}-R${{ matrix.config.r-version }}-results
-          path: | 
-            check/XLConnect_*.tar.gz
