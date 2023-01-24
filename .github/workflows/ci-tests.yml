@@ -230,7 +230,15 @@ jobs:
             check/XLConnect.Rcheck/
             !check/XLConnect.Rcheck/**/*.jar
             !check/XLConnect.Rcheck/00_pkg_src/
-      
+
+      - name: Upload successfully built package
+        if: success() && matrix.config.vignettes
+        uses: actions/upload-artifact@main
+        with:
+          name: ${{ matrix.config.os-name }}${{matrix.config.os-version}}-java${{ matrix.config.java }}-R${{ matrix.config.r-version }}-results
+          path: | 
+            check/XLConnect_*.tar.gz
+
       - name: checkout XLConnect java
         if: success() && matrix.config.r-version == 'release' && matrix.config.os-name == 'ubuntu'
         uses: actions/checkout@v3
@@ -244,16 +252,8 @@ jobs:
         run: |
           ls -la
           mvn dependency:copy-dependencies
-
-      - name: Upload successfully built package
-        if: success() && matrix.config.vignettes
-        uses: actions/upload-artifact@main
-        with:
-          name: ${{ matrix.config.os-name }}${{matrix.config.os-version}}-java${{ matrix.config.java }}-R${{ matrix.config.r-version }}-results
-          path: | 
-            check/XLConnect_*.tar.gz
       
-      - name: compare JAR hashes # this step may mess up the upload, so was moved below that step
+      - name: compare JAR hashes
         if: success() && matrix.config.r-version == 'release' && matrix.config.os-name == 'ubuntu'
         run: | 
           set -eux -o pipefail
