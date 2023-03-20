@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+- name: For questions and support
+  url: https://stackoverflow.com/questions/tagged/xlconnect
+  about: XLConnect questions and answers on stackoverflow
