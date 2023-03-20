@@ -28,7 +28,6 @@ body:
 
       Thank you for your collaboration!
 
-      Some of the information we require about your issue can be found by typing `sessionInfo()` in your R prompt.
 
       [stackoverflow]: https://stackoverflow.com/questions/tagged/xlconnect
 
