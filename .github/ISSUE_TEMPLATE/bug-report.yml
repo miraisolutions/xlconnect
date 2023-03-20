@@ -4,7 +4,7 @@ description: >-
   Create a report to help us improve when
   something is not working correctly.
   Based on the analogous pypa/setuptools form.
-title: ''
+title: ' '
 labels:
 - bug
 
