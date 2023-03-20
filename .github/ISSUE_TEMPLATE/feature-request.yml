@@ -1,7 +1,7 @@
 ---
 name: ➕ Feature request
 description: Suggest an idea for setuptools
-title: ' '
+title: 'Feature: '
 labels:
 - enhancement
 
