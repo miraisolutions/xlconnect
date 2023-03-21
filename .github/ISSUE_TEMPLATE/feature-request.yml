@@ -1,6 +1,7 @@
 ---
 name: ➕ Feature request
-description: Suggest an idea for setuptools
+description: Suggest an idea for XLConnect
+
 title: 'Feature: '
 labels:
 - enhancement
@@ -9,14 +10,16 @@ body:
 - type: markdown
   attributes:
     value: >
-      **Thank you for wanting to suggest a feature for XLConnect!**
+      **Thank you for suggesting a feature for XLConnect**
+
 
       ⚠
       Verify first that your idea is not [already requested on GitHub][issue search].
 
 
 
-      [issue search]: https://github.com/pypa/setuptools/search?q=is%3Aissue&type=issues
+      [issue search]: https://github.com/miraisolutions/xlconnect/search?q=is%3Aissue&type=issues
+
 
 - type: textarea
   attributes:
