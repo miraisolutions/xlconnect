@@ -31,6 +31,7 @@ body:
     placeholder: >-
       I'm trying to do X and I'm missing feature Y for this to be
       easily achievable.
+
   validations:
     required: true
 
@@ -45,6 +46,7 @@ body:
       and how it solves the problem described above.
     placeholder: >-
       When I do X, I want to achieve Y in a situation when Z.
+
   validations:
     required: true
 
@@ -68,6 +70,7 @@ body:
 
       **HINT:** You can paste https://gist.github.com links for
       larger files.
+
     placeholder: >-
       I asked on https://stackoverflow.com/.... and the community
       advised me to do X, Y and Z.
