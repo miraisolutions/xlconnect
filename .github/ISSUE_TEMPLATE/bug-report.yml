@@ -41,7 +41,8 @@ body:
   attributes:
     label: sessionInfo() output
     description: >-
-      Output of running sessionInfo in your r session with XLConnect loaded
+      Output of running sessionInfo in your R session with XLConnect loaded.
+
     placeholder: >-
       R version 4.2.2 (2022-10-31 ucrt)
       Platform: x86_64-w64-mingw32/x64 (64-bit)
@@ -80,8 +81,9 @@ body:
       A clear and concise description of what the bug is.
     placeholder: >-
       I tried doing X and I expected it to result in Y because the docs
-      mentioned Z but what happened next what totally unexpected!
+      mentioned Z but what happened next was totally unexpected!
       And here's why...
+
   validations:
     required: true
 
