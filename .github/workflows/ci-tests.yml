@@ -259,9 +259,9 @@ jobs:
           set -eux -o pipefail
           XLC_JAR_PATH=$(Rscript -e "cat(.libPaths()[1])")/XLConnect/java
           rm -f "$XLC_JAR_PATH"/XLConnect*
-          find "$XLC_JAR_PATH" -maxdepth 1 -type f |\
+          find "$XLC_JAR_PATH" -maxdepth 1 -type f -name "*.jar"|\
           xargs -l sha512sum | sort | awk '{print $1}' > effective_hashes
-          find /home/runner/work/xlconnect/xlconnect/target/dependency/ -maxdepth 1 -type f |\
+          find /home/runner/work/xlconnect/xlconnect/target/dependency/ -maxdepth 1 -type f -name "*.jar"|\
           grep -v -E "poi-ooxml-lite|junit|hamcrest" |\
           xargs -l sha512sum | sort | awk '{print $1}' > expected_hashes
           cmp expected_hashes effective_hashes ||\
