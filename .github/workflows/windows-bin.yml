@@ -145,7 +145,7 @@ jobs:
             Rscript -e 'system2(''cat'',c(''test.txt''))' 3>&1 2>&1 | Out-File cat-test.txt
           }
           catch {}
-          if(Select-String '''"cat"'' not found' .\cat-test.txt) {} elseif ((Get-Item cat-test.txt).length -gt 2) {throw "cat was here!"} else {}
+          if(Select-String '''"cat"'' not found' .\cat-test.txt) {} elseif ((Get-Item cat-test.txt).length -gt 2) {Get-Command cat.exe;throw "cat was here!"} else {}
           'install.packages(pkg=''XLConnect.zip'')' | Out-File test.r -Encoding ascii
           'library(XLConnect)' | Out-File test.r -Append -Encoding ascii
           'XLConnect::loadWorkbook(''test.xls'', create=TRUE)' | Out-File test.r -Append -Encoding ascii
