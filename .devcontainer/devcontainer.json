@@ -10,8 +10,9 @@
 			// Add the IDs of extensions you want installed when the container is created.
 				"extensions": [
 					"eamodio.gitlens",
-					"ikuyadeu.r",
-					"github.vscode-pull-request-github"
+					"REditorSupport.r",
+					"github.vscode-pull-request-github",
+					"github.vscode-github-actions"
 				]
 			}
 		}
