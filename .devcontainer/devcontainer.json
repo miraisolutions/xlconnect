@@ -3,14 +3,19 @@
 {
 	"name": "XLC-dev",
 	"build": {
-		"dockerfile": "Dockerfile",
+		"dockerfile": "Dockerfile"
 	},
-
-	// Set *default* container specific settings.json values on container create.
-	"settings": {},
-
-	// Add the IDs of extensions you want installed when the container is created.
-	"extensions": ["eamodio.gitlens", "ikuyadeu.r", "github.vscode-pull-request-github"],
+	"customizations": {
+		"vscode": {
+			// Add the IDs of extensions you want installed when the container is created.
+				"extensions": [
+					"eamodio.gitlens",
+					"REditorSupport.r",
+					"github.vscode-pull-request-github",
+					"github.vscode-github-actions"
+				]
+			}
+		}
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
 	// "forwardPorts": [],
