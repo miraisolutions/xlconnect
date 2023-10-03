@@ -147,15 +147,15 @@ jobs:
       - name: set TZ for tests / check
         run: echo 'TZ=${{ matrix.config.timezone-name }}' >> $GITHUB_ENV
 
-      - uses: 'szenius/set-timezone@v1.0'
+      - uses: 'szenius/set-timezone@v1.2'
         if: matrix.config.os-name == 'ubuntu'
         with:
           timezoneLinux: ${{ matrix.config.timezone-name }}
-      - uses: 'szenius/set-timezone@v1.0'
+      - uses: 'szenius/set-timezone@v1.2'
         if: matrix.config.os-name == 'macos'
         with:
           timezoneMacos: ${{ matrix.config.timezone-name }}
-      - uses: 'szenius/set-timezone@v1.0'
+      - uses: 'szenius/set-timezone@v1.2'
         if: matrix.config.os-name == 'windows'
         with:
           timezoneWindows: ${{ matrix.config.timezone-name }}
