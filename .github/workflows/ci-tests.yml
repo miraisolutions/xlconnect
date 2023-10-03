@@ -64,7 +64,7 @@ jobs:
       RSPM: ${{ matrix.config.pkgrepo }}
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
 
       - name: RSPM fallback
         if: matrix.config.pkgrepo == ''
@@ -234,7 +234,7 @@ jobs:
 
       - name: checkout XLConnect java
         if: success() && matrix.config.r-version == 'release' && matrix.config.os-name == 'ubuntu'
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           repository: miraisolutions/xlconnect-java
           # specify the below if you are working on a parallel xlconnect-java branch
