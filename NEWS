@@ -2,6 +2,7 @@ XLConnect News
 --------------
 1.0.8 tbd
  * avoid log4j2 error on first use (#172) 
+ * update POI to 5.2.4
 
 1.0.7 2023-01-19
   * Fix issue with loadWorkbook (#181)

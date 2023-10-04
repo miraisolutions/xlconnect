@@ -4,7 +4,7 @@ XLConnect depends on other open source software components. The following is a l
 
    Includes other Apache projects as transitive dependencies: Commons Compress, Commons Collections, Commons Math, Commons Codec, Commons IO, Log4j 2, XMLBeans
 
-   Copyright © 2002-2022, The Apache Software Foundation
+   Copyright © 2002-2023, The Apache Software Foundation
 
    Apache POI, POI, Apache, the Apache feather logo, and the Apache POI project logo are trademarks of The Apache Software Foundation.
 
@@ -15,7 +15,7 @@ XLConnect depends on other open source software components. The following is a l
    Further transitive dependencies include:
    * Curvesapi
 
-      Copyright © 2005, Graph Builder, 2022 The Apache Software Foundation
+      Copyright © 2005, Graph Builder, 2023 The Apache Software Foundation
 
       Project Website: https://github.com/virtuald/curvesapi
       License Information: https://github.com/virtuald/curvesapi, https://github.com/virtuald/curvesapi/blob/master/license.txt
