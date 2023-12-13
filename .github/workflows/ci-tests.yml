@@ -238,7 +238,7 @@ jobs:
         with:
           repository: miraisolutions/xlconnect-java
           # specify the below if you are working on a parallel xlconnect-java branch
-          # ref: feature/...
+          # ref: feature/... 
       
       - name: retrieve POM dependencies using maven
         if: success() && matrix.config.r-version == 'release' && matrix.config.os-name == 'ubuntu'
