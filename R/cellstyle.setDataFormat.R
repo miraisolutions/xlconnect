@@ -32,7 +32,8 @@ setGeneric("setDataFormat",
 setMethod("setDataFormat", 
 		signature(object = "cellstyle"), 
 		function(object, format) {
-		  xlcCall(object, "setDataFormat", format, .recycle = FALSE)
+		  xlcCall(object, "setDataFormat", format, .recycle = FALSE,
+		          .checkWarnings = FALSE)
 		  invisible()
 		}
 )

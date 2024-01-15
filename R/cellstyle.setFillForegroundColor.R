@@ -32,7 +32,8 @@ setGeneric("setFillForegroundColor",
 setMethod("setFillForegroundColor", 
 		signature(object = "cellstyle", color = "numeric"), 
 		function(object, color) {
-		  xlcCall(object, "setFillForegroundColor", as.integer(color), .recycle = FALSE)
+		  xlcCall(object, "setFillForegroundColor", as.integer(color),
+		          .recycle = FALSE, .checkWarnings = FALSE)
 		  invisible()
 		}
 )

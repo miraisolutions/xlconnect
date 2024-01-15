@@ -32,7 +32,8 @@ setGeneric("setFillPattern",
 setMethod("setFillPattern", 
 		signature(object = "cellstyle"), 
 		function(object, fill) {
-		  xlcCall(object, "setFillPattern", as.integer(fill), .recycle = FALSE)
+		  xlcCall(object, "setFillPattern", as.integer(fill), .recycle = FALSE,
+		          .checkWarnings = FALSE)
 		  invisible()
 		}
 )

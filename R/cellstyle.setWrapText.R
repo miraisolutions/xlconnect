@@ -32,7 +32,8 @@ setGeneric("setWrapText",
 setMethod("setWrapText", 
 		signature(object = "cellstyle"), 
 		function(object, wrap) {
-		  xlcCall(object, "setWrapText", wrap, .recycle = FALSE)
+		  xlcCall(object, "setWrapText", wrap, .recycle = FALSE,
+		          .checkWarnings = FALSE)
 		  invisible()
 		}
 )
