@@ -9,13 +9,14 @@ RUN install2.r --error devtools rJava RUnit zoo qpdf languageserver
 RUN installGithub.r r-lib/revdepcheck
 RUN apt-get install -y pandoc
 RUN install2.r --error ggplot2 tinytex
-RUN Rscript -e "{
-    tinytex::install_tinytex() 
-    library(tinytex)
-    tlmgr_install('datetime') 
-    tlmgr_install('inputenc')
-    tlmgr_install('hyperref')
-    tlmgr_install('url')
-    tlmgr_install('fmtcount')
-    tinytex:::install_yihui_pkgs()
+RUN Rscript -e "{\
+    library(tinytex);\
+    tlmgr_install('datetime');\
+    tlmgr_install('inputenc');\
+    tlmgr_install('hyperref');\
+    tlmgr_install('url');\
+    tlmgr_install('fmtcount');\
+    tlmgr_install('float');\
+    tlmgr_install('natbib');\
+    tinytex:::install_yihui_pkgs();\
 }"
