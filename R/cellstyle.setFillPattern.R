@@ -1,7 +1,7 @@
 #############################################################################
 #
 # XLConnect
-# Copyright (C) 2010-2021 Mirai Solutions GmbH
+# Copyright (C) 2010-2024 Mirai Solutions GmbH
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -32,7 +32,8 @@ setGeneric("setFillPattern",
 setMethod("setFillPattern", 
 		signature(object = "cellstyle"), 
 		function(object, fill) {
-		  xlcCall(object, "setFillPattern", as.integer(fill), .recycle = FALSE)
+		  xlcCall(object, "setFillPattern", as.integer(fill), .recycle = FALSE,
+		          .checkWarnings = FALSE)
 		  invisible()
 		}
 )

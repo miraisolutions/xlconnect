@@ -8,7 +8,7 @@ Performs automatic argument vectorization, provides default Java
 exception and warnings handling for \pkg{XLConnect}.
 }
 \usage{
-xlcCall(obj, fun, ..., .recycle = TRUE, .simplify = TRUE)
+xlcCall(obj, fun, ..., .recycle = TRUE, .simplify = TRUE, .checkWarnings = TRUE)
 }
 \arguments{
   \item{obj}{
@@ -32,6 +32,9 @@ xlcCall(obj, fun, ..., .recycle = TRUE, .simplify = TRUE)
   Only relevant if \code{.recycle = TRUE}. Argument to internal \code{\link{mapply}} to set if there should be an attempt to 
   reduce the result to a vector or matrix.
 }
+  \item{.checkWarnings}{
+  Whether to check for warnings registered on the underlying Java object.
+  }
 }
 \details{
 This function makes use of \code{\link{mapply}} to perform automatic argument vectorization. Non-atomic arguments are

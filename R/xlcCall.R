@@ -1,7 +1,7 @@
 #############################################################################
 #
 # XLConnect
-# Copyright (C) 2010-2021 Mirai Solutions GmbH
+# Copyright (C) 2010-2024 Mirai Solutions GmbH
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -30,7 +30,8 @@
 #
 #############################################################################
 
-xlcCall <- function(obj, fun, ..., .recycle = TRUE, .simplify = TRUE) {
+xlcCall <- function(obj, fun, ..., .recycle = TRUE, .simplify = TRUE,
+                    .checkWarnings = TRUE) {
 	f = eval(parse(text = paste("obj@jobj$", fun, sep = "")))
 	args <- list(...)
 	if(.recycle) {
@@ -42,8 +43,11 @@ xlcCall <- function(obj, fun, ..., .recycle = TRUE, .simplify = TRUE) {
 	} else {
 	  res = jTryCatch(do.call(f, args))
 	}
-	warnings = .jcall(obj@jobj, "[S", "retrieveWarnings")
-	for(w in warnings) warning(w, call. = FALSE)
+	
+	if (.checkWarnings) {
+	  warnings = .jcall(obj@jobj, "[S", "retrieveWarnings")
+	  for(w in warnings) warning(w, call. = FALSE)
+	}
 	
 	res
 }

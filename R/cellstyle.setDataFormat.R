@@ -1,7 +1,7 @@
 #############################################################################
 #
 # XLConnect
-# Copyright (C) 2010-2021 Mirai Solutions GmbH
+# Copyright (C) 2010-2024 Mirai Solutions GmbH
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -32,7 +32,8 @@ setGeneric("setDataFormat",
 setMethod("setDataFormat", 
 		signature(object = "cellstyle"), 
 		function(object, format) {
-		  xlcCall(object, "setDataFormat", format, .recycle = FALSE)
+		  xlcCall(object, "setDataFormat", format, .recycle = FALSE,
+		          .checkWarnings = FALSE)
 		  invisible()
 		}
 )
