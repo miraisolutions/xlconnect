@@ -1,0 +1,4 @@
+# disables linting with lintr, as we have not decided yet which linters to use
+linters: linters_with_defaults() # see vignette("lintr")
+encoding: "UTF-8"
+exclusions: list("R")
