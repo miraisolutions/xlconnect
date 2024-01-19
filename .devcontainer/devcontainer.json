@@ -8,14 +8,14 @@
 	"customizations": {
 		"vscode": {
 			// Add the IDs of extensions you want installed when the container is created.
-				"extensions": [
-					"eamodio.gitlens",
-					"REditorSupport.r",
-					"github.vscode-pull-request-github",
-					"github.vscode-github-actions"
-				]
-			}
+			"extensions": [
+				"eamodio.gitlens",
+				"REditorSupport.r",
+				"github.vscode-pull-request-github",
+				"github.vscode-github-actions"
+			]
 		}
+	}
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
 	// "forwardPorts": [],
@@ -28,4 +28,10 @@
 
 	// Comment out connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
 	// "remoteUser": "vscode"
+	
+	// The below may help when using podman instead of docker as the container backend
+	// (see https://github.com/microsoft/vscode-remote-release/issues/7175#issuecomment-1645498699)
+	// ,"runArgs": [
+	// 	"--log-driver=none"
+	// ]
 }
