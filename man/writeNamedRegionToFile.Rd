@@ -5,7 +5,7 @@
 Writes named regions to an Excel file.
 }
 \usage{
-writeNamedRegionToFile(file, data, name, formula=NA, worksheetScope = NULL, ...,
+writeNamedRegionToFile(file, data, name, formula=NA, ..., worksheetScope = NULL,
 styleAction = XLC$STYLE_ACTION.XLCONNECT, clearNamedRegions=FALSE)
 }
 \arguments{
