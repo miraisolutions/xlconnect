@@ -33,22 +33,24 @@ test.workbook.existsName <- function() {
 	wb.xlsx <- loadWorkbook(rsrc("resources/testWorkbookExistsNameAndSheet.xlsx"), create = FALSE)
 	
 	# Check that the following names exists (*.xls)
-	checkTrue(existsName(wb.xls, "AA"))
-	checkTrue(existsName(wb.xls, "BB"))
-	checkTrue(existsName(wb.xls, "CC"))
+	checkEquals(existsName(wb.xls, "AA"), TRUE, check.attributes = FALSE)
+	checkEquals(existsName(wb.xls, "BB"), TRUE, check.attributes = FALSE)
+	checkEquals(existsName(wb.xls, "CC"), TRUE, check.attributes = FALSE)
 	
 	# Check that the following do NOT exists (*.xls)
-	checkTrue(!existsName(wb.xls, "DD"))
-	checkTrue(!existsName(wb.xls, "'illegal name"))
-	checkTrue(!existsName(wb.xls, "%&$$-^~@afk20 235-??a?"))
+	checkEquals(existsName(wb.xls, "DD"), FALSE, check.attributes = FALSE)
+	checkEquals(existsName(wb.xls, "'illegal name"), FALSE, check.attributes = FALSE)
+	checkEquals(existsName(wb.xls, "%&$$-^~@afk20 235-??a?"), FALSE, check.attributes = FALSE)
 	
 	# Check that the following names exists (*.xlsx)
-	checkTrue(existsName(wb.xlsx, "AA"))
-	checkTrue(existsName(wb.xlsx, "BB"))
-	checkTrue(existsName(wb.xlsx, "CC"))
+	checkEquals(existsName(wb.xlsx, "AA"), TRUE, check.attributes = FALSE)
+	checkEquals(existsName(wb.xlsx, "BB"), TRUE, check.attributes = FALSE)
+	checkEquals(existsName(wb.xlsx, "CC"), TRUE, check.attributes = FALSE)
 	
 	# Check that the following do NOT exists (*.xlsx)
-	checkTrue(!existsName(wb.xlsx, "DD"))
-	checkTrue(!existsName(wb.xlsx, "'illegal name"))
-	checkTrue(!existsName(wb.xlsx, "%&$$-^~@afk20 235-??a?"))
+	checkEquals(existsName(wb.xlsx, "DD"), FALSE, check.attributes = FALSE)
+	checkEquals(existsName(wb.xlsx, "'illegal name"), FALSE, check.attributes = FALSE)
+	checkEquals(existsName(wb.xlsx, "%&$$-^~@afk20 235-??a?"), FALSE, check.attributes = FALSE)
+
+	# TODO check with attributes - where was the name found ?
 }
