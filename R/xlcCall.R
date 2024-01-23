@@ -31,22 +31,39 @@
 #############################################################################
 
 xlcCall <- function(obj, fun, ..., .recycle = TRUE, .simplify = TRUE,
-                    .checkWarnings = TRUE) {
-	f = eval(parse(text = paste("obj@jobj$", fun, sep = "")))
-	args <- list(...)
-	if(.recycle) {
-  	args <- lapply(args, function(x) {
-  				if(is.atomic(x)) x
-  				else wrapList(x)
-  			})
-  	res = jTryCatch(do.call("mapply", args = c(FUN = f, args, SIMPLIFY = .simplify)))
-	} else {
-	  res = jTryCatch(do.call(f, args))
-	}
+					.checkWarnings = TRUE, .withAttributes = FALSE) {
 	
+	g = eval(parse(text = paste("obj@jobj$", fun, sep = "")))
+	f <- if (.withAttributes) function(...) withAttributesFromJava(g(...)) else g
+	args <- list(...)
+	
+	if (.recycle) {
+		args <- lapply(args, function(x) {
+			if (is.atomic(x)) x
+			else wrapList(x)
+		})
+		
+		res = jTryCatch(do.call("mapply", args = c(FUN = f, args, SIMPLIFY = FALSE)))
+		
+		if (.simplify) {
+			if (.withAttributes) {
+				res_attr <- Reduce(function(atts1, atts2) {
+					aNames <- unique(c(names(atts1), names(atts2)))
+					sapply(aNames, function(aName) { list(c(atts1[aName][[1]], atts2[aName][[1]])) })
+				} ,lapply(res, attributes))
+				res <- simplify2array(res)
+				attributes(res) <- res_attr
+			} else {
+				res <- simplify2array(res)
+			}
+		}
+	} else {
+		res = jTryCatch(do.call(f, args))
+	}
+
 	if (.checkWarnings) {
-	  warnings = .jcall(obj@jobj, "[S", "retrieveWarnings")
-	  for(w in warnings) warning(w, call. = FALSE)
+		warnings = .jcall(obj@jobj, "[S", "retrieveWarnings")
+		for(w in warnings) warning(w, call. = FALSE)
 	}
 	
 	res
