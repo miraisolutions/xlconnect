@@ -75,9 +75,10 @@ dataframeFromJava <- function(df, check.names) {
   	# Apply attributes
   	toSet = (attributes(df))[!names(attributes(df)) %in% c("jobj", "jclass", "class", "package")]
   	# Apply names
-  	names(res) = columnNames
+  	attributes(res) = toSet
+	names(res) = columnNames
   	result = data.frame(res, check.names = check.names, stringsAsFactors = FALSE)
-  	attributes(result) <- toSet
+  	
   	result
 	})
 }
