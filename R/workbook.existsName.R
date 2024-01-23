@@ -32,6 +32,6 @@ setGeneric("existsName",
 setMethod("existsName", 
 		signature(object = "workbook"), 
 		function(object, name, worksheetScope = NULL) {
-		  xlcWithAttributesCall(object, "existsName", name, worksheetScope %||% .jnull())
+		  xlcCall(object, "existsName", name, worksheetScope %||% .jnull(), .withAttributes = TRUE)
 		}
 )
