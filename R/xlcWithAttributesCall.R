@@ -32,7 +32,7 @@
 #
 #############################################################################
 
-xlcWithAttributesCall <- function(obj, fun, ..., .recycle = TRUE, .simplify = TRUE) {
+xlcWithAttributesCall <- function(obj, fun, ..., .recycle = TRUE, .simplify = TRUE, .checkWarnings = TRUE) {
   g = eval(parse(text = paste("obj@jobj$", fun, sep = "")))
   f <- function(...) withAttributesFromJava(g(...))
   args <- list(...)
@@ -53,8 +53,11 @@ xlcWithAttributesCall <- function(obj, fun, ..., .recycle = TRUE, .simplify = TR
   } else {
     res = jTryCatch(do.call(f, args))
   }
-  warnings = .jcall(obj@jobj, "[S", "retrieveWarnings")
-  for(w in warnings) warning(w, call. = FALSE)
+
+  if (.checkWarnings) {
+	  warnings = .jcall(obj@jobj, "[S", "retrieveWarnings")
+	  for(w in warnings) warning(w, call. = FALSE)
+	}
   
   res
 }
