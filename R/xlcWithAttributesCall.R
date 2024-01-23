@@ -41,7 +41,7 @@ xlcWithAttributesCall <- function(obj, fun, ..., .recycle = TRUE, .simplify = TR
       if(is.atomic(x)) x
       else wrapList(x)
     })
-    res = jTryCatch(do.call("mapply", args = c(FUN = f, args, SIMPLIFY = FALSE, USE.NAMES = FALSE)))
+    res = jTryCatch(do.call("mapply", args = c(FUN = f, args, SIMPLIFY = FALSE)))
     if(.simplify) {
       res_attr <- Reduce(function(atts1, atts2) {
         aNames <- unique(c(names(atts1), names(atts2)))
