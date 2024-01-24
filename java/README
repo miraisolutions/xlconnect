@@ -15,7 +15,7 @@ Sources for other open source software components can be obtained from the corre
 
 - SparseBitSet: https://github.com/brettwooldridge/SparseBitSet
   Source Code: 
-  SparseBitSet-1.2.jar: https://repo1.maven.org/maven2/com/zaxxer/SparseBitSet/1.3/SparseBitSet-1.3-sources.jar
+  SparseBitSet-1.3.jar: https://repo1.maven.org/maven2/com/zaxxer/SparseBitSet/1.3/SparseBitSet-1.3-sources.jar
 
 
 See also associated copyright information in inst/COPYRIGHTS. 
