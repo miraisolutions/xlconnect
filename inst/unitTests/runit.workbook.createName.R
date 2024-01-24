@@ -94,5 +94,30 @@ test.workbook.createName <- function() {
 	# checkException(createName(wb.xlsx, "aName", "Test!A1A4"))
 	# checkNoException(createName(wb.xlsx, "aName", "Test!A1"))
 	# checkEquals(existsName(wb.xlsx, "aName"), TRUE, check.attributes = FALSE)
+
+
+	# Check that creating a worksheet-scoped name works (*.xls)
+	# we first need to create a worksheet:
+	# global names can be created without an existing sheet, but not scoped ones.
+	
+	sheetName <- "Test_Scoped_Sheet"
+
+	createSheet(wb.xls, name = sheetName)
+	createSheet(wb.xlsx, name = sheetName)
+
+	checkTrue(existsSheet(wb.xls, sheetName))
+	checkTrue(existsSheet(wb.xlsx, sheetName))
+
+	expect_found = TRUE
+	attributes(expect_found) <- list(worksheetScope = sheetName)
+	createName(wb.xls, "Test_1", "Test!$C$5", worksheetScope = sheetName)
+	checkEquals(existsName(wb.xls, "Test_1"), expect_found)
+
+	# Check that creating a worksheet-scoped name works (*.xlsx)
+	# (this test assumes 'existsName' is working fine)
+	expect_found = TRUE
+	attributes(expect_found) <- list(worksheetScope = sheetName)
+	createName(wb.xlsx, "Test_1", "Test!$C$5", worksheetScope = sheetName)
+	checkEquals(existsName(wb.xlsx, "Test_1"), expect_found)
 }
 
