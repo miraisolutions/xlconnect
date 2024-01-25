@@ -1,7 +1,7 @@
 XLConnect News
 --------------
-1.0.8 tbd
- * Avoid log4j2 error on first use (#172) 
+1.0.8 2024-01-29
+ * Avoid log4j2 error on first use (#172)
  * Upgrade POI to 5.2.5
  * Improvements in XLConnect Java
 
