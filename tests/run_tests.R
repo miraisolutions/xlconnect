@@ -51,6 +51,7 @@ runUnitTests <- function() {
 	
 	# Option to determine if full test suite should be run
 	options("FULL.TEST.SUITE" = Sys.getenv("FULL_TEST_SUITE") == "1")
+	options(XLConnect.mapAttributesFromJava = TRUE)
 
 	# RUnit is required for unit testing
 	if(require("RUnit", quietly = TRUE)) {
