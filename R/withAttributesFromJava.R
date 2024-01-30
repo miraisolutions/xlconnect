@@ -22,6 +22,8 @@
 #
 # Utility function for converting XLConnect java objects with added attributes
 # to R variables with the corresponding attributes.
+# Sets the attributes if option XLConnect.mapAttributesFromJava is TRUE. 
+# Otherwise only unwraps the java object.
 #
 # Author: Simon Poltier, Mirai Solutions GmbH
 #
@@ -29,15 +31,13 @@
 
 withAttributesFromJava <- function(jobj) {
     
-    # jni <- .jcall(jobj, "S", "jni")
-    # unwrapped <- .jcall(jobj, jni, "getValue")
     unwrapped <- jobj$getValue()
-    
     allANames = .jcall(jobj, "[S", "getAttributeNames")
-    # allAValues = .jcall(jobj, "[S", "getAttributeValues")
     
-    for(i in seq(along = allANames)) {
-        attr(unwrapped, allANames[i]) <- jobj$getAttributeValue(allANames[i])
+    if(getOption("XLConnect.mapAttributesFromJava")){
+        for(i in seq(along = allANames)) {
+            attr(unwrapped, allANames[i]) <- jobj$getAttributeValue(allANames[i])
+        }
     }
     unwrapped
   }
