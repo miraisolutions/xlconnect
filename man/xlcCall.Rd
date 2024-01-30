@@ -8,7 +8,8 @@ Performs automatic argument vectorization, provides default Java
 exception and warnings handling for \pkg{XLConnect}.
 }
 \usage{
-xlcCall(obj, fun, ..., .recycle = TRUE, .simplify = TRUE, .checkWarnings = TRUE, .withAttributes = FALSE)
+xlcCall(obj, fun, ..., .recycle = TRUE, 
+  .simplify = TRUE, .checkWarnings = TRUE, .withAttributes = FALSE)
 }
 \arguments{
   \item{obj}{
@@ -36,7 +37,11 @@ xlcCall(obj, fun, ..., .recycle = TRUE, .simplify = TRUE, .checkWarnings = TRUE,
   Whether to check for warnings registered on the underlying Java object.
   }
   \item{.withAttributes}{
-  Whether the function being called returns a Java object with attributes. If so, the attributes will be processed and set on the resulting R object.
+  Whether the function being called returns a wrapped Java object with attributes. 
+  
+  If \code{TRUE}:
+    \itemize{- the object will be unwrapped}
+    \itemize{- if option \code{XLConnect.mapAttributesFromJava} is \code{TRUE}, the attributes will be processed and set on the resulting R object.}
   }
 }
 \details{
