@@ -55,9 +55,25 @@ test.workbook.existsName <- function() {
 	checkEquals(existsName(wb.xlsx, "'illegal name"), FALSE)
 	checkEquals(existsName(wb.xlsx, "%&$$-^~@afk20 235-??a?"), FALSE)
 
-	# check with attributes - where was the name found ?
+	# check with attributes - where was the name found ? (*.xls)
+	attributes(expect_found) <- list(worksheetScope = "AAA")
+	checkEquals(existsName(wb.xls, "AA_1"), expect_found)
+	attributes(expect_found) <- list(worksheetScope = "BBB")
+	checkEquals(existsName(wb.xls, "BB_1"), expect_found)
+
+	# check with attributes - where was the name found ? (*.xlsx)
 	attributes(expect_found) <- list(worksheetScope = "AAA")
 	checkEquals(existsName(wb.xlsx, "AA_1"), expect_found)
 	attributes(expect_found) <- list(worksheetScope = "BBB")
 	checkEquals(existsName(wb.xlsx, "BB_1"), expect_found)
+
+	options(XLConnect.mapAttributesFromJava = FALSE)
+
+	# check without attributes (*.xlsx)
+	checkTrue(existsName(wb.xls, "AA_1"))
+	checkTrue(existsName(wb.xls, "BB_1"))
+
+	# check without attributes (*.xlsx)
+	checkTrue(existsName(wb.xlsx, "AA_1"))
+	checkTrue(existsName(wb.xlsx, "BB_1"))
 }
