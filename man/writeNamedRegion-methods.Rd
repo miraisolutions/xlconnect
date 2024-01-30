@@ -9,7 +9,8 @@
 Writes named regions to a \code{\linkS4class{workbook}}.
 }
 \usage{
-\S4method{writeNamedRegion}{workbook,ANY}(object,data,name,header,overwriteFormulaCells,rownames)
+\S4method{writeNamedRegion}{workbook,ANY}(object, data, name, header, 
+  overwriteFormulaCells, rownames, worksheetScope)
 }
 
 \arguments{
@@ -24,6 +25,8 @@ Writes named regions to a \code{\linkS4class{workbook}}.
   included as an additional column with the specified name. If \code{rownames = NULL} (default),
   no row names will be included. May also be a \code{list} in case multiple data objects are
   written in one call (see below).}
+  \item{worksheetScope}{Optional character vector with worksheet name(s) to limit the scope in 
+  which the \code{name} is defined. By default the name is defined workbook-global.}  
 }
 
 \details{
