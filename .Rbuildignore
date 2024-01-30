@@ -68,3 +68,4 @@ revdep/
 .github/
 .devcontainer/
 ^revdep$
+.lintr

@@ -129,7 +129,7 @@ jobs:
       - name: Install PDF system dependencies
         if: runner.os == 'Linux' && matrix.config.vignettes
         run: | 
-          sudo apt-get install -y qpdf ghostscript
+          sudo apt-get install -y qpdf ghostscript tidy
 
       - name: Session info
         run: |
