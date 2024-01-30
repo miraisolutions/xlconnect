@@ -32,7 +32,7 @@ setGeneric("createName",
 setMethod("createName", 
 		signature(object = "workbook"), 
 		function(object, name, formula, overwrite = FALSE, worksheetScope = NULL) {
-			xlcCall(object, "createName", name, worksheetScope %||% .jnull(), formula, overwrite)
+			xlcCall(object, "createName", name, formula, overwrite, worksheetScope %||% .jnull())
 			invisible()
 		}
 )
