@@ -13,7 +13,7 @@ Adds an image to a worksheet using a named region.
 
 \arguments{
   \item{object}{The \code{\linkS4class{workbook}} to use}
-  \item{filename}{Name of the image file. Supported are images of 
+  \item{filename}{Name of the image file. Supported are images of
   the following formats: JPG/JPEG, PNG, WMF, EMF, BMP, PICT.}
   \item{name}{Name of the named region that the image is set to}
   \item{originalSize}{If \code{originalSize = TRUE}, the image is
