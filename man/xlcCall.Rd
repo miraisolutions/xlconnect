@@ -38,10 +38,11 @@ xlcCall(obj, fun, ..., .recycle = TRUE,
   }
   \item{.withAttributes}{
   Whether the function being called returns a wrapped Java object with attributes. 
-  
   If \code{TRUE}:
-    \itemize{- the object will be unwrapped}
-    \itemize{- if option \code{XLConnect.mapAttributesFromJava} is \code{TRUE}, the attributes will be processed and set on the resulting R object.}
+    \itemize{
+      \item the object will be unwrapped
+      \item if option \code{XLConnect.mapAttributesFromJava} is \code{TRUE}, the attributes will be processed and set on the resulting R object.
+      }
   }
 }
 \details{
