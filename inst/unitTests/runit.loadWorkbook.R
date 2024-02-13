@@ -87,4 +87,11 @@ test.loadWorkbook <- function() {
 	# correct password is specified
 	# Excel2019
 	wb <- loadWorkbook(pwdProtectedFile, password = "mirai")
+
+	# Check that loadWorkbook can handle relative paths (#212)
+	sourceFile <- rsrc("resources/testLoadWorkbook.xls")
+	testFile <- "./relative.xls"
+	file.copy(sourceFile, testFile)
+	wb <- loadWorkbook(testFile)
+	checkTrue(is(wb, "workbook"))
 }
