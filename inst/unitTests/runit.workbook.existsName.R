@@ -76,4 +76,7 @@ test.workbook.existsName <- function() {
 	# check without attributes (*.xlsx)
 	checkTrue(existsName(wb.xlsx, "AA_1"))
 	checkTrue(existsName(wb.xlsx, "BB_1"))
+
+	
+	options(XLConnect.mapAttributesFromJava = TRUE)
 }

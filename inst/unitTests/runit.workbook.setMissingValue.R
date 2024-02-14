@@ -34,6 +34,8 @@ test.workbook.setMissingValue <- function() {
 	
 	# Test data
 	data <- data.frame(A = c(4.2, -3.2, NA, 1.34), B = c("A", NA, "C", "D"), stringsAsFactors = FALSE)
+
+	attr(data, "worksheetScope") <- ""
 	
 	name = "missing"
 
@@ -59,6 +61,7 @@ test.workbook.setMissingValue <- function() {
 	# returns the original data but with the numeric column as a character and corresonding
 	# missing value (*.xls)
 	expect <- data.frame(A = c("4.2", "-3.2", "missing", "1.34"), B = c("A", "missing", "C", "D"), stringsAsFactors = FALSE)
+	attr(expect, "worksheetScope") <- ""
 	setMissingValue(wb.xls, value = "missing")
 	writeNamedRegion(wb.xls, data, name = name)
 	# Reset missing value string such that missing value string is read as string
@@ -70,6 +73,7 @@ test.workbook.setMissingValue <- function() {
 	# returns the original data but with the numeric column as a character and corresonding
 	# missing value (*.xlsx)
 	expect <- data.frame(A = c("4.2", "-3.2", "missing", "1.34"), B = c("A", "missing", "C", "D"), stringsAsFactors = FALSE)
+	attr(expect, "worksheetScope") <- ""
 	setMissingValue(wb.xlsx, value = "missing")
 	writeNamedRegion(wb.xlsx, data, name = name)
 	# Reset missing value string such that missing value string is read as string
@@ -102,6 +106,8 @@ test.workbook.setMissingValue <- function() {
 		D = as.POSIXct(c("1981-12-01 00:00:00", "1981-12-02 00:00:00", NA, NA, NA, "1981-12-06 00:00:00")),
 		stringsAsFactors = FALSE
 	)
+
+	attr(expect, "worksheetScope") <- ""
 	
 	# Check that reading data with multiple missing value strings works (*.xls)
 	setMissingValue(wb.xls, value = c("NA", "missing", "empty"))
@@ -120,6 +126,8 @@ test.workbook.setMissingValue <- function() {
 	  D = as.POSIXct(c("1981-12-01 00:00:00", "1981-12-02 00:00:00", NA, NA, NA, "1981-12-06 00:00:00")),
 	  stringsAsFactors = FALSE
 	)
+
+	attr(expect, "worksheetScope") <- ""
   
 	# Check that reading data with multiple missing value strings works (*.xls)
 	setMissingValue(wb.xls, value = list("NA", "missing", "empty", -9999))
