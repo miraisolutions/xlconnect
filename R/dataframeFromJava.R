@@ -29,6 +29,7 @@
 #############################################################################
 
 dataframeFromJava <- function(df, check.names) {
+	print(paste0("attributes of java df: ", attributes(df)))
 	jTryCatch({
   	if(!is(df, "jobjRef"))
   		stop("Invalid object - object of class 'jobjRef' required!")
@@ -72,13 +73,12 @@ dataframeFromJava <- function(df, check.names) {
       res[[i]] = v
   	}
   	
-  	# Apply attributes
+  	# Preserve attributes
   	toSet = (attributes(df))[!names(attributes(df)) %in% c("jobj", "jclass", "class", "package")]
-  	attributes(res) = toSet
-  	# Apply names after attributes to avoid overwriting
 	names(res) = columnNames
   	result = data.frame(res, check.names = check.names, stringsAsFactors = FALSE)
-  	
+	# combine attributes to avoid overwriting names, rownames, colnames
+	attributes(result) <- c(attributes(result), toSet)
   	result
 	})
 }
