@@ -29,7 +29,6 @@
 #############################################################################
 
 dataframeFromJava <- function(df, check.names) {
-	print(paste0("attributes of java df: ", attributes(df)))
 	jTryCatch({
   	if(!is(df, "jobjRef"))
   		stop("Invalid object - object of class 'jobjRef' required!")
