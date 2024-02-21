@@ -89,9 +89,7 @@ test.loadWorkbook <- function() {
 	wb <- loadWorkbook(pwdProtectedFile, password = "mirai")
 
 	# Check that loadWorkbook can handle relative paths (#212)
-	sourceFile <- rsrc("resources/testLoadWorkbook.xls")
-	testFile <- "./relative.xls"
-	file.copy(sourceFile, testFile)
-	wb <- loadWorkbook(testFile)
+	setwd(rsrc("resources"))
+	wb <- loadWorkbook("testLoadWorkbook.xls")
 	checkTrue(is(wb, "workbook"))
 }
