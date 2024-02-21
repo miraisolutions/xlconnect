@@ -28,17 +28,17 @@
 
 setGeneric("appendNamedRegion",
 	function(object, data, name, header = FALSE, overwriteFormulaCells = TRUE,
-	         rownames = NULL) standardGeneric("appendNamedRegion"))
+	         rownames = NULL, worksheetScope = NULL) standardGeneric("appendNamedRegion"))
 
 setMethod("appendNamedRegion", 
 	signature(object = "workbook", data = "ANY"), 
 	function(object, data, name, header = FALSE, overwriteFormulaCells = TRUE,
-	         rownames = NULL) {
+	         rownames = NULL, worksheetScope = NULL) {
 		if(is.character(rownames))
 			data <- includeRownames(data, rownames)
 		# pass data.frame's to Java - construct RDataFrameWrapper Java object references
 		data <- lapply(wrapList(data), dataframeToJava)
-		xlcCall(object, "appendNamedRegion", data, name, header, overwriteFormulaCells, .simplify = FALSE)
+		xlcCall(object, "appendNamedRegion", data, name, header, overwriteFormulaCells, worksheetScope %||% .jnull(), .simplify = FALSE)
 		invisible()
 	}
 )

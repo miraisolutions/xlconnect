@@ -32,7 +32,7 @@ setGeneric("readNamedRegion",
 	function(object, name, header = TRUE, rownames = NULL, colTypes = character(0),
 			forceConversion = FALSE, dateTimeFormat = getOption("XLConnect.dateTimeFormat"),
 			check.names = TRUE, useCachedValues = FALSE, keep = NULL, drop = NULL, simplify = FALSE,
-      readStrategy = "default") 
+      readStrategy = "default", worksheetScope = NULL)
     standardGeneric("readNamedRegion"))
 
 
@@ -41,28 +41,31 @@ setMethod("readNamedRegion",
 	function(object, name, header = TRUE, rownames = NULL, colTypes = character(0),
 			forceConversion = FALSE, dateTimeFormat = getOption("XLConnect.dateTimeFormat"),
 			check.names = TRUE, useCachedValues = FALSE, keep = NULL, drop = NULL, simplify = FALSE,
-      readStrategy = "default") {
+      readStrategy = "default", worksheetScope = NULL) {
 
-		# returns a list of RDataFrameWrapper Java object references
-		sheet = as.vector(extractSheetName(getReferenceFormula(object, name)))
-		namedim = matrix(as.vector(t(getReferenceCoordinatesForName(object, name))), nrow=4, byrow=FALSE)
-		startRow = namedim[1,]
-		startCol = namedim[2,]
-		endRow = namedim[3,]
-		endCol = namedim[4,]
-		numcols = endCol-startCol+1
+	# returns a list of RDataFrameWrapper Java object references
+	sheet = as.vector(extractSheetName(getReferenceFormula(object, name, worksheetScope)))
+	
+	namedim = matrix(as.vector(t(getReferenceCoordinatesForName(object, name, worksheetScope))), nrow=4, byrow=FALSE)
+	startRow = namedim[1,]
+	startCol = namedim[2,]
+	endRow = namedim[3,]
+	endCol = namedim[4,]
+	numcols = endCol-startCol+1
 
-		subset <- getColSubset(object, sheet, startRow, endRow, startCol, endCol, header, numcols, keep, drop)
-		dataFrame <- xlcCall(object, "readNamedRegion", name, header, .jarray(classToXlcType(colTypes)), 
-				forceConversion, dateTimeFormat, useCachedValues, subset, readStrategy, .simplify = FALSE)
-		
+	subset <- getColSubset(object, sheet, startRow, endRow, startCol, endCol, header, numcols, keep, drop)
+	
+	dataFrame <- xlcCall(object, "readNamedRegion", name, header, .jarray(classToXlcType(colTypes)),
+		forceConversion, dateTimeFormat, useCachedValues, subset, readStrategy, worksheetScope %||% .jnull(),
+		.simplify = FALSE, .withAttributes = TRUE
+	)
+	
 
     # get data.frames from Java
     dataFrame = lapply(dataFrame, dataframeFromJava, check.names = check.names)
 		# extract rownames
     dataFrame = extractRownames(dataFrame, rownames)
-		names(dataFrame) <- name
-    
+	names(dataFrame) <- rep(name, length.out = length(dataFrame))
     # simplify
     dataFrame =
     mapply(df = dataFrame, simplify = rep(simplify, length.out = length(dataFrame)), 
@@ -71,7 +74,6 @@ setMethod("readNamedRegion",
              else df
           }, SIMPLIFY = FALSE
     )
-		
 		# Return data.frame directly in case only one data.frame is read
 		if(length(dataFrame) == 1) dataFrame[[1]]
 		else dataFrame

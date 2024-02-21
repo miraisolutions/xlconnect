@@ -8,18 +8,20 @@
 Adds an image to a worksheet using a named region.
 }
 \usage{
- \S4method{addImage}{workbook}(object, filename, name, originalSize)
+ \S4method{addImage}{workbook}(object, filename, name, originalSize, worksheetScope)
 }
 
 \arguments{
   \item{object}{The \code{\linkS4class{workbook}} to use}
-  \item{filename}{Name of the image file. Supported are images of 
+  \item{filename}{Name of the image file. Supported are images of
   the following formats: JPG/JPEG, PNG, WMF, EMF, BMP, PICT.}
   \item{name}{Name of the named region that the image is set to}
   \item{originalSize}{If \code{originalSize = TRUE}, the image is
   inserted in the top left corner of the named region and not
   scaled. Otherwise, the image is scaled to fit the named region.
   The default value for \code{originalSize} is \code{FALSE}.}
+  \item{worksheetScope}{Optional - the name of the worksheet in which the name is scoped;
+  useful if different sheets have scoped regions with the same name.}
 }
 
 \author{

@@ -1,7 +1,7 @@
 #############################################################################
 #
 # XLConnect
-# Copyright (C) 2010-2024 Mirai Solutions GmbH
+# Copyright (C) 2010-2021 Mirai Solutions GmbH
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -20,18 +20,24 @@
 
 #############################################################################
 #
-# Retrieving defined names in a workbook
-# 
-# Author: Martin Studer, Mirai Solutions GmbH
+# Utility function for converting XLConnect java objects with added attributes
+# to R variables with the corresponding attributes.
+# Sets the attributes if option XLConnect.mapAttributesFromJava is TRUE. 
+# Otherwise only unwraps the java object.
+#
+# Author: Simon Poltier, Mirai Solutions GmbH
 #
 #############################################################################
 
-setGeneric("getDefinedNames",
-	function(object, validOnly = TRUE, worksheetScope = NULL) standardGeneric("getDefinedNames"))
-
-setMethod("getDefinedNames", 
-	signature(object = "workbook"), 
-	function(object, validOnly = TRUE, worksheetScope = NULL) {
-	  xlcCall(object, "getDefinedNames", validOnly, worksheetScope %||% .jnull(), .recycle = TRUE)
-	}
-)
+withAttributesFromJava <- function(jobj) {
+    
+    unwrapped <- jobj$getValue()
+    allANames = .jcall(jobj, "[S", "getAttributeNames")
+    
+    if(getOption("XLConnect.mapAttributesFromJava")){
+        for(i in seq(along = allANames)) {
+            attr(unwrapped, allANames[i]) <- jobj$getAttributeValue(allANames[i])
+        }
+    }
+    unwrapped
+  }

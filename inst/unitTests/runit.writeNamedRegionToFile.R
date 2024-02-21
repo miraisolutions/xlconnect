@@ -139,7 +139,6 @@ test.writeNamedRegionToFile <- function() {
 					formula = "'My Cars'!$A$1", header = TRUE))
 	checkTrue(file.exists(file2.xlsx))
 
-
   # test clearNamedRegions
   testClearNamedRegions <- function(file, df) {
     df.short <- df[1,]
@@ -155,10 +154,45 @@ test.writeNamedRegionToFile <- function() {
     # overwrite name with shorter version & clearing
     writeNamedRegionToFile(file, data=df.short, name="cdfRegion", clearNamedRegions=TRUE)
     # should be cleared
-    #checkEquals(nrow(readNamedRegionFromFile(file, name="cdfRegion")), 1)
-    #checkEquals(nrow(readWorksheetFromFile(file, sheet="cdf")), 1)
+    checkEquals(nrow(readNamedRegionFromFile(file, name="cdfRegion")), 1)
+    checkEquals(nrow(readWorksheetFromFile(file, sheet="cdf")), 1)
   }
 
   testClearNamedRegions(file.xls, cdf)
   testClearNamedRegions(file.xlsx, cdf)
+
+  testClearNamedRegionsScoped <- function(file, df) {
+	scope <- c('scope1', 'scope2')
+	clearParam <- c(TRUE, FALSE)
+    df.short <- df[1,]
+
+	wb <- loadWorkbook(file, create = TRUE)
+	createSheet(wb, scope)
+	saveWorkbook(wb, file)
+
+	writeNamedRegionToFile(file, data=df, name="cdfRegionScoped", formula=paste(scope, "A1", sep="!"), worksheetScope = scope) # should write in cell A1 in each sheet
+    # overwrite named region with shorter version
+    writeNamedRegionToFile(file, data=df.short, name="cdfRegionScoped", worksheetScope = scope)
+    # default behaviour: not cleared, only named region is shortened
+    checkEquals(nrow(readNamedRegionFromFile(file, name="cdfRegionScoped", worksheetScope = scope)[[1]]), 1)
+	checkEquals(nrow(readNamedRegionFromFile(file, name="cdfRegionScoped", worksheetScope = scope)[[2]]), 1)
+    checkEquals(nrow(readWorksheetFromFile(file, sheet=scope)[[1]]), nrow(df))
+	checkEquals(nrow(readWorksheetFromFile(file, sheet=scope)[[2]]), nrow(df))
+
+    # rewrite longer version 
+    writeNamedRegionToFile(file, data=df, name="cdfRegionScoped", worksheetScope = scope)
+    # overwrite name with shorter version & clearing
+    writeNamedRegionToFile(file, data=df.short, name="cdfRegionScoped", clearNamedRegions=clearParam, worksheetScope = scope)
+    # should be cleared
+    checkEquals(nrow(readNamedRegionFromFile(file, name="cdfRegionScoped", worksheetScope = scope)[[1]]), 1)
+	checkEquals(nrow(readNamedRegionFromFile(file, name="cdfRegionScoped", worksheetScope = scope)[[2]]), 1)
+    checkEquals(nrow(readWorksheetFromFile(file, sheet=scope)[[1]]), 1)
+	checkEquals(nrow(readWorksheetFromFile(file, sheet=scope)[[2]]), nrow(df))
+  }
+
+  scopedfile.xls <- "testWriteNamedRegionToFileWorkbookScoped.xls"
+  scopedfile.xlsx <- "testWriteNamedRegionToFileWorkbookScoped.xlsx"
+  
+  testClearNamedRegionsScoped(scopedfile.xls, cdf)
+  testClearNamedRegionsScoped(scopedfile.xlsx, cdf)
 }

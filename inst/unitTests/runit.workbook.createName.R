@@ -35,12 +35,12 @@ test.workbook.createName <- function() {
 	# Check that creating a legal name works ok (*.xls)
 	# (this test assumes 'existsName' is working fine)
 	createName(wb.xls, "Test", "Test!$C$5")
-	checkTrue(existsName(wb.xls, "Test"))
+	checkEquals(existsName(wb.xls, "Test"), TRUE, check.attributes = FALSE)
 	
 	# Check that creating a legal name works ok (*.xlsx)
 	# (this test assumes 'existsName' is working fine)
 	createName(wb.xlsx, "Test", "Test!$C$5")
-	checkTrue(existsName(wb.xlsx, "Test"))
+	checkEquals(existsName(wb.xlsx, "Test"), TRUE, check.attributes = FALSE)
 	
 	# Check that trying to create an illegal name throws
 	# an exception (*.xls)
@@ -72,19 +72,19 @@ test.workbook.createName <- function() {
 	createName(wb.xls, "CurrentlyHere", "CurrentlyHere!$D$8")
 	createName(wb.xls, "CurrentlyHere", "NowThere!$C$3", overwrite = TRUE)
 	# TODO: Should actually rather check that new formula is correct
-	checkTrue(existsName(wb.xls, "CurrentlyHere"))
+	checkEquals(existsName(wb.xls, "CurrentlyHere"), TRUE, check.attributes = FALSE)
 	
 	# Check that overwriting an existing name works ok (*.xlsx)
 	createName(wb.xlsx, "CurrentlyHere", "CurrentlyHere!$D$8")
 	createName(wb.xlsx, "CurrentlyHere", "NowThere!$C$3", overwrite = TRUE)
 	# TODO: Should actually rather check that new formula is correct
-	checkTrue(existsName(wb.xlsx, "CurrentlyHere"))
+	checkEquals(existsName(wb.xlsx, "CurrentlyHere"), TRUE, check.attributes = FALSE)
 	
 	# Check that after trying to write a name with an illegal formula
 	# (which throws an exception), the name remains available (*.xls)
 	checkException(createName(wb.xls, "aName", "Test!A1A4"))
 	checkNoException(createName(wb.xls, "aName", "Test!A1"))
-	checkTrue(existsName(wb.xls, "aName"))
+	checkEquals(existsName(wb.xls, "aName"), TRUE, check.attributes = FALSE)
 	
 	# Check that after trying to write a name with an illegal formula
 	# (which throws an exception), the name remains available (*.xlsx)
@@ -93,6 +93,31 @@ test.workbook.createName <- function() {
   # name with an invalid formula does not throw an exception anymore!
 	# checkException(createName(wb.xlsx, "aName", "Test!A1A4"))
 	# checkNoException(createName(wb.xlsx, "aName", "Test!A1"))
-	# checkTrue(existsName(wb.xlsx, "aName"))
+	# checkEquals(existsName(wb.xlsx, "aName"), TRUE, check.attributes = FALSE)
+
+
+	# Check that creating a worksheet-scoped name works (*.xls)
+	# we first need to create a worksheet:
+	# global names can be created without an existing sheet, but not scoped ones.
+	
+	sheetName <- "Test_Scoped_Sheet"
+
+	createSheet(wb.xls, name = sheetName)
+	createSheet(wb.xlsx, name = sheetName)
+
+	checkTrue(existsSheet(wb.xls, sheetName))
+	checkTrue(existsSheet(wb.xlsx, sheetName))
+
+	expect_found = TRUE
+	attributes(expect_found) <- list(worksheetScope = sheetName)
+	createName(wb.xls, "Test_1", "Test!$C$5", worksheetScope = sheetName)
+	checkEquals(existsName(wb.xls, "Test_1"), expect_found)
+
+	# Check that creating a worksheet-scoped name works (*.xlsx)
+	# (this test assumes 'existsName' is working fine)
+	expect_found = TRUE
+	attributes(expect_found) <- list(worksheetScope = sheetName)
+	createName(wb.xlsx, "Test_1", "Test!$C$5", worksheetScope = sheetName)
+	checkEquals(existsName(wb.xlsx, "Test_1"), expect_found)
 }
 

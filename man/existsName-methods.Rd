@@ -9,18 +9,23 @@ Checks the existence of a name in a \code{\linkS4class{workbook}}.
 }
 
 \usage{
-\S4method{existsName}{workbook}(object, name)
+\S4method{existsName}{workbook}(object, name, worksheetScope)
 }
 
 \arguments{
   \item{object}{The \code{\linkS4class{workbook}} to use}
   \item{name}{The name to check for}
+  \item{worksheetScope}{Optional - the specific worksheet to check}
 }
 
 \details{
 Returns \code{TRUE} if the specified \code{name} exists and \code{FALSE}
 otherwise. Note that the \code{name} argument is vectorized and
 therefore multiple names can be checked for existence in one method call.
+
+If \code{worksheetScope} is provided, TRUE will be returned only if a matching
+name exists in the local scope of the specified sheet. To explicitly match only
+ in the global scope, pass \code{""} as the value.
 }
 
 \author{

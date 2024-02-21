@@ -30,7 +30,10 @@
 extractRownames <- function(x, col) {
   if(is(x, "list")) {
     if(is.null(col)) col = list(NULL)
-    mapply(extractRownames, x, col, SIMPLIFY = FALSE)
+    res <- mapply(extractRownames, x, col, SIMPLIFY = FALSE)
+    attributes(res) <- attributes(x)
+    res
+    
   } else{
   	# use attr(x, "row.names") instead of row.names or rownames
   	# since row.names coerces to character for backward compatibility
