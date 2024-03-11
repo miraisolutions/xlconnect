@@ -67,7 +67,7 @@
       paste0(apachePrefix, "/poi/poi/5.2.5/poi-5.2.5.jar"), "poi.jar", 
       "5.2.5",  libname, pkgname, debianpkg = "libapache-poi-java", rpmpkg="apache-poi"),
     xlcEnsureDependenciesFor(
-      paste0(apachePrefix, "/commons/commons-compress/1.25.0/commons-compress-1.25.0.jar"), "commons-compress.jar",
+      paste0(apachePrefix, "/commons/commons-compress/1.26.1/commons-compress-1.26.1.jar"), "commons-compress.jar",
       "1\\.(2[5-9]|[2-9][0-9]).*",  libname, pkgname, debianpkg = "libcommons-compress-java", rpmpkg="apache-commons-compress"),
     xlcEnsureDependenciesFor(
       paste0(apachePrefix, "/xmlbeans/xmlbeans/5.2.0/xmlbeans-5.2.0.jar"), "xmlbeans.jar",
@@ -82,10 +82,10 @@
       paste0(apachePrefix, "/logging/log4j/log4j-api/2.21.1/log4j-api-2.21.1.jar"), "log4j-api.jar",
       "2.21.1",  libname, pkgname),
     xlcEnsureDependenciesFor(
-      paste0(repo, "/commons-codec/commons-codec/1.16.0/commons-codec-1.16.0.jar"), "commons-codec-1.16.0.jar",
+      paste0(repo, "/commons-codec/commons-codec/1.16.1/commons-codec-1.16.1.jar"), "commons-codec-1.16.1.jar",
       "1\\.(1[1-9]|[2-9][0-9]).*",  libname, pkgname, debianpkg="libcommons-codec-java", rpmpkg="apache-commons-codec"),
     xlcEnsureDependenciesFor(
-      paste0(repo, "/commons-io/commons-io/2.15.0/commons-io-2.15.0.jar"), "commons-io-2.15.0.jar",
+      paste0(repo, "/commons-io/commons-io/2.15.1/commons-io-2.15.1.jar"), "commons-io-2.15.1.jar",
       "2\\.(1[5-9]|[2-9][0-9]).*",  libname, pkgname, debianpkg="libcommons-io-java", rpmpkg="apache-commons-io"),
     xlcEnsureDependenciesFor(
       paste0(repo, "/com/zaxxer/SparseBitSet/1.3/SparseBitSet-1.3.jar"), "SparseBitSet.jar",
