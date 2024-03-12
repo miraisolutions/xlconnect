@@ -93,10 +93,11 @@ specified with the argument \code{name}.\cr
 When reading dates, if your system uses a time zone that has / had daylight saving time,
 certain dates / timestamps will not be read exactly as they were written. See
 \url{https://poi.apache.org/apidocs/dev/org/apache/poi/ss/usermodel/DateUtil.html#getJavaDate-double-}
-
 If \code{worksheetScope} is unspecified, the contents of the name found anywhere in the workbook will be read.
 Otherwise, only a name specifically scoped to the specified sheet may be read. 
 To read only names defined in the global scope, pass \code{""} as the value.
+If option \code{XLConnect.mapAttributesFromJava} is \code{TRUE} (default \code{FALSE}), 
+the worksheet scope in which the name was found is set as an attribute of the result.
 }
 \references{
 What are named regions/ranges?\cr
