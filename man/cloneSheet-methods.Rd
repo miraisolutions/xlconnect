@@ -21,6 +21,10 @@ Clones (copies) a worksheet in a \code{\linkS4class{workbook}}.
   is the name of an already existing worksheet.}
 }
 
+\details{
+  The cloning operation does not handle any worksheet-scoped named ranges present on the original \code{sheet}.
+}
+
 \author{
 Martin Studer\cr
 Mirai Solutions GmbH \url{https://mirai-solutions.ch}
