@@ -11,8 +11,8 @@ RUN apt-get install -y pandoc
 RUN install2.r --error ggplot2 tinytex
 RUN Rscript -e "{\
     library(tinytex);\
+    tlmgr_update(self=TRUE, all=FALSE);\
     tlmgr_install('datetime');\
-    tlmgr_install('inputenc');\
     tlmgr_install('hyperref');\
     tlmgr_install('url');\
     tlmgr_install('fmtcount');\
