@@ -184,6 +184,16 @@ wb <- loadWorkbook(demoExcelFile)
 
 # Read the columns 1, 3 and 5 of the named region 'mtcars' (with default header = TRUE)
 data <- readNamedRegion(wb, name = "mtcars", keep=c(1,3,5))
+
+# activate attributes (used by worksheet scope)
+options(XLConnect.mapAttributesFromJava = TRUE)
+
+# read the iris dataset from worksheet-scoped named region 'iris'
+wb <- loadWorkbook("demoFiles/iris.xlsx")
+data <- readNamedRegion(wb, name = "iris", worksheetScope = "iris")
+
+# show worksheet scope attribute
+attr(data, "worksheetScope")
 }
 }
 \keyword{methods}

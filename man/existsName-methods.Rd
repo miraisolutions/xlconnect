@@ -51,6 +51,15 @@ wb <- loadWorkbook(mtcarsFile)
 # Check if the name 'mtcars' exists
 # (should return TRUE since the name is defined as 'mtcars!$A$1:$K$33')
 existsName(wb, name = "mtcars")
+
+# check if the worksheet-scoped name 'iris' exists
+options(XLConnect.mapAttributesFromJava = TRUE)
+wb <- loadWorkbook("demoFiles/iris.xlsx")
+
+# should return TRUE with worksheet scope "iris"
+res <- existsName(wb, name = "iris")
+res
+attributes(res)
 }
 }
 \keyword{methods}

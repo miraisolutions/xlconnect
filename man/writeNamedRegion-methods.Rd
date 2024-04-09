@@ -83,6 +83,13 @@ createName(wb, name = "mtcars", formula = "mtcars!$A$1")
 # (using header = TRUE)
 writeNamedRegion(wb, mtcars, name = "mtcars")
 
+createSheet(wb, name="iris")
+setActiveSheet(wb, "iris")
+
+# Do the same with the iris data set, with a worksheet-scoped name
+createName(wb, name = "iris", formula = "iris!$A$1", worksheetScope = "iris")
+writeNamedRegion(wb, iris, name = "iris", worksheetScope="iris")
+
 # Save workbook (this actually writes the file to disk)
 saveWorkbook(wb)
 
