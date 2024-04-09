@@ -22,7 +22,7 @@ Clones (copies) a worksheet in a \code{\linkS4class{workbook}}.
 }
 
 \details{
-  The cloning operation does not handle any worksheet-scoped named ranges present on the original \code{sheet}.
+  If any worksheet-scoped named ranges are present on the original \code{sheet}, these named ranges will not be present on the cloned worksheet.
 }
 
 \author{

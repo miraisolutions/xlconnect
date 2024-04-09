@@ -47,10 +47,15 @@ xlcCall <- function(obj, fun, ..., .recycle = TRUE, .simplify = TRUE,
 		
 		if (.simplify) {
 			if (.withAttributes) {
-				res_attr <- Reduce(function(atts1, atts2) {
-					aNames <- unique(c(names(atts1), names(atts2)))
-					sapply(aNames, function(aName) { list(c(atts1[aName][[1]], atts2[aName][[1]])) })
-				} ,lapply(res, attributes))
+				attrs_of_results <- lapply(res, attributes)
+				res_attr <- 
+					Reduce(
+						function(atts1, atts2) { # TODO is Reduce idiomatic ? 
+							aNames <- unique(c(names(atts1), names(atts2)))
+							sapply(aNames, function(aName) { list(c(atts1[aName][[1]], atts2[aName][[1]])) })
+						},
+						attrs_of_results
+					)
 				res <- simplify2array(res)
 				attributes(res) <- res_attr
 			} else {

@@ -64,20 +64,20 @@ test.writeAndReadNamedRegion <- function() {
 
 	testDataFrameGlobalAndScoped <- function(wb, df_global, df_scoped, lref) {
 		dfs <- list(df_global, df_scoped)
-        namedRegion <- paste0(deparse(substitute(df_global)), "expect_global")
+		namedRegion <- paste0(deparse(substitute(df_global)), "expect_global")
 		sheet_2 <- paste0(namedRegion, "2")
-        sheetNames <- c(namedRegion, sheet_2)
-        scopeSheets <- c("", sheet_2)
-        createSheet(wb, name = sheetNames)
-        createName(wb, name = namedRegion, formula = paste(sheetNames, lref, sep = "!"), worksheetScope = scopeSheets)
-        writeNamedRegion(wb, dfs, name = namedRegion, worksheetScope = scopeSheets, header = TRUE)
-        res_full <- readNamedRegion(wb, namedRegion, worksheetScope = scopeSheets)
-        dfs_norm <- list(normalizeDataframe(df_global, replaceInf = TRUE), normalizeDataframe(df_scoped, replaceInf = TRUE)) 
+		sheetNames <- c(namedRegion, sheet_2)
+		scopeSheets <- c("", sheet_2)
+		createSheet(wb, name = sheetNames)
+		createName(wb, name = namedRegion, formula = paste(sheetNames, lref, sep = "!"), worksheetScope = scopeSheets)
+		writeNamedRegion(wb, dfs, name = namedRegion, worksheetScope = scopeSheets, header = TRUE)
+		res_full <- readNamedRegion(wb, namedRegion, worksheetScope = scopeSheets)
+		dfs_norm <- list(normalizeDataframe(df_global, replaceInf = TRUE), normalizeDataframe(df_scoped, replaceInf = TRUE)) 
 		checkEquals(dfs_norm, res_full, check.attributes = FALSE, check.names = TRUE)
 		# checkEquals(attr(res_full, "worksheetScope"), scopeSheets)
 		res_global_prio <- readNamedRegion(wb, namedRegion)
 		checkEquals(normalizeDataframe(df_global, replaceInf = TRUE), res_global_prio, check.attributes = FALSE, check.names = TRUE)
-    }
+	}
 
 
 	if(getOption("FULL.TEST.SUITE")) {

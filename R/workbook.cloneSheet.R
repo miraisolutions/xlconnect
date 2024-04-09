@@ -29,7 +29,6 @@
 setGeneric("cloneSheet",
 		function(object, sheet, name) standardGeneric("cloneSheet"))
 
-# TODO make cloning names optional
 setMethod("cloneSheet", 
 		signature(object = "workbook", sheet = "numeric"), 
 		function(object, sheet, name) {
