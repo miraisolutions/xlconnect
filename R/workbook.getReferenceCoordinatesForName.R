@@ -32,7 +32,7 @@ setGeneric("getReferenceCoordinatesForName",
 setMethod("getReferenceCoordinatesForName", 
 		signature(object = "workbook"), 
 		function(object, name, worksheetScope = NULL) {
-			res <- xlcCall(object, "getReferenceCoordinatesForName", name, worksheetScope %||% .jnull())
+			res <- xlcCall(object, "getReferenceCoordinatesForName", name, worksheetScope %||% .jnull(), .withAttributes = TRUE) # TODO with Attributes!
       		if(is.numeric(res)) { matrix(res, nrow = 2, byrow = TRUE) + 1 } else { res } 
 		}
 )

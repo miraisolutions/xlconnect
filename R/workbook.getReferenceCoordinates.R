@@ -33,7 +33,7 @@ setMethod("getReferenceCoordinates",
 		signature(object = "workbook"), 
 		function(object, name) {
       .Deprecated("getReferenceCoordinatesForName")
-			res <- xlcCall(object, "getReferenceCoordinatesForName", name)
+			res <- xlcCall(object, "getReferenceCoordinatesForName", name, .withAttributes = TRUE)
       if(is.numeric(res)) { matrix(res, nrow = 2, byrow = TRUE) + 1 } else { res } 
 		}
 )
