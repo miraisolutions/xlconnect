@@ -47,5 +47,19 @@ test.workbook.getDefinedNames <- function() {
 	checkTrue(length(setdiff(expectedNamesValidOnly, definedNames)) == 0 && length(setdiff(definedNames, expectedNamesValidOnly)) == 0)
 	definedNames <- getDefinedNames(wb.xlsx, validOnly = FALSE)
 	checkTrue(length(setdiff(expectedNamesAll, definedNames)) == 0 && length(setdiff(definedNames, expectedNamesAll)) == 0)
+
+	# scoped names
+	wb.xls <- loadWorkbook(rsrc("resources/testWorkbookGetDefinedNamesScoped.xls"), create = FALSE)
+	wb.xlsx <- loadWorkbook(rsrc("resources/testWorkbookGetDefinedNamesScoped.xlsx"), create = FALSE)
 	
+	expectedNames <- c("ScopedName1", "ScopedName2")
+	expectedScopes <- c("scoped_1", "scoped_2")
+
+	res_xls <- getDefinedNames(wb.xls, validOnly = TRUE)
+	checkTrue(setequal(res_xls, expectedNames))
+	checkTrue(setequal(attributes(res_xls)$worksheetScope, expectedScopes))
+	
+	res_xlsx <- getDefinedNames(wb.xlsx, validOnly = TRUE)
+	checkTrue(setequal(res_xlsx, expectedNames))
+	checkTrue(setequal(attributes(res_xlsx)$worksheetScope, expectedScopes))
 }

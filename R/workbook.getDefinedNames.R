@@ -32,6 +32,6 @@ setGeneric("getDefinedNames",
 setMethod("getDefinedNames", 
 	signature(object = "workbook"), 
 	function(object, validOnly = TRUE, worksheetScope = NULL) {
-	  xlcCall(object, "getDefinedNames", validOnly, worksheetScope %||% .jnull(), .recycle = FALSE)
+	  xlcCall(object, "getDefinedNames", validOnly, worksheetScope %||% .jnull(), .recycle = FALSE, .withAttributes = TRUE)
 	}
 )
