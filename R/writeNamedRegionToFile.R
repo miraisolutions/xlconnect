@@ -41,8 +41,7 @@ writeNamedRegionToFile <- function(file, data, name, formula = NA , ..., workshe
   mapply(clearExistingName, name, worksheetScope %||% list(NULL), nameExists & clearNamedRegions)
 
   # TODO simplify using all instead of any, see if tests still pass
-  if(any(!is.na(formula))) {
-    formula=formula[!is.na(formula)]
+  if(all(!is.na(formula))) {
     sheets = extractSheetName(formula)
     createSheet(wb, sheets[sheets != ""])
     createName(wb, name, formula, worksheetScope = worksheetScope)
