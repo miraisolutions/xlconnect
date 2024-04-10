@@ -20,7 +20,7 @@ Queries the reference formula of an Excel named range in a \code{\linkS4class{wo
 }
 
 \details{
-  If option \code{XLConnect.mapAttributesFromJava} is \code{TRUE} (default \code{FALSE}),
+  If option \code{XLConnect.setCustomAttributes} is \code{TRUE} (default \code{FALSE}),
   the worksheet scope in which the queried name is defined is set as attribute \code{worksheetScope} on the result.
 }
 

@@ -27,7 +27,7 @@ If \code{worksheetScope} is provided, TRUE will be returned only if a matching
 named range exists in the local scope of the specified sheet. To explicitly match only
  in the global scope, pass \code{""} as the value.
 
-If option \code{XLConnect.mapAttributesFromJava} is \code{TRUE} (default \code{FALSE}),
+If option \code{XLConnect.setCustomAttributes} is \code{TRUE} (default \code{FALSE}),
 the worksheet scope in which the name is defined is set as attribute \code{worksheetScope} on the result.
 }
 
@@ -53,7 +53,7 @@ wb <- loadWorkbook(mtcarsFile)
 existsName(wb, name = "mtcars")
 
 # check if the worksheet-scoped name 'iris' exists
-options(XLConnect.mapAttributesFromJava = TRUE)
+options(XLConnect.setCustomAttributes = TRUE)
 wb <- loadWorkbook("demoFiles/iris.xlsx")
 
 # should return TRUE with worksheet scope "iris"

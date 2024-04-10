@@ -48,7 +48,7 @@ test.workbook.onErrorCell <- function() {
 	attr(target, "worksheetScope") <- ""
 	checkEquals(res, target)
 
-	options(XLConnect.mapAttributesFromJava = FALSE)
+	options(XLConnect.setCustomAttributes = FALSE)
 	
 	res <- try(readNamedRegion(wb.xls, name = "CC"))
 	checkTrue(!is(res, "try-error"))
@@ -93,7 +93,7 @@ test.workbook.onErrorCell <- function() {
 	target <- data.frame(E = c("zz", "yy", NA, "ww", "vv", "uu"), stringsAsFactors = FALSE)
 	checkEquals(res, target)
 
-	options(XLConnect.mapAttributesFromJava = TRUE)
+	options(XLConnect.setCustomAttributes = TRUE)
 	
 	# Check that reading error cells with the stop flag set causes an exception (*.xls)
 	onErrorCell(wb.xls, XLC$ERROR.STOP)

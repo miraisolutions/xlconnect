@@ -45,7 +45,7 @@ XLConnectSettings <- function(pdesc) {
 	# Rowname column (used by xlcDump, xlcRestore)
 	options(XLConnect.RownameCol = ".rownames")
 
-	options(XLConnect.mapAttributesFromJava = FALSE)
+	options(XLConnect.setCustomAttributes = FALSE)
   
 	invisible()
 }

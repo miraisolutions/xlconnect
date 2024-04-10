@@ -96,7 +96,7 @@ certain dates / timestamps will not be read exactly as they were written. See
 If \code{worksheetScope} is unspecified, the contents of the name found anywhere in the workbook will be read.
 Otherwise, only a name specifically scoped to the specified sheet may be read. 
 To read only names defined in the global scope, pass \code{""} as the value.
-If option \code{XLConnect.mapAttributesFromJava} is \code{TRUE} (default \code{FALSE}), 
+If option \code{XLConnect.setCustomAttributes} is \code{TRUE} (default \code{FALSE}), 
 the worksheet scope in which the name was found is set as attribute \code{worksheetScope} on the result.
 }
 \references{
@@ -186,7 +186,7 @@ wb <- loadWorkbook(demoExcelFile)
 data <- readNamedRegion(wb, name = "mtcars", keep=c(1,3,5))
 
 # activate attributes (used by worksheet scope)
-options(XLConnect.mapAttributesFromJava = TRUE)
+options(XLConnect.setCustomAttributes = TRUE)
 
 # read the iris dataset from worksheet-scoped named region 'iris'
 wb <- loadWorkbook("demoFiles/iris.xlsx")

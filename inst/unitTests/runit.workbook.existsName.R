@@ -67,7 +67,7 @@ test.workbook.existsName <- function() {
 	attributes(expect_found) <- list(worksheetScope = "BBB")
 	checkEquals(existsName(wb.xlsx, "BB_1"), expect_found)
 
-	options(XLConnect.mapAttributesFromJava = FALSE)
+	options(XLConnect.setCustomAttributes = FALSE)
 
 	# check without attributes (*.xlsx)
 	checkTrue(existsName(wb.xls, "AA_1"))
@@ -78,5 +78,5 @@ test.workbook.existsName <- function() {
 	checkTrue(existsName(wb.xlsx, "BB_1"))
 
 	
-	options(XLConnect.mapAttributesFromJava = TRUE)
+	options(XLConnect.setCustomAttributes = TRUE)
 }

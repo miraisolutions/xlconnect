@@ -22,7 +22,7 @@ are returned. Valid references are ones not starting with #REF! or
 }
 
 \details{
-  If option \code{XLConnect.mapAttributesFromJava} is \code{TRUE} (default \code{FALSE}),
+  If option \code{XLConnect.setCustomAttributes} is \code{TRUE} (default \code{FALSE}),
   a list of the worksheet scopes in which the names were found is set as attribute \code{worksheetScope} on the result.
 }
 

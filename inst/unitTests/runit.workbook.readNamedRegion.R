@@ -40,7 +40,7 @@ test.workbook.readNamedRegion <- function() {
 			stringsAsFactors = F
 	)
 
-	options(XLConnect.mapAttributesFromJava = FALSE)
+	options(XLConnect.setCustomAttributes = FALSE)
 	
 	# Check that the read named region equals the defined data.frame (*.xls)
 	res <- readNamedRegion(wb.xls, "Test", header = TRUE)
@@ -404,7 +404,7 @@ test.workbook.readNamedRegion <- function() {
 	res <- readNamedRegionFromFile(rsrc("resources/testBug49.xlsx"), name = "test", rownames = "A")
 	checkEquals(expected, res)
 
-	options(XLConnect.mapAttributesFromJava = TRUE)
+	options(XLConnect.setCustomAttributes = TRUE)
 	
 	# Check that named region can be read within a worksheet scope (see github issue #37)
 

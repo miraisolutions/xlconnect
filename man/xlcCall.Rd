@@ -41,7 +41,7 @@ xlcCall(obj, fun, ..., .recycle = TRUE,
   If \code{TRUE}:
     \itemize{
       \item the object will be unwrapped
-      \item if option \code{XLConnect.mapAttributesFromJava} is \code{TRUE}, the attributes will be processed and set on the resulting R object.
+      \item if option \code{XLConnect.setCustomAttributes} is \code{TRUE}, the attributes will be processed and set on the resulting R object.
       }
   }
 }
