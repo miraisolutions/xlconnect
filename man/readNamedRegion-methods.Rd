@@ -84,7 +84,7 @@ readStrategy, worksheetScope)
 }
 
 \details{
-The arguments \code{name} and \code{header} are vectorized. As such,
+The arguments \code{name}, \code{header}, and \code{worksheetScope} are vectorized. As such,
 multiple named regions can be read with one method call. If only one
 single named region is read, the return value is a \code{data.frame}.If
 multiple named regions are specified, the return value is a (named)

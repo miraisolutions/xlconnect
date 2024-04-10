@@ -5,7 +5,7 @@
 \alias{getReferenceCoordinates,workbook-method}
 \title{Querying the coordinates of the range reference by an Excel name}
 \description{
-(DEPRECATED) Queries the coordinates of an Excel name in a \code{\linkS4class{workbook}}.
+(DEPRECATED) Queries the coordinates of an Excel named range in a \code{\linkS4class{workbook}}.
 }
 \usage{
 \S4method{getReferenceCoordinates}{workbook}(object,name)

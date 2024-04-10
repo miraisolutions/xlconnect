@@ -6,7 +6,7 @@
 \alias{writeNamedRegion,workbook,ANY-method}
 \title{Writing named regions to a workbook}
 \description{
-Writes named regions to a \code{\linkS4class{workbook}}.
+Writes data to the named regions defined in a \code{\linkS4class{workbook}}.
 }
 \usage{
 \S4method{writeNamedRegion}{workbook,ANY}(object, data, name, header, 
@@ -26,7 +26,7 @@ Writes named regions to a \code{\linkS4class{workbook}}.
   no row names will be included. May also be a \code{list} in case multiple data objects are
   written in one call (see below).}
   \item{worksheetScope}{Optional character vector with worksheet name(s) to limit the scope in 
-  which the \code{name} is defined. By default the name is defined workbook-global.}  
+  which the \code{name}(s) to write to is/are expected to be found}.
 }
 
 \details{

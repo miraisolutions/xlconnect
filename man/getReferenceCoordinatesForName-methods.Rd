@@ -5,7 +5,7 @@
 \alias{getReferenceCoordinatesForName,workbook-method}
 \title{Querying the coordinates of the range reference by an Excel name}
 \description{
-Queries the coordinates of an Excel name in a \code{\linkS4class{workbook}}.
+Queries the coordinates of an Excel named range in a \code{\linkS4class{workbook}}.
 }
 \usage{
 \S4method{getReferenceCoordinatesForName}{workbook}(object,name, worksheetScope)
@@ -18,8 +18,8 @@ Queries the coordinates of an Excel name in a \code{\linkS4class{workbook}}.
   \item{worksheetScope}{Optional, the name of the worksheet to use for resolving the named region}
 }
 \details{
-  If \code{worksheetScope} is defined, only coordinates for a name scoped strictly to the specified worksheet are 
-  returned. To explicitly match only if the name is in the global scope, pass \code{""} as the value.
+  If \code{worksheetScope} is defined, only coordinates for a range scoped strictly to the specified worksheet are 
+  returned. To explicitly only query for named ranges in the global scope, pass \code{""} as the value.
 }
 
 \author{

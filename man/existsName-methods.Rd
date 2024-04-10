@@ -3,9 +3,9 @@
 \alias{existsName}
 \alias{existsName-methods}
 \alias{existsName,workbook-method}
-\title{Checking existence of names in a workbook}
+\title{Checking existence of named ranges in a workbook}
 \description{
-Checks the existence of a name in a \code{\linkS4class{workbook}}.
+Checks the existence of a named range in a \code{\linkS4class{workbook}}.
 }
 
 \usage{

@@ -5,7 +5,7 @@
 \alias{createName,workbook-method}
 \title{Creating names in a workbook}
 \description{
-Creates a name for a specified formula in a \code{\linkS4class{workbook}}.
+Creates a named range for a specified formula in a \code{\linkS4class{workbook}}.
 }
 \usage{
 \S4method{createName}{workbook}(object, name, formula, overwrite, worksheetScope)
@@ -13,7 +13,7 @@ Creates a name for a specified formula in a \code{\linkS4class{workbook}}.
 
 \arguments{
   \item{object}{The \code{\linkS4class{workbook}} to use}
-  \item{name}{The name's name to create}
+  \item{name}{The name of the range to be created}
   \item{formula}{Excel formula specifying the value / data the name refers to}
   \item{overwrite}{If a name with the same \code{name} already exists
     and \code{overwrite = TRUE}, then this name is removed first before
@@ -25,7 +25,7 @@ Creates a name for a specified formula in a \code{\linkS4class{workbook}}.
 }
 
 \details{
-Creates a name named \code{name} for the specified \code{formula}. 
+Creates a named range called \code{name} for the specified \code{formula}. 
 
 The \code{formula} should be specified as you would type it
 in Excel. Make sure that the worksheets, functions, ...
