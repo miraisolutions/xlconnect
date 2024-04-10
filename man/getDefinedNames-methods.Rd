@@ -18,7 +18,12 @@ are returned. Valid references are ones not starting with #REF! or
   #NULL! - which could result e.g. due to a missing sheet reference. The default
   value for \code{validOnly} is \code{TRUE}.}
   \item{worksheetScope}{Optional - the name of the worksheet in which the names are scoped;
-  for names in the global scope, use the value \code{""}}
+  to only query names in the global scope, use the value \code{""}}
+}
+
+\details{
+  If option \code{XLConnect.mapAttributesFromJava} is \code{TRUE} (default \code{FALSE}),
+  a list of the worksheet scopes in which the names were found is set as attribute \code{worksheetScope} on the result.
 }
 
 \author{

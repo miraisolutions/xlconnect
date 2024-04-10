@@ -24,11 +24,11 @@ otherwise. Note that the \code{name} argument is vectorized and
 therefore multiple names can be checked for existence in one method call.
 
 If \code{worksheetScope} is provided, TRUE will be returned only if a matching
-name exists in the local scope of the specified sheet. To explicitly match only
+named range exists in the local scope of the specified sheet. To explicitly match only
  in the global scope, pass \code{""} as the value.
 
 If option \code{XLConnect.mapAttributesFromJava} is \code{TRUE} (default \code{FALSE}),
-the worksheet scope in which the name was found is set as an attribute on the result.
+the worksheet scope in which the name is defined is set as attribute \code{worksheetScope} on the result.
 }
 
 \author{

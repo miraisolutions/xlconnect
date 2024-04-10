@@ -97,7 +97,7 @@ If \code{worksheetScope} is unspecified, the contents of the name found anywhere
 Otherwise, only a name specifically scoped to the specified sheet may be read. 
 To read only names defined in the global scope, pass \code{""} as the value.
 If option \code{XLConnect.mapAttributesFromJava} is \code{TRUE} (default \code{FALSE}), 
-the worksheet scope in which the name was found is set as an attribute of the result.
+the worksheet scope in which the name was found is set as attribute \code{worksheetScope} on the result.
 }
 \references{
 What are named regions/ranges?\cr
