@@ -32,6 +32,6 @@ setGeneric("getReferenceFormula",
 setMethod("getReferenceFormula",
 		signature(object = "workbook"),
 		function(object, name, worksheetScope = NULL) {
-			xlcCall(object, "getReferenceFormula", name, worksheetScope %||% .jnull())
+			xlcCall(object, "getReferenceFormula", name, worksheetScope %||% .jnull(), .withAttributes = TRUE)
 		}
 )
