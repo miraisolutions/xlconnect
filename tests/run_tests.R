@@ -29,8 +29,15 @@
 # Set timezone to UTC
 # Sys.setenv("TZ" = "UTC")
 
+# Option to determine if full test suite should be run
+options("FULL.TEST.SUITE" = Sys.getenv("FULL_TEST_SUITE") == "1")
+
 # Limit number of GC threads; set timezone
-options(java.parameters = c("-XX:+UseParallelGC", "-XX:ParallelGCThreads=1", paste0("-Duser.timezone=", Sys.timezone())))
+j_params <- c("-XX:+UseParallelGC", "-XX:ParallelGCThreads=1", paste0("-Duser.timezone=", Sys.timezone()))
+if(!getOption("FULL.TEST.SUITE")) {
+	j_params = c(j_params, "-XX:ActiveProcessorCount=1")
+}
+options(java.parameters = j_params)
 
 # Load library built by R CMD check
 library(package = "XLConnect", character.only = TRUE)
@@ -48,9 +55,10 @@ checkNoException <- function(expr) {
 runUnitTests <- function() {
 	
 	pkg <- "XLConnect"
-	
-	# Option to determine if full test suite should be run
-	options("FULL.TEST.SUITE" = Sys.getenv("FULL_TEST_SUITE") == "1")
+
+	if(!getOption("FULL.TEST.SUITE")) {
+		Sys.setenv("OMP_THREAD_LIMIT" = 1)
+	}
 
 	# RUnit is required for unit testing
 	if(require("RUnit", quietly = TRUE)) {
