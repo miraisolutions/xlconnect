@@ -173,7 +173,7 @@ jobs:
           args: 'c("--as-cran")'
           build_args: 'c("--compact-vignettes=gs+qpdf")'
         env:
-          FULL_TEST_SUITE: 1
+          FULL_TEST_SUITE: 0
 
       - name: run complete test suite # some tests are not run in r check, as test xls(x) files are Rbuild-ignored
         if: always()
