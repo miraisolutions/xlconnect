@@ -87,6 +87,8 @@ test.workbook.writeAndReadWorksheet <- function() {
 		testDataFrame(wb.xls, swiss, 4, 4)
 		# built-in dataset swiss (*.xlsx)
 		testDataFrame(wb.xlsx, swiss, 4, 4)
+	} else {
+		Sys.sleep(1.5)
 	}
 
 	# custom test dataset
