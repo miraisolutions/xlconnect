@@ -97,8 +97,6 @@ test.writeWorksheetToFile <- function() {
 		testDataFrame(file.xls, swiss)
 		# built-in dataset swiss (*.xlsx)
 		testDataFrame(file.xlsx, swiss)
-	} else {
-		Sys.sleep(1.5)
 	}
 
 	# custom test dataset

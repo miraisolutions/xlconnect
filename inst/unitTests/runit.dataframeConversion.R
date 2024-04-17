@@ -62,9 +62,6 @@ test.dataframeConversion <- function() {
 
 		# built-in dataset swiss
 		testDataFrame(swiss)
-	} 
-	else {
-		Sys.sleep(1.5)
 	}
 
 	# custom test dataset

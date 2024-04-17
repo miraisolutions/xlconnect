@@ -89,9 +89,6 @@ test.writeAndReadNamedRegion <- function() {
 		# built-in dataset swiss (*.xlsx)
 		testDataFrame(wb.xlsx, swiss, "$M$2")
 	}
-	else {
-		Sys.sleep(1.5)
-	}
 
 	# custom test dataset
 	cdf <- data.frame(
