@@ -250,10 +250,10 @@ jobs:
           rm -f "$XLC_JAR_PATH"/XLConnect*
           find "$XLC_JAR_PATH" -maxdepth 1 -type f -name "*.jar" -exec sha512sum {} + |\
           sort | awk '{print $1}' > effective_hashes
-          find /home/runner/work/xlconnect/xlconnect/target/dependency/ -maxdepth 1 -type f -name "*.jar" -exec sha512sum {} + |\
+          find "$GITHUB_WORKSPACE"/target/dependency/ -maxdepth 1 -type f -name "*.jar" -exec sha512sum {} + |\
           grep -v -E "poi-ooxml-lite|junit|hamcrest" |\
           sort | awk '{print $1}' > expected_hashes
           cmp expected_hashes effective_hashes ||\
-          (echo "JARs are different!" && ls -la /home/runner/work/xlconnect/xlconnect/target/dependency/ &&\
+          (echo "JARs are different!" && ls -la "$GITHUB_WORKSPACE"/target/dependency/ &&\
           ls -la "$XLC_JAR_PATH" &&\
           exit 1)
