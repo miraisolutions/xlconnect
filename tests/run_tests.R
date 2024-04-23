@@ -92,13 +92,16 @@ runUnitTests <- function() {
 		
 		# Print (summary) test protocol to stdout
 		printTextProtocol(TestResult, showDetails = FALSE)
-		# Write detailed test protocol to text file
-		printTextProtocol(TestResult, showDetails = TRUE, fileName = txtProtocol)
-		# Write HTML protocol
-		printHTMLProtocol(TestResult, fileName = htmlProtocol)
+		# only write results in FULL case, CRAN tries to run with readonly filesystem
+		if (getOption("FULL.TEST.SUITE")) {
+			# Write detailed test protocol to text file
+			printTextProtocol(TestResult, showDetails = TRUE, fileName = txtProtocol)
+			# Write HTML protocol
+			printHTMLProtocol(TestResult, fileName = htmlProtocol)
+		}
 		
 		# Show HTML Test Protocol
-		if (interactive()) { browseURL(url = htmlProtocol) }
+		if (interactive() && getOption("FULL.TEST.SUITE")) { browseURL(url = htmlProtocol) }
 		
 		## Return stop() to cause R CMD check stop in case of
 		##  - failures i.e. FALSE to unit tests or
