@@ -176,6 +176,7 @@ jobs:
           FULL_TEST_SUITE: 0
       
       - name: check that tests did not write anything to the R library
+        if: matrix.config.vignettes
         run: |
           INSTALL_PATH=$(Rscript -e "cat(.libPaths()[1])")/XLConnect
           INSTALLED_TIME=$(find "$INSTALL_PATH"/java -maxdepth 1 -type f -printf '%T@\n' | sort -n | tail -n 1 | awk '{print int($1+1)}' | xargs -I{} date -d "@{}" '+%Y-%m-%d %H:%M:%S')
