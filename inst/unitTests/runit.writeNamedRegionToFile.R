@@ -29,6 +29,7 @@
 
 test.writeNamedRegionToFile <- function() {
 
+  if(getOption("FULL.TEST.SUITE")) {
 	# Create workbooks
   file.xls <- "testWriteNamedRegionToFileWorkbook.xls"
   file.xlsx <- "testWriteNamedRegionToFileWorkbook.xlsx"
@@ -50,7 +51,7 @@ test.writeNamedRegionToFile <- function() {
             checkEquals(normalizeDataframe(df), res, check.attributes = FALSE, check.names = TRUE)
     }
 
-	if(getOption("FULL.TEST.SUITE")) {
+	
 		# built-in dataset mtcars (*.xls)
 		testDataFrame(file.xls, mtcars)
 		# built-in dataset mtcars (*.xlsx)
@@ -96,7 +97,6 @@ test.writeNamedRegionToFile <- function() {
 		testDataFrame(file.xls, swiss)
 		# built-in dataset swiss (*.xlsx)
 		testDataFrame(file.xlsx, swiss)
-	}
 
 	# custom test dataset
 	cdf <- data.frame(
@@ -161,4 +161,5 @@ test.writeNamedRegionToFile <- function() {
 
   testClearNamedRegions(file.xls, cdf)
   testClearNamedRegions(file.xlsx, cdf)
+  }
 }

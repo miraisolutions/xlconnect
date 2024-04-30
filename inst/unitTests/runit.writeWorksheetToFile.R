@@ -30,6 +30,7 @@
 
 test.writeWorksheetToFile <- function() {
 
+	if(getOption("FULL.TEST.SUITE")) {
 	# Create workbooks
         file.xls <- "testWriteWorksheetToFileWorkbook.xls"
         file.xlsx <- "testWriteWorksheetToFileWorkbook.xlsx"
@@ -51,7 +52,7 @@ test.writeWorksheetToFile <- function() {
                 checkEquals(normalizeDataframe(df), res, check.attributes = FALSE, check.names = TRUE)
         }
 
-	if(getOption("FULL.TEST.SUITE")) {
+	
 		# built-in dataset mtcars (*.xls)
 		testDataFrame(file.xls, mtcars)
 		# built-in dataset mtcars (*.xlsx)
@@ -97,7 +98,6 @@ test.writeWorksheetToFile <- function() {
 		testDataFrame(file.xls, swiss)
 		# built-in dataset swiss (*.xlsx)
 		testDataFrame(file.xlsx, swiss)
-	}
 
 	# custom test dataset
 	cdf <- data.frame(
@@ -139,5 +139,5 @@ test.writeWorksheetToFile <- function() {
 
 	testClearSheets(file.xls, cdf)
 	testClearSheets(file.xlsx, cdf)
-
+	}
 }

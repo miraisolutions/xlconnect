@@ -196,9 +196,9 @@ jobs:
         if: always()
         run: | 
           echo $(date)
-          cat tests/XLConnect_Unit_Tests.txt || true
+          cat inst/unitTests/resources/XLConnect_Unit_Tests.txt || true
           git clean -fd "*xls*"
-          grep -i "0 errors, 0 failures" tests/XLConnect_Unit_Tests.txt
+          grep -i "0 errors, 0 failures" inst/unitTests/resources/XLConnect_Unit_Tests.txt
         shell: bash
         continue-on-error: true
 
@@ -215,7 +215,7 @@ jobs:
         with:
           name: ${{ matrix.config.os-name }}${{matrix.config.os-version}}-java${{ matrix.config.java }}-R${{ matrix.config.r-version }}-results
           path: |
-            tests/XLConnect_Unit_Tests.*
+            inst/unitTests/resources/XLConnect_Unit_Tests.*
             check/XLConnect.Rcheck/
             !check/XLConnect.Rcheck/**/*.jar
             !check/XLConnect.Rcheck/00_pkg_src/
@@ -248,12 +248,12 @@ jobs:
           set -eux -o pipefail
           XLC_JAR_PATH=$(Rscript -e "cat(.libPaths()[1])")/XLConnect/java
           rm -f "$XLC_JAR_PATH"/XLConnect*
-          find "$XLC_JAR_PATH" -maxdepth 1 -type f -name "*.jar"|\
-          xargs -l sha512sum | sort | awk '{print $1}' > effective_hashes
-          find /home/runner/work/xlconnect/xlconnect/target/dependency/ -maxdepth 1 -type f -name "*.jar"|\
+          find "$XLC_JAR_PATH" -maxdepth 1 -type f -name "*.jar" -exec sha512sum {} + |\
+          sort | awk '{print $1}' > effective_hashes
+          find "$GITHUB_WORKSPACE"/target/dependency/ -maxdepth 1 -type f -name "*.jar" -exec sha512sum {} + |\
           grep -v -E "poi-ooxml-lite|junit|hamcrest" |\
-          xargs -l sha512sum | sort | awk '{print $1}' > expected_hashes
+          sort | awk '{print $1}' > expected_hashes
           cmp expected_hashes effective_hashes ||\
-          (echo "JARs are different!" && ls -la /home/runner/work/xlconnect/xlconnect/target/dependency/ &&\
+          (echo "JARs are different!" && ls -la "$GITHUB_WORKSPACE"/target/dependency/ &&\
           ls -la "$XLC_JAR_PATH" &&\
           exit 1)
