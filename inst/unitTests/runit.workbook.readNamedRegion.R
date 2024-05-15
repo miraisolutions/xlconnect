@@ -39,6 +39,8 @@ test.workbook.readNamedRegion <- function() {
 			"DateTimeColumn" = as.POSIXct(c(NA, NA, "2010-09-09 21:03:07", "2010-09-10 21:03:07", "2010-09-11 21:03:07")),
 			stringsAsFactors = F
 	)
+
+	options(XLConnect.setCustomAttributes = FALSE)
 	
 	# Check that the read named region equals the defined data.frame (*.xls)
 	res <- readNamedRegion(wb.xls, "Test", header = TRUE)
@@ -47,6 +49,20 @@ test.workbook.readNamedRegion <- function() {
 	# Check that the read named region equals the defined data.frame (*.xlsx)
 	res <- readNamedRegion(wb.xlsx, "Test", header = TRUE)
 	checkEquals(res, checkDf)
+
+	# Check that the same works when explicitly specifying global scope (*.xls)
+	res <- readNamedRegion(wb.xls, "Test", header = TRUE, worksheetScope = "")
+	checkEquals(res, checkDf)
+
+	# Check that the same works when explicitly specifying global scope (*.xlsx)
+	res <- readNamedRegion(wb.xlsx, "Test", header = TRUE, worksheetScope = "")
+	checkEquals(res, checkDf)
+
+	# check that global ranges are not found when specifying a worksheet name (*.xls)
+	checkException(readNamedRegion(wb.xls, name = "Test", header = TRUE, worksheetScope = "Test"))
+
+	# check that global ranges are not found when specifying a worksheet name (*.xlsx)
+	checkException(readNamedRegion(wb.xlsx, name = "Test", header = TRUE, worksheetScope = "Test"))
 	
 	# Check that attempting to read a non-existing named region throws an exception (*.xls)
 	checkException(readNamedRegion(wb.xls, "NameThatDoesNotExist"))
@@ -387,4 +403,23 @@ test.workbook.readNamedRegion <- function() {
 	expected = data.frame(B = 1:5, row.names = letters[1:5])
 	res <- readNamedRegionFromFile(rsrc("resources/testBug49.xlsx"), name = "test", rownames = "A")
 	checkEquals(expected, res)
+
+	options(XLConnect.setCustomAttributes = TRUE)
+	
+	# Check that named region can be read within a worksheet scope (see github issue #37)
+
+	name = 'Bla'
+	wb37xlsx <- loadWorkbook(rsrc("resources/test37.xlsx"), create = FALSE)
+	read1 <- readNamedRegion(wb37xlsx, name, worksheetScope = 'Sheet1')
+	checkEquals(attr(read1, "worksheetScope", exact = TRUE), "Sheet1")
+	read2 <- readNamedRegion(wb37xlsx, name, worksheetScope = 'Sheet2')
+	checkEquals(attr(read2,"worksheetScope", exact = TRUE), "Sheet2")
+  	checkEquals(colnames(read1), c("bla1"))
+  	checkEquals(colnames(read2), c("bla2"))
+	readBoth <- readNamedRegion(wb37xlsx, name, worksheetScope = c('Sheet1', 'Sheet2'))
+	checkEquals(colnames(readBoth[[1]]), 'bla1')
+	checkEquals(colnames(readBoth[[2]]), 'bla2')
+  
+  checkException(readNamedRegion(wb37xlsx, name, worksheetScope = 'Sheet3'))
 }
+

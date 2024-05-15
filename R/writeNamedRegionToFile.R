@@ -27,25 +27,28 @@
 #############################################################################
 
 
-writeNamedRegionToFile <- function(file, data, name, formula = NA, ..., 
+writeNamedRegionToFile <- function(file, data, name, formula = NA , ..., worksheetScope = NULL,
 		styleAction = XLC$STYLE_ACTION.XLCONNECT,clearNamedRegions=FALSE) {
 
-  wb <- loadWorkbook(file, create = !file.exists(file))  
+  wb <- loadWorkbook(file, create = !file.exists(file))
   setStyleAction(wb, styleAction)
  
   # clear existing named regions
-  existingNames <- getDefinedNames(wb)
-  toClear <- intersect(name[clearNamedRegions], existingNames)
-  clearNamedRegion(wb, toClear)
-  
-  if(!is.na(formula)) {
+  nameExists <- existsName(wb, name, worksheetScope = worksheetScope)
+  clearExistingName <- function(n, wsScope, clearExisting) {
+    if(clearExisting) clearNamedRegion(wb, n, worksheetScope = wsScope)
+  }
+  mapply(clearExistingName, name, worksheetScope %||% list(NULL), nameExists & clearNamedRegions)
+
+  # TODO simplify using all instead of any, see if tests still pass
+  if(all(!is.na(formula))) {
     sheets = extractSheetName(formula)
     createSheet(wb, sheets[sheets != ""])
-    createName(wb, name, formula)
+    createName(wb, name, formula, worksheetScope = worksheetScope)
   }
   
-  writeNamedRegion(wb, data, name, ...)
+  writeNamedRegion(wb, data, name, worksheetScope = worksheetScope, ...)
   
   saveWorkbook(wb)
-  invisible(wb)  
+  invisible(wb)
 }

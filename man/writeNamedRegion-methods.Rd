@@ -6,10 +6,11 @@
 \alias{writeNamedRegion,workbook,ANY-method}
 \title{Writing named regions to a workbook}
 \description{
-Writes named regions to a \code{\linkS4class{workbook}}.
+Writes data to the named regions defined in a \code{\linkS4class{workbook}}.
 }
 \usage{
-\S4method{writeNamedRegion}{workbook,ANY}(object,data,name,header,overwriteFormulaCells,rownames)
+\S4method{writeNamedRegion}{workbook,ANY}(object, data, name, header, 
+  overwriteFormulaCells, rownames, worksheetScope)
 }
 
 \arguments{
@@ -24,6 +25,8 @@ Writes named regions to a \code{\linkS4class{workbook}}.
   included as an additional column with the specified name. If \code{rownames = NULL} (default),
   no row names will be included. May also be a \code{list} in case multiple data objects are
   written in one call (see below).}
+  \item{worksheetScope}{Optional character vector with worksheet name(s) to limit the scope in 
+  which the \code{name}(s) to write to is/are expected to be found}.
 }
 
 \details{
@@ -79,6 +82,13 @@ createName(wb, name = "mtcars", formula = "mtcars!$A$1")
 # Write built-in data set 'mtcars' to the above defined named region
 # (using header = TRUE)
 writeNamedRegion(wb, mtcars, name = "mtcars")
+
+createSheet(wb, name="iris")
+setActiveSheet(wb, "iris")
+
+# Do the same with the iris data set, with a worksheet-scoped name
+createName(wb, name = "iris", formula = "iris!$A$1", worksheetScope = "iris")
+writeNamedRegion(wb, iris, name = "iris", worksheetScope="iris")
 
 # Save workbook (this actually writes the file to disk)
 saveWorkbook(wb)

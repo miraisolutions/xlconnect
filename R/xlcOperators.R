@@ -1,7 +1,7 @@
 #############################################################################
 #
 # XLConnect
-# Copyright (C) 2010-2024 Mirai Solutions GmbH
+# Copyright (C) 2010-2021 Mirai Solutions GmbH
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -17,23 +17,17 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 #
 #############################################################################
-
 #############################################################################
 #
-# Querying coordinates of Excel names
-# 
-# Author: Thomas Themel, Mirai Solutions GmbH
+# Operators used internally
 #
 #############################################################################
 
-setGeneric("getReferenceCoordinates",
-		function(object, name) standardGeneric("getReferenceCoordinates"))
-
-setMethod("getReferenceCoordinates", 
-		signature(object = "workbook"), 
-		function(object, name) {
-      .Deprecated("getReferenceCoordinatesForName")
-			res <- xlcCall(object, "getReferenceCoordinatesForName", name, .withAttributes = TRUE)
-      if(is.numeric(res)) { matrix(res, nrow = 2, byrow = TRUE) + 1 } else { res } 
-		}
-)
+# Replace `NULL` with a default value
+#
+# Operator that replaces the left-hand side with the right-hand side if the
+# left-hand side is NULL.
+#
+`%||%` <- function(x, y) {
+  if (is.null(x)) y else x
+}

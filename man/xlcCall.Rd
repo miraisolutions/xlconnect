@@ -8,20 +8,21 @@ Performs automatic argument vectorization, provides default Java
 exception and warnings handling for \pkg{XLConnect}.
 }
 \usage{
-xlcCall(obj, fun, ..., .recycle = TRUE, .simplify = TRUE, .checkWarnings = TRUE)
+xlcCall(obj, fun, ..., .recycle = TRUE, 
+  .simplify = TRUE, .checkWarnings = TRUE, .withAttributes = FALSE)
 }
 \arguments{
   \item{obj}{
   \pkg{XLConnect} S4 object (e.g \code{\linkS4class{workbook}}, \code{\linkS4class{cellstyle}}) which
   has a slot \code{jobj} representing a \pkg{rJava} \code{jobjRef} object whose method represented
   by the argument \code{fun} should be called.
-}
+  }
   \item{fun}{
   Name of Java method to be called.
-}
+  }
   \item{\dots}{
   Arguments to the Java method to be called.
-}
+  }
   \item{.recycle}{
   If \code{TRUE} (default), arguments passed through \dots will be automatically vectorized using \code{\link{mapply}} and
   \code{fun} will be called the appropriate amount of times.
@@ -31,9 +32,17 @@ xlcCall(obj, fun, ..., .recycle = TRUE, .simplify = TRUE, .checkWarnings = TRUE)
   \item{.simplify}{
   Only relevant if \code{.recycle = TRUE}. Argument to internal \code{\link{mapply}} to set if there should be an attempt to 
   reduce the result to a vector or matrix.
-}
+  }
   \item{.checkWarnings}{
   Whether to check for warnings registered on the underlying Java object.
+  }
+  \item{.withAttributes}{
+  Whether the function being called returns a wrapped Java object with attributes. 
+  If \code{TRUE}:
+    \itemize{
+      \item the object will be unwrapped
+      \item if option \code{XLConnect.setCustomAttributes} is \code{TRUE}, the attributes will be processed and set on the resulting R object.
+      }
   }
 }
 \details{

@@ -72,9 +72,12 @@ dataframeFromJava <- function(df, check.names) {
       res[[i]] = v
   	}
   	
-  	# Apply names
-  	names(res) = columnNames
-  	
-  	data.frame(res, check.names = check.names, stringsAsFactors = FALSE)
+  	# Preserve attributes
+  	toSet = (attributes(df))[!names(attributes(df)) %in% c("jobj", "jclass", "class", "package")]
+	names(res) = columnNames
+  	result = data.frame(res, check.names = check.names, stringsAsFactors = FALSE)
+	# combine attributes to avoid overwriting names, rownames, colnames
+	attributes(result) <- c(attributes(result), toSet)
+  	result
 	})
 }

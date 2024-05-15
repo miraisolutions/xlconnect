@@ -5,20 +5,23 @@
 \alias{removeName,workbook-method}
 \title{Removing names from workbooks}
 \description{
-Removes a name from a \code{\linkS4class{workbook}}.
+Removes a named range reference from a \code{\linkS4class{workbook}}.
 }
 \usage{
-\S4method{removeName}{workbook}(object,name)
+\S4method{removeName}{workbook}(object,name,worksheetScope)
 }
 
 \arguments{
   \item{object}{The \code{\linkS4class{workbook}} to use}
   \item{name}{The name to delete}
+  \item{worksheetScope}{Optional - the name of the worksheet in which the name is scoped;
+  useful if different sheets have locally-scoped named ranges with the same name.}
 }
 
 \details{
-Removes the name named \code{name} from the specified workbook
-\code{object} if it does exist. Multiple names can be specified to be removed.
+Removes the named range reference \code{name} from the specified workbook \code{object} if it does exist.
+Data in the referenced cells remains unchanged. Multiple names can be specified to be removed.
+Use \code{worksheetScope = ""} to only target names defined in the global scope.
 }
 \author{
 Martin Studer\cr

@@ -1,5 +1,12 @@
 XLConnect News
 --------------
+
+1.1.0 tbd
+
+  * Support for worksheet scoped names including [#37](https://github.com/miraisolutions/xlconnect/issues/37)
+    * specify scope of names when writing and reading names, and more
+    * new option to receive information on the scope in which a name was found
+
 1.0.9 2024-04-17
  * Use com.zaxxer.sparsebits.SparseBitSet instead of java.util.BitSet
  * (#212) fix for loading relative path workbooks under Java 8

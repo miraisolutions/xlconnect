@@ -36,11 +36,49 @@ test.writeAndReadNamedRegion <- function() {
 	testDataFrame <- function(wb, df, lref) {
 		namedRegion <- deparse(substitute(df))
 		createSheet(wb, name = namedRegion)
-		createName(wb, name = namedRegion, formula = paste(namedRegion, lref, sep = "!"))
-		writeNamedRegion(wb, df, name = namedRegion, header = TRUE)
-		res <- readNamedRegion(wb, namedRegion)
+		createName(wb, name = namedRegion, formula = paste(namedRegion, lref, sep = "!"), worksheetScope = namedRegion)
+		writeNamedRegion(wb, df, name = namedRegion, worksheetScope = namedRegion, header = TRUE)
+		res <- readNamedRegion(wb, namedRegion, worksheetScope = namedRegion)
 		checkEquals(normalizeDataframe(df, replaceInf = TRUE), res, check.attributes = FALSE, check.names = TRUE)
 	}
+
+	testDataFrameNameScope <- function(wb, df, lref) {
+		namedRegion <- paste(deparse(substitute(df)), "1", sep = "")
+		worksheetScopeName <- paste(namedRegion, "2", sep = "")
+		createSheet(wb, name = namedRegion)
+		createSheet(wb, name = worksheetScopeName)
+		createName(wb, name = namedRegion, formula = paste(namedRegion, lref, sep = "!"), worksheetScope = worksheetScopeName)
+		writeNamedRegion(wb, df, name = namedRegion, worksheetScope = worksheetScopeName, header = TRUE)
+		res <- readNamedRegion(wb, namedRegion, worksheetScope = worksheetScopeName)
+		checkEquals(normalizeDataframe(df, replaceInf = TRUE), res, check.attributes = FALSE, check.names = TRUE)
+	}
+
+	testDataFrameGlobalExplicit <- function(wb, df, lref) {
+		namedRegion <- paste(deparse(substitute(df)), "forGlobal", sep = "")
+		createSheet(wb, name = namedRegion)
+		createName(wb, name = namedRegion, formula = paste(namedRegion, lref, sep = "!"), worksheetScope = "")
+		writeNamedRegion(wb, df, name = namedRegion, worksheetScope = "", header = TRUE)
+		res <- readNamedRegion(wb, namedRegion, worksheetScope = "")
+		checkEquals(normalizeDataframe(df, replaceInf = TRUE), res, check.attributes = FALSE, check.names = TRUE)
+	}
+
+	testDataFrameGlobalAndScoped <- function(wb, df_global, df_scoped, lref) {
+		dfs <- list(df_global, df_scoped)
+		namedRegion <- paste0(deparse(substitute(df_global)), "expect_global")
+		sheet_2 <- paste0(namedRegion, "2")
+		sheetNames <- c(namedRegion, sheet_2)
+		scopeSheets <- c("", sheet_2)
+		createSheet(wb, name = sheetNames)
+		createName(wb, name = namedRegion, formula = paste(sheetNames, lref, sep = "!"), worksheetScope = scopeSheets)
+		writeNamedRegion(wb, dfs, name = namedRegion, worksheetScope = scopeSheets, header = TRUE)
+		res_full <- readNamedRegion(wb, namedRegion, worksheetScope = scopeSheets)
+		dfs_norm <- list(normalizeDataframe(df_global, replaceInf = TRUE), normalizeDataframe(df_scoped, replaceInf = TRUE)) 
+		checkEquals(dfs_norm, res_full, check.attributes = FALSE, check.names = TRUE)
+		# checkEquals(attr(res_full, "worksheetScope"), scopeSheets)
+		res_global_prio <- readNamedRegion(wb, namedRegion)
+		checkEquals(normalizeDataframe(df_global, replaceInf = TRUE), res_global_prio, check.attributes = FALSE, check.names = TRUE)
+	}
+
 
 	if(getOption("FULL.TEST.SUITE")) {
 		# built-in dataset mtcars (*.xls)
@@ -58,10 +96,20 @@ test.writeAndReadNamedRegion <- function() {
 		# built-in dataset attenu (*.xlsx)
 		testDataFrame(wb.xlsx, attenu, "$A$8")
 
+		# built-in dataset attenu (*.xls) - explicit global scope
+		testDataFrameGlobalExplicit(wb.xls, attenu, "$A$8")
+		# built-in dataset attenu (*.xlsx) - explicit global scope
+		testDataFrameGlobalExplicit(wb.xlsx, attenu, "$A$8")
+
 		# built-in dataset ChickWeight (*.xls)
 		testDataFrame(wb.xls, ChickWeight, "$BQ$7")
 		# built-in dataset ChickWeight (*.xlsx)
 		testDataFrame(wb.xlsx, ChickWeight, "$BQ$7")
+
+		# built-in dataset ChickWeight (*.xls) - explicit global scope
+		testDataFrameGlobalExplicit(wb.xls, ChickWeight, "$BQ$7")
+		# built-in dataset ChickWeight (*.xlsx) - explicit global scope
+		testDataFrameGlobalExplicit(wb.xlsx, ChickWeight, "$BQ$7")
 
 		# built-in dataset CO2 (*.xls)
 		CO = CO2 # CO2 seems to be an illegal name
@@ -84,10 +132,25 @@ test.writeAndReadNamedRegion <- function() {
 		# built-in dataset morley (*.xlsx)
 		testDataFrame(wb.xlsx, morley, "$K$4")
 
+		# built-in dataset morley (*.xls)
+		testDataFrameNameScope(wb.xls, morley, "$K$4")
+		# built-in dataset morley (*.xlsx)
+		testDataFrameNameScope(wb.xlsx, morley, "$K$4")
+
 		# built-in dataset swiss (*.xls)
 		testDataFrame(wb.xls, swiss, "$M$2")
 		# built-in dataset swiss (*.xlsx)
 		testDataFrame(wb.xlsx, swiss, "$M$2")
+
+		# built-in dataset swiss (*.xls)
+		testDataFrameNameScope(wb.xls, swiss, "$M$2")
+		# built-in dataset swiss (*.xlsx)
+		testDataFrameNameScope(wb.xlsx, swiss, "$M$2")
+
+		# built-in datasets swiss and morley (*.xls)
+		testDataFrameGlobalAndScoped(wb.xls, swiss, morley, "$M$2")
+		# built-in dataset swiss and morley (*.xlsx)
+		testDataFrameGlobalAndScoped(wb.xlsx, swiss, morley, "$M$2")
 	}
 
 	# custom test dataset

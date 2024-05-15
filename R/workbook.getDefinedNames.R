@@ -27,11 +27,11 @@
 #############################################################################
 
 setGeneric("getDefinedNames",
-	function(object, validOnly = TRUE) standardGeneric("getDefinedNames"))
+	function(object, validOnly = TRUE, worksheetScope = NULL) standardGeneric("getDefinedNames"))
 
 setMethod("getDefinedNames", 
 	signature(object = "workbook"), 
-	function(object, validOnly = TRUE) {
-	  xlcCall(object, "getDefinedNames", validOnly, .recycle = FALSE)
+	function(object, validOnly = TRUE, worksheetScope = NULL) {
+	  xlcCall(object, "getDefinedNames", validOnly, worksheetScope %||% .jnull(), .recycle = FALSE, .withAttributes = TRUE)
 	}
 )

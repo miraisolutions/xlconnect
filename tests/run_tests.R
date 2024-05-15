@@ -59,6 +59,7 @@ runUnitTests <- function() {
 	if(!getOption("FULL.TEST.SUITE")) {
 		Sys.setenv("OMP_THREAD_LIMIT" = 1)
 	}
+	options(XLConnect.setCustomAttributes = TRUE)
 
 	# RUnit is required for unit testing
 	if(require("RUnit", quietly = TRUE)) {

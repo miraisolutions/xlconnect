@@ -32,23 +32,51 @@ test.workbook.existsName <- function() {
 	wb.xls <- loadWorkbook(rsrc("resources/testWorkbookExistsNameAndSheet.xls"), create = FALSE)
 	wb.xlsx <- loadWorkbook(rsrc("resources/testWorkbookExistsNameAndSheet.xlsx"), create = FALSE)
 	
+	expect_found <- TRUE
+	attributes(expect_found) <- list(worksheetScope = "")
+	
 	# Check that the following names exists (*.xls)
-	checkTrue(existsName(wb.xls, "AA"))
-	checkTrue(existsName(wb.xls, "BB"))
-	checkTrue(existsName(wb.xls, "CC"))
+	checkEquals(existsName(wb.xls, "AA"), expect_found)
+	checkEquals(existsName(wb.xls, "BB"), expect_found)
+	checkEquals(existsName(wb.xls, "CC"), expect_found)
 	
 	# Check that the following do NOT exists (*.xls)
-	checkTrue(!existsName(wb.xls, "DD"))
-	checkTrue(!existsName(wb.xls, "'illegal name"))
-	checkTrue(!existsName(wb.xls, "%&$$-^~@afk20 235-??a?"))
+	checkEquals(existsName(wb.xls, "DD"), FALSE)
+	checkEquals(existsName(wb.xls, "'illegal name"), FALSE)
+	checkEquals(existsName(wb.xls, "%&$$-^~@afk20 235-??a?"), FALSE)
 	
 	# Check that the following names exists (*.xlsx)
-	checkTrue(existsName(wb.xlsx, "AA"))
-	checkTrue(existsName(wb.xlsx, "BB"))
-	checkTrue(existsName(wb.xlsx, "CC"))
+	checkEquals(existsName(wb.xlsx, "AA"), expect_found)
+	checkEquals(existsName(wb.xlsx, "BB"), expect_found)
+	checkEquals(existsName(wb.xlsx, "CC"), expect_found)
 	
 	# Check that the following do NOT exists (*.xlsx)
-	checkTrue(!existsName(wb.xlsx, "DD"))
-	checkTrue(!existsName(wb.xlsx, "'illegal name"))
-	checkTrue(!existsName(wb.xlsx, "%&$$-^~@afk20 235-??a?"))
+	checkEquals(existsName(wb.xlsx, "DD"), FALSE)
+	checkEquals(existsName(wb.xlsx, "'illegal name"), FALSE)
+	checkEquals(existsName(wb.xlsx, "%&$$-^~@afk20 235-??a?"), FALSE)
+
+	# check with attributes - where was the name found ? (*.xls)
+	attributes(expect_found) <- list(worksheetScope = "AAA")
+	checkEquals(existsName(wb.xls, "AA_1"), expect_found)
+	attributes(expect_found) <- list(worksheetScope = "BBB")
+	checkEquals(existsName(wb.xls, "BB_1"), expect_found)
+
+	# check with attributes - where was the name found ? (*.xlsx)
+	attributes(expect_found) <- list(worksheetScope = "AAA")
+	checkEquals(existsName(wb.xlsx, "AA_1"), expect_found)
+	attributes(expect_found) <- list(worksheetScope = "BBB")
+	checkEquals(existsName(wb.xlsx, "BB_1"), expect_found)
+
+	options(XLConnect.setCustomAttributes = FALSE)
+
+	# check without attributes (*.xlsx)
+	checkTrue(existsName(wb.xls, "AA_1"))
+	checkTrue(existsName(wb.xls, "BB_1"))
+
+	# check without attributes (*.xlsx)
+	checkTrue(existsName(wb.xlsx, "AA_1"))
+	checkTrue(existsName(wb.xlsx, "BB_1"))
+
+	
+	options(XLConnect.setCustomAttributes = TRUE)
 }

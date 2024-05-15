@@ -8,8 +8,9 @@
 Reads named regions from a \code{\linkS4class{workbook}}.
 }
 \usage{
-\S4method{readNamedRegion}{workbook}(object, name, header, rownames, colTypes, forceConversion, 
-dateTimeFormat, check.names, useCachedValues, keep, drop, simplify, readStrategy)
+\S4method{readNamedRegion}{workbook}(object, name, header, rownames, colTypes, 
+forceConversion, dateTimeFormat, check.names, useCachedValues, keep, drop, simplify,
+readStrategy, worksheetScope)
 }
 
 \arguments{
@@ -79,10 +80,11 @@ dateTimeFormat, check.names, useCachedValues, keep, drop, simplify, readStrategy
   fractional days represent hours, minutes, and seconds) and only blank cells are recognized as missing (missing value 
   identifiers as set in \code{\link[=setMissingValue-methods]{setMissingValue}} are ignored)
   }}
+  \item{worksheetScope}{Optional, the name of the worksheet to use for resolving the named region}
 }
 
 \details{
-The arguments \code{name} and \code{header} are vectorized. As such,
+The arguments \code{name}, \code{header}, and \code{worksheetScope} are vectorized. As such,
 multiple named regions can be read with one method call. If only one
 single named region is read, the return value is a \code{data.frame}.If
 multiple named regions are specified, the return value is a (named)
@@ -91,7 +93,11 @@ specified with the argument \code{name}.\cr
 When reading dates, if your system uses a time zone that has / had daylight saving time,
 certain dates / timestamps will not be read exactly as they were written. See
 \url{https://poi.apache.org/apidocs/dev/org/apache/poi/ss/usermodel/DateUtil.html#getJavaDate-double-}
-
+If \code{worksheetScope} is unspecified, the contents of the name found anywhere in the workbook will be read.
+Otherwise, only a name specifically scoped to the specified sheet may be read. 
+To read only names defined in the global scope, pass \code{""} as the value.
+If option \code{XLConnect.setCustomAttributes} is \code{TRUE} (default \code{FALSE}), 
+the worksheet scope in which the name was found is set as attribute \code{worksheetScope} on the result.
 }
 \references{
 What are named regions/ranges?\cr
@@ -178,6 +184,16 @@ wb <- loadWorkbook(demoExcelFile)
 
 # Read the columns 1, 3 and 5 of the named region 'mtcars' (with default header = TRUE)
 data <- readNamedRegion(wb, name = "mtcars", keep=c(1,3,5))
+
+# activate attributes (used by worksheet scope)
+options(XLConnect.setCustomAttributes = TRUE)
+
+# read the iris dataset from worksheet-scoped named region 'iris'
+wb <- loadWorkbook("demoFiles/iris.xlsx")
+data <- readNamedRegion(wb, name = "iris", worksheetScope = "iris")
+
+# show worksheet scope attribute
+attr(data, "worksheetScope")
 }
 }
 \keyword{methods}

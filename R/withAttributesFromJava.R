@@ -20,20 +20,24 @@
 
 #############################################################################
 #
-# Querying coordinates of Excel names
-# 
-# Author: Thomas Themel, Mirai Solutions GmbH
+# Utility function for converting XLConnect java objects with added attributes
+# to R variables with the corresponding attributes.
+# Sets the attributes if option XLConnect.setCustomAttributes is TRUE. 
+# Otherwise only unwraps the java object.
+#
+# Author: Simon Poltier, Mirai Solutions GmbH
 #
 #############################################################################
 
-setGeneric("getReferenceCoordinates",
-		function(object, name) standardGeneric("getReferenceCoordinates"))
-
-setMethod("getReferenceCoordinates", 
-		signature(object = "workbook"), 
-		function(object, name) {
-      .Deprecated("getReferenceCoordinatesForName")
-			res <- xlcCall(object, "getReferenceCoordinatesForName", name, .withAttributes = TRUE)
-      if(is.numeric(res)) { matrix(res, nrow = 2, byrow = TRUE) + 1 } else { res } 
-		}
-)
+withAttributesFromJava <- function(jobj) {
+    
+    unwrapped <- jobj$getValue()
+    allANames = .jcall(jobj, "[S", "getAttributeNames")
+    
+    if(getOption("XLConnect.setCustomAttributes")){
+        for(i in seq(along = allANames)) {
+            attr(unwrapped, allANames[i]) <- jobj$getAttributeValue(allANames[i])
+        }
+    }
+    unwrapped
+  }

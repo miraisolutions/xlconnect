@@ -8,7 +8,7 @@
 Retrieves the defined names in a \code{\linkS4class{workbook}}.
 }
 \usage{
-\S4method{getDefinedNames}{workbook}(object, validOnly)
+\S4method{getDefinedNames}{workbook}(object, validOnly, worksheetScope)
 }
 
 \arguments{
@@ -17,6 +17,13 @@ Retrieves the defined names in a \code{\linkS4class{workbook}}.
 are returned. Valid references are ones not starting with #REF! or
   #NULL! - which could result e.g. due to a missing sheet reference. The default
   value for \code{validOnly} is \code{TRUE}.}
+  \item{worksheetScope}{Optional - the name of the worksheet in which the names are scoped;
+  to only query names in the global scope, use the value \code{""}}
+}
+
+\details{
+  If option \code{XLConnect.setCustomAttributes} is \code{TRUE} (default \code{FALSE}),
+  a list of the worksheet scopes in which the names were found is set as attribute \code{worksheetScope} on the result.
 }
 
 \author{

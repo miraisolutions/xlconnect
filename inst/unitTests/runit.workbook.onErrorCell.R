@@ -38,12 +38,17 @@ test.workbook.onErrorCell <- function() {
 	res <- try(readNamedRegion(wb.xls, name = "AA"))
 	checkTrue(!is(res, "try-error"))
 	target <- data.frame(A = c("aa", "bb", "cc", NA, "ee", "ff"), stringsAsFactors = FALSE)
+	attr(target, "worksheetScope") <- ""
 	checkEquals(res, target)
 	
+
 	res <- try(readNamedRegion(wb.xls, name = "BB"))
 	checkTrue(!is(res, "try-error"))
 	target <- data.frame(B = c(4.3, NA, -2.5, 1.6, NA, 9.7), stringsAsFactors = FALSE)
+	attr(target, "worksheetScope") <- ""
 	checkEquals(res, target)
+
+	options(XLConnect.setCustomAttributes = FALSE)
 	
 	res <- try(readNamedRegion(wb.xls, name = "CC"))
 	checkTrue(!is(res, "try-error"))
@@ -87,6 +92,8 @@ test.workbook.onErrorCell <- function() {
 	checkTrue(!is(res, "try-error"))
 	target <- data.frame(E = c("zz", "yy", NA, "ww", "vv", "uu"), stringsAsFactors = FALSE)
 	checkEquals(res, target)
+
+	options(XLConnect.setCustomAttributes = TRUE)
 	
 	# Check that reading error cells with the stop flag set causes an exception (*.xls)
 	onErrorCell(wb.xls, XLC$ERROR.STOP)

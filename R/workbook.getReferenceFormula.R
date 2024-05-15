@@ -27,11 +27,11 @@
 #############################################################################
 
 setGeneric("getReferenceFormula",
-		function(object, name) standardGeneric("getReferenceFormula"))
+		function(object, name, worksheetScope = NULL) standardGeneric("getReferenceFormula"))
 
-setMethod("getReferenceFormula", 
-		signature(object = "workbook"), 
-		function(object, name) {
-			xlcCall(object, "getReferenceFormula", name)
+setMethod("getReferenceFormula",
+		signature(object = "workbook"),
+		function(object, name, worksheetScope = NULL) {
+			xlcCall(object, "getReferenceFormula", name, worksheetScope %||% .jnull(), .withAttributes = TRUE)
 		}
 )

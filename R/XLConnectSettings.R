@@ -44,6 +44,8 @@ XLConnectSettings <- function(pdesc) {
 	options(XLConnect.Sheet = "#xlc#")
 	# Rowname column (used by xlcDump, xlcRestore)
 	options(XLConnect.RownameCol = ".rownames")
+
+	options(XLConnect.setCustomAttributes = FALSE)
   
 	invisible()
 }

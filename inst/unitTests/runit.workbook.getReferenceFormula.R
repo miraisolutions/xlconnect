@@ -39,5 +39,23 @@ test.workbook.getReferenceFormula <- function() {
 	# Check if reference formulas match (*.xlsx)
 	checkTrue(getReferenceFormula(wb.xlsx, "FirstName") == "Tabelle1!$A$1")
 	checkTrue(substring(getReferenceFormula(wb.xlsx, "SecondName"), 1, 5) == "#REF!")
+
+	# Check if reference formulas match and are in the global scope (*.xls)
+	expect_formula <- "Tabelle1!$A$1"
+	attributes(expect_formula) <- list(worksheetScope = "")
+	checkEquals(getReferenceFormula(wb.xls, "FirstName"), expect_formula)
+	
+	expect_formula <- "#REF!"
+	attributes(expect_formula) <- list(worksheetScope = "")
+	checkEquals(substring(getReferenceFormula(wb.xls, "SecondName"), 1, 5), expect_formula)
+	
+	# Check if reference formulas match and are in the global scope (*.xlsx)
+	expect_formula <- "Tabelle1!$A$1"
+	attributes(expect_formula) <- list(worksheetScope = "")
+	checkEquals(getReferenceFormula(wb.xlsx, "FirstName"), expect_formula)
+	
+	expect_formula <- "#REF!"
+	attributes(expect_formula) <- list(worksheetScope = "")
+	checkEquals(substring(getReferenceFormula(wb.xlsx, "SecondName"), 1, 5), expect_formula)
 	
 }
