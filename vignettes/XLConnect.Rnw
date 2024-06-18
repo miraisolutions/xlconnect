@@ -761,13 +761,22 @@ p
 Check out the Excel file to see how the data and the graph have been exported!
 
 \pagebreak
-\section{What's new in XLConnect version \Sexpr{getOption("XLConnect.Version")}}
-
-We have introduced the following updates in version \Sexpr{getOption("XLConnect.Version")} of \pkg{XLConnect}:
+\subsection{Scope of named regions}
+In XLConnect functions that use named regions, it is possible to specify an argument \code{worksheetScope}.
+This argument can be used to specify the worksheet in which the targeted named region is defined.
 \begin{itemize}
-  \item{Upgraded XLConnectJars dependency to version 0.2-15}
-  \item{Rely on Java version check from XLConnectJars which now supports Java 10}
+	\item \code{worksheetScope = "Sheet1"} targets named regions scoped to the worksheet named \textit{Sheet1}.
+	\item \code{worksheetScope = ""} targets the named region defined in the global (workbook-wide) scope.
+	\item when omitting the parameter (leaving the default value \code{NA}), the first matching name will be targeted.
 \end{itemize}
+
+All methods that return a value based on a named region (e.g. \code{readNamedRegion}) 
+can optionally set a \textit{worksheetScope} attribute on the returned value,
+which will contain the name of the the worksheet scope in which the named region was found.
+To enable this behavior, set the option \code{XLConnect.setCustomAttributes} to \code{TRUE}:
+\\\code{options(XLConnect.setCustomAttributes = TRUE)}
+
+\section{What's new in XLConnect version \Sexpr{getOption("XLConnect.Version")}}
 
 A summary of news in \pkg{XLConnect} \Sexpr{getOption("XLConnect.Version")} can be found in the 
 \href{https://cran.r-project.org/package=XLConnect/NEWS}{NEWS} file on CRAN.
