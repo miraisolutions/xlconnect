@@ -24,8 +24,7 @@ Appends data to an existing named region.
   included as an additional column with the specified name. If \code{rownames = NULL} (default),
   no row names will be included.}
   \item{worksheetScope}{Optional character vector with worksheet name(s) to target a \code{name}
-  defined in the specified sheet(s) only.
-  By default all names in the workbook are considered and the first matching name is used.}
+  defined in the specified sheet(s) only.}
 }
 
 \details{
