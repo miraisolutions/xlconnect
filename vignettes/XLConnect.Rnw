@@ -760,7 +760,6 @@ p
 
 Check out the Excel file to see how the data and the graph have been exported!
 
-\pagebreak
 \subsection{Scope of named regions}
 In XLConnect functions that use named regions, it is possible to specify an argument \code{worksheetScope}.
 This argument can be used to specify the worksheet in which the targeted named region is defined.
@@ -775,6 +774,10 @@ can optionally set a \textit{worksheetScope} attribute on the returned value,
 which will contain the name of the the worksheet scope in which the named region was found.
 To enable this behavior, set the option \code{XLConnect.setCustomAttributes} to \code{TRUE}:
 \\\code{options(XLConnect.setCustomAttributes = TRUE)}
+
+You can then access the worksheet scope value using \textsf{R}'s \code{attr} function.
+
+\pagebreak
 
 \section{What's new in XLConnect version \Sexpr{getOption("XLConnect.Version")}}
 
@@ -924,14 +927,10 @@ We will do our best to reply to your enquires as quickly as possible!
 	    \\\urlwofont{https://www.rdocumentation.org/packages/XLConnect}
 	\item \pkg{XLConnect} on METACRAN:
 	    \\\urlwofont{https://www.r-pkg.org/pkg/XLConnect}
-	\item \pkg{XLConnect} on crantastic!: 
-			\\\urlwofont{https://crantastic.org/packages/XLConnect}
+	\item \pkg{XLConnect} on r-universe: 
+			\\\urlwofont{https://miraisolutions.r-universe.dev/XLConnect}
 	\item \pkg{XLConnect} in the R Programming section on Wikibooks:
 			\\\urlwofont{https://en.wikibooks.org/wiki/R_Programming/Importing_and_exporting_data}
-	\item Quick Intro to \pkg{XLConnect}:
-	    \\\urlwofont{https://altons.github.io/rstats/2015/02/13/quick-intro-to-xlconnect/}
-	\item "How to Read Data from Excel into R", article by Joris Meys and Andrie de Vries:
-			\\\urlwofont{https://www.dummies.com/how-to/content/how-to-read-data-from-excel-into-r.html}
   \item R and Excel: Making Your Data Dumps Pretty with XLConnect:
       \\\urlwofont{https://www.youtube.com/watch?v=G3mOUbZr4HI}
       \\\urlwofont{https://amunategui.github.io/excel-data-dumps/}
