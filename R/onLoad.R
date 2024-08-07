@@ -70,7 +70,7 @@
       paste0(apachePrefix, "/commons/commons-compress/1.26.2/commons-compress-1.26.2.jar"), "commons-compress.jar",
       "1\\.(2[5-9]|[2-9][0-9]).*",  libname, pkgname, debianpkg = "libcommons-compress-java", rpmpkg="apache-commons-compress"),
     xlcEnsureDependenciesFor(
-      paste0(repo, "/commons-lang3/commons-lang3/3.14.0/commons-lang3-3.14.0.jar"), "commons-lang3-3.14.0.jar",
+      paste0(apachePrefix, "/commons/commons-lang3/3.14.0/commons-lang3-3.14.0.jar"), "commons-lang3-3.14.0.jar",
       "3\\.(1[4-9]|[2-9][0-9])\\.*",  libname, pkgname, debianpkg="libcommons-lang3-java", rpmpkg="apache-commons-lang3"),
     xlcEnsureDependenciesFor(
       paste0(apachePrefix, "/xmlbeans/xmlbeans/5.2.1/xmlbeans-5.2.1.jar"), "xmlbeans.jar",
