@@ -4,7 +4,7 @@ XLConnect depends on other open source software components. The following is a l
 
    Includes other Apache projects as transitive dependencies: Commons Compress, Commons Collections, Commons Math, Commons Codec, Commons IO, Log4j 2, XMLBeans
 
-   Copyright © 2002-2023, The Apache Software Foundation
+   Copyright © 2002-2024, The Apache Software Foundation
 
    Apache POI, POI, Apache, the Apache feather logo, and the Apache POI project logo are trademarks of The Apache Software Foundation.
 
