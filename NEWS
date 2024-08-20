@@ -1,7 +1,7 @@
 XLConnect News
 --------------
 
-1.1.0 tbd
+1.1.0 2024-08-22
 
   * Support for worksheet scoped names including [#37](https://github.com/miraisolutions/xlconnect/issues/37)
   * specify scope of names when writing and reading names, and more
