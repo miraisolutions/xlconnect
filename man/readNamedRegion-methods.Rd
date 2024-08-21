@@ -101,7 +101,7 @@ the worksheet scope in which the name was found is set as attribute \code{worksh
 }
 \references{
 What are named regions/ranges?\cr
-\url{https://www.officearticles.com/excel/named_ranges_in_microsoft_excel.htm}\cr
+\url{https://web.archive.org/web/20240821110221/https://www.officearticles.com/excel/named_ranges_in_microsoft_excel.htm}\cr
 How to create named regions/ranges?\cr
 \url{https://www.youtube.com/watch?v=iAE9a0uRtpM}
 }
@@ -131,7 +131,7 @@ Any other string will return \code{FALSE}.
 \item Forcing conversion from Numeric to DateTime: since Excel understands
 Dates/Times as Numerics with some additional formatting, a conversion from
 a Numeric to a DateTime is actually possible. Numerics in this case represent
-the number of days since 1900-01-00 (yes, day 00! - see \url{http://www.cpearson.com/excel/datetime.htm}).
+the number of days since 1900-01-00 (yes, day 00! - see \url{https://web.archive.org/web/20240821110422/http://www.cpearson.com/excel/datetime.htm}).
 Note that in R 0 is represented as 1899-12-31 since there is no 1900-01-00.
 Fractional days represent hours, minutes, and seconds.
 }

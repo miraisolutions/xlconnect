@@ -37,7 +37,7 @@ vectorized such that multiple names can be created in one method call.
 
 \references{
 What are named regions/ranges?\cr
-\url{https://www.officearticles.com/excel/named_ranges_in_microsoft_excel.htm}\cr
+\url{https://web.archive.org/web/20240821110221/https://www.officearticles.com/excel/named_ranges_in_microsoft_excel.htm}\cr
 How to create named regions/ranges?\cr
 \url{https://www.youtube.com/watch?v=iAE9a0uRtpM}
 }

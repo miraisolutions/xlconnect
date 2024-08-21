@@ -134,7 +134,7 @@ require(XLConnect)
 \end{tikzpicture}
 
 % Excel icon on top right of the title page
-% Source: https://www.iconarchive.com/show/softdimension-icons-by-benjigarner/Excel-icon.html
+% Source: https://web.archive.org/web/20240821110005/https://www.iconarchive.com/show/softdimension-icons-by-benjigarner/Excel-icon.html
 
 \begin{tikzpicture}[remember picture,overlay,>=stealth]
 
@@ -930,10 +930,10 @@ We will do our best to reply to your enquires as quickly as possible!
 	\item \pkg{XLConnect} on r-universe: 
 			\\\urlwofont{https://miraisolutions.r-universe.dev/XLConnect}
 	\item \pkg{XLConnect} in the R Programming section on Wikibooks:
-			\\\urlwofont{https://en.wikibooks.org/wiki/R_Programming/Importing_and_exporting_data}
+			\\\urlwofont{https://web.archive.org/web/20240821111632/https://en.wikibooks.org/wiki/R_Programming/Importing_and_exporting_data}
   \item R and Excel: Making Your Data Dumps Pretty with XLConnect:
       \\\urlwofont{https://www.youtube.com/watch?v=G3mOUbZr4HI}
-      \\\urlwofont{https://amunategui.github.io/excel-data-dumps/}
+      \\\urlwofont{https://web.archive.org/web/20240821105927/https://amunategui.github.io/excel-data-dumps/}
 \end{enumerate}
 
 \end{document}
