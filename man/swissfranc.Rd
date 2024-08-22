@@ -9,5 +9,5 @@
 }
 \usage{swissfranc}
 \format{A data.frame with daily exchange rates in the mentioned time frame.}
-\source{retrieved via \url{https://oanda.com/} - the retrieved time range is no longer available.}
+\source{retrieved via \samp{https://www.oanda.com/} - the retrieved time range is no longer available.}
 \keyword{datasets}
