@@ -1,6 +1,10 @@
 XLConnect News
 --------------
 
+1.1.1.9999 (unreleased)
+
+  * fix #225 (loading simple logging context factory)
+
 1.1.0 2024-08-22
 
   * Support for worksheet scoped names including [#37](https://github.com/miraisolutions/xlconnect/issues/37)
