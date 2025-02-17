@@ -1,13 +1,11 @@
 XLConnect News
 --------------
 
-1.1.1.9999 (unreleased)
-
+1.2.0 2025-02-17
   * Fix #225 (loading simple logging context factory)
   * Upgrade POI to 5.4.0
 
 1.1.0 2024-08-22
-
   * Support for worksheet scoped names including [#37](https://github.com/miraisolutions/xlconnect/issues/37)
   * Specify scope of names when writing and reading names, and more
   * New option to receive information on the scope in which a name was found
