@@ -92,6 +92,7 @@ export(
 	aref,
 	aref2idx,
 	col2idx,
+	configurePOI,
 	cref2idx,
 	extractSheetName,
 	idx2aref,
