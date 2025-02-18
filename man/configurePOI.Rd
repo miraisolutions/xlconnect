@@ -7,7 +7,7 @@ Configuring Apache POI
 Configures Apache POI and related components.
 }
 \usage{
-configurePOI(zip_max_files = 1000L, zip_min_inflate_ratio = 0.01,
+configurePOI(zip_max_files = 1000L, zip_min_inflate_ratio = 0.001,
   zip_max_entry_size = 0xFFFFFFFF, zip_max_text_size = 10*1024*1024,
   max_size_byte_array = -1L)
 }
@@ -17,7 +17,7 @@ configurePOI(zip_max_files = 1000L, zip_min_inflate_ratio = 0.01,
   \item{zip_min_inflate_ratio}{Numeric scalar specifying the ratio between
   de- and inflated bytes to detect zip-bombs. If the compression ratio is
   better than the specified number an error will be thrown. Defaults to
-  \code{0.01}.}
+  \code{0.001}.}
   \item{zip_max_entry_size}{Integer scalar specifying the maximum file size
   of a single zip entry in an *.xlsx file. Defaults to 4'294'967'295 bytes,
   which is 4GB.}

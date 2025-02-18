@@ -29,7 +29,7 @@
 
 configurePOI <- function(
     zip_max_files = 1000L,
-    zip_min_inflate_ratio = 0.01,
+    zip_min_inflate_ratio = 0.001,
     zip_max_entry_size = 0xFFFFFFFF,
     zip_max_text_size = 10*1024*1024,
     max_size_byte_array = -1L
