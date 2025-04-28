@@ -51,7 +51,7 @@ test.configurePOI <- function() {
   # characters to just 1
   configurePOI(zip_max_text_size = 1L)
   checkException(readWorksheetFromFile(
-    rsrc("resources/testWorkbookReadNamedREgion.xlsx"),
+    rsrc("resources/testWorkbookReadNamedRegion.xlsx"),
     sheet = "Conversion"
   ))
   
