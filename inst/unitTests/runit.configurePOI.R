@@ -33,9 +33,9 @@ test.configurePOI <- function() {
   checkException(loadWorkbook(rsrc("resources/testLoadWorkbook.xlsx")))
   
   # Check zip bomb detection with high inflate ratio
-  configurePOI(zip_min_inflate_ratio = 1.0)
+  configurePOI(zip_min_inflate_ratio = 0.99)
   checkException(readWorksheetFromFile(
-    rsrc("resources/testWorkbookGetLastRow.xlsx"),
+    rsrc("resources/testZipBomb.xlsx"),
     sheet = 1
   ))
   
