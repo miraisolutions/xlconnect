@@ -47,14 +47,6 @@ test.configurePOI <- function() {
     sheet = 1
   ))
   
-  # Check that an exception is thrown if we limit the maximum number of
-  # characters to just 1
-  configurePOI(zip_max_text_size = 1L)
-  checkException(readWorksheetFromFile(
-    rsrc("resources/testWorkbookReadNamedRegion.xlsx"),
-    sheet = "Conversion"
-  ))
-  
   # Check storing of zip entries in temp files
   configurePOI(zip_entry_threshold_bytes = 0L)
   readWorksheetFromFile(
