@@ -43,7 +43,7 @@ test.configurePOI <- function() {
   # 1 byte
   configurePOI(zip_max_entry_size = 1L)
   checkException(readWorksheetFromFile(
-    rsrc("resources/testWorkbookGetLastRow.xlsx"),
+    rsrc("resources/testWorkbookReadWorksheet.xlsx"),
     sheet = 1
   ))
   
@@ -51,16 +51,16 @@ test.configurePOI <- function() {
   # characters to just 1
   configurePOI(zip_max_text_size = 1L)
   checkException(readWorksheetFromFile(
-    rsrc("resources/testWorkbookGetLastRow.xlsx"),
-    sheet = 1
+    rsrc("resources/testWorkbookReadNamedREgion.xlsx"),
+    sheet = "Conversion"
   ))
   
   # Check storing of zip entries in temp files
   configurePOI(zip_entry_threshold_bytes = 0L)
-  checkException(readWorksheetFromFile(
-    rsrc("resources/testWorkbookGetLastRow.xlsx"),
+  readWorksheetFromFile(
+    rsrc("resources/testWorkbookReadWorksheet.xlsx"),
     sheet = 1
-  ))
+  )
   
   # Reset settings after test
   configurePOI()
