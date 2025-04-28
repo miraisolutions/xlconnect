@@ -32,6 +32,7 @@ configurePOI <- function(
     zip_min_inflate_ratio = 0.001,
     zip_max_entry_size = 0xFFFFFFFF,
     zip_max_text_size = 10*1024*1024,
+    zip_entry_threshold_bytes = -1L,
     max_size_byte_array = -1L
 ) {
   ioutils <- J("org.apache.poi.util.IOUtils")
@@ -42,6 +43,9 @@ configurePOI <- function(
   zip$setMinInflateRatio(zip_min_inflate_ratio)
   zip$setMaxEntrySize(rJava::.jlong(zip_max_entry_size))
   zip$setMaxTextSize(rJava::.jlong(zip_max_text_size))
+  
+  zipEntry <- J("org.apache.poi.openxml4j.util.ZipInputStreamZipEntrySource")
+  zipEntry$setThresholdBytesForTempFiles(as.integer(zip_entry_threshold_bytes))
   
   invisible()
 }
