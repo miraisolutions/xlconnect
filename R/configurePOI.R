@@ -1,7 +1,7 @@
 #############################################################################
 #
 # XLConnect
-# Copyright (C) 2010-2025 Mirai Solutions GmbH
+# Copyright (C) 2010-2024 Mirai Solutions GmbH
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -20,35 +20,32 @@
 
 #############################################################################
 #
-# General XLConnect Settings
-# Called by .onLoad which is also passing the package description (pdesc)
+# Configures Apache POI and related components.
+# See https://poi.apache.org/components/configuration.html
 # 
 # Author: Martin Studer, Mirai Solutions GmbH
 #
 #############################################################################
 
-XLConnectSettings <- function(pdesc) {
-	
-	# URL to Mirai Solutions GmbH Website
-	options(MiraiSolutions.URL = pdesc$URL)
-	
-	# XLConnect Version
-	options(XLConnect.Version = pdesc$Version)
-	
-	# Date/time format used for conversion to string;
-	# This is used for communicating a string-based date/time
-	# representation to Java which will then convert it to java.util.Date
-	options(XLConnect.dateTimeFormat = "%Y-%m-%d %H:%M:%S")
-	
-	# Dummy sheet name (used by xlcDump, xlcRestore)
-	options(XLConnect.Sheet = "#xlc#")
-	# Rowname column (used by xlcDump, xlcRestore)
-	options(XLConnect.RownameCol = ".rownames")
-
-	options(XLConnect.setCustomAttributes = FALSE)
-	
-	# Apply default POI configuration
-	configurePOI()
+configurePOI <- function(
+    zip_max_files = 1000L,
+    zip_min_inflate_ratio = 0.001,
+    zip_max_entry_size = 0xFFFFFFFF,
+    zip_max_text_size = 10*1024*1024,
+    zip_entry_threshold_bytes = -1L,
+    max_size_byte_array = -1L
+) {
+  ioutils <- J("org.apache.poi.util.IOUtils")
+  ioutils$setByteArrayMaxOverride(as.integer(max_size_byte_array))
   
-	invisible()
+  zip <- J("org.apache.poi.openxml4j.util.ZipSecureFile")
+  zip$setMaxFileCount(rJava::.jlong(zip_max_files))
+  zip$setMinInflateRatio(zip_min_inflate_ratio)
+  zip$setMaxEntrySize(rJava::.jlong(zip_max_entry_size))
+  zip$setMaxTextSize(rJava::.jlong(zip_max_text_size))
+  
+  zipEntry <- J("org.apache.poi.openxml4j.util.ZipInputStreamZipEntrySource")
+  zipEntry$setThresholdBytesForTempFiles(as.integer(zip_entry_threshold_bytes))
+  
+  invisible()
 }
