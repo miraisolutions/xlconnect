@@ -2,19 +2,19 @@
 
 ## Test Environments
 
-* Ubuntu 24.04.1 LTS on Github Actions
-* Ubuntu 20.04.6 LTS on Github Actions
+* Ubuntu 24.04.2 LTS on Github Actions
+* Ubuntu 22.04.5 LTS on Github Actions
 * Windows Server 2019 on Github Actions
-* macOS Sonoma 14.7.2 on Github Actions
+* macOS Sonoma 14.7.5 on Github Actions
 
 ## R CMD check results
 
 There were no ERRORs or WARNINGs
 
-There was 1 NOTE:
+There was 1 INFO:
 
 ```sh
-* checking installed package size ... NOTE
+* checking installed package size ... INFO
   installed size is 29.0Mb
   sub-directories of 1Mb or more:
     java  26.5Mb
@@ -24,7 +24,7 @@ Justification: XLConnect uses a Java component which we maintain in a separate p
 
 ## revdepcheck results
 
-We checked 7 reverse dependencies (1 from CRAN + 6 from Bioconductor), comparing R CMD check results across CRAN and dev versions of this package.
+We checked 6 reverse dependencies (1 from CRAN + 5 from Bioconductor), comparing R CMD check results across CRAN and dev versions of this package.
 
  * We saw 0 new problems
  * We failed to check 0 packages

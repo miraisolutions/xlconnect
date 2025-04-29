@@ -1,7 +1,7 @@
 XLConnect News
 --------------
 
-1.x.x 2025-??-??
+1.2.1 2025-04-29
   * Add possibility to configure Apache POI through configurePOI
   * Upgrade POI to 5.4.1
 
