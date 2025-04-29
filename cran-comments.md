@@ -1,4 +1,4 @@
-# XLConnect 1.2.0
+# XLConnect 1.2.1
 
 ## Test Environments
 
