@@ -233,7 +233,6 @@ jobs:
           repository: miraisolutions/xlconnect-java
           # specify the below if you are working on a parallel xlconnect-java branch
           # ref: dependabot/maven/poi-707d71ec25
-          ref: feature/upgrade_poi_541
       
       - name: retrieve POM dependencies using maven
         if: success() && matrix.config.r-version == 'release' && matrix.config.os-name == 'ubuntu'
