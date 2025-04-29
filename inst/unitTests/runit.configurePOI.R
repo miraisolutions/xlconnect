@@ -20,35 +20,41 @@
 
 #############################################################################
 #
-# General XLConnect Settings
-# Called by .onLoad which is also passing the package description (pdesc)
+# Test POI configuration
 # 
 # Author: Martin Studer, Mirai Solutions GmbH
 #
 #############################################################################
 
-XLConnectSettings <- function(pdesc) {
-	
-	# URL to Mirai Solutions GmbH Website
-	options(MiraiSolutions.URL = pdesc$URL)
-	
-	# XLConnect Version
-	options(XLConnect.Version = pdesc$Version)
-	
-	# Date/time format used for conversion to string;
-	# This is used for communicating a string-based date/time
-	# representation to Java which will then convert it to java.util.Date
-	options(XLConnect.dateTimeFormat = "%Y-%m-%d %H:%M:%S")
-	
-	# Dummy sheet name (used by xlcDump, xlcRestore)
-	options(XLConnect.Sheet = "#xlc#")
-	# Rowname column (used by xlcDump, xlcRestore)
-	options(XLConnect.RownameCol = ".rownames")
-
-	options(XLConnect.setCustomAttributes = FALSE)
-	
-	# Apply default POI configuration
-	configurePOI()
+test.configurePOI <- function() {
   
-	invisible()
+  # Check that an exception is thrown if we limit the number of files to just 1
+  configurePOI(zip_max_files = 1L)
+  checkException(loadWorkbook(rsrc("resources/testLoadWorkbook.xlsx")))
+  
+  # Check zip bomb detection with high inflate ratio
+  configurePOI(zip_min_inflate_ratio = 0.99)
+  checkException(readWorksheetFromFile(
+    rsrc("resources/testZipBomb.xlsx"),
+    sheet = 1
+  ))
+  
+  # Check that an exception is thrown if we limit the max zip entry size to just
+  # 1 byte
+  configurePOI(zip_max_entry_size = 1L)
+  checkException(readWorksheetFromFile(
+    rsrc("resources/testWorkbookReadWorksheet.xlsx"),
+    sheet = 1
+  ))
+  
+  # Check storing of zip entries in temp files
+  configurePOI(zip_entry_threshold_bytes = 0L)
+  readWorksheetFromFile(
+    rsrc("resources/testWorkbookReadWorksheet.xlsx"),
+    sheet = 1
+  )
+  
+  # Reset settings after test
+  configurePOI()
+  
 }
