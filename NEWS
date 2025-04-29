@@ -3,6 +3,7 @@ XLConnect News
 
 1.x.x 2025-??-??
   * Add possibility to configure Apache POI through configurePOI
+  * Upgrade POI to 5.4.1
 
 1.2.0 2025-02-17
   * Fix #225 (loading simple logging context factory)
