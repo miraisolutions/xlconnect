@@ -33,8 +33,11 @@ configurePOI <- function(
     zip_max_entry_size = 0xFFFFFFFF,
     zip_max_text_size = 10*1024*1024,
     zip_entry_threshold_bytes = -1L,
-    max_size_byte_array = -1L
+    max_size_byte_array = -1L,
+    java_io_tmpdir = tempdir()
 ) {
+  J("java.lang.System")$setProperty("java.io.tmpdir", java_io_tmpdir)
+  
   ioutils <- J("org.apache.poi.util.IOUtils")
   ioutils$setByteArrayMaxOverride(as.integer(max_size_byte_array))
   
