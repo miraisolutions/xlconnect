@@ -9,7 +9,8 @@ Configures Apache POI and related components.
 \usage{
 configurePOI(zip_max_files = 1000L, zip_min_inflate_ratio = 0.001,
   zip_max_entry_size = 0xFFFFFFFF, zip_max_text_size = 10*1024*1024,
-  zip_entry_threshold_bytes = -1L, max_size_byte_array = -1L)
+  zip_entry_threshold_bytes = -1L, max_size_byte_array = -1L,
+  java_io_tmpdir = tempdir())
 }
 \arguments{
   \item{zip_max_files}{Integer scalar specifying the maximum number of files
@@ -35,6 +36,9 @@ configurePOI(zip_max_files = 1000L, zip_min_inflate_ratio = 0.001,
   this may demand a larger heap space (see option \code{java.parameters}; e.g.
   \code{options(java.parameters = "-Xmx8192m")}. Defaults to -1, which means
   that record-specific limits apply.)}
+  \item{java_io_tmpdir}{Directory to hold POI temporary files and generally any
+  temporary files produced by the Java subprocess. Defaults to the R session
+  temporary directory \code{tempdir()}}
 }
 \details{
 Many of the settings exposed here exist for security reasons to prevent excessive

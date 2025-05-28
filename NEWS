@@ -1,6 +1,9 @@
 XLConnect News
 --------------
 
+1.2.2 2025-05-26
+  * Set java.io.tmpdir to the R session temp directory by default
+  
 1.2.1 2025-04-29
   * Add possibility to configure Apache POI through configurePOI
   * Upgrade POI to 5.4.1
