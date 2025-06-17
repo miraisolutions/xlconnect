@@ -1,0 +1,15 @@
+test_that("test.workbook.appendWorksheet", {
+    wb.xls <- loadWorkbook(rsrc("resources/testWorkbookAppend.xls"))
+    wb.xlsx <- loadWorkbook(rsrc("resources/testWorkbookAppend.xlsx"))
+    appendWorksheet(wb.xls, mtcars, sheet = "mtcars")
+    res = readWorksheet(wb.xls, sheet = "mtcars")
+    expect_equal(c(mtcars = 73), getLastRow(wb.xls, "mtcars"))
+    expect_equal(normalizeDataframe(rbind(mtcars, mtcars)), res)
+    appendWorksheet(wb.xlsx, mtcars, sheet = "mtcars")
+    res = readWorksheet(wb.xlsx, sheet = "mtcars")
+    expect_equal(c(mtcars = 73), getLastRow(wb.xlsx, "mtcars"))
+    expect_equal(normalizeDataframe(rbind(mtcars, mtcars)), res)
+    expect_error(appendWorksheet(wb.xls, mtcars, sheet = "doesNotExist"))
+    expect_error(appendWorksheet(wb.xlsx, mtcars, sheet = "doesNotExist"))
+})
+

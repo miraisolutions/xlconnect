@@ -1,0 +1,41 @@
+test_that("test.workbook.createName", {
+    wb.xls <- loadWorkbook(rsrc("resources/createName.xls"), 
+        create = TRUE)
+    wb.xlsx <- loadWorkbook(rsrc("resources/createName.xlsx"), 
+        create = TRUE)
+    createName(wb.xls, "Test", "Test!$C$5")
+    expect_equal(TRUE, existsName(wb.xls, "Test"))
+    createName(wb.xlsx, "Test", "Test!$C$5")
+    expect_equal(TRUE, existsName(wb.xlsx, "Test"))
+    expect_error(createName(wb.xls, "'Test", "Test!$C$10"))
+    expect_error(createName(wb.xlsx, "'Test", "Test!$C$10"))
+    expect_error(createName(wb.xls, "IllegalFormula", "??-%&"))
+    expect_error(createName(wb.xlsx, "IllegalFormula", "??-%&"))
+    createName(wb.xls, "ImHere", "ImHere!$B$9")
+    expect_error(createName(wb.xls, "ImHere", "There!$A$2"))
+    createName(wb.xlsx, "ImHere", "ImHere!$B$9")
+    expect_error(createName(wb.xlsx, "ImHere", "There!$A$2"))
+    createName(wb.xls, "CurrentlyHere", "CurrentlyHere!$D$8")
+    createName(wb.xls, "CurrentlyHere", "NowThere!$C$3", overwrite = TRUE)
+    expect_equal(TRUE, existsName(wb.xls, "CurrentlyHere"))
+    createName(wb.xlsx, "CurrentlyHere", "CurrentlyHere!$D$8")
+    createName(wb.xlsx, "CurrentlyHere", "NowThere!$C$3", overwrite = TRUE)
+    expect_equal(TRUE, existsName(wb.xlsx, "CurrentlyHere"))
+    expect_error(createName(wb.xls, "aName", "Test!A1A4"))
+    checkNoException(createName(wb.xls, "aName", "Test!A1"))
+    expect_equal(TRUE, existsName(wb.xls, "aName"))
+    sheetName <- "Test_Scoped_Sheet"
+    createSheet(wb.xls, name = sheetName)
+    createSheet(wb.xlsx, name = sheetName)
+    expect_true(existsSheet(wb.xls, sheetName))
+    expect_true(existsSheet(wb.xlsx, sheetName))
+    expect_found = TRUE
+    attributes(expect_found) <- list(worksheetScope = sheetName)
+    createName(wb.xls, "Test_1", "Test!$C$5", worksheetScope = sheetName)
+    expect_equal(expect_found, existsName(wb.xls, "Test_1"))
+    expect_found = TRUE
+    attributes(expect_found) <- list(worksheetScope = sheetName)
+    createName(wb.xlsx, "Test_1", "Test!$C$5", worksheetScope = sheetName)
+    expect_equal(expect_found, existsName(wb.xlsx, "Test_1"))
+})
+

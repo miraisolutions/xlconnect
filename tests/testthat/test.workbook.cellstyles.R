@@ -1,0 +1,33 @@
+test_that("test.workbook.cellstyles", {
+    if (getOption("FULL.TEST.SUITE")) {
+        file.xls <- rsrc("resources/cellstyles.xls")
+        file.xlsx <- rsrc("resources/cellstyles.xlsx")
+        file.remove(file.xls)
+        file.remove(file.xlsx)
+        wb.xls <- loadWorkbook(file.xls, create = TRUE)
+        wb.xlsx <- loadWorkbook(file.xlsx, create = TRUE)
+        styleName <- "MyStyle"
+        anotherStyleName <- "MyOtherStyle"
+        expect_false(existsCellStyle(wb.xls, styleName))
+        expect_false(existsCellStyle(wb.xlsx, styleName))
+        expect_error(getCellStyle(wb.xls, styleName))
+        expect_error(getCellStyle(wb.xlsx, styleName))
+        checkNoException(createCellStyle(wb.xls, styleName))
+        checkNoException(createCellStyle(wb.xlsx, styleName))
+        expect_true(existsCellStyle(wb.xls, styleName))
+        expect_true(existsCellStyle(wb.xlsx, styleName))
+        expect_error(createCellStyle(wb.xls, styleName))
+        expect_error(createCellStyle(wb.xlsx, styleName))
+        checkNoException(getCellStyle(wb.xls, styleName))
+        checkNoException(getCellStyle(wb.xlsx, styleName))
+        expect_false(existsCellStyle(wb.xls, anotherStyleName))
+        expect_false(existsCellStyle(wb.xlsx, anotherStyleName))
+        checkNoException(getOrCreateCellStyle(wb.xls, anotherStyleName))
+        checkNoException(getOrCreateCellStyle(wb.xlsx, anotherStyleName))
+        expect_true(existsCellStyle(wb.xls, anotherStyleName))
+        expect_true(existsCellStyle(wb.xlsx, anotherStyleName))
+        checkNoException(getOrCreateCellStyle(wb.xls, anotherStyleName))
+        checkNoException(getOrCreateCellStyle(wb.xlsx, anotherStyleName))
+    }
+})
+

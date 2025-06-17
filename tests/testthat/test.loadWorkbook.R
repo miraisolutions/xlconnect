@@ -1,0 +1,26 @@
+test_that("test.loadWorkbook", {
+    expect_error(loadWorkbook(rsrc("resources/fileWhichDoesNotExist.xls")))
+    expect_error(loadWorkbook(rsrc("resources/fileWhichDoesNotExist.xlsx")))
+    wb <- loadWorkbook(rsrc("resources/testLoadWorkbook.xls"))
+    expect_true(is(wb, "workbook"))
+    wb <- loadWorkbook(rsrc("resources/testLoadWorkbook.xlsx"))
+    expect_true(is(wb, "workbook"))
+    wb <- loadWorkbook(rsrc("resources/fileCreatedOnTheFly.xls"), 
+        create = TRUE)
+    expect_true(is(wb, "workbook"))
+    wb <- loadWorkbook(rsrc("resources/fileCreatedOnTheFly.xlsx"), 
+        create = TRUE)
+    expect_true(is(wb, "workbook"))
+    pwdProtectedFile <- rsrc("resources/testBug61.xlsx")
+    wb <- checkException(loadWorkbook(pwdProtectedFile))
+    b <- checkException(loadWorkbook(pwdProtectedFile, password = "wrong"))
+    wb <- loadWorkbook(pwdProtectedFile, password = "mirai")
+    pwdProtectedFile <- rsrc("resources/testBug106.xlsx")
+    wb <- checkException(loadWorkbook(pwdProtectedFile))
+    b <- checkException(loadWorkbook(pwdProtectedFile, password = "wrong"))
+    wb <- loadWorkbook(pwdProtectedFile, password = "mirai")
+    setwd(rsrc("resources"))
+    wb <- loadWorkbook("testLoadWorkbook.xls")
+    expect_true(is(wb, "workbook"))
+})
+
