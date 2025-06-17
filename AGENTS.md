@@ -20,7 +20,9 @@ You need to call `library(<some_package>)` before using any function from that p
 devtools::install()
 ```
 
-### Load the package; must be done before running tests
+### Load the package
+
+Must be done as a first command each time you run tests
 
 ```R
 library(XLConnect)
