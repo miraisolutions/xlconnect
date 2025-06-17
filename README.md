@@ -35,3 +35,14 @@ Build for release on CRAN
 ```r
 devtools::build(args=c("--compact-vignettes=gs+qpdf"))
 ```
+
+Run tests with testthat
+-----------------------
+
+You need to have run `devtools::install()` first.
+
+```r
+library(testthat)
+library(XLConnect)
+test_dir("tests/testthat")
+```
