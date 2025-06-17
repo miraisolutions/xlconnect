@@ -12,6 +12,18 @@ You can run R commands by using the `Rscript` command. You can put statements on
 
 You need to call `library(<some_package>)` before using any function from that package.
 
+## setup
+
+Prerequisite packages:
+
+```sh
+Rscript -e "install.packages(c('rJava', 'RUnit', 'devtools', 'testthat'))"
+Rscript -e "{\
+   library(devtools);\
+   devtools::install();\
+}"
+```
+
 ## common commands
 
 ### install the local source package
