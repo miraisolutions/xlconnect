@@ -1,7 +1,7 @@
 test_that("test.workbook.getReferenceFormula", {
-    wb.xls <- loadWorkbook(rsrc("resources/testWorkbookReferenceFormula.xls"), 
+    wb.xls <- loadWorkbook("resources/testWorkbookReferenceFormula.xls"),
         create = FALSE)
-    wb.xlsx <- loadWorkbook(rsrc("resources/testWorkbookReferenceFormula.xlsx"), 
+    wb.xlsx <- loadWorkbook("resources/testWorkbookReferenceFormula.xlsx"),
         create = FALSE)
     expect_true(getReferenceFormula(wb.xls, "FirstName") == "Tabelle1!$A$1")
     expect_true(substring(getReferenceFormula(wb.xls, "SecondName"), 

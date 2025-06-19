@@ -1,7 +1,7 @@
 test_that("test.writeAndReadNamedRegion", {
-    wb.xls <- loadWorkbook(rsrc("resources/testWriteAndReadNamedRegion.xls"), 
+    wb.xls <- loadWorkbook("resources/testWriteAndReadNamedRegion.xls"),
         create = TRUE)
-    wb.xlsx <- loadWorkbook(rsrc("resources/testWriteAndReadNamedRegion.xlsx"), 
+    wb.xlsx <- loadWorkbook("resources/testWriteAndReadNamedRegion.xlsx"),
         create = TRUE)
     testDataFrame <- function(wb, df, lref) {
         namedRegion <- deparse(substitute(df))

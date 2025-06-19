@@ -1,7 +1,7 @@
 test_that("test.workbook.createName", {
-    wb.xls <- loadWorkbook(rsrc("resources/createName.xls"), 
+    wb.xls <- loadWorkbook("resources/createName.xls"),
         create = TRUE)
-    wb.xlsx <- loadWorkbook(rsrc("resources/createName.xlsx"), 
+    wb.xlsx <- loadWorkbook("resources/createName.xlsx"),
         create = TRUE)
     createName(wb.xls, "Test", "Test!$C$5")
     expect_equal(TRUE, existsName(wb.xls, "Test"))

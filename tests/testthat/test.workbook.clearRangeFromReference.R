@@ -1,7 +1,7 @@
 test_that("test.workbook.clearRangeFromReference", {
-    wb.xls <- loadWorkbook(rsrc("resources/testWorkbookClearCells.xls"), 
+    wb.xls <- loadWorkbook("resources/testWorkbookClearCells.xls"),
         create = FALSE)
-    wb.xlsx <- loadWorkbook(rsrc("resources/testWorkbookClearCells.xlsx"), 
+    wb.xlsx <- loadWorkbook("resources/testWorkbookClearCells.xlsx"),
         create = FALSE)
     checkDf <- data.frame(one = 1:5, two = c(NA, NA, 8, 9, 10), 
         three = c(NA, NA, 13, 14, 15), four = 16:20, five = c(21, 

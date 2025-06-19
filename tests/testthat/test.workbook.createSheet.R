@@ -1,7 +1,7 @@
 test_that("test.workbook.createSheet", {
-    wb.xls <- loadWorkbook(rsrc("resources/createSheet.xls"), 
+    wb.xls <- loadWorkbook("resources/createSheet.xls"),
         create = TRUE)
-    wb.xlsx <- loadWorkbook(rsrc("resources/createSheet.xlsx"), 
+    wb.xlsx <- loadWorkbook("resources/createSheet.xlsx"),
         create = TRUE)
     expect_error(createSheet(wb.xls, "'Invalid Sheet Name"))
     expect_error(createSheet(wb.xlsx, "'Invalid Sheet Name"))

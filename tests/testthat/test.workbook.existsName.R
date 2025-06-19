@@ -1,7 +1,7 @@
 test_that("test.workbook.existsName", {
-    wb.xls <- loadWorkbook(rsrc("resources/testWorkbookExistsNameAndSheet.xls"), 
+    wb.xls <- loadWorkbook("resources/testWorkbookExistsNameAndSheet.xls"),
         create = FALSE)
-    wb.xlsx <- loadWorkbook(rsrc("resources/testWorkbookExistsNameAndSheet.xlsx"), 
+    wb.xlsx <- loadWorkbook("resources/testWorkbookExistsNameAndSheet.xlsx"),
         create = FALSE)
     expect_found <- TRUE
     attributes(expect_found) <- list(worksheetScope = "")

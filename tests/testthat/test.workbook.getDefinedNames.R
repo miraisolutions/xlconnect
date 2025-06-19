@@ -1,7 +1,7 @@
 test_that("test.workbook.getDefinedNames", {
-    wb.xls <- loadWorkbook(rsrc("resources/testWorkbookDefinedNames.xls"), 
+    wb.xls <- loadWorkbook("resources/testWorkbookDefinedNames.xls"),
         create = FALSE)
-    wb.xlsx <- loadWorkbook(rsrc("resources/testWorkbookDefinedNames.xlsx"), 
+    wb.xlsx <- loadWorkbook("resources/testWorkbookDefinedNames.xlsx"),
         create = FALSE)
     expectedNamesValidOnly <- c("FirstName", "SecondName", "FourthName", 
         "FifthName")
@@ -23,9 +23,9 @@ test_that("test.workbook.getDefinedNames", {
     expect_true(length(setdiff(expectedNamesAll, definedNames)) == 
         0 && length(setdiff(definedNames, expectedNamesAll)) == 
         0)
-    wb.xls <- loadWorkbook(rsrc("resources/testWorkbookGetDefinedNamesScoped.xls"), 
+    wb.xls <- loadWorkbook("resources/testWorkbookGetDefinedNamesScoped.xls"),
         create = FALSE)
-    wb.xlsx <- loadWorkbook(rsrc("resources/testWorkbookGetDefinedNamesScoped.xlsx"), 
+    wb.xlsx <- loadWorkbook("resources/testWorkbookGetDefinedNamesScoped.xlsx"),
         create = FALSE)
     expectedNames <- c("ScopedName1", "ScopedName2")
     expectedScopes <- c("scoped_1", "scoped_2")

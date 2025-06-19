@@ -1,5 +1,5 @@
 test_that("test.workbook.getReferenceCoordinatesForTable", {
-    wb.xlsx <- loadWorkbook(rsrc("resources/testWorkbookReadTable.xlsx"), 
+    wb.xlsx <- loadWorkbook("resources/testWorkbookReadTable.xlsx"),
         create = FALSE)
     res <- getReferenceCoordinatesForTable(wb.xlsx, sheet = "Test", 
         table = "TestTable1")

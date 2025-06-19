@@ -1,7 +1,7 @@
 test_that("test.workbook.extraction", {
-    wb.xls <- loadWorkbook(rsrc("resources/testWorkbookExtractionOperators.xls"), 
+    wb.xls <- loadWorkbook("resources/testWorkbookExtractionOperators.xls"),
         create = TRUE)
-    wb.xlsx <- loadWorkbook(rsrc("resources/testWorkbookExtractionOperators.xlsx"), 
+    wb.xlsx <- loadWorkbook("resources/testWorkbookExtractionOperators.xlsx"),
         create = TRUE)
     wb.xls["mtcars1"] = mtcars
     expect_true("mtcars1" %in% getSheets(wb.xls))

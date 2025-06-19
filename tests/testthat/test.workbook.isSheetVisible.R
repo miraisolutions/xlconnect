@@ -1,7 +1,7 @@
 test_that("test.workbook.isSheetVisible", {
-    wb.xls <- loadWorkbook(rsrc("resources/testWorkbookHiddenSheets.xls"), 
+    wb.xls <- loadWorkbook("resources/testWorkbookHiddenSheets.xls"),
         create = FALSE)
-    wb.xlsx <- loadWorkbook(rsrc("resources/testWorkbookHiddenSheets.xlsx"), 
+    wb.xlsx <- loadWorkbook("resources/testWorkbookHiddenSheets.xlsx"),
         create = FALSE)
     expect_false(isSheetVisible(wb.xls, 2))
     expect_false(isSheetVisible(wb.xls, "BBB"))

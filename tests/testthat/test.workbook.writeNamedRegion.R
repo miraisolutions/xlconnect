@@ -1,7 +1,7 @@
 test_that("test.workbook.writeNamedRegion", {
-    wb.xls <- loadWorkbook(rsrc("resources/testWorkbookWriteNamedRegion.xls"), 
+    wb.xls <- loadWorkbook("resources/testWorkbookWriteNamedRegion.xls"),
         create = TRUE)
-    wb.xlsx <- loadWorkbook(rsrc("resources/testWorkbookWriteNamedRegion.xlsx"), 
+    wb.xlsx <- loadWorkbook("resources/testWorkbookWriteNamedRegion.xlsx"),
         create = TRUE)
     createName(wb.xls, "test1", "Test1!$C$8")
     expect_error(writeNamedRegion(wb.xls, search, "test1"))
@@ -26,8 +26,8 @@ test_that("test.workbook.writeNamedRegion", {
         "empty1"))
     checkNoException(writeNamedRegion(wb.xlsx, data.frame(a = character(0), 
         b = numeric(0)), "empty2"))
-    wb.xls <- loadWorkbook(rsrc("resources/testWorkbookOverwriteFormulas.xls"))
-    wb.xlsx <- loadWorkbook(rsrc("resources/testWorkbookOverwriteFormulas.xlsx"))
+    wb.xls <- loadWorkbook("resources/testWorkbookOverwriteFormulas.xls"))
+    wb.xlsx <- loadWorkbook("resources/testWorkbookOverwriteFormulas.xlsx"))
     mtcars_mod = mtcars
     mtcars_mod$carb = mtcars_mod$gear
     test_overwrite_formula <- function(wb, expected, overwrite = TRUE) {

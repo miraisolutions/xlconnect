@@ -9,8 +9,8 @@ test_that("test.workbook.appendNamedRegion", {
         checkEquals(getReferenceCoordinatesForName(wb, "mtcars_formula"), 
             coords)
     }
-    wb.xls <- loadWorkbook(rsrc("resources/testWorkbookAppend.xls"))
-    wb.xlsx <- loadWorkbook(rsrc("resources/testWorkbookAppend.xlsx"))
+    wb.xls <- loadWorkbook("resources/testWorkbookAppend.xls"))
+    wb.xlsx <- loadWorkbook("resources/testWorkbookAppend.xlsx"))
     refCoord = matrix(c(9, 5, 73, 15), ncol = 2, byrow = TRUE)
     appendNamedRegion(wb.xls, mtcars, name = "mtcars")
     res = readNamedRegion(wb.xls, name = "mtcars")
@@ -30,8 +30,8 @@ test_that("test.workbook.appendNamedRegion", {
         refCoord, overwrite = FALSE)
     test_overwrite_formula(wb.xlsx, rbind(mtcars_mod, mtcars_mod), 
         refCoord, overwrite = FALSE)
-    wb.xls <- loadWorkbook(rsrc("resources/testWorkbookAppend.xls"))
-    wb.xlsx <- loadWorkbook(rsrc("resources/testWorkbookAppend.xlsx"))
+    wb.xls <- loadWorkbook("resources/testWorkbookAppend.xls"))
+    wb.xlsx <- loadWorkbook("resources/testWorkbookAppend.xlsx"))
     refCoord = matrix(c(9, 5, 194, 15), ncol = 2, byrow = TRUE)
     refCoordFormula = matrix(c(9, 5, 73, 15), ncol = 2, byrow = TRUE)
     appendNamedRegion(wb.xls, airquality, name = "mtcars")

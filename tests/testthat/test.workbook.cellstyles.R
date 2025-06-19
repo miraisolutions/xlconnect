@@ -1,7 +1,7 @@
 test_that("test.workbook.cellstyles", {
     if (getOption("FULL.TEST.SUITE")) {
-        file.xls <- rsrc("resources/cellstyles.xls")
-        file.xlsx <- rsrc("resources/cellstyles.xlsx")
+        file.xls <- "resources/cellstyles.xls")
+        file.xlsx <- "resources/cellstyles.xlsx")
         file.remove(file.xls)
         file.remove(file.xlsx)
         wb.xls <- loadWorkbook(file.xls, create = TRUE)

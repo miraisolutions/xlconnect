@@ -1,5 +1,5 @@
 test_that("test.workbook.setForceFormulaRecalculation", {
-    wb.xlsx <- loadWorkbook(rsrc("resources/testBug170.xlsx"), 
+    wb.xlsx <- loadWorkbook("resources/testBug170.xlsx"),
         create = FALSE)
     setForceFormulaRecalculation(wb.xlsx, 1, TRUE)
     expect_true(getForceFormulaRecalculation(wb.xlsx, 1))

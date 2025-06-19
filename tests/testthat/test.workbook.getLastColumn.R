@@ -1,7 +1,7 @@
 test_that("test.workbook.getLastColumn", {
-    wb.xls <- loadWorkbook(rsrc("resources/testWorkbookGetLastRow.xls"), 
+    wb.xls <- loadWorkbook("resources/testWorkbookGetLastRow.xls"),
         create = FALSE)
-    wb.xlsx <- loadWorkbook(rsrc("resources/testWorkbookGetLastRow.xlsx"), 
+    wb.xlsx <- loadWorkbook("resources/testWorkbookGetLastRow.xlsx"),
         create = FALSE)
     expect_equal(11, as.vector(getLastColumn(wb.xls, "mtcars")))
     expect_equal(15, as.vector(getLastColumn(wb.xls, "mtcars2")))

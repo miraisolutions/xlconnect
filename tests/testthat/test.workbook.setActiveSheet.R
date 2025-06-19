@@ -1,7 +1,7 @@
 test_that("test.workbook.setActiveSheet", {
-    wb.xls <- loadWorkbook(rsrc("resources/testWorkbookSetActiveSheet.xls"), 
+    wb.xls <- loadWorkbook("resources/testWorkbookSetActiveSheet.xls"),
         create = FALSE)
-    wb.xlsx <- loadWorkbook(rsrc("resources/testWorkbookSetActiveSheet.xlsx"), 
+    wb.xlsx <- loadWorkbook("resources/testWorkbookSetActiveSheet.xlsx"),
         create = FALSE)
     setActiveSheet(wb.xls, 1)
     expect_true(getActiveSheetIndex(wb.xls) == 1)

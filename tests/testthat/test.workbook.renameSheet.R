@@ -1,7 +1,7 @@
 test_that("test.workbook.renameSheet", {
-    wb.xls <- loadWorkbook(rsrc("resources/testWorkbookRenameSheet.xls"), 
+    wb.xls <- loadWorkbook("resources/testWorkbookRenameSheet.xls"),
         create = TRUE)
-    wb.xlsx <- loadWorkbook(rsrc("resources/testWorkbookRenameSheet.xlsx"), 
+    wb.xlsx <- loadWorkbook("resources/testWorkbookRenameSheet.xlsx"),
         create = TRUE)
     createSheet(wb.xls, name = "OldName1")
     renameSheet(wb.xls, sheet = "OldName1", newName = "NewName1")

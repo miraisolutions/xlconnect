@@ -1,7 +1,7 @@
 test_that("test.workbook.onErrorCell", {
-    wb.xls <- loadWorkbook(rsrc("resources/testWorkbookErrorCell.xls"), 
+    wb.xls <- loadWorkbook("resources/testWorkbookErrorCell.xls"),
         create = FALSE)
-    wb.xlsx <- loadWorkbook(rsrc("resources/testWorkbookErrorCell.xlsx"), 
+    wb.xlsx <- loadWorkbook("resources/testWorkbookErrorCell.xlsx"),
         create = FALSE)
     onErrorCell(wb.xls, XLC$ERROR.WARN)
     res <- try(readNamedRegion(wb.xls, name = "AA"))

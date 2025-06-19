@@ -1,7 +1,7 @@
 test_that("test.workbook.hideSheet", {
-    wb.xls <- loadWorkbook(rsrc("resources/testWorkbookHideSheet.xls"), 
+    wb.xls <- loadWorkbook("resources/testWorkbookHideSheet.xls"),
         create = TRUE)
-    wb.xlsx <- loadWorkbook(rsrc("resources/testWorkbookHideSheet.xlsx"), 
+    wb.xlsx <- loadWorkbook("resources/testWorkbookHideSheet.xlsx"),
         create = TRUE)
     visibleSheet <- "VisibleSheet"
     hiddenSheet <- "HiddenSheet"

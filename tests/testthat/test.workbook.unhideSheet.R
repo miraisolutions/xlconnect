@@ -1,7 +1,7 @@
 test_that("test.workbook.unhideSheet", {
-    wb.xls <- loadWorkbook(rsrc("resources/testWorkbookHiddenSheets.xls"), 
+    wb.xls <- loadWorkbook("resources/testWorkbookHiddenSheets.xls"),
         create = FALSE)
-    wb.xlsx <- loadWorkbook(rsrc("resources/testWorkbookHiddenSheets.xlsx"), 
+    wb.xlsx <- loadWorkbook("resources/testWorkbookHiddenSheets.xlsx"),
         create = FALSE)
     unhideSheet(wb.xls, 2)
     unhideSheet(wb.xls, "DDD")

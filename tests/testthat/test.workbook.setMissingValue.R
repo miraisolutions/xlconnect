@@ -1,7 +1,7 @@
 test_that("test.workbook.setMissingValue", {
-    wb.xls <- loadWorkbook(rsrc("resources/testWorkbookSetMissingValue.xls"), 
+    wb.xls <- loadWorkbook("resources/testWorkbookSetMissingValue.xls"),
         create = TRUE)
-    wb.xlsx <- loadWorkbook(rsrc("resources/testWorkbookSetMissingValue.xlsx"), 
+    wb.xlsx <- loadWorkbook("resources/testWorkbookSetMissingValue.xlsx"),
         create = TRUE)
     data <- data.frame(A = c(4.2, -3.2, NA, 1.34), B = c("A", 
         NA, "C", "D"), stringsAsFactors = FALSE)
@@ -43,9 +43,9 @@ test_that("test.workbook.setMissingValue", {
     writeNamedRegion(wb.xlsx, data, name = name)
     res <- readNamedRegion(wb.xlsx, name = name)
     expect_equal(res, data)
-    wb.xls <- loadWorkbook(rsrc("resources/testWorkbookMissingValue.xls"), 
+    wb.xls <- loadWorkbook("resources/testWorkbookMissingValue.xls"),
         create = FALSE)
-    wb.xlsx <- loadWorkbook(rsrc("resources/testWorkbookMissingValue.xlsx"), 
+    wb.xlsx <- loadWorkbook("resources/testWorkbookMissingValue.xlsx"),
         create = FALSE)
     expect <- data.frame(A = c(NA, -3.2, 3.4, NA, 8, NA), B = c("a", 
         NA, "c", "x", "a", "o"), C = c(TRUE, TRUE, FALSE, NA, 

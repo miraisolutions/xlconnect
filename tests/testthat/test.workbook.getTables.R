@@ -1,5 +1,5 @@
 test_that("test.workbook.getTables", {
-    wb.xlsx <- loadWorkbook(rsrc("resources/testWorkbookReadTable.xlsx"), 
+    wb.xlsx <- loadWorkbook("resources/testWorkbookReadTable.xlsx"),
         create = FALSE)
     res <- getTables(wb.xlsx, sheet = "Test", simplify = TRUE)
     expect_equal("TestTable1", res)

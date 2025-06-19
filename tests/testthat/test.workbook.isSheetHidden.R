@@ -1,7 +1,7 @@
 test_that("test.workbook.isSheetHidden", {
-    wb.xls <- loadWorkbook(rsrc("resources/testWorkbookHiddenSheets.xls"), 
+    wb.xls <- loadWorkbook("resources/testWorkbookHiddenSheets.xls"),
         create = FALSE)
-    wb.xlsx <- loadWorkbook(rsrc("resources/testWorkbookHiddenSheets.xlsx"), 
+    wb.xlsx <- loadWorkbook("resources/testWorkbookHiddenSheets.xlsx"),
         create = FALSE)
     expect_true(isSheetHidden(wb.xls, 2))
     expect_true(isSheetHidden(wb.xls, "BBB"))

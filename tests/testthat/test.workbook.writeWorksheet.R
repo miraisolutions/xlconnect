@@ -1,7 +1,7 @@
 test_that("test.workbook.writeWorksheet", {
-    wb.xls <- loadWorkbook(rsrc("resources/testWorkbookWriteWorksheet.xls"), 
+    wb.xls <- loadWorkbook("resources/testWorkbookWriteWorksheet.xls"),
         create = TRUE)
-    wb.xlsx <- loadWorkbook(rsrc("resources/testWorkbookWriteWorksheet.xlsx"), 
+    wb.xlsx <- loadWorkbook("resources/testWorkbookWriteWorksheet.xlsx"),
         create = TRUE)
     createSheet(wb.xls, "test1")
     expect_error(writeWorksheet(wb.xls, search, "test1"))
@@ -9,8 +9,8 @@ test_that("test.workbook.writeWorksheet", {
     expect_error(writeWorksheet(wb.xlsx, search, "test1"))
     expect_error(writeWorksheet(wb.xls, mtcars, "sheetDoesNotExist"))
     expect_error(writeWorksheet(wb.xlsx, mtcars, "sheetDoesNotExist"))
-    wb.xls <- loadWorkbook(rsrc("resources/testWorkbookOverwriteFormulas.xls"))
-    wb.xlsx <- loadWorkbook(rsrc("resources/testWorkbookOverwriteFormulas.xlsx"))
+    wb.xls <- loadWorkbook("resources/testWorkbookOverwriteFormulas.xls"))
+    wb.xlsx <- loadWorkbook("resources/testWorkbookOverwriteFormulas.xlsx"))
     mtcars_mod = mtcars
     mtcars_mod$carb = mtcars_mod$gear
     test_overwrite_formula <- function(wb, expected, overwrite = TRUE) {

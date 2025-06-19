@@ -1,7 +1,7 @@
 test_that("test.workbook.writeAndReadWorksheet", {
-    wb.xls <- loadWorkbook(rsrc("resources/testWriteAndReadWorksheet.xls"), 
+    wb.xls <- loadWorkbook("resources/testWriteAndReadWorksheet.xls"),
         create = TRUE)
-    wb.xlsx <- loadWorkbook(rsrc("resources/testWriteAndReadWorksheet.xlsx"), 
+    wb.xlsx <- loadWorkbook("resources/testWriteAndReadWorksheet.xlsx"),
         create = TRUE)
     testDataFrame <- function(wb, df, startRow, startCol) {
         worksheet <- deparse(substitute(df))

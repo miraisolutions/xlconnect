@@ -1,7 +1,7 @@
 test_that("test.workbook.cloneSheet", {
-    wb.xls <- loadWorkbook(rsrc("resources/testWorkbookCloneSheet.xls"), 
+    wb.xls <- loadWorkbook("resources/testWorkbookCloneSheet.xls"),
         create = FALSE)
-    wb.xlsx <- loadWorkbook(rsrc("resources/testWorkbookCloneSheet.xlsx"), 
+    wb.xlsx <- loadWorkbook("resources/testWorkbookCloneSheet.xlsx"),
         create = FALSE)
     checkNoException(cloneSheet(wb.xls, sheet = "Test1", name = "Clone1"))
     checkNoException(readWorksheet(wb.xls, sheet = "Clone1"))

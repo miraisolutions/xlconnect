@@ -1,7 +1,7 @@
 test_that("test.workbook.getBoundingBox", {
-    wb.xls <- loadWorkbook(rsrc("resources/testWorkbookReadWorksheet.xls"), 
+    wb.xls <- loadWorkbook("resources/testWorkbookReadWorksheet.xls"),
         create = FALSE)
-    wb.xlsx <- loadWorkbook(rsrc("resources/testWorkbookReadWorksheet.xlsx"), 
+    wb.xlsx <- loadWorkbook("resources/testWorkbookReadWorksheet.xlsx"),
         create = FALSE)
     dim1 <- matrix(c(17, 6, 25, 9), dimnames = list(c(), c("Test5")))
     dim2 <- matrix(c(17, 7, 24, 9), dimnames = list(c(), c("Test5")))

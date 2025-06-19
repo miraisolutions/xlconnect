@@ -1,5 +1,5 @@
 test_that("test.workbook.readTable", {
-    wb.xlsx <- loadWorkbook(rsrc("resources/testWorkbookReadTable.xlsx"), 
+    wb.xlsx <- loadWorkbook("resources/testWorkbookReadTable.xlsx"),
         create = FALSE)
     checkDf <- data.frame(NumericColumn = c(-23.63, NA, NA, 5.8, 
         3), StringColumn = c("Hello", NA, NA, NA, "World"), BooleanColumn = c(TRUE, 

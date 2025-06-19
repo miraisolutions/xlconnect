@@ -1,7 +1,7 @@
 test_that("test.with.workbook", {
-    wb.xls <- loadWorkbook(rsrc("resources/testWithWorkbook.xls"), 
+    wb.xls <- loadWorkbook("resources/testWithWorkbook.xls"),
         create = FALSE)
-    wb.xlsx <- loadWorkbook(rsrc("resources/testWithWorkbook.xlsx"), 
+    wb.xlsx <- loadWorkbook("resources/testWithWorkbook.xlsx"),
         create = FALSE)
     with(wb.xls, {
         checkTrue(all(dim(AA) == c(8, 3)))
