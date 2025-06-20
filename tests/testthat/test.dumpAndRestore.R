@@ -12,9 +12,9 @@ test_that("test.dumpAndRestore", {
             sapply(names(out)[out], function(obj) {
                 data.orig = normalizeDataframe(get(obj, pos = pos))
                 data.restored = get(obj)
-                checkEquals(data.orig, data.restored, check.attributes = FALSE, 
+                expect_equal(data.orig, data.restored, check.attributes = FALSE,
                   check.names = TRUE)
-                checkEquals(attr(data.orig, "row.names"), attr(data.restored, 
+                expect_equal(attr(data.orig, "row.names"), attr(data.restored,
                   "row.names"))
             })
         }

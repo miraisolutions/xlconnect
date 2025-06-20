@@ -1,23 +1,23 @@
 test_that("test.loadWorkbook", {
-    expect_error(loadWorkbook("resources/fileWhichDoesNotExist.xls")))
-    expect_error(loadWorkbook("resources/fileWhichDoesNotExist.xlsx")))
-    wb <- loadWorkbook("resources/testLoadWorkbook.xls"))
+    expect_error(loadWorkbook("resources/fileWhichDoesNotExist.xls""))
+    expect_error(loadWorkbook("resources/fileWhichDoesNotExist.xlsx""))
+    wb <- loadWorkbook("resources/testLoadWorkbook.xls"")
     expect_true(is(wb, "workbook"))
-    wb <- loadWorkbook("resources/testLoadWorkbook.xlsx"))
+    wb <- loadWorkbook("resources/testLoadWorkbook.xlsx"")
     expect_true(is(wb, "workbook"))
-    wb <- loadWorkbook("resources/fileCreatedOnTheFly.xls"),
+    wb <- loadWorkbook("resources/fileCreatedOnTheFly.xls"",
         create = TRUE)
     expect_true(is(wb, "workbook"))
-    wb <- loadWorkbook("resources/fileCreatedOnTheFly.xlsx"),
+    wb <- loadWorkbook("resources/fileCreatedOnTheFly.xlsx"",
         create = TRUE)
     expect_true(is(wb, "workbook"))
-    pwdProtectedFile <- "resources/testBug61.xlsx")
-    wb <- checkException(loadWorkbook(pwdProtectedFile))
-    b <- checkException(loadWorkbook(pwdProtectedFile, password = "wrong"))
+    pwdProtectedFile <- "resources/testBug61.xlsx""
+    wb <- expect_error(loadWorkbook(pwdProtectedFile))
+    b <- expect_error(loadWorkbook(pwdProtectedFile, password = "wrong"))
     wb <- loadWorkbook(pwdProtectedFile, password = "mirai")
-    pwdProtectedFile <- "resources/testBug106.xlsx")
-    wb <- checkException(loadWorkbook(pwdProtectedFile))
-    b <- checkException(loadWorkbook(pwdProtectedFile, password = "wrong"))
+    pwdProtectedFile <- "resources/testBug106.xlsx""
+    wb <- expect_error(loadWorkbook(pwdProtectedFile))
+    b <- expect_error(loadWorkbook(pwdProtectedFile, password = "wrong"))
     wb <- loadWorkbook(pwdProtectedFile, password = "mirai")
     setwd(rsrc("resources"))
     wb <- loadWorkbook("testLoadWorkbook.xls")

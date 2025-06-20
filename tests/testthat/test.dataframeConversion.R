@@ -2,7 +2,7 @@ test_that("test.dataframeConversion", {
     testDataFrame <- function(df) {
         res <- XLConnect:::dataframeFromJava(XLConnect:::dataframeToJava(df), 
             check.names = TRUE)
-        checkEquals(normalizeDataframe(df), res, check.attributes = FALSE, 
+        expect_equal(normalizeDataframe(df), res, check.attributes = FALSE,
             check.names = TRUE)
     }
     if (getOption("FULL.TEST.SUITE")) {

@@ -1,28 +1,28 @@
 test_that("test.workbook.createName", {
-    wb.xls <- loadWorkbook("resources/createName.xls"),
+    wb.xls <- loadWorkbook("resources/createName.xls"",
         create = TRUE)
-    wb.xlsx <- loadWorkbook("resources/createName.xlsx"),
+    wb.xlsx <- loadWorkbook("resources/createName.xlsx"",
         create = TRUE)
     createName(wb.xls, "Test", "Test!$C$5")
     expect_equal(TRUE, existsName(wb.xls, "Test"))
     createName(wb.xlsx, "Test", "Test!$C$5")
     expect_equal(TRUE, existsName(wb.xlsx, "Test"))
-    expect_error(createName(wb.xls, "'Test", "Test!$C$10"))
-    expect_error(createName(wb.xlsx, "'Test", "Test!$C$10"))
-    expect_error(createName(wb.xls, "IllegalFormula", "??-%&"))
-    expect_error(createName(wb.xlsx, "IllegalFormula", "??-%&"))
+    expect_error(createName(wb.xls, "'Test", "Test!$C$10"), NA)
+    expect_error(createName(wb.xlsx, "'Test", "Test!$C$10"), NA)
+    expect_error(createName(wb.xls, "IllegalFormula", "??-%&"), NA)
+    expect_error(createName(wb.xlsx, "IllegalFormula", "??-%&"), NA)
     createName(wb.xls, "ImHere", "ImHere!$B$9")
-    expect_error(createName(wb.xls, "ImHere", "There!$A$2"))
+    expect_error(createName(wb.xls, "ImHere", "There!$A$2"), NA)
     createName(wb.xlsx, "ImHere", "ImHere!$B$9")
-    expect_error(createName(wb.xlsx, "ImHere", "There!$A$2"))
+    expect_error(createName(wb.xlsx, "ImHere", "There!$A$2"), NA)
     createName(wb.xls, "CurrentlyHere", "CurrentlyHere!$D$8")
     createName(wb.xls, "CurrentlyHere", "NowThere!$C$3", overwrite = TRUE)
     expect_equal(TRUE, existsName(wb.xls, "CurrentlyHere"))
     createName(wb.xlsx, "CurrentlyHere", "CurrentlyHere!$D$8")
     createName(wb.xlsx, "CurrentlyHere", "NowThere!$C$3", overwrite = TRUE)
     expect_equal(TRUE, existsName(wb.xlsx, "CurrentlyHere"))
-    expect_error(createName(wb.xls, "aName", "Test!A1A4"))
-    checkNoException(createName(wb.xls, "aName", "Test!A1"))
+    expect_error(createName(wb.xls, "aName", "Test!A1A4"), NA)
+    expect_error(createName(wb.xls, "aName", "Test!A1"), NA)
     expect_equal(TRUE, existsName(wb.xls, "aName"))
     sheetName <- "Test_Scoped_Sheet"
     createSheet(wb.xls, name = sheetName)

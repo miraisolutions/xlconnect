@@ -1,7 +1,7 @@
 test_that("test.writeAndReadNamedRegion", {
-    wb.xls <- loadWorkbook("resources/testWriteAndReadNamedRegion.xls"),
+    wb.xls <- loadWorkbook("resources/testWriteAndReadNamedRegion.xls"",
         create = TRUE)
-    wb.xlsx <- loadWorkbook("resources/testWriteAndReadNamedRegion.xlsx"),
+    wb.xlsx <- loadWorkbook("resources/testWriteAndReadNamedRegion.xlsx"",
         create = TRUE)
     testDataFrame <- function(wb, df, lref) {
         namedRegion <- deparse(substitute(df))
@@ -11,7 +11,7 @@ test_that("test.writeAndReadNamedRegion", {
         writeNamedRegion(wb, df, name = namedRegion, worksheetScope = namedRegion, 
             header = TRUE)
         res <- readNamedRegion(wb, namedRegion, worksheetScope = namedRegion)
-        checkEquals(normalizeDataframe(df, replaceInf = TRUE), 
+        expect_equal(normalizeDataframe(df, replaceInf = TRUE),
             res, check.attributes = FALSE, check.names = TRUE)
     }
     testDataFrameNameScope <- function(wb, df, lref) {
@@ -24,7 +24,7 @@ test_that("test.writeAndReadNamedRegion", {
         writeNamedRegion(wb, df, name = namedRegion, worksheetScope = worksheetScopeName, 
             header = TRUE)
         res <- readNamedRegion(wb, namedRegion, worksheetScope = worksheetScopeName)
-        checkEquals(normalizeDataframe(df, replaceInf = TRUE), 
+        expect_equal(normalizeDataframe(df, replaceInf = TRUE),
             res, check.attributes = FALSE, check.names = TRUE)
     }
     testDataFrameGlobalExplicit <- function(wb, df, lref) {
@@ -36,7 +36,7 @@ test_that("test.writeAndReadNamedRegion", {
         writeNamedRegion(wb, df, name = namedRegion, worksheetScope = "", 
             header = TRUE)
         res <- readNamedRegion(wb, namedRegion, worksheetScope = "")
-        checkEquals(normalizeDataframe(df, replaceInf = TRUE), 
+        expect_equal(normalizeDataframe(df, replaceInf = TRUE),
             res, check.attributes = FALSE, check.names = TRUE)
     }
     testDataFrameGlobalAndScoped <- function(wb, df_global, df_scoped, 
@@ -55,10 +55,10 @@ test_that("test.writeAndReadNamedRegion", {
         res_full <- readNamedRegion(wb, namedRegion, worksheetScope = scopeSheets)
         dfs_norm <- list(normalizeDataframe(df_global, replaceInf = TRUE), 
             normalizeDataframe(df_scoped, replaceInf = TRUE))
-        checkEquals(dfs_norm, res_full, check.attributes = FALSE, 
+        expect_equal(dfs_norm, res_full, check.attributes = FALSE,
             check.names = TRUE)
         res_global_prio <- readNamedRegion(wb, namedRegion)
-        checkEquals(normalizeDataframe(df_global, replaceInf = TRUE), 
+        expect_equal(normalizeDataframe(df_global, replaceInf = TRUE),
             res_global_prio, check.attributes = FALSE, check.names = TRUE)
     }
     if (getOption("FULL.TEST.SUITE")) {

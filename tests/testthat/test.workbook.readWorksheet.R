@@ -1,7 +1,7 @@
 test_that("test.workbook.readWorksheet", {
-    wb.xls <- loadWorkbook("resources/testWorkbookReadWorksheet.xls"),
+    wb.xls <- loadWorkbook("resources/testWorkbookReadWorksheet.xls"",
         create = FALSE)
-    wb.xlsx <- loadWorkbook("resources/testWorkbookReadWorksheet.xlsx"),
+    wb.xlsx <- loadWorkbook("resources/testWorkbookReadWorksheet.xlsx"",
         create = FALSE)
     checkDf <- data.frame(NumericColumn = c(-23.63, NA, NA, 5.8, 
         3), StringColumn = c("Hello", NA, NA, NA, "World"), BooleanColumn = c(TRUE, 
@@ -450,9 +450,9 @@ test_that("test.workbook.readWorksheet", {
         startCol = 5, endRow = 11, endCol = 9, autofitRow = TRUE, 
         autofitCol = TRUE, header = FALSE)
     expect_equal(target7, res)
-    wb.xls <- loadWorkbook("resources/testCachedValues.xls"),
+    wb.xls <- loadWorkbook("resources/testCachedValues.xls"",
         create = FALSE)
-    wb.xlsx <- loadWorkbook("resources/testCachedValues.xlsx"),
+    wb.xlsx <- loadWorkbook("resources/testCachedValues.xlsx"",
         create = FALSE)
     ref.xls.uncached <- readWorksheet(wb.xls, "AllLocal", useCachedValues = FALSE)
     ref.xls.cached <- readWorksheet(wb.xls, "AllLocal", useCachedValues = TRUE)
@@ -481,26 +481,26 @@ test_that("test.workbook.readWorksheet", {
     expect_equal(res, ref.xls.uncached)
     res <- readWorksheet(wb.xlsx, "BothRemote", useCachedValues = TRUE)
     expect_equal(res, ref.xls.uncached)
-    res <- readWorksheetFromFile("resources/testBug52.xlsx"),
+    res <- readWorksheetFromFile("resources/testBug52.xlsx"",
         sheet = 1, useCachedValues = TRUE)
     expected <- data.frame(Var1 = c(2, 4, 6), Var2 = c("2", "nope", 
         "6"), Var3 = c(NA, 4, 6), Var4 = c(2, 4, 6), stringsAsFactors = FALSE)
     expect_equal(res, expected)
     expected = data.frame(B = 1:5, row.names = letters[1:5])
-    res <- readWorksheetFromFile("resources/testBug49.xlsx"),
+    res <- readWorksheetFromFile("resources/testBug49.xlsx"",
         sheet = 1, rownames = 1)
     expect_equal(res, expected)
     expected = data.frame(A = c("2003-04-06", "2014-10-30", "abc"), 
         stringsAsFactors = FALSE)
-    res <- readWorksheetFromFile("resources/testBug53.xlsx"),
+    res <- readWorksheetFromFile("resources/testBug53.xlsx"",
         sheet = 1, dateTimeFormat = "%Y-%m-%d")
     expect_equal(res, expected)
     expected = data.frame(A = as.POSIXct(c("2015-12-01", "2015-11-17", 
         "1984-01-11")))
-    res <- readWorksheetFromFile("resources/testBug53.xlsx"),
+    res <- readWorksheetFromFile("resources/testBug53.xlsx"",
         sheet = 2, colTypes = "POSIXt", forceConversion = TRUE)
     expect_equal(res, expected)
-    wbSparse.xlsx <- loadWorkbook("resources/testReadWorksheetSparseBitSet.xlsx"),
+    wbSparse.xlsx <- loadWorkbook("resources/testReadWorksheetSparseBitSet.xlsx"",
         create = FALSE)
     sparseSheet <- readWorksheet(wbSparse.xlsx, "hist")
 })

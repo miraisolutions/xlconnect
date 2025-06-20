@@ -1,7 +1,7 @@
 test_that("test.workbook.saveWorkbook", {
     if (getOption("FULL.TEST.SUITE")) {
-        file.xls <- "resources/testWorkbookSaveWorkbook.xls")
-        file.xlsx <- "resources/testWorkbookSaveWorkbook.xlsx")
+        file.xls <- "resources/testWorkbookSaveWorkbook.xls"
+        file.xlsx <- "resources/testWorkbookSaveWorkbook.xlsx"
         file.remove(file.xls)
         file.remove(file.xlsx)
         wb.xls <- loadWorkbook(file.xls, create = TRUE)

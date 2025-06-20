@@ -16,7 +16,7 @@ test_that("test.writeNamedRegionToFile", {
             writeNamedRegionToFile(file, df, name, formula = paste(worksheet, 
                 "A1", sep = "!"))
             res <- readNamedRegionFromFile(file, name)
-            checkEquals(normalizeDataframe(df), res, check.attributes = FALSE, 
+            expect_equal(normalizeDataframe(df), res, check.attributes = FALSE,
                 check.names = TRUE)
         }
         testDataFrame(file.xls, mtcars)
@@ -67,25 +67,25 @@ test_that("test.writeNamedRegionToFile", {
             file.remove(file2.xls)
         if (file.exists(file2.xlsx)) 
             file.remove(file2.xlsx)
-        checkNoException(writeNamedRegionToFile(file2.xls, data = mtcars, 
+        expect_error(writeNamedRegionToFile(file2.xls, data = mtcars,
             name = "mtcars", formula = "'My Cars'!$A$1", header = TRUE))
         expect_true(file.exists(file2.xls))
-        checkNoException(writeNamedRegionToFile(file2.xlsx, data = mtcars, 
+        expect_error(writeNamedRegionToFile(file2.xlsx, data = mtcars,
             name = "mtcars", formula = "'My Cars'!$A$1", header = TRUE))
         expect_true(file.exists(file2.xlsx))
         testClearNamedRegions <- function(file, df) {
             df.short <- df[1, ]
             writeNamedRegionToFile(file, data = df.short, name = "cdfRegion")
-            checkEquals(nrow(readNamedRegionFromFile(file, name = "cdfRegion")), 
+            expect_equal(nrow(readNamedRegionFromFile(file, name = "cdfRegion")),
                 1)
-            checkEquals(nrow(readWorksheetFromFile(file, sheet = "cdf")), 
+            expect_equal(nrow(readWorksheetFromFile(file, sheet = "cdf")),
                 nrow(df))
             writeNamedRegionToFile(file, data = df, name = "cdfRegion")
             writeNamedRegionToFile(file, data = df.short, name = "cdfRegion", 
                 clearNamedRegions = TRUE)
-            checkEquals(nrow(readNamedRegionFromFile(file, name = "cdfRegion")), 
+            expect_equal(nrow(readNamedRegionFromFile(file, name = "cdfRegion")),
                 1)
-            checkEquals(nrow(readWorksheetFromFile(file, sheet = "cdf")), 
+            expect_equal(nrow(readWorksheetFromFile(file, sheet = "cdf")),
                 1)
         }
         testClearNamedRegions(file.xls, cdf)
@@ -101,25 +101,25 @@ test_that("test.writeNamedRegionToFile", {
                 formula = paste(scope, "A1", sep = "!"), worksheetScope = scope)
             writeNamedRegionToFile(file, data = df.short, name = "cdfRegionScoped", 
                 worksheetScope = scope)
-            checkEquals(nrow(readNamedRegionFromFile(file, name = "cdfRegionScoped", 
+            expect_equal(nrow(readNamedRegionFromFile(file, name = "cdfRegionScoped",
                 worksheetScope = scope)[[1]]), 1)
-            checkEquals(nrow(readNamedRegionFromFile(file, name = "cdfRegionScoped", 
+            expect_equal(nrow(readNamedRegionFromFile(file, name = "cdfRegionScoped",
                 worksheetScope = scope)[[2]]), 1)
-            checkEquals(nrow(readWorksheetFromFile(file, sheet = scope)[[1]]), 
+            expect_equal(nrow(readWorksheetFromFile(file, sheet = scope)[[1]]),
                 nrow(df))
-            checkEquals(nrow(readWorksheetFromFile(file, sheet = scope)[[2]]), 
+            expect_equal(nrow(readWorksheetFromFile(file, sheet = scope)[[2]]),
                 nrow(df))
             writeNamedRegionToFile(file, data = df, name = "cdfRegionScoped", 
                 worksheetScope = scope)
             writeNamedRegionToFile(file, data = df.short, name = "cdfRegionScoped", 
                 clearNamedRegions = clearParam, worksheetScope = scope)
-            checkEquals(nrow(readNamedRegionFromFile(file, name = "cdfRegionScoped", 
+            expect_equal(nrow(readNamedRegionFromFile(file, name = "cdfRegionScoped",
                 worksheetScope = scope)[[1]]), 1)
-            checkEquals(nrow(readNamedRegionFromFile(file, name = "cdfRegionScoped", 
+            expect_equal(nrow(readNamedRegionFromFile(file, name = "cdfRegionScoped",
                 worksheetScope = scope)[[2]]), 1)
-            checkEquals(nrow(readWorksheetFromFile(file, sheet = scope)[[1]]), 
+            expect_equal(nrow(readWorksheetFromFile(file, sheet = scope)[[1]]),
                 1)
-            checkEquals(nrow(readWorksheetFromFile(file, sheet = scope)[[2]]), 
+            expect_equal(nrow(readWorksheetFromFile(file, sheet = scope)[[2]]),
                 nrow(df))
         }
         scopedfile.xls <- "testWriteNamedRegionToFileWorkbookScoped.xls"

@@ -15,7 +15,7 @@ test_that("test.writeWorksheetToFile", {
             name <- paste(worksheet, "Region", sep = "")
             writeWorksheetToFile(file, data = df, sheet = name)
             res <- readWorksheetFromFile(file, sheet = name)
-            checkEquals(normalizeDataframe(df), res, check.attributes = FALSE, 
+            expect_equal(normalizeDataframe(df), res, check.attributes = FALSE,
                 check.names = TRUE)
         }
         testDataFrame(file.xls, mtcars)
@@ -63,11 +63,11 @@ test_that("test.writeWorksheetToFile", {
         testClearSheets <- function(file, df) {
             df.short <- df[1, ]
             writeWorksheetToFile(file, data = c(df.short), sheet = "cdfRegion")
-            checkEquals(nrow(readWorksheetFromFile(file, sheet = "cdfRegion")), 
+            expect_equal(nrow(readWorksheetFromFile(file, sheet = "cdfRegion")),
                 nrow(df))
             writeWorksheetToFile(file, data = c(df.short), sheet = "cdfRegion", 
                 clearSheets = TRUE)
-            checkEquals(nrow(readWorksheetFromFile(file, sheet = "cdfRegion")), 
+            expect_equal(nrow(readWorksheetFromFile(file, sheet = "cdfRegion")),
                 1)
         }
         testClearSheets(file.xls, cdf)

@@ -1,7 +1,7 @@
 test_that("test.workbook.readNamedRegion", {
-    wb.xls <- loadWorkbook("resources/testWorkbookReadNamedRegion.xls"),
+    wb.xls <- loadWorkbook("resources/testWorkbookReadNamedRegion.xls"",
         create = FALSE)
-    wb.xlsx <- loadWorkbook("resources/testWorkbookReadNamedRegion.xlsx"),
+    wb.xlsx <- loadWorkbook("resources/testWorkbookReadNamedRegion.xlsx"",
         create = FALSE)
     checkDf <- data.frame(NumericColumn = c(-23.63, NA, NA, 5.8, 
         3), StringColumn = c("Hello", NA, NA, NA, "World"), BooleanColumn = c(TRUE, 
@@ -245,9 +245,9 @@ test_that("test.workbook.readNamedRegion", {
     res <- readNamedRegion(wb.xlsx, name = "Simplify4", header = TRUE, 
         simplify = TRUE)
     expect_equal(c("one", "two", "three", "four", "five"), res)
-    wb.xls <- loadWorkbook("resources/testCachedValues.xls"),
+    wb.xls <- loadWorkbook("resources/testCachedValues.xls"",
         create = FALSE)
-    wb.xlsx <- loadWorkbook("resources/testCachedValues.xlsx"),
+    wb.xlsx <- loadWorkbook("resources/testCachedValues.xlsx"",
         create = FALSE)
     ref.xls.uncached <- readNamedRegion(wb.xls, "AllLocal", useCachedValues = FALSE)
     ref.xls.cached <- readNamedRegion(wb.xls, "AllLocal", useCachedValues = TRUE)
@@ -278,12 +278,12 @@ test_that("test.workbook.readNamedRegion", {
     res <- readNamedRegion(wb.xlsx, "BothRemote", useCachedValues = TRUE)
     expect_equal(res, ref.xls.uncached)
     expected = data.frame(B = 1:5, row.names = letters[1:5])
-    res <- readNamedRegionFromFile("resources/testBug49.xlsx"),
+    res <- readNamedRegionFromFile("resources/testBug49.xlsx"",
         name = "test", rownames = "A")
     expect_equal(res, expected)
     options(XLConnect.setCustomAttributes = TRUE)
     name = "Bla"
-    wb37xlsx <- loadWorkbook("resources/test37.xlsx"), create = FALSE)
+    wb37xlsx <- loadWorkbook("resources/test37.xlsx"", create = FALSE)
     read1 <- readNamedRegion(wb37xlsx, name, worksheetScope = "Sheet1")
     expect_equal("Sheet1", attr(read1, "worksheetScope", exact = TRUE))
     read2 <- readNamedRegion(wb37xlsx, name, worksheetScope = "Sheet2")

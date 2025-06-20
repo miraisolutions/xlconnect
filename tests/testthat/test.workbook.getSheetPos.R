@@ -1,7 +1,7 @@
 test_that("test.workbook.getSheetPos", {
-    wb.xls <- loadWorkbook("resources/testWorkbookGetSheetPos.xls"),
+    wb.xls <- loadWorkbook("resources/testWorkbookGetSheetPos.xls"",
         create = TRUE)
-    wb.xlsx <- loadWorkbook("resources/testWorkbookGetSheetPos.xlsx"),
+    wb.xlsx <- loadWorkbook("resources/testWorkbookGetSheetPos.xlsx"",
         create = TRUE)
     createSheet(wb.xls, c("Sheet 1", "Sheet 2", "Sheet 3", "Sheet 4"))
     createSheet(wb.xlsx, c("Sheet 1", "Sheet 2", "Sheet 3", "Sheet 4"))

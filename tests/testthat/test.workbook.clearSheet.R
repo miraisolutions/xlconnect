@@ -1,7 +1,7 @@
 test_that("test.workbook.clearSheet", {
-    wb.xls <- loadWorkbook("resources/testWorkbookClearCells.xls"),
+    wb.xls <- loadWorkbook("resources/testWorkbookClearCells.xls"",
         create = FALSE)
-    wb.xlsx <- loadWorkbook("resources/testWorkbookClearCells.xlsx"),
+    wb.xlsx <- loadWorkbook("resources/testWorkbookClearCells.xlsx"",
         create = FALSE)
     clearSheet(wb.xls, c("clearSheet1", "clearSheet2"))
     res1 <- getLastRow(wb.xls, "clearSheet1")

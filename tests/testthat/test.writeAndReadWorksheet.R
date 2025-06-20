@@ -1,7 +1,7 @@
 test_that("test.workbook.writeAndReadWorksheet", {
-    wb.xls <- loadWorkbook("resources/testWriteAndReadWorksheet.xls"),
+    wb.xls <- loadWorkbook("resources/testWriteAndReadWorksheet.xls"",
         create = TRUE)
-    wb.xlsx <- loadWorkbook("resources/testWriteAndReadWorksheet.xlsx"),
+    wb.xlsx <- loadWorkbook("resources/testWriteAndReadWorksheet.xlsx"",
         create = TRUE)
     testDataFrame <- function(wb, df, startRow, startCol) {
         worksheet <- deparse(substitute(df))
@@ -10,7 +10,7 @@ test_that("test.workbook.writeAndReadWorksheet", {
             startCol = startCol)
         res <- readWorksheet(wb, worksheet, startRow = startRow, 
             startCol = startCol, endRow = 0, endCol = 0)
-        checkEquals(normalizeDataframe(df), res, check.attributes = FALSE, 
+        expect_equal(normalizeDataframe(df), res, check.attributes = FALSE,
             check.names = TRUE)
     }
     if (getOption("FULL.TEST.SUITE")) {

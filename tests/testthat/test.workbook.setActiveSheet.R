@@ -1,7 +1,7 @@
 test_that("test.workbook.setActiveSheet", {
-    wb.xls <- loadWorkbook("resources/testWorkbookSetActiveSheet.xls"),
+    wb.xls <- loadWorkbook("resources/testWorkbookSetActiveSheet.xls"",
         create = FALSE)
-    wb.xlsx <- loadWorkbook("resources/testWorkbookSetActiveSheet.xlsx"),
+    wb.xlsx <- loadWorkbook("resources/testWorkbookSetActiveSheet.xlsx"",
         create = FALSE)
     setActiveSheet(wb.xls, 1)
     expect_true(getActiveSheetIndex(wb.xls) == 1)
@@ -15,9 +15,9 @@ test_that("test.workbook.setActiveSheet", {
     expect_true(getActiveSheetIndex(wb.xlsx) == 3)
     setActiveSheet(wb.xlsx, "Sheet2")
     expect_true(getActiveSheetIndex(wb.xlsx) == 2)
-    expect_error(setActiveSheet(wb.xls, 19))
-    expect_error(setActiveSheet(wb.xls, "SheetWhichDoesNotExist"))
-    expect_error(setActiveSheet(wb.xlsx, 19))
-    expect_error(setActiveSheet(wb.xlsx, "SheetWhichDoesNotExist"))
+    expect_error(setActiveSheet(wb.xls, 19), NA)
+    expect_error(setActiveSheet(wb.xls, "SheetWhichDoesNotExist"), NA)
+    expect_error(setActiveSheet(wb.xlsx, 19), NA)
+    expect_error(setActiveSheet(wb.xlsx, "SheetWhichDoesNotExist"), NA)
 })
 
