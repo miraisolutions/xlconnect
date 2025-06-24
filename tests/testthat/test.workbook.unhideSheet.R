@@ -1,8 +1,10 @@
 test_that("test.workbook.unhideSheet", {
-    wb.xls <- loadWorkbook("resources/testWorkbookHiddenSheets.xls"",
-        create = FALSE)
-    wb.xlsx <- loadWorkbook("resources/testWorkbookHiddenSheets.xlsx"",
-        create = FALSE)
+    wb.xls <- loadWorkbook("resources/testWorkbookHiddenSheets.xls",
+        create = FALSE
+    )
+    wb.xlsx <- loadWorkbook("resources/testWorkbookHiddenSheets.xlsx",
+        create = FALSE
+    )
     unhideSheet(wb.xls, 2)
     unhideSheet(wb.xls, "DDD")
     expect_false(isSheetHidden(wb.xls, 2))
@@ -16,4 +18,3 @@ test_that("test.workbook.unhideSheet", {
     expect_error(unhideSheet(wb.xlsx, 58), NA)
     expect_error(unhideSheet(wb.xlsx, "SheetWhichDoesNotExist"), NA)
 })
-

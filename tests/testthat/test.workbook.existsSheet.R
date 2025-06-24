@@ -1,8 +1,10 @@
 test_that("test.workbook.existsSheet", {
-    wb.xls <- loadWorkbook("resources/testWorkbookExistsNameAndSheet.xls"",
-        create = FALSE)
-    wb.xlsx <- loadWorkbook("resources/testWorkbookExistsNameAndSheet.xlsx"",
-        create = FALSE)
+    wb.xls <- loadWorkbook("resources/testWorkbookExistsNameAndSheet.xls",
+        create = FALSE
+    )
+    wb.xlsx <- loadWorkbook("resources/testWorkbookExistsNameAndSheet.xlsx",
+        create = FALSE
+    )
     expect_true(existsSheet(wb.xls, "AAA"))
     expect_true(existsSheet(wb.xls, "BBB"))
     expect_true(existsSheet(wb.xls, "CCC"))
@@ -16,4 +18,3 @@ test_that("test.workbook.existsSheet", {
     expect_false(existsSheet(wb.xlsx, "'illegal name"))
     expect_false(existsSheet(wb.xlsx, "%&$$-^~@afk20 235-??a?"))
 })
-

@@ -1,8 +1,10 @@
 test_that("test.workbook.createName", {
-    wb.xls <- loadWorkbook("resources/createName.xls"",
-        create = TRUE)
-    wb.xlsx <- loadWorkbook("resources/createName.xlsx"",
-        create = TRUE)
+    wb.xls <- loadWorkbook("resources/createName.xls",
+        create = TRUE
+    )
+    wb.xlsx <- loadWorkbook("resources/createName.xlsx",
+        create = TRUE
+    )
     createName(wb.xls, "Test", "Test!$C$5")
     expect_equal(TRUE, existsName(wb.xls, "Test"))
     createName(wb.xlsx, "Test", "Test!$C$5")
@@ -29,13 +31,12 @@ test_that("test.workbook.createName", {
     createSheet(wb.xlsx, name = sheetName)
     expect_true(existsSheet(wb.xls, sheetName))
     expect_true(existsSheet(wb.xlsx, sheetName))
-    expect_found = TRUE
+    expect_found <- TRUE
     attributes(expect_found) <- list(worksheetScope = sheetName)
     createName(wb.xls, "Test_1", "Test!$C$5", worksheetScope = sheetName)
     expect_equal(expect_found, existsName(wb.xls, "Test_1"))
-    expect_found = TRUE
+    expect_found <- TRUE
     attributes(expect_found) <- list(worksheetScope = sheetName)
     createName(wb.xlsx, "Test_1", "Test!$C$5", worksheetScope = sheetName)
     expect_equal(expect_found, existsName(wb.xlsx, "Test_1"))
 })
-

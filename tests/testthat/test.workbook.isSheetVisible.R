@@ -1,8 +1,10 @@
 test_that("test.workbook.isSheetVisible", {
-    wb.xls <- loadWorkbook("resources/testWorkbookHiddenSheets.xls"",
-        create = FALSE)
-    wb.xlsx <- loadWorkbook("resources/testWorkbookHiddenSheets.xlsx"",
-        create = FALSE)
+    wb.xls <- loadWorkbook("resources/testWorkbookHiddenSheets.xls",
+        create = FALSE
+    )
+    wb.xlsx <- loadWorkbook("resources/testWorkbookHiddenSheets.xlsx",
+        create = FALSE
+    )
     expect_false(isSheetVisible(wb.xls, 2))
     expect_false(isSheetVisible(wb.xls, "BBB"))
     expect_true(isSheetVisible(wb.xls, 1))
@@ -20,4 +22,3 @@ test_that("test.workbook.isSheetVisible", {
     expect_false(isSheetVisible(wb.xlsx, 4))
     expect_false(isSheetVisible(wb.xlsx, "DDD"))
 })
-

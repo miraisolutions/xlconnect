@@ -1,8 +1,10 @@
 test_that("test.workbook.isSheetHidden", {
-    wb.xls <- loadWorkbook("resources/testWorkbookHiddenSheets.xls"",
-        create = FALSE)
-    wb.xlsx <- loadWorkbook("resources/testWorkbookHiddenSheets.xlsx"",
-        create = FALSE)
+    wb.xls <- loadWorkbook("resources/testWorkbookHiddenSheets.xls",
+        create = FALSE
+    )
+    wb.xlsx <- loadWorkbook("resources/testWorkbookHiddenSheets.xlsx",
+        create = FALSE
+    )
     expect_true(isSheetHidden(wb.xls, 2))
     expect_true(isSheetHidden(wb.xls, "BBB"))
     expect_false(isSheetHidden(wb.xls, 1))
@@ -26,4 +28,3 @@ test_that("test.workbook.isSheetHidden", {
     expect_error(isSheetHidden(wb.xlsx, "Sheet does not exist"))
     expect_error(isSheetHidden(wb.xlsx, "'Illegal sheet name"))
 })
-

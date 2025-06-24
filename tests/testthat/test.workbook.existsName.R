@@ -1,8 +1,10 @@
 test_that("test.workbook.existsName", {
-    wb.xls <- loadWorkbook("resources/testWorkbookExistsNameAndSheet.xls"",
-        create = FALSE)
-    wb.xlsx <- loadWorkbook("resources/testWorkbookExistsNameAndSheet.xlsx"",
-        create = FALSE)
+    wb.xls <- loadWorkbook("resources/testWorkbookExistsNameAndSheet.xls",
+        create = FALSE
+    )
+    wb.xlsx <- loadWorkbook("resources/testWorkbookExistsNameAndSheet.xlsx",
+        create = FALSE
+    )
     expect_found <- TRUE
     attributes(expect_found) <- list(worksheetScope = "")
     expect_equal(expect_found, existsName(wb.xls, "AA"))
@@ -32,4 +34,3 @@ test_that("test.workbook.existsName", {
     expect_true(existsName(wb.xlsx, "BB_1"))
     options(XLConnect.setCustomAttributes = TRUE)
 })
-

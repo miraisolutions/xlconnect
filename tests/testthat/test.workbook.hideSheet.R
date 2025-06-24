@@ -1,8 +1,10 @@
 test_that("test.workbook.hideSheet", {
-    wb.xls <- loadWorkbook("resources/testWorkbookHideSheet.xls"",
-        create = TRUE)
-    wb.xlsx <- loadWorkbook("resources/testWorkbookHideSheet.xlsx"",
-        create = TRUE)
+    wb.xls <- loadWorkbook("resources/testWorkbookHideSheet.xls",
+        create = TRUE
+    )
+    wb.xlsx <- loadWorkbook("resources/testWorkbookHideSheet.xlsx",
+        create = TRUE
+    )
     visibleSheet <- "VisibleSheet"
     hiddenSheet <- "HiddenSheet"
     veryHiddenSheet <- "VeryHiddenSheet"
@@ -21,4 +23,3 @@ test_that("test.workbook.hideSheet", {
     hideSheet(wb.xlsx, veryHiddenSheet, veryHidden = TRUE)
     expect_true(isSheetVeryHidden(wb.xlsx, veryHiddenSheet))
 })
-

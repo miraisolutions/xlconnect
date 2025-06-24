@@ -1,6 +1,7 @@
 test_that("test.workbook.getTables", {
-    wb.xlsx <- loadWorkbook("resources/testWorkbookReadTable.xlsx"",
-        create = FALSE)
+    wb.xlsx <- loadWorkbook("resources/testWorkbookReadTable.xlsx",
+        create = FALSE
+    )
     res <- getTables(wb.xlsx, sheet = "Test", simplify = TRUE)
     expect_equal("TestTable1", res)
     res <- getTables(wb.xlsx, sheet = "Test", simplify = FALSE)
@@ -9,4 +10,3 @@ test_that("test.workbook.getTables", {
     expect_equal(character(0), res)
     expect_error(getTables(wb.xlsx, sheet = "DoesNotExist"))
 })
-

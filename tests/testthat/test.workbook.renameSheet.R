@@ -1,8 +1,10 @@
 test_that("test.workbook.renameSheet", {
-    wb.xls <- loadWorkbook("resources/testWorkbookRenameSheet.xls"",
-        create = TRUE)
-    wb.xlsx <- loadWorkbook("resources/testWorkbookRenameSheet.xlsx"",
-        create = TRUE)
+    wb.xls <- loadWorkbook("resources/testWorkbookRenameSheet.xls",
+        create = TRUE
+    )
+    wb.xlsx <- loadWorkbook("resources/testWorkbookRenameSheet.xlsx",
+        create = TRUE
+    )
     createSheet(wb.xls, name = "OldName1")
     renameSheet(wb.xls, sheet = "OldName1", newName = "NewName1")
     expect_true(existsSheet(wb.xls, "NewName1"))
@@ -20,11 +22,12 @@ test_that("test.workbook.renameSheet", {
     expect_true(existsSheet(wb.xlsx, "NewName2"))
     expect_false(existsSheet(wb.xlsx, "OldName2"))
     expect_error(renameSheet(wb.xls, sheet = "NonExisting", newName = "ShouldStillNotExist"), NA)
-    expect_error(renameSheet(wb.xlsx, sheet = "NonExisting", 
-        newName = "ShouldStillNotExist"))
+    expect_error(renameSheet(wb.xlsx,
+        sheet = "NonExisting",
+        newName = "ShouldStillNotExist"
+    ))
     createSheet(wb.xls, name = "SomeName")
     expect_error(renameSheet(wb.xls, sheet = "SomeName", newName = "'invalid"), NA)
     createSheet(wb.xlsx, name = "SomeName")
     expect_error(renameSheet(wb.xlsx, sheet = "SomeName", newName = "'invalid"), NA)
 })
-
