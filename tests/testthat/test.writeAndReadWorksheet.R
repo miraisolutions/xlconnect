@@ -1,4 +1,4 @@
-test_that("test.workbook.writeAndReadWorksheet", {
+test_that("test.workbook.writeAndReadWorksheet - always run", {
     wb.xls <- loadWorkbook("resources/testWriteAndReadWorksheet.xls",
         create = TRUE
     )
@@ -20,26 +20,6 @@ test_that("test.workbook.writeAndReadWorksheet", {
             check.attributes = FALSE,
             check.names = TRUE
         )
-    }
-    if (getOption("FULL.TEST.SUITE")) {
-        testDataFrame(wb.xls, mtcars, 8, 13)
-        testDataFrame(wb.xlsx, mtcars, 8, 13)
-        testDataFrame(wb.xls, airquality, 2, 9)
-        testDataFrame(wb.xlsx, airquality, 2, 9)
-        testDataFrame(wb.xls, attenu, 7, 1)
-        testDataFrame(wb.xlsx, attenu, 7, 1)
-        testDataFrame(wb.xls, ChickWeight, 8, 8)
-        testDataFrame(wb.xlsx, ChickWeight, 8, 8)
-        testDataFrame(wb.xls, CO2, 100, 12)
-        testDataFrame(wb.xlsx, CO2, 100, 12)
-        testDataFrame(wb.xls, iris, 1, 1)
-        testDataFrame(wb.xlsx, iris, 1, 1)
-        testDataFrame(wb.xls, longley, 5, 214)
-        testDataFrame(wb.xlsx, longley, 5, 214)
-        testDataFrame(wb.xls, morley, 1000, 6)
-        testDataFrame(wb.xlsx, morley, 1000, 6)
-        testDataFrame(wb.xls, swiss, 4, 4)
-        testDataFrame(wb.xlsx, swiss, 4, 4)
     }
     cdf <- data.frame(
         Column.A = c(
@@ -116,4 +96,49 @@ test_that("test.workbook.writeAndReadWorksheet", {
     res <- readWorksheet(wb.xlsx, "rownames2", rownames = "Car")
     expect_equal(res, mtcars)
     expect_equal(attr(res, "row.names"), attr(mtcars, "row.names"))
+})
+
+test_that("test.workbook.writeAndReadWorksheet - full test suite only", {
+    skip_if_not(getOption("FULL.TEST.SUITE"), "FULL.TEST.SUITE is not TRUE")
+
+    wb.xls <- loadWorkbook("resources/testWriteAndReadWorksheet.xls",
+        create = TRUE
+    )
+    wb.xlsx <- loadWorkbook("resources/testWriteAndReadWorksheet.xlsx",
+        create = TRUE
+    )
+    testDataFrame <- function(wb, df, startRow, startCol) {
+        worksheet <- deparse(substitute(df))
+        createSheet(wb, worksheet)
+        writeWorksheet(wb, df, worksheet,
+            startRow = startRow,
+            startCol = startCol
+        )
+        res <- readWorksheet(wb, worksheet,
+            startRow = startRow,
+            startCol = startCol, endRow = 0, endCol = 0
+        )
+        expect_equal(normalizeDataframe(df), res,
+            check.attributes = FALSE,
+            check.names = TRUE
+        )
+    }
+    testDataFrame(wb.xls, mtcars, 8, 13)
+    testDataFrame(wb.xlsx, mtcars, 8, 13)
+    testDataFrame(wb.xls, airquality, 2, 9)
+    testDataFrame(wb.xlsx, airquality, 2, 9)
+    testDataFrame(wb.xls, attenu, 7, 1)
+    testDataFrame(wb.xlsx, attenu, 7, 1)
+    testDataFrame(wb.xls, ChickWeight, 8, 8)
+    testDataFrame(wb.xlsx, ChickWeight, 8, 8)
+    testDataFrame(wb.xls, CO2, 100, 12)
+    testDataFrame(wb.xlsx, CO2, 100, 12)
+    testDataFrame(wb.xls, iris, 1, 1)
+    testDataFrame(wb.xlsx, iris, 1, 1)
+    testDataFrame(wb.xls, longley, 5, 214)
+    testDataFrame(wb.xlsx, longley, 5, 214)
+    testDataFrame(wb.xls, morley, 1000, 6)
+    testDataFrame(wb.xlsx, morley, 1000, 6)
+    testDataFrame(wb.xls, swiss, 4, 4)
+    testDataFrame(wb.xlsx, swiss, 4, 4)
 })

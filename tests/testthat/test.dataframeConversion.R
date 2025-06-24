@@ -1,20 +1,9 @@
-test_that("test.dataframeConversion", {
+test_that("test.dataframeConversion - always run", {
     testDataFrame <- function(df) {
         res <- XLConnect:::dataframeFromJava(XLConnect:::dataframeToJava(df), 
             check.names = TRUE)
         expect_equal(normalizeDataframe(df), res, check.attributes = FALSE,
             check.names = TRUE)
-    }
-    if (getOption("FULL.TEST.SUITE")) {
-        testDataFrame(mtcars)
-        testDataFrame(airquality)
-        testDataFrame(attenu)
-        testDataFrame(ChickWeight)
-        testDataFrame(CO2)
-        testDataFrame(iris)
-        testDataFrame(longley)
-        testDataFrame(morley)
-        testDataFrame(swiss)
     }
     cdf <- data.frame(Column.A = c(1, 2, 3, NA, 5, Inf, 7, 8, 
         NA, 10), Column.B = c(-4, -3, NA, -Inf, 0, NA, NA, 3, 
@@ -44,3 +33,22 @@ test_that("test.dataframeConversion", {
     expect_error(XLConnect:::dataframeFromJava(search))
 })
 
+test_that("test.dataframeConversion - full test suite only", {
+    skip_if_not(getOption("FULL.TEST.SUITE"), "FULL.TEST.SUITE is not TRUE")
+
+    testDataFrame <- function(df) {
+        res <- XLConnect:::dataframeFromJava(XLConnect:::dataframeToJava(df),
+            check.names = TRUE)
+        expect_equal(normalizeDataframe(df), res, check.attributes = FALSE,
+            check.names = TRUE)
+    }
+    testDataFrame(mtcars)
+    testDataFrame(airquality)
+    testDataFrame(attenu)
+    testDataFrame(ChickWeight)
+    testDataFrame(CO2)
+    testDataFrame(iris)
+    testDataFrame(longley)
+    testDataFrame(morley)
+    testDataFrame(swiss)
+})
