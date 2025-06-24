@@ -42,8 +42,16 @@ library(XLConnect)
 
 ### Run tests with testthat
 
+Run all tests:
+
 ```R
 testthat::test_dir("tests/testthat")
+```
+
+Run a specific test file:
+
+```R
+testthat::test_file("tests/testthat/test.loadWorkbook.R")
 ```
 
 ### Run RUnit tests
