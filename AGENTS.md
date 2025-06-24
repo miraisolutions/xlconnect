@@ -45,7 +45,7 @@ library(XLConnect)
 Run all tests:
 
 ```R
-testthat::test_dir("tests/testthat")
+testthat::test_local(load_package='none')
 ```
 
 Run a specific test file:
@@ -65,6 +65,30 @@ Rscript tests/run_tests.R
 ```sh
 git clean -fdx *.xls *.xlsx
 ```
+
+### Explore available functionality
+
+You can list the functions / objects in a package with `ls` or `lsf`:
+
+```R
+> library(testthat)
+> lsf("package:testthat")
+  [1] "%>%"                       "announce_snapshot_file"   
+  [3] "auto_test"                 "auto_test_package"        
+  [5] "capture_condition"         "capture_error"            
+  [7] "capture_expectation"       "capture_message"          
+  [9] "capture_messages"          "capture_output"
+  ...
+```
+
+You can then get help on a specific function by using `?`,
+for example for `testthat::test_file`:
+
+```R
+?testthat::test_file"
+```
+
+This should open a read view in the terminal which can be scrolled with arrow keys or exited with `q`.
 
 ## Checks
 
