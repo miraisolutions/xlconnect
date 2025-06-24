@@ -14,7 +14,7 @@ You need to call `library(<some_package>)` before using any function from that p
 
 ## setup
 
-Prerequisite packages:
+Prerequisite packages, including installing the checked out package itelf from source:
 
 ```sh
 Rscript -e "install.packages(c('rJava', 'RUnit', 'devtools', 'testthat'))"
@@ -24,9 +24,9 @@ Rscript -e "{\
 }"
 ```
 
-## common commands
+## Common commands
 
-### install the local source package
+### Install the local source package
 
 ```R
 devtools::install()
