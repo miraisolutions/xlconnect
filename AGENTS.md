@@ -59,3 +59,18 @@ testthat::test_file("tests/testthat/test.loadWorkbook.R")
 ```sh
 Rscript tests/run_tests.R
 ```
+
+### Clean up after tests
+
+```sh
+git clean -fdx *.xls *.xlsx
+```
+
+## Checks
+
+- no xls(x) files that are tracked by git should be modifiied after running the tests:
+
+   ```sh
+   > git status | grep -E "xls|xlsx" | wc -l
+   0
+   ```
