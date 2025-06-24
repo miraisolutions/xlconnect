@@ -7,15 +7,15 @@ test_that("test.with.workbook", {
     )
     with(wb.xls,
         {
-            checkTrue(all(dim(AA) == c(8, 3)))
-            checkTrue(all(dim(BB) == c(5, 5)))
+            expect_true(all(dim(AA) == c(8, 3)))
+            expect_true(all(dim(BB) == c(5, 5)))
         },
         header = FALSE
     )
     with(wb.xlsx,
         {
-            checkTrue(all(dim(AA) == c(8, 3)))
-            checkTrue(all(dim(BB) == c(5, 5)))
+            expect_true(all(dim(AA) == c(8, 3)))
+            expect_true(all(dim(BB) == c(5, 5)))
         },
         header = FALSE
     )

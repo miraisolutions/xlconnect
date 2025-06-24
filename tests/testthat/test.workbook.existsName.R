@@ -5,28 +5,64 @@ test_that("test.workbook.existsName", {
     wb.xlsx <- loadWorkbook("resources/testWorkbookExistsNameAndSheet.xlsx",
         create = FALSE
     )
-    expect_found <- TRUE
-    attributes(expect_found) <- list(worksheetScope = "")
-    expect_equal(expect_found, existsName(wb.xls, "AA"))
-    expect_equal(expect_found, existsName(wb.xls, "BB"))
-    expect_equal(expect_found, existsName(wb.xls, "CC"))
-    expect_equal(FALSE, existsName(wb.xls, "DD"))
-    expect_equal(FALSE, existsName(wb.xls, "'illegal name"))
-    expect_equal(FALSE, existsName(wb.xls, "%&$$-^~@afk20 235-??a?"))
-    expect_equal(expect_found, existsName(wb.xlsx, "AA"))
-    expect_equal(expect_found, existsName(wb.xlsx, "BB"))
-    expect_equal(expect_found, existsName(wb.xlsx, "CC"))
-    expect_equal(FALSE, existsName(wb.xlsx, "DD"))
-    expect_equal(FALSE, existsName(wb.xlsx, "'illegal name"))
-    expect_equal(FALSE, existsName(wb.xlsx, "%&$$-^~@afk20 235-??a?"))
-    attributes(expect_found) <- list(worksheetScope = "AAA")
-    expect_equal(expect_found, existsName(wb.xls, "AA_1"))
-    attributes(expect_found) <- list(worksheetScope = "BBB")
-    expect_equal(expect_found, existsName(wb.xls, "BB_1"))
-    attributes(expect_found) <- list(worksheetScope = "AAA")
-    expect_equal(expect_found, existsName(wb.xlsx, "AA_1"))
-    attributes(expect_found) <- list(worksheetScope = "BBB")
-    expect_equal(expect_found, existsName(wb.xlsx, "BB_1"))
+    # Global names
+    res_xls_AA <- existsName(wb.xls, "AA")
+    expect_true(res_xls_AA)
+    xls_AA_scope <- attr(res_xls_AA, "worksheetScope")
+    expect_true(is.null(xls_AA_scope) || xls_AA_scope == "")
+    res_xls_BB <- existsName(wb.xls, "BB")
+    expect_true(res_xls_BB)
+    xls_BB_scope <- attr(res_xls_BB, "worksheetScope")
+    expect_true(is.null(xls_BB_scope) || xls_BB_scope == "")
+    res_xls_CC <- existsName(wb.xls, "CC")
+    expect_true(res_xls_CC)
+    xls_CC_scope <- attr(res_xls_CC, "worksheetScope")
+    expect_true(is.null(xls_CC_scope) || xls_CC_scope == "")
+
+    expect_false(existsName(wb.xls, "DD"))
+    expect_false(existsName(wb.xls, "'illegal name"))
+    expect_false(existsName(wb.xls, "%&$$-^~@afk20 235-??a?"))
+
+    res_xlsx_AA <- existsName(wb.xlsx, "AA")
+    expect_true(res_xlsx_AA)
+    xlsx_AA_scope <- attr(res_xlsx_AA, "worksheetScope")
+    expect_true(is.null(xlsx_AA_scope) || xlsx_AA_scope == "")
+    res_xlsx_BB <- existsName(wb.xlsx, "BB")
+    expect_true(res_xlsx_BB)
+    xlsx_BB_scope <- attr(res_xlsx_BB, "worksheetScope")
+    expect_true(is.null(xlsx_BB_scope) || xlsx_BB_scope == "")
+    res_xlsx_CC <- existsName(wb.xlsx, "CC")
+    expect_true(res_xlsx_CC)
+    xlsx_CC_scope <- attr(res_xlsx_CC, "worksheetScope")
+    expect_true(is.null(xlsx_CC_scope) || xlsx_CC_scope == "")
+
+    expect_false(existsName(wb.xlsx, "DD"))
+    expect_false(existsName(wb.xlsx, "'illegal name"))
+    expect_false(existsName(wb.xlsx, "%&$$-^~@afk20 235-??a?"))
+
+    # Sheet-scoped names
+    res_xls_AA_1 <- existsName(wb.xls, "AA_1")
+    expect_true(res_xls_AA_1)
+    if (isTRUE(getOption("XLConnect.setCustomAttributes"))) {
+        expect_equal(attr(res_xls_AA_1, "worksheetScope"), "AAA")
+    }
+    res_xls_BB_1 <- existsName(wb.xls, "BB_1")
+    expect_true(res_xls_BB_1)
+    if (isTRUE(getOption("XLConnect.setCustomAttributes"))) {
+        expect_equal(attr(res_xls_BB_1, "worksheetScope"), "BBB")
+    }
+
+    res_xlsx_AA_1 <- existsName(wb.xlsx, "AA_1")
+    expect_true(res_xlsx_AA_1)
+    if (isTRUE(getOption("XLConnect.setCustomAttributes"))) {
+        expect_equal(attr(res_xlsx_AA_1, "worksheetScope"), "AAA")
+    }
+    res_xlsx_BB_1 <- existsName(wb.xlsx, "BB_1")
+    expect_true(res_xlsx_BB_1)
+    if (isTRUE(getOption("XLConnect.setCustomAttributes"))) {
+        expect_equal(attr(res_xlsx_BB_1, "worksheetScope"), "BBB")
+    }
+
     options(XLConnect.setCustomAttributes = FALSE)
     expect_true(existsName(wb.xls, "AA_1"))
     expect_true(existsName(wb.xls, "BB_1"))

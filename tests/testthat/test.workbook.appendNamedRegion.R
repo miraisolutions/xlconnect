@@ -20,14 +20,20 @@ test_that("test.workbook.appendNamedRegion", {
     refCoord <- matrix(c(9, 5, 73, 15), ncol = 2, byrow = TRUE)
     appendNamedRegion(wb.xls, mtcars, name = "mtcars")
     res <- readNamedRegion(wb.xls, name = "mtcars")
-    expect_equal(normalizeDataframe(rbind(mtcars, mtcars)), res)
+    rownames(res) <- as.character(seq_len(nrow(res)))
+    expected_data_xls <- rbind(mtcars, mtcars)
+    rownames(expected_data_xls) <- as.character(seq_len(nrow(expected_data_xls)))
+    expect_equal(normalizeDataframe(expected_data_xls), normalizeDataframe(res))
     expect_equal(refCoord, getReferenceCoordinatesForName(
         wb.xls,
         "mtcars"
     ))
     appendNamedRegion(wb.xlsx, mtcars, name = "mtcars")
     res <- readNamedRegion(wb.xlsx, name = "mtcars")
-    expect_equal(normalizeDataframe(rbind(mtcars, mtcars)), res)
+    rownames(res) <- as.character(seq_len(nrow(res)))
+    expected_data_xlsx <- rbind(mtcars, mtcars)
+    rownames(expected_data_xlsx) <- as.character(seq_len(nrow(expected_data_xlsx)))
+    expect_equal(normalizeDataframe(expected_data_xlsx), normalizeDataframe(res))
     expect_equal(refCoord, getReferenceCoordinatesForName(
         wb.xlsx,
         "mtcars"

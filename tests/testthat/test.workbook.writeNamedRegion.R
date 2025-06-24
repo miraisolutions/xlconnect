@@ -6,34 +6,36 @@ test_that("test.workbook.writeNamedRegion", {
         create = TRUE
     )
     createName(wb.xls, "test1", "Test1!$C$8")
-    expect_error(writeNamedRegion(wb.xls, search, "test1"), NA)
+    expect_error(writeNamedRegion(wb.xls, search, "test1"), "cannot coerce class")
     createName(wb.xlsx, "test1", "Test1!$C$8")
-    expect_error(writeNamedRegion(wb.xlsx, search, "test1"), NA)
-    expect_error(writeNamedRegion(wb.xls, mtcars, "nameDoesNotExist"), NA)
-    expect_error(writeNamedRegion(wb.xlsx, mtcars, "nameDoesNotExist"), NA)
+    expect_error(writeNamedRegion(wb.xlsx, search, "test1"), "cannot coerce class")
+    expect_error(writeNamedRegion(wb.xls, mtcars, "nameDoesNotExist"), "IllegalArgumentException")
+    expect_error(writeNamedRegion(wb.xlsx, mtcars, "nameDoesNotExist"), "IllegalArgumentException")
     createName(wb.xls, "nope", "NonExistingSheet!A1")
-    expect_error(writeNamedRegion(wb.xls, mtcars, "nope"), NA)
+    expect_error(writeNamedRegion(wb.xls, mtcars, "nope"), "IllegalArgumentException")
     createName(wb.xlsx, "nope", "NonExistingSheet!A1")
-    expect_error(writeNamedRegion(wb.xlsx, mtcars, "nope"), NA)
+    expect_error(writeNamedRegion(wb.xlsx, mtcars, "nope"), "IllegalArgumentException")
     createSheet(wb.xls, "empty")
     createName(wb.xls, "empty1", "empty!A1")
     createName(wb.xls, "empty2", "empty!D10")
-    expect_error(writeNamedRegion(wb.xls, data.frame(), "empty1"))
-    expect_error(writeNamedRegion(wb.xls, data.frame(
+    # Writing empty data frames is allowed
+    writeNamedRegion(wb.xls, data.frame(), "empty1")
+    writeNamedRegion(wb.xls, data.frame(
         a = character(0),
         b = numeric(0)
-    ), "empty2"))
+    ), "empty2")
     createSheet(wb.xlsx, "empty")
     createName(wb.xlsx, "empty1", "empty!A1")
     createName(wb.xlsx, "empty2", "empty!D10")
-    expect_error(writeNamedRegion(
+    # Writing empty data frames is allowed
+    writeNamedRegion(
         wb.xlsx, data.frame(),
         "empty1"
-    ))
-    expect_error(writeNamedRegion(wb.xlsx, data.frame(
+    )
+    writeNamedRegion(wb.xlsx, data.frame(
         a = character(0),
         b = numeric(0)
-    ), "empty2"))
+    ), "empty2")
     wb.xls <- loadWorkbook("resources/testWorkbookOverwriteFormulas.xls")
     wb.xlsx <- loadWorkbook("resources/testWorkbookOverwriteFormulas.xlsx")
     mtcars_mod <- mtcars

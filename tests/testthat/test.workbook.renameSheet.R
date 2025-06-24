@@ -21,13 +21,13 @@ test_that("test.workbook.renameSheet", {
     renameSheet(wb.xlsx, sheet = 2, newName = "NewName2")
     expect_true(existsSheet(wb.xlsx, "NewName2"))
     expect_false(existsSheet(wb.xlsx, "OldName2"))
-    expect_error(renameSheet(wb.xls, sheet = "NonExisting", newName = "ShouldStillNotExist"), NA)
+    expect_error(renameSheet(wb.xls, sheet = "NonExisting", newName = "ShouldStillNotExist"), "IllegalArgumentException")
     expect_error(renameSheet(wb.xlsx,
         sheet = "NonExisting",
         newName = "ShouldStillNotExist"
-    ))
+    ), "IllegalArgumentException")
     createSheet(wb.xls, name = "SomeName")
-    expect_error(renameSheet(wb.xls, sheet = "SomeName", newName = "'invalid"), NA)
+    expect_error(renameSheet(wb.xls, sheet = "SomeName", newName = "'invalid"), "IllegalArgumentException")
     createSheet(wb.xlsx, name = "SomeName")
-    expect_error(renameSheet(wb.xlsx, sheet = "SomeName", newName = "'invalid"), NA)
+    expect_error(renameSheet(wb.xlsx, sheet = "SomeName", newName = "'invalid"), "IllegalArgumentException")
 })

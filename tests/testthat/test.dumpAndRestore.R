@@ -1,4 +1,5 @@
 test_that("test.dumpAndRestore", {
+    skip_on_cran() # Skip this test on CRAN due to memory issues
     if (getOption("FULL.TEST.SUITE")) {
         require(datasets)
         pos = "package:datasets"

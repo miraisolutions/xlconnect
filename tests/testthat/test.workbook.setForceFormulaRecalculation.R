@@ -11,9 +11,9 @@ test_that("test.workbook.setForceFormulaRecalculation", {
     expect_false(getForceFormulaRecalculation(wb.xlsx, "Sheet2"))
     setForceFormulaRecalculation(wb.xlsx, "*", TRUE)
     expect_true(all(getForceFormulaRecalculation(wb.xlsx, "*")))
-    expect_error(setForceFormulaRecalculation(wb.xlsx, 12, TRUE), NA)
+    expect_error(setForceFormulaRecalculation(wb.xlsx, 12, TRUE), "IllegalArgumentException")
     expect_error(setForceFormulaRecalculation(
         wb.xlsx, "SheetWhichDoesNotExist",
         TRUE
-    ))
+    ), "IllegalArgumentException")
 })
