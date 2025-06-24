@@ -12,7 +12,7 @@ You can run R commands by using the `Rscript` command. You can put statements on
 
 You need to call `library(<some_package>)` before using any function from that package.
 
-## setup
+## IMPORTANT Setup - REQUIRED
 
 Prerequisite packages, including installing the checked out package itelf from source:
 
