@@ -6,11 +6,11 @@ test_that("test.workbook.writeWorksheet", {
         create = TRUE
     )
     createSheet(wb.xls, "test1")
-    expect_error(writeWorksheet(wb.xls, search, "test1"), NA)
+    expect_error(writeWorksheet(wb.xls, search, "test1"))
     createSheet(wb.xlsx, "test1")
-    expect_error(writeWorksheet(wb.xlsx, search, "test1"), NA)
-    expect_error(writeWorksheet(wb.xls, mtcars, "sheetDoesNotExist"), NA)
-    expect_error(writeWorksheet(wb.xlsx, mtcars, "sheetDoesNotExist"), NA)
+    expect_error(writeWorksheet(wb.xlsx, search, "test1"))
+    expect_error(writeWorksheet(wb.xls, mtcars, "sheetDoesNotExist"))
+    expect_error(writeWorksheet(wb.xlsx, mtcars, "sheetDoesNotExist"))
     wb.xls <- loadWorkbook("resources/testWorkbookOverwriteFormulas.xls")
     wb.xlsx <- loadWorkbook("resources/testWorkbookOverwriteFormulas.xlsx")
     mtcars_mod <- mtcars

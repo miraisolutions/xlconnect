@@ -182,7 +182,7 @@ test_that("test.writeAndReadNamedRegion", {
         rownames = "Car"
     )
     res <- readNamedRegion(wb.xls, "rownames")
-    expect_equal(res, XLConnect:::includeRownames(mtcars, "Car"))
+    expect_equal(res, XLConnect:::includeRownames(mtcars, "Car"), check.attributes = FALSE)
     createSheet(wb.xlsx, name = "rownames")
     createName(wb.xlsx, name = "rownames", formula = "rownames!$F$16")
     writeNamedRegion(wb.xlsx, mtcars,
@@ -190,7 +190,7 @@ test_that("test.writeAndReadNamedRegion", {
         rownames = "Car"
     )
     res <- readNamedRegion(wb.xlsx, "rownames")
-    expect_equal(res, XLConnect:::includeRownames(mtcars, "Car"))
+    expect_equal(res, XLConnect:::includeRownames(mtcars, "Car"), check.attributes = FALSE)
     createSheet(wb.xls, name = "rownames2")
     createName(wb.xls, name = "rownames2", formula = "rownames2!$K$5")
     writeNamedRegion(wb.xls, mtcars,

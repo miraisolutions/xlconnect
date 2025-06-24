@@ -68,10 +68,10 @@ test_that("test.writeNamedRegionToFile", {
         if (file.exists(file2.xlsx)) 
             file.remove(file2.xlsx)
         expect_error(writeNamedRegionToFile(file2.xls, data = mtcars,
-            name = "mtcars", formula = "'My Cars'!$A$1", header = TRUE))
+            name = "mtcars", formula = "'My Cars'!$A$1", header = TRUE), NA)
         expect_true(file.exists(file2.xls))
         expect_error(writeNamedRegionToFile(file2.xlsx, data = mtcars,
-            name = "mtcars", formula = "'My Cars'!$A$1", header = TRUE))
+            name = "mtcars", formula = "'My Cars'!$A$1", header = TRUE), NA)
         expect_true(file.exists(file2.xlsx))
         testClearNamedRegions <- function(file, df) {
             df.short <- df[1, ]
@@ -124,6 +124,10 @@ test_that("test.writeNamedRegionToFile", {
         }
         scopedfile.xls <- "testWriteNamedRegionToFileWorkbookScoped.xls"
         scopedfile.xlsx <- "testWriteNamedRegionToFileWorkbookScoped.xlsx"
+        if (file.exists(scopedfile.xls))
+            file.remove(scopedfile.xls)
+        if (file.exists(scopedfile.xlsx))
+            file.remove(scopedfile.xlsx)
         testClearNamedRegionsScoped(scopedfile.xls, cdf)
         testClearNamedRegionsScoped(scopedfile.xlsx, cdf)
     }
