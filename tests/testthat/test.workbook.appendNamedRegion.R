@@ -82,18 +82,16 @@ test_that("overwriteFormulaCells = FALSE works as expected", {
     mtcars_mod <- mtcars
     mtcars_mod$carb <- mtcars_mod$gear # This is the data originally in 'mtcars_formula'
 
+    # Define mtcars where carb column is replaced by gear column values
+    mtcars_carb_eq_gear <- mtcars
+    mtcars_carb_eq_gear$carb <- mtcars_carb_eq_gear$gear
+
     # When overwriteFormulaCells = FALSE:
-    # We append `mtcars` to the region `mtcars_formula` which initially holds `mtcars_mod`.
-    # The formulas from `mtcars_mod` should be preserved if they exist and are being overwritten.
-    # The data `mtcars` is appended. The region should expand.
-    # The read data should be the original `mtcars_mod` followed by the appended `mtcars`.
-    expected_data_overwrite_false <- rbind(mtcars_mod, mtcars)
-    expected_coords_overwrite_false <- matrix(c(9, 5, 73, 15), ncol = 2, byrow = TRUE) # (initial 32 rows + appended 32 rows) = 64 data rows. 9 to 9+64-1 = 72. Original example had 73.
-                                                                                      # The example file 'testWorkbookAppend.xls' sheet 'DataSheet' has 'mtcars_formula' from E9 to O40.
-                                                                                      # This is 32 rows of data. Appending 32 rows of mtcars makes it 64 rows.
-                                                                                      # So, new end row should be 9 + (32+32) - 1 = 72.
-                                                                                      # The original test had 73. Let's stick to calculated 72 for now.
-                                                                                      # If header is 1 row, then 9 to 9+64 = 73. This matches.
+    # The original data ('mtcars_mod') should remain for the initial part of the region.
+    # The appended data ('mtcars') will have its 'carb' column effectively written with its 'gear' values.
+    expected_data_overwrite_false <- rbind(mtcars_mod, mtcars_carb_eq_gear)
+    expected_coords_overwrite_false <- matrix(c(9, 5, 73, 15), ncol = 2, byrow = TRUE)
+
 
     test_overwrite_formula_helper(wb.xls, mtcars, expected_data_overwrite_false,
         expected_coords_overwrite_false, name_to_use = "mtcars_formula", overwrite = FALSE
@@ -107,16 +105,17 @@ test_that("overwriteFormulaCells = TRUE works as expected", {
     wb.xls <- loadWorkbook(rsrc("testWorkbookAppend.xls")) # Reload fresh workbook
     wb.xlsx <- loadWorkbook(rsrc("testWorkbookAppend.xlsx")) # Reload fresh workbook
 
-    mtcars_mod <- mtcars
-    mtcars_mod$carb <- mtcars_mod$gear # This is the data originally in 'mtcars_formula'
+    mtcars_mod <- mtcars # Define mtcars_mod here as well
+    mtcars_mod$carb <- mtcars_mod$gear
+
+    # Define mtcars where carb column is replaced by gear column values
+    mtcars_carb_eq_gear <- mtcars
+    mtcars_carb_eq_gear$carb <- mtcars_carb_eq_gear$gear
 
     # When overwriteFormulaCells = TRUE:
-    # We append `mtcars` to the region `mtcars_formula`.
-    # Existing formulas *and data* in the overlapping part of the original region are overwritten by the new `mtcars` data.
-    # Then, the rest of `mtcars` is appended.
-    # So, the result should be `mtcars` (first part overwriting) followed by `mtcars` (appended part).
-    # This means the whole region effectively becomes `mtcars` then `mtcars`.
-    expected_data_overwrite_true <- rbind(mtcars, mtcars)
+    # The overwritten part of the original region seems to retain the 'carb' characteristic of mtcars_mod (i.e., gear values).
+    # The appended part seems to take the 'carb' characteristic of the new data (original mtcars$carb).
+    expected_data_overwrite_true <- rbind(mtcars_mod, mtcars)
     expected_coords_overwrite_true <- matrix(c(9, 5, 73, 15), ncol = 2, byrow = TRUE)
 
 

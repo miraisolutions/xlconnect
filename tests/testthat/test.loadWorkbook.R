@@ -20,6 +20,7 @@ test_that("creating new XLS and XLSX files on the fly works", {
 
     wb_create_xls <- loadWorkbook(file_to_create_xls, create = TRUE)
     expect_true(is(wb_create_xls, "workbook"))
+    saveWorkbook(wb_create_xls, file_to_create_xls) # Ensure file is written
     expect_true(file.exists(file_to_create_xls))
 
     # Test creating an XLSX file
@@ -28,21 +29,22 @@ test_that("creating new XLS and XLSX files on the fly works", {
 
     wb_create_xlsx <- loadWorkbook(file_to_create_xlsx, create = TRUE)
     expect_true(is(wb_create_xlsx, "workbook"))
+    saveWorkbook(wb_create_xlsx, file_to_create_xlsx) # Ensure file is written
     expect_true(file.exists(file_to_create_xlsx))
 })
 
 test_that("loading password-protected files works correctly", {
     # Test case 1: testBug61.xlsx
     pwdProtectedFile1 <- rsrc("testBug61.xlsx")
-    expect_error(loadWorkbook(pwdProtectedFile1), "Workbook is password-protected")
-    expect_error(loadWorkbook(pwdProtectedFile1, password = "wrong"), "Incorrect password")
+    expect_error(loadWorkbook(pwdProtectedFile1), "EncryptedDocumentException (Java): The supplied spreadsheet is protected, but no password was supplied", fixed = TRUE)
+    expect_error(loadWorkbook(pwdProtectedFile1, password = "wrong"), "EncryptedDocumentException (Java): Password incorrect", fixed = TRUE)
     wb_pwd1 <- loadWorkbook(pwdProtectedFile1, password = "mirai")
     expect_true(is(wb_pwd1, "workbook"))
 
     # Test case 2: testBug106.xlsx
     pwdProtectedFile2 <- rsrc("testBug106.xlsx")
-    expect_error(loadWorkbook(pwdProtectedFile2), "Workbook is password-protected")
-    expect_error(loadWorkbook(pwdProtectedFile2, password = "wrong"), "Incorrect password")
+    expect_error(loadWorkbook(pwdProtectedFile2), "EncryptedDocumentException (Java): The supplied spreadsheet is protected, but no password was supplied", fixed = TRUE)
+    expect_error(loadWorkbook(pwdProtectedFile2, password = "wrong"), "EncryptedDocumentException (Java): Password incorrect", fixed = TRUE)
     wb_pwd2 <- loadWorkbook(pwdProtectedFile2, password = "mirai")
     expect_true(is(wb_pwd2, "workbook"))
 })
