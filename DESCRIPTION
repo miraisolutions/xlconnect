@@ -23,3 +23,4 @@ Description: Provides comprehensive functionality to read, write and format Exce
 License: GPL-3
 Copyright: See file COPYRIGHTS
 LazyData: yes
+Config/testthat/edition: 3

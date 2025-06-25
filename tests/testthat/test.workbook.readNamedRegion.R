@@ -56,41 +56,41 @@ test_that("test.workbook.readNamedRegion", {
             "1900-12-22 16:04:48"
         )), stringsAsFactors = FALSE
     )
-    res <- readNamedRegion(wb.xls,
+    res <- suppressWarnings(readNamedRegion(wb.xls,
         name = "Conversion", header = TRUE,
         colTypes = c(
             XLC$DATA_TYPE.NUMERIC, XLC$DATA_TYPE.STRING,
             XLC$DATA_TYPE.BOOLEAN, XLC$DATA_TYPE.DATETIME
         ), forceConversion = FALSE,
         dateTimeFormat = "%d.%m.%Y %H:%M:%S"
-    )
+    ))
     expect_equal(targetNoForce, res)
-    res <- readNamedRegion(wb.xlsx,
+    res <- suppressWarnings(readNamedRegion(wb.xlsx,
         name = "Conversion", header = TRUE,
         colTypes = c(
             XLC$DATA_TYPE.NUMERIC, XLC$DATA_TYPE.STRING,
             XLC$DATA_TYPE.BOOLEAN, XLC$DATA_TYPE.DATETIME
         ), forceConversion = FALSE,
         dateTimeFormat = "%d.%m.%Y %H:%M:%S"
-    )
+    ))
     expect_equal(targetNoForce, res)
-    res <- readNamedRegion(wb.xls,
+    res <- suppressWarnings(readNamedRegion(wb.xls,
         name = "Conversion", header = TRUE,
         colTypes = c(
             XLC$DATA_TYPE.NUMERIC, XLC$DATA_TYPE.STRING,
             XLC$DATA_TYPE.BOOLEAN, XLC$DATA_TYPE.DATETIME
         ), forceConversion = TRUE,
         dateTimeFormat = "%d.%m.%Y %H:%M:%S"
-    )
+    ))
     expect_equal(targetForce, res)
-    res <- readNamedRegion(wb.xlsx,
+    res <- suppressWarnings(readNamedRegion(wb.xlsx,
         name = "Conversion", header = TRUE,
         colTypes = c(
             XLC$DATA_TYPE.NUMERIC, XLC$DATA_TYPE.STRING,
             XLC$DATA_TYPE.BOOLEAN, XLC$DATA_TYPE.DATETIME
         ), forceConversion = TRUE,
         dateTimeFormat = "%d.%m.%Y %H:%M:%S"
-    )
+    ))
     expect_equal(targetForce, res)
     target <- list(
         AAA = data.frame(
@@ -415,23 +415,23 @@ test_that("test.workbook.readNamedRegion", {
         dateTimeFormat = "%d.%m.%Y %H:%M:%S", keep = c(2, 4)
     )
     expect_equal(targetNoForceSubset, res)
-    res <- readNamedRegion(wb.xls,
+    res <- suppressWarnings(readNamedRegion(wb.xls,
         name = "Conversion", header = TRUE,
         colTypes = c(
             XLC$DATA_TYPE.NUMERIC, XLC$DATA_TYPE.STRING,
             XLC$DATA_TYPE.BOOLEAN, XLC$DATA_TYPE.DATETIME
         ), forceConversion = FALSE,
         dateTimeFormat = "%d.%m.%Y %H:%M:%S", drop = c(1, 3)
-    )
+    ))
     expect_equal(targetNoForceSubset, res)
-    res <- readNamedRegion(wb.xlsx,
+    res <- suppressWarnings(readNamedRegion(wb.xls,
         name = "Conversion", header = TRUE,
         colTypes = c(
             XLC$DATA_TYPE.NUMERIC, XLC$DATA_TYPE.STRING,
             XLC$DATA_TYPE.BOOLEAN, XLC$DATA_TYPE.DATETIME
         ), forceConversion = FALSE,
         dateTimeFormat = "%d.%m.%Y %H:%M:%S", drop = c(1, 3)
-    )
+    ))
     expect_equal(targetNoForceSubset, res)
     res <- readNamedRegion(wb.xls,
         name = "Simplify1", header = TRUE,

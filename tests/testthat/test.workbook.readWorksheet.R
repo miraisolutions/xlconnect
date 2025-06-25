@@ -65,10 +65,14 @@ test_that("handling of non-existent sheets and empty sheets is correct", {
     expect_error(readWorksheet(wb.xlsx, 23), info = "XLSX: Non-existent sheet index")
     expect_error(readWorksheet(wb.xlsx, "SheetDoesNotExist"), info = "XLSX: Non-existent sheet name")
 
-    expect_equal(data.frame(), readWorksheet(wb.xls, 3), info = "XLS: Empty sheet by index (Test3)")
-    expect_equal(data.frame(), readWorksheet(wb.xls, "Test3"), info = "XLS: Empty sheet by name (Test3)")
-    expect_equal(data.frame(), readWorksheet(wb.xlsx, 3), info = "XLSX: Empty sheet by index (Test3)")
-    expect_equal(data.frame(), readWorksheet(wb.xlsx, "Test3"), info = "XLSX: Empty sheet by name (Test3)")
+    res_xls_3 <- suppressMessages(readWorksheet(wb.xls, 3))
+    expect_equal(data.frame(), res_xls_3, info = "XLS: Empty sheet by index (Test3)")
+    res_xls_Test3 <- suppressMessages(readWorksheet(wb.xls, "Test3"))
+    expect_equal(data.frame(), res_xls_Test3, info = "XLS: Empty sheet by name (Test3)")
+    res_xlsx_3 <- suppressMessages(readWorksheet(wb.xlsx, 3))
+    expect_equal(data.frame(), res_xlsx_3, info = "XLSX: Empty sheet by index (Test3)")
+    res_xlsx_Test3 <- suppressMessages(readWorksheet(wb.xlsx, "Test3"))
+    expect_equal(data.frame(), res_xlsx_Test3, info = "XLSX: Empty sheet by name (Test3)")
 })
 
 test_that("reading sheets with NAs and varied data (Test4, Test5) works", {
