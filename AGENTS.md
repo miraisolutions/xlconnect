@@ -45,18 +45,21 @@ library(XLConnect)
 Run all tests:
 
 ```R
+options(FULL.TEST.SUITE=TRUE)
 testthat::test_local(load_package='none')
 ```
 
 Run a specific test file:
 
 ```R
+options(FULL.TEST.SUITE=TRUE)
 testthat::test_file("tests/testthat/test.loadWorkbook.R")
 ```
 
 ### Run RUnit tests
 
 ```sh
+export FULL_TEST_SUITE=1
 Rscript tests/run_tests.R
 ```
 
@@ -92,7 +95,7 @@ This should open a read view in the terminal which can be scrolled with arrow ke
 
 ## Checks
 
-- no xls(x) files that are tracked by git should be modifiied after running the tests:
+- no xls(x) files that are tracked by git should be modified after running the tests:
 
    ```sh
    > git status | grep -E "xls|xlsx" | wc -l
