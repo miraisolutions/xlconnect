@@ -66,7 +66,7 @@ Rscript tests/run_tests.R
 ### Clean up after tests
 
 ```sh
-git clean -fdx *.xls *.xlsx
+git clean -fdx **.xls **.xlsx *.xls *.xlsx
 ```
 
 ### Explore available functionality
