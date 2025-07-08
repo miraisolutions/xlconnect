@@ -69,3 +69,5 @@ revdep/
 .devcontainer/
 ^revdep$
 .lintr
+AGENTS.md
+.vscode
