@@ -18,19 +18,16 @@ Prerequisite packages, including installing the checked out package itelf from s
 
 ```sh
 export R_LIBS_USER=$HOME"/r-libs"
-Rscript -e "install.packages(c('rJava', 'devtools'))"
-Rscript -e "{\
-   library(devtools);\
-   devtools::install();\
-}"
+Rscript -e "install.packages(c('rJava'))"
+R CMD INSTALL .
 ```
 
 ## Common commands
 
 ### Install the local source package
 
-```R
-devtools::install()
+```
+R CMD INSTALL .
 ```
 
 ### Load the package
