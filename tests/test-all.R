@@ -1,2 +1,3 @@
-library(testthat)
-test_check()
+require(testthat)
+library(XLConnect)
+test_check("XLConnect")
