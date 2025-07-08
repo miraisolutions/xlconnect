@@ -18,7 +18,7 @@ Prerequisite packages, including installing the checked out package itelf from s
 
 ```sh
 export R_LIBS_USER=$HOME"/r-libs"
-Rscript -e "install.packages(c('rJava', 'RUnit', 'devtools', 'testthat'))"
+Rscript -e "install.packages(c('rJava', 'devtools'))"
 Rscript -e "{\
    library(devtools);\
    devtools::install();\
