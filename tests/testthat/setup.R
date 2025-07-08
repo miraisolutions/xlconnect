@@ -7,13 +7,27 @@
 # when used within testthat's setup files.
 
 # Get current Java parameters to append to them, not overwrite others.
+options("FULL.TEST.SUITE" = Sys.getenv("FULL_TEST_SUITE") == "1")
+
 original_java_params <- getOption("java.parameters")
-new_java_params <- c(original_java_params, "-Xmx1024m")
+j_params <- c(
+  original_java_params,
+  "-XX:+UseParallelGC",
+  "-XX:ParallelGCThreads=1",
+  paste0("-Duser.timezone=", Sys.timezone())
+)
+if (!getOption("FULL.TEST.SUITE")) {
+  j_params = c(j_params, "-XX:ActiveProcessorCount=1")
+}
+options(java.parameters = j_params)
+
+# Load library built by R CMD check
+library(package = "XLConnect", character.only = TRUE)
+require(rJava)
 
 # Define all options to be set
 options_to_set <- list(
-  FULL.TEST.SUITE = TRUE,
-  java.parameters = new_java_params
+  java.parameters = j_params
 )
 
 # Apply these options locally for the test environment
