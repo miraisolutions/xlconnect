@@ -19,7 +19,18 @@ j_params <- c(
 if (!getOption("FULL.TEST.SUITE")) {
   j_params = c(j_params, "-XX:ActiveProcessorCount=1")
 }
-options(java.parameters = j_params)
+
+# Define options and locale to be set locally for the test environment
+options_to_set <- list(
+  java.parameters = j_params, # Keep java.parameters under withr for reset
+  encoding = "UTF-8"
+)
+
+withr::local_options(options_to_set, .local_envir = testthat::teardown_env())
+withr::local_locale(
+  c(LC_NUMERIC = "C"),
+  .local_envir = testthat::teardown_env()
+)
 
 # Load library built by R CMD check
 library(package = "XLConnect", character.only = TRUE)
@@ -28,18 +39,6 @@ require(rJava)
 # Set Java Locale to US
 jlocale <- J("java.util.Locale")
 jlocale$setDefault(jlocale$US)
-
-# Define options and locale to be set locally for the test environment
-options_to_set <- list(
-  java.parameters = j_params, # Keep java.parameters under withr for reset
-  encoding = "UTF-8"
-)
-locale_to_set <- c(LC_NUMERIC = "C")
-
-# Apply these settings locally for the test environment
-# No need to check for withr, testthat depends on it.
-withr::local_options(options_to_set, .local_envir = testthat::teardown_env())
-withr::local_locale(locale_to_set, .local_envir = testthat::teardown_env())
 
 # Clean up variables from this script's environment
 # Note: new_java_params was already not defined, removing it from rm()
