@@ -61,7 +61,7 @@ testthat::test_file("tests/testthat/test.loadWorkbook.R")
 
 ```sh
 export FULL_TEST_SUITE=1
-Rscript tests/run_tests.R
+Rscript tests/run_tests-old.R
 ```
 
 ### Clean up after tests
