@@ -1,6 +1,6 @@
 TOP=../..
 PKG=${shell cd ${TOP};pwd}
-SUITE=run_tests.R
+SUITE=test-all.R
 R=R
 
 all: inst test
