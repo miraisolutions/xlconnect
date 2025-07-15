@@ -3,18 +3,8 @@ context("Workbook Cell Style Functionality")
 test_that("Basic cell style operations (create, exists, get) work as expected", {
     skip_if_not(getOption("FULL.TEST.SUITE"), "FULL.TEST.SUITE is not TRUE for cellstyle tests")
 
-    file.xls <- rsrc("cellstyles_test.xls")
-    file.xlsx <- rsrc("cellstyles_test.xlsx")
-
-    # Ensure files are cleaned up even if tests fail
-    on.exit({
-        if (file.exists(file.xls)) file.remove(file.xls)
-        if (file.exists(file.xlsx)) file.remove(file.xlsx)
-    }, add = TRUE)
-
-    # Remove files if they exist from a previous failed run
-    if (file.exists(file.xls)) file.remove(file.xls)
-    if (file.exists(file.xlsx)) file.remove(file.xlsx)
+    file.xls <- withr::local_tempfile(fileext = ".xls")
+    file.xlsx <- withr::local_tempfile(fileext = ".xlsx")
 
     wb.xls <- loadWorkbook(file.xls, create = TRUE)
     wb.xlsx <- loadWorkbook(file.xlsx, create = TRUE)
@@ -47,16 +37,8 @@ test_that("Basic cell style operations (create, exists, get) work as expected", 
 test_that("getOrCreateCellStyle works as expected", {
     skip_if_not(getOption("FULL.TEST.SUITE"), "FULL.TEST.SUITE is not TRUE for cellstyle tests")
 
-    file.xls <- rsrc("cellstyles_getorcreate.xls")
-    file.xlsx <- rsrc("cellstyles_getorcreate.xlsx")
-
-    on.exit({
-        if (file.exists(file.xls)) file.remove(file.xls)
-        if (file.exists(file.xlsx)) file.remove(file.xlsx)
-    }, add = TRUE)
-
-    if (file.exists(file.xls)) file.remove(file.xls)
-    if (file.exists(file.xlsx)) file.remove(file.xlsx)
+    file.xls <- withr::local_tempfile(fileext = ".xls")
+    file.xlsx <- withr::local_tempfile(fileext = ".xlsx")
 
     wb.xls <- loadWorkbook(file.xls, create = TRUE)
     wb.xlsx <- loadWorkbook(file.xlsx, create = TRUE)
@@ -82,9 +64,6 @@ test_that("getOrCreateCellStyle works as expected", {
 
     cs_xlsx_existing <- getOrCreateCellStyle(wb.xlsx, anotherStyleName)
     expect_true(is(cs_xlsx_existing, "cellstyle"), info = "XLSX: getOrCreate (existing) should return cellstyle")
-
-    # Ensure the returned objects are indeed the same style (optional, by checking some property if possible)
-    # For now, just checking class and existence is sufficient based on original test.
 })
 
 # The original file had a placeholder "always run" test.

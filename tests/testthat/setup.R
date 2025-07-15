@@ -12,6 +12,7 @@ withr::local_locale(
   .local_envir = testthat::teardown_env()
 )
 # Set Java Locale to US
+library(rJava)
 jlocale <- J("java.util.Locale")
 jlocale$setDefault(jlocale$US)
 
