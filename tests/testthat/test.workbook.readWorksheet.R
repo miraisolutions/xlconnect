@@ -1,5 +1,3 @@
-context("readWorksheet Functionality")
-
 # Common data frames used across tests
 common_checkDf <- data.frame(
     NumericColumn = c(-23.63, NA, NA, 5.8, 3),
