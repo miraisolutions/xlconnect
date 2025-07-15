@@ -1,28 +1,14 @@
-# Common data frames used across tests
-common_checkDf <- data.frame(
-    NumericColumn = c(-23.63, NA, NA, 5.8, 3),
-    StringColumn = c("Hello", NA, NA, NA, "World"),
-    BooleanColumn = c(TRUE, FALSE, FALSE, NA, NA),
-    DateTimeColumn = as.POSIXct(c(NA, NA, "2010-09-09 21:03:07", "2010-09-10 21:03:07", "2010-09-11 21:03:07")),
-    stringsAsFactors = FALSE
-)
-
-common_checkDf1 <- data.frame(
-    A = c(1:2, NA, 3:6, NA), B = letters[1:8],
-    C = c("z", "y", "x", "w", NA, "v", "u", NA), D = c(NA, 1:5, NA, NA),
-    stringsAsFactors = FALSE
-)
-
-common_checkDf2 <- data.frame(
-    A = c(rep(NA, 3), 3:6, NA), B = c(NA, letters[2:8]),
-    C = c("z", "y", "x", "w", NA, "v", "u", NA), D = c(NA, 1:5, NA, NA),
-    stringsAsFactors = FALSE
-)
-
-
 test_that("reading basic worksheets by index and name works", {
-    wb.xls <- loadWorkbook(rsrc("testWorkbookReadWorksheet.xls"), create = FALSE)
-    wb.xlsx <- loadWorkbook(rsrc("testWorkbookReadWorksheet.xlsx"), create = FALSE)
+    common_checkDf <- data.frame(
+        NumericColumn = c(-23.63, NA, NA, 5.8, 3),
+        StringColumn = c("Hello", NA, NA, NA, "World"),
+        BooleanColumn = c(TRUE, FALSE, FALSE, NA, NA),
+        DateTimeColumn = as.POSIXct(c(NA, NA, "2010-09-09 21:03:07", "2010-09-10 21:03:07", "2010-09-11 21:03:07")),
+        stringsAsFactors = FALSE
+    )
+
+    wb.xls <- loadWorkbook(test_path("resources/testWorkbookReadWorksheet.xls"), create = FALSE)
+    wb.xlsx <- loadWorkbook(test_path("resources/testWorkbookReadWorksheet.xlsx"), create = FALSE)
 
     # XLS
     expect_equal(common_checkDf, readWorksheet(wb.xls, 1), info = "XLS: Read sheet 1 by index")
@@ -33,8 +19,16 @@ test_that("reading basic worksheets by index and name works", {
 })
 
 test_that("reading specific regions (startRow/Col, endRow/Col, region string) works", {
-    wb.xls <- loadWorkbook(rsrc("testWorkbookReadWorksheet.xls"), create = FALSE)
-    wb.xlsx <- loadWorkbook(rsrc("testWorkbookReadWorksheet.xlsx"), create = FALSE)
+    common_checkDf <- data.frame(
+        NumericColumn = c(-23.63, NA, NA, 5.8, 3),
+        StringColumn = c("Hello", NA, NA, NA, "World"),
+        BooleanColumn = c(TRUE, FALSE, FALSE, NA, NA),
+        DateTimeColumn = as.POSIXct(c(NA, NA, "2010-09-09 21:03:07", "2010-09-10 21:03:07", "2010-09-11 21:03:07")),
+        stringsAsFactors = FALSE
+    )
+
+    wb.xls <- loadWorkbook(test_path("resources/testWorkbookReadWorksheet.xls"), create = FALSE)
+    wb.xlsx <- loadWorkbook(test_path("resources/testWorkbookReadWorksheet.xlsx"), create = FALSE)
 
     # Using startRow/Col, endRow/Col
     expect_equal(common_checkDf, readWorksheet(wb.xls, 2, startRow = 17, startCol = 6, endRow = 22, endCol = 9, header = TRUE), info = "XLS: Specific area")
@@ -55,8 +49,8 @@ test_that("reading specific regions (startRow/Col, endRow/Col, region string) wo
 })
 
 test_that("handling of non-existent sheets and empty sheets is correct", {
-    wb.xls <- loadWorkbook(rsrc("testWorkbookReadWorksheet.xls"), create = FALSE)
-    wb.xlsx <- loadWorkbook(rsrc("testWorkbookReadWorksheet.xlsx"), create = FALSE)
+    wb.xls <- loadWorkbook(test_path("resources/testWorkbookReadWorksheet.xls"), create = FALSE)
+    wb.xlsx <- loadWorkbook(test_path("resources/testWorkbookReadWorksheet.xlsx"), create = FALSE)
 
     expect_error(readWorksheet(wb.xls, 23), info = "XLS: Non-existent sheet index")
     expect_error(readWorksheet(wb.xls, "SheetDoesNotExist"), info = "XLS: Non-existent sheet name")
@@ -74,8 +68,26 @@ test_that("handling of non-existent sheets and empty sheets is correct", {
 })
 
 test_that("reading sheets with NAs and varied data (Test4, Test5) works", {
-    wb.xls <- loadWorkbook(rsrc("testWorkbookReadWorksheet.xls"), create = FALSE)
-    wb.xlsx <- loadWorkbook(rsrc("testWorkbookReadWorksheet.xlsx"), create = FALSE)
+    common_checkDf1 <- data.frame(
+        A = c(1:2, NA, 3:6, NA), B = letters[1:8],
+        C = c("z", "y", "x", "w", NA, "v", "u", NA), D = c(NA, 1:5, NA, NA),
+        stringsAsFactors = FALSE
+    )
+    common_checkDf2 <- data.frame(
+        A = c(rep(NA, 3), 3:6, NA), B = c(NA, letters[2:8]),
+        C = c("z", "y", "x", "w", NA, "v", "u", NA), D = c(NA, 1:5, NA, NA),
+        stringsAsFactors = FALSE
+    )
+    common_checkDf <- data.frame(
+        NumericColumn = c(-23.63, NA, NA, 5.8, 3),
+        StringColumn = c("Hello", NA, NA, NA, "World"),
+        BooleanColumn = c(TRUE, FALSE, FALSE, NA, NA),
+        DateTimeColumn = as.POSIXct(c(NA, NA, "2010-09-09 21:03:07", "2010-09-10 21:03:07", "2010-09-11 21:03:07")),
+        stringsAsFactors = FALSE
+    )
+
+    wb.xls <- loadWorkbook(test_path("resources/testWorkbookReadWorksheet.xls"), create = FALSE)
+    wb.xlsx <- loadWorkbook(test_path("resources/testWorkbookReadWorksheet.xlsx"), create = FALSE)
 
     expect_equal(common_checkDf1, readWorksheet(wb.xls, "Test4"), info = "XLS: Test4 sheet")
     expect_equal(common_checkDf2, readWorksheet(wb.xls, "Test5"), info = "XLS: Test5 sheet")
@@ -94,8 +106,8 @@ test_that("reading sheets with NAs and varied data (Test4, Test5) works", {
 })
 
 test_that("column type conversion (forceConversion = TRUE/FALSE) works", {
-    wb.xls <- loadWorkbook(rsrc("testWorkbookReadWorksheet.xls"), create = FALSE)
-    wb.xlsx <- loadWorkbook(rsrc("testWorkbookReadWorksheet.xlsx"), create = FALSE)
+    wb.xls <- loadWorkbook(test_path("resources/testWorkbookReadWorksheet.xls"), create = FALSE)
+    wb.xlsx <- loadWorkbook(test_path("resources/testWorkbookReadWorksheet.xlsx"), create = FALSE)
 
     col_types_spec <- c(XLC$DATA_TYPE.NUMERIC, XLC$DATA_TYPE.STRING, XLC$DATA_TYPE.BOOLEAN, XLC$DATA_TYPE.DATETIME)
     datetime_fmt <- "%d.%m.%Y %H:%M:%S"
@@ -127,8 +139,8 @@ test_that("column type conversion (forceConversion = TRUE/FALSE) works", {
 })
 
 test_that("reading multiple sheets by name works", {
-    wb.xls <- loadWorkbook(rsrc("testWorkbookReadWorksheet.xls"), create = FALSE)
-    wb.xlsx <- loadWorkbook(rsrc("testWorkbookReadWorksheet.xlsx"), create = FALSE)
+    wb.xls <- loadWorkbook(test_path("resources/testWorkbookReadWorksheet.xls"), create = FALSE)
+    wb.xlsx <- loadWorkbook(test_path("resources/testWorkbookReadWorksheet.xlsx"), create = FALSE)
 
     target_multi_sheet <- list(
         AAA = data.frame(A = 1:3, B = letters[1:3], C = c(TRUE, TRUE, FALSE), stringsAsFactors = FALSE),
@@ -139,8 +151,8 @@ test_that("reading multiple sheets by name works", {
 })
 
 test_that("handling of variable names (check.names) works", {
-    wb.xls <- loadWorkbook(rsrc("testWorkbookReadWorksheet.xls"), create = FALSE)
-    wb.xlsx <- loadWorkbook(rsrc("testWorkbookReadWorksheet.xlsx"), create = FALSE)
+    wb.xls <- loadWorkbook(test_path("resources/testWorkbookReadWorksheet.xls"), create = FALSE)
+    wb.xlsx <- loadWorkbook(test_path("resources/testWorkbookReadWorksheet.xlsx"), create = FALSE)
 
     target_var_names <- data.frame(
         `With whitespace` = 1:4, `And some other funky characters: _=?^~!$@#%§` = letters[1:4],
@@ -153,8 +165,8 @@ test_that("handling of variable names (check.names) works", {
 })
 
 test_that("keep and drop arguments work correctly", {
-    wb.xls <- loadWorkbook(rsrc("testWorkbookReadWorksheet.xls"), create = FALSE)
-    wb.xlsx <- loadWorkbook(rsrc("testWorkbookReadWorksheet.xlsx"), create = FALSE)
+    wb.xls <- loadWorkbook(test_path("resources/testWorkbookReadWorksheet.xls"), create = FALSE)
+    wb.xlsx <- loadWorkbook(test_path("resources/testWorkbookReadWorksheet.xlsx"), create = FALSE)
 
     checkDfSubset <- data.frame(A = c(rep(NA, 3), 3:6, NA), C = c("z", "y", "x", "w", NA, "v", "u", NA), stringsAsFactors = FALSE)
 
@@ -185,8 +197,8 @@ test_that("keep and drop arguments work correctly", {
 })
 
 test_that("keep and drop arguments with specified region work correctly", {
-    wb.xls <- loadWorkbook(rsrc("testWorkbookReadWorksheet.xls"), create = FALSE)
-    wb.xlsx <- loadWorkbook(rsrc("testWorkbookReadWorksheet.xlsx"), create = FALSE)
+    wb.xls <- loadWorkbook(test_path("resources/testWorkbookReadWorksheet.xls"), create = FALSE)
+    wb.xlsx <- loadWorkbook(test_path("resources/testWorkbookReadWorksheet.xlsx"), create = FALSE)
 
     region_params <- list(sheet = "Test5", startRow = 17, startCol = 7, endRow = 24, endCol = 9, header = TRUE) # This region is B, C, D columns from original Test5
 
@@ -248,8 +260,26 @@ test_that("keep and drop arguments with specified region work correctly", {
 })
 
 test_that("keep/drop with multiple sheets (list argument) works", {
-    wb.xls <- loadWorkbook(rsrc("testWorkbookReadWorksheet.xls"), create = FALSE)
-    wb.xlsx <- loadWorkbook(rsrc("testWorkbookReadWorksheet.xlsx"), create = FALSE)
+    common_checkDf <- data.frame(
+        NumericColumn = c(-23.63, NA, NA, 5.8, 3),
+        StringColumn = c("Hello", NA, NA, NA, "World"),
+        BooleanColumn = c(TRUE, FALSE, FALSE, NA, NA),
+        DateTimeColumn = as.POSIXct(c(NA, NA, "2010-09-09 21:03:07", "2010-09-10 21:03:07", "2010-09-11 21:03:07")),
+        stringsAsFactors = FALSE
+    )
+    common_checkDf1 <- data.frame(
+        A = c(1:2, NA, 3:6, NA), B = letters[1:8],
+        C = c("z", "y", "x", "w", NA, "v", "u", NA), D = c(NA, 1:5, NA, NA),
+        stringsAsFactors = FALSE
+    )
+    common_checkDf2 <- data.frame(
+        A = c(rep(NA, 3), 3:6, NA), B = c(NA, letters[2:8]),
+        C = c("z", "y", "x", "w", NA, "v", "u", NA), D = c(NA, 1:5, NA, NA),
+        stringsAsFactors = FALSE
+    )
+
+    wb.xls <- loadWorkbook(test_path("resources/testWorkbookReadWorksheet.xls"), create = FALSE)
+    wb.xlsx <- loadWorkbook(test_path("resources/testWorkbookReadWorksheet.xlsx"), create = FALSE)
     testAAA_df <- data.frame(A = 1:3, B = letters[1:3], C = c(TRUE, TRUE, FALSE), stringsAsFactors = FALSE)
 
     sheets_to_read <- c("Test1", "Test4", "Test5")
@@ -294,20 +324,9 @@ test_that("keep/drop with multiple sheets (list argument) works", {
 })
 
 test_that("autofitRow and autofitCol for BoundingBox sheet work", {
-    wb.xls <- loadWorkbook(rsrc("testWorkbookReadWorksheet.xls"), create = FALSE)
-    wb.xlsx <- loadWorkbook(rsrc("testWorkbookReadWorksheet.xlsx"), create = FALSE)
+    wb.xls <- loadWorkbook(test_path("resources/testWorkbookReadWorksheet.xls"), create = FALSE)
 
-    # Define targets based on original test file structure for BoundingBox
     target1_bb <- data.frame(Col1 = c(NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,7,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA), Col2 = c(NA,NA,NA,3,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,13), Col3 = c(NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA), Col4 = c(NA,NA,NA,4,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,9,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA), Col5 = c(1,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA), Col6 = c(NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA), Col7 = c(NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,10,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA), Col8 = c(2,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA), Col9 = c(NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA), Col10 = c(NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,11,NA,NA,NA,NA,NA), Col11 = c(NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA), Col12 = c(NA,NA,NA,NA,NA,NA,5,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,12,NA,NA,NA,NA,NA), Col13 = c(NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA), Col14 = c(NA,NA,NA,NA,NA,NA,6,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA), Col15 = c(NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA), Col16 = c(NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,8,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA))
-    target2_bb <- data.frame(Col1=c(9,NA,NA,NA,NA,NA), Col2=c(NA,NA,NA,NA,NA,NA), Col3=c(NA,NA,NA,NA,NA,NA), Col4=c(10,NA,NA,NA,NA,NA), Col5=c(NA,NA,NA,NA,NA,NA), Col6=c(NA,NA,NA,NA,NA,NA), Col7=c(NA,NA,NA,NA,NA,11)) # Original implies 7 cols, this has 6 rows
-    # The original target2 was 6 rows, 7 columns. The data implies target2_bb should be what is read from startRow=20, startCol=5, endRow=31, endCol=13
-    # This is a 12 row x 9 col region. The original target2 seems incorrect.
-    # Let's use the definitions from the original test for now and see if tests pass/fail.
-    # The original target2 was: data.frame(Col1=c(9,NA,NA,NA,NA,NA), Col2=c(NA,NA,NA,NA,NA,NA), Col3=c(NA,NA,NA,NA,NA,NA), Col4=c(10,NA,NA,NA,NA,NA), Col5=c(NA,NA,NA,NA,NA,NA), Col6=c(NA,NA,NA,NA,NA,NA), Col7=c(NA,NA,NA,NA,NA,11))
-    # This is 6 rows, 7 columns.
-    # The read is from sheet "BoundingBox", startRow = 20, startCol = 5, endRow = 31, endCol = 13. Header=FALSE.
-    # This is rows 20-31 (12 rows) and columns E-M (9 columns).
-    # Target2 from original:
     target2_orig <- data.frame( Col1 = c(9, NA, NA, NA, NA, NA), Col2 = c( NA, NA, NA, NA, NA, NA ), Col3 = c(NA, NA, NA, NA, NA, NA), Col4 = c(10, NA, NA, NA, NA, NA), Col5 = c( NA, NA, NA, NA, NA, NA ), Col6 = c(NA, NA, NA, NA, NA, NA), Col7 = c( NA, NA, NA, NA, NA, 11 ) )
     target3_orig <- data.frame(Col1=c(NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA), Col2=c(NA,NA,NA,9,NA,NA,NA,NA,NA,NA,NA,NA), Col3=c(NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA), Col4=c(NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA), Col5=c(NA,NA,NA,10,NA,NA,NA,NA,NA,NA,NA,NA), Col6=c(NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA), Col7=c(NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA), Col8=c(NA,NA,NA,NA,NA,NA,NA,NA,11,NA,NA,NA), Col9=c(NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA))
     target4_orig <- as.data.frame(matrix(NA, nrow = 10, ncol = 8)); names(target4_orig) <- paste("Col", 1:8, sep = "")
@@ -315,32 +334,42 @@ test_that("autofitRow and autofitCol for BoundingBox sheet work", {
     target6_orig <- data.frame(Col1=c(NA,NA,NA,NA),Col2=c(NA,NA,NA,4),Col3=c(1,NA,NA,NA),Col4=c(NA,NA,NA,NA),Col5=c(NA,NA,NA,NA))
     target7_orig <- data.frame(Col1=c(NA,NA,NA,4),Col2=c(1,NA,NA,NA))
 
-    # XLS
-    expect_equal(target1_bb, readWorksheet(wb.xls, sheet = "BoundingBox", autofitRow = TRUE, autofitCol = TRUE, header = FALSE), info = "XLS BB full autoT autoT")
-    expect_equal(target1_bb, readWorksheet(wb.xls, sheet = "BoundingBox", autofitRow = FALSE, autofitCol = FALSE, header = FALSE), info = "XLS BB full autoF autoF")
-    expect_equal(target2_orig, readWorksheet(wb.xls, sheet = "BoundingBox", startRow = 20, startCol = 5, endRow = 31, endCol = 13, autofitRow = TRUE, autofitCol = TRUE, header = FALSE), info = "XLS BB sub1 autoT autoT")
-    expect_equal(target3_orig, readWorksheet(wb.xls, sheet = "BoundingBox", startRow = 20, startCol = 5, endRow = 31, endCol = 13, autofitRow = FALSE, autofitCol = FALSE, header = FALSE), info = "XLS BB sub1 autoF autoF")
-    expect_equal(data.frame(), readWorksheet(wb.xls, sheet = "BoundingBox", startRow = 12, startCol = 5, endRow = 21, endCol = 12, autofitRow = TRUE, autofitCol = TRUE, header = FALSE), info = "XLS BB empty autoT autoT")
-    expect_equal(target4_orig, readWorksheet(wb.xls, sheet = "BoundingBox", startRow = 12, startCol = 5, endRow = 21, endCol = 12, autofitRow = FALSE, autofitCol = FALSE, header = FALSE), info = "XLS BB empty autoF autoF")
-    expect_equal(target5_orig, readWorksheet(wb.xls, sheet = "BoundingBox", startRow = 6, startCol = 5, endRow = 11, endCol = 9, autofitRow = FALSE, autofitCol = TRUE, header = FALSE), info = "XLS BB sub2 autoF autoT")
-    expect_equal(target6_orig, readWorksheet(wb.xls, sheet = "BoundingBox", startRow = 6, startCol = 5, endRow = 11, endCol = 9, autofitRow = TRUE, autofitCol = FALSE, header = FALSE), info = "XLS BB sub2 autoT autoF")
-    expect_equal(target7_orig, readWorksheet(wb.xls, sheet = "BoundingBox", startRow = 6, startCol = 5, endRow = 11, endCol = 9, autofitRow = TRUE, autofitCol = TRUE, header = FALSE), info = "XLS BB sub2 autoT autoT")
+    expect_equal(target1_bb, readWorksheet(wb.xls, sheet = "BoundingBox", autofitRow = TRUE, autofitCol = TRUE, header = FALSE))
+    expect_equal(target1_bb, readWorksheet(wb.xls, sheet = "BoundingBox", autofitRow = FALSE, autofitCol = FALSE, header = FALSE))
+    expect_equal(target2_orig, readWorksheet(wb.xls, sheet = "BoundingBox", startRow = 20, startCol = 5, endRow = 31, endCol = 13, autofitRow = TRUE, autofitCol = TRUE, header = FALSE))
+    expect_equal(target3_orig, readWorksheet(wb.xls, sheet = "BoundingBox", startRow = 20, startCol = 5, endRow = 31, endCol = 13, autofitRow = FALSE, autofitCol = FALSE, header = FALSE))
+    expect_equal(data.frame(), readWorksheet(wb.xls, sheet = "BoundingBox", startRow = 12, startCol = 5, endRow = 21, endCol = 12, autofitRow = TRUE, autofitCol = TRUE, header = FALSE))
+    expect_equal(target4_orig, readWorksheet(wb.xls, sheet = "BoundingBox", startRow = 12, startCol = 5, endRow = 21, endCol = 12, autofitRow = FALSE, autofitCol = FALSE, header = FALSE))
+    expect_equal(target5_orig, readWorksheet(wb.xls, sheet = "BoundingBox", startRow = 6, startCol = 5, endRow = 11, endCol = 9, autofitRow = FALSE, autofitCol = TRUE, header = FALSE))
+    expect_equal(target6_orig, readWorksheet(wb.xls, sheet = "BoundingBox", startRow = 6, startCol = 5, endRow = 11, endCol = 9, autofitRow = TRUE, autofitCol = FALSE, header = FALSE))
+    expect_equal(target7_orig, readWorksheet(wb.xls, sheet = "BoundingBox", startRow = 6, startCol = 5, endRow = 11, endCol = 9, autofitRow = TRUE, autofitCol = TRUE, header = FALSE))
+})
 
-    # XLSX
-    expect_equal(target1_bb, readWorksheet(wb.xlsx, sheet = "BoundingBox", autofitRow = TRUE, autofitCol = TRUE, header = FALSE), info = "XLSX BB full autoT autoT")
-    expect_equal(target1_bb, readWorksheet(wb.xlsx, sheet = "BoundingBox", autofitRow = FALSE, autofitCol = FALSE, header = FALSE), info = "XLSX BB full autoF autoF")
-    expect_equal(target2_orig, readWorksheet(wb.xlsx, sheet = "BoundingBox", startRow = 20, startCol = 5, endRow = 31, endCol = 13, autofitRow = TRUE, autofitCol = TRUE, header = FALSE), info = "XLSX BB sub1 autoT autoT")
-    expect_equal(target3_orig, readWorksheet(wb.xlsx, sheet = "BoundingBox", startRow = 20, startCol = 5, endRow = 31, endCol = 13, autofitRow = FALSE, autofitCol = FALSE, header = FALSE), info = "XLSX BB sub1 autoF autoF")
-    expect_equal(data.frame(), readWorksheet(wb.xlsx, sheet = "BoundingBox", startRow = 12, startCol = 5, endRow = 21, endCol = 12, autofitRow = TRUE, autofitCol = TRUE, header = FALSE), info = "XLSX BB empty autoT autoT")
-    expect_equal(target4_orig, readWorksheet(wb.xlsx, sheet = "BoundingBox", startRow = 12, startCol = 5, endRow = 21, endCol = 12, autofitRow = FALSE, autofitCol = FALSE, header = FALSE), info = "XLSX BB empty autoF autoF")
-    expect_equal(target5_orig, readWorksheet(wb.xlsx, sheet = "BoundingBox", startRow = 6, startCol = 5, endRow = 11, endCol = 9, autofitRow = FALSE, autofitCol = TRUE, header = FALSE), info = "XLSX BB sub2 autoF autoT")
-    expect_equal(target6_orig, readWorksheet(wb.xlsx, sheet = "BoundingBox", startRow = 6, startCol = 5, endRow = 11, endCol = 9, autofitRow = TRUE, autofitCol = FALSE, header = FALSE), info = "XLSX BB sub2 autoT autoF")
-    expect_equal(target7_orig, readWorksheet(wb.xlsx, sheet = "BoundingBox", startRow = 6, startCol = 5, endRow = 11, endCol = 9, autofitRow = TRUE, autofitCol = TRUE, header = FALSE), info = "XLSX BB sub2 autoT autoT")
+test_that("autofitRow and autofitCol for BoundingBox sheet work (XLSX)", {
+    wb.xlsx <- loadWorkbook(test_path("resources/testWorkbookReadWorksheet.xlsx"), create = FALSE)
+
+    target1_bb <- data.frame(Col1 = c(NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,7,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA), Col2 = c(NA,NA,NA,3,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,13), Col3 = c(NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA), Col4 = c(NA,NA,NA,4,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,9,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA), Col5 = c(1,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA), Col6 = c(NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA), Col7 = c(NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,10,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA), Col8 = c(2,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA), Col9 = c(NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA), Col10 = c(NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,11,NA,NA,NA,NA,NA), Col11 = c(NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA), Col12 = c(NA,NA,NA,NA,NA,NA,5,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,12,NA,NA,NA,NA,NA), Col13 = c(NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA), Col14 = c(NA,NA,NA,NA,NA,NA,6,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA), Col15 = c(NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA), Col16 = c(NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,8,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA))
+    target2_orig <- data.frame( Col1 = c(9, NA, NA, NA, NA, NA), Col2 = c( NA, NA, NA, NA, NA, NA ), Col3 = c(NA, NA, NA, NA, NA, NA), Col4 = c(10, NA, NA, NA, NA, NA), Col5 = c( NA, NA, NA, NA, NA, NA ), Col6 = c(NA, NA, NA, NA, NA, NA), Col7 = c( NA, NA, NA, NA, NA, 11 ) )
+    target3_orig <- data.frame(Col1=c(NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA), Col2=c(NA,NA,NA,9,NA,NA,NA,NA,NA,NA,NA,NA), Col3=c(NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA), Col4=c(NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA), Col5=c(NA,NA,NA,10,NA,NA,NA,NA,NA,NA,NA,NA), Col6=c(NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA), Col7=c(NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA), Col8=c(NA,NA,NA,NA,NA,NA,NA,NA,11,NA,NA,NA), Col9=c(NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA))
+    target4_orig <- as.data.frame(matrix(NA, nrow = 10, ncol = 8)); names(target4_orig) <- paste("Col", 1:8, sep = "")
+    target5_orig <- data.frame(Col1=c(NA,NA,NA,NA,4,NA), Col2=c(NA,1,NA,NA,NA,NA))
+    target6_orig <- data.frame(Col1=c(NA,NA,NA,NA),Col2=c(NA,NA,NA,4),Col3=c(1,NA,NA,NA),Col4=c(NA,NA,NA,NA),Col5=c(NA,NA,NA,NA))
+    target7_orig <- data.frame(Col1=c(NA,NA,NA,4),Col2=c(1,NA,NA,NA))
+
+    expect_equal(target1_bb, readWorksheet(wb.xlsx, sheet = "BoundingBox", autofitRow = TRUE, autofitCol = TRUE, header = FALSE))
+    expect_equal(target1_bb, readWorksheet(wb.xlsx, sheet = "BoundingBox", autofitRow = FALSE, autofitCol = FALSE, header = FALSE))
+    expect_equal(target2_orig, readWorksheet(wb.xlsx, sheet = "BoundingBox", startRow = 20, startCol = 5, endRow = 31, endCol = 13, autofitRow = TRUE, autofitCol = TRUE, header = FALSE))
+    expect_equal(target3_orig, readWorksheet(wb.xlsx, sheet = "BoundingBox", startRow = 20, startCol = 5, endRow = 31, endCol = 13, autofitRow = FALSE, autofitCol = FALSE, header = FALSE))
+    expect_equal(data.frame(), readWorksheet(wb.xlsx, sheet = "BoundingBox", startRow = 12, startCol = 5, endRow = 21, endCol = 12, autofitRow = TRUE, autofitCol = TRUE, header = FALSE))
+    expect_equal(target4_orig, readWorksheet(wb.xlsx, sheet = "BoundingBox", startRow = 12, startCol = 5, endRow = 21, endCol = 12, autofitRow = FALSE, autofitCol = FALSE, header = FALSE))
+    expect_equal(target5_orig, readWorksheet(wb.xlsx, sheet = "BoundingBox", startRow = 6, startCol = 5, endRow = 11, endCol = 9, autofitRow = FALSE, autofitCol = TRUE, header = FALSE))
+    expect_equal(target6_orig, readWorksheet(wb.xlsx, sheet = "BoundingBox", startRow = 6, startCol = 5, endRow = 11, endCol = 9, autofitRow = TRUE, autofitCol = FALSE, header = FALSE))
+    expect_equal(target7_orig, readWorksheet(wb.xlsx, sheet = "BoundingBox", startRow = 6, startCol = 5, endRow = 11, endCol = 9, autofitRow = TRUE, autofitCol = TRUE, header = FALSE))
 })
 
 test_that("useCachedValues and onErrorCell interaction works", {
-    wb.xls.cache <- loadWorkbook(rsrc("testCachedValues.xls"), create = FALSE)
-    wb.xlsx.cache <- loadWorkbook(rsrc("testCachedValues.xlsx"), create = FALSE)
+    wb.xls.cache <- loadWorkbook(test_path("resources/testCachedValues.xls"), create = FALSE)
+    wb.xlsx.cache <- loadWorkbook(test_path("resources/testCachedValues.xlsx"), create = FALSE)
 
     ref.xls.uncached <- readWorksheet(wb.xls.cache, "AllLocal", useCachedValues = FALSE)
     ref.xls.cached <- readWorksheet(wb.xls.cache, "AllLocal", useCachedValues = TRUE)
@@ -373,31 +402,27 @@ test_that("useCachedValues and onErrorCell interaction works", {
 
 test_that("readWorksheetFromFile with specific bug cases works", {
     # Bug 52 - useCachedValues
-    res_bug52 <- readWorksheetFromFile(rsrc("testBug52.xlsx"), sheet = 1, useCachedValues = TRUE)
+    res_bug52 <- readWorksheetFromFile(test_path("resources/testBug52.xlsx"), sheet = 1, useCachedValues = TRUE)
     expected_bug52 <- data.frame(Var1 = c(2,4,6), Var2 = c("2", "nope", "6"), Var3 = c(NA,4,6), Var4 = c(2,4,6), stringsAsFactors = FALSE)
     expect_equal(res_bug52, expected_bug52, info = "Bug 52 (cached values)")
 
     # Bug 49 - rownames
     expected_bug49 <- data.frame(B = 1:5, row.names = letters[1:5])
-    res_bug49 <- readWorksheetFromFile(rsrc("testBug49.xlsx"), sheet = 1, rownames = 1)
+    res_bug49 <- readWorksheetFromFile(test_path("resources/testBug49.xlsx"), sheet = 1, rownames = 1)
     expect_equal(res_bug49, expected_bug49, info = "Bug 49 (rownames)")
 
     # Bug 53 - dateTimeFormat and forceConversion with POSIXt
     expected_bug53_sheet1 <- data.frame(A = c("2003-04-06", "2014-10-30", "abc"), stringsAsFactors = FALSE)
-    res_bug53_sheet1 <- readWorksheetFromFile(rsrc("testBug53.xlsx"), sheet = 1, dateTimeFormat = "%Y-%m-%d")
+    res_bug53_sheet1 <- readWorksheetFromFile(test_path("resources/testBug53.xlsx"), sheet = 1, dateTimeFormat = "%Y-%m-%d")
     expect_equal(res_bug53_sheet1, expected_bug53_sheet1, info = "Bug 53 (sheet 1, dateTimeFormat)")
 
     expected_bug53_sheet2 <- data.frame(A = as.POSIXct(c("2015-12-01", "2015-11-17", "1984-01-11")))
-    res_bug53_sheet2 <- readWorksheetFromFile(rsrc("testBug53.xlsx"), sheet = 2, colTypes = "POSIXt", forceConversion = TRUE)
+    res_bug53_sheet2 <- readWorksheetFromFile(test_path("resources/testBug53.xlsx"), sheet = 2, colTypes = "POSIXt", forceConversion = TRUE)
     expect_equal(res_bug53_sheet2, expected_bug53_sheet2, info = "Bug 53 (sheet 2, colTypes POSIXt)")
 })
 
 test_that("reading sparse bitset worksheet works", {
-    wbSparse.xlsx <- loadWorkbook(rsrc("testReadWorksheetSparseBitSet.xlsx"), create = FALSE)
-    # The original test just read it without assertion. We'll assume it shouldn't error.
-    # A more robust test would check the actual content if known.
+    wbSparse.xlsx <- loadWorkbook(test_path("resources/testReadWorksheetSparseBitSet.xlsx"), create = FALSE)
     expect_silent(sparseSheet <- readWorksheet(wbSparse.xlsx, "hist"))
-    # Optionally, check if sparseSheet is a data.frame and has some dimensions if expected
-    # For now, silent execution is the check.
-    expect_true(is.data.frame(sparseSheet), info = "Sparse sheet read should be a data.frame")
+    expect_true(is.data.frame(sparseSheet))
 })
