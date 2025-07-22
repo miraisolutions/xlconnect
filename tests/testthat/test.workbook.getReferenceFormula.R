@@ -21,23 +21,23 @@ test_that("test.workbook.getReferenceFormula", {
     expect_equal(expect_formula, getReferenceFormula(
         wb.xls,
         "FirstName"
-    ),  ignore_attr = TRUE)
+    ))
     expect_formula <- "#REF!"
     attributes(expect_formula) <- list(worksheetScope = "")
     expect_equal(expect_formula, substring(getReferenceFormula(
         wb.xls,
         "SecondName"
-    ), 1, 5),  ignore_attr = TRUE)
+    ), 1, 5))
     expect_formula <- "Tabelle1!$A$1"
     attributes(expect_formula) <- list(worksheetScope = "")
     expect_equal(expect_formula, getReferenceFormula(
         wb.xlsx,
         "FirstName"
-    ),  ignore_attr = TRUE)
+    ))
     expect_formula <- "#REF!"
     attributes(expect_formula) <- list(worksheetScope = "")
     expect_equal(expect_formula, substring(getReferenceFormula(
         wb.xlsx,
         "SecondName"
-    ), 1, 5),  ignore_attr = TRUE)
+    ), 1, 5))
 })

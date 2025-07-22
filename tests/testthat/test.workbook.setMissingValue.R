@@ -7,14 +7,16 @@ test_that("setMissingValue works correctly for a single value in XLS", {
 
     writeNamedRegion(wb.xls, data, name = name)
     res <- readNamedRegion(wb.xls, name = name)
-    expect_equal(res, data, ignore_attr = TRUE)
+    attr(data, "worksheetScope") <- ""
+    expect_equal(res, data)
 
     expect <- data.frame(A = c("4.2", "-3.2", "missing", "1.34"), B = c("A", "missing", "C", "D"), stringsAsFactors = FALSE)
+    attr(expect, "worksheetScope") <- ""
     setMissingValue(wb.xls, value = "missing")
     writeNamedRegion(wb.xls, data, name = name)
     setMissingValue(wb.xls, value = NULL)
     res <- readNamedRegion(wb.xls, name = name)
-    expect_equal(res, expect, ignore_attr = TRUE)
+    expect_equal(res, expect)
 })
 
 test_that("setMissingValue works correctly for a single value in XLSX", {
@@ -26,14 +28,14 @@ test_that("setMissingValue works correctly for a single value in XLSX", {
 
     writeNamedRegion(wb.xlsx, data, name = name)
     res <- readNamedRegion(wb.xlsx, name = name)
-    expect_equal(res, data, ignore_attr = TRUE)
+    expect_equal(res, data)
 
     expect <- data.frame(A = c("4.2", "-3.2", "missing", "1.34"), B = c("A", "missing", "C", "D"), stringsAsFactors = FALSE)
     setMissingValue(wb.xlsx, value = "missing")
     writeNamedRegion(wb.xlsx, data, name = name)
     setMissingValue(wb.xlsx, value = NULL)
     res <- readNamedRegion(wb.xlsx, name = name)
-    expect_equal(res, expect, ignore_attr = TRUE)
+    expect_equal(res, expect)
 })
 
 test_that("setMissingValue works with a vector of values in XLS", {
@@ -44,7 +46,7 @@ test_that("setMissingValue works with a vector of values in XLS", {
                          stringsAsFactors = FALSE)
     setMissingValue(wb.xls, value = c("NA", "missing", "empty"))
     res <- readNamedRegion(wb.xls, name = "Missing1")
-    expect_equal(expect, res, ignore_attr = TRUE)
+    expect_equal(expect, res)
 })
 
 test_that("setMissingValue works with a vector of values in XLSX", {
@@ -55,7 +57,7 @@ test_that("setMissingValue works with a vector of values in XLSX", {
                          stringsAsFactors = FALSE)
     setMissingValue(wb.xlsx, value = c("NA", "missing", "empty"))
     res <- readNamedRegion(wb.xlsx, name = "Missing1")
-    expect_equal(expect, res, ignore_attr = TRUE)
+    expect_equal(expect, res)
 })
 
 test_that("setMissingValue works with a list of values in XLS", {
@@ -66,7 +68,7 @@ test_that("setMissingValue works with a list of values in XLS", {
                          stringsAsFactors = FALSE)
     setMissingValue(wb.xls, value = list("NA", "missing", "empty", -9999))
     res <- readNamedRegion(wb.xls, name = "Missing2")
-    expect_equal(expect, res, ignore_attr = TRUE)
+    expect_equal(expect, res)
 })
 
 test_that("setMissingValue works with a list of values in XLSX", {
@@ -77,5 +79,5 @@ test_that("setMissingValue works with a list of values in XLSX", {
                          stringsAsFactors = FALSE)
     setMissingValue(wb.xlsx, value = list("NA", "missing", "empty", -9999))
     res <- readNamedRegion(wb.xlsx, name = "Missing2")
-    expect_equal(expect, res, ignore_attr = TRUE)
+    expect_equal(expect, res)
 })
