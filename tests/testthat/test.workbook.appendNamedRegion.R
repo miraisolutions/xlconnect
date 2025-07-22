@@ -9,7 +9,7 @@ test_overwrite_formula_helper <- function(wb, data_to_append, expected_read_data
     )
     res <- readNamedRegion(wb, name = name_to_use)
     expect_equal(res, normalizeDataframe(expected_read_data),
-        check.attributes = FALSE,
+        ignore_attr = TRUE,
         check.names = TRUE
     )
     expect_equal(

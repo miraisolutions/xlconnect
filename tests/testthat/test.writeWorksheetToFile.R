@@ -9,7 +9,7 @@ testDataFrame <- function(file, df) {
     expect_equal(
         normalizeDataframe(df),
         res,
-        check.attributes = FALSE,
+        ignore_attr = TRUE,
     )
 }
 

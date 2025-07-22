@@ -23,7 +23,7 @@ test_that("test.writeNamedRegionToFile - full test suite only", {
         writeNamedRegionToFile(file, df, name, formula = paste(worksheet,
             "A1", sep = "!"))
         res <- readNamedRegionFromFile(file, name)
-        expect_equal(normalizeDataframe(df), res, check.attributes = FALSE,
+        expect_equal(normalizeDataframe(df), res, ignore_attr = TRUE,
             check.names = TRUE)
     }
     testDataFrame(file.xls, mtcars)

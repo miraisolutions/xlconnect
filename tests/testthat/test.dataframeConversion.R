@@ -2,7 +2,7 @@ test_that("test.dataframeConversion - always run", {
     testDataFrame <- function(df) {
         res <- XLConnect:::dataframeFromJava(XLConnect:::dataframeToJava(df), 
             check.names = TRUE)
-        expect_equal(normalizeDataframe(df), res, check.attributes = FALSE,
+        expect_equal(normalizeDataframe(df), res, ignore_attr = TRUE,
             check.names = TRUE)
     }
     cdf <- data.frame(Column.A = c(1, 2, 3, NA, 5, Inf, 7, 8, 
@@ -39,7 +39,7 @@ test_that("test.dataframeConversion - full test suite only", {
     testDataFrame <- function(df) {
         res <- XLConnect:::dataframeFromJava(XLConnect:::dataframeToJava(df),
             check.names = TRUE)
-        expect_equal(normalizeDataframe(df), res, check.attributes = FALSE,
+        expect_equal(normalizeDataframe(df), res, ignore_attr = TRUE,
             check.names = TRUE)
     }
     testDataFrame(mtcars)

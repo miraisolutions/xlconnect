@@ -22,7 +22,7 @@ test_that("test.workbook.writeWorksheet", {
         )
         res <- readWorksheet(wb, "mtcars_formula")
         expect_equal(res, normalizeDataframe(expected),
-            check.attributes = FALSE,
+            ignore_attr = TRUE,
             check.names = TRUE
         )
     }

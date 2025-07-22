@@ -19,7 +19,7 @@ test_that("test.writeAndReadNamedRegion - always run", {
         res <- readNamedRegion(wb, namedRegion, worksheetScope = namedRegion)
         expect_equal(normalizeDataframe(df, replaceInf = TRUE),
             res,
-            check.attributes = FALSE, check.names = TRUE
+            ignore_attr = TRUE, check.names = TRUE
         )
     }
     cdf <- data.frame(
@@ -76,7 +76,7 @@ test_that("test.writeAndReadNamedRegion - always run", {
         rownames = "Car"
     )
     res <- readNamedRegion(wb.xls, "rownames")
-    expect_equal(res, XLConnect:::includeRownames(mtcars, "Car"), check.attributes = FALSE)
+    expect_equal(res, XLConnect:::includeRownames(mtcars, "Car"), ignore_attr = TRUE)
     createSheet(wb.xlsx, name = "rownames")
     createName(wb.xlsx, name = "rownames", formula = "rownames!$F$16")
     writeNamedRegion(wb.xlsx, mtcars,
@@ -84,7 +84,7 @@ test_that("test.writeAndReadNamedRegion - always run", {
         rownames = "Car"
     )
     res <- readNamedRegion(wb.xlsx, "rownames")
-    expect_equal(res, XLConnect:::includeRownames(mtcars, "Car"), check.attributes = FALSE)
+    expect_equal(res, XLConnect:::includeRownames(mtcars, "Car"), ignore_attr = TRUE)
     createSheet(wb.xls, name = "rownames2")
     createName(wb.xls, name = "rownames2", formula = "rownames2!$K$5")
     writeNamedRegion(wb.xls, mtcars,
@@ -128,7 +128,7 @@ test_that("test.writeAndReadNamedRegion - full test suite only", {
         res <- readNamedRegion(wb, namedRegion, worksheetScope = namedRegion)
         expect_equal(normalizeDataframe(df, replaceInf = TRUE),
             res,
-            check.attributes = FALSE, check.names = TRUE
+            ignore_attr = TRUE, check.names = TRUE
         )
     }
     testDataFrameNameScope <- function(wb, df, lref) {
@@ -147,7 +147,7 @@ test_that("test.writeAndReadNamedRegion - full test suite only", {
         res <- readNamedRegion(wb, namedRegion, worksheetScope = worksheetScopeName)
         expect_equal(normalizeDataframe(df, replaceInf = TRUE),
             res,
-            check.attributes = FALSE, check.names = TRUE
+            ignore_attr = TRUE, check.names = TRUE
         )
     }
     testDataFrameGlobalExplicit <- function(wb, df, lref) {
@@ -166,7 +166,7 @@ test_that("test.writeAndReadNamedRegion - full test suite only", {
         res <- readNamedRegion(wb, namedRegion, worksheetScope = "")
         expect_equal(normalizeDataframe(df, replaceInf = TRUE),
             res,
-            check.attributes = FALSE, check.names = TRUE
+            ignore_attr = TRUE, check.names = TRUE
         )
     }
     testDataFrameGlobalAndScoped <- function(wb, df_global, df_scoped,
@@ -194,13 +194,13 @@ test_that("test.writeAndReadNamedRegion - full test suite only", {
             normalizeDataframe(df_scoped, replaceInf = TRUE)
         )
         expect_equal(dfs_norm, res_full,
-            check.attributes = FALSE,
+            ignore_attr = TRUE,
             check.names = TRUE
         )
         res_global_prio <- readNamedRegion(wb, namedRegion)
         expect_equal(normalizeDataframe(df_global, replaceInf = TRUE),
             res_global_prio,
-            check.attributes = FALSE, check.names = TRUE
+            ignore_attr = TRUE, check.names = TRUE
         )
     }
     testDataFrame(wb.xls, mtcars, "$C$8")

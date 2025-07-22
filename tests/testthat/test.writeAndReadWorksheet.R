@@ -17,7 +17,7 @@ test_that("test.workbook.writeAndReadWorksheet - always run", {
             startCol = startCol, endRow = 0, endCol = 0
         )
         expect_equal(normalizeDataframe(df), res,
-            check.attributes = FALSE,
+            ignore_attr = TRUE,
             check.names = TRUE
         )
     }
@@ -119,7 +119,7 @@ test_that("test.workbook.writeAndReadWorksheet - full test suite only", {
             startCol = startCol, endRow = 0, endCol = 0
         )
         expect_equal(normalizeDataframe(df), res,
-            check.attributes = FALSE,
+            ignore_attr = TRUE,
             check.names = TRUE
         )
     }
