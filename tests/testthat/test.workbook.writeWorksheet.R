@@ -22,8 +22,7 @@ test_that("test.workbook.writeWorksheet", {
         )
         res <- readWorksheet(wb, "mtcars_formula")
         expect_equal(res, normalizeDataframe(expected),
-            ignore_attr = TRUE,
-            check.names = TRUE
+            ignore_attr = c("worksheetScope", "row.names")
         )
     }
     test_overwrite_formula(wb.xls, mtcars_mod, overwrite = FALSE)

@@ -19,7 +19,7 @@ test_that("test.writeAndReadNamedRegion - always run", {
         res <- readNamedRegion(wb, namedRegion, worksheetScope = namedRegion)
         expect_equal(normalizeDataframe(df, replaceInf = TRUE),
             res,
-            ignore_attr = TRUE, check.names = TRUE
+            ignore_attr = c("worksheetScope", "row.names")
         )
     }
     cdf <- data.frame(
@@ -128,7 +128,7 @@ test_that("test.writeAndReadNamedRegion - full test suite only", {
         res <- readNamedRegion(wb, namedRegion, worksheetScope = namedRegion)
         expect_equal(normalizeDataframe(df, replaceInf = TRUE),
             res,
-            ignore_attr = TRUE, check.names = TRUE
+            ignore_attr = c("worksheetScope", "row.names")
         )
     }
     testDataFrameNameScope <- function(wb, df, lref) {
@@ -147,7 +147,7 @@ test_that("test.writeAndReadNamedRegion - full test suite only", {
         res <- readNamedRegion(wb, namedRegion, worksheetScope = worksheetScopeName)
         expect_equal(normalizeDataframe(df, replaceInf = TRUE),
             res,
-            ignore_attr = TRUE, check.names = TRUE
+            ignore_attr = c("worksheetScope", "row.names")
         )
     }
     testDataFrameGlobalExplicit <- function(wb, df, lref) {
@@ -166,7 +166,7 @@ test_that("test.writeAndReadNamedRegion - full test suite only", {
         res <- readNamedRegion(wb, namedRegion, worksheetScope = "")
         expect_equal(normalizeDataframe(df, replaceInf = TRUE),
             res,
-            ignore_attr = TRUE, check.names = TRUE
+            ignore_attr = c("worksheetScope", "row.names")
         )
     }
     testDataFrameGlobalAndScoped <- function(wb, df_global, df_scoped,
@@ -194,13 +194,12 @@ test_that("test.writeAndReadNamedRegion - full test suite only", {
             normalizeDataframe(df_scoped, replaceInf = TRUE)
         )
         expect_equal(dfs_norm, res_full,
-            ignore_attr = TRUE,
-            check.names = TRUE
+            ignore_attr = c("worksheetScope", "row.names", "names")
         )
         res_global_prio <- readNamedRegion(wb, namedRegion)
         expect_equal(normalizeDataframe(df_global, replaceInf = TRUE),
             res_global_prio,
-            ignore_attr = TRUE, check.names = TRUE
+            ignore_attr = c("worksheetScope", "row.names")
         )
     }
     testDataFrame(wb.xls, mtcars, "$C$8")

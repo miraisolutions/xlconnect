@@ -2,8 +2,7 @@ test_that("test.dataframeConversion - always run", {
     testDataFrame <- function(df) {
         res <- XLConnect:::dataframeFromJava(XLConnect:::dataframeToJava(df), 
             check.names = TRUE)
-        expect_equal(normalizeDataframe(df), res, ignore_attr = TRUE,
-            check.names = TRUE)
+        expect_equal(normalizeDataframe(df), res, ignore_attr = c("worksheetScope", "row.names"))
     }
     cdf <- data.frame(Column.A = c(1, 2, 3, NA, 5, Inf, 7, 8, 
         NA, 10), Column.B = c(-4, -3, NA, -Inf, 0, NA, NA, 3, 
@@ -39,8 +38,7 @@ test_that("test.dataframeConversion - full test suite only", {
     testDataFrame <- function(df) {
         res <- XLConnect:::dataframeFromJava(XLConnect:::dataframeToJava(df),
             check.names = TRUE)
-        expect_equal(normalizeDataframe(df), res, ignore_attr = TRUE,
-            check.names = TRUE)
+        expect_equal(normalizeDataframe(df), res, ignore_attr = c("worksheetScope", "row.names"))
     }
     testDataFrame(mtcars)
     testDataFrame(airquality)

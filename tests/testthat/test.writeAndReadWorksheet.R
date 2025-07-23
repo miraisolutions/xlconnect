@@ -17,8 +17,7 @@ test_that("test.workbook.writeAndReadWorksheet - always run", {
             startCol = startCol, endRow = 0, endCol = 0
         )
         expect_equal(normalizeDataframe(df), res,
-            ignore_attr = TRUE,
-            check.names = TRUE
+            ignore_attr = c("worksheetScope", "row.names")
         )
     }
     cdf <- data.frame(
@@ -119,8 +118,7 @@ test_that("test.workbook.writeAndReadWorksheet - full test suite only", {
             startCol = startCol, endRow = 0, endCol = 0
         )
         expect_equal(normalizeDataframe(df), res,
-            ignore_attr = TRUE,
-            check.names = TRUE
+            ignore_attr = c("worksheetScope", "row.names")
         )
     }
     testDataFrame(wb.xls, mtcars, 8, 13)

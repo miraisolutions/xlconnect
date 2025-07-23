@@ -9,8 +9,7 @@ test_overwrite_formula_helper <- function(wb, data_to_append, expected_read_data
     )
     res <- readNamedRegion(wb, name = name_to_use)
     expect_equal(res, normalizeDataframe(expected_read_data),
-        ignore_attr = TRUE,
-        check.names = TRUE
+        ignore_attr = c("worksheetScope", "row.names")
     )
     expect_equal(
         getReferenceCoordinatesForName(wb, name_to_use),
