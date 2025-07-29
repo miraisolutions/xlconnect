@@ -104,3 +104,9 @@ This should open a read view in the terminal which can be scrolled with arrow ke
    > git status | grep -E "xls|xlsx" | wc -l
    0
    ```
+
+## Code style
+
+Only write comments if they explain a non-obvious aspect of the code, or the rationale behind it.
+If you have come to a certain conclusion, only write the salient points and the conclusion itself.
+If a comment doesn't make sense or appears to be out of date, err on the side of removing it.
