@@ -16,9 +16,7 @@ test_that("test.workbook.writeAndReadWorksheet - always run", {
             startRow = startRow,
             startCol = startCol, endRow = 0, endCol = 0
         )
-        expect_equal(normalizeDataframe(df), res,
-            ignore_attr = c("worksheetScope", "row.names")
-        )
+        expect_equal( normalizeDataframe(df), res, ignore_attr = c("worksheetScope"))
     }
     cdf <- data.frame(
         Column.A = c(

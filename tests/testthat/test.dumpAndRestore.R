@@ -20,7 +20,7 @@ test_that("test.dumpAndRestore - full test suite only", {
         sapply(names(out)[out], function(obj) {
             data.orig = normalizeDataframe(get(obj, pos = pos))
             data.restored = get(obj)
-            expect_equal(data.orig, data.restored, ignore_attr = c("worksheetScope", "row.names"))
+            expect_equal(data.orig, data.restored, ignore_attr = c("worksheetScope"))
             expect_equal(attr(data.orig, "row.names"), attr(data.restored,
               "row.names"))
         })

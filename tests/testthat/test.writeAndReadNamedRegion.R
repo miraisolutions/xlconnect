@@ -19,7 +19,7 @@ test_that("test.writeAndReadNamedRegion - always run", {
         res <- readNamedRegion(wb, namedRegion, worksheetScope = namedRegion)
         expect_equal(normalizeDataframe(df, replaceInf = TRUE),
             res,
-            ignore_attr = c("worksheetScope", "row.names")
+            ignore_attr = c("worksheetScope")
         )
     }
     cdf <- data.frame(
@@ -166,7 +166,7 @@ test_that("test.writeAndReadNamedRegion - full test suite only", {
         res <- readNamedRegion(wb, namedRegion, worksheetScope = "")
         expect_equal(normalizeDataframe(df, replaceInf = TRUE),
             res,
-            ignore_attr = c("worksheetScope", "row.names")
+            ignore_attr = c("worksheetScope")
         )
     }
     testDataFrameGlobalAndScoped <- function(wb, df_global, df_scoped,
