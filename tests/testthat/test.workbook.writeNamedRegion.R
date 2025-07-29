@@ -39,7 +39,6 @@ test_that("writeNamedRegion handles empty data frames in XLS", {
     createName(wb.xls, "empty2", "empty!D10")
     writeNamedRegion(wb.xls, data.frame(), "empty1")
     writeNamedRegion(wb.xls, data.frame(a = character(0), b = numeric(0)), "empty2")
-    # No assertion, just checking that it runs without error
     expect_true(TRUE)
 })
 
@@ -50,7 +49,6 @@ test_that("writeNamedRegion handles empty data frames in XLSX", {
     createName(wb.xlsx, "empty2", "empty!D10")
     writeNamedRegion(wb.xlsx, data.frame(), "empty1")
     writeNamedRegion(wb.xlsx, data.frame(a = character(0), b = numeric(0)), "empty2")
-    # No assertion, just checking that it runs without error
     expect_true(TRUE)
 })
 

@@ -1,9 +1,3 @@
-test_that("test.writeNamedRegionToFile - always run", {
-    # Add tests here that should always run, if any.
-    # For now, this block will be empty as all existing tests are conditional.
-    expect_true(TRUE) # Placeholder to ensure the test block is not empty
-})
-
 test_that("test.writeNamedRegionToFile - full test suite only", {
     skip_if_not(getOption("FULL.TEST.SUITE"), "FULL.TEST.SUITE is not TRUE")
 

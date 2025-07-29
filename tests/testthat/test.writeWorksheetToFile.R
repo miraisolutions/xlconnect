@@ -132,7 +132,6 @@ test_that("clearSheets parameter works correctly for XLS", {
     df.short <- cdf[1, , drop = FALSE]
 
     writeWorksheetToFile(file.xls, data = df.short, sheet = "cdfRegion")
-    # expect_equal(nrow(readWorksheetFromFile(file.xls, sheet = "cdfRegion")), nrow(df.short))
 
     writeWorksheetToFile(file.xls, data = cdf, sheet = "cdfRegion")
     expect_equal(
@@ -161,7 +160,6 @@ test_that("clearSheets parameter works correctly for XLSX", {
     df.short <- cdf[1, , drop = FALSE]
 
     writeWorksheetToFile(file.xlsx, data = df.short, sheet = "cdfRegion")
-    # expect_equal(nrow(readWorksheetFromFile(file.xlsx, sheet = "cdfRegion")), nrow(df.short))
 
     writeWorksheetToFile(file.xlsx, data = cdf, sheet = "cdfRegion")
     expect_equal(

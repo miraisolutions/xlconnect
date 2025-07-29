@@ -65,9 +65,3 @@ test_that("getOrCreateCellStyle works as expected", {
     cs_xlsx_existing <- getOrCreateCellStyle(wb.xlsx, anotherStyleName)
     expect_true(is(cs_xlsx_existing, "cellstyle"), info = "XLSX: getOrCreate (existing) should return cellstyle")
 })
-
-# The original file had a placeholder "always run" test.
-# If there are no actual tests that *must* run when FULL.TEST.SUITE is false,
-# it can be removed or kept as a specific context for such tests if they arise.
-# For now, I'll remove the empty test_that block.
-# test_that("test.workbook.cellstyles - always run", { ... })

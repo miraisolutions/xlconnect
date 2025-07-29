@@ -228,37 +228,7 @@ test_that("keep and drop arguments with specified region work correctly", {
     wb.xlsx <- loadWorkbook(test_path("resources/testWorkbookReadWorksheet.xlsx"), create = FALSE)
 
     region_params <- list(sheet = "Test5", startRow = 17, startCol = 7, endRow = 24, endCol = 9, header = TRUE) # This region is B, C, D columns from original Test5
-
-    # Original data in region B17:D24 of Test5 sheet, if we assume header in row 16 of this sub-region
-    # B: letters[2:8] (NA, then b to h)
-    # C: "y", "x", "w", NA, "v", "u", NA (y to NA)
-    # D: 1:5, NA, NA (1 to NA)
-    # The file shows the data in F17:I22 for the common_checkDf.
-    # Test5 data starts at row 16 in the sheet.
-    # Region F17:I22 means cols F, G, H, I.
-    # If startCol=7 (G), endCol=9 (I), we are looking at G, H, I from Test5 data.
-    # Test5 data: A, B, C, D.
-    # Original data in G (col 2 of Test5), H (col 3 of Test5), I (col 4 of Test5)
-    # G (B col of Test5): c(NA, letters[2:8]) -> from row 17 (index 2 if header is row 16) -> c(letters[2:7]) if region is 7 rows long.
-    # Original test file had:
-    # checkDfAreaSubset <- data.frame( B = c(NA, letters[2:7]), D = c(NA, 1:5, NA), stringsAsFactors = FALSE)
-    # This implies the region F17:I22 (for common_checkDf) is different from how Test5 is laid out for this specific sub-region test.
-    # The original test used startCol = 7, endCol = 9 for Test5.
-    # Test5 columns are A, B, C, D.
-    # If startCol=7 refers to the 7th column of the *sheet*, this is complex.
-    # The `readWorksheet` call was: readWorksheet(wb.xls, "Test5", startRow = 17, startCol = 7, endRow = 24, endCol = 9, header = TRUE, keep = c("B", "D"))
-    # This implies that within the sub-region defined by start/end Row/Col, the columns are named B, C, D.
-    # Let's assume the columns within the specified region are named as per the header in that region.
-    # The region from the file "Test5" starting G16 (col 7, row 16) to I24 (col 9, row 24)
-    # G16 is 'B', H16 is 'C', I16 is 'D' from sheet "Test5".
-    # So, data is:
-    # B: c(NA, letters[2:8]) -> relevant part for 8 rows (16 to 24, header at 16): c(NA, letters[2:8])[1:8] -> c(NA,b,c,d,e,f,g,h)
-    # C: c("z", "y", "x", "w", NA, "v", "u", NA) -> relevant part: c("z", "y", "x", "w", NA, "v", "u", NA)[1:8]
-    # D: c(NA, 1:5, NA, NA) -> relevant part: c(NA, 1,2,3,4,5,NA,NA)[1:8]
-    # The original test uses checkDfAreaSubset for keep/drop on this region.
-    # checkDfAreaSubset <- data.frame(B = c(NA, letters[2:7]), D = c(NA, 1:5, NA), stringsAsFactors = FALSE) - this implies 7 data rows.
-    # If endRow = 24, startRow = 17, header=TRUE (row 16 is header), then data is from 17 to 24 (8 rows).
-    # Let's use the original checkDfAreaSubset and assume it's correct for the intended sub-region.
+    
     checkDfAreaSubset <- data.frame(B = c(NA, letters[2:7]), D = c(NA, 1:5, NA), stringsAsFactors = FALSE)
 
 
