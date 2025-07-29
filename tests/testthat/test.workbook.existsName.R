@@ -1,11 +1,5 @@
-test_that("test.workbook.existsName", {
-    wb.xls <- loadWorkbook("resources/testWorkbookExistsNameAndSheet.xls",
-        create = FALSE
-    )
-    wb.xlsx <- loadWorkbook("resources/testWorkbookExistsNameAndSheet.xlsx",
-        create = FALSE
-    )
-    # Global names
+test_that("existsName identifies global names in XLS", {
+    wb.xls <- loadWorkbook("resources/testWorkbookExistsNameAndSheet.xls", create = FALSE)
     res_xls_AA <- existsName(wb.xls, "AA")
     expect_true(res_xls_AA)
     xls_AA_scope <- attr(res_xls_AA, "worksheetScope")
@@ -18,11 +12,17 @@ test_that("test.workbook.existsName", {
     expect_true(res_xls_CC)
     xls_CC_scope <- attr(res_xls_CC, "worksheetScope")
     expect_true(is.null(xls_CC_scope) || xls_CC_scope == "")
+})
 
+test_that("existsName identifies non-existent and illegal names in XLS", {
+    wb.xls <- loadWorkbook("resources/testWorkbookExistsNameAndSheet.xls", create = FALSE)
     expect_false(existsName(wb.xls, "DD"))
     expect_false(existsName(wb.xls, "'illegal name"))
     expect_false(existsName(wb.xls, "%&$$-^~@afk20 235-??a?"))
+})
 
+test_that("existsName identifies global names in XLSX", {
+    wb.xlsx <- loadWorkbook("resources/testWorkbookExistsNameAndSheet.xlsx", create = FALSE)
     res_xlsx_AA <- existsName(wb.xlsx, "AA")
     expect_true(res_xlsx_AA)
     xlsx_AA_scope <- attr(res_xlsx_AA, "worksheetScope")
@@ -35,12 +35,17 @@ test_that("test.workbook.existsName", {
     expect_true(res_xlsx_CC)
     xlsx_CC_scope <- attr(res_xlsx_CC, "worksheetScope")
     expect_true(is.null(xlsx_CC_scope) || xlsx_CC_scope == "")
+})
 
+test_that("existsName identifies non-existent and illegal names in XLSX", {
+    wb.xlsx <- loadWorkbook("resources/testWorkbookExistsNameAndSheet.xlsx", create = FALSE)
     expect_false(existsName(wb.xlsx, "DD"))
     expect_false(existsName(wb.xlsx, "'illegal name"))
     expect_false(existsName(wb.xlsx, "%&$$-^~@afk20 235-??a?"))
+})
 
-    # Sheet-scoped names
+test_that("existsName identifies sheet-scoped names in XLS", {
+    wb.xls <- loadWorkbook("resources/testWorkbookExistsNameAndSheet.xls", create = FALSE)
     res_xls_AA_1 <- existsName(wb.xls, "AA_1")
     expect_true(res_xls_AA_1)
     if (isTRUE(getOption("XLConnect.setCustomAttributes"))) {
@@ -51,7 +56,10 @@ test_that("test.workbook.existsName", {
     if (isTRUE(getOption("XLConnect.setCustomAttributes"))) {
         expect_equal(attr(res_xls_BB_1, "worksheetScope"), "BBB")
     }
+})
 
+test_that("existsName identifies sheet-scoped names in XLSX", {
+    wb.xlsx <- loadWorkbook("resources/testWorkbookExistsNameAndSheet.xlsx", create = FALSE)
     res_xlsx_AA_1 <- existsName(wb.xlsx, "AA_1")
     expect_true(res_xlsx_AA_1)
     if (isTRUE(getOption("XLConnect.setCustomAttributes"))) {
@@ -62,7 +70,11 @@ test_that("test.workbook.existsName", {
     if (isTRUE(getOption("XLConnect.setCustomAttributes"))) {
         expect_equal(attr(res_xlsx_BB_1, "worksheetScope"), "BBB")
     }
+})
 
+test_that("existsName works when XLConnect.setCustomAttributes is FALSE", {
+    wb.xls <- loadWorkbook("resources/testWorkbookExistsNameAndSheet.xls", create = FALSE)
+    wb.xlsx <- loadWorkbook("resources/testWorkbookExistsNameAndSheet.xlsx", create = FALSE)
     options(XLConnect.setCustomAttributes = FALSE)
     expect_true(existsName(wb.xls, "AA_1"))
     expect_true(existsName(wb.xls, "BB_1"))

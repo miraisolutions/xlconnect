@@ -13,7 +13,7 @@ test_that("test.workbook.onErrorCell", {
         stringsAsFactors = FALSE
     )
     attr(target, "worksheetScope") <- ""
-    expect_equal(target, res, ignore_attr = TRUE)
+    expect_equal(target, res)
     expect_warning(res <- try(readNamedRegion(wb.xls, name = "BB")), "Error detected in cell")
     expect_false(is(res, "try-error"))
     target <- data.frame(
@@ -21,7 +21,7 @@ test_that("test.workbook.onErrorCell", {
         stringsAsFactors = FALSE
     )
     attr(target, "worksheetScope") <- ""
-    expect_equal(target, res, ignore_attr = TRUE)
+    expect_equal(target, res)
     options(XLConnect.setCustomAttributes = FALSE)
     expect_warning(res <- try(readNamedRegion(wb.xls, name = "CC")), "Error detected in cell")
     expect_false(is(res, "try-error"))

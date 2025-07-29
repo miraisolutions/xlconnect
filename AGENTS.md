@@ -22,6 +22,8 @@ Rscript -e "install.packages(c('rJava'))"
 R CMD INSTALL .
 ```
 
+Run this before you start any work, and then check that the setup worked by running `Rscript -e 'library(XLConnect)'
+
 ## Common commands
 
 ### Install the local source package
@@ -53,6 +55,9 @@ Run a specific test file:
 options(FULL.TEST.SUITE=TRUE)
 testthat::test_file("tests/testthat/test.loadWorkbook.R")
 ```
+
+When making multiple changes, run the tests after each change and fix any failures before moving on to the next change.
+In that case it's ok to run only the tests that you expect to be impacted.
 
 ### Run RUnit tests
 

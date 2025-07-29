@@ -25,14 +25,14 @@ test_that("test.workbook.createName", {
     expect_error(createName(wb.xlsx, "ImHere", "There!$A$2"), "IllegalArgumentException")
     createName(wb.xls, "CurrentlyHere", "CurrentlyHere!$D$8")
     createName(wb.xls, "CurrentlyHere", "NowThere!$C$3", overwrite = TRUE)
-    expect_equal(TRUE, existsName(wb.xls, "CurrentlyHere"))
+    expect_true(existsName(wb.xls, "CurrentlyHere"))
     createName(wb.xlsx, "CurrentlyHere", "CurrentlyHere!$D$8")
     createName(wb.xlsx, "CurrentlyHere", "NowThere!$C$3", overwrite = TRUE)
-    expect_equal(TRUE, existsName(wb.xlsx, "CurrentlyHere"))
+    expect_true(existsName(wb.xlsx, "CurrentlyHere"))
     expect_error(createName(wb.xls, "aName", "Test!A1A4"), "IllegalArgumentException")
     # This call should not produce an error:
     createName(wb.xls, "aName", "Test!A1")
-    expect_equal(TRUE, existsName(wb.xls, "aName"))
+    expect_true(existsName(wb.xls, "aName"))
     sheetName <- "Test_Scoped_Sheet"
     createSheet(wb.xls, name = sheetName)
     createSheet(wb.xlsx, name = sheetName)

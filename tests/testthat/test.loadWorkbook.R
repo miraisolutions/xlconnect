@@ -1,4 +1,3 @@
-context("loadWorkbook Functionality")
 
 test_that("loading non-existent files throws an error", {
     expect_error(loadWorkbook(rsrc("fileWhichDoesNotExist.xls")))
@@ -13,35 +12,35 @@ test_that("loading existing valid XLS and XLSX files works", {
     expect_true(is(wb_xlsx, "workbook"))
 })
 
-test_that("creating new XLS and XLSX files on the fly works", {
-    # Test creating an XLS file
+test_that("creating a new XLS file on the fly works", {
     file_to_create_xls <- rsrc("fileCreatedOnTheFly.xls")
-    on.exit(if (file.exists(file_to_create_xls)) file.remove(file_to_create_xls), add = TRUE) # Ensure cleanup
+    on.exit(if (file.exists(file_to_create_xls)) file.remove(file_to_create_xls))
 
     wb_create_xls <- loadWorkbook(file_to_create_xls, create = TRUE)
     expect_true(is(wb_create_xls, "workbook"))
-    saveWorkbook(wb_create_xls, file_to_create_xls) # Ensure file is written
+    saveWorkbook(wb_create_xls, file_to_create_xls)
     expect_true(file.exists(file_to_create_xls))
+})
 
-    # Test creating an XLSX file
+test_that("creating a new XLSX file on the fly works", {
     file_to_create_xlsx <- rsrc("fileCreatedOnTheFly.xlsx")
-    on.exit(if (file.exists(file_to_create_xlsx)) file.remove(file_to_create_xlsx), add = TRUE) # Ensure cleanup
+    on.exit(if (file.exists(file_to_create_xlsx)) file.remove(file_to_create_xlsx))
 
     wb_create_xlsx <- loadWorkbook(file_to_create_xlsx, create = TRUE)
     expect_true(is(wb_create_xlsx, "workbook"))
-    saveWorkbook(wb_create_xlsx, file_to_create_xlsx) # Ensure file is written
+    saveWorkbook(wb_create_xlsx, file_to_create_xlsx)
     expect_true(file.exists(file_to_create_xlsx))
 })
 
-test_that("loading password-protected files works correctly", {
-    # Test case 1: testBug61.xlsx
+test_that("loading a password-protected file (testBug61.xlsx) works", {
     pwdProtectedFile1 <- rsrc("testBug61.xlsx")
     expect_error(loadWorkbook(pwdProtectedFile1), "EncryptedDocumentException (Java): The supplied spreadsheet is protected, but no password was supplied", fixed = TRUE)
     expect_error(loadWorkbook(pwdProtectedFile1, password = "wrong"), "EncryptedDocumentException (Java): Password incorrect", fixed = TRUE)
     wb_pwd1 <- loadWorkbook(pwdProtectedFile1, password = "mirai")
     expect_true(is(wb_pwd1, "workbook"))
+})
 
-    # Test case 2: testBug106.xlsx
+test_that("loading a password-protected file (testBug106.xlsx) works", {
     pwdProtectedFile2 <- rsrc("testBug106.xlsx")
     expect_error(loadWorkbook(pwdProtectedFile2), "EncryptedDocumentException (Java): The supplied spreadsheet is protected, but no password was supplied", fixed = TRUE)
     expect_error(loadWorkbook(pwdProtectedFile2, password = "wrong"), "EncryptedDocumentException (Java): Password incorrect", fixed = TRUE)
