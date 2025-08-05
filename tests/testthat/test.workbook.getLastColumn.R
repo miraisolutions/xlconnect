@@ -1,18 +1,14 @@
 test_that("test.workbook.getLastColumn", {
-    wb.xls <- loadWorkbook("resources/testWorkbookGetLastRow.xls",
-        create = FALSE
-    )
-    wb.xlsx <- loadWorkbook("resources/testWorkbookGetLastRow.xlsx",
-        create = FALSE
-    )
-    expect_equal(11, as.vector(getLastColumn(wb.xls, "mtcars")))
-    expect_equal(15, as.vector(getLastColumn(wb.xls, "mtcars2")))
-    expect_equal(19, as.vector(getLastColumn(wb.xls, "mtcars3")))
-    expect_equal(11, as.vector(getLastColumn(wb.xlsx, "mtcars")))
-    expect_equal(15, as.vector(getLastColumn(wb.xlsx, "mtcars2")))
-    expect_equal(19, as.vector(getLastColumn(wb.xlsx, "mtcars3")))
-    expect_error(getLastColumn(wb.xls, "doesNotExist"))
-    expect_error(getLastColumn(wb.xlsx, "doesNotExist"))
-    expect_equal(c(empty = 1), getLastColumn(wb.xls, "empty"))
-    expect_equal(c(empty = 1), getLastColumn(wb.xlsx, "empty"))
+  wb.xls <- loadWorkbook("resources/testWorkbookGetLastRow.xls", create = FALSE)
+  wb.xlsx <- loadWorkbook("resources/testWorkbookGetLastRow.xlsx", create = FALSE)
+  expect_equal(11, as.vector(getLastColumn(wb.xls, "mtcars")))
+  expect_equal(15, as.vector(getLastColumn(wb.xls, "mtcars2")))
+  expect_equal(19, as.vector(getLastColumn(wb.xls, "mtcars3")))
+  expect_equal(11, as.vector(getLastColumn(wb.xlsx, "mtcars")))
+  expect_equal(15, as.vector(getLastColumn(wb.xlsx, "mtcars2")))
+  expect_equal(19, as.vector(getLastColumn(wb.xlsx, "mtcars3")))
+  expect_error(getLastColumn(wb.xls, "doesNotExist"))
+  expect_error(getLastColumn(wb.xlsx, "doesNotExist"))
+  expect_equal(c(empty = 1), getLastColumn(wb.xls, "empty"))
+  expect_equal(c(empty = 1), getLastColumn(wb.xlsx, "empty"))
 })
