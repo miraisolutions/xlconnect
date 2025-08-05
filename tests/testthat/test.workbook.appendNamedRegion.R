@@ -1,20 +1,18 @@
 context("Workbook appendNamedRegion functionality")
 
 # Helper function (specific to this test file)
-test_overwrite_formula_helper <- function(wb, data_to_append, expected_read_data, expected_coords,
-                                   name_to_use = "mtcars_formula", overwrite = TRUE) {
-    appendNamedRegion(wb, data_to_append,
-        name = name_to_use,
-        overwriteFormulaCells = overwrite
-    )
+test_overwrite_formula_helper <- function(
+  wb,
+  data_to_append,
+  expected_read_data,
+  expected_coords,
+  name_to_use = "mtcars_formula",
+  overwrite = TRUE
+) {
+  appendNamedRegion(wb, data_to_append, name = name_to_use, overwriteFormulaCells = overwrite)
   res <- readNamedRegion(wb, name = name_to_use)
-    expect_equal(res, normalizeDataframe(expected_read_data),
-        ignore_attr = c("worksheetScope", "row.names")
-    )
-    expect_equal(
-        getReferenceCoordinatesForName(wb, name_to_use),
-        expected_coords
-    )
+  expect_equal(res, normalizeDataframe(expected_read_data), ignore_attr = c("worksheetScope", "row.names"))
+  expect_equal(getReferenceCoordinatesForName(wb, name_to_use), expected_coords)
 }
 
 test_that("appending to an existing named region works for XLS and XLSX", {
@@ -63,12 +61,21 @@ test_that("overwriteFormulaCells = FALSE works as expected", {
   expected_data_overwrite_false <- rbind(mtcars_mod, mtcars_carb_eq_gear)
   expected_coords_overwrite_false <- matrix(c(9, 5, 73, 15), ncol = 2, byrow = TRUE)
 
-
-    test_overwrite_formula_helper(wb.xls, mtcars, expected_data_overwrite_false,
-        expected_coords_overwrite_false, name_to_use = "mtcars_formula", overwrite = FALSE
+  test_overwrite_formula_helper(
+    wb.xls,
+    mtcars,
+    expected_data_overwrite_false,
+    expected_coords_overwrite_false,
+    name_to_use = "mtcars_formula",
+    overwrite = FALSE
   )
-    test_overwrite_formula_helper(wb.xlsx, mtcars, expected_data_overwrite_false,
-        expected_coords_overwrite_false, name_to_use = "mtcars_formula", overwrite = FALSE
+  test_overwrite_formula_helper(
+    wb.xlsx,
+    mtcars,
+    expected_data_overwrite_false,
+    expected_coords_overwrite_false,
+    name_to_use = "mtcars_formula",
+    overwrite = FALSE
   )
 })
 
@@ -85,12 +92,21 @@ test_that("overwriteFormulaCells = TRUE works as expected", {
   expected_data_overwrite_true <- rbind(mtcars_mod, mtcars)
   expected_coords_overwrite_true <- matrix(c(9, 5, 73, 15), ncol = 2, byrow = TRUE)
 
-
-    test_overwrite_formula_helper(wb.xls, mtcars, expected_data_overwrite_true,
-        expected_coords_overwrite_true, name_to_use = "mtcars_formula", overwrite = TRUE
+  test_overwrite_formula_helper(
+    wb.xls,
+    mtcars,
+    expected_data_overwrite_true,
+    expected_coords_overwrite_true,
+    name_to_use = "mtcars_formula",
+    overwrite = TRUE
   )
-    test_overwrite_formula_helper(wb.xlsx, mtcars, expected_data_overwrite_true,
-        expected_coords_overwrite_true, name_to_use = "mtcars_formula", overwrite = TRUE
+  test_overwrite_formula_helper(
+    wb.xlsx,
+    mtcars,
+    expected_data_overwrite_true,
+    expected_coords_overwrite_true,
+    name_to_use = "mtcars_formula",
+    overwrite = TRUE
   )
 })
 

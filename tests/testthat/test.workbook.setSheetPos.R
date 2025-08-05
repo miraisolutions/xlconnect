@@ -1,26 +1,18 @@
 test_that("test.workbook.setSheetPos", {
-    wb.xls <- loadWorkbook("resources/testWorkbookSetSheetPos.xls",
-        create = TRUE
-    )
-    wb.xlsx <- loadWorkbook("resources/testWorkbookSetSheetPos.xlsx",
-        create = TRUE
-    )
-    createSheet(wb.xls, c("A", "B", "C", "D"))
-    createSheet(wb.xlsx, c("A", "B", "C", "D"))
-    setSheetPos(wb.xls, sheet = c("D", "B"), pos = c(2, 1))
-    expect_equal(c("B", "A", "D", "C"), getSheets(wb.xls))
-    expect_equal(c(A = 2, B = 1, C = 4, D = 3), getSheetPos(wb.xls,
-        sheet = c("A", "B", "C", "D")
-    ))
-    setSheetPos(wb.xlsx, sheet = c("D", "B"), pos = c(2, 1))
-    expect_equal(c("B", "A", "D", "C"), getSheets(wb.xlsx))
-    expect_equal(c(A = 2, B = 1, C = 4, D = 3), getSheetPos(wb.xlsx,
-        sheet = c("A", "B", "C", "D")
-    ))
-    expect_error(setSheetPos(wb.xls, sheet = "A", pos = -1))
-    expect_error(setSheetPos(wb.xls, sheet = "A", pos = 36298))
-    expect_error(setSheetPos(wb.xlsx, sheet = "A", pos = -1))
-    expect_error(setSheetPos(wb.xlsx, sheet = "A", pos = 36298))
-    expect_error(setSheetPos(wb.xls, sheet = "NotThere", pos = 2))
-    expect_error(setSheetPos(wb.xlsx, sheet = "NotThere", pos = 2))
+  wb.xls <- loadWorkbook("resources/testWorkbookSetSheetPos.xls", create = TRUE)
+  wb.xlsx <- loadWorkbook("resources/testWorkbookSetSheetPos.xlsx", create = TRUE)
+  createSheet(wb.xls, c("A", "B", "C", "D"))
+  createSheet(wb.xlsx, c("A", "B", "C", "D"))
+  setSheetPos(wb.xls, sheet = c("D", "B"), pos = c(2, 1))
+  expect_equal(c("B", "A", "D", "C"), getSheets(wb.xls))
+  expect_equal(c(A = 2, B = 1, C = 4, D = 3), getSheetPos(wb.xls, sheet = c("A", "B", "C", "D")))
+  setSheetPos(wb.xlsx, sheet = c("D", "B"), pos = c(2, 1))
+  expect_equal(c("B", "A", "D", "C"), getSheets(wb.xlsx))
+  expect_equal(c(A = 2, B = 1, C = 4, D = 3), getSheetPos(wb.xlsx, sheet = c("A", "B", "C", "D")))
+  expect_error(setSheetPos(wb.xls, sheet = "A", pos = -1))
+  expect_error(setSheetPos(wb.xls, sheet = "A", pos = 36298))
+  expect_error(setSheetPos(wb.xlsx, sheet = "A", pos = -1))
+  expect_error(setSheetPos(wb.xlsx, sheet = "A", pos = 36298))
+  expect_error(setSheetPos(wb.xls, sheet = "NotThere", pos = 2))
+  expect_error(setSheetPos(wb.xlsx, sheet = "NotThere", pos = 2))
 })
