@@ -15,7 +15,7 @@ if (!getOption("FULL.TEST.SUITE")) {
 }
 
 options_to_set <- list(
-  java.parameters = j_params, # Keep java.parameters under withr for reset
+  java.parameters = j_params, # can't use withr for java.parameters, as we can only load the jvm once in the session
   encoding = "UTF-8"
 )
 
