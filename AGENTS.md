@@ -110,3 +110,19 @@ This should open a read view in the terminal which can be scrolled with arrow ke
 Only write comments if they explain a non-obvious aspect of the code, or the rationale behind it.
 If you have come to a certain conclusion, only write the salient points and the conclusion itself.
 If a comment doesn't make sense or appears to be out of date, err on the side of removing it.
+
+### Format the code
+
+When you modify R code, you should use `air` to format it:
+
+```sh
+air format tests/testthat
+```
+
+formats all testthat tests;
+
+```sh
+air format tests/test-all.R
+```
+
+formats the test-all.R file (the test runner).
