@@ -1,72 +1,109 @@
-test_that("test.workbook.onErrorCell", {
-  wb.xls <- loadWorkbook("resources/testWorkbookErrorCell.xls", create = FALSE)
-  wb.xlsx <- loadWorkbook("resources/testWorkbookErrorCell.xlsx", create = FALSE)
+# Helper function to avoid code duplication
+test_error_warn <- function(wb, region, expected_df, warning_msg) {
+  expect_warning(res <- try(readNamedRegion(wb, name = region)), warning_msg)
+  expect_false(is(res, "try-error"))
+  if (is.null(attr(res, "worksheetScope"))) {
+    attr(expected_df, "worksheetScope") <- NULL
+  } else {
+    attr(expected_df, "worksheetScope") <- ""
+  }
+  expect_equal(expected_df, res)
+}
+
+test_that("onErrorCell with XLC$ERROR.WARN works for xls", {
+  wb.xls <- loadWorkbook(rsrc("testWorkbookErrorCell.xls"), create = FALSE)
   onErrorCell(wb.xls, XLC$ERROR.WARN)
-  expect_warning(res <- try(readNamedRegion(wb.xls, name = "AA")), "Error detected in cell")
-  expect_false(is(res, "try-error"))
-  target <- data.frame(A = c("aa", "bb", "cc", NA, "ee", "ff"), stringsAsFactors = FALSE)
-  attr(target, "worksheetScope") <- ""
-  expect_equal(target, res)
-  expect_warning(res <- try(readNamedRegion(wb.xls, name = "BB")), "Error detected in cell")
-  expect_false(is(res, "try-error"))
-  target <- data.frame(B = c(4.3, NA, -2.5, 1.6, NA, 9.7), stringsAsFactors = FALSE)
-  attr(target, "worksheetScope") <- ""
-  expect_equal(target, res)
-  options(XLConnect.setCustomAttributes = FALSE)
-  expect_warning(res <- try(readNamedRegion(wb.xls, name = "CC")), "Error detected in cell")
-  expect_false(is(res, "try-error"))
-  target <- data.frame(C = c(-53.2, NA, 34.1, -37.89, 0, 1.6), stringsAsFactors = FALSE)
-  expect_equal(target, res)
-  expect_warning(res <- try(readNamedRegion(wb.xls, name = "DD")), "Error detected in cell")
-  expect_false(is(res, "try-error"))
-  target <- data.frame(D = c(8.2, 2, 1, -0.5, NA, 3.1), stringsAsFactors = FALSE)
-  expect_equal(target, res)
-  expect_warning(res <- try(readNamedRegion(wb.xls, name = "EE")), "Error when trying to evaluate cell")
-  expect_false(is(res, "try-error"))
-  target <- data.frame(E = c("zz", "yy", NA, "ww", "vv", "uu"), stringsAsFactors = FALSE)
-  expect_equal(target, res)
+
+  # Test regions
+  test_error_warn(
+    wb.xls,
+    "AA",
+    data.frame(A = c("aa", "bb", "cc", NA, "ee", "ff"), stringsAsFactors = FALSE),
+    "Error detected in cell"
+  )
+  test_error_warn(
+    wb.xls,
+    "BB",
+    data.frame(B = c(4.3, NA, -2.5, 1.6, NA, 9.7), stringsAsFactors = FALSE),
+    "Error detected in cell"
+  )
+  withr::local_options(XLConnect.setCustomAttributes = FALSE)
+  test_error_warn(
+    wb.xls,
+    "CC",
+    data.frame(C = c(-53.2, NA, 34.1, -37.89, 0, 1.6), stringsAsFactors = FALSE),
+    "Error detected in cell"
+  )
+  withr::local_options(XLConnect.setCustomAttributes = TRUE)
+  test_error_warn(
+    wb.xls,
+    "DD",
+    data.frame(D = c(8.2, 2, 1, -0.5, NA, 3.1), stringsAsFactors = FALSE),
+    "Error detected in cell"
+  )
+  test_error_warn(
+    wb.xls,
+    "EE",
+    data.frame(E = c("zz", "yy", NA, "ww", "vv", "uu"), stringsAsFactors = FALSE),
+    "Error when trying to evaluate cell"
+  )
+})
+
+test_that("onErrorCell with XLC$ERROR.WARN works for xlsx", {
+  wb.xlsx <- loadWorkbook(rsrc("testWorkbookErrorCell.xlsx"), create = FALSE)
   onErrorCell(wb.xlsx, XLC$ERROR.WARN)
-  expect_warning(res <- try(readNamedRegion(wb.xlsx, name = "AA")), "Error when trying to evaluate cell")
-  expect_false(is(res, "try-error"))
-  target <- data.frame(A = c("aa", "bb", "cc", NA, "ee", "ff"), stringsAsFactors = FALSE)
-  expect_equal(target, res)
-  expect_warning(res <- try(readNamedRegion(wb.xlsx, name = "BB")), "Error detected in cell")
-  expect_false(is(res, "try-error"))
-  target <- data.frame(B = c(4.3, NA, -2.5, 1.6, NA, 9.7), stringsAsFactors = FALSE)
-  expect_equal(target, res)
-  expect_warning(res <- try(readNamedRegion(wb.xlsx, name = "CC")), "Error detected in cell")
-  expect_false(is(res, "try-error"))
-  target <- data.frame(C = c(-53.2, NA, 34.1, -37.89, 0, 1.6), stringsAsFactors = FALSE)
-  expect_equal(target, res)
-  expect_warning(res <- try(readNamedRegion(wb.xlsx, name = "DD")), "Error detected in cell")
-  expect_false(is(res, "try-error"))
-  target <- data.frame(D = c(8.2, 2, 1, -0.5, NA, 3.1), stringsAsFactors = FALSE)
-  expect_equal(target, res)
-  expect_warning(res <- try(readNamedRegion(wb.xlsx, name = "EE")), "Error when trying to evaluate cell")
-  expect_false(is(res, "try-error"))
-  target <- data.frame(E = c("zz", "yy", NA, "ww", "vv", "uu"), stringsAsFactors = FALSE)
-  expect_equal(target, res)
-  options(XLConnect.setCustomAttributes = TRUE)
+
+  # Test regions
+  test_error_warn(
+    wb.xlsx,
+    "AA",
+    data.frame(A = c("aa", "bb", "cc", NA, "ee", "ff"), stringsAsFactors = FALSE),
+    "Error when trying to evaluate cell"
+  )
+  test_error_warn(
+    wb.xlsx,
+    "BB",
+    data.frame(B = c(4.3, NA, -2.5, 1.6, NA, 9.7), stringsAsFactors = FALSE),
+    "Error detected in cell"
+  )
+  test_error_warn(
+    wb.xlsx,
+    "CC",
+    data.frame(C = c(-53.2, NA, 34.1, -37.89, 0, 1.6), stringsAsFactors = FALSE),
+    "Error detected in cell"
+  )
+  test_error_warn(
+    wb.xlsx,
+    "DD",
+    data.frame(D = c(8.2, 2, 1, -0.5, NA, 3.1), stringsAsFactors = FALSE),
+    "Error detected in cell"
+  )
+  test_error_warn(
+    wb.xlsx,
+    "EE",
+    data.frame(E = c("zz", "yy", NA, "ww", "vv", "uu"), stringsAsFactors = FALSE),
+    "Error when trying to evaluate cell"
+  )
+})
+
+test_that("onErrorCell with XLC$ERROR.STOP creates an error for xls", {
+  wb.xls <- loadWorkbook(rsrc("testWorkbookErrorCell.xls"), create = FALSE)
   onErrorCell(wb.xls, XLC$ERROR.STOP)
-  res <- try(readNamedRegion(wb.xls, name = "AA"))
-  expect_true(is(res, "try-error"))
-  res <- try(readNamedRegion(wb.xls, name = "BB"))
-  expect_true(is(res, "try-error"))
-  res <- try(readNamedRegion(wb.xls, name = "CC"))
-  expect_true(is(res, "try-error"))
-  res <- try(readNamedRegion(wb.xls, name = "DD"))
-  expect_true(is(res, "try-error"))
-  res <- try(readNamedRegion(wb.xls, name = "EE"))
-  expect_true(is(res, "try-error"))
+
+  expect_true(is(try(readNamedRegion(wb.xls, name = "AA")), "try-error"))
+  expect_true(is(try(readNamedRegion(wb.xls, name = "BB")), "try-error"))
+  expect_true(is(try(readNamedRegion(wb.xls, name = "CC")), "try-error"))
+  expect_true(is(try(readNamedRegion(wb.xls, name = "DD")), "try-error"))
+  expect_true(is(try(readNamedRegion(wb.xls, name = "EE")), "try-error"))
+})
+
+test_that("onErrorCell with XLC$ERROR.STOP creates an error for xlsx", {
+  wb.xlsx <- loadWorkbook(rsrc("testWorkbookErrorCell.xlsx"), create = FALSE)
   onErrorCell(wb.xlsx, XLC$ERROR.STOP)
-  res <- try(readNamedRegion(wb.xlsx, name = "AA"))
-  expect_true(is(res, "try-error"))
-  res <- try(readNamedRegion(wb.xlsx, name = "BB"))
-  expect_true(is(res, "try-error"))
-  res <- try(readNamedRegion(wb.xlsx, name = "CC"))
-  expect_true(is(res, "try-error"))
-  res <- try(readNamedRegion(wb.xlsx, name = "DD"))
-  expect_true(is(res, "try-error"))
-  res <- try(readNamedRegion(wb.xlsx, name = "EE"))
-  expect_true(is(res, "try-error"))
+
+  expect_true(is(try(readNamedRegion(wb.xlsx, name = "AA")), "try-error"))
+  expect_true(is(try(readNamedRegion(wb.xlsx, name = "BB")), "try-error"))
+  expect_true(is(try(readNamedRegion(wb.xlsx, name = "CC")), "try-error"))
+  expect_true(is(try(readNamedRegion(wb.xlsx, name = "DD")), "try-error"))
+  expect_true(is(try(readNamedRegion(wb.xlsx, name = "EE")), "try-error"))
 })

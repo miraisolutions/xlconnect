@@ -1,23 +1,43 @@
-test_that("test.workbook.writeWorksheet", {
-  wb.xls <- loadWorkbook("resources/testWorkbookWriteWorksheet.xls", create = TRUE)
-  wb.xlsx <- loadWorkbook("resources/testWorkbookWriteWorksheet.xlsx", create = TRUE)
-  createSheet(wb.xls, "test1")
-  expect_error(writeWorksheet(wb.xls, search, "test1"))
-  createSheet(wb.xlsx, "test1")
-  expect_error(writeWorksheet(wb.xlsx, search, "test1"))
-  expect_error(writeWorksheet(wb.xls, mtcars, "sheetDoesNotExist"))
-  expect_error(writeWorksheet(wb.xlsx, mtcars, "sheetDoesNotExist"))
-  wb.xls <- loadWorkbook("resources/testWorkbookOverwriteFormulas.xls")
-  wb.xlsx <- loadWorkbook("resources/testWorkbookOverwriteFormulas.xlsx")
+test_that("writeWorksheet throws error for non-data.frame objects", {
+  wb <- loadWorkbook(tempfile(fileext = ".xlsx"), create = TRUE)
+  createSheet(wb, "test1")
+  expect_error(writeWorksheet(wb, search, "test1"))
+})
+
+test_that("writeWorksheet throws error for non-existent sheets", {
+  wb <- loadWorkbook(tempfile(fileext = ".xlsx"), create = TRUE)
+  expect_error(writeWorksheet(wb, mtcars, "sheetDoesNotExist"))
+})
+
+test_that("writeWorksheet can preserve formulas", {
+  wb.xls <- loadWorkbook(rsrc("testWorkbookOverwriteFormulas.xls"))
+  wb.xlsx <- loadWorkbook(rsrc("testWorkbookOverwriteFormulas.xlsx"))
+
   mtcars_mod <- mtcars
   mtcars_mod$carb <- mtcars_mod$gear
-  test_overwrite_formula <- function(wb, expected, overwrite = TRUE) {
-    writeWorksheet(wb, mtcars, "mtcars_formula", startRow = 9, startCol = 5, overwriteFormulaCells = overwrite)
-    res <- readWorksheet(wb, "mtcars_formula")
-    expect_equal(res, normalizeDataframe(expected), ignore_attr = c("worksheetScope", "row.names"))
-  }
-  test_overwrite_formula(wb.xls, mtcars_mod, overwrite = FALSE)
-  test_overwrite_formula(wb.xlsx, mtcars_mod, overwrite = FALSE)
-  test_overwrite_formula(wb.xls, mtcars)
-  test_overwrite_formula(wb.xlsx, mtcars)
+
+  # Test for .xls
+  writeWorksheet(wb.xls, mtcars, "mtcars_formula", startRow = 9, startCol = 5, overwriteFormulaCells = FALSE)
+  res.xls <- readWorksheet(wb.xls, "mtcars_formula")
+  expect_equal(res.xls, normalizeDataframe(mtcars_mod), ignore_attr = c("worksheetScope", "row.names"))
+
+  # Test for .xlsx
+  writeWorksheet(wb.xlsx, mtcars, "mtcars_formula", startRow = 9, startCol = 5, overwriteFormulaCells = FALSE)
+  res.xlsx <- readWorksheet(wb.xlsx, "mtcars_formula")
+  expect_equal(res.xlsx, normalizeDataframe(mtcars_mod), ignore_attr = c("worksheetScope", "row.names"))
+})
+
+test_that("writeWorksheet can overwrite formulas", {
+  wb.xls <- loadWorkbook(rsrc("testWorkbookOverwriteFormulas.xls"))
+  wb.xlsx <- loadWorkbook(rsrc("testWorkbookOverwriteFormulas.xlsx"))
+
+  # Test for .xls
+  writeWorksheet(wb.xls, mtcars, "mtcars_formula", startRow = 9, startCol = 5, overwriteFormulaCells = TRUE)
+  res.xls <- readWorksheet(wb.xls, "mtcars_formula")
+  expect_equal(res.xls, normalizeDataframe(mtcars), ignore_attr = c("worksheetScope", "row.names"))
+
+  # Test for .xlsx
+  writeWorksheet(wb.xlsx, mtcars, "mtcars_formula", startRow = 9, startCol = 5, overwriteFormulaCells = TRUE)
+  res.xlsx <- readWorksheet(wb.xlsx, "mtcars_formula")
+  expect_equal(res.xlsx, normalizeDataframe(mtcars), ignore_attr = c("worksheetScope", "row.names"))
 })
