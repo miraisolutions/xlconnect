@@ -15,7 +15,7 @@
 				"github.vscode-github-actions"
 			]
 		}
-	}
+	},
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
 	// "forwardPorts": [],
 	// Uncomment to use the Docker CLI from inside the container. See https://aka.ms/vscode-remote/samples/docker-from-docker.
@@ -29,4 +29,5 @@
 	// ,"runArgs": [
 	// 	"--log-driver=none"
 	// ]
+	"postAttachCommand": "R -e 'devtools::install()'"
 }
