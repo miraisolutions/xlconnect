@@ -6,7 +6,13 @@ testDataFrame <- function(file, df) {
   name <- paste(worksheet, "Region", sep = "")
   writeWorksheetToFile(file, data = df, sheet = name)
   res <- readWorksheetFromFile(file, sheet = name)
-  expect_equal(normalizeDataframe(df), res, ignore_attr = TRUE, )
+  res_attr <- attributes(res)
+  df_attr <- attributes(df)
+  # Merge attributes using set logic (union of names, preferring res' values when duplicates)
+  attr_names <- union(names(df_attr), names(res_attr))
+  # remove "name" from attr_names
+  attr_names <- setdiff(attr_names, "name")
+  expect_equal(normalizeDataframe(df), res, ignore_attr = attr_names)
 }
 
 
