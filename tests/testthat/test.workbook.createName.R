@@ -37,13 +37,12 @@ test_that("test.workbook.createName", {
   createName(wb.xls, "Test_1", paste0(sheetName, "!$C$5"), worksheetScope = sheetName)
   res_xls <- existsName(wb.xls, "Test_1")
   expect_true(res_xls)
-  if (isTRUE(getOption("XLConnect.setCustomAttributes"))) {
-    expect_equal(attr(res_xls, "worksheetScope"), sheetName)
-  }
+
+  expect_equal(attr(res_xls, "worksheetScope"), sheetName)
+
   createName(wb.xlsx, "Test_1", paste0(sheetName, "!$C$5"), worksheetScope = sheetName)
   res_xlsx <- existsName(wb.xlsx, "Test_1")
   expect_true(res_xlsx)
-  if (isTRUE(getOption("XLConnect.setCustomAttributes"))) {
-    expect_equal(attr(res_xlsx, "worksheetScope"), sheetName)
-  }
+
+  expect_equal(attr(res_xlsx, "worksheetScope"), sheetName)
 })

@@ -1,5 +1,4 @@
 test_that("test.dumpAndRestore - full test suite only", {
-  skip_on_cran() # Skip this test on CRAN due to memory issues
   skip_if_not(getOption("FULL.TEST.SUITE"), "FULL.TEST.SUITE is not TRUE")
 
   require(datasets)
