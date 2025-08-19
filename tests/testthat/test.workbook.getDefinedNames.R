@@ -32,6 +32,7 @@ test_that("getDefinedNames returns scoped names correctly in XLS", {
   expectedScopes <- c("scoped_1", "scoped_2")
   res_xls <- getDefinedNames(wb.xls, validOnly = TRUE)
   expect_true(setequal(res_xls, expectedNames))
+  expect_true(setequal(attributes(res_xls)$worksheetScope, expectedScopes))
 })
 
 test_that("getDefinedNames returns scoped names correctly in XLSX", {
@@ -40,4 +41,5 @@ test_that("getDefinedNames returns scoped names correctly in XLSX", {
   expectedScopes <- c("scoped_1", "scoped_2")
   res_xlsx <- getDefinedNames(wb.xlsx, validOnly = TRUE)
   expect_true(setequal(res_xlsx, expectedNames))
+  expect_true(setequal(attributes(res_xlsx)$worksheetScope, expectedScopes))
 })
