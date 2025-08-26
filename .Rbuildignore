@@ -71,3 +71,4 @@ revdep/
 .lintr
 AGENTS.md
 .vscode
+air.toml
