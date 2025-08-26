@@ -1,5 +1,5 @@
 test_that("createName can create a legal name", {
-  wb <- loadWorkbook(tempfile(fileext = ".xlsx"), create = TRUE)
+  wb <- loadWorkbook(withr::local_tempfile(fileext = ".xlsx"), create = TRUE)
   createName(wb, "Test", "Test!$C$5")
   res_xlsx_global <- existsName(wb, "Test")
   expect_true(res_xlsx_global)
@@ -8,30 +8,30 @@ test_that("createName can create a legal name", {
 })
 
 test_that("createName throws an error for illegal names", {
-  wb <- loadWorkbook(tempfile(fileext = ".xlsx"), create = TRUE)
+  wb <- loadWorkbook(withr::local_tempfile(fileext = ".xlsx"), create = TRUE)
   expect_error(createName(wb, "'Test", "Test!$C$10"), "IllegalArgumentException")
 })
 
 test_that("createName throws an error for illegal formulas", {
-  wb <- loadWorkbook(tempfile(fileext = ".xlsx"), create = TRUE)
+  wb <- loadWorkbook(withr::local_tempfile(fileext = ".xlsx"), create = TRUE)
   expect_error(createName(wb, "IllegalFormula", "??-%&"), "IllegalArgumentException")
 })
 
 test_that("createName throws an error for existing names without overwrite", {
-  wb <- loadWorkbook(tempfile(fileext = ".xlsx"), create = TRUE)
+  wb <- loadWorkbook(withr::local_tempfile(fileext = ".xlsx"), create = TRUE)
   createName(wb, "ImHere", "ImHere!$B$9")
   expect_error(createName(wb, "ImHere", "There!$A$2"), "IllegalArgumentException")
 })
 
 test_that("createName can overwrite an existing name", {
-  wb <- loadWorkbook(tempfile(fileext = ".xlsx"), create = TRUE)
+  wb <- loadWorkbook(withr::local_tempfile(fileext = ".xlsx"), create = TRUE)
   createName(wb, "CurrentlyHere", "CurrentlyHere!$D$8")
   createName(wb, "CurrentlyHere", "NowThere!$C$3", overwrite = TRUE)
   expect_true(existsName(wb, "CurrentlyHere"))
 })
 
 test_that("createName handles formula parsing errors correctly", {
-  wb.xls <- loadWorkbook(tempfile(fileext = ".xls"), create = TRUE)
+  wb.xls <- loadWorkbook(withr::local_tempfile(fileext = ".xls"), create = TRUE)
   # This call should not produce an error:
   expect_error(createName(wb.xls, "aName", "Test!A1A4"), "IllegalArgumentException")
   createName(wb.xls, "aName", "Test!A1")
@@ -39,7 +39,7 @@ test_that("createName handles formula parsing errors correctly", {
 })
 
 test_that("createName can create a worksheet-scoped name", {
-  wb <- loadWorkbook(tempfile(fileext = ".xlsx"), create = TRUE)
+  wb <- loadWorkbook(withr::local_tempfile(fileext = ".xlsx"), create = TRUE)
   sheetName <- "Test_Scoped_Sheet"
   createSheet(wb, name = sheetName)
   expect_true(existsSheet(wb, sheetName))

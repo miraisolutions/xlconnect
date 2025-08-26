@@ -1,11 +1,11 @@
 test_that("writeWorksheet throws error for non-data.frame objects", {
-  wb <- loadWorkbook(tempfile(fileext = ".xlsx"), create = TRUE)
+  wb <- loadWorkbook(withr::local_tempfile(fileext = ".xlsx"), create = TRUE)
   createSheet(wb, "test1")
   expect_error(writeWorksheet(wb, search, "test1"))
 })
 
 test_that("writeWorksheet throws error for non-existent sheets", {
-  wb <- loadWorkbook(tempfile(fileext = ".xlsx"), create = TRUE)
+  wb <- loadWorkbook(withr::local_tempfile(fileext = ".xlsx"), create = TRUE)
   expect_error(writeWorksheet(wb, mtcars, "sheetDoesNotExist"))
 })
 

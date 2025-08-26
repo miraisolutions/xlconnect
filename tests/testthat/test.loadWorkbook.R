@@ -12,9 +12,7 @@ test_that("loading existing valid XLS and XLSX files works", {
 })
 
 test_that("creating a new XLS file on the fly works", {
-  file_to_create_xls <- rsrc("fileCreatedOnTheFly.xls")
-  on.exit(if (file.exists(file_to_create_xls)) file.remove(file_to_create_xls))
-
+  file_to_create_xls <- withr::local_tempfile(fileext = ".xls")
   wb_create_xls <- loadWorkbook(file_to_create_xls, create = TRUE)
   expect_true(is(wb_create_xls, "workbook"))
   saveWorkbook(wb_create_xls, file_to_create_xls)
@@ -22,9 +20,7 @@ test_that("creating a new XLS file on the fly works", {
 })
 
 test_that("creating a new XLSX file on the fly works", {
-  file_to_create_xlsx <- rsrc("fileCreatedOnTheFly.xlsx")
-  on.exit(if (file.exists(file_to_create_xlsx)) file.remove(file_to_create_xlsx))
-
+  file_to_create_xlsx <- withr::local_tempfile(fileext = ".xlsx")
   wb_create_xlsx <- loadWorkbook(file_to_create_xlsx, create = TRUE)
   expect_true(is(wb_create_xlsx, "workbook"))
   saveWorkbook(wb_create_xlsx, file_to_create_xlsx)
