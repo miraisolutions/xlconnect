@@ -100,7 +100,7 @@
         }
   )
   classPath = tryCatch(.jclassPath(), error = function(e) character())
-  poiJars <- grep("poi", classPath, ignore.case = FALSE, value = TRUE)
+  poiJars <- grep("(?:^|[/\\\\])poi-[^/\\\\]*\\.jar$", classPath, ignore.case = FALSE, value = TRUE, perl = TRUE)
   if (length(poiJars) > 0) {
     warning(
     "'poi' jars were loaded by a different package in the main class loader:\n",
