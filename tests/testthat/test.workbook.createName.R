@@ -1,47 +1,50 @@
-test_that("test.workbook.createName", {
-  wb.xls <- loadWorkbook("resources/createName.xls", create = TRUE)
-  wb.xlsx <- loadWorkbook("resources/createName.xlsx", create = TRUE)
-  createName(wb.xls, "Test", "Test!$C$5")
-  res_xls_global <- existsName(wb.xls, "Test")
-  expect_true(res_xls_global)
-  xls_global_scope <- attr(res_xls_global, "worksheetScope")
-  expect_true(is.null(xls_global_scope) || xls_global_scope == "")
-  createName(wb.xlsx, "Test", "Test!$C$5")
-  res_xlsx_global <- existsName(wb.xlsx, "Test")
+test_that("createName can create a legal name", {
+  wb <- loadWorkbook(tempfile(fileext = ".xlsx"), create = TRUE)
+  createName(wb, "Test", "Test!$C$5")
+  res_xlsx_global <- existsName(wb, "Test")
   expect_true(res_xlsx_global)
   xlsx_global_scope <- attr(res_xlsx_global, "worksheetScope")
   expect_true(is.null(xlsx_global_scope) || xlsx_global_scope == "")
-  expect_error(createName(wb.xls, "'Test", "Test!$C$10"), "IllegalArgumentException")
-  expect_error(createName(wb.xlsx, "'Test", "Test!$C$10"), "IllegalArgumentException")
-  expect_error(createName(wb.xls, "IllegalFormula", "??-%&"), "IllegalArgumentException")
-  expect_error(createName(wb.xlsx, "IllegalFormula", "??-%&"), "IllegalArgumentException")
-  createName(wb.xls, "ImHere", "ImHere!$B$9")
-  expect_error(createName(wb.xls, "ImHere", "There!$A$2"), "IllegalArgumentException")
-  createName(wb.xlsx, "ImHere", "ImHere!$B$9")
-  expect_error(createName(wb.xlsx, "ImHere", "There!$A$2"), "IllegalArgumentException")
-  createName(wb.xls, "CurrentlyHere", "CurrentlyHere!$D$8")
-  createName(wb.xls, "CurrentlyHere", "NowThere!$C$3", overwrite = TRUE)
-  expect_true(existsName(wb.xls, "CurrentlyHere"))
-  createName(wb.xlsx, "CurrentlyHere", "CurrentlyHere!$D$8")
-  createName(wb.xlsx, "CurrentlyHere", "NowThere!$C$3", overwrite = TRUE)
-  expect_true(existsName(wb.xlsx, "CurrentlyHere"))
-  expect_error(createName(wb.xls, "aName", "Test!A1A4"), "IllegalArgumentException")
+})
+
+test_that("createName throws an error for illegal names", {
+  wb <- loadWorkbook(tempfile(fileext = ".xlsx"), create = TRUE)
+  expect_error(createName(wb, "'Test", "Test!$C$10"), "IllegalArgumentException")
+})
+
+test_that("createName throws an error for illegal formulas", {
+  wb <- loadWorkbook(tempfile(fileext = ".xlsx"), create = TRUE)
+  expect_error(createName(wb, "IllegalFormula", "??-%&"), "IllegalArgumentException")
+})
+
+test_that("createName throws an error for existing names without overwrite", {
+  wb <- loadWorkbook(tempfile(fileext = ".xlsx"), create = TRUE)
+  createName(wb, "ImHere", "ImHere!$B$9")
+  expect_error(createName(wb, "ImHere", "There!$A$2"), "IllegalArgumentException")
+})
+
+test_that("createName can overwrite an existing name", {
+  wb <- loadWorkbook(tempfile(fileext = ".xlsx"), create = TRUE)
+  createName(wb, "CurrentlyHere", "CurrentlyHere!$D$8")
+  createName(wb, "CurrentlyHere", "NowThere!$C$3", overwrite = TRUE)
+  expect_true(existsName(wb, "CurrentlyHere"))
+})
+
+test_that("createName handles formula parsing errors correctly", {
+  wb.xls <- loadWorkbook(tempfile(fileext = ".xls"), create = TRUE)
   # This call should not produce an error:
+  expect_error(createName(wb.xls, "aName", "Test!A1A4"), "IllegalArgumentException")
   createName(wb.xls, "aName", "Test!A1")
   expect_true(existsName(wb.xls, "aName"))
+})
+
+test_that("createName can create a worksheet-scoped name", {
+  wb <- loadWorkbook(tempfile(fileext = ".xlsx"), create = TRUE)
   sheetName <- "Test_Scoped_Sheet"
-  createSheet(wb.xls, name = sheetName)
-  createSheet(wb.xlsx, name = sheetName)
-  expect_true(existsSheet(wb.xls, sheetName))
-  expect_true(existsSheet(wb.xlsx, sheetName))
-  createName(wb.xls, "Test_1", paste0(sheetName, "!$C$5"), worksheetScope = sheetName)
-  res_xls <- existsName(wb.xls, "Test_1")
-  expect_true(res_xls)
-
-  expect_equal(attr(res_xls, "worksheetScope"), sheetName)
-
-  createName(wb.xlsx, "Test_1", paste0(sheetName, "!$C$5"), worksheetScope = sheetName)
-  res_xlsx <- existsName(wb.xlsx, "Test_1")
+  createSheet(wb, name = sheetName)
+  expect_true(existsSheet(wb, sheetName))
+  createName(wb, "Test_1", paste0(sheetName, "!$C$5"), worksheetScope = sheetName)
+  res_xlsx <- existsName(wb, "Test_1")
   expect_true(res_xlsx)
 
   expect_equal(attr(res_xlsx, "worksheetScope"), sheetName)
