@@ -61,7 +61,7 @@ jobs:
       XLCONNECT_JAVA_REPO_URL: ${{ matrix.config.xlc-repo }}
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
       - name: Setup java (x64)
         uses: actions/setup-java@v4
@@ -228,7 +228,7 @@ jobs:
 
       - name: checkout XLConnect java
         if: success() && matrix.config.r-version == 'release' && matrix.config.os-name == 'ubuntu'
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           repository: miraisolutions/xlconnect-java
           # specify the below if you are working on a parallel xlconnect-java branch
