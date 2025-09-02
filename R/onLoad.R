@@ -99,7 +99,16 @@
           e
         }
   )
-  .jpackage(name = pkgname, jars = "*", morePaths = sharedPaths, own.loader=TRUE)  
+  classPath = tryCatch(.jclassPath(), error = function(e) character())
+  poiJars <- grep("(?:^|[/\\\\])poi-[^/\\\\]*\\.jar$", classPath, ignore.case = FALSE, value = TRUE, perl = TRUE)
+  if (length(poiJars) > 0) {
+    warning(
+    "'poi' jars were loaded by a different package in the main class loader:\n",
+    paste(poiJars, collapse = "\n"),
+    "\nTo ensure XLConnect functions correctly, start R without loading other Excel-related packages such as 'xlsx'."
+    )
+  }
+  .jpackage(name = pkgname, jars = "*", morePaths = sharedPaths, own.loader=TRUE)
   # Perform general XLConnect settings - pass package description
   XLConnectSettings(packageDescription(pkgname))
 }
