@@ -1,4 +1,5 @@
-test_that("test.writeAndReadNamedRegion - always run", {
+test_that("checking equality of data.frame's being written to and read from Excel named regions - always run", {
+  # Create workbooks
   wb.xls <- loadWorkbook("resources/testWriteAndReadNamedRegion.xls", create = TRUE)
   wb.xlsx <- loadWorkbook("resources/testWriteAndReadNamedRegion.xlsx", create = TRUE)
   testDataFrame <- function(wb, df, lref) {
@@ -9,6 +10,7 @@ test_that("test.writeAndReadNamedRegion - always run", {
     res <- readNamedRegion(wb, namedRegion, worksheetScope = namedRegion)
     expect_equal(normalizeDataframe(df, replaceInf = TRUE), res, ignore_attr = c("worksheetScope"))
   }
+  # custom test dataset
   cdf <- data.frame(
     Column.A = c(1, 2, 3, NA, 5, Inf, 7, 8, NA, 10),
     Column.B = c(-4, -3, NA, -Inf, 0, NA, NA, 3, 4, 5),
@@ -18,6 +20,7 @@ test_that("test.writeAndReadNamedRegion - always run", {
     Column.F = c("High", "Medium", "Low", "Low", "Low", NA, NA, "Medium", "High", "High"),
     Column.G = c("High", "Medium", NA, "Low", "Low", "Medium", NA, "Medium", "High", "High"),
     Column.H = rep(c(as.Date("2021-10-30"), as.Date("2021-03-28"), NA), length = 10),
+    # NOTE: Column.I is automatically converted to POSIXct!!!
     Column.I = rep(
       c(
         as.POSIXlt("2021-10-31 03:00:00"),
@@ -27,6 +30,7 @@ test_that("test.writeAndReadNamedRegion - always run", {
       ),
       length = 10
     ),
+    # NOTE: 1582963631 with origin="1970-01-01" corresponds to 2020 Feb 29
     Column.J = rep(
       c(
         as.POSIXct("2021-10-31 03:00:00"),
@@ -40,24 +44,35 @@ test_that("test.writeAndReadNamedRegion - always run", {
   )
   cdf[["Column.F"]] <- factor(cdf[["Column.F"]])
   cdf[["Column.F"]] <- ordered(cdf[["Column.F"]], levels = c("Low", "Medium", "High"))
+
+  # (*.xls)
   testDataFrame(wb.xls, cdf, "$X$100")
+  # (*.xlsx)
   testDataFrame(wb.xlsx, cdf, "$X$100")
+
+  # Check writing of data.frame with row names (*.xls)
   createSheet(wb.xls, name = "rownames")
   createName(wb.xls, name = "rownames", formula = "rownames!$F$16")
   writeNamedRegion(wb.xls, mtcars, name = "rownames", header = TRUE, rownames = "Car")
   res <- readNamedRegion(wb.xls, "rownames")
   expect_equal(res, XLConnect:::includeRownames(mtcars, "Car"), ignore_attr = TRUE)
+
+  # Check writing of data.frame with row names (*.xlsx)
   createSheet(wb.xlsx, name = "rownames")
   createName(wb.xlsx, name = "rownames", formula = "rownames!$F$16")
   writeNamedRegion(wb.xlsx, mtcars, name = "rownames", header = TRUE, rownames = "Car")
   res <- readNamedRegion(wb.xlsx, "rownames")
   expect_equal(res, XLConnect:::includeRownames(mtcars, "Car"), ignore_attr = TRUE)
+
+  # Check writing & reading of data.frame with row names (*.xls)
   createSheet(wb.xls, name = "rownames2")
   createName(wb.xls, name = "rownames2", formula = "rownames2!$K$5")
   writeNamedRegion(wb.xls, mtcars, name = "rownames2", header = TRUE, rownames = "Car")
   res <- readNamedRegion(wb.xls, "rownames2", rownames = "Car")
   expect_equal(res, mtcars)
   expect_equal(attr(res, "row.names"), attr(mtcars, "row.names"))
+
+  # Check writing & reading of data.frame with row names (*.xlsx)
   createSheet(wb.xlsx, name = "rownames2")
   createName(wb.xlsx, name = "rownames2", formula = "rownames2!$K$5")
   writeNamedRegion(wb.xlsx, mtcars, name = "rownames2", header = TRUE, rownames = "Car")
@@ -66,9 +81,10 @@ test_that("test.writeAndReadNamedRegion - always run", {
   expect_equal(attr(res, "row.names"), attr(mtcars, "row.names"))
 })
 
-test_that("test.writeAndReadNamedRegion - full test suite only", {
+test_that("checking equality of data.frame's being written to and read from Excel named regions - full test suite only", {
   skip_if_not(getOption("FULL.TEST.SUITE"), "FULL.TEST.SUITE is not TRUE")
 
+  # Create workbooks
   wb.xls <- loadWorkbook("resources/testWriteAndReadNamedRegion.xls", create = TRUE)
   wb.xlsx <- loadWorkbook("resources/testWriteAndReadNamedRegion.xlsx", create = TRUE)
   testDataFrame <- function(wb, df, lref) {
@@ -121,33 +137,74 @@ test_that("test.writeAndReadNamedRegion - full test suite only", {
       ignore_attr = c("worksheetScope", "row.names")
     )
   }
+  # built-in dataset mtcars (*.xls)
   testDataFrame(wb.xls, mtcars, "$C$8")
+  # built-in dataset mtcars (*.xlsx)
   testDataFrame(wb.xlsx, mtcars, "$C$8")
+
+  # built-in dataset airquality (*.xls)
   testDataFrame(wb.xls, airquality, "$F$13")
+  # built-in dataset airquality (*.xlsx)
   testDataFrame(wb.xlsx, airquality, "$F$13")
+
+  # built-in dataset attenu (*.xls)
   testDataFrame(wb.xls, attenu, "$A$8")
+  # built-in dataset attenu (*.xlsx)
   testDataFrame(wb.xlsx, attenu, "$A$8")
+
+  # built-in dataset attenu (*.xls) - explicit global scope
   testDataFrameGlobalExplicit(wb.xls, attenu, "$A$8")
+  # built-in dataset attenu (*.xlsx) - explicit global scope
   testDataFrameGlobalExplicit(wb.xlsx, attenu, "$A$8")
+
+  # built-in dataset ChickWeight (*.xls)
   testDataFrame(wb.xls, ChickWeight, "$BQ$7")
+  # built-in dataset ChickWeight (*.xlsx)
   testDataFrame(wb.xlsx, ChickWeight, "$BQ$7")
+
+  # built-in dataset ChickWeight (*.xls) - explicit global scope
   testDataFrameGlobalExplicit(wb.xls, ChickWeight, "$BQ$7")
+  # built-in dataset ChickWeight (*.xlsx) - explicit global scope
   testDataFrameGlobalExplicit(wb.xlsx, ChickWeight, "$BQ$7")
-  CO <- CO2
+
+  # built-in dataset CO2 (*.xls)
+  CO <- CO2 # CO2 seems to be an illegal name
   testDataFrame(wb.xls, CO, "$L$1")
+  # built-in dataset CO2 (*.xlsx)
   testDataFrame(wb.xlsx, CO, "$L$1")
+
+  # built-in dataset iris (*.xls)
   testDataFrame(wb.xls, iris, "$BB$5")
+  # built-in dataset iris (*.xlsx)
   testDataFrame(wb.xlsx, iris, "$BB$5")
+
+  # built-in dataset longley (*.xls)
   testDataFrame(wb.xls, longley, "$AD$8")
+  # built-in dataset longley (*.xlsx)
   testDataFrame(wb.xlsx, longley, "$AD$8")
+
+  # built-in dataset morley (*.xls)
   testDataFrame(wb.xls, morley, "$K$4")
+  # built-in dataset morley (*.xlsx)
   testDataFrame(wb.xlsx, morley, "$K$4")
+
+  # built-in dataset morley (*.xls)
   testDataFrameNameScope(wb.xls, morley, "$K$4")
+  # built-in dataset morley (*.xlsx)
   testDataFrameNameScope(wb.xlsx, morley, "$K$4")
+
+  # built-in dataset swiss (*.xls)
   testDataFrame(wb.xls, swiss, "$M$2")
+  # built-in dataset swiss (*.xlsx)
   testDataFrame(wb.xlsx, swiss, "$M$2")
+
+  # built-in dataset swiss (*.xls)
   testDataFrameNameScope(wb.xls, swiss, "$M$2")
+  # built-in dataset swiss (*.xlsx)
   testDataFrameNameScope(wb.xlsx, swiss, "$M$2")
+
+  # built-in datasets swiss and morley (*.xls)
   testDataFrameGlobalAndScoped(wb.xls, swiss, morley, "$M$2")
+  # built-in dataset swiss and morley (*.xlsx)
   testDataFrameGlobalAndScoped(wb.xlsx, swiss, morley, "$M$2")
 })

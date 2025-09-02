@@ -1,4 +1,4 @@
-test_that("test.workbook.hideSheet", {
+test_that("Tests around hiding Excel worksheets", {
   wb.xls <- loadWorkbook("resources/testWorkbookHideSheet.xls", create = TRUE)
   wb.xlsx <- loadWorkbook("resources/testWorkbookHideSheet.xlsx", create = TRUE)
   visibleSheet <- "VisibleSheet"
@@ -10,10 +10,14 @@ test_that("test.workbook.hideSheet", {
   createSheet(wb.xlsx, hiddenSheet)
   createSheet(wb.xls, veryHiddenSheet)
   createSheet(wb.xlsx, veryHiddenSheet)
+
+  # Check if sheets are hidden correspondingly (*.xls)
   hideSheet(wb.xls, hiddenSheet)
   expect_true(isSheetHidden(wb.xls, hiddenSheet))
   hideSheet(wb.xls, veryHiddenSheet, veryHidden = TRUE)
   expect_true(isSheetVeryHidden(wb.xls, veryHiddenSheet))
+
+  # Check if sheets are hidden correspondingly (*.xlsx)
   hideSheet(wb.xlsx, hiddenSheet)
   expect_true(isSheetHidden(wb.xlsx, hiddenSheet))
   hideSheet(wb.xlsx, veryHiddenSheet, veryHidden = TRUE)

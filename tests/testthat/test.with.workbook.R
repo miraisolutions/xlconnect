@@ -1,4 +1,4 @@
-test_that("with.workbook correctly loads data from an XLS file", {
+test_that("with.workbook correctly loads data from an XLS file - check if named regions can be correctly referenced", {
   wb.xls <- loadWorkbook(rsrc("testWithWorkbook.xls"), create = FALSE)
   with(
     wb.xls,
@@ -10,7 +10,7 @@ test_that("with.workbook correctly loads data from an XLS file", {
   )
 })
 
-test_that("with.workbook correctly loads data from an XLSX file", {
+test_that("with.workbook correctly loads data from an XLSX file - check if named regions can be correctly referenced", {
   wb.xlsx <- loadWorkbook(rsrc("testWithWorkbook.xlsx"), create = FALSE)
   with(
     wb.xlsx,

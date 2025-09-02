@@ -1,6 +1,9 @@
-test_that("test.workbook.isSheetVisible", {
+test_that("checking the visibility of Excel worksheets", {
+  # Create workbooks
   wb.xls <- loadWorkbook("resources/testWorkbookHiddenSheets.xls", create = FALSE)
   wb.xlsx <- loadWorkbook("resources/testWorkbookHiddenSheets.xlsx", create = FALSE)
+
+  # Check if sheets are visible (*.xls)
   expect_false(isSheetVisible(wb.xls, 2))
   expect_false(isSheetVisible(wb.xls, "BBB"))
   expect_true(isSheetVisible(wb.xls, 1))
@@ -9,6 +12,8 @@ test_that("test.workbook.isSheetVisible", {
   expect_true(isSheetVisible(wb.xls, "CCC"))
   expect_false(isSheetVisible(wb.xls, 4))
   expect_false(isSheetVisible(wb.xls, "DDD"))
+
+  # Check if sheets are visible (*.xlsx)
   expect_false(isSheetVisible(wb.xlsx, 2))
   expect_false(isSheetVisible(wb.xlsx, "BBB"))
   expect_true(isSheetVisible(wb.xlsx, 1))

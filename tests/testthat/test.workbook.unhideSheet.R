@@ -1,4 +1,4 @@
-test_that("unhideSheet works correctly for xls", {
+test_that("unhiding sheets works correctly for xls format (assumes 'isSheetHidden' and 'isSheetVeryHidden' work correctly)", {
   wb.xls <- loadWorkbook(rsrc("testWorkbookHiddenSheets.xls"), create = FALSE)
   unhideSheet(wb.xls, 2)
   unhideSheet(wb.xls, "DDD")
@@ -6,7 +6,7 @@ test_that("unhideSheet works correctly for xls", {
   expect_false(isSheetVeryHidden(wb.xls, "DDD"))
 })
 
-test_that("unhideSheet works correctly for xlsx", {
+test_that("unhiding sheets works correctly for xlsx format (assumes 'isSheetHidden' and 'isSheetVeryHidden' work correctly)", {
   wb.xlsx <- loadWorkbook(rsrc("testWorkbookHiddenSheets.xlsx"), create = FALSE)
   unhideSheet(wb.xlsx, 2)
   unhideSheet(wb.xlsx, "DDD")
@@ -14,13 +14,13 @@ test_that("unhideSheet works correctly for xlsx", {
   expect_false(isSheetVeryHidden(wb.xlsx, "DDD"))
 })
 
-test_that("unhideSheet throws an error for non-existent sheets in xls", {
+test_that("attempting to unhide an illegal sheet throws an exception for xls format", {
   wb.xls <- loadWorkbook(rsrc("testWorkbookHiddenSheets.xls"), create = FALSE)
   expect_error(unhideSheet(wb.xls, 58), "IllegalArgumentException")
   expect_error(unhideSheet(wb.xls, "SheetWhichDoesNotExist"), "IllegalArgumentException")
 })
 
-test_that("unhideSheet throws an error for non-existent sheets in xlsx", {
+test_that("attempting to unhide an illegal sheet throws an exception for xlsx format", {
   wb.xlsx <- loadWorkbook(rsrc("testWorkbookHiddenSheets.xlsx"), create = FALSE)
   expect_error(unhideSheet(wb.xlsx, 58), "IllegalArgumentException")
   expect_error(unhideSheet(wb.xlsx, "SheetWhichDoesNotExist"), "IllegalArgumentException")

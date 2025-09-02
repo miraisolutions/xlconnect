@@ -12,7 +12,7 @@ test_that("idx2aref converts indices to area references", {
   expect_equal(c("D27:J54", "AA23:CD129"), idx2aref(aref2idx(c("D27:J54", "AA23:CD129"))))
 })
 
-test_that("aref creates an area reference", {
+test_that("aref creates an area reference from top-left position and dimensions", {
   expect_equal("BB35:BZ712", aref("BB35", c(678, 25)))
   expect_equal("AT18:BK33", aref(c(18, 46), c(16, 18)))
 })

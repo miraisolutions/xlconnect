@@ -15,13 +15,13 @@ test_overwrite_formula_helper <- function(
   expect_equal(getReferenceCoordinatesForName(wb, name_to_use), expected_coords)
 }
 
-test_that("appending to an existing named region works for XLS and XLSX", {
+test_that("appending data to a named region produces the expected result", {
   wb.xls <- loadWorkbook(rsrc("testWorkbookAppend.xls"))
   wb.xlsx <- loadWorkbook(rsrc("testWorkbookAppend.xlsx"))
 
-  refCoord <- matrix(c(9, 5, 73, 15), ncol = 2, byrow = TRUE) # Expected coordinates after appending mtcars once
+  refCoord <- matrix(c(9, 5, 73, 15), ncol = 2, byrow = TRUE)
 
-  # XLS
+  # Check that appending data to a named region produces the expected result (*.xls)
   appendNamedRegion(wb.xls, mtcars, name = "mtcars")
   res_xls <- readNamedRegion(wb.xls, name = "mtcars")
   rownames(res_xls) <- as.character(seq_len(nrow(res_xls)))
@@ -30,7 +30,7 @@ test_that("appending to an existing named region works for XLS and XLSX", {
   expect_equal(normalizeDataframe(expected_data_xls), normalizeDataframe(res_xls))
   expect_equal(refCoord, getReferenceCoordinatesForName(wb.xls, "mtcars"))
 
-  # XLSX
+  # Check that appending data to a named region produces the expected result (*.xlsx)
   appendNamedRegion(wb.xlsx, mtcars, name = "mtcars")
   res_xlsx <- readNamedRegion(wb.xlsx, name = "mtcars")
   rownames(res_xlsx) <- as.character(seq_len(nrow(res_xlsx)))
@@ -40,18 +40,22 @@ test_that("appending to an existing named region works for XLS and XLSX", {
   expect_equal(refCoord, getReferenceCoordinatesForName(wb.xlsx, "mtcars"))
 })
 
-test_that("appending to a non-existent named region throws an error", {
+test_that("trying to append to a non-existing named region throws an error", {
   wb.xls <- loadWorkbook(rsrc("testWorkbookAppend.xls"))
   wb.xlsx <- loadWorkbook(rsrc("testWorkbookAppend.xlsx"))
 
+  # Check that trying to append to an non-existing named region throws an error (*.xls)
   expect_error(appendNamedRegion(wb.xls, mtcars, name = "doesNotExist"))
+
+  # Check that trying to append to an non-existing named region throws an error (*.xlsx)
   expect_error(appendNamedRegion(wb.xlsx, mtcars, name = "doesNotExist"))
 })
 
-test_that("overwriteFormulaCells = FALSE works as expected", {
+test_that("appending data to a named region with a formula below it does not overwrite it if overwriteFormulaCells is set to FALSE", {
   wb.xls <- loadWorkbook(rsrc("testWorkbookAppend.xls")) # Reload fresh workbook
   wb.xlsx <- loadWorkbook(rsrc("testWorkbookAppend.xlsx")) # Reload fresh workbook
 
+  # Initialize mtcars_mod as is defined with the formula in the carb column (set equal to the gear column)
   mtcars_mod <- mtcars
   mtcars_mod$carb <- mtcars_mod$gear
 
@@ -61,6 +65,8 @@ test_that("overwriteFormulaCells = FALSE works as expected", {
   expected_data_overwrite_false <- rbind(mtcars_mod, mtcars_carb_eq_gear)
   expected_coords_overwrite_false <- matrix(c(9, 5, 73, 15), ncol = 2, byrow = TRUE)
 
+  # Check that appending data to a named region with a formula below it does not overwrite it if
+  # overwriteFormulaCells is set to FALSE (*.xls)
   test_overwrite_formula_helper(
     wb.xls,
     mtcars,
@@ -69,6 +75,9 @@ test_that("overwriteFormulaCells = FALSE works as expected", {
     name_to_use = "mtcars_formula",
     overwrite = FALSE
   )
+
+  # Check that appending data to a named region with a formula below it does not overwrite it if
+  # overwriteFormulaCells is set to FALSE (*.xlsx)
   test_overwrite_formula_helper(
     wb.xlsx,
     mtcars,
@@ -79,7 +88,8 @@ test_that("overwriteFormulaCells = FALSE works as expected", {
   )
 })
 
-test_that("overwriteFormulaCells = TRUE works as expected", {
+test_that("appending data to a named region with a formula below it overwrites it if overwriteFormulaCells is set to TRUE (default)", {
+  # Re-create workbooks
   wb.xls <- loadWorkbook(rsrc("testWorkbookAppend.xls"))
   wb.xlsx <- loadWorkbook(rsrc("testWorkbookAppend.xlsx"))
 
@@ -92,6 +102,8 @@ test_that("overwriteFormulaCells = TRUE works as expected", {
   expected_data_overwrite_true <- rbind(mtcars_mod, mtcars)
   expected_coords_overwrite_true <- matrix(c(9, 5, 73, 15), ncol = 2, byrow = TRUE)
 
+  # Check that appending data to a named region with a formula below it overwrites it if
+  # overwriteFormulaCells is set to TRUE (default) (*.xls)
   test_overwrite_formula_helper(
     wb.xls,
     mtcars,
@@ -100,6 +112,9 @@ test_that("overwriteFormulaCells = TRUE works as expected", {
     name_to_use = "mtcars_formula",
     overwrite = TRUE
   )
+
+  # Check that appending data to a named region with a formula below it overwrites it if
+  # overwriteFormulaCells is set to TRUE (default) (*.xlsx)
   test_overwrite_formula_helper(
     wb.xlsx,
     mtcars,
@@ -111,12 +126,14 @@ test_that("overwriteFormulaCells = TRUE works as expected", {
 })
 
 
-test_that("appending different data (airquality) to 'mtcars' named region updates coordinates", {
+test_that("appending data to a named region with a different structure results in the correct bounding box for the re-defined named region", {
   wb.xls <- loadWorkbook(rsrc("testWorkbookAppend.xls"))
   wb.xlsx <- loadWorkbook(rsrc("testWorkbookAppend.xlsx"))
 
   refCoord_airquality_append <- matrix(c(9, 5, 194, 15), ncol = 2, byrow = TRUE)
 
+  # Check that appending data to a named region with a different structure results
+  # in the correct bounding box for the re-defined named region (*.xls)
   appendNamedRegion(wb.xls, airquality, name = "mtcars")
   expect_equal(refCoord_airquality_append, getReferenceCoordinatesForName(wb.xls, "mtcars"))
 
@@ -124,6 +141,8 @@ test_that("appending different data (airquality) to 'mtcars' named region update
   res_xls_air <- readNamedRegion(wb.xls, name = "mtcars")
   expect_equal(nrow(res_xls_air), 32 + nrow(airquality))
 
+  # Check that appending data to a named region with a different structure results
+  # in the correct bounding box for the re-defined named region (*.xlsx)
   appendNamedRegion(wb.xlsx, airquality, name = "mtcars")
   expect_equal(refCoord_airquality_append, getReferenceCoordinatesForName(wb.xlsx, "mtcars"))
 

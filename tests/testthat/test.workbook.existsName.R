@@ -1,4 +1,5 @@
 test_that("existsName identifies global names in XLS", {
+  # Create workbooks
   wb.xls <- loadWorkbook("resources/testWorkbookExistsNameAndSheet.xls", create = FALSE)
   res_xls_AA <- existsName(wb.xls, "AA")
   expect_true(res_xls_AA)
@@ -16,12 +17,14 @@ test_that("existsName identifies global names in XLS", {
 
 test_that("existsName identifies non-existent and illegal names in XLS", {
   wb.xls <- loadWorkbook("resources/testWorkbookExistsNameAndSheet.xls", create = FALSE)
+  # Check that the following do NOT exists (*.xls)
   expect_false(existsName(wb.xls, "DD"))
   expect_false(existsName(wb.xls, "'illegal name"))
   expect_false(existsName(wb.xls, "%&$$-^~@afk20 235-??a?"))
 })
 
 test_that("existsName identifies global names in XLSX", {
+  # Create workbooks
   wb.xlsx <- loadWorkbook("resources/testWorkbookExistsNameAndSheet.xlsx", create = FALSE)
   res_xlsx_AA <- existsName(wb.xlsx, "AA")
   expect_true(res_xlsx_AA)
@@ -39,6 +42,7 @@ test_that("existsName identifies global names in XLSX", {
 
 test_that("existsName identifies non-existent and illegal names in XLSX", {
   wb.xlsx <- loadWorkbook("resources/testWorkbookExistsNameAndSheet.xlsx", create = FALSE)
+  # Check that the following do NOT exists (*.xlsx)
   expect_false(existsName(wb.xlsx, "DD"))
   expect_false(existsName(wb.xlsx, "'illegal name"))
   expect_false(existsName(wb.xlsx, "%&$$-^~@afk20 235-??a?"))
@@ -46,6 +50,7 @@ test_that("existsName identifies non-existent and illegal names in XLSX", {
 
 test_that("existsName identifies sheet-scoped names in XLS", {
   wb.xls <- loadWorkbook("resources/testWorkbookExistsNameAndSheet.xls", create = FALSE)
+  # check with attributes - where was the name found ? (*.xls)
   res_xls_AA_1 <- existsName(wb.xls, "AA_1")
   expect_true(res_xls_AA_1)
   if (isTRUE(getOption("XLConnect.setCustomAttributes"))) {
@@ -60,6 +65,7 @@ test_that("existsName identifies sheet-scoped names in XLS", {
 
 test_that("existsName identifies sheet-scoped names in XLSX", {
   wb.xlsx <- loadWorkbook("resources/testWorkbookExistsNameAndSheet.xlsx", create = FALSE)
+  # check with attributes - where was the name found ? (*.xlsx)
   res_xlsx_AA_1 <- existsName(wb.xlsx, "AA_1")
   expect_true(res_xlsx_AA_1)
   if (isTRUE(getOption("XLConnect.setCustomAttributes"))) {
@@ -76,8 +82,10 @@ test_that("existsName works when XLConnect.setCustomAttributes is FALSE", {
   wb.xls <- loadWorkbook("resources/testWorkbookExistsNameAndSheet.xls", create = FALSE)
   wb.xlsx <- loadWorkbook("resources/testWorkbookExistsNameAndSheet.xlsx", create = FALSE)
   options(XLConnect.setCustomAttributes = FALSE)
+  # check without attributes (*.xls)
   expect_true(existsName(wb.xls, "AA_1"))
   expect_true(existsName(wb.xls, "BB_1"))
+  # check without attributes (*.xlsx)
   expect_true(existsName(wb.xlsx, "AA_1"))
   expect_true(existsName(wb.xlsx, "BB_1"))
   options(XLConnect.setCustomAttributes = TRUE)

@@ -1,8 +1,10 @@
-test_that("test.dataframeConversion - always run", {
+test_that("dataframe conversion - Tests whether data.frame's pushed and pulled to/from Java are consistent (with respect to some defined differences; see 'normalizeDataframe') - always run", {
   testDataFrame <- function(df) {
     res <- XLConnect:::dataframeFromJava(XLConnect:::dataframeToJava(df), check.names = TRUE)
     expect_equal(normalizeDataframe(df), res, ignore_attr = c("worksheetScope"))
   }
+
+  # custom test dataset
   cdf <- data.frame(
     Column.A = c(1, 2, 3, NA, 5, Inf, 7, 8, NA, 10),
     Column.B = c(-4, -3, NA, -Inf, 0, NA, NA, 3, 4, 5),
@@ -37,14 +39,20 @@ test_that("test.dataframeConversion - always run", {
   cdf[["Column.F"]] <- factor(cdf[["Column.F"]])
   cdf[["Column.F"]] <- ordered(cdf[["Column.F"]], levels = c("Low", "Medium", "High"))
   testDataFrame(cdf)
+
+  # Check that when being supplied with an object that is not coercable
+  # into a data.frame, an appropriate exception is thrown
   expect_error(XLConnect:::dataframeToJava(search))
+
+  # Check that exceptions are thrown when calling dataframeFromJava
+  # with inappropriate objects
   expect_error(XLConnect:::dataframeFromJava(NULL))
   expect_error(XLConnect:::dataframeFromJava(NA))
   expect_error(XLConnect:::dataframeFromJava(9))
   expect_error(XLConnect:::dataframeFromJava(search))
 })
 
-test_that("test.dataframeConversion - full test suite only", {
+test_that("dataframe conversion - built-in datasets - full test suite only", {
   skip_if_not(getOption("FULL.TEST.SUITE"), "FULL.TEST.SUITE is not TRUE")
 
   testDataFrame <- function(df) {

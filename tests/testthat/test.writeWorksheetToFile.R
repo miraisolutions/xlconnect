@@ -16,7 +16,7 @@ testDataFrame <- function(file, df) {
 }
 
 
-test_that("test.writeWorksheetToFile - full test suite only", {
+test_that("checking equality of data.frames being written to and read from Excel worksheets - full test suite only", {
   skip_if_not(getOption("FULL.TEST.SUITE"), "FULL.TEST.SUITE is not TRUE")
   file.xls <- withr::local_tempfile(fileext = ".xls")
   file.xlsx <- withr::local_tempfile(fileext = ".xlsx")
@@ -29,7 +29,7 @@ test_that("test.writeWorksheetToFile - full test suite only", {
   testDataFrame(file.xlsx, attenu)
   testDataFrame(file.xls, ChickWeight)
   testDataFrame(file.xlsx, ChickWeight)
-  CO = CO2
+  CO = CO2 # CO2 seems to be an illegal name
   testDataFrame(file.xls, CO2)
   testDataFrame(file.xlsx, CO2)
   testDataFrame(file.xls, iris)
@@ -49,6 +49,7 @@ test_that("test.writeWorksheetToFile - full test suite only", {
     Column.F = c("High", "Medium", "Low", "Low", "Low", NA, NA, "Medium", "High", "High"),
     Column.G = c("High", "Medium", NA, "Low", "Low", "Medium", NA, "Medium", "High", "High"),
     Column.H = rep(c(as.Date("2021-10-30"), as.Date("2021-03-28"), NA), length = 10),
+    # NOTE: Column.I is automatically converted to POSIXct!!!
     Column.I = rep(
       c(
         as.POSIXlt("2021-10-31 03:00:00"),
@@ -58,6 +59,7 @@ test_that("test.writeWorksheetToFile - full test suite only", {
       ),
       length = 10
     ),
+    # NOTE: 1582963631 with origin="1970-01-01" corresponds to 2020 Feb 29
     Column.J = rep(
       c(
         as.POSIXct("2021-10-31 03:00:00"),
@@ -76,7 +78,7 @@ test_that("test.writeWorksheetToFile - full test suite only", {
 })
 
 
-test_that("clearSheets parameter works correctly for XLS", {
+test_that("clearSheets parameter works correctly for XLS - test clearSheets", {
   skip_if_not(getOption("FULL.TEST.SUITE"), "FULL.TEST.SUITE is not TRUE")
   file.xls <- withr::local_tempfile(fileext = ".xls")
 
@@ -85,15 +87,19 @@ test_that("clearSheets parameter works correctly for XLS", {
 
   writeWorksheetToFile(file.xls, data = df.short, sheet = "cdfRegion")
 
+  # overwrite sheet with longer version
   writeWorksheetToFile(file.xls, data = cdf, sheet = "cdfRegion")
+  # default behaviour: not cleared
   expect_equal(nrow(readWorksheetFromFile(file.xls, sheet = "cdfRegion")), nrow(cdf))
 
+  # overwrite sheet with shorter version
   writeWorksheetToFile(file.xls, data = df.short, sheet = "cdfRegion", clearSheets = TRUE)
+  # should be cleared
   expect_equal(nrow(readWorksheetFromFile(file.xls, sheet = "cdfRegion")), nrow(df.short))
 })
 
 
-test_that("clearSheets parameter works correctly for XLSX", {
+test_that("clearSheets parameter works correctly for XLSX - test clearSheets", {
   skip_if_not(getOption("FULL.TEST.SUITE"), "FULL.TEST.SUITE is not TRUE")
   file.xlsx <- withr::local_tempfile(fileext = ".xlsx")
 
@@ -102,9 +108,13 @@ test_that("clearSheets parameter works correctly for XLSX", {
 
   writeWorksheetToFile(file.xlsx, data = df.short, sheet = "cdfRegion")
 
+  # overwrite sheet with longer version
   writeWorksheetToFile(file.xlsx, data = cdf, sheet = "cdfRegion")
+  # default behaviour: not cleared
   expect_equal(nrow(readWorksheetFromFile(file.xlsx, sheet = "cdfRegion")), nrow(cdf))
 
+  # overwrite sheet with shorter version
   writeWorksheetToFile(file.xlsx, data = df.short, sheet = "cdfRegion", clearSheets = TRUE)
+  # should be cleared
   expect_equal(nrow(readWorksheetFromFile(file.xlsx, sheet = "cdfRegion")), nrow(df.short))
 })

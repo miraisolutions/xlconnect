@@ -1,4 +1,4 @@
-test_that("test.dumpAndRestore - full test suite only", {
+test_that("dumping & restoring objects to/from Excel files - full test suite only", {
   skip_if_not(getOption("FULL.TEST.SUITE"), "FULL.TEST.SUITE is not TRUE")
 
   require(datasets)
