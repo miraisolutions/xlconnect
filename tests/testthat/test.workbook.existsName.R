@@ -54,12 +54,12 @@ test_that("existsName identifies sheet-scoped names in XLS", {
   res_xls_AA_1 <- existsName(wb.xls, "AA_1")
   expect_true(res_xls_AA_1)
   if (isTRUE(getOption("XLConnect.setCustomAttributes"))) {
-    expect_equal(attr(res_xls_AA_1, "worksheetScope"), "AAA")
+    expect_equal("AAA", attr(res_xls_AA_1, "worksheetScope"))
   }
   res_xls_BB_1 <- existsName(wb.xls, "BB_1")
   expect_true(res_xls_BB_1)
   if (isTRUE(getOption("XLConnect.setCustomAttributes"))) {
-    expect_equal(attr(res_xls_BB_1, "worksheetScope"), "BBB")
+    expect_equal("BBB", attr(res_xls_BB_1, "worksheetScope"))
   }
 })
 
@@ -69,12 +69,12 @@ test_that("existsName identifies sheet-scoped names in XLSX", {
   res_xlsx_AA_1 <- existsName(wb.xlsx, "AA_1")
   expect_true(res_xlsx_AA_1)
   if (isTRUE(getOption("XLConnect.setCustomAttributes"))) {
-    expect_equal(attr(res_xlsx_AA_1, "worksheetScope"), "AAA")
+    expect_equal("AAA", attr(res_xlsx_AA_1, "worksheetScope"))
   }
   res_xlsx_BB_1 <- existsName(wb.xlsx, "BB_1")
   expect_true(res_xlsx_BB_1)
   if (isTRUE(getOption("XLConnect.setCustomAttributes"))) {
-    expect_equal(attr(res_xlsx_BB_1, "worksheetScope"), "BBB")
+    expect_equal("BBB", attr(res_xlsx_BB_1, "worksheetScope"))
   }
 })
 

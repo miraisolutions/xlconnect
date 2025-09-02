@@ -14,18 +14,18 @@ test_that("Tests around querying Excel reference formulas", {
   # Check if reference formulas match and are in the global scope (*.xls)
   expect_formula <- "Tabelle1!$A$1"
   attributes(expect_formula) <- list(worksheetScope = "")
-  expect_equal(expect_formula, getReferenceFormula(wb.xls, "FirstName"))
+  expect_equal(getReferenceFormula(wb.xls, "FirstName"), expect_formula)
 
   expect_formula <- "#REF!"
   attributes(expect_formula) <- list(worksheetScope = "")
-  expect_equal(expect_formula, substring(getReferenceFormula(wb.xls, "SecondName"), 1, 5))
+  expect_equal(substring(getReferenceFormula(wb.xls, "SecondName"), 1, 5), expect_formula)
 
   # Check if reference formulas match and are in the global scope (*.xlsx)
   expect_formula <- "Tabelle1!$A$1"
   attributes(expect_formula) <- list(worksheetScope = "")
-  expect_equal(expect_formula, getReferenceFormula(wb.xlsx, "FirstName"))
+  expect_equal(getReferenceFormula(wb.xlsx, "FirstName"), expect_formula)
 
   expect_formula <- "#REF!"
   attributes(expect_formula) <- list(worksheetScope = "")
-  expect_equal(expect_formula, substring(getReferenceFormula(wb.xlsx, "SecondName"), 1, 5))
+  expect_equal(substring(getReferenceFormula(wb.xlsx, "SecondName"), 1, 5), expect_formula)
 })
