@@ -3,6 +3,8 @@ test_that("test.dumpAndRestore - full test suite only", {
 
   require(datasets)
   pos = "package:datasets"
+
+  # Get all data.frame's from 'package:datasets'
   objs = ls(pos = pos)
   idx = sapply(objs, function(obj) is.data.frame(get(obj, pos = pos)))
   objs = objs[idx]

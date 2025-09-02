@@ -44,6 +44,7 @@ test_that("loading a password-protected file (testBug61.xlsx) works", {
 })
 
 test_that("loading a password-protected file (testBug106.xlsx) works", {
+  # Excel2019
   pwdProtectedFile2 <- rsrc("testBug106.xlsx")
   expect_error(
     loadWorkbook(pwdProtectedFile2),
@@ -59,7 +60,7 @@ test_that("loading a password-protected file (testBug106.xlsx) works", {
   expect_true(is(wb_pwd2, "workbook"))
 })
 
-test_that("loading a file relative to the working directory works", {
+test_that("loading a file relative to the working directory works (#212)", {
   setwd(rsrc(""))
   wb_direct_name <- loadWorkbook("testLoadWorkbook.xls") # avoid using rsrc here, as it creates an absolute path
   expect_true(is(wb_direct_name, "workbook"))

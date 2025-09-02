@@ -12,6 +12,7 @@ test_that("test.dataframeConversion - always run", {
     Column.F = c("High", "Medium", "Low", "Low", "Low", NA, NA, "Medium", "High", "High"),
     Column.G = c("High", "Medium", NA, "Low", "Low", "Medium", NA, "Medium", "High", "High"),
     Column.H = rep(c(as.Date("2021-10-30"), as.Date("2021-03-28"), NA), length = 10),
+    # NOTE: Column.I is automatically converted to POSIXct!!!
     Column.I = rep(
       c(
         as.POSIXlt("2021-10-31 03:00:00"),
@@ -21,6 +22,7 @@ test_that("test.dataframeConversion - always run", {
       ),
       length = 10
     ),
+    # NOTE: 1582963631 with origin="1970-01-01" corresponds to 2020 Feb 29
     Column.J = rep(
       c(
         as.POSIXct("2021-10-31 03:00:00"),
