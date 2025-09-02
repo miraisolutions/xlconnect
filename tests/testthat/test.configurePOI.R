@@ -1,21 +1,23 @@
-test_that("test.configurePOI", {
-  # Check that an exception is thrown if we limit the number of files to just 1
+test_that("exception is thrown if zip_max_files is set to 1", {
   configurePOI(zip_max_files = 1L)
   expect_error(loadWorkbook("resources/testLoadWorkbook.xlsx"))
+  configurePOI()
+})
 
-  # Check zip bomb detection with high inflate ratio
+test_that("zip bomb detection works with high inflate ratio", {
   configurePOI(zip_min_inflate_ratio = 0.99)
   expect_error(readWorksheetFromFile("resources/testZipBomb.xlsx", sheet = 1))
+  configurePOI()
+})
 
-  # Check that an exception is thrown if we limit the max zip entry size to just
-  # 1 byte
+test_that("exception is thrown if zip_max_entry_size is set to 1 byte", {
   configurePOI(zip_max_entry_size = 1L)
   expect_error(readWorksheetFromFile("resources/testWorkbookReadWorksheet.xlsx", sheet = 1))
+  configurePOI()
+})
 
-  # Check storing of zip entries in temp files
+test_that("zip entries are stored in temp files when zip_entry_threshold_bytes is 0", {
   configurePOI(zip_entry_threshold_bytes = 0L)
-  readWorksheetFromFile("resources/testWorkbookReadWorksheet.xlsx", sheet = 1)
-
-  # Reset settings after test
+  expect_true(is.data.frame(readWorksheetFromFile("resources/testWorkbookReadWorksheet.xlsx", sheet = 1)))
   configurePOI()
 })
