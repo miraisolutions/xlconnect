@@ -187,7 +187,7 @@ jobs:
          }
          install.packages(list.files("./check", pattern = "XLConnect_.*.tar.gz", full.names = TRUE), repos=NULL, type="source", INSTALL_opts=install_opts)
          setwd("tests")
-         source("run_tests.R")
+         source("test-all.R")
         shell: Rscript {0}
 
       - name: Show test output
