@@ -80,7 +80,8 @@ body:
   attributes:
     label: Description
     description: >-
-      A clear and concise description of what the bug is.
+      A clear and concise description of what the bug is. 
+      If an error occurred, include it and the output of `options("java.stacktrace")`
 
     placeholder: >-
       I tried doing X and I expected it to result in Y because the docs
