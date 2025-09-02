@@ -27,8 +27,8 @@ test_that("appending data to a named region produces the expected result", {
   rownames(res_xls) <- as.character(seq_len(nrow(res_xls)))
   expected_data_xls <- rbind(mtcars, mtcars) # Original mtcars + appended mtcars
   rownames(expected_data_xls) <- as.character(seq_len(nrow(expected_data_xls)))
-  expect_equal(normalizeDataframe(expected_data_xls), normalizeDataframe(res_xls))
-  expect_equal(refCoord, getReferenceCoordinatesForName(wb.xls, "mtcars"))
+  expect_equal(normalizeDataframe(res_xls), normalizeDataframe(expected_data_xls))
+  expect_equal(getReferenceCoordinatesForName(wb.xls, "mtcars"), refCoord)
 
   # Check that appending data to a named region produces the expected result (*.xlsx)
   appendNamedRegion(wb.xlsx, mtcars, name = "mtcars")
@@ -36,8 +36,8 @@ test_that("appending data to a named region produces the expected result", {
   rownames(res_xlsx) <- as.character(seq_len(nrow(res_xlsx)))
   expected_data_xlsx <- rbind(mtcars, mtcars) # Original mtcars + appended mtcars
   rownames(expected_data_xlsx) <- as.character(seq_len(nrow(expected_data_xlsx)))
-  expect_equal(normalizeDataframe(expected_data_xlsx), normalizeDataframe(res_xlsx))
-  expect_equal(refCoord, getReferenceCoordinatesForName(wb.xlsx, "mtcars"))
+  expect_equal(normalizeDataframe(res_xlsx), normalizeDataframe(expected_data_xlsx))
+  expect_equal(getReferenceCoordinatesForName(wb.xlsx, "mtcars"), refCoord)
 })
 
 test_that("trying to append to a non-existing named region throws an error", {
@@ -135,7 +135,7 @@ test_that("appending data to a named region with a different structure results i
   # Check that appending data to a named region with a different structure results
   # in the correct bounding box for the re-defined named region (*.xls)
   appendNamedRegion(wb.xls, airquality, name = "mtcars")
-  expect_equal(refCoord_airquality_append, getReferenceCoordinatesForName(wb.xls, "mtcars"))
+  expect_equal(getReferenceCoordinatesForName(wb.xls, "mtcars"), refCoord_airquality_append)
 
   # Verify actual data read back (optional, but good for sanity)
   res_xls_air <- readNamedRegion(wb.xls, name = "mtcars")
@@ -144,7 +144,7 @@ test_that("appending data to a named region with a different structure results i
   # Check that appending data to a named region with a different structure results
   # in the correct bounding box for the re-defined named region (*.xlsx)
   appendNamedRegion(wb.xlsx, airquality, name = "mtcars")
-  expect_equal(refCoord_airquality_append, getReferenceCoordinatesForName(wb.xlsx, "mtcars"))
+  expect_equal(getReferenceCoordinatesForName(wb.xlsx, "mtcars"), refCoord_airquality_append)
 
   res_xlsx_air <- readNamedRegion(wb.xlsx, name = "mtcars")
   expect_equal(nrow(res_xlsx_air), 32 + nrow(airquality))

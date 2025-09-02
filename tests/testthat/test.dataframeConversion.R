@@ -1,7 +1,7 @@
 test_that("dataframe conversion - Tests whether data.frame's pushed and pulled to/from Java are consistent (with respect to some defined differences; see 'normalizeDataframe') - always run", {
   testDataFrame <- function(df) {
     res <- XLConnect:::dataframeFromJava(XLConnect:::dataframeToJava(df), check.names = TRUE)
-    expect_equal(normalizeDataframe(df), res, ignore_attr = c("worksheetScope"))
+    expect_equal(res, normalizeDataframe(df), ignore_attr = c("worksheetScope"))
   }
 
   # custom test dataset
@@ -57,7 +57,7 @@ test_that("dataframe conversion - built-in datasets - full test suite only", {
 
   testDataFrame <- function(df) {
     res <- XLConnect:::dataframeFromJava(XLConnect:::dataframeToJava(df), check.names = TRUE)
-    expect_equal(normalizeDataframe(df), res, ignore_attr = c("worksheetScope", "row.names"))
+    expect_equal(res, normalizeDataframe(df), ignore_attr = c("worksheetScope", "row.names"))
   }
   testDataFrame(mtcars)
   testDataFrame(airquality)
