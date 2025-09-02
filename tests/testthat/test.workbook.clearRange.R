@@ -15,7 +15,7 @@ test_that("clearRange works correctly for XLS", {
   # Check that clearing ranges returns the desired result (*.xls)
   clearRange(wb.xls, "clearRange", c(c(4, 4, 5, 5), c(6, 7, 7, 8)))
   res <- readWorksheet(wb.xls, "clearRange", region = "C3:I8", header = TRUE)
-  expect_equal(checkDf, res)
+  expect_equal(res, checkDf)
 })
 
 test_that("clearRange works correctly for XLSX", {
@@ -35,5 +35,5 @@ test_that("clearRange works correctly for XLSX", {
   # Check that clearing ranges returns the desired result (*.xlsx)
   clearRange(wb.xlsx, "clearRange", c(c(4, 4, 5, 5), c(6, 7, 7, 8)))
   res <- readWorksheet(wb.xlsx, "clearRange", region = "C3:I8", header = TRUE)
-  expect_equal(checkDf, res)
+  expect_equal(res, checkDf)
 })
