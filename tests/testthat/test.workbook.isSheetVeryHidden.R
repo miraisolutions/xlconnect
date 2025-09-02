@@ -8,13 +8,13 @@ test_that("isSheetVeryHidden identifies non-very hidden sheets correctly in XLS"
   wb.xls <- loadWorkbook("resources/testWorkbookHiddenSheets.xls", create = FALSE)
   expect_false(isSheetVeryHidden(wb.xls, 1))
   expect_false(isSheetVeryHidden(wb.xls, "AAA"))
-  expect_false(isSheetVeryHidden(wb.xls, 2))
-  expect_false(isSheetVeryHidden(wb.xls, "BBB"))
+  expect_false(isSheetVeryHidden(wb.xls, 2)) # Sheet is actually hidden only!
+  expect_false(isSheetVeryHidden(wb.xls, "BBB")) # Sheet is actually hidden only!
   expect_false(isSheetVeryHidden(wb.xls, 3))
   expect_false(isSheetVeryHidden(wb.xls, "CCC"))
 })
 
-test_that("isSheetVeryHidden throws errors for invalid sheets in XLS", {
+test_that("isSheetVeryHidden throws errors for invalid/non-existing sheets in XLS", {
   wb.xls <- loadWorkbook("resources/testWorkbookHiddenSheets.xls", create = FALSE)
   expect_error(isSheetVeryHidden(wb.xls, 200))
   expect_error(isSheetVeryHidden(wb.xls, "Sheet does not exist"))
@@ -31,13 +31,13 @@ test_that("isSheetVeryHidden identifies non-very hidden sheets correctly in XLSX
   wb.xlsx <- loadWorkbook("resources/testWorkbookHiddenSheets.xlsx", create = FALSE)
   expect_false(isSheetVeryHidden(wb.xlsx, 1))
   expect_false(isSheetVeryHidden(wb.xlsx, "AAA"))
-  expect_false(isSheetVeryHidden(wb.xlsx, 2))
-  expect_false(isSheetVeryHidden(wb.xlsx, "BBB"))
+  expect_false(isSheetVeryHidden(wb.xlsx, 2)) # Sheet is actually hidden only!
+  expect_false(isSheetVeryHidden(wb.xlsx, "BBB")) # Sheet is actually hidden only!
   expect_false(isSheetVeryHidden(wb.xlsx, 3))
   expect_false(isSheetVeryHidden(wb.xlsx, "CCC"))
 })
 
-test_that("isSheetVeryHidden throws errors for invalid sheets in XLSX", {
+test_that("isSheetVeryHidden throws errors for invalid/non-existing sheets in XLSX", {
   wb.xlsx <- loadWorkbook("resources/testWorkbookHiddenSheets.xlsx", create = FALSE)
   expect_error(isSheetVeryHidden(wb.xlsx, 200))
   expect_error(isSheetVeryHidden(wb.xlsx, "Sheet does not exist"))

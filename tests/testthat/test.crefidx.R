@@ -1,4 +1,4 @@
-test_that("test.crefidx", {
+test_that("Tests around converting Excel cell references to row & column indices", {
   target <- matrix(c(5, 8, 14, 38), ncol = 2, byrow = TRUE)
   expect_equal(target, cref2idx(c("$H$5", "$AL$14")))
   expect_equal(c("$H$5", "$AL$14"), idx2cref(c(5, 8, 14, 38)))

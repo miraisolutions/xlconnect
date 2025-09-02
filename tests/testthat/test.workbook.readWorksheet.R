@@ -7,6 +7,8 @@ test_that("reading basic worksheets by index and name works in XLS", {
     DateTimeColumn = as.POSIXct(c(NA, NA, "2010-09-09 21:03:07", "2010-09-10 21:03:07", "2010-09-11 21:03:07")),
     stringsAsFactors = FALSE
   )
+
+  # Read worksheet without specifying range - check that the read data region equals the defined data.frame
   expect_equal(common_checkDf, readWorksheet(wb.xls, 1), info = "XLS: Read sheet 1 by index")
   expect_equal(common_checkDf, readWorksheet(wb.xls, "Test1"), info = "XLS: Read sheet 'Test1' by name")
 })
@@ -20,6 +22,8 @@ test_that("reading basic worksheets by index and name works in XLSX", {
     DateTimeColumn = as.POSIXct(c(NA, NA, "2010-09-09 21:03:07", "2010-09-10 21:03:07", "2010-09-11 21:03:07")),
     stringsAsFactors = FALSE
   )
+
+  # Read worksheet without specifying range - check that the read data region equals the defined data.frame
   expect_equal(common_checkDf, readWorksheet(wb.xlsx, 1), info = "XLSX: Read sheet 1 by index")
   expect_equal(common_checkDf, readWorksheet(wb.xlsx, "Test1"), info = "XLSX: Read sheet 'Test1' by name")
 })
@@ -33,18 +37,24 @@ test_that("reading specific regions works in XLS", {
     DateTimeColumn = as.POSIXct(c(NA, NA, "2010-09-09 21:03:07", "2010-09-10 21:03:07", "2010-09-11 21:03:07")),
     stringsAsFactors = FALSE
   )
+
+  # Read worksheet by specifying a range - check that the read data region equals the defined data.frame
   expect_equal(
     common_checkDf,
     readWorksheet(wb.xls, 2, startRow = 17, startCol = 6, endRow = 22, endCol = 9, header = TRUE),
     info = "XLS: Specific area"
   )
+  # Test using a negative endRow/endCol
   expected_neg_end <- common_checkDf[-nrow(common_checkDf) + 0:1, -ncol(common_checkDf)]
   expect_equal(
     expected_neg_end,
     readWorksheet(wb.xls, "Test2", startRow = 17, startCol = 6, endRow = -2, endCol = -1, header = TRUE),
     info = "XLS: Negative endRow/Col"
   )
+
+  # Read worksheet by specifying a range via the region argument
   expect_equal(common_checkDf, readWorksheet(wb.xls, 2, region = "F17:I22", header = TRUE), info = "XLS: Region string")
+  # Read worksheet by specifying a range via the region argument (region takes precedence over index specifications)
   expect_equal(
     common_checkDf,
     readWorksheet(wb.xls, 2, region = "F17:I22", startRow = 88, endCol = 45, header = TRUE),
@@ -61,22 +71,28 @@ test_that("reading specific regions works in XLSX", {
     DateTimeColumn = as.POSIXct(c(NA, NA, "2010-09-09 21:03:07", "2010-09-10 21:03:07", "2010-09-11 21:03:07")),
     stringsAsFactors = FALSE
   )
+
+  # Read worksheet by specifying a range - check that the read data region equals the defined data.frame
   expect_equal(
     common_checkDf,
     readWorksheet(wb.xlsx, "Test2", startRow = 17, startCol = 6, endRow = 22, endCol = 9, header = TRUE),
     info = "XLSX: Specific area by name"
   )
+  # Test using a negative endRow/endCol
   expected_neg_end <- common_checkDf[-nrow(common_checkDf) + 0:1, -ncol(common_checkDf)]
   expect_equal(
     expected_neg_end,
     readWorksheet(wb.xlsx, "Test2", startRow = 17, startCol = 6, endRow = -2, endCol = -1, header = TRUE),
     info = "XLSX: Negative endRow/Col"
   )
+
+  # Read worksheet by specifying a range via the region argument
   expect_equal(
     common_checkDf,
     readWorksheet(wb.xlsx, "Test2", region = "F17:I22", header = TRUE),
     info = "XLSX: Region string by name"
   )
+  # Read worksheet by specifying a range via the region argument (region takes precedence over index specifications)
   expect_equal(
     common_checkDf,
     readWorksheet(wb.xlsx, "Test2", region = "F17:I22", startRow = 88, endCol = 45, header = TRUE),
@@ -120,8 +136,11 @@ test_that("reading sheets with NAs and varied data works in XLS", {
     D = c(NA, 1:5, NA, NA),
     stringsAsFactors = FALSE
   )
+
+  # Check that the data bounding box is correctly inferred even if there are blank cells in the last row
   expect_equal(common_checkDf1, readWorksheet(wb.xls, "Test4"), info = "XLS: Test4 sheet")
   expect_equal(common_checkDf2, readWorksheet(wb.xls, "Test5"), info = "XLS: Test5 sheet")
+  # Test with negative endRow/endCol
   expected_test4_neg <- common_checkDf1[-nrow(common_checkDf1) + 0:3, -ncol(common_checkDf1) + 0:1]
   expect_equal(
     expected_test4_neg,
@@ -152,8 +171,11 @@ test_that("reading sheets with NAs and varied data works in XLSX", {
     D = c(NA, 1:5, NA, NA),
     stringsAsFactors = FALSE
   )
+
+  # Check that the data bounding box is correctly inferred even if there are blank cells in the last row
   expect_equal(common_checkDf1, readWorksheet(wb.xlsx, "Test4"), info = "XLSX: Test4 sheet")
   expect_equal(common_checkDf2, readWorksheet(wb.xlsx, "Test5"), info = "XLSX: Test5 sheet")
+  # Test with negative endRow/endCol
   expected_test4_neg <- common_checkDf1[-nrow(common_checkDf1) + 0:3, -ncol(common_checkDf1) + 0:1]
   expect_equal(
     expected_test4_neg,
@@ -186,6 +208,8 @@ test_that("column type conversion works in XLS", {
     DDD = as.POSIXct(c("1984-01-11 12:00:00", "2012-02-06 16:15:23", "1984-01-11 12:00:00", NA, "1900-12-22 16:04:48")),
     stringsAsFactors = FALSE
   )
+
+  # Check that conversion performs ok (without forcing conversion)
   res_xls_noforce <- readWorksheet(
     wb.xls,
     sheet = "Conversion",
@@ -195,6 +219,8 @@ test_that("column type conversion works in XLS", {
     dateTimeFormat = datetime_fmt
   )
   expect_equal(targetNoForce, res_xls_noforce, info = "XLS: Conversion sheet, no force")
+
+  # Check that conversion performs ok (with forcing conversion)
   res_xls_force <- readWorksheet(
     wb.xls,
     sheet = "Conversion",
@@ -224,6 +250,8 @@ test_that("column type conversion works in XLSX", {
     DDD = as.POSIXct(c("1984-01-11 12:00:00", "2012-02-06 16:15:23", "1984-01-11 12:00:00", NA, "1900-12-22 16:04:48")),
     stringsAsFactors = FALSE
   )
+
+  # Check that conversion performs ok (without forcing conversion)
   res_xlsx_noforce <- readWorksheet(
     wb.xlsx,
     sheet = "Conversion",
@@ -233,6 +261,8 @@ test_that("column type conversion works in XLSX", {
     dateTimeFormat = datetime_fmt
   )
   expect_equal(targetNoForce, res_xlsx_noforce, info = "XLSX: Conversion sheet, no force")
+
+  # Check that conversion performs ok (with forcing conversion)
   res_xlsx_force <- readWorksheet(
     wb.xlsx,
     sheet = "Conversion",
@@ -250,6 +280,8 @@ test_that("reading multiple sheets by name works in XLS", {
     AAA = data.frame(A = 1:3, B = letters[1:3], C = c(TRUE, TRUE, FALSE), stringsAsFactors = FALSE),
     BBB = data.frame(D = 4:6, E = letters[4:6], F = c(FALSE, TRUE, TRUE), stringsAsFactors = FALSE)
   )
+
+  # Check that reading multiple worksheets (by name) returns a named list
   expect_equal(
     target_multi_sheet,
     readWorksheet(wb.xls, sheet = c("AAA", "BBB"), header = TRUE),
@@ -263,6 +295,8 @@ test_that("reading multiple sheets by name works in XLSX", {
     AAA = data.frame(A = 1:3, B = letters[1:3], C = c(TRUE, TRUE, FALSE), stringsAsFactors = FALSE),
     BBB = data.frame(D = 4:6, E = letters[4:6], F = c(FALSE, TRUE, TRUE), stringsAsFactors = FALSE)
   )
+
+  # Check that reading multiple worksheets (by name) returns a named list
   expect_equal(
     target_multi_sheet,
     readWorksheet(wb.xlsx, sheet = c("AAA", "BBB"), header = TRUE),
@@ -278,6 +312,8 @@ test_that("handling of variable names works in XLS", {
     check.names = FALSE,
     stringsAsFactors = FALSE
   )
+
+  # Check that reading worksheets with check.names = FALSE works
   res_xls_varnames <- readWorksheet(wb.xls, sheet = "VariableNames", header = TRUE, check.names = FALSE)
   expect_equal(target_var_names, res_xls_varnames, info = "XLS: VariableNames sheet, check.names=FALSE")
 })
@@ -290,6 +326,8 @@ test_that("handling of variable names works in XLSX", {
     check.names = FALSE,
     stringsAsFactors = FALSE
   )
+
+  # Check that reading worksheets with check.names = FALSE works
   res_xlsx_varnames <- readWorksheet(wb.xlsx, sheet = "VariableNames", header = TRUE, check.names = FALSE)
   expect_equal(target_var_names, res_xlsx_varnames, info = "XLSX: VariableNames sheet, check.names=FALSE")
 })
@@ -484,24 +522,32 @@ test_that("keep/drop with multiple sheets works in XLS", {
   )
   testAAA_df <- data.frame(A = 1:3, B = letters[1:3], C = c(TRUE, TRUE, FALSE), stringsAsFactors = FALSE)
   sheets_to_read <- c("Test1", "Test4", "Test5")
+
+  # Keeping the same columns from multiple sheets
   res_xls_kl1 <- readWorksheet(wb.xls, sheet = sheets_to_read, header = TRUE, keep = c(1, 2, 3))
   expect_equal(
     list(Test1 = common_checkDf[1:3], Test4 = common_checkDf1[1:3], Test5 = common_checkDf2[1:3]),
     res_xls_kl1,
     info = "XLS: Multi-sheet keep same cols"
   )
+
+  # Testing the correct replication of the keep argument (reading from 3 sheets, while keep has length 2)
   res_xls_kl2 <- readWorksheet(wb.xls, sheet = sheets_to_read, header = TRUE, keep = list(1, 2, c(1, 3)))
   expect_equal(
     list(Test1 = common_checkDf[1], Test4 = common_checkDf1[2], Test5 = common_checkDf2[c(1, 3)]),
     res_xls_kl2,
     info = "XLS: Multi-sheet keep different cols (simple list)"
   )
+
+  # Keeping different columns from multiple sheets
   res_xls_kl3 <- readWorksheet(wb.xls, sheet = sheets_to_read, header = TRUE, keep = list(c(1, 2), c(2, 3), c(1, 3)))
   expect_equal(
     list(Test1 = common_checkDf[1:2], Test4 = common_checkDf1[2:3], Test5 = common_checkDf2[c(1, 3)]),
     res_xls_kl3,
     info = "XLS: Multi-sheet keep different cols (list of vectors)"
   )
+
+  # Keeping different columns from multiple sheets (2 keep list elements for 4 sheets)
   sheets_plus_aaa <- c("Test1", "Test4", "Test5", "AAA")
   res_xls_kl4 <- readWorksheet(wb.xls, sheet = sheets_plus_aaa, header = TRUE, keep = list(c(1, 2), c(2, 3)))
   expect_equal(
@@ -514,12 +560,16 @@ test_that("keep/drop with multiple sheets works in XLS", {
     res_xls_kl4,
     info = "XLS: Multi-sheet keep, recycle last keep spec (adjusted for observed behavior)"
   )
+
+  # Dropping the same columns from multiple sheets
   res_xls_dl1 <- readWorksheet(wb.xls, sheet = sheets_to_read, header = TRUE, drop = c(1, 2))
   expect_equal(
     list(Test1 = common_checkDf[3:4], Test4 = common_checkDf1[3:4], Test5 = common_checkDf2[3:4]),
     res_xls_dl1,
     info = "XLS: Multi-sheet drop same cols"
   )
+
+  # Testing the correct replication of the drop argument (reading from 3 sheets, while drop has length 2)
   res_xls_dl2 <- readWorksheet(wb.xls, sheet = sheets_to_read, header = TRUE, drop = list(1, 2, c(1, 3)))
   expect_equal(
     list(Test1 = common_checkDf[2:4], Test4 = common_checkDf1[c(1, 3, 4)], Test5 = common_checkDf2[c(2, 4)]),
@@ -553,24 +603,32 @@ test_that("keep/drop with multiple sheets works in XLSX", {
   )
   testAAA_df <- data.frame(A = 1:3, B = letters[1:3], C = c(TRUE, TRUE, FALSE), stringsAsFactors = FALSE)
   sheets_to_read <- c("Test1", "Test4", "Test5")
+
+  # Keeping the same columns from multiple sheets
   res_xlsx_kl1 <- readWorksheet(wb.xlsx, sheet = sheets_to_read, header = TRUE, keep = c(1, 2, 3))
   expect_equal(
     list(Test1 = common_checkDf[1:3], Test4 = common_checkDf1[1:3], Test5 = common_checkDf2[1:3]),
     res_xlsx_kl1,
     info = "XLSX: Multi-sheet keep same cols"
   )
+
+  # Testing the correct replication of the keep argument (reading from 3 sheets, while keep has length 2)
   res_xlsx_kl2 <- readWorksheet(wb.xlsx, sheet = sheets_to_read, header = TRUE, keep = list(1, 2, c(1, 3)))
   expect_equal(
     list(Test1 = common_checkDf[1], Test4 = common_checkDf1[2], Test5 = common_checkDf2[c(1, 3)]),
     res_xlsx_kl2,
     info = "XLSX: Multi-sheet keep different cols (simple list)"
   )
+
+  # Keeping different columns from multiple sheets
   res_xlsx_kl3 <- readWorksheet(wb.xlsx, sheet = sheets_to_read, header = TRUE, keep = list(c(1, 2), c(2, 3), c(1, 3)))
   expect_equal(
     list(Test1 = common_checkDf[1:2], Test4 = common_checkDf1[2:3], Test5 = common_checkDf2[c(1, 3)]),
     res_xlsx_kl3,
     info = "XLSX: Multi-sheet keep different cols (list of vectors)"
   )
+
+  # Keeping different columns from multiple sheets (2 keep list elements for 4 sheets)
   sheets_plus_aaa <- c("Test1", "Test4", "Test5", "AAA")
   res_xlsx_kl4 <- readWorksheet(wb.xlsx, sheet = sheets_plus_aaa, header = TRUE, keep = list(c(1, 2), c(2, 3)))
   expect_equal(
@@ -583,12 +641,16 @@ test_that("keep/drop with multiple sheets works in XLSX", {
     res_xlsx_kl4,
     info = "XLSX: Multi-sheet keep, recycle last keep spec (adjusted for observed behavior)"
   )
+
+  # Dropping the same columns from multiple sheets
   res_xlsx_dl1 <- readWorksheet(wb.xlsx, sheet = sheets_to_read, header = TRUE, drop = c(1, 2))
   expect_equal(
     list(Test1 = common_checkDf[3:4], Test4 = common_checkDf1[3:4], Test5 = common_checkDf2[3:4]),
     res_xlsx_dl1,
     info = "XLSX: Multi-sheet drop same cols"
   )
+
+  # Testing the correct replication of the drop argument (reading from 3 sheets, while drop has length 2)
   res_xlsx_dl2 <- readWorksheet(wb.xlsx, sheet = sheets_to_read, header = TRUE, drop = list(1, 2, c(1, 3)))
   expect_equal(
     list(Test1 = common_checkDf[2:4], Test4 = common_checkDf1[c(1, 3, 4)], Test5 = common_checkDf2[c(2, 4)]),
@@ -599,6 +661,8 @@ test_that("keep/drop with multiple sheets works in XLSX", {
 
 test_that("autofitRow and autofitCol work for BoundingBox sheet in XLS", {
   wb.xls <- loadWorkbook(test_path("resources/testWorkbookReadWorksheet.xls"), create = FALSE)
+
+  # Checking bounding-box resolution
   target1_bb <- data.frame(
     Col1 = c(NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, 7, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA),
     Col2 = c(NA, NA, NA, 3, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, 13),
@@ -1038,6 +1102,8 @@ test_that("autofitRow and autofitCol work for BoundingBox sheet in XLS", {
 
 test_that("autofitRow and autofitCol for BoundingBox sheet work in XLSX", {
   wb.xlsx <- loadWorkbook(test_path("resources/testWorkbookReadWorksheet.xlsx"), create = FALSE)
+
+  # Checking bounding-box resolution
   target1_bb <- data.frame(
     Col1 = c(NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, 7, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA),
     Col2 = c(NA, NA, NA, 3, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, 13),
@@ -1477,9 +1543,13 @@ test_that("autofitRow and autofitCol for BoundingBox sheet work in XLSX", {
 
 test_that("useCachedValues and onErrorCell interaction works in XLS", {
   wb.xls.cache <- loadWorkbook(test_path("resources/testCachedValues.xls"), create = FALSE)
+
+  # "AllLocal" contains no formulae - cached and uncached results should be identical
   ref.xls.uncached <- readWorksheet(wb.xls.cache, "AllLocal", useCachedValues = FALSE)
   ref.xls.cached <- readWorksheet(wb.xls.cache, "AllLocal", useCachedValues = TRUE)
   expect_equal(ref.xls.cached, ref.xls.uncached, info = "XLS: Cached vs Uncached for AllLocal")
+
+  # The other three named regions reference external worksheets and can't be read with useCachedValues=FALSE
   onErrorCell(wb.xls.cache, XLC$ERROR.STOP)
   expect_error(
     readWorksheet(wb.xls.cache, "HeaderRemote", useCachedValues = FALSE),
@@ -1493,6 +1563,7 @@ test_that("useCachedValues and onErrorCell interaction works in XLS", {
     readWorksheet(wb.xls.cache, "AllRemote", useCachedValues = FALSE),
     info = "XLS: AllRemote uncached error"
   )
+
   expect_equal(
     readWorksheet(wb.xls.cache, "HeadersRemote", useCachedValues = TRUE),
     ref.xls.uncached,
@@ -1512,9 +1583,13 @@ test_that("useCachedValues and onErrorCell interaction works in XLS", {
 
 test_that("useCachedValues and onErrorCell interaction works in XLSX", {
   wb.xlsx.cache <- loadWorkbook(test_path("resources/testCachedValues.xlsx"), create = FALSE)
+
+  # "AllLocal" contains no formulae - cached and uncached results should be identical
   ref.xlsx.uncached <- readWorksheet(wb.xlsx.cache, "AllLocal", useCachedValues = FALSE)
   ref.xlsx.cached <- readWorksheet(wb.xlsx.cache, "AllLocal", useCachedValues = TRUE)
   expect_equal(ref.xlsx.cached, ref.xlsx.uncached, info = "XLSX: Cached vs Uncached for AllLocal")
+
+  # The other three named regions reference external worksheets and can't be read with useCachedValues=FALSE
   onErrorCell(wb.xlsx.cache, XLC$ERROR.STOP)
   expect_error(
     readWorksheet(wb.xlsx.cache, "HeaderRemote", useCachedValues = FALSE),
@@ -1528,6 +1603,7 @@ test_that("useCachedValues and onErrorCell interaction works in XLSX", {
     readWorksheet(wb.xlsx.cache, "AllRemote", useCachedValues = FALSE),
     info = "XLSX: AllRemote uncached error"
   )
+
   expect_equal(
     readWorksheet(wb.xlsx.cache, "HeadersRemote", useCachedValues = TRUE),
     ref.xlsx.uncached,
@@ -1546,6 +1622,8 @@ test_that("useCachedValues and onErrorCell interaction works in XLSX", {
 })
 
 test_that("readWorksheetFromFile with useCachedValues works (Bug 52)", {
+  # Check that reading cached cell values in conjunction with converting cell values to string
+  # does not lead to cell formulas being returned (see github issue #52)
   res_bug52 <- readWorksheetFromFile(test_path("resources/testBug52.xlsx"), sheet = 1, useCachedValues = TRUE)
   expected_bug52 <- data.frame(
     Var1 = c(2, 4, 6),
@@ -1558,12 +1636,16 @@ test_that("readWorksheetFromFile with useCachedValues works (Bug 52)", {
 })
 
 test_that("readWorksheetFromFile with rownames works (Bug 49)", {
+  # Check that dimensionality is not dropped when reading in a worksheet with rownames = x
+  # (see github issue #49)
   expected_bug49 <- data.frame(B = 1:5, row.names = letters[1:5])
   res_bug49 <- readWorksheetFromFile(test_path("resources/testBug49.xlsx"), sheet = 1, rownames = 1)
   expect_equal(res_bug49, expected_bug49, info = "Bug 49 (rownames)")
 })
 
 test_that("readWorksheetFromFile with dateTimeFormat and forceConversion works (Bug 53)", {
+  # Check that dates are correctly converted to string in 1904-windowing based Excel files
+  # (see github issue #53)
   expected_bug53_sheet1 <- data.frame(A = c("2003-04-06", "2014-10-30", "abc"), stringsAsFactors = FALSE)
   res_bug53_sheet1 <- readWorksheetFromFile(
     test_path("resources/testBug53.xlsx"),
@@ -1571,6 +1653,8 @@ test_that("readWorksheetFromFile with dateTimeFormat and forceConversion works (
     dateTimeFormat = "%Y-%m-%d"
   )
   expect_equal(res_bug53_sheet1, expected_bug53_sheet1, info = "Bug 53 (sheet 1, dateTimeFormat)")
+
+  # Check that numbers are correctly converted to string 1904-windowing based Excel files
   expected_bug53_sheet2 <- data.frame(A = as.POSIXct(c("2015-12-01", "2015-11-17", "1984-01-11")))
   res_bug53_sheet2 <- readWorksheetFromFile(
     test_path("resources/testBug53.xlsx"),
@@ -1582,6 +1666,7 @@ test_that("readWorksheetFromFile with dateTimeFormat and forceConversion works (
 })
 
 test_that("reading sparse bitset worksheet works", {
+  # Cover use of SparseBitSet in POI 4.1.2 (GH #131)
   wbSparse.xlsx <- loadWorkbook(test_path("resources/testReadWorksheetSparseBitSet.xlsx"), create = FALSE)
   expect_silent(sparseSheet <- readWorksheet(wbSparse.xlsx, "hist"))
   expect_true(is.data.frame(sparseSheet))

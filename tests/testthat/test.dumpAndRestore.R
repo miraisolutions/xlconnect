@@ -1,8 +1,10 @@
-test_that("test.dumpAndRestore - full test suite only", {
+test_that("dumping & restoring objects to/from Excel files - full test suite only", {
   skip_if_not(getOption("FULL.TEST.SUITE"), "FULL.TEST.SUITE is not TRUE")
 
   require(datasets)
   pos = "package:datasets"
+
+  # Get all data.frame's from 'package:datasets'
   objs = ls(pos = pos)
   idx = sapply(objs, function(obj) is.data.frame(get(obj, pos = pos)))
   objs = objs[idx]
