@@ -12,7 +12,7 @@ testDataFrame <- function(file, df) {
   attr_names <- union(names(df_attr), names(res_attr))
   # remove "name" from attr_names
   attr_names <- setdiff(attr_names, "name")
-  expect_equal(normalizeDataframe(df), res, ignore_attr = attr_names)
+  expect_equal(res, normalizeDataframe(df), ignore_attr = attr_names)
 }
 
 

@@ -7,7 +7,7 @@ test_that("checking equality of data.frame's being written to and read from Exce
     createSheet(wb, worksheet)
     writeWorksheet(wb, df, worksheet, startRow = startRow, startCol = startCol)
     res <- readWorksheet(wb, worksheet, startRow = startRow, startCol = startCol, endRow = 0, endCol = 0)
-    expect_equal(normalizeDataframe(df), res, ignore_attr = c("worksheetScope"))
+    expect_equal(res, normalizeDataframe(df), ignore_attr = c("worksheetScope"))
   }
 
   # custom test dataset
@@ -88,7 +88,7 @@ test_that("checking equality of data.frame's being written to and read from Exce
     createSheet(wb, worksheet)
     writeWorksheet(wb, df, worksheet, startRow = startRow, startCol = startCol)
     res <- readWorksheet(wb, worksheet, startRow = startRow, startCol = startCol, endRow = 0, endCol = 0)
-    expect_equal(normalizeDataframe(df), res, ignore_attr = c("worksheetScope", "row.names"))
+    expect_equal(res, normalizeDataframe(df), ignore_attr = c("worksheetScope", "row.names"))
   }
 
   # built-in dataset mtcars (*.xls)

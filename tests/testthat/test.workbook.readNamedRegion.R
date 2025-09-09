@@ -13,19 +13,19 @@ test_that("test.workbook.readNamedRegion", {
 
   # Check that the read named region equals the defined data.frame (*.xls)
   res <- readNamedRegion(wb.xls, "Test", header = TRUE)
-  expect_equal(checkDf, res)
+  expect_equal(res, checkDf)
 
   # Check that the read named region equals the defined data.frame (*.xlsx)
   res <- readNamedRegion(wb.xlsx, "Test", header = TRUE)
-  expect_equal(checkDf, res)
+  expect_equal(res, checkDf)
 
   # Check that the same works when explicitly specifying global scope (*.xls)
   res <- readNamedRegion(wb.xls, "Test", header = TRUE, worksheetScope = "")
-  expect_equal(checkDf, res)
+  expect_equal(res, checkDf)
 
   # Check that the same works when explicitly specifying global scope (*.xlsx)
   res <- readNamedRegion(wb.xlsx, "Test", header = TRUE, worksheetScope = "")
-  expect_equal(checkDf, res)
+  expect_equal(res, checkDf)
 
   # check that global ranges are not found when specifying a worksheet name (*.xls)
   expect_error(readNamedRegion(wb.xls, name = "Test", header = TRUE, worksheetScope = "Test"))
@@ -61,7 +61,7 @@ test_that("test.workbook.readNamedRegion", {
     forceConversion = FALSE,
     dateTimeFormat = "%d.%m.%Y %H:%M:%S"
   ))
-  expect_equal(targetNoForce, res)
+  expect_equal(res, targetNoForce)
 
   # Check that conversion performs ok (without forcing conversion; *.xlsx)
   res <- suppressWarnings(readNamedRegion(
@@ -72,7 +72,7 @@ test_that("test.workbook.readNamedRegion", {
     forceConversion = FALSE,
     dateTimeFormat = "%d.%m.%Y %H:%M:%S"
   ))
-  expect_equal(targetNoForce, res)
+  expect_equal(res, targetNoForce)
 
   # Check that conversion performs ok (with forcing conversion; *.xls)
   res <- suppressWarnings(readNamedRegion(
@@ -83,7 +83,7 @@ test_that("test.workbook.readNamedRegion", {
     forceConversion = TRUE,
     dateTimeFormat = "%d.%m.%Y %H:%M:%S"
   ))
-  expect_equal(targetForce, res)
+  expect_equal(res, targetForce)
 
   # Check that conversion performs ok (with forcing conversion; *.xlsx)
   res <- suppressWarnings(readNamedRegion(
@@ -94,18 +94,18 @@ test_that("test.workbook.readNamedRegion", {
     forceConversion = TRUE,
     dateTimeFormat = "%d.%m.%Y %H:%M:%S"
   ))
-  expect_equal(targetForce, res)
+  expect_equal(res, targetForce)
   target <- list(
     AAA = data.frame(A = 1:3, B = letters[1:3], C = c(TRUE, TRUE, FALSE), stringsAsFactors = FALSE),
     BBB = data.frame(D = 4:6, E = letters[4:6], F = c(FALSE, TRUE, TRUE), stringsAsFactors = FALSE)
   )
   # Check that reading multiple named regions returns a named list (*.xls)
   res <- readNamedRegion(wb.xls, name = c("AAA", "BBB"), header = TRUE)
-  expect_equal(target, res)
+  expect_equal(res, target)
 
   # Check that reading multiple named regions returns a named list (*.xlsx)
   res <- readNamedRegion(wb.xlsx, name = c("AAA", "BBB"), header = TRUE)
-  expect_equal(target, res)
+  expect_equal(res, target)
   target <- data.frame(
     `With whitespace` = 1:4,
     `And some other funky characters: _=?^~!$@#%§` = letters[1:4],
@@ -114,11 +114,11 @@ test_that("test.workbook.readNamedRegion", {
   )
   # Check that reading named regions with check.names = FALSE works (*.xls)
   res <- readNamedRegion(wb.xls, name = "VariableNames", header = TRUE, check.names = FALSE)
-  expect_equal(target, res)
+  expect_equal(res, target)
 
   # Check that reading named regions with check.names = FALSE works (*.xlsx)
   res <- readNamedRegion(wb.xlsx, name = "VariableNames", header = TRUE, check.names = FALSE)
-  expect_equal(target, res)
+  expect_equal(res, target)
   # Check that attempting to specify both keep and drop throws an exception (*.xls)
   expect_error(readNamedRegion(wb.xls, "Conversion", header = TRUE, keep = c("AAA", "BBB"), drop = c("CCC", "DDD")))
 
@@ -163,109 +163,109 @@ test_that("test.workbook.readNamedRegion", {
   expect_error(readNamedRegion(wb.xlsx, "Test", header = FALSE, drop = c("StringColumn", "DateTimeColumn")))
   # Keeping the same columns from multiple named regions (*.xls)
   res <- readNamedRegion(wb.xls, name = c("Test", "AAA", "BBB"), header = TRUE, keep = c(1, 3))
-  expect_equal(list(Test = checkDf[, c(1, 3)], AAA = AAA[, c(1, 3)], BBB = BBB[, c(1, 3)]), res)
+  expect_equal(res, list(Test = checkDf[, c(1, 3)], AAA = AAA[, c(1, 3)], BBB = BBB[, c(1, 3)]))
 
   # Keeping the same columns from multiple named regions (*.xlsx)
   res <- readNamedRegion(wb.xlsx, name = c("Test", "AAA", "BBB"), header = TRUE, keep = c(1, 3))
-  expect_equal(list(Test = checkDf[, c(1, 3)], AAA = AAA[, c(1, 3)], BBB = BBB[, c(1, 3)]), res)
+  expect_equal(res, list(Test = checkDf[, c(1, 3)], AAA = AAA[, c(1, 3)], BBB = BBB[, c(1, 3)]))
   # Testing the correct replication of the keep argument (reading from 3 named regions, while keep has length 2) (*.xls)
   res <- readNamedRegion(wb.xls, name = c("Test", "AAA", "BBB"), header = TRUE, keep = list(1, 3))
-  expect_equal(list(Test = checkDf[1], AAA = AAA[3], BBB = BBB[1]), res)
+  expect_equal(res, list(Test = checkDf[1], AAA = AAA[3], BBB = BBB[1]))
 
   # Testing the correct replication of the keep argument (reading from 3 named regions, while keep has length 2) (*.xlsx)
   res <- readNamedRegion(wb.xlsx, name = c("Test", "AAA", "BBB"), header = TRUE, keep = list(1, 3))
-  expect_equal(list(Test = checkDf[1], AAA = AAA[3], BBB = BBB[1]), res)
+  expect_equal(res, list(Test = checkDf[1], AAA = AAA[3], BBB = BBB[1]))
   # Keeping different columns from multiple named regions (*.xls)
   res <- readNamedRegion(wb.xls, name = c("Test", "AAA", "BBB"), header = TRUE, keep = list(c(1, 2), c(2, 3), c(1, 3)))
-  expect_equal(list(Test = checkDf[, c(1, 2)], AAA = AAA[, c(2, 3)], BBB = BBB[, c(1, 3)]), res)
+  expect_equal(res, list(Test = checkDf[, c(1, 2)], AAA = AAA[, c(2, 3)], BBB = BBB[, c(1, 3)]))
 
   # Keeping different columns from multiple named regions (*.xlsx)
   res <- readNamedRegion(wb.xlsx, name = c("Test", "AAA", "BBB"), header = TRUE, keep = list(c(1, 2), c(2, 3), c(1, 3)))
-  expect_equal(list(Test = checkDf[, c(1, 2)], AAA = AAA[, c(2, 3)], BBB = BBB[, c(1, 3)]), res)
+  expect_equal(res, list(Test = checkDf[, c(1, 2)], AAA = AAA[, c(2, 3)], BBB = BBB[, c(1, 3)]))
   # Keeping different columns from multiple named regions (2 keep list elements for 4 named regions) (*.xls)
   res <- readNamedRegion(wb.xls, name = c("Test", "AAA", "BBB", "Test"), header = TRUE, keep = list(c(1, 2), c(2, 3)))
   expect_equal(
-    list(Test = checkDf[, c(1, 2)], AAA = AAA[, c(2, 3)], BBB = BBB[, c(1, 2)], Test = checkDf[, c(2, 3)]),
-    res
+    res,
+    list(Test = checkDf[, c(1, 2)], AAA = AAA[, c(2, 3)], BBB = BBB[, c(1, 2)], Test = checkDf[, c(2, 3)])
   )
 
   # Keeping different columns from multiple named regions (2 keep list elements for 4 named regions) (*.xlsx)
   res <- readNamedRegion(wb.xlsx, name = c("Test", "AAA", "BBB", "Test"), header = TRUE, keep = list(c(1, 2), c(2, 3)))
   expect_equal(
-    list(Test = checkDf[, c(1, 2)], AAA = AAA[, c(2, 3)], BBB = BBB[, c(1, 2)], Test = checkDf[, c(2, 3)]),
-    res
+    res,
+    list(Test = checkDf[, c(1, 2)], AAA = AAA[, c(2, 3)], BBB = BBB[, c(1, 2)], Test = checkDf[, c(2, 3)])
   )
   # Dropping the same columns from multiple named regions (*.xls)
   res <- readNamedRegion(wb.xls, name = c("Test", "AAA", "BBB"), header = TRUE, drop = c(1, 2))
   expect_equal(
+    res,
     list(
       Test = checkDf[, c(3, 4)],
       AAA = data.frame(C = AAA[, 3], stringsAsFactors = F),
       BBB = data.frame(F = BBB[, 3], stringsAsFactors = F)
-    ),
-    res
+    )
   )
 
   # Dropping the same columns from multiple named regions (*.xlsx)
   res <- readNamedRegion(wb.xlsx, name = c("Test", "AAA", "BBB"), header = TRUE, drop = c(1, 2))
   expect_equal(
+    res,
     list(
       Test = checkDf[, c(3, 4)],
       AAA = data.frame(C = AAA[, 3], stringsAsFactors = F),
       BBB = data.frame(F = BBB[, 3], stringsAsFactors = F)
-    ),
-    res
+    )
   )
   # Testing the correct replication of the drop argument (reading from 3 named regions, while drop has length 2) (*.xls)
   res <- readNamedRegion(wb.xls, name = c("Test", "AAA", "BBB"), header = TRUE, drop = list(1, 2))
-  expect_equal(list(Test = checkDf[, c(2, 3, 4)], AAA = AAA[, c(1, 3)], BBB = BBB[, c(2, 3)]), res)
+  expect_equal(res, list(Test = checkDf[, c(2, 3, 4)], AAA = AAA[, c(1, 3)], BBB = BBB[, c(2, 3)]))
 
   # Testing the correct replication of the drop argument (reading from 3 named regions, while drop has length 2) (*.xlsx)
   res <- readNamedRegion(wb.xlsx, name = c("Test", "AAA", "BBB"), header = TRUE, drop = list(1, 2))
-  expect_equal(list(Test = checkDf[, c(2, 3, 4)], AAA = AAA[, c(1, 3)], BBB = BBB[, c(2, 3)]), res)
+  expect_equal(res, list(Test = checkDf[, c(2, 3, 4)], AAA = AAA[, c(1, 3)], BBB = BBB[, c(2, 3)]))
   # Dropping different columns from multiple named regions (*.xls)
   res <- readNamedRegion(wb.xls, name = c("Test", "AAA", "BBB"), header = TRUE, drop = list(c(1, 2), c(2, 3), c(1, 3)))
   expect_equal(
+    res,
     list(
       Test = checkDf[, c(3, 4)],
       AAA = data.frame(A = AAA[, 1], stringsAsFactors = F),
       BBB = data.frame(E = BBB[, 2], stringsAsFactors = F)
-    ),
-    res
+    )
   )
 
   # Dropping different columns from multiple named regions (*.xlsx)
   res <- readNamedRegion(wb.xlsx, name = c("Test", "AAA", "BBB"), header = TRUE, drop = list(c(1, 2), c(2, 3), c(1, 3)))
   expect_equal(
+    res,
     list(
       Test = checkDf[, c(3, 4)],
       AAA = data.frame(A = AAA[, 1], stringsAsFactors = F),
       BBB = data.frame(E = BBB[, 2], stringsAsFactors = F)
-    ),
-    res
+    )
   )
   # Dropping different columns from multiple named regions (2 drop list elements for 4 named regions) (*.xls)
   res <- readNamedRegion(wb.xls, name = c("Test", "AAA", "BBB", "Test"), header = TRUE, drop = list(c(1, 2), c(2, 3)))
   expect_equal(
+    res,
     list(
       Test = checkDf[, c(3, 4)],
       AAA = data.frame(A = AAA[, 1], stringsAsFactors = F),
       BBB = data.frame(F = BBB[, 3], stringsAsFactors = F),
       Test = checkDf[, c(1, 4)]
-    ),
-    res
+    )
   )
 
   # Dropping different columns from multiple named regions (2 drop list elements for 4 named regions) (*.xlsx)
   res <- readNamedRegion(wb.xlsx, name = c("Test", "AAA", "BBB", "Test"), header = TRUE, drop = list(c(1, 2), c(2, 3)))
   expect_equal(
+    res,
     list(
       Test = checkDf[, c(3, 4)],
       AAA = data.frame(A = AAA[, 1], stringsAsFactors = F),
       BBB = data.frame(F = BBB[, 3], stringsAsFactors = F),
       Test = checkDf[, c(1, 4)]
-    ),
-    res
+    )
   )
   targetNoForceSubset <- data.frame(
     BBB = c("hello", "42.24", "true", NA, "11.01.1984 12:00:00"),
@@ -282,7 +282,7 @@ test_that("test.workbook.readNamedRegion", {
     dateTimeFormat = "%d.%m.%Y %H:%M:%S",
     keep = c("BBB", "DDD")
   )
-  expect_equal(targetNoForceSubset, res)
+  expect_equal(res, targetNoForceSubset)
 
   # Check that conversion performs ok (without forcing conversion, keeping columns BBB and DDD; *.xlsx)
   res <- readNamedRegion(
@@ -294,7 +294,7 @@ test_that("test.workbook.readNamedRegion", {
     dateTimeFormat = "%d.%m.%Y %H:%M:%S",
     keep = c("BBB", "DDD")
   )
-  expect_equal(targetNoForceSubset, res)
+  expect_equal(res, targetNoForceSubset)
   # Check that conversion performs ok (without forcing conversion, dropping columns AAA and CCC; *.xls)
   res <- readNamedRegion(
     wb.xls,
@@ -305,7 +305,7 @@ test_that("test.workbook.readNamedRegion", {
     dateTimeFormat = "%d.%m.%Y %H:%M:%S",
     drop = c("AAA", "CCC")
   )
-  expect_equal(targetNoForceSubset, res)
+  expect_equal(res, targetNoForceSubset)
 
   # Check that conversion performs ok (without forcing conversion, dropping columns AAA and CCC; *.xlsx)
   res <- readNamedRegion(
@@ -317,7 +317,7 @@ test_that("test.workbook.readNamedRegion", {
     dateTimeFormat = "%d.%m.%Y %H:%M:%S",
     drop = c("AAA", "CCC")
   )
-  expect_equal(targetNoForceSubset, res)
+  expect_equal(res, targetNoForceSubset)
   # Check that conversion performs ok (without forcing conversion, keeping columns 2 and 4; *.xls)
   res <- readNamedRegion(
     wb.xls,
@@ -328,7 +328,7 @@ test_that("test.workbook.readNamedRegion", {
     dateTimeFormat = "%d.%m.%Y %H:%M:%S",
     keep = c(2, 4)
   )
-  expect_equal(targetNoForceSubset, res)
+  expect_equal(res, targetNoForceSubset)
 
   # Check that conversion performs ok (without forcing conversion, keeping columns 2 and 4; *.xlsx)
   res <- readNamedRegion(
@@ -340,7 +340,7 @@ test_that("test.workbook.readNamedRegion", {
     dateTimeFormat = "%d.%m.%Y %H:%M:%S",
     keep = c(2, 4)
   )
-  expect_equal(targetNoForceSubset, res)
+  expect_equal(res, targetNoForceSubset)
   # Check that conversion performs ok (without forcing conversion, dropping columns 1 and 3; *.xls)
   res <- suppressWarnings(readNamedRegion(
     wb.xls,
@@ -351,7 +351,7 @@ test_that("test.workbook.readNamedRegion", {
     dateTimeFormat = "%d.%m.%Y %H:%M:%S",
     drop = c(1, 3)
   ))
-  expect_equal(targetNoForceSubset, res)
+  expect_equal(res, targetNoForceSubset)
 
   # Check that conversion performs ok (without forcing conversion, dropping columns 1 and 3; *.xlsx)
   res <- suppressWarnings(readNamedRegion(
@@ -363,26 +363,26 @@ test_that("test.workbook.readNamedRegion", {
     dateTimeFormat = "%d.%m.%Y %H:%M:%S",
     drop = c(1, 3)
   ))
-  expect_equal(targetNoForceSubset, res)
+  expect_equal(res, targetNoForceSubset)
   # Check that simplification works as expected (*.xls)
   res <- readNamedRegion(wb.xls, name = "Simplify1", header = TRUE, simplify = TRUE)
-  expect_equal(1:10, res)
+  expect_equal(res, 1:10)
   res <- readNamedRegion(wb.xls, name = "Simplify2", header = TRUE, simplify = TRUE)
-  expect_equal(1:4, res)
+  expect_equal(res, 1:4)
   res <- readNamedRegion(wb.xls, name = "Simplify3", header = TRUE, simplify = TRUE)
-  expect_equal(c(TRUE, FALSE, FALSE, TRUE), res)
+  expect_equal(res, c(TRUE, FALSE, FALSE, TRUE))
   res <- readNamedRegion(wb.xls, name = "Simplify4", header = TRUE, simplify = TRUE)
-  expect_equal(c("one", "two", "three", "four", "five"), res)
+  expect_equal(res, c("one", "two", "three", "four", "five"))
 
   # Check that simplification works as expected (*.xlsx)
   res <- readNamedRegion(wb.xlsx, name = "Simplify1", header = TRUE, simplify = TRUE)
-  expect_equal(1:10, res)
+  expect_equal(res, 1:10)
   res <- readNamedRegion(wb.xlsx, name = "Simplify2", header = TRUE, simplify = TRUE)
-  expect_equal(1:4, res)
+  expect_equal(res, 1:4)
   res <- readNamedRegion(wb.xlsx, name = "Simplify3", header = TRUE, simplify = TRUE)
-  expect_equal(c(TRUE, FALSE, FALSE, TRUE), res)
+  expect_equal(res, c(TRUE, FALSE, FALSE, TRUE))
   res <- readNamedRegion(wb.xlsx, name = "Simplify4", header = TRUE, simplify = TRUE)
-  expect_equal(c("one", "two", "three", "four", "five"), res)
+  expect_equal(res, c("one", "two", "three", "four", "five"))
   # Cached value tests: Create workbook
   wb.xls <- loadWorkbook(test_path("resources/testCachedValues.xls"), create = FALSE)
   wb.xlsx <- loadWorkbook(test_path("resources/testCachedValues.xlsx"), create = FALSE)
@@ -433,14 +433,14 @@ test_that("test.workbook.readNamedRegion", {
   name <- "Bla"
   wb37xlsx <- loadWorkbook(test_path("resources/test37.xlsx"), create = FALSE)
   read1 <- readNamedRegion(wb37xlsx, name, worksheetScope = "Sheet1")
-  expect_equal("Sheet1", attr(read1, "worksheetScope", exact = TRUE))
+  expect_equal(attr(read1, "worksheetScope", exact = TRUE), "Sheet1")
   read2 <- readNamedRegion(wb37xlsx, name, worksheetScope = "Sheet2")
-  expect_equal("Sheet2", attr(read2, "worksheetScope", exact = TRUE))
-  expect_equal(c("bla1"), colnames(read1))
-  expect_equal(c("bla2"), colnames(read2))
+  expect_equal(attr(read2, "worksheetScope", exact = TRUE), "Sheet2")
+  expect_equal(colnames(read1), c("bla1"))
+  expect_equal(colnames(read2), c("bla2"))
   readBoth <- readNamedRegion(wb37xlsx, name, worksheetScope = c("Sheet1", "Sheet2"))
-  expect_equal("bla1", colnames(readBoth[[1]]))
-  expect_equal("bla2", colnames(readBoth[[2]]))
+  expect_equal(colnames(readBoth[[1]]), "bla1")
+  expect_equal(colnames(readBoth[[2]]), "bla2")
 
   expect_error(readNamedRegion(wb37xlsx, name, worksheetScope = "Sheet3"))
 })

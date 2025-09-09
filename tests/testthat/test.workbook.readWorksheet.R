@@ -9,8 +9,8 @@ test_that("reading basic worksheets by index and name works in XLS", {
   )
 
   # Read worksheet without specifying range - check that the read data region equals the defined data.frame
-  expect_equal(common_checkDf, readWorksheet(wb.xls, 1), info = "XLS: Read sheet 1 by index")
-  expect_equal(common_checkDf, readWorksheet(wb.xls, "Test1"), info = "XLS: Read sheet 'Test1' by name")
+  expect_equal(readWorksheet(wb.xls, 1), common_checkDf, info = "XLS: Read sheet 1 by index")
+  expect_equal(readWorksheet(wb.xls, "Test1"), common_checkDf, info = "XLS: Read sheet 'Test1' by name")
 })
 
 test_that("reading basic worksheets by index and name works in XLSX", {
@@ -24,8 +24,8 @@ test_that("reading basic worksheets by index and name works in XLSX", {
   )
 
   # Read worksheet without specifying range - check that the read data region equals the defined data.frame
-  expect_equal(common_checkDf, readWorksheet(wb.xlsx, 1), info = "XLSX: Read sheet 1 by index")
-  expect_equal(common_checkDf, readWorksheet(wb.xlsx, "Test1"), info = "XLSX: Read sheet 'Test1' by name")
+  expect_equal(readWorksheet(wb.xlsx, 1), common_checkDf, info = "XLSX: Read sheet 1 by index")
+  expect_equal(readWorksheet(wb.xlsx, "Test1"), common_checkDf, info = "XLSX: Read sheet 'Test1' by name")
 })
 
 test_that("reading specific regions works in XLS", {
@@ -40,24 +40,24 @@ test_that("reading specific regions works in XLS", {
 
   # Read worksheet by specifying a range - check that the read data region equals the defined data.frame
   expect_equal(
-    common_checkDf,
     readWorksheet(wb.xls, 2, startRow = 17, startCol = 6, endRow = 22, endCol = 9, header = TRUE),
+    common_checkDf,
     info = "XLS: Specific area"
   )
   # Test using a negative endRow/endCol
   expected_neg_end <- common_checkDf[-nrow(common_checkDf) + 0:1, -ncol(common_checkDf)]
   expect_equal(
-    expected_neg_end,
     readWorksheet(wb.xls, "Test2", startRow = 17, startCol = 6, endRow = -2, endCol = -1, header = TRUE),
+    expected_neg_end,
     info = "XLS: Negative endRow/Col"
   )
 
   # Read worksheet by specifying a range via the region argument
-  expect_equal(common_checkDf, readWorksheet(wb.xls, 2, region = "F17:I22", header = TRUE), info = "XLS: Region string")
+  expect_equal(readWorksheet(wb.xls, 2, region = "F17:I22", header = TRUE), common_checkDf, info = "XLS: Region string")
   # Read worksheet by specifying a range via the region argument (region takes precedence over index specifications)
   expect_equal(
-    common_checkDf,
     readWorksheet(wb.xls, 2, region = "F17:I22", startRow = 88, endCol = 45, header = TRUE),
+    common_checkDf,
     info = "XLS: Region string with other params"
   )
 })
@@ -74,28 +74,28 @@ test_that("reading specific regions works in XLSX", {
 
   # Read worksheet by specifying a range - check that the read data region equals the defined data.frame
   expect_equal(
-    common_checkDf,
     readWorksheet(wb.xlsx, "Test2", startRow = 17, startCol = 6, endRow = 22, endCol = 9, header = TRUE),
+    common_checkDf,
     info = "XLSX: Specific area by name"
   )
   # Test using a negative endRow/endCol
   expected_neg_end <- common_checkDf[-nrow(common_checkDf) + 0:1, -ncol(common_checkDf)]
   expect_equal(
-    expected_neg_end,
     readWorksheet(wb.xlsx, "Test2", startRow = 17, startCol = 6, endRow = -2, endCol = -1, header = TRUE),
+    expected_neg_end,
     info = "XLSX: Negative endRow/Col"
   )
 
   # Read worksheet by specifying a range via the region argument
   expect_equal(
-    common_checkDf,
     readWorksheet(wb.xlsx, "Test2", region = "F17:I22", header = TRUE),
+    common_checkDf,
     info = "XLSX: Region string by name"
   )
   # Read worksheet by specifying a range via the region argument (region takes precedence over index specifications)
   expect_equal(
-    common_checkDf,
     readWorksheet(wb.xlsx, "Test2", region = "F17:I22", startRow = 88, endCol = 45, header = TRUE),
+    common_checkDf,
     info = "XLSX: Region string with other params by name"
   )
 })
@@ -105,9 +105,9 @@ test_that("handling of non-existent and empty sheets is correct in XLS", {
   expect_error(readWorksheet(wb.xls, 23), info = "XLS: Non-existent sheet index")
   expect_error(readWorksheet(wb.xls, "SheetDoesNotExist"), info = "XLS: Non-existent sheet name")
   res_xls_3 <- suppressMessages(readWorksheet(wb.xls, 3))
-  expect_equal(data.frame(), res_xls_3, info = "XLS: Empty sheet by index (Test3)")
+  expect_equal(res_xls_3, data.frame(), info = "XLS: Empty sheet by index (Test3)")
   res_xls_Test3 <- suppressMessages(readWorksheet(wb.xls, "Test3"))
-  expect_equal(data.frame(), res_xls_Test3, info = "XLS: Empty sheet by name (Test3)")
+  expect_equal(res_xls_Test3, data.frame(), info = "XLS: Empty sheet by name (Test3)")
 })
 
 test_that("handling of non-existent and empty sheets is correct in XLSX", {
@@ -115,9 +115,9 @@ test_that("handling of non-existent and empty sheets is correct in XLSX", {
   expect_error(readWorksheet(wb.xlsx, 23), info = "XLSX: Non-existent sheet index")
   expect_error(readWorksheet(wb.xlsx, "SheetDoesNotExist"), info = "XLSX: Non-existent sheet name")
   res_xlsx_3 <- suppressMessages(readWorksheet(wb.xlsx, 3))
-  expect_equal(data.frame(), res_xlsx_3, info = "XLSX: Empty sheet by index (Test3)")
+  expect_equal(res_xlsx_3, data.frame(), info = "XLSX: Empty sheet by index (Test3)")
   res_xlsx_Test3 <- suppressMessages(readWorksheet(wb.xlsx, "Test3"))
-  expect_equal(data.frame(), res_xlsx_Test3, info = "XLSX: Empty sheet by name (Test3)")
+  expect_equal(res_xlsx_Test3, data.frame(), info = "XLSX: Empty sheet by name (Test3)")
 })
 
 test_that("reading sheets with NAs and varied data works in XLS", {
@@ -138,19 +138,19 @@ test_that("reading sheets with NAs and varied data works in XLS", {
   )
 
   # Check that the data bounding box is correctly inferred even if there are blank cells in the last row
-  expect_equal(common_checkDf1, readWorksheet(wb.xls, "Test4"), info = "XLS: Test4 sheet")
-  expect_equal(common_checkDf2, readWorksheet(wb.xls, "Test5"), info = "XLS: Test5 sheet")
+  expect_equal(readWorksheet(wb.xls, "Test4"), common_checkDf1, info = "XLS: Test4 sheet")
+  expect_equal(readWorksheet(wb.xls, "Test5"), common_checkDf2, info = "XLS: Test5 sheet")
   # Test with negative endRow/endCol
   expected_test4_neg <- common_checkDf1[-nrow(common_checkDf1) + 0:3, -ncol(common_checkDf1) + 0:1]
   expect_equal(
-    expected_test4_neg,
     readWorksheet(wb.xls, "Test4", endRow = -4, endCol = -2),
+    expected_test4_neg,
     info = "XLS: Test4 negative endRow/Col"
   )
   expected_test5_neg <- common_checkDf2[-nrow(common_checkDf2) + 0:2, -ncol(common_checkDf2)]
   expect_equal(
-    expected_test5_neg,
     readWorksheet(wb.xls, "Test5", endRow = -3, endCol = -1),
+    expected_test5_neg,
     info = "XLS: Test5 negative endRow/Col"
   )
 })
@@ -173,19 +173,19 @@ test_that("reading sheets with NAs and varied data works in XLSX", {
   )
 
   # Check that the data bounding box is correctly inferred even if there are blank cells in the last row
-  expect_equal(common_checkDf1, readWorksheet(wb.xlsx, "Test4"), info = "XLSX: Test4 sheet")
-  expect_equal(common_checkDf2, readWorksheet(wb.xlsx, "Test5"), info = "XLSX: Test5 sheet")
+  expect_equal(readWorksheet(wb.xlsx, "Test4"), common_checkDf1, info = "XLSX: Test4 sheet")
+  expect_equal(readWorksheet(wb.xlsx, "Test5"), common_checkDf2, info = "XLSX: Test5 sheet")
   # Test with negative endRow/endCol
   expected_test4_neg <- common_checkDf1[-nrow(common_checkDf1) + 0:3, -ncol(common_checkDf1) + 0:1]
   expect_equal(
-    expected_test4_neg,
     readWorksheet(wb.xlsx, "Test4", endRow = -4, endCol = -2),
+    expected_test4_neg,
     info = "XLSX: Test4 negative endRow/Col"
   )
   expected_test5_neg <- common_checkDf2[-nrow(common_checkDf2) + 0:2, -ncol(common_checkDf2)]
   expect_equal(
-    expected_test5_neg,
     readWorksheet(wb.xlsx, "Test5", endRow = -3, endCol = -1),
+    expected_test5_neg,
     info = "XLSX: Test5 negative endRow/Col"
   )
 })
@@ -218,7 +218,7 @@ test_that("column type conversion works in XLS", {
     forceConversion = FALSE,
     dateTimeFormat = datetime_fmt
   )
-  expect_equal(targetNoForce, res_xls_noforce, info = "XLS: Conversion sheet, no force")
+  expect_equal(res_xls_noforce, targetNoForce, info = "XLS: Conversion sheet, no force")
 
   # Check that conversion performs ok (with forcing conversion)
   res_xls_force <- readWorksheet(
@@ -229,7 +229,7 @@ test_that("column type conversion works in XLS", {
     forceConversion = TRUE,
     dateTimeFormat = datetime_fmt
   )
-  expect_equal(targetForce, res_xls_force, info = "XLS: Conversion sheet, force")
+  expect_equal(res_xls_force, targetForce, info = "XLS: Conversion sheet, force")
 })
 
 test_that("column type conversion works in XLSX", {
@@ -260,7 +260,7 @@ test_that("column type conversion works in XLSX", {
     forceConversion = FALSE,
     dateTimeFormat = datetime_fmt
   )
-  expect_equal(targetNoForce, res_xlsx_noforce, info = "XLSX: Conversion sheet, no force")
+  expect_equal(res_xlsx_noforce, targetNoForce, info = "XLSX: Conversion sheet, no force")
 
   # Check that conversion performs ok (with forcing conversion)
   res_xlsx_force <- readWorksheet(
@@ -271,7 +271,7 @@ test_that("column type conversion works in XLSX", {
     forceConversion = TRUE,
     dateTimeFormat = datetime_fmt
   )
-  expect_equal(targetForce, res_xlsx_force, info = "XLSX: Conversion sheet, force")
+  expect_equal(res_xlsx_force, targetForce, info = "XLSX: Conversion sheet, force")
 })
 
 test_that("reading multiple sheets by name works in XLS", {
@@ -283,8 +283,8 @@ test_that("reading multiple sheets by name works in XLS", {
 
   # Check that reading multiple worksheets (by name) returns a named list
   expect_equal(
-    target_multi_sheet,
     readWorksheet(wb.xls, sheet = c("AAA", "BBB"), header = TRUE),
+    target_multi_sheet,
     info = "XLS: Multi-sheet read"
   )
 })
@@ -298,8 +298,8 @@ test_that("reading multiple sheets by name works in XLSX", {
 
   # Check that reading multiple worksheets (by name) returns a named list
   expect_equal(
-    target_multi_sheet,
     readWorksheet(wb.xlsx, sheet = c("AAA", "BBB"), header = TRUE),
+    target_multi_sheet,
     info = "XLSX: Multi-sheet read"
   )
 })
@@ -315,7 +315,7 @@ test_that("handling of variable names works in XLS", {
 
   # Check that reading worksheets with check.names = FALSE works
   res_xls_varnames <- readWorksheet(wb.xls, sheet = "VariableNames", header = TRUE, check.names = FALSE)
-  expect_equal(target_var_names, res_xls_varnames, info = "XLS: VariableNames sheet, check.names=FALSE")
+  expect_equal(res_xls_varnames, target_var_names, info = "XLS: VariableNames sheet, check.names=FALSE")
 })
 
 test_that("handling of variable names works in XLSX", {
@@ -329,7 +329,7 @@ test_that("handling of variable names works in XLSX", {
 
   # Check that reading worksheets with check.names = FALSE works
   res_xlsx_varnames <- readWorksheet(wb.xlsx, sheet = "VariableNames", header = TRUE, check.names = FALSE)
-  expect_equal(target_var_names, res_xlsx_varnames, info = "XLSX: VariableNames sheet, check.names=FALSE")
+  expect_equal(res_xlsx_varnames, target_var_names, info = "XLSX: VariableNames sheet, check.names=FALSE")
 })
 
 test_that("keep and drop arguments work correctly in XLS", {
@@ -360,8 +360,8 @@ test_that("keep and drop arguments work correctly in XLS", {
     info = "XLS: drop non-existent column index"
   )
   expect_equal(
-    checkDfSubset,
     readWorksheet(wb.xls, "Test5", header = TRUE, keep = c("A", "C")),
+    checkDfSubset,
     info = "XLS: keep by name"
   )
   expect_error(
@@ -369,8 +369,8 @@ test_that("keep and drop arguments work correctly in XLS", {
     info = "XLS: keep by name with header=FALSE"
   )
   expect_equal(
-    checkDfSubset,
     readWorksheet(wb.xls, "Test5", header = TRUE, drop = c("B", "D")),
+    checkDfSubset,
     info = "XLS: drop by name"
   )
   expect_error(
@@ -378,13 +378,13 @@ test_that("keep and drop arguments work correctly in XLS", {
     info = "XLS: drop by name with header=FALSE"
   )
   expect_equal(
-    checkDfSubset,
     readWorksheet(wb.xls, "Test5", header = TRUE, keep = c(1, 3)),
+    checkDfSubset,
     info = "XLS: keep by index"
   )
   expect_equal(
-    checkDfSubset,
     readWorksheet(wb.xls, "Test5", header = TRUE, drop = c(2, 4)),
+    checkDfSubset,
     info = "XLS: drop by index"
   )
 })
@@ -397,28 +397,28 @@ test_that("keep and drop arguments work correctly in XLSX", {
     stringsAsFactors = FALSE
   )
   expect_equal(
-    checkDfSubset,
     readWorksheet(wb.xlsx, "Test5", header = TRUE, keep = c("A", "C")),
+    checkDfSubset,
     info = "XLSX: keep by name"
   )
   expect_equal(
-    checkDfSubset,
     readWorksheet(wb.xlsx, "Test5", header = TRUE, drop = c("B", "D")),
+    checkDfSubset,
     info = "XLSX: drop by name"
   )
   expect_equal(
-    checkDfSubset,
     readWorksheet(wb.xlsx, "Test5", header = TRUE, keep = c(1, 3)),
+    checkDfSubset,
     info = "XLSX: keep by index"
   )
   expect_equal(
-    checkDfSubset,
     readWorksheet(wb.xlsx, "Test5", header = TRUE, drop = c(2, 4)),
+    checkDfSubset,
     info = "XLSX: drop by index"
   )
 })
 
-test_that("keep and drop arguments with specified region work correctly", {
+test_that("keep/drop with specified region work correctly", {
   wb.xls <- loadWorkbook(test_path("resources/testWorkbookReadWorksheet.xls"), create = FALSE)
   wb.xlsx <- loadWorkbook(test_path("resources/testWorkbookReadWorksheet.xlsx"), create = FALSE)
 
@@ -450,49 +450,49 @@ test_that("keep and drop arguments with specified region work correctly", {
 
   # Keep by name in region
   expect_equal(
-    checkDfAreaSubset,
     do.call(readWorksheet, c(list(wb.xls), region_params, list(keep = c("B", "D")))),
+    checkDfAreaSubset,
     info = "XLS: Region keep by name"
   )
   expect_equal(
-    checkDfAreaSubset,
     do.call(readWorksheet, c(list(wb.xlsx), region_params, list(keep = c("B", "D")))),
+    checkDfAreaSubset,
     info = "XLSX: Region keep by name"
   )
 
   # Drop by name in region
   expect_equal(
-    checkDfAreaSubset,
     do.call(readWorksheet, c(list(wb.xls), region_params, list(drop = "C"))),
+    checkDfAreaSubset,
     info = "XLS: Region drop by name"
   )
   expect_equal(
-    checkDfAreaSubset,
     do.call(readWorksheet, c(list(wb.xlsx), region_params, list(drop = "C"))),
+    checkDfAreaSubset,
     info = "XLSX: Region drop by name"
   )
 
   # Keep by index in region (cols B,C,D map to 1,2,3 in the sub-region)
   expect_equal(
-    checkDfAreaSubset,
     do.call(readWorksheet, c(list(wb.xls), region_params, list(keep = c(1, 3)))),
+    checkDfAreaSubset,
     info = "XLS: Region keep by index"
   ) # Keep B (1) and D (3)
   expect_equal(
-    checkDfAreaSubset,
     do.call(readWorksheet, c(list(wb.xlsx), region_params, list(keep = c(1, 3)))),
+    checkDfAreaSubset,
     info = "XLSX: Region keep by index"
   )
 
   # Drop by index in region
   expect_equal(
-    checkDfAreaSubset,
     do.call(readWorksheet, c(list(wb.xls), region_params, list(drop = 2))),
+    checkDfAreaSubset,
     info = "XLS: Region drop by index"
   ) # Drop C (2)
   expect_equal(
-    checkDfAreaSubset,
     do.call(readWorksheet, c(list(wb.xlsx), region_params, list(drop = 2))),
+    checkDfAreaSubset,
     info = "XLSX: Region drop by index"
   )
 })
@@ -526,24 +526,24 @@ test_that("keep/drop with multiple sheets works in XLS", {
   # Keeping the same columns from multiple sheets
   res_xls_kl1 <- readWorksheet(wb.xls, sheet = sheets_to_read, header = TRUE, keep = c(1, 2, 3))
   expect_equal(
-    list(Test1 = common_checkDf[1:3], Test4 = common_checkDf1[1:3], Test5 = common_checkDf2[1:3]),
     res_xls_kl1,
+    list(Test1 = common_checkDf[1:3], Test4 = common_checkDf1[1:3], Test5 = common_checkDf2[1:3]),
     info = "XLS: Multi-sheet keep same cols"
   )
 
   # Testing the correct replication of the keep argument (reading from 3 sheets, while keep has length 2)
   res_xls_kl2 <- readWorksheet(wb.xls, sheet = sheets_to_read, header = TRUE, keep = list(1, 2, c(1, 3)))
   expect_equal(
-    list(Test1 = common_checkDf[1], Test4 = common_checkDf1[2], Test5 = common_checkDf2[c(1, 3)]),
     res_xls_kl2,
+    list(Test1 = common_checkDf[1], Test4 = common_checkDf1[2], Test5 = common_checkDf2[c(1, 3)]),
     info = "XLS: Multi-sheet keep different cols (simple list)"
   )
 
   # Keeping different columns from multiple sheets
   res_xls_kl3 <- readWorksheet(wb.xls, sheet = sheets_to_read, header = TRUE, keep = list(c(1, 2), c(2, 3), c(1, 3)))
   expect_equal(
-    list(Test1 = common_checkDf[1:2], Test4 = common_checkDf1[2:3], Test5 = common_checkDf2[c(1, 3)]),
     res_xls_kl3,
+    list(Test1 = common_checkDf[1:2], Test4 = common_checkDf1[2:3], Test5 = common_checkDf2[c(1, 3)]),
     info = "XLS: Multi-sheet keep different cols (list of vectors)"
   )
 
@@ -551,29 +551,29 @@ test_that("keep/drop with multiple sheets works in XLS", {
   sheets_plus_aaa <- c("Test1", "Test4", "Test5", "AAA")
   res_xls_kl4 <- readWorksheet(wb.xls, sheet = sheets_plus_aaa, header = TRUE, keep = list(c(1, 2), c(2, 3)))
   expect_equal(
+    res_xls_kl4,
     list(
       Test1 = common_checkDf[1:2],
       Test4 = common_checkDf1[2:3],
       Test5 = common_checkDf2[1:2],
       AAA = testAAA_df[2:3]
     ),
-    res_xls_kl4,
     info = "XLS: Multi-sheet keep, recycle last keep spec (adjusted for observed behavior)"
   )
 
   # Dropping the same columns from multiple sheets
   res_xls_dl1 <- readWorksheet(wb.xls, sheet = sheets_to_read, header = TRUE, drop = c(1, 2))
   expect_equal(
-    list(Test1 = common_checkDf[3:4], Test4 = common_checkDf1[3:4], Test5 = common_checkDf2[3:4]),
     res_xls_dl1,
+    list(Test1 = common_checkDf[3:4], Test4 = common_checkDf1[3:4], Test5 = common_checkDf2[3:4]),
     info = "XLS: Multi-sheet drop same cols"
   )
 
   # Testing the correct replication of the drop argument (reading from 3 sheets, while drop has length 2)
   res_xls_dl2 <- readWorksheet(wb.xls, sheet = sheets_to_read, header = TRUE, drop = list(1, 2, c(1, 3)))
   expect_equal(
-    list(Test1 = common_checkDf[2:4], Test4 = common_checkDf1[c(1, 3, 4)], Test5 = common_checkDf2[c(2, 4)]),
     res_xls_dl2,
+    list(Test1 = common_checkDf[2:4], Test4 = common_checkDf1[c(1, 3, 4)], Test5 = common_checkDf2[c(2, 4)]),
     info = "XLS: Multi-sheet drop different cols (simple list)"
   )
 })
@@ -607,24 +607,24 @@ test_that("keep/drop with multiple sheets works in XLSX", {
   # Keeping the same columns from multiple sheets
   res_xlsx_kl1 <- readWorksheet(wb.xlsx, sheet = sheets_to_read, header = TRUE, keep = c(1, 2, 3))
   expect_equal(
-    list(Test1 = common_checkDf[1:3], Test4 = common_checkDf1[1:3], Test5 = common_checkDf2[1:3]),
     res_xlsx_kl1,
+    list(Test1 = common_checkDf[1:3], Test4 = common_checkDf1[1:3], Test5 = common_checkDf2[1:3]),
     info = "XLSX: Multi-sheet keep same cols"
   )
 
   # Testing the correct replication of the keep argument (reading from 3 sheets, while keep has length 2)
   res_xlsx_kl2 <- readWorksheet(wb.xlsx, sheet = sheets_to_read, header = TRUE, keep = list(1, 2, c(1, 3)))
   expect_equal(
-    list(Test1 = common_checkDf[1], Test4 = common_checkDf1[2], Test5 = common_checkDf2[c(1, 3)]),
     res_xlsx_kl2,
+    list(Test1 = common_checkDf[1], Test4 = common_checkDf1[2], Test5 = common_checkDf2[c(1, 3)]),
     info = "XLSX: Multi-sheet keep different cols (simple list)"
   )
 
   # Keeping different columns from multiple sheets
   res_xlsx_kl3 <- readWorksheet(wb.xlsx, sheet = sheets_to_read, header = TRUE, keep = list(c(1, 2), c(2, 3), c(1, 3)))
   expect_equal(
-    list(Test1 = common_checkDf[1:2], Test4 = common_checkDf1[2:3], Test5 = common_checkDf2[c(1, 3)]),
     res_xlsx_kl3,
+    list(Test1 = common_checkDf[1:2], Test4 = common_checkDf1[2:3], Test5 = common_checkDf2[c(1, 3)]),
     info = "XLSX: Multi-sheet keep different cols (list of vectors)"
   )
 
@@ -632,29 +632,29 @@ test_that("keep/drop with multiple sheets works in XLSX", {
   sheets_plus_aaa <- c("Test1", "Test4", "Test5", "AAA")
   res_xlsx_kl4 <- readWorksheet(wb.xlsx, sheet = sheets_plus_aaa, header = TRUE, keep = list(c(1, 2), c(2, 3)))
   expect_equal(
+    res_xlsx_kl4,
     list(
       Test1 = common_checkDf[1:2],
       Test4 = common_checkDf1[2:3],
       Test5 = common_checkDf2[1:2],
       AAA = testAAA_df[2:3]
     ),
-    res_xlsx_kl4,
     info = "XLSX: Multi-sheet keep, recycle last keep spec (adjusted for observed behavior)"
   )
 
   # Dropping the same columns from multiple sheets
   res_xlsx_dl1 <- readWorksheet(wb.xlsx, sheet = sheets_to_read, header = TRUE, drop = c(1, 2))
   expect_equal(
-    list(Test1 = common_checkDf[3:4], Test4 = common_checkDf1[3:4], Test5 = common_checkDf2[3:4]),
     res_xlsx_dl1,
+    list(Test1 = common_checkDf[3:4], Test4 = common_checkDf1[3:4], Test5 = common_checkDf2[3:4]),
     info = "XLSX: Multi-sheet drop same cols"
   )
 
   # Testing the correct replication of the drop argument (reading from 3 sheets, while drop has length 2)
   res_xlsx_dl2 <- readWorksheet(wb.xlsx, sheet = sheets_to_read, header = TRUE, drop = list(1, 2, c(1, 3)))
   expect_equal(
-    list(Test1 = common_checkDf[2:4], Test4 = common_checkDf1[c(1, 3, 4)], Test5 = common_checkDf2[c(2, 4)]),
     res_xlsx_dl2,
+    list(Test1 = common_checkDf[2:4], Test4 = common_checkDf1[c(1, 3, 4)], Test5 = common_checkDf2[c(2, 4)]),
     info = "XLSX: Multi-sheet drop different cols (simple list)"
   )
 })
@@ -993,15 +993,14 @@ test_that("autofitRow and autofitCol work for BoundingBox sheet in XLS", {
   )
   target7_orig <- data.frame(Col1 = c(NA, NA, NA, 4), Col2 = c(1, NA, NA, NA))
   expect_equal(
-    target1_bb,
-    readWorksheet(wb.xls, sheet = "BoundingBox", autofitRow = TRUE, autofitCol = TRUE, header = FALSE)
+    readWorksheet(wb.xls, sheet = "BoundingBox", autofitRow = TRUE, autofitCol = TRUE, header = FALSE),
+    target1_bb
   )
   expect_equal(
-    target1_bb,
-    readWorksheet(wb.xls, sheet = "BoundingBox", autofitRow = FALSE, autofitCol = FALSE, header = FALSE)
+    readWorksheet(wb.xls, sheet = "BoundingBox", autofitRow = FALSE, autofitCol = FALSE, header = FALSE),
+    target1_bb
   )
   expect_equal(
-    target2_orig,
     readWorksheet(
       wb.xls,
       sheet = "BoundingBox",
@@ -1012,10 +1011,10 @@ test_that("autofitRow and autofitCol work for BoundingBox sheet in XLS", {
       autofitRow = TRUE,
       autofitCol = TRUE,
       header = FALSE
-    )
+    ),
+    target2_orig
   )
   expect_equal(
-    target3_orig,
     readWorksheet(
       wb.xls,
       sheet = "BoundingBox",
@@ -1026,10 +1025,10 @@ test_that("autofitRow and autofitCol work for BoundingBox sheet in XLS", {
       autofitRow = FALSE,
       autofitCol = FALSE,
       header = FALSE
-    )
+    ),
+    target3_orig
   )
   expect_equal(
-    data.frame(),
     readWorksheet(
       wb.xls,
       sheet = "BoundingBox",
@@ -1040,10 +1039,10 @@ test_that("autofitRow and autofitCol work for BoundingBox sheet in XLS", {
       autofitRow = TRUE,
       autofitCol = TRUE,
       header = FALSE
-    )
+    ),
+    data.frame()
   )
   expect_equal(
-    target4_orig,
     readWorksheet(
       wb.xls,
       sheet = "BoundingBox",
@@ -1054,10 +1053,10 @@ test_that("autofitRow and autofitCol work for BoundingBox sheet in XLS", {
       autofitRow = FALSE,
       autofitCol = FALSE,
       header = FALSE
-    )
+    ),
+    target4_orig
   )
   expect_equal(
-    target5_orig,
     readWorksheet(
       wb.xls,
       sheet = "BoundingBox",
@@ -1068,10 +1067,10 @@ test_that("autofitRow and autofitCol work for BoundingBox sheet in XLS", {
       autofitRow = FALSE,
       autofitCol = TRUE,
       header = FALSE
-    )
+    ),
+    target5_orig
   )
   expect_equal(
-    target6_orig,
     readWorksheet(
       wb.xls,
       sheet = "BoundingBox",
@@ -1082,10 +1081,10 @@ test_that("autofitRow and autofitCol work for BoundingBox sheet in XLS", {
       autofitRow = TRUE,
       autofitCol = FALSE,
       header = FALSE
-    )
+    ),
+    target6_orig
   )
   expect_equal(
-    target7_orig,
     readWorksheet(
       wb.xls,
       sheet = "BoundingBox",
@@ -1096,7 +1095,8 @@ test_that("autofitRow and autofitCol work for BoundingBox sheet in XLS", {
       autofitRow = TRUE,
       autofitCol = TRUE,
       header = FALSE
-    )
+    ),
+    target7_orig
   )
 })
 
@@ -1434,15 +1434,14 @@ test_that("autofitRow and autofitCol for BoundingBox sheet work in XLSX", {
   )
   target7_orig <- data.frame(Col1 = c(NA, NA, NA, 4), Col2 = c(1, NA, NA, NA))
   expect_equal(
-    target1_bb,
-    readWorksheet(wb.xlsx, sheet = "BoundingBox", autofitRow = TRUE, autofitCol = TRUE, header = FALSE)
+    readWorksheet(wb.xlsx, sheet = "BoundingBox", autofitRow = TRUE, autofitCol = TRUE, header = FALSE),
+    target1_bb
   )
   expect_equal(
-    target1_bb,
-    readWorksheet(wb.xlsx, sheet = "BoundingBox", autofitRow = FALSE, autofitCol = FALSE, header = FALSE)
+    readWorksheet(wb.xlsx, sheet = "BoundingBox", autofitRow = FALSE, autofitCol = FALSE, header = FALSE),
+    target1_bb
   )
   expect_equal(
-    target2_orig,
     readWorksheet(
       wb.xlsx,
       sheet = "BoundingBox",
@@ -1453,10 +1452,10 @@ test_that("autofitRow and autofitCol for BoundingBox sheet work in XLSX", {
       autofitRow = TRUE,
       autofitCol = TRUE,
       header = FALSE
-    )
+    ),
+    target2_orig
   )
   expect_equal(
-    target3_orig,
     readWorksheet(
       wb.xlsx,
       sheet = "BoundingBox",
@@ -1467,10 +1466,10 @@ test_that("autofitRow and autofitCol for BoundingBox sheet work in XLSX", {
       autofitRow = FALSE,
       autofitCol = FALSE,
       header = FALSE
-    )
+    ),
+    target3_orig
   )
   expect_equal(
-    data.frame(),
     readWorksheet(
       wb.xlsx,
       sheet = "BoundingBox",
@@ -1481,10 +1480,10 @@ test_that("autofitRow and autofitCol for BoundingBox sheet work in XLSX", {
       autofitRow = TRUE,
       autofitCol = TRUE,
       header = FALSE
-    )
+    ),
+    data.frame()
   )
   expect_equal(
-    target4_orig,
     readWorksheet(
       wb.xlsx,
       sheet = "BoundingBox",
@@ -1495,10 +1494,10 @@ test_that("autofitRow and autofitCol for BoundingBox sheet work in XLSX", {
       autofitRow = FALSE,
       autofitCol = FALSE,
       header = FALSE
-    )
+    ),
+    target4_orig
   )
   expect_equal(
-    target5_orig,
     readWorksheet(
       wb.xlsx,
       sheet = "BoundingBox",
@@ -1509,10 +1508,10 @@ test_that("autofitRow and autofitCol for BoundingBox sheet work in XLSX", {
       autofitRow = FALSE,
       autofitCol = TRUE,
       header = FALSE
-    )
+    ),
+    target5_orig
   )
   expect_equal(
-    target6_orig,
     readWorksheet(
       wb.xlsx,
       sheet = "BoundingBox",
@@ -1523,10 +1522,10 @@ test_that("autofitRow and autofitCol for BoundingBox sheet work in XLSX", {
       autofitRow = TRUE,
       autofitCol = FALSE,
       header = FALSE
-    )
+    ),
+    target6_orig
   )
   expect_equal(
-    target7_orig,
     readWorksheet(
       wb.xlsx,
       sheet = "BoundingBox",
@@ -1537,7 +1536,8 @@ test_that("autofitRow and autofitCol for BoundingBox sheet work in XLSX", {
       autofitRow = TRUE,
       autofitCol = TRUE,
       header = FALSE
-    )
+    ),
+    target7_orig
   )
 })
 

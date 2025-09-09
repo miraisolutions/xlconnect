@@ -18,7 +18,7 @@ test_that("writeNamedRegionToFile - checking equality of data.frame's being writ
     name <- paste(worksheet, "Region", sep = "")
     writeNamedRegionToFile(file, df, name, formula = paste(worksheet, "A1", sep = "!"))
     res <- readNamedRegionFromFile(file, name)
-    expect_equal(normalizeDataframe(df), res, ignore_attr = c("worksheetScope", "row.names"))
+    expect_equal(res, normalizeDataframe(df), ignore_attr = c("worksheetScope", "row.names"))
   }
 
   # built-in dataset mtcars (*.xls)

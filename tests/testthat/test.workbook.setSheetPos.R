@@ -8,13 +8,13 @@ test_that("setting Excel worksheet positions", {
 
   # Check positions (*.xls)
   setSheetPos(wb.xls, sheet = c("D", "B"), pos = c(2, 1))
-  expect_equal(c("B", "A", "D", "C"), getSheets(wb.xls))
-  expect_equal(c(A = 2, B = 1, C = 4, D = 3), getSheetPos(wb.xls, sheet = c("A", "B", "C", "D")))
+  expect_equal(getSheets(wb.xls), c("B", "A", "D", "C"))
+  expect_equal(getSheetPos(wb.xls, sheet = c("A", "B", "C", "D")), c(A = 2, B = 1, C = 4, D = 3))
 
   # Check positions (*.xlsx)
   setSheetPos(wb.xlsx, sheet = c("D", "B"), pos = c(2, 1))
-  expect_equal(c("B", "A", "D", "C"), getSheets(wb.xlsx))
-  expect_equal(c(A = 2, B = 1, C = 4, D = 3), getSheetPos(wb.xlsx, sheet = c("A", "B", "C", "D")))
+  expect_equal(getSheets(wb.xlsx), c("B", "A", "D", "C"))
+  expect_equal(getSheetPos(wb.xlsx, sheet = c("A", "B", "C", "D")), c(A = 2, B = 1, C = 4, D = 3))
 
   # Check that trying to set a non-existing index (out of bounds) results in an exception (*.xls)
   expect_error(setSheetPos(wb.xls, sheet = "A", pos = -1))
