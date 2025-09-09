@@ -6,7 +6,7 @@ test_error_warn <- function(wb, region, expected_df, warning_msg) {
   # attr(expected_df, "worksheetScope") <- NULL
   # } else {
   # }
-  expect_equal(expected_df, res)
+  expect_equal(res, expected_df)
 }
 
 add_expected_attr <- function(df) {

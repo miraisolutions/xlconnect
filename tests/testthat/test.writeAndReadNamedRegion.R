@@ -8,7 +8,7 @@ test_that("checking equality of data.frame's being written to and read from Exce
     createName(wb, name = namedRegion, formula = paste(namedRegion, lref, sep = "!"), worksheetScope = namedRegion)
     writeNamedRegion(wb, df, name = namedRegion, worksheetScope = namedRegion, header = TRUE)
     res <- readNamedRegion(wb, namedRegion, worksheetScope = namedRegion)
-    expect_equal(normalizeDataframe(df, replaceInf = TRUE), res, ignore_attr = c("worksheetScope"))
+    expect_equal(res, normalizeDataframe(df, replaceInf = TRUE), ignore_attr = c("worksheetScope"))
   }
   # custom test dataset
   cdf <- data.frame(
@@ -93,7 +93,7 @@ test_that("checking equality of data.frame's being written to and read from Exce
     createName(wb, name = namedRegion, formula = paste(namedRegion, lref, sep = "!"), worksheetScope = namedRegion)
     writeNamedRegion(wb, df, name = namedRegion, worksheetScope = namedRegion, header = TRUE)
     res <- readNamedRegion(wb, namedRegion, worksheetScope = namedRegion)
-    expect_equal(normalizeDataframe(df, replaceInf = TRUE), res, ignore_attr = c("worksheetScope", "row.names"))
+    expect_equal(res, normalizeDataframe(df, replaceInf = TRUE), ignore_attr = c("worksheetScope", "row.names"))
   }
   testDataFrameNameScope <- function(wb, df, lref) {
     namedRegion <- paste(deparse(substitute(df)), "1", sep = "")
@@ -108,7 +108,7 @@ test_that("checking equality of data.frame's being written to and read from Exce
     )
     writeNamedRegion(wb, df, name = namedRegion, worksheetScope = worksheetScopeName, header = TRUE)
     res <- readNamedRegion(wb, namedRegion, worksheetScope = worksheetScopeName)
-    expect_equal(normalizeDataframe(df, replaceInf = TRUE), res, ignore_attr = c("worksheetScope", "row.names"))
+    expect_equal(res, normalizeDataframe(df, replaceInf = TRUE), ignore_attr = c("worksheetScope", "row.names"))
   }
   testDataFrameGlobalExplicit <- function(wb, df, lref) {
     namedRegion <- paste(deparse(substitute(df)), "forGlobal", sep = "")
@@ -116,7 +116,7 @@ test_that("checking equality of data.frame's being written to and read from Exce
     createName(wb, name = namedRegion, formula = paste(namedRegion, lref, sep = "!"), worksheetScope = "")
     writeNamedRegion(wb, df, name = namedRegion, worksheetScope = "", header = TRUE)
     res <- readNamedRegion(wb, namedRegion, worksheetScope = "")
-    expect_equal(normalizeDataframe(df, replaceInf = TRUE), res, ignore_attr = c("worksheetScope"))
+    expect_equal(res, normalizeDataframe(df, replaceInf = TRUE), ignore_attr = c("worksheetScope"))
   }
   testDataFrameGlobalAndScoped <- function(wb, df_global, df_scoped, lref) {
     dfs <- list(df_global, df_scoped)
@@ -129,11 +129,11 @@ test_that("checking equality of data.frame's being written to and read from Exce
     writeNamedRegion(wb, dfs, name = namedRegion, worksheetScope = scopeSheets, header = TRUE)
     res_full <- readNamedRegion(wb, namedRegion, worksheetScope = scopeSheets)
     dfs_norm <- list(normalizeDataframe(df_global, replaceInf = TRUE), normalizeDataframe(df_scoped, replaceInf = TRUE))
-    expect_equal(dfs_norm, res_full, ignore_attr = c("worksheetScope", "row.names", "names"))
+    expect_equal(res_full, dfs_norm, ignore_attr = c("worksheetScope", "row.names", "names"))
     res_global_prio <- readNamedRegion(wb, namedRegion)
     expect_equal(
-      normalizeDataframe(df_global, replaceInf = TRUE),
       res_global_prio,
+      normalizeDataframe(df_global, replaceInf = TRUE),
       ignore_attr = c("worksheetScope", "row.names")
     )
   }

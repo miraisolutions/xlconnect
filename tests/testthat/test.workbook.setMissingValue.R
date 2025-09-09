@@ -73,7 +73,7 @@ test_that("reading data with multiple missing value strings works (XLS)", {
   setMissingValue(wb.xls, value = c("NA", "missing", "empty"))
   res <- readNamedRegion(wb.xls, name = "Missing1")
   attr(expect, "worksheetScope") <- ""
-  expect_equal(expect, res)
+  expect_equal(res, expect)
 })
 
 test_that("writing and reading data with same specific missing value string returns original data (XLS)", {
@@ -121,7 +121,7 @@ test_that("reading data with multiple missing value strings works (XLSX)", {
   setMissingValue(wb.xlsx, value = c("NA", "missing", "empty"))
   res <- readNamedRegion(wb.xlsx, name = "Missing1")
   attr(expect, "worksheetScope") <- ""
-  expect_equal(expect, res)
+  expect_equal(res, expect)
 })
 
 test_that("reading data with multiple missing value strings works with list input (XLS)", {
@@ -137,7 +137,7 @@ test_that("reading data with multiple missing value strings works with list inpu
   setMissingValue(wb.xls, value = list("NA", "missing", "empty", -9999))
   res <- readNamedRegion(wb.xls, name = "Missing2")
   attr(expect, "worksheetScope") <- ""
-  expect_equal(expect, res)
+  expect_equal(res, expect)
 })
 
 test_that("reading data with multiple missing value strings works with list input (XLSX)", {
@@ -153,5 +153,5 @@ test_that("reading data with multiple missing value strings works with list inpu
   setMissingValue(wb.xlsx, value = list("NA", "missing", "empty", -9999))
   res <- readNamedRegion(wb.xlsx, name = "Missing2")
   attr(expect, "worksheetScope") <- ""
-  expect_equal(expect, res)
+  expect_equal(res, expect)
 })

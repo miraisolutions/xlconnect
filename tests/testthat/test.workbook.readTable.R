@@ -10,5 +10,5 @@ test_that("readTable reads a table from an XLSX file", {
 
   # Check that reading an Excel table works as expected (*.xlsx)
   res <- readTable(wb.xlsx, sheet = "Test", table = "TestTable1")
-  expect_equal(checkDf, res)
+  expect_equal(res, checkDf)
 })
