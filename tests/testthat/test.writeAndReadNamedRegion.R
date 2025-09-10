@@ -55,14 +55,14 @@ test_that("checking equality of data.frame's being written to and read from Exce
   createName(wb.xls, name = "rownames", formula = "rownames!$F$16")
   writeNamedRegion(wb.xls, mtcars, name = "rownames", header = TRUE, rownames = "Car")
   res <- readNamedRegion(wb.xls, "rownames")
-  expect_equal(res, XLConnect:::includeRownames(mtcars, "Car"), ignore_attr = TRUE)
+  expect_equal(res, XLConnect:::includeRownames(mtcars, "Car"), ignore_attr = c("worksheetScope"))
 
   # Check writing of data.frame with row names (*.xlsx)
   createSheet(wb.xlsx, name = "rownames")
   createName(wb.xlsx, name = "rownames", formula = "rownames!$F$16")
   writeNamedRegion(wb.xlsx, mtcars, name = "rownames", header = TRUE, rownames = "Car")
   res <- readNamedRegion(wb.xlsx, "rownames")
-  expect_equal(res, XLConnect:::includeRownames(mtcars, "Car"), ignore_attr = TRUE)
+  expect_equal(res, XLConnect:::includeRownames(mtcars, "Car"), ignore_attr = c("worksheetScope"))
 
   # Check writing & reading of data.frame with row names (*.xls)
   createSheet(wb.xls, name = "rownames2")

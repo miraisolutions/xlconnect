@@ -68,7 +68,7 @@ test_that("writeNamedRegion handles empty data frames in XLSX", {
 test_overwrite_formula <- function(wb, expected, overwrite = TRUE) {
   writeNamedRegion(wb, mtcars, "mtcars_formula", overwriteFormulaCells = overwrite)
   res <- readNamedRegion(wb, "mtcars_formula")
-  expect_equal(res, normalizeDataframe(expected), ignore_attr = TRUE)
+  expect_equal(res, normalizeDataframe(expected), ignore_attr = c("worksheetScope", "row.names"))
 }
 
 test_that("writeNamedRegion with overwriteFormulaCells = FALSE works in XLS", {
