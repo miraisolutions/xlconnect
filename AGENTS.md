@@ -129,7 +129,7 @@ formats the test-all.R file (the test runner).
 
 ### Write tests
 
-Use `ẁithr` functionality to change the R environment for the duration of a test:
+Use `withr` functionality to change the R environment for the duration of a test:
 - create temporary files: `local_tempfile(...)`
 - set R options: `local_options(...)`
 ...
