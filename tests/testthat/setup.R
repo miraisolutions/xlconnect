@@ -2,10 +2,6 @@
 # Options set here using withr::local_options and teardown_env()
 # will be automatically reset after the test suite finishes.
 
-# Ensure withr is available. It's a dependency of testthat.
-# testthat::teardown_env() is the correct environment for withr functions
-# when used within testthat's setup files.
-
 # Define locale to be set locally for the test environment
 withr::local_locale(c(LC_NUMERIC = "C"), .local_envir = testthat::teardown_env())
 # Set Java Locale to US
@@ -17,6 +13,4 @@ if (!getOption("FULL.TEST.SUITE", default = FALSE)) {
 }
 withr::local_options(.new = list(XLConnect.setCustomAttributes = TRUE), .local_envir = testthat::teardown_env())
 # Clean up variables from this script's environment
-# Note: new_java_params was already not defined, removing it from rm()
-# j_params is defined earlier and used in options_to_set, so it's cleaned up here.
 rm(jlocale)
