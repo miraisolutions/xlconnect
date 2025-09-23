@@ -12,12 +12,13 @@ You can run R commands by using the `Rscript` command. You can put statements on
 
 You need to call `library(<some_package>)` before using any function from that package.
 
-## IMPORTANT Setup - REQUIRED
+## Setup
 
-Prerequisite packages, including installing the checked out package itelf from source:
+Try to run `Rscript -e 'library(XLConnect)'. If this command is successful, the setup has already been run once.
+
+Prerequisite packages, including installing the checked out package itelf from source. This is only required once; it may have already been performed by a setup script.
 
 ```sh
-export R_LIBS_USER=$HOME"/r-libs"
 Rscript -e "install.packages(c('rJava'))"
 R CMD INSTALL .
 ```
@@ -28,7 +29,9 @@ Run this before you start any work, and then check that the setup worked by runn
 
 ### Install the local source package
 
-```
+This must be run to make source code changes (under `R/`) effective (i.e. before rerunning tests).
+
+```sh
 R CMD INSTALL .
 ```
 
@@ -130,6 +133,7 @@ formats the test-all.R file (the test runner).
 ### Write tests
 
 Use `withr` functionality to change the R environment for the duration of a test:
+
 - create temporary files: `local_tempfile(...)`
 - set R options: `local_options(...)`
 ...
