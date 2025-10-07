@@ -28,36 +28,35 @@
 # in fact are written to Excel as ordinary strings. Therefore, when read
 # back in to R, they are treated as character variables.
 #
-# 'normalizeDataframe' is used for RUnit tests to compare data.frame's
+# 'normalizeDataframe' is used for unit tests to compare data.frame's
 # written to and read from Excel
-# 
+#
 # Author: Martin Studer, Mirai Solutions GmbH
 #
 #############################################################################
 
 normalizeDataframe <- function(df, replaceInf = FALSE) {
-	att = attr(df, "row.names")
-	res <- lapply(df, 
-		function(col) {
-      if(is(col, "numeric")) {
-        if(replaceInf) {
-          col[is.infinite(col)] = NA # there are no infinites in Excel
-          col
-        } else {
-          col
-        }
-			} else if(is(col, "logical") || is(col, "character")) {
+  att = attr(df, "row.names")
+  res <- lapply(df, function(col) {
+    if (is(col, "numeric")) {
+      if (replaceInf) {
+        col[is.infinite(col)] = NA # there are no infinites in Excel
         col
-			} else if(is(col, "Date") || is(col, "POSIXt")) {
-        ms = round(as.numeric(as.POSIXct(col)), 3) # only consider up to milliseconds
-        d = as.POSIXct("1970-01-01", tz = "UTC") + ms
-        attr(d, "tzone") = ""
-        d
-			} else
-				as.character(col)
-		}
-	)
-	res = data.frame(res, stringsAsFactors = F)
-	attr(res, "row.names") = att
-	res
+      } else {
+        col
+      }
+    } else if (is(col, "logical") || is(col, "character")) {
+      col
+    } else if (is(col, "Date") || is(col, "POSIXt")) {
+      ms = round(as.numeric(as.POSIXct(col)), 3) # only consider up to milliseconds
+      d = as.POSIXct("1970-01-01", tz = "UTC") + ms
+      attr(d, "tzone") = ""
+      d
+    } else {
+      as.character(col)
+    }
+  })
+  res = data.frame(res, stringsAsFactors = F)
+  attr(res, "row.names") = att
+  res
 }

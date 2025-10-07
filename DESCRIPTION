@@ -18,7 +18,7 @@ BugReports: https://github.com/miraisolutions/xlconnect/issues
 SystemRequirements: Java (>= 8)
 Depends: R (>= 3.6.0)
 Imports: methods, rJava (>= 1.0-1)
-Suggests: RUnit, lattice, ggplot2 (>= 0.9.3), zoo, testthat, withr
+Suggests: lattice, ggplot2 (>= 0.9.3), zoo, testthat, withr
 Description: Provides comprehensive functionality to read, write and format Excel data.
 License: GPL-3
 Copyright: See file COPYRIGHTS
