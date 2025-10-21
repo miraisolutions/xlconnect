@@ -35,3 +35,25 @@ Build for release on CRAN
 ```r
 devtools::build(args=c("--compact-vignettes=gs+qpdf"))
 ```
+
+Run tests with testthat
+-----------------------
+
+You need to have run `devtools::install()` first.
+
+```r
+library(testthat)
+library(XLConnect)
+test_dir("tests/testthat")
+```
+
+Local Coverage Report
+---------------------
+
+For a local html report, you need to `install.packages(c("DT", "htmltools"))`
+
+You can create a local coverage report, viewable in a web browser, by running
+```r
+library(covr)
+covr:report()
+```
