@@ -1,6 +1,9 @@
 XLConnect News
 --------------
 
+1.3.0 (unreleased)
+  * Upgrade POI to 5.5.1
+
 1.2.3 TBD
   * Migrate test suite from RUnit to testthat #240 
 
