@@ -3,7 +3,7 @@ XLConnect News
 
 1.2.3 TBD
   * Migrate test suite from RUnit to testthat #240 
-  * Upgrade POI to 5.5.1
+  * Upgrade POI to 5.5.0
 
 1.2.2 2025-05-26
   * Set java.io.tmpdir to the R session temp directory by default
