@@ -190,13 +190,10 @@ jobs:
          source("test-all.R")
         shell: Rscript {0}
 
-      - name: Show test output
+      - name: Clean test output
         if: always()
         run: | 
-          echo $(date)
-          cat inst/unitTests/resources/XLConnect_Unit_Tests.txt || true
           git clean -fd "*xls*"
-          grep -i "0 errors, 0 failures" inst/unitTests/resources/XLConnect_Unit_Tests.txt
         shell: bash
         continue-on-error: true
 
@@ -213,7 +210,6 @@ jobs:
         with:
           name: ${{ matrix.config.os-name }}${{matrix.config.os-version}}-java${{ matrix.config.java }}-R${{ matrix.config.r-version }}-results
           path: |
-            inst/unitTests/resources/XLConnect_Unit_Tests.*
             check/XLConnect.Rcheck/
             !check/XLConnect.Rcheck/**/*.jar
             !check/XLConnect.Rcheck/00_pkg_src/

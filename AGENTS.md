@@ -62,12 +62,6 @@ testthat::test_file("tests/testthat/test.loadWorkbook.R")
 When making multiple changes, run the tests after each change and fix any failures before moving on to the next change.
 In that case it's ok to run only the tests that you expect to be impacted.
 
-### Run RUnit tests
-
-```sh
-export FULL_TEST_SUITE=1
-Rscript tests/run_tests-old.R
-```
 
 ### Clean up after tests
 
