@@ -36,7 +36,7 @@ jobs:
           - os-name: ubuntu
             os-version: latest
             r-version: release
-            java: 21
+            java: 25
             vignettes: true
             timezone-name: Asia/Kathmandu
           - os-name: ubuntu
