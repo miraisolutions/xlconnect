@@ -92,13 +92,7 @@
       "2\\.(21|[3-9][0-9]).*",  libname, pkgname, debianpkg="libcommons-io-java", rpmpkg="apache-commons-io"),
     xlcEnsureDependenciesFor(
       paste0(repo, "/com/zaxxer/SparseBitSet/1.3/SparseBitSet-1.3.jar"), "SparseBitSet.jar",
-      "1\\.([2-9]|[1-9][0-9]).*",  libname, pkgname),
-    xlcEnsureDependenciesFor(
-      paste0(apachePrefix, "/pdfbox/pdfbox/3.0.6/pdfbox-3.0.6.jar"), "pdfbox.jar",
-      "3\\.0\\..*",  libname, pkgname),
-    xlcEnsureDependenciesFor(
-      paste0(repo, "/org/bouncycastle/bcpkix-jdk18on/1.83/bcpkix-jdk18on-1.83.jar"), "bcpkix-jdk18on.jar",
-      "1\\.83.*",  libname, pkgname)
+      "1\\.([2-9]|[1-9][0-9]).*",  libname, pkgname)
     )
   },
   error=function(e) {
