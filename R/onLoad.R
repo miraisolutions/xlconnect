@@ -58,20 +58,20 @@
   sharedPaths <- tryCatch({
     c(
       xlcEnsureDependenciesFor(
-      paste0(apachePrefix, "/poi/poi-ooxml-full/5.5.0/poi-ooxml-full-5.5.0.jar"), "poi-ooxml-full.jar",
-      "5.5.0",  libname, pkgname),
+      paste0(apachePrefix, "/poi/poi-ooxml-full/5.5.1/poi-ooxml-full-5.5.1.jar"), "poi-ooxml-full.jar",
+      "5.5.1",  libname, pkgname),
     xlcEnsureDependenciesFor(
-      paste0(apachePrefix, "/poi/poi-ooxml/5.5.0/poi-ooxml-5.5.0.jar"), "poi-ooxml.jar",
-      "5.5.0",  libname, pkgname, debianpkg = "libapache-poi-java", rpmpkg="apache-poi"),
+      paste0(apachePrefix, "/poi/poi-ooxml/5.5.1/poi-ooxml-5.5.1.jar"), "poi-ooxml.jar",
+      "5.5.1",  libname, pkgname, debianpkg = "libapache-poi-java", rpmpkg="apache-poi"),
     xlcEnsureDependenciesFor(
-      paste0(apachePrefix, "/poi/poi/5.5.0/poi-5.5.0.jar"), "poi.jar",
-      "5.5.0",  libname, pkgname, debianpkg = "libapache-poi-java", rpmpkg="apache-poi"),
+      paste0(apachePrefix, "/poi/poi/5.5.1/poi-5.5.1.jar"), "poi.jar",
+      "5.5.1",  libname, pkgname, debianpkg = "libapache-poi-java", rpmpkg="apache-poi"),
     xlcEnsureDependenciesFor(
       paste0(apachePrefix, "/commons/commons-compress/1.28.0/commons-compress-1.28.0.jar"), "commons-compress.jar",
       "1\\.(2[8-9]|[3-9][0-9]).*",  libname, pkgname, debianpkg = "libcommons-compress-java", rpmpkg="apache-commons-compress"),
     xlcEnsureDependenciesFor(
       paste0(apachePrefix, "/commons/commons-lang3/3.18.0/commons-lang3-3.18.0.jar"), "commons-lang3-3.18.0.jar",
-      "3\\.(1[8-9]|[2-9][0-9])\\.*",  libname, pkgname, debianpkg="libcommons-lang3-java", rpmpkg="apache-commons-lang3"),
+      "3\\.(18|[2-9][0-9])\\.*",  libname, pkgname, debianpkg="libcommons-lang3-java", rpmpkg="apache-commons-lang3"),
     xlcEnsureDependenciesFor(
       paste0(apachePrefix, "/xmlbeans/xmlbeans/5.3.0/xmlbeans-5.3.0.jar"), "xmlbeans.jar",
       "5\\..*",  libname, pkgname, debianpkg="libxmlbeans-java"),
@@ -85,14 +85,17 @@
       paste0(apachePrefix, "/logging/log4j/log4j-api/2.24.3/log4j-api-2.24.3.jar"), "log4j-api.jar",
       "2\\.24\\..*",  libname, pkgname),
     xlcEnsureDependenciesFor(
-      paste0(repo, "/commons-codec/commons-codec/1.19.0/commons-codec-1.19.0.jar"), "commons-codec-1.19.0.jar",
-      "1\\.(19|[2-9][0-9]).*",  libname, pkgname, debianpkg="libcommons-codec-java", rpmpkg="apache-commons-codec"),
+      paste0(repo, "/commons-codec/commons-codec/1.20.0/commons-codec-1.20.0.jar"), "commons-codec-1.20.0.jar",
+      "1\\.(20|[2-9][0-9]).*",  libname, pkgname, debianpkg="libcommons-codec-java", rpmpkg="apache-commons-codec"),
     xlcEnsureDependenciesFor(
       paste0(repo, "/commons-io/commons-io/2.20.0/commons-io-2.20.0.jar"), "commons-io-2.20.0.jar",
-      "2\\.(2[0-9]|[3-9][0-9]).*",  libname, pkgname, debianpkg="libcommons-io-java", rpmpkg="apache-commons-io"),
+      "2\\.(20|[3-9][0-9]).*",  libname, pkgname, debianpkg="libcommons-io-java", rpmpkg="apache-commons-io"),
     xlcEnsureDependenciesFor(
       paste0(repo, "/com/zaxxer/SparseBitSet/1.3/SparseBitSet-1.3.jar"), "SparseBitSet.jar",
-      "1\\.([2-9]|[1-9][0-9]).*",  libname, pkgname)
+      "1\\.([2-9]|[1-9][0-9]).*",  libname, pkgname),
+    xlcEnsureDependenciesFor(
+      paste0(repo, "/com/github/virtuald/curvesapi/1.08/curvesapi-1.08.jar"), "curvesapi.jar",
+      "1\\.08", libname, pkgname)
     )
   },
   error=function(e) {
