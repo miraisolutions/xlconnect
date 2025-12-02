@@ -82,8 +82,8 @@
       paste0(apachePrefix, "/commons/commons-math3/3.6.1/commons-math3-3.6.1.jar"), "commons-math3.jar",
       "3\\.([6-9]|1[0-9]).*",  libname, pkgname, debianpkg="libcommons-math3-java"),
     xlcEnsureDependenciesFor(
-      paste0(apachePrefix, "/logging/log4j/log4j-api/2.25.2/log4j-api-2.25.2.jar"), "log4j-api.jar",
-      "2\\.25\\..*",  libname, pkgname),
+      paste0(apachePrefix, "/logging/log4j/log4j-api/2.24.3/log4j-api-2.24.3.jar"), "log4j-api.jar",
+      "2\\.24\\..*",  libname, pkgname),
     xlcEnsureDependenciesFor(
       paste0(repo, "/commons-codec/commons-codec/1.20.0/commons-codec-1.20.0.jar"), "commons-codec-1.20.0.jar",
       "1\\.(20|[2-9][0-9]).*",  libname, pkgname, debianpkg="libcommons-codec-java", rpmpkg="apache-commons-codec"),
