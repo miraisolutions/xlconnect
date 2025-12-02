@@ -2,8 +2,12 @@ XLConnect News
 --------------
 
 1.2.3 TBD
-  * Migrate test suite from RUnit to testthat #240 
-  * Upgrade POI to 5.5.0
+  * Upgrade POI to 5.5.1
+  * Upgrade bouncycastle dependency to 1.83
+  * Upgrade commons-io dependency to 2.21.0
+  * Upgrade commons-codec dependency to 1.20.0
+  * Upgrade pdfbox dependency to 3.0.6
+  * Migrate test suite from RUnit to testthat #240
 
 1.2.2 2025-05-26
   * Set java.io.tmpdir to the R session temp directory by default
