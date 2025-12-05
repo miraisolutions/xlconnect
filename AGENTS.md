@@ -131,3 +131,11 @@ Use `withr` functionality to change the R environment for the duration of a test
 - create temporary files: `local_tempfile(...)`
 - set R options: `local_options(...)`
 ...
+
+## Upgrading Java Dependencies
+
+When upgrading Java dependencies, especially the Apache POI libraries, you must:
+
+1.  **Update `R/onLoad.R`:** Modify the hardcoded URLs and version numbers for the dependencies.
+2.  **Update `NEWS` and `inst/COPYRIGHTS`:** Document the changes in these files.
+3.  **Verify Changes:** Run the test suite and ensure that the JAR hashes match the `xlconnect-java` repository.

@@ -1,0 +1,118 @@
+# Instructions for Agents
+
+This document provides instructions for agents working on the XLConnect project.
+
+## Running R Commands
+
+You can run R commands using the `Rscript` command. You can put statements on a single line, separated by a semicolon.
+
+```sh
+Rscript -e "print('hello world'); print(1+1)"
+```
+
+You need to call `library(<some_package>)` before using any function from that package.
+
+## Setup
+
+To ensure a clean and isolated environment, it is recommended to install R packages into a user-specific library.
+
+1.  **Create a user library:**
+    ```sh
+    mkdir -p ~/r-libs
+    ```
+2.  **Set the `R_LIBS_USER` environment variable:**
+    ```sh
+    echo 'R_LIBS_USER="~/r-libs"' >> ~/.Renviron
+    ```
+3.  **Install prerequisite packages:**
+    ```sh
+    Rscript -e ".libPaths('~/r-libs'); install.packages(c('rJava', 'testthat', 'withr'))"
+    ```
+4.  **Install the XLConnect package from source:**
+    ```sh
+    R CMD INSTALL . --library=~/r-libs
+    ```
+5.  **Verify the installation:**
+    ```sh
+    Rscript -e ".libPaths('~/r-libs'); library(XLConnect)"
+    ```
+
+## Common Commands
+
+### Install the Local Source Package
+
+This must be run to make source code changes (under `R/`) effective.
+
+```sh
+R CMD INSTALL . --library=~/r-libs
+```
+
+### Run Tests
+
+To run the full test suite, use the following command:
+
+```sh
+Rscript -e ".libPaths('~/r-libs'); options(FULL.TEST.SUITE=TRUE); testthat::test_local(load_package='none')"
+```
+
+To run a specific test file:
+
+```sh
+Rscript -e ".libPaths('~/r-libs'); options(FULL.TEST.SUITE=TRUE); testthat::test_file('tests/testthat/test.loadWorkbook.R')"
+```
+
+**Note:** The test suite is designed to generate warnings and errors to test error-handling capabilities. A successful test run is indicated by `FAIL 0` in the final summary.
+
+### Clean Up After Tests
+
+```sh
+git clean -fdx **.xls **.xlsx *.xls *.xlsx
+```
+
+## Upgrading Java Dependencies
+
+The Java dependencies for this project are managed in the `R/onLoad.R` file and are tied to the `xlconnect-java` repository. When upgrading dependencies, especially the Apache POI libraries, you must follow a specific process.
+
+### 1. Update `R/onLoad.R`
+
+The `R/onLoad.R` file contains hardcoded URLs and version numbers for the Java dependencies. When upgrading, you must:
+
+1.  Update the version numbers in the URLs.
+2.  Update the corresponding version strings in the `xlconnect-java` repository.
+3.  Ensure that the transitive dependencies are also updated, as specified in the `log4j-bom` maven dependency group in the reference `pom` file.
+4.  Do not add new dependencies unless they are required to fix a failing test.
+
+### 2. Update `NEWS` and `inst/COPYRIGHTS`
+
+All changes to dependencies must be documented in the `NEWS` and `inst/COPYRIGHTS` files.
+
+### 3. Verify the Changes
+
+After updating the dependencies, you must verify that the changes are correct by running the test suite and comparing the JAR hashes with the `xlconnect-java` repository. The CI pipeline includes a step that performs this check.
+
+## Code Style
+
+### Format the Code
+
+When you modify R code, you should use `air` to format it:
+
+```sh
+air format tests/testthat
+```
+
+### Write Tests
+
+Use `withr` functionality to change the R environment for the duration of a test:
+
+*   Create temporary files: `local_tempfile(...)`
+*   Set R options: `local_options(...)`
+
+## Checks
+
+Ensure that no `xls(x)` files tracked by git are modified after running the tests:
+
+```sh
+git status | grep -E "xls|xlsx" | wc -l
+```
+
+The output should be `0`.
