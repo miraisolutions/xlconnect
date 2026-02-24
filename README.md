@@ -22,7 +22,7 @@ require(devtools)
 # Installs the master branch of XLConnect (= current development version)
 install_github("miraisolutions/xlconnect")
 
-# Installs XLConnect with the given version, e.g. 1.0.2
+# Installs XLConnect with the given version
 install_github("miraisolutions/xlconnect", ref = "<version>")
 ```
 
