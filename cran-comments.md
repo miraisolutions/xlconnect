@@ -20,7 +20,7 @@ There was 1 INFO:
     java  26.8Mb
 ```
 
-Justification: XLConnect uses a Java component which we maintain in a separate project, as well as Apache POI 5.5.x and its dependencies. At install time, the presence of these dependencies in the correct version is checked; if missing, they are downloaded into XLConnect's installation directory. Apache POI 5.4.x is not yet available from major distributions' package managers at the time of writing. In addition, _poi-ooxml-full-<version>.jar_ is required, which is not distributed via package managers. See point 3. of [the POI FAQ](https://poi.apache.org/help/faq.html) for more information.
+Justification: XLConnect uses a Java component which we maintain in a separate project, as well as Apache POI 5.5.x and its dependencies. At install time, the presence of these dependencies in the correct version is checked; if missing, they are downloaded into XLConnect's installation directory. Apache POI 5.5.x is not yet available from major distributions' package managers at the time of writing. In addition, _poi-ooxml-full-<version>.jar_ is required, which is not distributed via package managers. See point 3. of [the POI FAQ](https://poi.apache.org/help/faq.html) for more information.
 
 ## revdepcheck results
 
