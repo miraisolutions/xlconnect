@@ -12,7 +12,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    name: freebsd-14 R release - java 21
+    name: freebsd-15 R release - java 21
 
     env:
       R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
@@ -23,7 +23,7 @@ jobs:
       - name: Setup R on FreeBSD
         uses: r-hub/actions/setup-r-freebsd@v1
         with:
-          release: '14.2'
+          release: '15.0'
 
       - name: Install Java in FreeBSD VM
         shell: freebsd {0}
@@ -73,7 +73,7 @@ jobs:
         if: failure()
         uses: actions/upload-artifact@main
         with:
-          name: freebsd14-java21-R-release-results
+          name: freebsd15-java21-R-release-results
           path: |
             check/XLConnect.Rcheck/
             !check/XLConnect.Rcheck/**/*.jar
