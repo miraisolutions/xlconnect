@@ -43,6 +43,7 @@ jobs:
           extra-packages: |
             any::rcmdcheck
             any::remotes
+            any::testthat
 
       - name: Check without doc
         uses: r-lib/actions/check-r-package@v2
@@ -60,14 +61,14 @@ jobs:
           FULL_TEST_SUITE: 1
           RCMDCHECK: "FALSE"
         run: |
-          install.packages(list.files("./check", pattern = "XLConnect_.*.tar.gz", full.names = TRUE), repos=NULL, type="source")
+          remotes::install_local(".", force=TRUE)
           setwd("tests")
           source("test-all.R")
         shell: Rscript {0}
 
       - name: Clean test output
         if: always()
-        shell: freebsd {0}
+        shell: bash
         run: git clean -fd "*xls*"
         continue-on-error: true
 
