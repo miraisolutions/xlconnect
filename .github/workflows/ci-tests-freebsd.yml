@@ -37,13 +37,10 @@ jobs:
           echo java_home:$JAVA_HOME
           R CMD javareconf
 
-      - name: Install and cache dependencies
-        uses: r-lib/actions/setup-r-dependencies@v2
-        with:
-          extra-packages: |
-            any::rcmdcheck
-            any::remotes
-            any::testthat
+      - name: Install R dependencies in FreeBSD VM
+        shell: freebsd {0}
+        run: |
+          Rscript -e 'install.packages(c("rJava", "rcmdcheck", "remotes", "testthat", "withr"), repos="https://cloud.r-project.org")'
 
       - name: Check without doc
         uses: r-lib/actions/check-r-package@v2
