@@ -22,5 +22,6 @@ Suggests: lattice, ggplot2 (>= 0.9.3), zoo, testthat, withr
 Description: Provides comprehensive functionality to read, write and format Excel data.
 License: GPL-3
 Copyright: See file COPYRIGHTS
+Encoding: UTF-8
 LazyData: yes
 Config/testthat/edition: 3
