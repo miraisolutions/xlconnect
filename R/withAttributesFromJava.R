@@ -33,12 +33,12 @@ withAttributesFromJava <- function(jobj) {
     
     unwrapped <- jobj$getValue()
     allANames = .jcall(jobj, "[S", "getAttributeNames")
-    Encoding(allANames) <- "UTF-8"
+    # Encoding(allANames) <- "UTF-8"
 
     if(getOption("XLConnect.setCustomAttributes")){
         for(i in seq(along = allANames)) {
             attrValue <- jobj$getAttributeValue(allANames[i])
-            Encoding(attrValue) <- "UTF-8"
+            # Encoding(attrValue) <- "UTF-8"
             attr(unwrapped, allANames[i]) <- attrValue
         }
     }

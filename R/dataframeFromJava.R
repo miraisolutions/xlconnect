@@ -35,7 +35,7 @@ dataframeFromJava <- function(df, check.names) {
   	
   	columnTypes = .jcall(df, "[S", "getColumnTypes")
   	columnNames = .jcall(df, "[S", "getColumnNames")
-  	Encoding(columnNames) <- "UTF-8"
+  	# Encoding(columnNames) <- "UTF-8"
   	
   	# Init result list to contain column vectors
   	res = list()
@@ -51,7 +51,7 @@ dataframeFromJava <- function(df, check.names) {
   				
   				"String" = {
   					v <- as.vector(.jcall(df, "[S", "getStringColumn", jIndex))
-  					Encoding(v) <- "UTF-8"
+  					# Encoding(v) <- "UTF-8"
   					v
   				},
   				
