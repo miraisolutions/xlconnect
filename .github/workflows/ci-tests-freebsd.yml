@@ -50,6 +50,7 @@ jobs:
           error-on: '"error"'
         env:
           FULL_TEST_SUITE: 1
+          LANG: fr_FR.UTF-8
 
       - name: run complete test suite
         if: always()
@@ -57,6 +58,7 @@ jobs:
           _R_CHECK_CRAN_INCOMING_: false
           FULL_TEST_SUITE: 1
           RCMDCHECK: "FALSE"
+          LANG: fr_FR.UTF-8
         run: |
           remotes::install_local(".", force=TRUE)
           setwd("tests")
