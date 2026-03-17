@@ -108,7 +108,7 @@ test_that("test.workbook.readNamedRegion", {
   expect_equal(res, target)
   target <- data.frame(
     `With whitespace` = 1:4,
-    `And some other funky characters: _=?^~!$@#%§` = letters[1:4],
+    `And some other funky characters: _=?^~!$@#%\u00a7` = letters[1:4],
     check.names = FALSE,
     stringsAsFactors = FALSE
   )

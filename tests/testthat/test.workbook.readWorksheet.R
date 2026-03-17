@@ -308,7 +308,7 @@ test_that("handling of variable names works in XLS", {
   wb.xls <- loadWorkbook(test_path("resources/testWorkbookReadWorksheet.xls"), create = FALSE)
   target_var_names <- data.frame(
     `With whitespace` = 1:4,
-    `And some other funky characters: _=?^~!$@#%§` = letters[1:4],
+    `And some other funky characters: _=?^~!$@#%\u00a7` = letters[1:4],
     check.names = FALSE,
     stringsAsFactors = FALSE
   )
@@ -322,7 +322,7 @@ test_that("handling of variable names works in XLSX", {
   wb.xlsx <- loadWorkbook(test_path("resources/testWorkbookReadWorksheet.xlsx"), create = FALSE)
   target_var_names <- data.frame(
     `With whitespace` = 1:4,
-    `And some other funky characters: _=?^~!$@#%§` = letters[1:4],
+    `And some other funky characters: _=?^~!$@#%\u00a7` = letters[1:4],
     check.names = FALSE,
     stringsAsFactors = FALSE
   )
