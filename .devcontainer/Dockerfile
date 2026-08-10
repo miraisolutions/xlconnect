@@ -37,7 +37,10 @@ RUN R CMD javareconf && \
         }"
 
 # Package dependencies and check tooling not covered by the base image.
-RUN install2.r --error --skipinstalled qpdf withr zoo
+# `remotes` is what `installGithub.r` loads to install from GitHub. The base
+# image ships devtools, which used to depend on remotes but no longer does
+# (devtools 2.5.0 dropped it), so it has to be requested explicitly.
+RUN install2.r --error --skipinstalled qpdf remotes withr zoo
 RUN installGithub.r r-lib/revdepcheck
 
 # (more latex libs would be required to include pdf related checks)
