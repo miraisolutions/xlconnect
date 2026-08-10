@@ -3,15 +3,18 @@
 # Pin to an explicit tag (e.g. rocker/verse:4.6.1) to freeze the R version.
 #
 # The base image already provides pandoc, quarto, TeX Live, the tinytex R
-# package, ghostscript, qpdf, devtools, testthat, ggplot2 and rJava, so only
-# what is missing on top of it is installed below.
+# package, ghostscript, qpdf, libxml2-dev, libssl-dev, devtools, testthat,
+# ggplot2, withr and the rJava R package, so only what is missing on top of it
+# is installed below.
 FROM rocker/verse:latest
 
 ENV DEBIAN_FRONTEND=noninteractive
 
 # tidy is needed by `R CMD check --as-cran` to validate the generated HTML.
-# Java 25 is the newest JDK covered by the CI matrix and supersedes the
-# default-jdk (21) shipped with rocker/verse.
+# Despite shipping the rJava R package, the base image contains no JDK at all
+# (install_verse.sh installs default-jdk but the subsequent `apt-get
+# autoremove` drops it again), so rJava is unusable until one is installed.
+# Java 25 is the newest JDK covered by the CI matrix.
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
         gpg \
@@ -19,11 +22,12 @@ RUN apt-get update && \
         tidy && \
     rm -rf /var/lib/apt/lists/*
 
-# Point R at the new JDK and rebuild rJava from source against it: the copy in
-# the base image is linked against the older default-jdk. The assertion turns a
-# broken Java setup into a build failure rather than a puzzling runtime error.
+# Point R at the JDK installed above. rJava resolves libjvm through this
+# configuration at load time, so the copy from the base image needs no rebuild.
+# The assertion turns a broken Java setup into a build failure rather than a
+# puzzling runtime error.
 RUN R CMD javareconf && \
-    install2.r --error -r https://cloud.r-project.org rJava && \
+    install2.r --error --skipinstalled rJava && \
     Rscript -e "{\
         library(rJava);\
         .jinit();\
