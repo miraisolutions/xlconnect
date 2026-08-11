@@ -1,16 +1,53 @@
+# rocker/verse:latest tracks the current R release (4.6.1 at the time of writing),
+# which is what the "release" rows of the CI matrix and CRAN check against.
+# Pin to an explicit tag (e.g. rocker/verse:4.6.1) to freeze the R version.
+#
+# The base image already provides the ghostscript and qpdf system tools, pandoc,
+# quarto, TeX Live, libxml2-dev, libssl-dev and the tinytex, devtools, pak,
+# testthat, ggplot2, withr and rJava R packages, so only what is missing on top
+# of it is installed below.
 FROM rocker/verse:latest
 
-RUN apt-get update
-RUN apt-get install -y libxml2-dev libssl-dev gpg
-# texlive
-RUN apt-get install -y libqpdf29t64 qpdf ghostscript tidy
-RUN apt-get install -y openjdk-21-jdk-headless
-RUN R CMD javareconf
-# RUN tlmgr install xcolor  # (more latex libs would be required to include pdf related checks)
-RUN install2.r --error devtools rJava testthat zoo qpdf
-RUN installGithub.r r-lib/revdepcheck
-RUN apt-get install -y pandoc
-RUN install2.r --error ggplot2 tinytex
+ENV DEBIAN_FRONTEND=noninteractive
+
+# tidy is needed by `R CMD check --as-cran` to validate the generated HTML.
+# We install JDK 25 as Java 25 is the newest JDK covered by the CI matrix.
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+        gpg \
+        openjdk-25-jdk-headless \
+        tidy && \
+    rm -rf /var/lib/apt/lists/*
+
+# Point R at the JDK installed above. rJava resolves libjvm through this
+# configuration at load time, so the copy from the base image needs no rebuild.
+# Then check that Java works from rJava and show the version.
+RUN R CMD javareconf && \
+    install2.r --error --skipinstalled rJava && \
+    Rscript -e "{\
+        library(rJava);\
+        .jinit();\
+        version <- .jcall('java/lang/System', 'S', 'getProperty', 'java.version');\
+        cat('rJava runs on Java', version, '\n');\
+        stopifnot(as.integer(sub('[.].*', '', version)) >= 25);\
+        }"
+
+# XLConnect's Suggests, needed to build the vignettes and run the checks. Most are already in
+# the base image, but we list them all to 
+# keep the checks working should the base image remove some of them. Note that PDF
+# compaction during `R CMD build` uses the qpdf *system* tool from the base
+# image, not the CRAN package of the same name.
+RUN install2.r --error --skipinstalled ggplot2 lattice testthat withr zoo
+
+# revdepcheck is not on CRAN, and it pulls in the GitHub-only crancache. The
+# `git::` source makes pak clone over the git protocol instead of going through
+# the GitHub REST API, whose unauthenticated 60 requests/hour limit is shared
+# per IP and is regularly exhausted on Codespaces hosts. Authenticating is not
+# an option here: Codespaces provides no token during the image build, only
+# inside the running container.
+RUN Rscript -e 'pak::pkg_install("git::https://github.com/r-lib/revdepcheck.git")'
+
+# (more latex libs would be required to include pdf related checks)
 RUN Rscript -e "{\
     library(tinytex);\
     tlmgr_update(self=TRUE, all=FALSE);\
