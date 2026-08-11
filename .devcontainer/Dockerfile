@@ -32,10 +32,9 @@ RUN R CMD javareconf && \
         stopifnot(as.integer(sub('[.].*', '', version)) >= 25);\
         }"
 
-# XLConnect's Suggests, all needed to build the vignettes and run the checks
-# (ggplot2 and zoo are used in the vignette code chunks). Most are already in
-# the base image, where --skipinstalled turns them into no-ops; listing them all
-# keeps the checks working should the base image stop shipping one. PDF
+# XLConnect's Suggests, needed to build the vignettes and run the checks. Most are already in
+# the base image, but we list them all to 
+# keep the checks working should the base image remove some of them. Note that PDF
 # compaction during `R CMD build` uses the qpdf *system* tool from the base
 # image, not the CRAN package of the same name.
 RUN install2.r --error --skipinstalled ggplot2 lattice testthat withr zoo
