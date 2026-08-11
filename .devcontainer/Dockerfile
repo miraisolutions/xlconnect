@@ -11,10 +11,7 @@ FROM rocker/verse:latest
 ENV DEBIAN_FRONTEND=noninteractive
 
 # tidy is needed by `R CMD check --as-cran` to validate the generated HTML.
-# Despite shipping the rJava R package, the base image contains no JDK at all
-# (install_verse.sh installs default-jdk but the subsequent `apt-get
-# autoremove` drops it again), so rJava is unusable until one is installed.
-# Java 25 is the newest JDK covered by the CI matrix.
+# We install JDK 25 as Java 25 is the newest JDK covered by the CI matrix.
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
         gpg \
