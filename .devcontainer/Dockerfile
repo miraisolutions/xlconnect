@@ -3,7 +3,7 @@
 # Pin to an explicit tag (e.g. rocker/verse:4.6.1) to freeze the R version.
 #
 # The base image already provides pandoc, quarto, TeX Live, the tinytex R
-# package, ghostscript, qpdf, libxml2-dev, libssl-dev, devtools, testthat,
+# package, ghostscript, qpdf, libxml2-dev, libssl-dev, devtools, pak, testthat,
 # ggplot2, withr and the rJava R package, so only what is missing on top of it
 # is installed below.
 FROM rocker/verse:latest
@@ -37,11 +37,15 @@ RUN R CMD javareconf && \
         }"
 
 # Package dependencies and check tooling not covered by the base image.
-# `remotes` is what `installGithub.r` loads to install from GitHub. The base
-# image ships devtools, which used to depend on remotes but no longer does
-# (devtools 2.5.0 dropped it), so it has to be requested explicitly.
-RUN install2.r --error --skipinstalled qpdf remotes withr zoo
-RUN installGithub.r r-lib/revdepcheck
+RUN install2.r --error --skipinstalled qpdf withr zoo
+
+# revdepcheck is not on CRAN, and it pulls in the GitHub-only crancache. The
+# `git::` source makes pak clone over the git protocol instead of going through
+# the GitHub REST API, whose unauthenticated 60 requests/hour limit is shared
+# per IP and is regularly exhausted on Codespaces hosts. Authenticating is not
+# an option here: Codespaces provides no token during the image build, only
+# inside the running container.
+RUN Rscript -e 'pak::pkg_install("git::https://github.com/r-lib/revdepcheck.git")'
 
 # (more latex libs would be required to include pdf related checks)
 RUN Rscript -e "{\
