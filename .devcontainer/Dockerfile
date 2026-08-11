@@ -24,8 +24,7 @@ RUN apt-get update && \
 
 # Point R at the JDK installed above. rJava resolves libjvm through this
 # configuration at load time, so the copy from the base image needs no rebuild.
-# The assertion turns a broken Java setup into a build failure rather than a
-# puzzling runtime error.
+# Then check that Java works from rJava and show the version.
 RUN R CMD javareconf && \
     install2.r --error --skipinstalled rJava && \
     Rscript -e "{\
