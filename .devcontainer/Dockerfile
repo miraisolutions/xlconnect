@@ -2,10 +2,10 @@
 # which is what the "release" rows of the CI matrix and CRAN check against.
 # Pin to an explicit tag (e.g. rocker/verse:4.6.1) to freeze the R version.
 #
-# The base image already provides pandoc, quarto, TeX Live, the tinytex R
-# package, ghostscript, qpdf, libxml2-dev, libssl-dev, devtools, pak, testthat,
-# ggplot2, withr and the rJava R package, so only what is missing on top of it
-# is installed below.
+# The base image already provides the ghostscript and qpdf system tools, pandoc,
+# quarto, TeX Live, libxml2-dev, libssl-dev and the tinytex, devtools, pak,
+# testthat, ggplot2, withr and rJava R packages, so only what is missing on top
+# of it is installed below.
 FROM rocker/verse:latest
 
 ENV DEBIAN_FRONTEND=noninteractive
@@ -32,8 +32,13 @@ RUN R CMD javareconf && \
         stopifnot(as.integer(sub('[.].*', '', version)) >= 25);\
         }"
 
-# Package dependencies and check tooling not covered by the base image.
-RUN install2.r --error --skipinstalled qpdf withr zoo
+# XLConnect's Suggests, all needed to build the vignettes and run the checks
+# (ggplot2 and zoo are used in the vignette code chunks). Most are already in
+# the base image, where --skipinstalled turns them into no-ops; listing them all
+# keeps the checks working should the base image stop shipping one. PDF
+# compaction during `R CMD build` uses the qpdf *system* tool from the base
+# image, not the CRAN package of the same name.
+RUN install2.r --error --skipinstalled ggplot2 lattice testthat withr zoo
 
 # revdepcheck is not on CRAN, and it pulls in the GitHub-only crancache. The
 # `git::` source makes pak clone over the git protocol instead of going through
