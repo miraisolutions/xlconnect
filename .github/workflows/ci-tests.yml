@@ -30,7 +30,7 @@ jobs:
           - os-name: ubuntu
             os-version: latest
             r-version: oldrel
-            java: 17 #8
+            java: 17
             vignettes: true
             timezone-name: Europe/Zurich
           - os-name: ubuntu
@@ -53,7 +53,7 @@ jobs:
           - os-name: windows
             os-version: latest
             r-version: release
-            java: 8
+            java: 17
             vignettes: false
             timezone-name: "W. Europe Standard Time"
     env:
@@ -228,7 +228,7 @@ jobs:
         with:
           repository: miraisolutions/xlconnect-java
           # specify the below if you are working on a parallel xlconnect-java branch
-          # ref: dependabot/maven/poi-9c495da4a7
+          ref: claude/optimistic-knuth-yszubp
       
       - name: retrieve POM dependencies using maven
         if: success() && matrix.config.r-version == 'release' && matrix.config.os-name == 'ubuntu'
