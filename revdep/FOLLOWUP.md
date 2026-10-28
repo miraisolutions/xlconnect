@@ -3,7 +3,7 @@
 > **TODO: delete this `revdep/` directory before merging.** It is committed
 > (despite `.gitignore`) only to hand over revdepcheck status between sessions.
 
-Run on 2026-10-27, CRAN XLConnect 1.3.0 (POI 5.5.1) vs dev 1.3.1.9999
+Run on 2026-10-27, CRAN XLConnect 1.3.0 (POI 5.5.1) vs dev 1.3.1.9999, now 1.4.0.9999
 (POI 6.0.0, Java >= 17), R 4.6.1, Java 21, Ubuntu 24.04. The other files in
 this directory are revdepcheck output, updated by hand for D4TAlink.light.
 
