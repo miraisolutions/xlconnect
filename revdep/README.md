@@ -22,9 +22,10 @@
 
 # Revdeps
 
-## Failed to check (1)
+## All (3)
 
 |package        |version |error |warning |note |
 |:--------------|:-------|:-----|:-------|:----|
-|D4TAlink.light |?       |      |        |     |
-
+|D4TAlink.light |2.1.23  |      |1       |     |
+|JGR            |1.9-2   |      |        |     |
+|psyverse       |0.2.6   |      |        |     |
