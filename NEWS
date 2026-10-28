@@ -1,6 +1,10 @@
 XLConnect News
 --------------
 
+1.4.0.9999 TBD
+  * Upgrade POI to 6.0.0
+  * Java 17 or newer is now required (Apache POI 6 requires Java 17)
+
 1.3.0 2025-02-24
   * Migrate test suite from RUnit to testthat #240
   * Upgrade POI to 5.5.1

@@ -47,7 +47,7 @@
         jvn <- as.numeric(twoFirst)
       }
     }
-    if (jvn<8) stop(paste0("XLConnect is compatible with Java versions 8 and above. Detected java version: ",jv))
+    if (jvn<17) stop(paste0("XLConnect is compatible with Java versions 17 and above. Detected java version: ",jv))
   }
   javaCheck()
   repo <- Sys.getenv("XLCONNECT_JAVA_REPO_URL")
@@ -58,14 +58,14 @@
   sharedPaths <- tryCatch({
     c(
       xlcEnsureDependenciesFor(
-      paste0(apachePrefix, "/poi/poi-ooxml-full/5.5.1/poi-ooxml-full-5.5.1.jar"), "poi-ooxml-full.jar",
-      "5.5.1",  libname, pkgname),
+      paste0(apachePrefix, "/poi/poi-ooxml-full/6.0.0/poi-ooxml-full-6.0.0.jar"), "poi-ooxml-full.jar",
+      "6.0.0",  libname, pkgname),
     xlcEnsureDependenciesFor(
-      paste0(apachePrefix, "/poi/poi-ooxml/5.5.1/poi-ooxml-5.5.1.jar"), "poi-ooxml.jar",
-      "5.5.1",  libname, pkgname, debianpkg = "libapache-poi-java", rpmpkg="apache-poi"),
+      paste0(apachePrefix, "/poi/poi-ooxml/6.0.0/poi-ooxml-6.0.0.jar"), "poi-ooxml.jar",
+      "6.0.0",  libname, pkgname, debianpkg = "libapache-poi-java", rpmpkg="apache-poi"),
     xlcEnsureDependenciesFor(
-      paste0(apachePrefix, "/poi/poi/5.5.1/poi-5.5.1.jar"), "poi.jar",
-      "5.5.1",  libname, pkgname, debianpkg = "libapache-poi-java", rpmpkg="apache-poi"),
+      paste0(apachePrefix, "/poi/poi/6.0.0/poi-6.0.0.jar"), "poi.jar",
+      "6.0.0",  libname, pkgname, debianpkg = "libapache-poi-java", rpmpkg="apache-poi"),
     xlcEnsureDependenciesFor(
       paste0(apachePrefix, "/commons/commons-compress/1.28.0/commons-compress-1.28.0.jar"), "commons-compress.jar",
       "1\\.(2[8-9]|[3-9][0-9]).*",  libname, pkgname, debianpkg = "libcommons-compress-java", rpmpkg="apache-commons-compress"),
@@ -73,23 +73,23 @@
       paste0(apachePrefix, "/commons/commons-lang3/3.18.0/commons-lang3-3.18.0.jar"), "commons-lang3-3.18.0.jar",
       "3\\.(1[8-9]|[2-9][0-9])\\.*",  libname, pkgname, debianpkg="libcommons-lang3-java", rpmpkg="apache-commons-lang3"),
     xlcEnsureDependenciesFor(
-      paste0(apachePrefix, "/xmlbeans/xmlbeans/5.3.0/xmlbeans-5.3.0.jar"), "xmlbeans.jar",
-      "5\\..*",  libname, pkgname, debianpkg="libxmlbeans-java"),
+      paste0(apachePrefix, "/xmlbeans/xmlbeans/5.4.1/xmlbeans-5.4.1.jar"), "xmlbeans.jar",
+      "5\\.([4-9]|[1-9][0-9]).*",  libname, pkgname, debianpkg="libxmlbeans-java"),
     xlcEnsureDependenciesFor(
-      paste0(apachePrefix, "/commons/commons-collections4/4.5.0/commons-collections4-4.5.0.jar"), "commons-collections4.jar",
-      "4\\.5.*",  libname, pkgname, debianpkg="libcommons-collections4-java", rpmpkg="apache-commons-collections4"),
+      paste0(apachePrefix, "/commons/commons-collections4/4.6.0/commons-collections4-4.6.0.jar"), "commons-collections4.jar",
+      "4\\.([6-9]|[1-9][0-9]).*",  libname, pkgname, debianpkg="libcommons-collections4-java", rpmpkg="apache-commons-collections4"),
     xlcEnsureDependenciesFor(
       paste0(apachePrefix, "/commons/commons-math3/3.6.1/commons-math3-3.6.1.jar"), "commons-math3.jar",
       "3\\.([6-9]|1[0-9]).*",  libname, pkgname, debianpkg="libcommons-math3-java"),
     xlcEnsureDependenciesFor(
-      paste0(apachePrefix, "/logging/log4j/log4j-api/2.24.3/log4j-api-2.24.3.jar"), "log4j-api.jar",
-      "2\\.24\\..*",  libname, pkgname),
+      paste0(apachePrefix, "/logging/log4j/log4j-api/2.26.1/log4j-api-2.26.1.jar"), "log4j-api.jar",
+      "2\\.26\\..*",  libname, pkgname),
     xlcEnsureDependenciesFor(
-      paste0(repo, "/commons-codec/commons-codec/1.20.0/commons-codec-1.20.0.jar"), "commons-codec-1.20.0.jar",
-      "1\\.(20|[2-9][0-9]).*",  libname, pkgname, debianpkg="libcommons-codec-java", rpmpkg="apache-commons-codec"),
+      paste0(repo, "/commons-codec/commons-codec/1.23.0/commons-codec-1.23.0.jar"), "commons-codec-1.23.0.jar",
+      "1\\.(2[3-9]|[3-9][0-9]).*",  libname, pkgname, debianpkg="libcommons-codec-java", rpmpkg="apache-commons-codec"),
     xlcEnsureDependenciesFor(
-      paste0(repo, "/commons-io/commons-io/2.21.0/commons-io-2.21.0.jar"), "commons-io-2.21.0.jar",
-      "2\\.(21|[3-9][0-9]).*",  libname, pkgname, debianpkg="libcommons-io-java", rpmpkg="apache-commons-io"),
+      paste0(repo, "/commons-io/commons-io/2.22.0/commons-io-2.22.0.jar"), "commons-io-2.22.0.jar",
+      "2\\.(2[2-9]|[3-9][0-9]).*",  libname, pkgname, debianpkg="libcommons-io-java", rpmpkg="apache-commons-io"),
     xlcEnsureDependenciesFor(
       paste0(repo, "/com/zaxxer/SparseBitSet/1.3/SparseBitSet-1.3.jar"), "SparseBitSet.jar",
       "1\\.([2-9]|[1-9][0-9]).*",  libname, pkgname)
