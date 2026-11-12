@@ -234,7 +234,7 @@ jobs:
         if: success() && matrix.config.r-version == 'release' && matrix.config.os-name == 'ubuntu'
         run: |
           ls -la
-          mvn dependency:copy-dependencies
+          mvn dependency:copy-dependencies -DincludeScope=runtime
       
       - name: compare JAR hashes
         if: success() && matrix.config.r-version == 'release' && matrix.config.os-name == 'ubuntu'
@@ -245,7 +245,7 @@ jobs:
           find "$XLC_JAR_PATH" -maxdepth 1 -type f -name "*.jar" -exec sha512sum {} + |\
           sort | awk '{print $1}' > effective_hashes
           find "$GITHUB_WORKSPACE"/target/dependency/ -maxdepth 1 -type f -name "*.jar" -exec sha512sum {} + |\
-          grep -v -E "poi-ooxml-lite|junit|hamcrest" |\
+          grep -v "poi-ooxml-lite" |\
           sort | awk '{print $1}' > expected_hashes
           cmp expected_hashes effective_hashes ||\
           (echo "JARs are different!" && ls -la "$GITHUB_WORKSPACE"/target/dependency/ &&\
