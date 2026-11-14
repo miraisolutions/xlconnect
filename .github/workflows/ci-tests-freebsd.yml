@@ -1,0 +1,82 @@
+name: ci-tests-freebsd
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+  schedule:
+    - cron: '12 23 13,28 * *'
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    name: freebsd-15 R release - java 21
+
+    env:
+      R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
+
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Setup R on FreeBSD
+        uses: r-hub/actions/setup-r-freebsd@v1
+        with:
+          release: '15.0'
+
+      - name: Install Java in FreeBSD VM
+        shell: freebsd {0}
+        run: |
+          pkg install -y openjdk21
+
+      - name: Configure Java for R (javareconf)
+        shell: freebsd {0}
+        run: |
+          java -version
+          echo java_home:$JAVA_HOME
+          R CMD javareconf
+
+      - name: Install R dependencies in FreeBSD VM
+        shell: freebsd {0}
+        run: |
+          Rscript -e 'install.packages(c("rJava", "rcmdcheck", "remotes", "testthat", "withr"), repos="https://cloud.r-project.org")'
+
+      - name: Check without doc
+        uses: r-lib/actions/check-r-package@v2
+        with:
+          args: 'c("--no-manual", "--no-vignettes", "--no-build-vignettes", "--check-subdirs=no")'
+          build_args: 'c("--no-build-vignettes")'
+          error-on: '"error"'
+        env:
+          FULL_TEST_SUITE: 1
+          LANG: fr_FR.UTF-8
+
+      - name: run complete test suite
+        if: always()
+        env:
+          _R_CHECK_CRAN_INCOMING_: false
+          FULL_TEST_SUITE: 1
+          RCMDCHECK: "FALSE"
+          LANG: fr_FR.UTF-8
+        run: |
+          remotes::install_local(".", force=TRUE)
+          setwd("tests")
+          source("test-all.R")
+        shell: Rscript {0}
+
+      - name: Clean test output
+        if: always()
+        shell: bash
+        run: git clean -fd "*xls*"
+        continue-on-error: true
+
+      - name: Upload check results
+        if: failure()
+        uses: actions/upload-artifact@main
+        with:
+          name: freebsd15-java21-R-release-results
+          path: |
+            check/XLConnect.Rcheck/
+            !check/XLConnect.Rcheck/**/*.jar
+            !check/XLConnect.Rcheck/00_pkg_src/
