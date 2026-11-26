@@ -68,6 +68,7 @@ xlcCall <- function(obj, fun, ..., .recycle = TRUE, .simplify = TRUE,
 
 	if (.checkWarnings) {
 		warnings = .jcall(obj@jobj, "[S", "retrieveWarnings")
+		Encoding(warnings) <- "UTF-8"
 		for(w in warnings) warning(w, call. = FALSE)
 	}
 	
